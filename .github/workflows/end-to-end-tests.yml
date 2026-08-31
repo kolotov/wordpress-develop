@@ -1,17 +1,15 @@
 name: End-to-end Tests
 
 on:
-  # The end-to-end test suite was introduced in WordPress 5.3.
+  # Run end-to-end tests on the current WordPress 7.x line.
   push:
     branches:
       - trunk
-      - '5.[3-9]'
-      - '[6-9].[0-9]'
+      - '7.[0-9]'
   pull_request:
     branches:
       - trunk
-      - '5.[3-9]'
-      - '[6-9].[0-9]'
+      - '7.[0-9]'
     paths:
       # Any change to a PHP, CSS, or JavaScript file should run checks.
       - '**.css'

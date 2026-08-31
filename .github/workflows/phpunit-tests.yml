@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - trunk
+      - '7.[0-9]'
       - phpunit-13
   pull_request:
     branches:
       - trunk
+      - '7.[0-9]'
       - phpunit-13
     paths:
       - '**.css'
@@ -135,3 +137,20 @@ jobs:
       phpunit-test-groups: html-api-web-platform-tests
       gutenberg-artifact: ${{ needs.prepare-gutenberg.result != 'skipped' }}
       gutenberg-sha: ${{ needs.prepare-gutenberg.outputs.gutenberg-sha }}
+
+  slack-notifications:
+    name: Slack Notifications
+    uses: ./.github/workflows/slack-notifications.yml
+    permissions:
+      actions: read
+      contents: read
+    needs: [ prepare-gutenberg, migration-audit, modern-runtime, html-api-test-groups ]
+    if: ${{ github.repository == 'kolotov/wordpress-develop' && github.event_name != 'pull_request' && always() }}
+    with:
+      calling_status: ${{ contains( needs.*.result, 'cancelled' ) && 'cancelled' || contains( needs.*.result, 'failure' ) && 'failure' || 'success' }}
+    secrets:
+      SLACK_GHA_SUCCESS_WEBHOOK: ${{ secrets.SLACK_GHA_SUCCESS_WEBHOOK }}
+      SLACK_GHA_CANCELLED_WEBHOOK: ${{ secrets.SLACK_GHA_CANCELLED_WEBHOOK }}
+      SLACK_GHA_FIXED_WEBHOOK: ${{ secrets.SLACK_GHA_FIXED_WEBHOOK }}
+      SLACK_GHA_FAILURE_WEBHOOK: ${{ secrets.SLACK_GHA_FAILURE_WEBHOOK }}
+      SLACK_GHA_TIMEOUT_WEBHOOK: ${{ secrets.SLACK_GHA_TIMEOUT_WEBHOOK }}

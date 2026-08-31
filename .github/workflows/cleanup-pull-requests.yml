@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - trunk
-      - '4.[1-9]'
-      - '[5-9].[0-9]'
+      - '7.[0-9]'
 
 # Cancels all previous workflow runs for pull requests that have not completed.
 concurrency:

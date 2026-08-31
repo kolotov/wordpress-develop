@@ -1,7 +1,6 @@
 ##
-# A reusable workflow that ensures the local Docker environment is working properly.
-#
-# This workflow is used by `trunk` and branches >= 6.8.
+# A reusable workflow that ensures the local Docker environment is working properly
+# for the current WordPress 7.x line.
 ##
 name: Test local Docker environment
 

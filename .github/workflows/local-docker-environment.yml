@@ -1,12 +1,11 @@
 name: Local Docker Environment
 
 on:
-  # Local Docker environment testing was introduced in WordPress 6.8.
+  # Run local Docker environment tests on the current WordPress 7.x line.
   push:
     branches:
       - trunk
-      - '6.[8-9]'
-      - '[7-9].[0-9]'
+      - '7.[0-9]'
     paths:
       # Any changes to Docker related files.
       - '.env.example'
@@ -25,7 +24,7 @@ on:
       # These files configure Composer. Changes could affect the local environment.
       - 'composer.*'
       # These files define the versions to test.
-      - '.version-support-*.json'
+      - '.version-support-mysql.json'
       # Changes to this and related workflow files should always be verified.
       - '.github/workflows/local-docker-environment.yml'
       - '.github/workflows/reusable-support-json-reader-v1.yml'
@@ -33,8 +32,7 @@ on:
   pull_request:
     branches:
       - trunk
-      - '6.[8-9]'
-      - '[7-9].[0-9]'
+      - '7.[0-9]'
     paths:
       # Any changes to Docker related files.
       - '.env.example'
@@ -51,7 +49,7 @@ on:
       # These files configure Composer. Changes could affect the local environment.
       - 'composer.*'
       # These files define the versions to test.
-      - '.version-support-*.json'
+      - '.version-support-mysql.json'
       # Changes to this and related workflow files should always be verified.
       - '.github/workflows/local-docker-environment.yml'
       - '.github/workflows/reusable-support-json-reader-v1.yml'
@@ -71,8 +69,7 @@ permissions: {}
 
 jobs:
   #
-  # Determines the appropriate supported values for PHP and database versions based on the WordPress
-  # version being tested.
+  # Determines the database versions for the current WordPress version being tested.
   #
   build-test-matrix:
     name: Build Test Matrix
@@ -95,7 +92,7 @@ jobs:
       matrix:
         os: [ ubuntu-24.04 ]
         memcached: [ false, true ]
-        php: ${{ fromJSON( needs.build-test-matrix.outputs.php-versions ) }}
+        php: [ '8.5' ]
         db-version: ${{ fromJSON( needs.build-test-matrix.outputs.mysql-versions ) }}
 
         exclude:

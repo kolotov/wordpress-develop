@@ -1,8 +1,5 @@
 ##
-# A reusable workflow that runs end-to-end tests.
-#
-# Branches 6.3 and earlier used Puppeteer instead of Playwright.
-# Use https://github.com/WordPress/wordpress-develop/tree/6.3/.github/workflows/reusable-end-to-end-tests.yml instead.
+# A reusable workflow that runs end-to-end tests for the current WordPress 7.x line.
 ##
 name: End-to-end Tests
 

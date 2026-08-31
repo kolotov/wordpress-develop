@@ -670,7 +670,7 @@ module.exports = function(grunt) {
 				options: {
 					processContent: function( src ) {
 						return src.replace( /uses: \.\/\.github\/workflows\/([^\.]+)\.yml/g, function( match, $1 ) {
-							return 'uses: WordPress/wordpress-develop/.github/workflows/' + $1 + '.yml@trunk';
+							return 'uses: kolotov/wordpress-develop/.github/workflows/' + $1 + '.yml@trunk';
 						} );
 					}
 				},
@@ -680,7 +680,7 @@ module.exports = function(grunt) {
 			'workflow-references-remote-to-local': {
 				options: {
 					processContent: function( src ) {
-						return src.replace( /uses: WordPress\/wordpress-develop\/\.github\/workflows\/([^\.]+)\.yml@trunk/g, function( match, $1 ) {
+						return src.replace( /uses: (?:WordPress|kolotov)\/wordpress-develop\/\.github\/workflows\/([^\.]+)\.yml@trunk/g, function( match, $1 ) {
 							return 'uses: ./.github/workflows/' + $1 + '.yml';
 						} );
 					}

@@ -10,12 +10,12 @@ on:
     # Always test the workflow after it's updated.
     paths:
       - '.github/workflows/install-testing.yml'
-      - '.version-support-*.json'
+      - '.version-support-mysql.json'
       - '.github/workflows/reusable-support-json-reader-v1.yml'
   pull_request:
     # Always test the workflow when changes are suggested.
     paths:
-      - '.version-support-*.json'
+      - '.version-support-mysql.json'
       - '.github/workflows/install-testing.yml'
       - '.github/workflows/reusable-support-json-reader-v1.yml'
 
@@ -109,7 +109,7 @@ jobs:
           -e MYSQL_ROOT_PASSWORD="root"
           -e MYSQL_DATABASE="test_db"
           --entrypoint sh ${{ matrix.db-type }}:${{ matrix.db-version }}
-          -c "exec docker-entrypoint.sh mysqld${{ matrix.db-type == 'mysql' && contains( fromJSON('["5.4", "5.5", "5.6", "7.0", "7.1", "7.2", "7.3"]'), matrix.php ) && ( matrix.db-version == '8.4' && ' --mysql-native-password=ON --authentication-policy=mysql_native_password' || ' --default-authentication-plugin=mysql_native_password' ) || '' }}"
+          -c "exec docker-entrypoint.sh mysqld"
 
     steps:
       - name: Set up PHP ${{ matrix.php }}
@@ -117,7 +117,7 @@ jobs:
         with:
           php-version: '${{ matrix.php }}'
           coverage: none
-          tools: ${{ contains( fromJSON('["5.4", "5.5"]'), matrix.php ) && 'wp-cli:2.4.0' || 'wp-cli' }}
+          tools: wp-cli
 
       - name: Download WordPress
         run: wp core download --version="${WP_VERSION}"

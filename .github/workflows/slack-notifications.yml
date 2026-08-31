@@ -15,16 +15,16 @@ on:
     secrets:
       SLACK_GHA_SUCCESS_WEBHOOK:
         description: 'The Slack webhook URL for a successful build.'
-        required: true
+        required: false
       SLACK_GHA_CANCELLED_WEBHOOK:
         description: 'The Slack webhook URL for a cancelled build.'
-        required: true
+        required: false
       SLACK_GHA_FIXED_WEBHOOK:
         description: 'The Slack webhook URL for a fixed build.'
-        required: true
+        required: false
       SLACK_GHA_FAILURE_WEBHOOK:
         description: 'The Slack webhook URL for a failed build.'
-        required: true
+        required: false
       SLACK_GHA_TIMEOUT_WEBHOOK:
         description: 'The Slack webhook URL for a timed out build.'
         required: false
@@ -77,14 +77,8 @@ jobs:
               run_id: `${context.runId}`,
             });
 
-            if ( process.env.CALLING_STATUS == 'failure' && workflow_run.data.run_attempt == 1 ) {
-              return 'first-failure';
-            }
-
-            // When a workflow has been restarted, check the previous run attempt. Because workflows are automatically
-            // restarted once and a failure on the first run is not reported, failures on the second run should not be
-            // considered.
-            if ( workflow_run.data.run_attempt > 2 ) {
+            // For a manually rerun workflow, compare against the immediately preceding attempt.
+            if ( workflow_run.data.run_attempt > 1 ) {
               const previous_run = await github.rest.actions.getWorkflowRunAttempt({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -191,14 +185,17 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     needs: [ prepare ]
-    if: ${{ needs.prepare.outputs.previous_conclusion != 'first-failure' && inputs.calling_status == 'failure' || failure() }}
+    if: ${{ inputs.calling_status == 'failure' || failure() }}
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_GHA_FAILURE_WEBHOOK }}
 
     steps:
       - name: Post failure notifications to Slack
+        if: ${{ env.SLACK_WEBHOOK != '' }}
         uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
         with:
           webhook-type: webhook-trigger
-          webhook: ${{ secrets.SLACK_GHA_FAILURE_WEBHOOK }}
+          webhook: ${{ env.SLACK_WEBHOOK }}
           payload: ${{ needs.prepare.outputs.payload }}
 
   # Posts notifications the first time a workflow run succeeds after previously failing.
@@ -209,13 +206,16 @@ jobs:
     timeout-minutes: 20
     needs: [ prepare ]
     if: ${{ contains( fromJson( '["failure", "cancelled", "none"]' ), needs.prepare.outputs.previous_conclusion ) && inputs.calling_status == 'success' && success() }}
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_GHA_FIXED_WEBHOOK }}
 
     steps:
-      - name: Post failure notifications to Slack
+      - name: Post fixed notifications to Slack
+        if: ${{ env.SLACK_WEBHOOK != '' }}
         uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
         with:
           webhook-type: webhook-trigger
-          webhook: ${{ secrets.SLACK_GHA_FIXED_WEBHOOK }}
+          webhook: ${{ env.SLACK_WEBHOOK }}
           payload: ${{ needs.prepare.outputs.payload }}
 
   # Posts notifications when a workflow is successful.
@@ -226,13 +226,16 @@ jobs:
     timeout-minutes: 20
     needs: [ prepare ]
     if: ${{ inputs.calling_status == 'success' && success() }}
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_GHA_SUCCESS_WEBHOOK }}
 
     steps:
       - name: Post success notifications to Slack
+        if: ${{ env.SLACK_WEBHOOK != '' }}
         uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
         with:
           webhook-type: webhook-trigger
-          webhook: ${{ secrets.SLACK_GHA_SUCCESS_WEBHOOK }}
+          webhook: ${{ env.SLACK_WEBHOOK }}
           payload: ${{ needs.prepare.outputs.payload }}
 
   cancelled:
@@ -241,14 +244,17 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     needs: [ prepare ]
-    if: ${{ ( inputs.calling_status == 'cancelled' && github.run_attempt == 2 && needs.prepare.outputs.timed_out != 'true' ) || cancelled() }}
+    if: ${{ ( inputs.calling_status == 'cancelled' && needs.prepare.outputs.timed_out != 'true' ) || cancelled() }}
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_GHA_CANCELLED_WEBHOOK }}
 
     steps:
       - name: Post cancelled notifications to Slack
+        if: ${{ env.SLACK_WEBHOOK != '' }}
         uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
         with:
           webhook-type: webhook-trigger
-          webhook: ${{ secrets.SLACK_GHA_CANCELLED_WEBHOOK }}
+          webhook: ${{ env.SLACK_WEBHOOK }}
           payload: ${{ needs.prepare.outputs.payload }}
 
   timeout:
@@ -257,12 +263,15 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     needs: [ prepare ]
-    if: ${{ inputs.calling_status == 'cancelled' && github.run_attempt == 2 && needs.prepare.outputs.timed_out == 'true' }}
+    if: ${{ inputs.calling_status == 'cancelled' && needs.prepare.outputs.timed_out == 'true' }}
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_GHA_TIMEOUT_WEBHOOK }}
 
     steps:
       - name: Post timeout notifications to Slack
+        if: ${{ env.SLACK_WEBHOOK != '' }}
         uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
         with:
           webhook-type: webhook-trigger
-          webhook: ${{ secrets.SLACK_GHA_TIMEOUT_WEBHOOK }}
+          webhook: ${{ env.SLACK_WEBHOOK }}
           payload: ${{ needs.prepare.outputs.payload }}
