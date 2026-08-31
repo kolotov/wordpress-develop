@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Terms_GetTermsParentsList extends WP_UnitTestCase {
 	protected static $c1;

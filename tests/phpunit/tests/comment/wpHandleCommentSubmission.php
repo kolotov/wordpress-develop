@@ -1,11 +1,6 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_handle_comment_submission' )]
 class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 
@@ -130,8 +125,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertEmpty( $comment->get_error_message() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39650' )]
 	public function test_submitting_comment_to_draft_post_returns_error_message_for_user_with_correct_caps() {
 		$error = 'comment_on_draft';
@@ -614,8 +607,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( $error, $comment->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '10377' )]
 	public function test_submitting_comment_with_content_too_long_returns_error() {
 		$error = 'comment_content_column_length';
@@ -632,8 +623,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( $error, $comment->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '10377' )]
 	public function test_submitting_comment_with_author_too_long_returns_error() {
 		$error = 'comment_author_column_length';
@@ -650,8 +639,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( $error, $comment->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '10377' )]
 	public function test_submitting_comment_with_email_too_long_returns_error() {
 		$error = 'comment_author_email_column_length';
@@ -668,8 +655,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( $error, $comment->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '10377' )]
 	public function test_submitting_comment_with_url_too_long_returns_error() {
 		$error = 'comment_author_url_column_length';
@@ -687,8 +672,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( $error, $comment->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49236' )]
 	public function test_submitting_comment_with_empty_type_results_in_correct_type() {
 		$data    = array(
@@ -706,9 +689,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( 'comment', $comment->comment_type );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49236' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_comment' )]
 	public function test_inserting_comment_with_empty_type_results_in_correct_type() {
@@ -728,8 +708,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( 'comment', $comment->comment_type );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34997' )]
 	public function test_comment_submission_sends_all_expected_parameters_to_preprocess_comment_filter() {
 		$user = get_userdata( self::$author_id );
@@ -763,8 +741,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56712' )]
 	public function test_submitting_comment_without_optional_parameters_sets_them_to_empty_strings() {
 		$data = array(
@@ -794,8 +770,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		return $commentdata;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36901' )]
 	public function test_submitting_duplicate_comments() {
 		$data           = array(
@@ -810,8 +784,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( 'comment_duplicate', $second_comment->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36901' )]
 	public function test_comments_flood() {
 		$data          = array(
@@ -829,8 +801,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( 'comment_flood', $second_comment->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36901' )]
 	public function test_comments_flood_user_can_moderate_comments() {
 		$user = get_user_by( 'id', self::$editor_id );
@@ -988,8 +958,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( 'trash', $comment->comment_approved, 'The wrong approved status was returned.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61827' )]
 	public function test_disallowed_keys_html_match_gives_approved_status_of_trash() {
 		$data = array(
@@ -1007,8 +975,6 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 		$this->assertSame( 'trash', $comment->comment_approved, 'The wrong approved status was returned.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61827' )]
 	public function test_disallowed_keys_filtered_html_match_does_not_call_check_comment_flood_action_twice() {
 		$data = array(

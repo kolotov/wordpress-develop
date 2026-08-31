@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'term' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'is_term_publicly_viewable' )]
 class Tests_Term_IsTermPubliclyViewable extends WP_UnitTestCase {

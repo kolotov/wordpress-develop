@@ -1,13 +1,5 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
-
-
-
-
-
-
 class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	protected $i       = 0;
 	protected $queries = 0;
@@ -20,9 +12,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		switch_theme( 'default' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16894' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_comment_meta' )]
 	public function test_update_comment_meta_cache_should_default_to_lazy_loading() {
@@ -53,9 +42,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		$this->assertSame( 1, get_num_queries() - $num_queries, 'Querying comments is expected to make two queries' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57801' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_lazyload_comment_meta' )]
 	public function test_update_comment_meta_cache_should_default_to_lazy_loading_fields_id() {
@@ -87,9 +73,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		$this->assertSame( 1, get_num_queries() - $num_queries, 'Comment meta is expected to be lazy loaded' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16894' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_comment_meta' )]
 	public function test_update_comment_meta_cache_true() {
@@ -120,9 +103,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		$this->assertSame( 1, get_num_queries() - $num_queries, 'Comment meta should be loaded in one database query' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57801' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_comment_meta' )]
 	public function test_update_comment_meta_cache_true_multiple() {
@@ -158,9 +138,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		$this->assertSameSets( $prime_comment_ids, $all_comment_ids, 'All comment meta should be loaded all at once' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16894' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_comment_meta' )]
 	public function test_update_comment_meta_cache_false() {
@@ -186,9 +163,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		$this->assertSame( 3, get_num_queries() - $num_queries );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16894' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_meta' )]
 	public function test_comment_meta_should_be_lazy_loaded_for_all_comments_in_comments_template() {
@@ -221,9 +195,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34047' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_meta' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_lazyload_comment_meta' )]
@@ -270,9 +241,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34047' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_meta' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_lazyload_comment_meta' )]
@@ -320,9 +288,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_metadata' )]
 	public function test_add_metadata_sets_comments_last_changed() {
@@ -334,9 +299,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		$this->assertNotFalse( wp_cache_get_last_changed( 'comment' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_metadata' )]
 	public function test_update_metadata_sets_comments_last_changed() {
@@ -348,9 +310,6 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 		$this->assertNotFalse( wp_cache_get_last_changed( 'comment' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_metadata' )]
 	public function test_delete_metadata_sets_comments_last_changed() {

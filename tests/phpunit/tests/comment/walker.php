@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_list_comments' )]
 class Tests_Comment_Walker extends WP_UnitTestCase {
@@ -20,8 +17,6 @@ class Tests_Comment_Walker extends WP_UnitTestCase {
 		$this->post_id = self::factory()->post->create();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14041' )]
 	public function test_has_children() {
 		$comment_parent = self::factory()->comment->create( array( 'comment_post_ID' => $this->post_id ) );

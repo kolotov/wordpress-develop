@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_term' )]
 class Tests_Term_SanitizeTerm extends WP_UnitTestCase {

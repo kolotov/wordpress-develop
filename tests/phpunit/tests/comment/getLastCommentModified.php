@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '38027' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_lastcommentmodified' )]

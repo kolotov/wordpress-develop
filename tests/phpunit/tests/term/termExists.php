@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'term_exists' )]
 class Tests_TermExists extends WP_UnitTestCase {
@@ -78,8 +75,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		$this->assertNull( term_exists( '   ' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29589' )]
 	public function test_term_exists_existing_term_that_sanitizes_to_empty() {
 		wp_insert_term( '//', 'category' );
@@ -122,8 +117,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		$this->assertEquals( $t, $found['term_id'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29851' )]
 	public function test_term_exists_taxonomy_nonempty_parent_0_should_return_false_for_child_term() {
 		register_taxonomy(
@@ -273,8 +266,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36949' )]
 	public function test_term_lookup_by_id_and_update() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -294,8 +285,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36949' )]
 	public function test_term_lookup_by_slug_and_update() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -315,8 +304,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36949' )]
 	public function test_term_exists_caching() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -342,8 +329,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36949' )]
 	public function test_term_exists_caching_suspend_cache_invalidation() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -367,8 +352,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36949' )]
 	public function test_term_exists_caching_by_int_suspend_cache_invalidation() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -399,8 +382,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		$this->assertNull( term_exists( null ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55358' )]
 	public function test_term_exists_with_numeric_parent_term() {
 		register_taxonomy(
@@ -438,8 +419,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		_unregister_taxonomy( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55358' )]
 	public function test_term_exists_with_non_numeric_parent_term() {
 		register_taxonomy(
@@ -477,8 +456,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		_unregister_taxonomy( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55358' )]
 	public function test_term_exists_with_empty_taxonomy_and_numeric_parent() {
 		register_taxonomy(
@@ -511,8 +488,6 @@ class Tests_TermExists extends WP_UnitTestCase {
 		_unregister_taxonomy( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55358' )]
 	public function test_term_exists_with_wordpress_categories() {
 		// Create a parent category

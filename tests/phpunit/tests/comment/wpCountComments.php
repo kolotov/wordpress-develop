@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_count_comments' )]
 class Tests_Comment_wpCountComments extends WP_UnitTestCase {

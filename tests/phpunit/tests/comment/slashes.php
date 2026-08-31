@@ -1,14 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '21767' )]
-
-
-
-
 class Tests_Comment_Slashes extends WP_UnitTestCase {
 
 	/*

@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_author_email_link' )]
 class Tests_Comment_GetCommentAuthorEmailLink extends WP_UnitTestCase {
@@ -45,8 +42,6 @@ class Tests_Comment_GetCommentAuthorEmailLink extends WP_UnitTestCase {
 		$this->assertSame( $expected, get_comment_author_email_link() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36571' )]
 	public function test_all_parameters() {
 		unset( $GLOBALS['comment'] );
@@ -93,8 +88,6 @@ class Tests_Comment_GetCommentAuthorEmailLink extends WP_UnitTestCase {
 		$this->assertSame( $expected, get_comment_author_email_link( '', '', $after ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36571' )]
 	public function test_comment_param_should_override_global() {
 		$comment = self::factory()->comment->create_and_get(

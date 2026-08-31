@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_WP_Taxonomy extends WP_UnitTestCase {
 	public function test_instances() {

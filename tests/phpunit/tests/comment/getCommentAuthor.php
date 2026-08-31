@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_author' )]
 class Tests_Comment_GetCommentAuthor extends WP_UnitTestCase {
@@ -46,8 +43,6 @@ class Tests_Comment_GetCommentAuthor extends WP_UnitTestCase {
 		return $comment_author;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60475' )]
 	public function test_comment_author_passes_correct_comment_id_for_non_existent_comment() {
 		add_filter( 'get_comment_author', array( $this, 'get_comment_author_filter_non_existent_id' ), 99, 3 );

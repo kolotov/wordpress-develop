@@ -1,9 +1,5 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
-
-
 class Tests_Comment_Template extends WP_UnitTestCase {
 	/**
 	 * Shared post ID.
@@ -21,8 +17,6 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 		self::$post_id = self::factory()->post->create();
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments_number' )]
 	public function test_get_comments_number() {
 		$post_id = self::$post_id;
@@ -37,8 +31,6 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 		$this->assertSame( '12', get_comments_number( get_post( $post_id ) ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments_number' )]
 	public function test_get_comments_number_without_arg() {
 		$post_id   = self::$post_id;
@@ -53,9 +45,6 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 		$this->assertSame( '12', get_comments_number() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48772' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments_number_text' )]
 	public function test_get_comments_number_text_with_post_id() {
@@ -73,9 +62,6 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 		$this->assertSame( sprintf( _n( '%s Comment', '%s Comments', 6 ), '6' ), $comments_number_text );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '13651' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments_number_text' )]
 	public function test_get_comments_number_text_declension_with_default_args() {
@@ -96,9 +82,6 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 		$this->assertSame( sprintf( _n( '%s Comment', '%s Comments', 2 ), '2' ), get_comments_number_text() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '13651' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_comments_number_text_declension' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments_number_text' )]

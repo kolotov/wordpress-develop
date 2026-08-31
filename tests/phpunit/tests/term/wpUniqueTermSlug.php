@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Term_WpUniqueTermSlug extends WP_UnitTestCase {
 	public function set_up() {
@@ -128,8 +126,6 @@ class Tests_Term_WpUniqueTermSlug extends WP_UnitTestCase {
 		$this->assertSame( 'bar-2', $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '46431' )]
 	public function test_duplicate_parent_suffixed_slug_should_get_numeric_suffix() {
 		$t1 = self::factory()->term->create(

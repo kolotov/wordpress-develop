@@ -1,10 +1,6 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_count' )]
 class Tests_Comment_GetCommentCount extends WP_UnitTestCase {
 
@@ -105,9 +101,6 @@ class Tests_Comment_GetCommentCount extends WP_UnitTestCase {
 		$this->assertSame( 0, $count['total_comments'] );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19901' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_count' )]
 	public function test_get_comment_count_validate_cache_comment_deleted() {
@@ -125,9 +118,6 @@ class Tests_Comment_GetCommentCount extends WP_UnitTestCase {
 		$this->assertSame( 0, $count['total_comments'] );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19901' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_count' )]
 	public function test_get_comment_count_validate_cache_post_deleted() {
@@ -151,9 +141,6 @@ class Tests_Comment_GetCommentCount extends WP_UnitTestCase {
 		$this->assertSame( 0, $count['total_comments'] );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19901' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_count' )]
 	public function test_get_comment_count_validate_cache_comment_status() {

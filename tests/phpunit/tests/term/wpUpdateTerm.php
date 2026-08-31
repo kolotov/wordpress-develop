@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 	public function test_wp_update_term_taxonomy_does_not_exist() {
@@ -83,8 +81,6 @@ class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29614' )]
 	public function test_wp_update_term_parent_does_not_exist() {
 		register_taxonomy(
@@ -184,8 +180,6 @@ class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '5809' )]
 	public function test_wp_update_term_should_not_create_duplicate_slugs_within_the_same_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -218,8 +212,6 @@ class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 		$this->assertSame( 'duplicate_term_slug', $updated->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '5809' )]
 	public function test_wp_update_term_should_allow_duplicate_slugs_in_different_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -256,8 +248,6 @@ class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 		$this->assertSame( $t1_term->slug, $t2_term->slug );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30780' )]
 	public function test_wp_update_term_should_allow_duplicate_names_in_different_taxonomies() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -293,8 +283,6 @@ class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 		$this->assertSame( 'Foo', $t2_term->name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30780' )]
 	public function test_wp_update_term_should_allow_duplicate_names_at_different_levels_of_the_same_taxonomy() {
 		register_taxonomy(
@@ -345,8 +333,6 @@ class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 		$this->assertSame( 'Bar', $t3_term->name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '5809' )]
 	public function test_wp_update_term_should_split_shared_term() {
 		global $wpdb;
@@ -620,8 +606,6 @@ class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 		$this->assertEquals( $term_by_id, $term_by_ttid );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32876' )]
 	public function test_wp_update_term_should_return_int_values_for_term_id_and_term_taxonomy_id() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -688,8 +672,6 @@ class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 		$this->assertContains( $found['term_id'], $cached_children[ $t2 ] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30780' )]
 	public function test_wp_update_term_should_assign_new_slug_when_reassigning_parent_as_long_as_there_is_no_other_term_with_the_same_slug() {
 		register_taxonomy(
@@ -736,8 +718,6 @@ class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30780' )]
 	public function test_wp_update_term_should_not_assign_new_slug_when_reassigning_parent_as_long_as_there_is_no_other_slug_conflict_within_the_taxonomy() {
 		register_taxonomy(
@@ -792,8 +772,6 @@ class Tests_Term_WpUpdateTerm extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31954' )]
 	public function test_wp_update_term_with_null_get_term() {
 		$t     = self::factory()->term->create( array( 'taxonomy' => 'category' ) );

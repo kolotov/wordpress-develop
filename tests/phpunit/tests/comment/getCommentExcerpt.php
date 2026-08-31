@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_excerpt' )]
 class Tests_Comment_GetCommentExcerpt extends WP_UnitTestCase {

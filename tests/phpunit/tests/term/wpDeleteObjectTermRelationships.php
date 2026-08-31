@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_delete_object_term_relationships' )]
 class Tests_Term_WpDeleteObjectTermRelationships extends WP_UnitTestCase {
@@ -54,8 +52,6 @@ class Tests_Term_WpDeleteObjectTermRelationships extends WP_UnitTestCase {
 		$this->assertSameSets( array( $t2 ), $terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64406' )]
 	public function test_delete_when_error() {
 		$taxonomy_name = 'wptests_tax';

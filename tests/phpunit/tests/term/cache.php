@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Term_Cache extends WP_UnitTestCase {
 	public function set_up() {
@@ -10,8 +8,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		wp_cache_delete( 'last_changed', 'terms' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25711' )]
 	public function test_category_children_cache() {
 		// Test with only one Parent => Child.
@@ -35,8 +31,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22526' )]
 	public function test_category_name_change() {
 		$term    = self::factory()->category->create_and_get( array( 'name' => 'Foo' ) );
@@ -52,8 +46,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		$this->assertNotEquals( $term->name, reset( $cats2 )->name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14485' )]
 	public function test_hierarchy_invalidation() {
 		$tax = 'burrito';
@@ -177,8 +169,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		$this->assertEquals( $term_object, $term_object_2 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30749' )]
 	public function test_get_terms_should_update_cache_for_located_terms() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -208,8 +198,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35462' )]
 	public function test_term_objects_should_not_be_modified_by_update_term_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -229,8 +217,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_get_term_by_slug_cache() {
 		$term_id = self::factory()->term->create(
@@ -258,8 +244,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_get_term_by_slug_cache_update() {
 		$term_id = self::factory()->term->create(
@@ -294,8 +278,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_get_term_by_name_cache() {
 		$term_id = self::factory()->term->create(
@@ -321,8 +303,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_get_term_by_name_cache_update() {
 		$term_id = self::factory()->term->create(
@@ -354,8 +334,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_invalidating_term_caches_should_fail_when_invalidation_is_suspended() {
 		$term_id = self::factory()->term->create(
@@ -395,8 +373,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		wp_suspend_cache_invalidation( $suspend );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_get_term_by_does_not_prime_term_meta_cache() {
 		$term_id = self::factory()->term->create(
@@ -422,8 +398,6 @@ class Tests_Term_Cache extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37291' )]
 	public function test_get_object_term_cache_should_return_error_if_any_term_is_an_error() {
 		register_taxonomy( 'wptests_tax', 'post' );

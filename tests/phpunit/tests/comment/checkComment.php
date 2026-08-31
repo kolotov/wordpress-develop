@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'check_comment' )]
 class Tests_Comment_CheckComment extends WP_UnitTestCase {
@@ -85,8 +82,6 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 		$this->assertFalse( $results );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57207' )]
 	public function test_should_return_false_when_content_with_non_latin_words_matches_moderation_keys() {
 		update_option( 'comment_previously_approved', 0 );
@@ -152,8 +147,6 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 		$this->assertTrue( $results );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28603' )]
 	public function test_should_return_true_when_comment_previously_approved_is_enabled_and_user_has_previously_approved_comments_with_different_email() {
 		$subscriber_id = self::factory()->user->create(
@@ -184,8 +177,6 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 		$this->assertTrue( $results );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28603' )]
 	public function test_should_return_false_when_comment_previously_approved_is_enabled_and_user_does_not_have_a_previously_approved_comment_with_any_email() {
 		$subscriber_id = self::factory()->user->create(
@@ -206,8 +197,6 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 		$this->assertFalse( $results );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
 	public function test_should_return_true_for_a_pingback_from_this_site() {
 		update_option( 'comment_previously_approved', '1' );

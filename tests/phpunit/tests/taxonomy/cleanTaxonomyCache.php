@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'clean_taxonomy_cache' )]
 class Tests_Taxonomy_CleanTaxonomyCache extends WP_UnitTestCase {

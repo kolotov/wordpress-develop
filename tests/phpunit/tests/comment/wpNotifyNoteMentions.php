@@ -7,9 +7,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\Group( 'notes' )]
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_notify_note_mentions' )]
 class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 
@@ -139,9 +136,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		return sprintf( '<span class="wp-note-mention user-%d">%s</span>', $user_id, $label );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_note_mentioned_user_ids' )]
 	public function test_parses_mentioned_user_ids() {
@@ -151,9 +145,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		$this->assertSame( array( 5, 9 ), wp_get_note_mentioned_user_ids( $content ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_note_mentioned_user_ids' )]
 	public function test_ignores_non_mentions_and_deduplicates() {
@@ -166,9 +157,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		$this->assertSame( array( 5 ), wp_get_note_mentioned_user_ids( $content ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_send_note_notification' )]
 	public function test_mentioned_user_is_emailed() {
@@ -182,9 +170,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		$this->assertContains( self::$mentioned->user_email, $this->sent_to );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_send_note_notification' )]
 	public function test_email_contains_context_and_editor_link() {
@@ -246,9 +231,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		$this->assertStringContainsString( $edit_link, $this->sent[0]['message'] );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_send_note_notification' )]
 	public function test_email_is_sent_as_plain_text() {
@@ -313,8 +295,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'Use <code> tags', $this->sent[0]['message'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_author_is_not_notified_about_their_own_note() {
 		$note = $this->insert_note(
@@ -327,8 +307,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		$this->assertNotContains( self::$commenter->user_email, $this->sent_to );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_post_author_is_left_to_the_postauthor_notification() {
 		$note = $this->insert_note(
@@ -346,8 +324,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		$this->assertNotContains( self::$post_author->user_email, $this->sent_to );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_mentioned_user_without_note_access_is_not_emailed() {
 		$subscriber = self::factory()->user->create_and_get( array( 'role' => 'subscriber' ) );
@@ -367,8 +343,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		$this->assertNotContains( $subscriber->user_email, $this->sent_to );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_mentioning_a_nonexistent_user_sends_nothing() {
 		$note = $this->insert_note(
@@ -381,8 +355,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		$this->assertEmpty( $this->sent_to );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_no_notifications_when_disabled() {
 		update_option( 'wp_notes_notify', 0 );
@@ -397,8 +369,6 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 		$this->assertEmpty( $this->sent_to );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_editing_a_note_does_not_renotify() {
 		$note = $this->insert_note(

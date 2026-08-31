@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 	protected $taxonomy        = 'category';
@@ -11,8 +9,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		self::$post_ids = $factory->post->create_many( 5 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22560' )]
 	public function test_object_term_cache() {
 		$post_id = self::$post_ids[0];
@@ -47,8 +43,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		$this->assertFalse( wp_cache_get( $post_id, $this->taxonomy . '_relationships' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24189' )]
 	public function test_object_term_cache_when_term_changes() {
 		$post_id = self::$post_ids[0];
@@ -82,8 +76,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		$this->assertSame( 'This description is even more amazing!', $terms[0]->description );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34262' )]
 	public function test_get_the_terms_should_return_wp_term_objects_from_cache() {
 		$p = self::$post_ids[0];
@@ -101,8 +93,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		$this->assertInstanceOf( 'WP_Term', $cached[0] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31086' )]
 	public function test_get_the_terms_should_return_zero_indexed_array_when_cache_is_empty() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -114,8 +104,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		$this->assertSameSets( array( 0, 1 ), array_keys( $found ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31086' )]
 	public function test_get_the_terms_should_return_zero_indexed_array_when_cache_is_primed() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -130,8 +118,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		$this->assertSameSets( array( 0, 1 ), array_keys( $found ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35180' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '28922' )]
 	public function test_get_the_terms_should_return_results_ordered_by_name_when_pulling_from_cache() {
@@ -165,8 +151,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		$this->assertSame( array( $t2, $t1, $t3 ), wp_list_pluck( $found, 'term_id' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34723' )]
 	public function test_get_the_terms_should_return_wp_error_when_taxonomy_is_unregistered() {
 		$p     = self::$post_ids[0];
@@ -174,8 +158,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		$this->assertWPError( $terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36814' )]
 	public function test_count_should_not_be_improperly_cached() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -193,8 +175,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		$this->assertSame( 2, $terms[0]->count );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36814' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '57701' )]
 	public function test_uncached_terms_should_not_be_primed_with_a_single_query_by_default() {
@@ -218,8 +198,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		$this->assertSame( 1, get_num_queries() - $num_queries );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40306' )]
 	public function test_term_cache_should_be_invalidated_on_set_object_terms() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -250,8 +228,6 @@ class Tests_Term_GetTheTerms extends WP_UnitTestCase {
 		$this->assertSame( array( $term_id ), wp_list_pluck( $terms, 'term_id' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40306' )]
 	public function test_term_cache_should_be_invalidated_on_remove_object_terms() {
 		register_taxonomy( 'wptests_tax', 'post' );

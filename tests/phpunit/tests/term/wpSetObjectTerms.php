@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_set_object_terms' )]
 class Tests_Term_WpSetObjectTerms extends WP_UnitTestCase {
@@ -15,8 +12,6 @@ class Tests_Term_WpSetObjectTerms extends WP_UnitTestCase {
 		self::$term_ids = $factory->term->create_many( 5, array( 'taxonomy' => self::$taxonomy ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26570' )]
 	public function test_set_object_terms() {
 		$non_hier = rand_str( 10 );

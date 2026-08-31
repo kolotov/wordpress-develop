@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_allow_comment' )]
 class Tests_Comment_WpAllowComment extends WP_UnitTestCase {

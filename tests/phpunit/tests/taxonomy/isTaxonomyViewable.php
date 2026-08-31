@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Taxonomy_IsTaxonomyViewable extends WP_UnitTestCase {
 	public function set_up() {
@@ -12,29 +10,21 @@ class Tests_Taxonomy_IsTaxonomyViewable extends WP_UnitTestCase {
 		register_taxonomy( 'wptests_tax_non_viewable', 'wptests_pt', array( 'publicly_queryable' => false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44466' )]
 	public function test_is_taxonomy_viewable_for_querable_taxonomy() {
 		$this->assertTrue( is_taxonomy_viewable( 'wptests_tax_viewable' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44466' )]
 	public function test_is_taxonomy_viewable_for_non_querable_taxonomy() {
 		$this->assertFalse( is_taxonomy_viewable( 'wptests_tax_non_viewable' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44466' )]
 	public function test_is_taxonomy_viewable_for_non_existing_taxonomy() {
 		$this->assertFalse( is_taxonomy_viewable( 'wptests_tax_non_existing' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44466' )]
 	public function test_is_taxonomy_viewable_with_object_given() {
 		$taxonomy = get_taxonomy( 'wptests_tax_viewable' );

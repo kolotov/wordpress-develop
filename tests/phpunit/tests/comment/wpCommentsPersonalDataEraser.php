@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_comments_personal_data_eraser' )]

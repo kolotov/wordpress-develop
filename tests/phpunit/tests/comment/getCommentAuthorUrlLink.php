@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_author_url_link' )]
 class Tests_Comment_GetCommentAuthorUrlLink extends WP_UnitTestCase {

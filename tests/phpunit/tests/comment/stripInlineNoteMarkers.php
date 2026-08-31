@@ -15,8 +15,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_strip_inline_note_markers' )]
 class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_unwraps_marker_from_mark(): void {
 		$html     = '<p>Hello <mark class="wp-note" data-id="7">marked</mark> world</p>';
@@ -25,8 +23,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( '<p>Hello marked world</p>', $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_handles_multiple_markers_in_one_block(): void {
 		$html     = '<p><mark class="wp-note" data-id="1">a</mark> and <mark class="wp-note" data-id="2">b</mark></p>';
@@ -35,8 +31,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( '<p>a and b</p>', $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_passes_through_block_content_without_markers(): void {
 		$html     = '<p>Plain text with no notes here.</p>';
@@ -45,8 +39,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( $html, $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_keeps_other_classes_when_removing_wp_note(): void {
 		// The whole wrapper is removed, so any companion classes go with it.
@@ -56,8 +48,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( '<p>x</p>', $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_leaves_unrelated_marks_untouched(): void {
 		// A user highlight (`core/text-color`) serializes as a plain `<mark>` and
@@ -68,8 +58,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( $html, $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_does_not_match_partial_class_names(): void {
 		// `wp-note-foo` is a different class and must not be treated as a marker;
@@ -80,8 +68,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( $html, $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_preserves_user_mark_attributes_next_to_note(): void {
 		// A user/plugin `<mark>` with several attributes sitting beside a note
@@ -92,8 +78,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( '<p><mark class="highlight" style="background-color:#ff0" data-id="99" title="kept">user</mark> and noted</p>', $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_preserves_nested_formatting(): void {
 		// A note wrapping already-formatted text (e.g. coloured text) serializes
@@ -105,8 +89,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( '<p>a <span style="color:red">red</span> b</p>', $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_unwraps_note_but_keeps_inner_highlight_mark(): void {
 		// A note wrapping a user highlight nests `<mark>` inside `<mark>`. Only the
@@ -118,8 +100,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( '<p>a <mark style="background-color:#ff0">hi</mark> b</p>', $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_handles_overlapping_nested_note_markers(): void {
 		// Two notes anchored on overlapping text serialize as nested `<mark>`s.
@@ -130,8 +110,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( '<p>abc</p>', $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_ignores_mark_like_text_inside_a_comment(): void {
 		// A `</mark>` sequence inside an HTML comment is text, not a tag. Walking
@@ -185,8 +163,6 @@ class Tests_Comment_StripInlineNoteMarkers extends WP_UnitTestCase {
 		$this->assertSame( '<p>a<i>bc</i></p>', $stripped );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65482' )]
 	public function test_strip_filter_is_registered_on_render_block(): void {
 		// Guards against future hook rewiring that would silently leave

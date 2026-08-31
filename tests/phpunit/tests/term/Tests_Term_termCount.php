@@ -1,10 +1,6 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
-
-
 class Tests_Term_termCount extends WP_UnitTestCase {
 
 	/**

@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_link' )]
 class Tests_Comment_GetCommentLink extends WP_UnitTestCase {
@@ -57,8 +54,6 @@ class Tests_Comment_GetCommentLink extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34068' )]
 	public function test_default_comments_page_newest_default_page_should_have_cpage() {
 		update_option( 'page_comments', 1 );
@@ -70,8 +65,6 @@ class Tests_Comment_GetCommentLink extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'cpage=3', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34068' )]
 	public function test_default_comments_page_newest_middle_page_should_have_cpage() {
 		update_option( 'page_comments', 1 );
@@ -83,8 +76,6 @@ class Tests_Comment_GetCommentLink extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'cpage=2', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34068' )]
 	public function test_default_comments_page_newest_last_page_should_have_cpage() {
 		update_option( 'page_comments', 1 );
@@ -96,8 +87,6 @@ class Tests_Comment_GetCommentLink extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'cpage=1', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34068' )]
 	public function test_default_comments_page_oldest_default_page_should_not_have_cpage() {
 		update_option( 'default_comments_page', 'oldest' );
@@ -108,8 +97,6 @@ class Tests_Comment_GetCommentLink extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'cpage', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34068' )]
 	public function test_default_comments_page_oldest_middle_page_should_have_cpage() {
 		update_option( 'page_comments', 1 );
@@ -121,8 +108,6 @@ class Tests_Comment_GetCommentLink extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'cpage=2', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34068' )]
 	public function test_default_comments_page_oldest_last_page_should_have_cpage() {
 		update_option( 'page_comments', 1 );
@@ -134,8 +119,6 @@ class Tests_Comment_GetCommentLink extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'cpage=3', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34946' )]
 	public function test_should_not_contain_comment_page_1_when_pagination_is_disabled() {
 		$this->set_permalink_structure( '/%postname%/' );

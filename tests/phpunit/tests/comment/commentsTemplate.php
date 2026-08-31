@@ -17,8 +17,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		switch_theme( 'default' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_asc_when_default_comments_page_is_newest() {
 		$now       = time();
@@ -51,8 +49,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_2, $comment_1 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_desc_when_default_comments_page_is_newest() {
 		$now       = time();
@@ -85,8 +81,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_1, $comment_2 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_asc_when_default_comments_page_is_oldest() {
 		$now       = time();
@@ -119,8 +113,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_2, $comment_1 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_desc_when_default_comments_page_is_oldest() {
 		$now       = time();
@@ -153,8 +145,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_1, $comment_2 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_asc_when_default_comments_page_is_newest_on_subsequent_pages() {
 		$now       = time();
@@ -224,8 +214,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_4, $comment_3 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_desc_when_default_comments_page_is_newest_on_subsequent_pages() {
 		$now       = time();
@@ -295,8 +283,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_3, $comment_4 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_asc_when_default_comments_page_is_oldest_on_subsequent_pages() {
 		$now       = time();
@@ -352,8 +338,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_2, $comment_1 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_desc_when_default_comments_page_is_oldest_on_subsequent_pages() {
 		$now       = time();
@@ -409,8 +393,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_1, $comment_2 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '34073' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '29462' )]
@@ -461,8 +443,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_2, $comment_3 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '34073' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '29462' )]
@@ -513,8 +493,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_1 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34073' )]
 	public function test_comment_permalinks_should_be_correct_when_using_default_display_callback_with_default_comment_page_oldest() {
 		$now       = time();
@@ -598,8 +576,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34073' )]
 	public function test_comment_permalinks_should_be_correct_when_using_default_display_callback_with_default_comment_page_newest() {
 		$now       = time();
@@ -720,8 +696,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35068' )]
 	public function test_query_offset_should_not_include_unapproved_comments() {
 		$now       = time();
@@ -774,8 +748,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_4 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35068' )]
 	public function test_query_offset_should_include_unapproved_comments() {
 		$comment_author_email = 'foo@example.com';
@@ -856,8 +828,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		return $commenter;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43857' )]
 	public function test_comments_list_should_include_just_posted_unapproved_comment() {
 		$now     = time();
@@ -892,8 +862,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( $c, $found_cid );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35378' )]
 	public function test_hierarchy_should_be_ignored_when_threading_is_disabled() {
 		$now       = time();
@@ -937,8 +905,6 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertSame( array( $comment_2, $comment_3, $comment_1 ), $found_cids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35419' )]
 	public function test_pagination_calculation_should_ignore_comment_hierarchy_when_threading_is_disabled() {
 		$now       = time();

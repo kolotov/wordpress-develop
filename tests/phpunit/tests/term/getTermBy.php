@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Term_GetTermBy extends WP_UnitTestCase {
 
@@ -34,8 +32,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertEquals( get_term( $term1['term_id'], 'category' ), $term2 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45163' )]
 	public function test_get_term_by_uppercase_id() {
 		$term1 = wp_insert_term( 'Foo', 'category', array( 'slug' => 'foo' ) );
@@ -43,8 +39,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertEquals( get_term( $term1['term_id'], 'category' ), $term2 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21651' )]
 	public function test_get_term_by_tt_id() {
 		$term1 = wp_insert_term( 'Foo', 'category' );
@@ -58,16 +52,12 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertFalse( $term2 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33281' )]
 	public function test_get_term_by_with_nonexistent_id_should_return_false() {
 		$term = get_term_by( 'id', 123456, 'category' );
 		$this->assertFalse( $term );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16282' )]
 	public function test_get_term_by_slug_should_match_nonaccented_equivalents() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -84,8 +74,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertSame( $t, $found->term_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30620' )]
 	public function test_taxonomy_should_be_ignored_if_matching_by_term_taxonomy_id() {
 		global $wpdb;
@@ -107,8 +95,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertSame( $t, $found->term_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14162' )]
 	public function test_should_prime_term_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -135,8 +121,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_should_unslash_name() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -156,8 +140,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertSame( $term_name, $found->name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_should_sanitize_slug() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -188,8 +170,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertSame( $t2, $found2->term_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_query_should_not_contain_order_by_clause() {
 		global $wpdb;
@@ -205,8 +185,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'ORDER BY', $wpdb->last_query );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_query_should_contain_limit_clause() {
 		$term_id = self::factory()->term->create(
@@ -221,8 +199,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'LIMIT 1', $this->query );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_prevent_recursion_by_get_terms_filter() {
 		$action = new MockAction();
@@ -234,8 +210,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertSame( 0, $action->get_call_count() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_get_term_by_name_with_string_0() {
 		register_taxonomy( 'wptests_tax', 'post', array( 'hierarchical' => true ) );
@@ -251,8 +225,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertSame( $term_id, $found->term_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_get_term_by_slug_with_string_0() {
 		register_taxonomy( 'wptests_tax', 'post', array( 'hierarchical' => true ) );
@@ -269,8 +241,6 @@ class Tests_Term_GetTermBy extends WP_UnitTestCase {
 		$this->assertSame( $term_id, $found->term_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21760' )]
 	public function test_get_term_by_with_empty_string() {
 		register_taxonomy( 'wptests_tax', 'post', array( 'hierarchical' => true ) );

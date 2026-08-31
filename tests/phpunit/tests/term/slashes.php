@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'term' )]
 #[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '21767' )]

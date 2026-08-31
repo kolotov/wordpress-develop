@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'comment_form' )]
 class Tests_Comment_CommentForm extends WP_UnitTestCase {
@@ -64,8 +61,6 @@ class Tests_Comment_CommentForm extends WP_UnitTestCase {
 		$this->assertMatchesRegularExpression( '|<p class="my\-custom\-submit\-field">\s*' . $button . '\s*' . $hidden . '\s*|', $form );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32312' )]
 	public function test_submit_button_and_submit_field_should_fall_back_on_defaults_when_filtered_defaults_do_not_contain_the_keys() {
 		$p = self::factory()->post->create();
@@ -92,8 +87,6 @@ class Tests_Comment_CommentForm extends WP_UnitTestCase {
 		return $defaults;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44126' )]
 	public function test_fields_should_include_cookies_consent() {
 		$p = self::factory()->post->create();
@@ -113,8 +106,6 @@ class Tests_Comment_CommentForm extends WP_UnitTestCase {
 		$this->assertMatchesRegularExpression( '|<p class="comment\-form\-cookies\-consent">.*?</p>|', $form );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47975' )]
 	public function test_aria_describedby_email_notes_should_not_be_added_if_no_email_notes() {
 		$p = self::factory()->post->create();
@@ -132,8 +123,6 @@ class Tests_Comment_CommentForm extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'aria-describedby="email-notes"', $form_without_aria );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32767' )]
 	public function test_when_thread_comments_enabled() {
 		update_option( 'thread_comments', true );
@@ -143,8 +132,6 @@ class Tests_Comment_CommentForm extends WP_UnitTestCase {
 		$this->assertStringContainsString( $expected, $form );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32767' )]
 	public function test_when_thread_comments_disabled() {
 		delete_option( 'thread_comments' );
@@ -154,8 +141,6 @@ class Tests_Comment_CommentForm extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( $expected, $form );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56243' )]
 	public function test_comment_form_should_not_display_for_global_post_when_called_with_invalid_id() {
 		// Go to permalink to ensure global post ID is set.
@@ -167,8 +152,6 @@ class Tests_Comment_CommentForm extends WP_UnitTestCase {
 		$this->assertEmpty( $form );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56243' )]
 	public function test_comment_form_should_display_for_global_post_with_falsey_post_id() {
 		$post_id = self::$post_id;
@@ -181,8 +164,6 @@ class Tests_Comment_CommentForm extends WP_UnitTestCase {
 		$this->assertStringContainsString( $post_hidden_field, $form );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56243' )]
 	public function test_comment_form_should_display_for_specified_post_when_passed_a_valid_post_id() {
 		$post_id = self::$post_id;
@@ -228,8 +209,6 @@ class Tests_Comment_CommentForm extends WP_UnitTestCase {
 		$this->assertTrue( $p->get_attribute( 'novalidate' ), 'Expected FORM to have novalidate attribute.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16576' )]
 	public function test_custom_fields_shown_default_fields_hidden_for_logged_in_users() {
 		$user_id = self::factory()->user->create(
@@ -271,8 +250,6 @@ class Tests_Comment_CommentForm extends WP_UnitTestCase {
 		wp_set_current_user( 0 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16576' )]
 	public function test_all_fields_displayed_for_non_logged_in_users() {
 		wp_set_current_user( 0 );

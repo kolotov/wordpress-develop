@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_IsObjectInTerm extends WP_UnitTestCase {
 	public function test_terms_are_ints() {
@@ -112,8 +110,6 @@ class Tests_IsObjectInTerm extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax', 'post' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29467' )]
 	public function test_should_not_return_true_if_term_name_begins_with_existing_term_id() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -131,8 +127,6 @@ class Tests_IsObjectInTerm extends WP_UnitTestCase {
 		$this->assertTrue( is_object_in_term( $post_id, 'wptests_tax', $int_tax_name ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32044' )]
 	public function test_should_populate_and_hit_relationships_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -150,8 +144,6 @@ class Tests_IsObjectInTerm extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32044' )]
 	public function test_should_not_be_fooled_by_a_stale_relationship_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -173,8 +165,6 @@ class Tests_IsObjectInTerm extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37721' )]
 	public function test_invalid_taxonomy_should_return_wp_error_object() {
 		$this->assertWPError( is_object_in_term( 12345, 'foo', 'bar' ) );

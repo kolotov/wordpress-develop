@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 	public function set_up() {
@@ -180,8 +178,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'quality', $term->slug );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17689' )]
 	public function test_wp_insert_term_duplicate_name() {
 		$term = self::factory()->tag->create_and_get( array( 'name' => 'Bozo' ) );
@@ -255,8 +251,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertNotWPError( $term20 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31328' )]
 	public function test_wp_insert_term_should_not_allow_duplicate_names_when_slug_is_a_duplicate_of_the_same_term_in_non_hierarchical_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -280,8 +274,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'term_exists', $t2->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31328' )]
 	public function test_wp_insert_term_should_not_allow_duplicate_names_when_slug_is_a_duplicate_of_a_different_term_in_non_hierarchical_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -313,8 +305,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'term_exists', $t3->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31328' )]
 	public function test_wp_insert_term_should_allow_duplicate_names_when_a_unique_slug_has_been_provided_in_non_hierarchical_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -341,8 +331,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'Foo', $t2_term->name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31328' )]
 	public function test_wp_insert_term_should_not_allow_duplicate_names_when_the_slug_is_not_provided_in_non_hierarchical_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -360,8 +348,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'term_exists', $t2->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31328' )]
 	public function test_wp_insert_term_should_not_allow_duplicate_names_when_slug_is_a_duplicate_of_the_same_term_in_hierarchical_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post', array( 'hierarchical' => true ) );
@@ -385,8 +371,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'term_exists', $t2->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31328' )]
 	public function test_wp_insert_term_should_not_allow_duplicate_names_when_slug_is_a_duplicate_of_a_different_term_at_same_hierarchy_level_in_hierarchical_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post', array( 'hierarchical' => true ) );
@@ -418,8 +402,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'term_exists', $t3->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31328' )]
 	public function test_wp_insert_term_should_allow_duplicate_names_when_slug_is_a_duplicate_of_a_term_at_different_hierarchy_level_in_hierarchical_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post', array( 'hierarchical' => true ) );
@@ -458,8 +440,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'Foo', $t4_term->name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39984' )]
 	public function test_duplicate_name_check_should_fail_when_no_slug_is_provided_even_when_slugs_would_not_clash() {
 		register_taxonomy( 'wptests_tax', 'post', array( 'hierarchical' => true ) );
@@ -478,8 +458,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( $t1, $error->get_error_data() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39984' )]
 	public function test_error_should_reference_correct_term_when_rejected_as_duplicate() {
 		register_taxonomy( 'wptests_tax', 'post', array( 'hierarchical' => true ) );
@@ -528,8 +506,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( $t2_child['term_id'], $error->get_error_data() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31328' )]
 	public function test_wp_insert_term_should_allow_duplicate_names_when_a_unique_slug_has_been_provided_in_hierarchical_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post', array( 'hierarchical' => true ) );
@@ -556,8 +532,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'Foo', $t2_term->name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31328' )]
 	public function test_wp_insert_term_should_not_allow_duplicate_names_when_the_slug_is_not_provided_in_hierarchical_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post', array( 'hierarchical' => true ) );
@@ -574,8 +548,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertWPError( $t2 );
 		$this->assertSame( 'term_exists', $t2->get_error_code() );
 	}
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '5809' )]
 	public function test_wp_insert_term_duplicate_slug_same_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -603,8 +575,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax', 'post' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '5809' )]
 	public function test_wp_insert_term_duplicate_slug_different_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -636,8 +606,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax', 'post' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '5809' )]
 	public function test_wp_insert_term_duplicate_slug_different_taxonomy_before_410_schema_change() {
 		$old_db_version = 30055;
@@ -751,8 +719,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 0, $created_term->term_group );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '5809' )]
 	public function test_wp_insert_term_should_not_create_shared_term() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -823,8 +789,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertContains( $found['term_id'], $cached_children[ $t ] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33864' )]
 	public function test_wp_insert_term_with_and_without_accents() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -851,8 +815,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'Foo', $term_2->name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37009' )]
 	public function test_term_whose_slug_matches_existing_term_but_name_does_not_should_get_suffixed_slug() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -873,8 +835,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( 'foobar-2', $created_term->slug );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35321' )]
 	public function test_wp_insert_term_with_null_description() {
 
@@ -894,8 +854,6 @@ class Tests_Term_WpInsertTerm extends WP_UnitTestCase {
 		$this->assertSame( '', $term_object->description );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59995' )]
 	public function test_wp_insert_term_with_empty_name_after_db_sanitization() {
 		$term = wp_insert_term(

@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_check_comment_disallowed_list' )]
 class Tests_Comment_wpCheckCommentDisallowedList extends WP_UnitTestCase {
@@ -22,8 +19,6 @@ class Tests_Comment_wpCheckCommentDisallowedList extends WP_UnitTestCase {
 		$this->assertTrue( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37208' )]
 	public function test_should_return_true_when_content_with_html_matches_disallowed_keys() {
 		$author       = 'Sting';
@@ -40,8 +35,6 @@ class Tests_Comment_wpCheckCommentDisallowedList extends WP_UnitTestCase {
 		$this->assertTrue( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57207' )]
 	public function test_should_return_true_when_content_with_non_latin_words_matches_disallowed_keys() {
 		$author       = 'Setup';
@@ -88,8 +81,6 @@ class Tests_Comment_wpCheckCommentDisallowedList extends WP_UnitTestCase {
 		$this->assertTrue( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37208' )]
 	public function test_should_return_true_when_link_matches_disallowed_keys() {
 		$author       = 'Rainier Wolfcastle';

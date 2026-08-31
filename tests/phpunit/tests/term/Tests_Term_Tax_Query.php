@@ -1,9 +1,6 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
-
 class Tests_Term_Tax_Query extends WP_UnitTestCase {
 	protected $q;
 
@@ -98,8 +95,6 @@ class Tests_Term_Tax_Query extends WP_UnitTestCase {
 		$this->assertSame( array( 'foo' ), $tq->queries[0]['terms'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30117' )]
 	public function test_construct_empty_strings_array_members_should_be_discarded() {
 		$q = new WP_Tax_Query(
@@ -282,8 +277,6 @@ class Tests_Term_Tax_Query extends WP_UnitTestCase {
 		$this->assertWPError( $tq->queries[0] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18105' )]
 	public function test_get_sql_relation_or_operator_in() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -334,8 +327,6 @@ class Tests_Term_Tax_Query extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18105' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Tax_Query', 'get_sql' )]
 	public function test_get_sql_relation_and_operator_in() {
@@ -391,8 +382,6 @@ class Tests_Term_Tax_Query extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18105' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Tax_Query', 'get_sql' )]
 	public function test_get_sql_nested_relation_or_operator_in() {
@@ -448,8 +437,6 @@ class Tests_Term_Tax_Query extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29738' )]
 	public function test_get_sql_operator_not_in_empty_terms() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -477,8 +464,6 @@ class Tests_Term_Tax_Query extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29738' )]
 	public function test_get_sql_operator_and_empty_terms() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -506,8 +491,6 @@ class Tests_Term_Tax_Query extends WP_UnitTestCase {
 		_unregister_taxonomy( 'wptests_tax' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18105' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Tax_Query', 'get_sql' )]
 	public function test_get_sql_relation_unsupported() {

@@ -1,13 +1,6 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
-
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversMethod( WP_Comment::class, 'get_instance' )]
 class Tests_Comment_WpComment extends WP_UnitTestCase {
 	protected static $comment_id;
@@ -31,8 +24,6 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 		self::$comment_id = $factory->comment->create();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_work_for_numeric_string() {
 		$found = WP_Comment::get_instance( (string) self::$comment_id );
@@ -40,8 +31,6 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 		$this->assertSame( (string) self::$comment_id, $found->comment_ID );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_fail_for_negative_number() {
 		$found = WP_Comment::get_instance( -self::$comment_id );
@@ -49,8 +38,6 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 		$this->assertFalse( $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_fail_for_non_numeric_string() {
 		$found = WP_Comment::get_instance( 'abc' );
@@ -58,8 +45,6 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 		$this->assertFalse( $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_succeed_for_float_that_is_equal_to_post_id() {
 		$found = WP_Comment::get_instance( 1.0 );
@@ -67,9 +52,6 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 		$this->assertSame( '1', $found->comment_ID );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', 'get_children' )]
 	public function test_get_children_should_return_count_without_storing_it_in_the_children_cache(): void {
@@ -100,9 +82,6 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 		$this->assertSameSets( $children, $found_ids, 'Expected the children cache to be unaffected by the count query.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', 'get_children' )]
 	public function test_get_children_should_return_ids_without_storing_them_in_the_children_cache(): void {
@@ -133,9 +112,6 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 		$this->assertSameSets( $children, $found_ids, 'Expected the children cache to be unaffected by the IDs query.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', '__isset' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', '__get' )]
@@ -154,9 +130,6 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 		$this->assertNull( $comment->post_title, 'Expected __get() to return null when the post is deleted.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', '__isset' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', '__get' )]

@@ -1,14 +1,9 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_batch_update_comment_type' )]
 class Tests_Comment_wpBatchUpdateCommentType extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49236' )]
 	public function test__wp_batch_update_comment_type() {
 		global $wpdb;

@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\Group( 'meta' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '10142' )]
@@ -159,8 +157,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$q->set( 'cache_results', true );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36593' )]
 	public function test_lazy_load_term_meta_should_fall_back_on_update_post_term_cache() {
 		$q = new WP_Query(
@@ -180,8 +176,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$this->assertFalse( $q->get( 'lazy_load_term_meta' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36593' )]
 	public function test_lazy_load_term_meta_false() {
 		$p = self::factory()->post->create( array( 'post_status' => 'publish' ) );
@@ -343,8 +337,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$this->assertSameSets( array( $terms[0] ), $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34544' )]
 	public function test_add_term_meta_should_return_error_when_term_id_is_shared() {
 		global $wpdb;
@@ -381,8 +373,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$this->assertSame( 'ambiguous_term_id', $found->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34544' )]
 	public function test_update_term_meta_should_return_error_when_term_id_is_shared() {
 		global $wpdb;
@@ -421,8 +411,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$this->assertSame( 'ambiguous_term_id', $found->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34626' )]
 	public function test_term_meta_should_be_deleted_when_term_is_deleted() {
 		$t = self::factory()->term->create( array( 'taxonomy' => 'wptests_tax' ) );
@@ -439,8 +427,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$this->assertSame( '', get_term_meta( $t, 'foo1', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35991' )]
 	public function test_has_term_meta() {
 		$t = self::factory()->term->create( array( 'taxonomy' => 'wptests_tax' ) );
@@ -462,8 +448,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35991' )]
 	public function test_has_term_meta_empty_results() {
 		$t = self::factory()->term->create( array( 'taxonomy' => 'wptests_tax' ) );
@@ -473,8 +457,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$this->assertSame( array(), $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_term_meta' )]
 	public function test_register_term_meta( $taxonomy, $meta_key, $args ) {
@@ -508,8 +490,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		return $args;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unregister_term_meta' )]
 	public function test_unregister_term_meta( $taxonomy, $meta_key ) {
@@ -534,8 +514,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	public function test_add_metadata_sets_terms_last_changed() {
 		$term_id = self::factory()->term->create();
@@ -546,8 +524,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$this->assertIsString( wp_cache_get_last_changed( 'terms' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	public function test_update_metadata_sets_terms_last_changed() {
 		$term_id = self::factory()->term->create();
@@ -558,8 +534,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$this->assertIsString( wp_cache_get_last_changed( 'terms' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	public function test_delete_metadata_sets_terms_last_changed() {
 		$term_id = self::factory()->term->create();
@@ -571,8 +545,6 @@ class Tests_Term_Meta extends WP_UnitTestCase {
 		$this->assertIsString( wp_cache_get_last_changed( 'terms' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	public function test_metadata_functions_respect_term_meta_support() {
 		$term_id = self::factory()->term->create();

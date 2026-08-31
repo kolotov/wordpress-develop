@@ -2,15 +2,7 @@
 
 // Test the output of Comment Querying functions.
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
-
-
-
-
-
-
 class Tests_Comment_Query extends WP_UnitTestCase {
 	protected static $post_id;
 	protected $comment_id;
@@ -35,8 +27,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_query() {
 		$c1 = self::factory()->comment->create(
@@ -84,8 +74,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3, $c4, $c5 ), $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_query_post_id_0() {
 		$c1 = self::factory()->comment->create(
@@ -106,9 +94,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_query_type_empty_string() {
@@ -158,9 +143,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3, $c4, $c5 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_query_type_comment() {
@@ -210,8 +192,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1 ), $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_query_type_pingback() {
 		$c1 = self::factory()->comment->create(
@@ -253,8 +233,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c2, $c3 ), $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_query_type_trackback() {
 		$c1 = self::factory()->comment->create(
@@ -409,9 +387,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c4, $c6 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_not__in_array_custom() {
@@ -468,9 +443,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3, $c4, $c6 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type__in_array_and_not_type_array_custom() {
@@ -528,9 +500,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_array_and_type__not_in_array_custom() {
@@ -588,9 +557,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c2, $c3 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type__not_in_custom() {
@@ -647,9 +613,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3, $c4, $c6 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_array_comments_and_pings() {
@@ -699,9 +662,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_array_comment_pings() {
@@ -737,9 +697,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_array_pingback() {
@@ -775,9 +732,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_array_custom_pingpack() {
@@ -813,9 +767,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_array_pings() {
@@ -851,9 +802,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c2, $c3 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_status_approved_array_comment_pings() {
@@ -897,9 +845,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c3, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_array_trackback() {
@@ -935,9 +880,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_array_custom_trackback() {
@@ -973,9 +915,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12668' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_type_array_pings_approved() {
@@ -1019,9 +958,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c3, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29612' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_status_empty_string() {
@@ -1055,9 +991,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21101' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_status_hold() {
@@ -1085,9 +1018,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21101' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_status_approve() {
@@ -1115,8 +1045,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $c1 ), $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_status_custom() {
 		$c1 = self::factory()->comment->create(
@@ -1149,8 +1077,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $c2 ), $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_status_all() {
 		$c1 = self::factory()->comment->create(
@@ -1183,8 +1109,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c3 ), $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_status_default_to_all() {
 		$c1 = self::factory()->comment->create(
@@ -1216,9 +1140,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c3 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29612' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_status_comma_any() {
@@ -1252,9 +1173,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29612' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_status_comma_separated() {
@@ -1288,9 +1206,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29612' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_status_array() {
@@ -1324,9 +1239,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_multiple_post_fields_should_all_be_respected() {
@@ -1373,8 +1285,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $comments[2] ), $q->comments );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_get_comments_for_post() {
 		$limit = 5;
@@ -1433,9 +1343,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21003' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_orderby_meta() {
@@ -1527,9 +1434,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertCount( 1, $comments );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_clause_key() {
@@ -1556,9 +1460,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $comments[1], $comments[2], $comments[0] ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_clause_key_as_secondary_sort() {
@@ -1602,9 +1503,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $c3, $c1, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_more_than_one_clause_key() {
@@ -1641,9 +1539,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $comments[2], $comments[0], $comments[1] ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32081' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'get_comments' )]
@@ -1670,9 +1565,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $comments[2] ), $q->get_comments() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32081' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'get_comments' )]
@@ -1699,9 +1591,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $comments[0] ), $q->get_comments() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27064' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_get_comments_by_user() {
@@ -1754,9 +1643,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertEquals( $users[1], $comments[2]->user_id );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35377' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_get_comments_by_author_url() {
@@ -1795,9 +1681,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2 ), $comments );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28434' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_fields_ids_query() {
@@ -1833,9 +1716,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $comment_1, $comment_2, $comment_3 ), $comment_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29189' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_fields_comment__in() {
@@ -1871,9 +1751,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $comment_1, $comment_3 ), $comment_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29189' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_fields_comment__not_in() {
@@ -1909,9 +1786,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $comment_1 ), $comment_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29189' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_fields_post__in() {
@@ -1951,9 +1825,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2 ), $comment_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29189' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_fields_post__not_in() {
@@ -1993,9 +1864,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c3 ), $comment_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29885' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_fields_post_author__in() {
@@ -2038,9 +1906,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2 ), $comment_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29885' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_fields_post_author__not_in() {
@@ -2083,9 +1948,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c3 ), $comment_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29885' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_fields_author__in() {
@@ -2133,9 +1995,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c3 ), $comment_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29885' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_fields_author__not_in() {
@@ -2183,9 +2042,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c3, $c4 ), $comment_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19623' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_get_comments_with_status_all() {
@@ -2216,9 +2072,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $comment_1, $comment_2, $comment_3 ), $comment_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19623' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_get_comments_with_include_unapproved_user_id() {
@@ -2262,9 +2115,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19623' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_get_comments_with_include_unapproved_user_id_array() {
@@ -2315,9 +2165,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3, $c5 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19623' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_get_comments_with_include_unapproved_user_id_comma_separated() {
@@ -2368,9 +2215,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3, $c5 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19623' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_get_comments_with_include_unapproved_author_email() {
@@ -2420,9 +2264,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19623' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_get_comments_with_include_unapproved_mixed_array() {
@@ -2481,9 +2322,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3, $c5 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19623' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_get_comments_with_include_unapproved_mixed_comma_separated() {
@@ -2542,8 +2380,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3, $c5 ), $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_search() {
 		$c1 = self::factory()->comment->create(
@@ -2618,9 +2454,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2, $c3, $c4, $c5 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35513' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_search_false_should_be_ignored() {
@@ -2633,9 +2466,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'comment_author LIKE', $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35513' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_search_null_should_be_ignored() {
@@ -2648,9 +2478,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'comment_author LIKE', $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35513' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_search_empty_string_should_be_ignored() {
@@ -2663,9 +2490,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'comment_author LIKE', $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35513' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_search_int_0_should_not_be_ignored() {
@@ -2679,9 +2503,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "comment_author LIKE '%0%'", $wpdb->remove_placeholder_escape( $q->request ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35513' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_search_string_0_should_not_be_ignored() {
@@ -2695,8 +2516,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "comment_author LIKE '%0%'", $wpdb->remove_placeholder_escape( $q->request ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_default() {
 		global $wpdb;
@@ -2707,8 +2526,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_date_gmt", $q->request );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_single() {
 		global $wpdb;
@@ -2723,8 +2540,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent", $q->request );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_single_invalid() {
 		global $wpdb;
@@ -2739,8 +2554,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_date_gmt", $q->request );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_space_separated() {
 		global $wpdb;
@@ -2755,8 +2568,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent DESC, $wpdb->comments.comment_approved DESC", $q->request );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_comma_separated() {
 		global $wpdb;
@@ -2771,8 +2582,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent DESC, $wpdb->comments.comment_approved DESC", $q->request );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_flat_array() {
 		global $wpdb;
@@ -2787,8 +2596,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent DESC, $wpdb->comments.comment_approved DESC", $q->request );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_array_contains_invalid_item() {
 		global $wpdb;
@@ -2803,8 +2610,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent DESC, $wpdb->comments.comment_approved DESC", $q->request );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_array_contains_all_invalid_items() {
 		global $wpdb;
@@ -2819,9 +2624,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_date_gmt", $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29902' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_none() {
@@ -2835,9 +2637,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'ORDER BY', $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29902' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_empty_array() {
@@ -2851,9 +2650,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'ORDER BY', $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29902' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_false() {
@@ -2867,9 +2663,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'ORDER BY', $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_array() {
@@ -2890,9 +2683,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent DESC, $wpdb->comments.comment_date_gmt ASC, $wpdb->comments.comment_ID DESC", $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_array_should_discard_invalid_columns() {
@@ -2913,9 +2703,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent DESC, $wpdb->comments.comment_ID DESC", $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_array_should_convert_invalid_order_to_DESC() {
@@ -2936,9 +2723,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent DESC, $wpdb->comments.comment_date_gmt DESC, $wpdb->comments.comment_ID DESC", $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_array_should_sort_by_comment_ID_as_fallback_and_should_inherit_order_from_comment_date_gmt() {
@@ -2958,9 +2742,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent DESC, $wpdb->comments.comment_date_gmt ASC, $wpdb->comments.comment_ID ASC", $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_array_should_sort_by_comment_ID_as_fallback_and_should_inherit_order_from_comment_date() {
@@ -2980,9 +2761,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent DESC, $wpdb->comments.comment_date ASC, $wpdb->comments.comment_ID ASC", $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_array_should_sort_by_comment_ID_DESC_as_fallback_when_not_sorted_by_date() {
@@ -3001,9 +2779,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $wpdb->comments.comment_agent ASC, $wpdb->comments.comment_ID DESC", $q->request );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_date_modified_gmt_should_order_by_comment_ID_in_case_of_tie_ASC() {
@@ -3028,9 +2803,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertEquals( $comments, wp_list_pluck( $found, 'comment_ID' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30478' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_orderby_date_modified_gmt_should_order_by_comment_ID_in_case_of_tie_DESC() {
@@ -3057,8 +2829,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertEquals( $comments, wp_list_pluck( $found, 'comment_ID' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_meta_vars_should_be_converted_to_meta_query() {
 		$q = new WP_Comment_Query();
@@ -3077,8 +2847,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( 'SIGNED', $q->meta_query->queries[0]['type'] );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_count() {
 		$c1 = self::factory()->comment->create(
@@ -3105,9 +2873,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( 2, $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23369' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_count_with_meta_query() {
@@ -3149,9 +2914,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( 2, $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38268' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_paged() {
@@ -3197,9 +2959,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $expected, $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38268' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_offset_should_take_precedence_over_paged() {
@@ -3247,8 +3006,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $expected, $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_type_single_value() {
 		register_post_type( 'post-type-1' );
@@ -3274,9 +3031,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		_unregister_post_type( 'post-type-2' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20006' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_type_singleton_array() {
@@ -3303,9 +3057,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		_unregister_post_type( 'post-type-2' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20006' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_type_array() {
@@ -3332,8 +3083,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array_merge( $c1, $c3 ), $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_name_single_value() {
 		$p1 = self::factory()->post->create( array( 'post_name' => 'foo' ) );
@@ -3353,9 +3102,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( $c2, $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20006' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_name_singleton_array() {
@@ -3376,9 +3122,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( $c2, $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20006' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_name_array() {
@@ -3401,8 +3144,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array_merge( $c1, $c3 ), $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_status_single_value() {
 		$p1 = self::factory()->post->create( array( 'post_status' => 'publish' ) );
@@ -3422,9 +3163,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( $c2, $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20006' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_status_singleton_array() {
@@ -3445,9 +3183,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( $c2, $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20006' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_status_array() {
@@ -3470,9 +3205,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array_merge( $c1, $c3 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35512' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_type_any_should_override_other_post_types() {
@@ -3495,9 +3227,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array_merge( $c1, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35512' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_type_any_as_part_of_an_array_of_post_types() {
@@ -3520,9 +3249,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array_merge( $c1, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35512' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_status_any_should_override_other_post_statuses() {
@@ -3542,9 +3268,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array_merge( $c1, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35512' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_post_status_any_as_part_of_an_array_of_post_statuses() {
@@ -3564,9 +3287,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array_merge( $c1, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24826' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'get_comments' )]
@@ -3587,9 +3307,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertEquals( $query2->comments, $query1->get_comments() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22400' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_comment_cache_key_should_ignore_custom_params() {
@@ -3618,9 +3335,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35677' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_cache_should_be_sensitive_to_parent__in() {
@@ -3643,9 +3357,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertNotEquals( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35677' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_cache_should_be_sensitive_to_parent__not_in() {
@@ -3668,9 +3379,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertNotEquals( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32762' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_it_should_be_possible_to_modify_meta_query_using_pre_get_comments_action() {
@@ -3708,9 +3416,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32762' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_it_should_be_possible_to_modify_meta_params_using_pre_get_comments_action() {
@@ -3742,9 +3447,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$q->query_vars['meta_value'] = 'bar';
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33882' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_parent__in() {
@@ -3773,9 +3475,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c2 ), $ids->comments );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33882' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_parent__in_commas() {
@@ -3817,9 +3516,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c3, $c4 ), $ids->comments );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33882' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_parent__not_in() {
@@ -3849,9 +3545,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1 ), $ids->comments );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33882' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_parent__not_in_commas() {
@@ -3894,9 +3587,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c1, $c2 ), $ids->comments );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33883' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_orderby_comment__in() {
@@ -3938,9 +3628,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $c2, $c3 ), $ids->comments );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_no_found_rows_should_default_to_true() {
@@ -3957,9 +3644,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( 0, $q->max_num_pages );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_should_respect_no_found_rows_true() {
@@ -3977,9 +3661,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( 0, $q->max_num_pages );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_should_respect_no_found_rows_false() {
@@ -3997,9 +3678,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( 2, $q->max_num_pages );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37184' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_found_rows_should_be_fetched_from_the_cache() {
@@ -4026,9 +3704,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( 2, $q->max_num_pages );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_hierarchical_should_skip_child_comments_in_offset() {
@@ -4070,9 +3745,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $top_level_comments[0], $top_level_comments[1] ), $q->comments );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_hierarchical_should_not_include_child_comments_in_number() {
@@ -4112,9 +3784,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertEqualSets( array( $top_level_0, $child_of_0, $top_level_comments[0] ), wp_list_pluck( $q->comments, 'comment_ID' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_hierarchical_threaded() {
@@ -4192,9 +3861,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertEqualSets( array( $c6 ), array_values( wp_list_pluck( $q->comments[ $c5 ]->get_children( $args ), 'comment_ID' ) ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_hierarchical_threaded_approved() {
@@ -4270,9 +3936,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertEqualSets( array(), array_values( wp_list_pluck( $q->comments[ $c1 ]->get_child( $c2 )->get_children( $args ), 'comment_ID' ) ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35192' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_comment_clauses_prepend_callback_should_be_respected_when_filling_descendants() {
@@ -4327,9 +3990,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		return $clauses;
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35192' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_comment_clauses_append_callback_should_be_respected_when_filling_descendants() {
@@ -4384,9 +4044,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		return $clauses;
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36487' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_cache_should_be_hit_when_querying_descendants() {
@@ -4442,9 +4099,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37696' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_hierarchy_should_be_filled_when_cache_is_incomplete() {
@@ -4505,9 +4159,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( $q1_ids, $q2_ids );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37966' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '37696' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
@@ -4575,9 +4226,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c4, $c5 ), array_keys( $children_3 ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27571' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_update_comment_post_cache_should_be_disabled_by_default() {
@@ -4597,9 +4245,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $num_queries + 1, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27571' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_should_respect_update_comment_post_cache_true() {
@@ -4620,9 +4265,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34138' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_comment_objects_should_be_filled_from_cache() {
@@ -4650,9 +4292,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34138' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_comment_objects_should_be_fetched_from_database_when_suspend_cache_addition() {
@@ -4673,8 +4312,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertEqualSets( array( $c ), $found );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_comment_query_should_be_cached() {
 		global $wpdb;
@@ -4706,8 +4343,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_created_comment_should_invalidate_query_cache() {
 		global $wpdb;
@@ -4739,8 +4374,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c ), $q->comments );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_updated_comment_should_invalidate_query_cache() {
 		global $wpdb;
@@ -4782,8 +4415,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c ), $q->comments );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_deleted_comment_should_invalidate_query_cache() {
 		global $wpdb;
@@ -4818,8 +4449,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array(), $q->comments );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_trashed_comment_should_invalidate_query_cache() {
 		global $wpdb;
@@ -4854,8 +4483,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array(), $q->comments );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_untrashed_comment_should_invalidate_query_cache() {
 		global $wpdb;
@@ -4892,8 +4519,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c ), $q->comments );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_spammed_comment_should_invalidate_query_cache() {
 		global $wpdb;
@@ -4928,8 +4553,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array(), $q->comments );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_unspammed_comment_should_invalidate_query_cache() {
 		global $wpdb;
@@ -4966,9 +4589,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $c ), $q->comments );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41348' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_count_query_should_miss_noncount_cache() {
@@ -4997,9 +4617,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries + 1, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41348' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_count_query_should_hit_count_cache() {
@@ -5028,9 +4645,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41348' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_different_values_of_fields_should_share_cached_values() {
@@ -5058,9 +4672,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40669' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_add_comment_meta_should_invalidate_query_cache() {
@@ -5109,9 +4720,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array_merge( $c1, $c2 ), $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40669' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_update_comment_meta_should_invalidate_query_cache() {
@@ -5160,9 +4768,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( $c1, $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40669' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments' )]
 	public function test_delete_comment_meta_should_invalidate_query_cache() {
@@ -5211,9 +4816,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSameSets( $c1, $found );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45800' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_comments_pre_query_filter_should_bypass_database_query() {
@@ -5244,9 +4846,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		return array( 555 );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50521' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'query' )]
 	public function test_comments_pre_query_filter_should_set_comments_property() {
@@ -5275,9 +4874,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		return array( get_comment( $c ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55460' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_comment_cache_key_should_ignore_unset_params() {
@@ -5304,9 +4900,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( $num_queries_all_args, get_num_queries() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55218' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', '__construct' )]
 	public function test_unapproved_comment_with_meta_query_does_not_trigger_ambiguous_identifier_error() {
@@ -5357,8 +4950,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( ' comment_ID ', $wpdb->last_query );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56841' )]
 	public function test_query_does_not_have_leading_whitespace() {
 		self::factory()->comment->create(
@@ -5479,8 +5070,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64145' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment_Query', 'get_comment_ids' )]
 	public function test_note_type_not_duplicated_in_type__not_in() {
@@ -5502,8 +5091,6 @@ class Tests_Comment_Query extends WP_UnitTestCase {
 		$this->assertSame( 1, $note_count, 'The note type should only appear once in the query' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64145' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_count' )]
 	public function test_get_comment_count_excludes_note_type() {

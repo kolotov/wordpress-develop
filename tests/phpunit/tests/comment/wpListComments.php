@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_list_comments' )]
 class Tests_Comment_WpListComments extends WP_UnitTestCase {
@@ -15,8 +12,6 @@ class Tests_Comment_WpListComments extends WP_UnitTestCase {
 		switch_theme( 'default' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35175' )]
 	public function test_should_respect_page_param() {
 		$p = self::factory()->post->create();
@@ -53,8 +48,6 @@ class Tests_Comment_WpListComments extends WP_UnitTestCase {
 		$this->assertEqualSets( array( $comments[2], $comments[3] ), $matches[1] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35175' )]
 	public function test_should_respect_per_page_param() {
 		$p = self::factory()->post->create();
@@ -91,8 +84,6 @@ class Tests_Comment_WpListComments extends WP_UnitTestCase {
 		$this->assertEqualSets( array( $comments[0], $comments[1], $comments[2] ), $matches[1] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35175' )]
 	public function test_should_respect_reverse_top_level_param() {
 		$p = self::factory()->post->create();
@@ -136,8 +127,6 @@ class Tests_Comment_WpListComments extends WP_UnitTestCase {
 		$this->assertSame( array( $comments[1], $comments[0] ), array_map( 'intval', $matches[1] ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35356' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '35175' )]
 	public function test_comments_param_should_be_respected_when_custom_pagination_params_are_passed() {
@@ -177,8 +166,6 @@ class Tests_Comment_WpListComments extends WP_UnitTestCase {
 		$this->assertSame( array( $comments[3] ), array_map( 'intval', $matches[1] ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37048' )]
 	public function test_custom_pagination_should_not_result_in_unapproved_comments_being_shown() {
 		$p = self::factory()->post->create();
@@ -221,8 +208,6 @@ class Tests_Comment_WpListComments extends WP_UnitTestCase {
 		$this->assertSame( array( $comments[2] ), array_map( 'intval', $matches[1] ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37048' )]
 	public function test_custom_pagination_should_allow_ones_own_unapproved_comments() {
 		$p = self::factory()->post->create();

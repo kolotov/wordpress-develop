@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_tag_link' )]
 class Tests_Term_GetTagLink extends WP_UnitTestCase {
@@ -59,8 +57,6 @@ class Tests_Term_GetTagLink extends WP_UnitTestCase {
 		$this->assertSame( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42771' )]
 	public function test_should_return_link_for_term_from_another_taxonomy_on_primed_cache() {
 		$term_id = self::$term_id;
@@ -73,8 +69,6 @@ class Tests_Term_GetTagLink extends WP_UnitTestCase {
 		$this->assertSame( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42771' )]
 	public function test_should_return_link_for_term_from_another_taxonomy_on_empty_cache() {
 		$term_id = self::$term_id;

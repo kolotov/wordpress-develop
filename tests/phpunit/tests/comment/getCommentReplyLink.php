@@ -1,13 +1,8 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_reply_link' )]
 class Tests_Comment_GetCommentReplyLink extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38170' )]
 	public function test_should_return_null_when_max_depth_is_less_than_depth() {
 		$args = array(
@@ -18,8 +13,6 @@ class Tests_Comment_GetCommentReplyLink extends WP_UnitTestCase {
 		$this->assertNull( get_comment_reply_link( $args ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38170' )]
 	public function test_should_return_null_when_default_max_depth_is_less_than_depth() {
 		$args = array(
@@ -69,8 +62,6 @@ class Tests_Comment_GetCommentReplyLink extends WP_UnitTestCase {
 		$this->assertStringContainsString( $expected_url, $comment_reply_link );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41846' )]
 	public function test_should_return_null_when_depth_less_than_max_depth_and_comment_null_and_no_current_global_comment() {
 

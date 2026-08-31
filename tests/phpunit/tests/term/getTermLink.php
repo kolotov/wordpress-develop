@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_term_link' )]
 class Tests_Term_GetTermLink extends WP_UnitTestCase {
@@ -142,8 +140,6 @@ class Tests_Term_GetTermLink extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'term=bar', $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52882' )]
 	public function test_taxonomy_with_rewrite_false_and_custom_permalink_structure() {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );

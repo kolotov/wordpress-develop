@@ -1,9 +1,6 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
-
 class Tests_Term_Query extends WP_UnitTestCase {
 
 	/**
@@ -26,8 +23,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37545' )]
 	public function test_taxonomy_should_accept_single_taxonomy_as_string() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
@@ -47,8 +42,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $term_2 ), $q->terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57645' )]
 	public function test_lazy_load_term_meta() {
 		$filter = new MockAction();
@@ -105,8 +98,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $term_2 ), $q->terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37074' )]
 	public function test_term_taxonomy_id_single() {
 		global $wpdb;
@@ -133,8 +124,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $terms[0] ), $q->terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37074' )]
 	public function test_term_taxonomy_id_array() {
 		global $wpdb;
@@ -167,8 +156,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $terms[0], $terms[2] ), $q->terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37151' )]
 	public function test_order_by_meta_value_num() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -193,8 +180,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $terms[1], $terms[0], $terms[2] ), $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37378' )]
 	public function test_order_by_keyword_should_not_be_duplicated_when_filtered() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -217,8 +202,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		return $clauses;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	public function test_order_by_term_order_should_fall_back_on_term_id_when_relationship_table_is_not_being_joined() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -237,8 +220,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSame( $terms, $q->get_terms() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37591' )]
 	public function test_terms_is_set() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
@@ -264,8 +245,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertNotEmpty( $q2->terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23261' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '37904' )]
 	public function test_orderby_include_with_comma_separated_list() {
@@ -286,8 +265,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertEquals( array( $t1, $t2 ), $terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	public function test_object_ids_single() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
@@ -308,8 +285,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $t ), $query->terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	public function test_object_ids_array() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
@@ -330,8 +305,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $t ), $query->terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	public function test_duplicates_should_be_removed_for_fields_all() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
@@ -354,8 +327,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSame( $t, reset( $query->terms )->term_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	public function test_duplicates_should_not_be_removed_for_fields_all_with_object_id() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
@@ -380,8 +351,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44221' )]
 	public function test_all_with_object_id_should_return_term_objects() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
@@ -415,8 +384,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 	public function test_object_ids_cache_should_be_invalidated_by_term_relationship_change() {
@@ -452,8 +419,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSameSets( array( $terms[1] ), $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38295' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 	public function test_count_query_should_be_cached() {
@@ -485,8 +450,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38295' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 	public function test_count_query_cache_should_be_invalidated_with_incrementor_bump() {
@@ -517,8 +480,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSame( '1', $count );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40496' )]
 	public function test_get_the_terms_should_respect_taxonomy_orderby() {
 		register_taxonomy(
@@ -547,8 +508,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $term_ids[1], $term_ids[0] ), wp_list_pluck( $terms, 'term_id' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40496' )]
 	public function test_wp_get_object_terms_should_respect_taxonomy_orderby() {
 		register_taxonomy(
@@ -577,8 +536,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSame( array( $term_ids[1], $term_ids[0], 1 ), wp_list_pluck( $terms, 'term_id' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41293' )]
 	public function test_should_allow_same_args_with_the_get_terms() {
 		register_post_type( 'wptests_pt' );
@@ -824,8 +781,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertSame( array(), $q->terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42691' )]
 	public function test_null_term_object_should_be_discarded() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -908,8 +863,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		return $term;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42691' )]
 	public function test_error_term_object_should_be_discarded() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -945,8 +898,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		return $term;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41246' )]
 	public function test_terms_pre_query_filter_should_bypass_database_query() {
 		add_filter( 'terms_pre_query', array( __CLASS__, 'filter_terms_pre_query' ), 10, 2 );
@@ -973,8 +924,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		return array( 555 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37728' )]
 	public function test_hide_empty_should_include_empty_parents_of_nonempty_children() {
 		register_taxonomy(
@@ -1013,8 +962,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertContains( $t1, $q->terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37728' )]
 	public function test_hide_empty_should_include_empty_parents_of_nonempty_children_when_category_is_unspecified() {
 		register_taxonomy(
@@ -1052,8 +999,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		$this->assertContains( $t1, $q->terms );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47719' )]
 	public function test_include_should_return_no_terms_when_0() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -1194,8 +1139,6 @@ class Tests_Term_Query extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56841' )]
 	public function test_query_does_not_have_leading_whitespace() {
 		$q = new WP_Term_Query(
