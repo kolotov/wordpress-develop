@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '21767' )]
@@ -142,8 +140,6 @@ class Tests_Post_Slashes extends WP_UnitTestCase {
 		$this->assertSame( wp_unslash( self::SLASH_6 ), $post->post_excerpt );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27550' )]
 	public function test_wp_trash_untrash() {
 		$post    = array(

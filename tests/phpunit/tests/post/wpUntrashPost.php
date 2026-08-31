@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_untrash_post' )]
 class Tests_Post_WpUntrashPost extends WP_UnitTestCase {

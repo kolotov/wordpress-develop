@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_truncate_post_slug' )]
 class Tests_Post_TruncatePostSlug extends WP_UnitTestCase {

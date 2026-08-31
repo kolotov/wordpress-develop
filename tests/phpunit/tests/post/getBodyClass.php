@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_body_class' )]
 class Tests_Post_GetBodyClass extends WP_UnitTestCase {
@@ -12,8 +10,6 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 		$this->post_id = self::factory()->post->create();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_category_slugs() {
 		$cat_id1 = self::factory()->category->create( array( 'name' => 'Первая рубрика' ) );
@@ -31,8 +27,6 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 		$this->assertContains( "category-$cat_id3", get_body_class() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_tag_slugs() {
 		$tag_id1 = self::factory()->tag->create( array( 'name' => 'Первая метка' ) );
@@ -54,8 +48,6 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 		$this->assertContains( "tag-$tag_id3", get_body_class() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_term_slugs() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -93,8 +85,6 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 		$this->assertContains( "term-$term_id3", get_body_class() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35164' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '36510' )]
 	public function test_singular_body_classes() {
@@ -141,8 +131,6 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 		$this->assertContains( 'page-template-templatescpt-php', $class );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_page_template_body_classes_attachment() {
 		$post_id = self::factory()->post->create(
@@ -163,8 +151,6 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 		$this->assertContains( 'attachment-template-templatescpt-php', $class );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_page_template_body_classes_post() {
 		$post_id = self::factory()->post->create();
@@ -181,8 +167,6 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 		$this->assertContains( 'post-template-templatescpt-php', $class );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38225' )]
 	public function test_attachment_body_classes() {
 		$post_id = self::factory()->post->create();
@@ -204,8 +188,6 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 		$this->assertContains( 'attachment-jpeg', $class );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38168' )]
 	public function test_custom_background_class_is_added_when_theme_supports_it() {
 		add_theme_support( 'custom-background', array( 'default-color', '#ffffff' ) );
@@ -221,8 +203,6 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 		$this->assertContains( 'custom-background', $class );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38168' )]
 	public function test_custom_background_class_is_not_added_when_theme_support_is_missing() {
 		set_theme_mod( 'background_color', '#000000' );
@@ -236,8 +216,6 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 		$this->assertNotContains( 'custom-background', $class );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44005' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
 	public function test_privacy_policy_body_class() {

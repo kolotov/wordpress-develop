@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'ping' )]
 class Tests_Post_Pings extends WP_UnitTestCase {

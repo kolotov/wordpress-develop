@@ -1,12 +1,7 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'revision' )]
-
-
-
 class Tests_Post_Revisions extends WP_UnitTestCase {
 
 	const POST_TYPE = 'test-revision';
@@ -66,8 +61,6 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 		$this->assertEquals( self::$admin_user_id, get_post_meta( $post_id, '_edit_last', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '7392' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '9843' )]
 	public function test_revision_dont_save_revision_if_unchanged() {
@@ -136,8 +129,6 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 		$this->assertCount( 4, wp_get_post_revisions( $post_id ) ); // Should still be 4 revisions.
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '7392' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '9843' )]
 	public function test_revision_force_save_revision_even_if_unchanged() {
@@ -509,8 +500,6 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26042' )]
 	public function test_wp_get_post_revisions_should_order_by_post_date() {
 		global $wpdb;
@@ -545,8 +534,6 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 		$this->assertSame( $revision_ids, array_values( wp_list_pluck( $revisions, 'ID' ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26042' )]
 	public function test_wp_get_post_revisions_should_order_by_ID_when_post_date_matches() {
 		$post = self::factory()->post->create_and_get(
@@ -580,8 +567,6 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 		$this->assertSame( $revision_ids, array_values( wp_list_pluck( $revisions, 'ID' ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51550' )]
 	public function test_wp_revisions_to_keep_filter() {
 		$post = self::factory()->post->create_and_get(
@@ -605,8 +590,6 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 		$this->assertSame( $expected, wp_revisions_to_keep( $post ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51550' )]
 	public function test_wp_post_type_revisions_to_keep_filter() {
 		$post = self::factory()->post->create_and_get(
@@ -934,8 +917,6 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64314' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_save_post_revision' )]
 	public function test_wp_save_post_revision_with_array_post_meta() {

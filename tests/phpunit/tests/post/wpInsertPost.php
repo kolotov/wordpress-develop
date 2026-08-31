@@ -1,10 +1,6 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_insert_post' )]
 class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 
@@ -489,8 +485,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertFalse( $this->next_schedule_for_post( 'publish_future_post', $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '5305' )]
 	public function test_wp_insert_post_should_not_allow_a_bare_numeric_slug_that_might_conflict_with_a_date_archive_when_generating_from_an_empty_post_title() {
 		$this->set_permalink_structure( '/%postname%/' );
@@ -509,8 +503,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( "$post_id-2", $post->post_name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '5305' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '33392' )]
 	public function test_wp_insert_post_should_invalidate_post_cache_before_generating_guid_when_post_name_is_empty_and_is_generated_from_the_post_ID() {
@@ -529,8 +521,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'wptests_pt=' . $post_id, $post->guid );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55877' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_post' )]
 	public function test_wp_insert_post_should_not_trigger_warning_for_pending_posts_with_unknown_cpt() {
@@ -546,8 +536,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertGreaterThan( 0, $post_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20451' )]
 	public function test_wp_insert_post_with_meta_input() {
 		$post_id = wp_insert_post(
@@ -592,8 +580,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( $expected, get_permalink( $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23708' )]
 	public function test_get_post_ancestors_within_loop() {
 		global $post;
@@ -608,8 +594,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( array( $parent_id ), get_post_ancestors( 0 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23474' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_post' )]
 	public function test_update_invalid_post_id() {
@@ -625,8 +609,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertInstanceOf( 'WP_Error', wp_update_post( $post, true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19373' )]
 	public function test_insert_programmatic_sanitized() {
 		$this->unset_current_user();
@@ -653,8 +635,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( $title, $post->post_title );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31168' )]
 	public function test_wp_insert_post_default_comment_ping_status_open() {
 		$post_id = self::factory()->post->create(
@@ -668,8 +648,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( 'open', $post->ping_status );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31168' )]
 	public function test_wp_insert_post_page_default_comment_ping_status_closed() {
 		$post_id = self::factory()->post->create(
@@ -684,8 +662,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( 'closed', $post->ping_status );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31168' )]
 	public function test_wp_insert_post_cpt_default_comment_ping_status_open() {
 		register_post_type(
@@ -709,8 +685,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( 'open', $post->ping_status );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31168' )]
 	public function test_wp_insert_post_cpt_default_comment_ping_status_closed() {
 		register_post_type( 'cpt' );
@@ -755,8 +729,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( 'stuff', $updated_post->post_name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32585' )]
 	public function test_wp_insert_post_author_zero() {
 		$post_id = self::factory()->post->create( array( 'post_author' => 0 ) );
@@ -764,8 +736,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( '0', get_post( $post_id )->post_author );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32585' )]
 	public function test_wp_insert_post_author_null() {
 		wp_set_current_user( self::$user_ids['editor'] );
@@ -775,8 +745,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( (string) self::$user_ids['editor'], get_post( $post_id )->post_author );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '15946' )]
 	public function test_wp_insert_post_should_respect_post_date_gmt() {
 		$data = array(
@@ -848,8 +816,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( $changeset_data, json_decode( get_post( $post_id )->post_content, true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19954' )]
 	public function test_updating_a_post_should_not_trash_categories() {
 		// Create a category and attach it to a new post.
@@ -893,8 +859,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( (int) get_option( 'default_category' ), $assigned_terms[0]->term_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48113' )]
 	public function test_insert_post_should_respect_date_floating_post_status_arg() {
 		register_post_status( 'floating', array( 'date_floating' => true ) );
@@ -911,8 +875,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		self::assertSame( '0000-00-00 00:00:00', $post->post_date_gmt );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48113' )]
 	public function test_insert_post_should_respect_date_floating_post_status_arg_not_set() {
 		register_post_status( 'not-floating', array( 'date_floating' => false ) );
@@ -976,8 +938,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSameSets( array( $tag_2['term_id'], $tag_3['term_id'] ), $tags );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52187' )]
 	public function test_insert_empty_post_date() {
 		$post_date_gmt = '2020-12-29 10:11:45';
@@ -1074,8 +1034,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( '0000-00-00 00:00:00', $post->post_date_gmt );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52187' )]
 	public function test_insert_valid_post_date() {
 		$post_date     = '2020-12-28 11:26:35';
@@ -1149,8 +1107,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( '0000-00-00 00:00:00', $post->post_date_gmt );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52187' )]
 	public function test_insert_invalid_post_date() {
 		$post_date     = '2020-12-28 11:26:35';
@@ -1212,8 +1168,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertWPError( $post_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '11863' )]
 	public function test_trashing_a_post_should_add_trashed_suffix_to_post_name() {
 		$trashed_about_page_id = self::factory()->post->create(
@@ -1227,8 +1181,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( 'about__trashed', get_post( $trashed_about_page_id )->post_name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '11863' )]
 	public function test_trashed_suffix_should_be_added_to_post_with__trashed_in_slug() {
 		$trashed_about_page_id = self::factory()->post->create(
@@ -1243,8 +1195,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( 'foo__trashed__foo__trashed', get_post( $trashed_about_page_id )->post_name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '11863' )]
 	public function test_trashed_posts_original_post_name_should_be_reassigned_after_untrashing() {
 		$about_page_id = self::factory()->post->create(
@@ -1260,8 +1210,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( 'about', get_post( $about_page_id )->post_name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '11863' )]
 	public function test_creating_a_new_post_should_add_trashed_suffix_to_post_name_of_trashed_posts_with_the_desired_slug() {
 		$trashed_about_page_id = self::factory()->post->create(
@@ -1284,8 +1232,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( 'about', get_post( $about_page_id )->post_name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '11863' )]
 	public function test_untrashing_a_post_with_a_stored_desired_post_name_should_get_its_post_name_suffixed_if_another_post_has_taken_the_desired_post_name() {
 		$about_page_id = self::factory()->post->create(
@@ -1317,8 +1263,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( 'about-2', get_post( $about_page_id )->post_name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23022' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_various_post_statuses' )]
 	public function test_untrashing_a_post_should_always_restore_it_to_draft_status( $post_status ) {
@@ -1335,8 +1279,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( 'draft', get_post( $page_id )->post_status );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23022' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_various_post_statuses' )]
 	public function test_wp_untrash_post_status_filter_restores_post_to_correct_status( $post_status ) {
@@ -1507,8 +1449,6 @@ class Tests_Post_wpInsertPost extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25347' )]
 	public function test_scheduled_post_with_a_past_date_should_be_published() {
 

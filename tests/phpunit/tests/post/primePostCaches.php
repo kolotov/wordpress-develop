@@ -43,8 +43,6 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 		add_post_meta( self::$posts[1], 'meta', 'bar' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches() {
 		$post_id = self::$posts[0];
@@ -84,8 +82,6 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 		$this->assertSame( 0, $num_queries, 'Unexpected number of queries.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_with_multiple_posts() {
 		$this->assertSame( self::$posts, _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are already cached.' );
@@ -106,8 +102,6 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 		$this->assertSame( array(), _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are not cached.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_only_posts_cache() {
 		$this->assertSame( self::$posts, _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are already cached.' );
@@ -125,8 +119,6 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 		$this->assertSame( array(), _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are not cached.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_only_posts_and_term_cache() {
 		$this->assertSame( self::$posts, _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are already cached.' );
@@ -154,8 +146,6 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 		$this->assertSame( 0, $num_queries, 'Unexpected number of queries.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_only_posts_and_meta_cache() {
 		$this->assertSame( self::$posts, _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are already cached.' );
@@ -184,8 +174,6 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 		$this->assertSame( 0, $num_queries, 'Unexpected number of queries getting post meta.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_accounts_for_posts_without_primed_meta_terms() {
 		$post_id = self::$posts[0];
@@ -210,8 +198,6 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 		$this->assertSame( 3, $num_queries, 'Unexpected number of queries.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_does_not_prime_caches_twice() {
 		$this->assertSame( self::$posts, _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are already cached.' );

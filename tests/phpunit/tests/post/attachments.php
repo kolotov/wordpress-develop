@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
 #[\PHPUnit\Framework\Attributes\Group( 'upload' )]
@@ -54,8 +52,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertSame( 50, $downsize[2] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_insert_image_thumb_only() {
 		update_option( 'medium_size_w', 0 );
@@ -105,8 +101,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertSame( 300, $downsize[2] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_insert_image_medium_sizes() {
 		update_option( 'medium_size_w', 400 );
@@ -162,8 +156,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertSame( 1024, $downsize[2] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_insert_image_delete() {
 		update_option( 'medium_size_w', 400 );
@@ -228,8 +220,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertNotEmpty( $guid );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21963' )]
 	public function test_update_attachment_fields() {
 		$filename = ( DIR_TESTDATA . '/images/test-image.jpg' );
@@ -254,8 +244,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertSame( $attached_file, get_post_meta( $id, '_wp_attached_file', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29646' )]
 	public function test_update_orphan_attachment_parent() {
 		$filename = ( DIR_TESTDATA . '/images/test-image.jpg' );
@@ -283,8 +271,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertSame( $attachment->post_parent, $post_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '15928' )]
 	public function test_wp_get_attachment_url_should_not_force_https_when_current_page_is_non_ssl_and_siteurl_is_non_ssl() {
 		$siteurl = get_option( 'siteurl' );
@@ -359,8 +345,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertSame( 'https', parse_url( $url, PHP_URL_SCHEME ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '15928' )]
 	public function test_wp_get_attachment_url_with_https_on_same_host_when_siteurl_is_https() {
 		$siteurl = get_option( 'siteurl' );
@@ -387,8 +371,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertSame( 'https', parse_url( $url, PHP_URL_SCHEME ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '15928' )]
 	public function test_wp_get_attachment_url_should_not_force_https_when_administering_over_https_but_siteurl_is_not_https() {
 		$siteurl = get_option( 'siteurl' );
@@ -411,8 +393,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertSame( set_url_scheme( $url, 'http' ), $url );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '15928' )]
 	public function test_wp_get_attachment_url_should_force_https_when_administering_over_https_and_siteurl_is_https() {
 		// Set https upload URL.
@@ -500,8 +480,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		return $mimes;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33012' )]
 	public function test_wp_mime_type_icon() {
 		$icon = wp_mime_type_icon();
@@ -509,8 +487,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'images/media/default.png', $icon );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33012' )]
 	public function test_wp_mime_type_icon_video() {
 		$icon = wp_mime_type_icon( 'video/mp4' );
@@ -518,8 +494,6 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'images/media/video.png', $icon );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60610' )]
 	public function test_wp_mime_type_icon_video_with_preferred_ext() {
 		$icon1 = wp_mime_type_icon( 'video/mp4', '.png' ); // Added `$preferred_ext` parameter.

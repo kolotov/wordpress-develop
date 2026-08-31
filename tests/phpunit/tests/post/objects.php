@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_Objects extends WP_UnitTestCase {
 
@@ -98,8 +96,6 @@ class Tests_Post_Objects extends WP_UnitTestCase {
 		$this->assertSame( array(), get_post_ancestors( get_post( $parent_id ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22882' )]
 	public function test_get_post_ancestors_with_falsey_values() {
 		foreach ( array( null, 0, false, '0', '' ) as $post_id ) {
@@ -184,8 +180,6 @@ class Tests_Post_Objects extends WP_UnitTestCase {
 		$this->assertSame( esc_js( "Mary's home" ), $raw_post->post_title );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53235' )]
 	public function test_numeric_properties_should_be_cast_to_ints() {
 		$post_id  = self::factory()->post->create();
@@ -219,8 +213,6 @@ class Tests_Post_Objects extends WP_UnitTestCase {
 		$this->assertSame( 'raw', $post['filter'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22223' )]
 	public function test_get_post_cache() {
 		global $wpdb;

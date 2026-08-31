@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_wpAfterInsertPost extends WP_UnitTestCase {
 

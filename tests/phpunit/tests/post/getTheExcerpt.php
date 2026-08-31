@@ -1,13 +1,9 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27246' )]
 	public function test_the_excerpt_invalid_post() {
 		$this->assertSame( '', get_echo( 'the_excerpt' ) );
@@ -23,8 +19,6 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 		$this->assertSame( '', get_the_excerpt( false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27246' )]
 	public function test_the_excerpt() {
 		$GLOBALS['post'] = self::factory()->post->create_and_get( array( 'post_excerpt' => 'Post excerpt' ) );
@@ -32,8 +26,6 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 		$this->assertSame( 'Post excerpt', get_the_excerpt() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27246' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '35486' )]
 	public function test_the_excerpt_password_protected_post() {
@@ -49,8 +41,6 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 		$this->assertSame( "<p>There is no excerpt because this is a protected post.</p>\n", get_echo( 'the_excerpt' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27246' )]
 	public function test_the_excerpt_specific_post() {
 		$GLOBALS['post'] = self::factory()->post->create_and_get( array( 'post_excerpt' => 'Foo' ) );
@@ -58,8 +48,6 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 		$this->assertSame( 'Bar', get_the_excerpt( $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_should_fall_back_on_post_content_if_excerpt_is_empty_and_post_is_inferred_from_context() {
 		$post_id = self::factory()->post->create(
@@ -83,8 +71,6 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 		$this->assertSame( 'Foo', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_should_fall_back_on_post_content_if_excerpt_is_empty_and_post_is_provided() {
 		$GLOBALS['post'] = self::factory()->post->create_and_get(
@@ -96,8 +82,6 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 		$this->assertSame( 'Foo', get_the_excerpt( $GLOBALS['post'] ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_should_respect_post_parameter_in_the_loop() {
 		$p1 = self::factory()->post->create_and_get( array( 'post_excerpt' => 'Foo' ) );
@@ -116,8 +100,6 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 		$this->assertSame( 'Bar', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_should_respect_post_parameter_in_the_loop_when_falling_back_on_post_content() {
 		$p1 = self::factory()->post->create_and_get(
@@ -146,8 +128,6 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 		$this->assertSame( 'Bar', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53604' )]
 	public function test_inner_blocks_excerpt() {
 		$content_1 = '<!-- wp:group -->

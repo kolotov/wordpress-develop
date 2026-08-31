@@ -1,14 +1,7 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
-
-
-
-
-
 class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 	protected static $post;
 	protected static $different_post;
@@ -128,8 +121,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertTrue( $query->thumbnails_cached, 'Thumbnails should be cached after calling update_post_thumbnail_cache().' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12235' )]
 	public function test_get_the_post_thumbnail_caption() {
 		$this->assertSame( '', get_the_post_thumbnail_caption() );
@@ -152,8 +143,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertSame( $caption, get_the_post_thumbnail_caption( $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12235' )]
 	public function test_get_the_post_thumbnail_caption_empty() {
 		$post_id       = self::factory()->post->create();
@@ -172,8 +161,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertSame( '', get_the_post_thumbnail_caption( $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12235' )]
 	public function test_the_post_thumbnail_caption() {
 		$caption = 'This is a caption.';
@@ -244,8 +231,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertSame( $expected, ob_get_clean() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33070' )]
 	public function test_get_the_post_thumbnail_url() {
 		$this->assertFalse( has_post_thumbnail( self::$post ) );
@@ -262,8 +247,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertSame( wp_get_attachment_url( self::$attachment_id ), get_the_post_thumbnail_url() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33070' )]
 	public function test_get_the_post_thumbnail_url_with_invalid_post() {
 		set_post_thumbnail( self::$post, self::$attachment_id );
@@ -276,8 +259,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertFalse( get_the_post_thumbnail_url( self::$post->ID ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33070' )]
 	public function test_the_post_thumbnail_url() {
 		$GLOBALS['post'] = self::$post;
@@ -293,8 +274,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertSame( wp_get_attachment_url( self::$attachment_id ), ob_get_clean() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12922' )]
 	public function test__wp_preview_post_thumbnail_filter() {
 		$old_post = $GLOBALS['post'] ?? null;
@@ -313,8 +292,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertEquals( self::$attachment_id, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37697' )]
 	public function test__wp_preview_post_thumbnail_filter_secondary_post() {
 		$old_post = $GLOBALS['post'] ?? null;
@@ -339,8 +316,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertEmpty( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12922' )]
 	public function test_insert_post_with_post_thumbnail() {
 		$post_id = wp_insert_post(
@@ -370,8 +345,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertEmpty( $thumbnail_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37658' )]
 	public function test_insert_attachment_with_post_thumbnail() {
 		// Audio files support featured images.
@@ -409,8 +382,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertEmpty( $thumbnail_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39030' )]
 	public function test_post_thumbnail_size_filter_simple() {
 		$this->current_size_filter_data = 'medium';
@@ -429,8 +400,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertSame( 'medium', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39030' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_post_thumbnail_size_filter_complex' )]
 	public function test_post_thumbnail_size_filter_complex( $which_post, $expected ) {
@@ -455,8 +424,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57490' )]
 	public function test_get_the_post_thumbnail_includes_loading_lazy() {
 		set_post_thumbnail( self::$post, self::$attachment_id );
@@ -465,8 +432,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertStringContainsString( ' loading="lazy"', $html );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57490' )]
 	public function test_get_the_post_thumbnail_respects_passed_loading_attr() {
 		set_post_thumbnail( self::$post, self::$attachment_id );
@@ -478,8 +443,6 @@ class Tests_Post_Thumbnail_Template extends WP_UnitTestCase {
 		$this->assertStringContainsString( ' loading="eager"', $html, 'loading=eager was not present in img tag because attributes string with loading=eager was overwritten.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57490' )]
 	public function test_get_the_post_thumbnail_respects_wp_lazy_loading_enabled_filter() {
 		set_post_thumbnail( self::$post, self::$attachment_id );

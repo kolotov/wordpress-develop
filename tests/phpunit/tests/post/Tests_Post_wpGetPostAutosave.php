@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_wpGetPostAutosave extends WP_UnitTestCase {
 

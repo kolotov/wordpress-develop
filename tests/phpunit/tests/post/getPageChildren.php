@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_GetPageChildren extends WP_UnitTestCase {
 	protected $pages = array();

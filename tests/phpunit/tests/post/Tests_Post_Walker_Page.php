@@ -1,6 +1,4 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'walker' )]
 class Tests_Post_Walker_Page extends WP_UnitTestCase {
@@ -21,9 +19,6 @@ class Tests_Post_Walker_Page extends WP_UnitTestCase {
 		$this->walker = new Walker_Page();
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47720' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_start_el_with_empty_attributes' )]
 	public function test_start_el_with_empty_attributes( $value, $expected ) {

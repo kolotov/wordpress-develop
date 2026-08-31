@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'template' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post' )]

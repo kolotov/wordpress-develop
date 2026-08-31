@@ -1,12 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_GetPageUri extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22883' )]
 	public function test_get_page_uri_with_stdclass_post_object() {
 		$post_id = self::factory()->post->create( array( 'post_name' => 'get-page-uri-post-name' ) );
@@ -19,8 +15,6 @@ class Tests_Post_GetPageUri extends WP_UnitTestCase {
 		$this->assertSame( 'get-page-uri-post-name', get_page_uri( $post_array ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24491' )]
 	public function test_get_page_uri_with_nonexistent_post() {
 		global $wpdb;
@@ -28,8 +22,6 @@ class Tests_Post_GetPageUri extends WP_UnitTestCase {
 		$this->assertFalse( get_page_uri( $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '15963' )]
 	public function test_get_post_uri_check_orphan() {
 		$parent_id = self::factory()->post->create( array( 'post_name' => 'parent' ) );
@@ -51,8 +43,6 @@ class Tests_Post_GetPageUri extends WP_UnitTestCase {
 		$this->assertSame( 'child', get_page_uri( $child_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36174' )]
 	public function test_get_page_uri_with_a_draft_parent_with_empty_slug() {
 		$parent_id = self::factory()->post->create( array( 'post_name' => 'parent' ) );
@@ -74,8 +64,6 @@ class Tests_Post_GetPageUri extends WP_UnitTestCase {
 		$this->assertSame( 'child', get_page_uri( $child_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26284' )]
 	public function test_get_page_uri_without_argument() {
 		$post_id = self::factory()->post->create(

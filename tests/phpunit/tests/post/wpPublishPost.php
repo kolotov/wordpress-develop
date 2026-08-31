@@ -1,11 +1,6 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_publish_post' )]
 class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 
@@ -41,8 +36,6 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 		$this->assertSame( 'publish', $post->post_status );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22944' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_post' )]
 	public function test_wp_insert_post_and_wp_publish_post_with_future_date() {
@@ -65,8 +58,6 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 		$this->assertSame( $future_date, $post->post_date );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48145' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_post' )]
 	public function test_wp_insert_post_should_default_to_publish_if_post_date_is_within_59_seconds_from_current_time() {
@@ -82,8 +73,6 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 		$this->assertSame( $future_date, $post->post_date );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22944' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_post' )]
 	public function test_wp_update_post_with_content_filtering() {
@@ -113,8 +102,6 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 		$this->assertSame( 'Test', $post->post_title );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22944' )]
 	public function test_wp_publish_post_and_avoid_content_filtering() {
 		kses_remove_filters();

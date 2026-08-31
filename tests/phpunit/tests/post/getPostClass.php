@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_class' )]
 class Tests_Post_GetPostClass extends WP_UnitTestCase {
@@ -44,8 +42,6 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 		$this->assertContains( 'wptests_tax-bar', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22271' )]
 	public function test_with_custom_classes_and_no_post() {
 		$this->assertSame( array(), get_post_class( '', null ) );
@@ -53,8 +49,6 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 		$this->assertSame( array( 'foo', 'bar' ), get_post_class( array( 'foo', 'bar' ), null ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_category_slugs() {
 		$cat_id1 = self::factory()->category->create( array( 'name' => 'Первая рубрика' ) );
@@ -69,8 +63,6 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 		$this->assertContains( "category-$cat_id3", $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_tag_slugs() {
 		$tag_id1 = self::factory()->tag->create( array( 'name' => 'Первая метка' ) );
@@ -85,8 +77,6 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 		$this->assertContains( "tag-$tag_id3", $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_term_slugs() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -117,8 +107,6 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 		$this->assertContains( "wptests_tax-$term_id3", $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 	public function test_taxonomy_classes_hit_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -136,8 +124,6 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64247' )]
 	public function test_list_return_value_when_duplicate_classes() {
 

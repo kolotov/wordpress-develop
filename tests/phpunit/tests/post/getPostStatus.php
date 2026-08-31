@@ -1,9 +1,6 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
-
 class Tests_Post_GetPostStatus extends WP_UnitTestCase {
 
 	/**

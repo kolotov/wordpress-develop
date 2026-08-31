@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'meta' )]
 class Tests_Post_Meta extends WP_UnitTestCase {
@@ -227,8 +225,6 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 		$this->assertSame( $data, $meta->meta_value );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12860' )]
 	public function test_funky_post_meta() {
 		$classy          = new StdClass();
@@ -248,8 +244,6 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 		$this->assertEqualSets( $funky_meta, get_post_meta( self::$post_id, 'test_funky_post_meta', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_post_meta' )]
 	public function test_register_post_meta( $post_type, $meta_key, $args ) {
@@ -283,8 +277,6 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 		return $args;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unregister_post_meta' )]
 	public function test_unregister_post_meta( $post_type, $meta_key ) {
@@ -309,8 +301,6 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	public function test_add_metadata_sets_posts_last_changed() {
 		$post_id = self::factory()->post->create();
@@ -321,8 +311,6 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 		$this->assertNotFalse( wp_cache_get_last_changed( 'posts' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	public function test_update_metadata_sets_posts_last_changed() {
 		$post_id = self::factory()->post->create();
@@ -333,8 +321,6 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 		$this->assertNotFalse( wp_cache_get_last_changed( 'posts' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	public function test_delete_metadata_sets_posts_last_changed() {
 		$post_id = self::factory()->post->create();

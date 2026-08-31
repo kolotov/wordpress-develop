@@ -1,12 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_GetLastPostDate extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47777' )]
 	public function test_get_lastpostdate() {
 		$post_post_date_first = '2020-01-30 16:09:28';

@@ -31,8 +31,6 @@ class Tests_Post_PrimePostParentIdCaches extends WP_UnitTestCase {
 		self::$posts = $factory->post->create_many( 3 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_prime_post_parent_id_caches() {
 		$post_id = self::$posts[0];
@@ -45,8 +43,6 @@ class Tests_Post_PrimePostParentIdCaches extends WP_UnitTestCase {
 		$this->assertSameSets( array( 0 ), wp_cache_get_multiple( array( "post_parent:{$post_id}" ), 'posts' ), 'Array of parent ids' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_prime_post_parent_id_caches_multiple() {
 		$before_num_queries = get_num_queries();
@@ -64,8 +60,6 @@ class Tests_Post_PrimePostParentIdCaches extends WP_UnitTestCase {
 		$this->assertSameSets( array( 0, 0, 0 ), wp_cache_get_multiple( $cache_keys, 'posts' ), 'Array of parent ids' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_prime_post_parent_id_caches_multiple_runs() {
 		_prime_post_parent_id_caches( self::$posts );
@@ -76,8 +70,6 @@ class Tests_Post_PrimePostParentIdCaches extends WP_UnitTestCase {
 		$this->assertSame( 0, $num_queries, 'Unexpected number of queries.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_prime_post_parent_id_caches_update() {
 		$page_id            = self::factory()->post->create(
@@ -108,8 +100,6 @@ class Tests_Post_PrimePostParentIdCaches extends WP_UnitTestCase {
 		$this->assertSameSets( array( self::$posts[1] ), wp_cache_get_multiple( array( "post_parent:{$page_id}" ), 'posts' ), 'Array of parent ids with post 1 as parent' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_prime_post_parent_id_caches_delete() {
 		$parent_page_id     = self::factory()->post->create(

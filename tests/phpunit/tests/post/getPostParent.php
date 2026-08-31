@@ -1,16 +1,11 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'template' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_parent' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'has_post_parent' )]
 class Tests_Post_GetPostParent extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33045' )]
 	public function test_get_post_parent() {
 		$post = array(
@@ -40,8 +35,6 @@ class Tests_Post_GetPostParent extends WP_UnitTestCase {
 		$this->assertSame( $parent_id, $parent->ID );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33045' )]
 	public function test_has_post_parent() {
 		$post = array(

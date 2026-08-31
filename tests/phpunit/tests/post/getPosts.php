@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Post_GetPosts extends WP_UnitTestCase {
@@ -79,8 +77,6 @@ class Tests_Post_GetPosts extends WP_UnitTestCase {
 		$this->assertSame( array( $p2 ), $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34060' )]
 	public function test_paged_should_not_be_overridden_by_default_offset() {
 		$p1 = self::factory()->post->create(

@@ -1,15 +1,10 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'template' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_page_template_slug' )]
 class Tests_Post_GetPageTemplateSlug extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31389' )]
 	public function test_get_page_template_slug_by_id() {
 		$page_id = self::factory()->post->create(
@@ -27,8 +22,6 @@ class Tests_Post_GetPageTemplateSlug extends WP_UnitTestCase {
 		$this->assertSame( 'example.php', get_page_template_slug( $page_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31389' )]
 	public function test_get_page_template_slug_from_loop() {
 		$page_id = self::factory()->post->create(
@@ -43,8 +36,6 @@ class Tests_Post_GetPageTemplateSlug extends WP_UnitTestCase {
 		$this->assertSame( 'example.php', get_page_template_slug() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31389' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_get_page_template_slug_non_page() {
@@ -60,8 +51,6 @@ class Tests_Post_GetPageTemplateSlug extends WP_UnitTestCase {
 		$this->assertSame( 'example.php', get_page_template_slug( $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_get_page_template_slug_non_page_from_loop() {
 		$post_id = self::factory()->post->create();

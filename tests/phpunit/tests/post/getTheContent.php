@@ -1,12 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 class Tests_Post_GetTheContent extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_argument_back_compat_more_link_text() {
 		$text = 'Foo<!--more-->Bar';
@@ -22,8 +18,6 @@ class Tests_Post_GetTheContent extends WP_UnitTestCase {
 		$this->assertStringContainsString( '>Ping<', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_argument_back_compat_strip_teaser() {
 		$text = 'Foo<!--more-->Bar';
@@ -41,8 +35,6 @@ class Tests_Post_GetTheContent extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'Foo', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_content_other_post() {
 		$text_1 = 'Foo<!--nextpage-->Bar<!--nextpage-->Baz';
@@ -56,8 +48,6 @@ class Tests_Post_GetTheContent extends WP_UnitTestCase {
 		$this->assertSame( 'Bing', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_should_respect_pagination_of_inner_post() {
 		$text_1 = 'Foo<!--nextpage-->Bar<!--nextpage-->Baz';
@@ -76,8 +66,6 @@ class Tests_Post_GetTheContent extends WP_UnitTestCase {
 		$this->assertSame( 'Bang', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47824' )]
 	public function test_should_fall_back_to_post_global_outside_of_the_loop() {
 		$GLOBALS['post'] = self::factory()->post->create( array( 'post_content' => 'Foo' ) );

@@ -568,8 +568,6 @@ class Tests_Post_MetaRevisions extends WP_UnitTestCase {
 		$this->assertSame( 'default value', get_post_meta( $post_id, 'meta_revision_test', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_post_meta_supports_revisions' )]
 	public function test_register_post_meta_supports_revisions( $post_type, $meta_key, $args, $expected_is_revisioned ) {
 		register_post_meta( $post_type, $meta_key, $args );

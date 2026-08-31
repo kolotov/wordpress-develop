@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'body_class' )]
 class Tests_Post_BodyClass extends WP_UnitTestCase {

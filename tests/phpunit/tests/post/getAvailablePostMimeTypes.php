@@ -7,11 +7,8 @@
  */
 
 #[\PHPUnit\Framework\Attributes\Ticket( '59195' )]
-
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_available_post_mime_types' )]
-
 class Tests_Post_GetAvailablePostMimeTypes extends WP_UnitTestCase {
 
 	public function tear_down() {

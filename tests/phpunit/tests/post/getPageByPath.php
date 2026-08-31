@@ -1,12 +1,7 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
-
 class Tests_Post_GetPageByPath extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '15665' )]
 	public function test_get_page_by_path_priority() {
 		global $wpdb;
@@ -104,9 +99,6 @@ class Tests_Post_GetPageByPath extends WP_UnitTestCase {
 		$this->assertSame( $p3, $found->ID );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56689' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_page_by_path' )]
 	public function test_should_match_nested_page_query_count() {
@@ -143,9 +135,6 @@ class Tests_Post_GetPageByPath extends WP_UnitTestCase {
 		$this->assertIsObject( $cached_post, 'The cached post is not an object' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56689' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_page_by_path' )]
 	public function test_should_match_nested_page_query_count_status() {
@@ -183,9 +172,6 @@ class Tests_Post_GetPageByPath extends WP_UnitTestCase {
 		$this->assertIsObject( $cached_post, 'The cached post is not an object' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56689' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_page_by_path' )]
 	public function test_should_return_null_for_invalid_path() {
@@ -257,8 +243,6 @@ class Tests_Post_GetPageByPath extends WP_UnitTestCase {
 		$this->assertNull( $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36711' )]
 	public function test_should_hit_cache() {
 		$page = self::factory()->post->create(
@@ -279,8 +263,6 @@ class Tests_Post_GetPageByPath extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36711' )]
 	public function test_bad_path_should_be_cached() {
 		// Prime cache.
@@ -294,8 +276,6 @@ class Tests_Post_GetPageByPath extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36711' )]
 	public function test_bad_path_served_from_cache_should_not_fall_back_on_current_post() {
 		global $post;
@@ -316,8 +296,6 @@ class Tests_Post_GetPageByPath extends WP_UnitTestCase {
 		unset( $post );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36711' )]
 	public function test_cache_should_not_match_post_in_different_post_type_with_same_path() {
 		register_post_type( 'wptests_pt' );
@@ -348,8 +326,6 @@ class Tests_Post_GetPageByPath extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36711' )]
 	public function test_cache_should_be_invalidated_when_post_name_is_edited() {
 		$page = self::factory()->post->create(
@@ -378,8 +354,6 @@ class Tests_Post_GetPageByPath extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37611' )]
 	public function test_output_param_should_be_obeyed_for_cached_value() {
 		$page = self::factory()->post->create(

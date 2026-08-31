@@ -1,10 +1,7 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
+#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_page_by_title' )]
 class Tests_Post_GetPageByTitle extends WP_UnitTestCase {
 
 	/**

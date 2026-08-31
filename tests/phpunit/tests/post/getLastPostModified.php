@@ -1,12 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_GetLastPostModified extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47777' )]
 	public function test_get_lastpostmodified() {
 		global $wpdb;

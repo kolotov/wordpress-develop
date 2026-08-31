@@ -49,8 +49,6 @@ class Tests_Post_UpdatePostAuthorCaches extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55716' )]
 	public function test_update_post_author_caches() {
 		$action = new MockAction();

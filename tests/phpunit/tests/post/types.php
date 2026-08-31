@@ -1,9 +1,6 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
-
 class Tests_Post_Types extends WP_UnitTestCase {
 
 	/**
@@ -40,8 +37,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		_unregister_post_type( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48558' )]
 	public function test_register_post_type_return_value() {
 		$this->assertInstanceOf( 'WP_Post_Type', register_post_type( 'foo' ) );
@@ -67,8 +62,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertInstanceOf( 'WP_Error', register_post_type( '' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35985' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_post_type' )]
 	public function test_register_post_type_exclude_from_search_should_default_to_opposite_value_of_public() {
@@ -81,8 +74,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertNotEquals( $public, $args->exclude_from_search );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35985' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_post_type' )]
 	public function test_register_post_type_publicly_queryable_should_default_to_value_of_public() {
@@ -95,8 +86,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertSame( $public, $args->publicly_queryable );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35985' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_post_type' )]
 	public function test_register_post_type_show_ui_should_default_to_value_of_public() {
@@ -109,8 +98,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertSame( $public, $args->show_ui );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35985' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_post_type' )]
 	public function test_register_post_type_show_in_menu_should_default_to_value_of_show_ui() {
@@ -128,8 +115,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertSame( $public, $args->show_in_menu );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35985' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_post_type' )]
 	public function test_register_post_type_show_in_nav_menus_should_default_to_value_of_public() {
@@ -142,8 +127,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertSame( $public, $args->show_in_nav_menus );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35985' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_post_type' )]
 	public function test_register_post_type_show_in_admin_bar_should_default_to_value_of_show_in_menu() {
@@ -164,8 +147,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertSame( $public, $args->show_in_admin_bar );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53212' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_post_type' )]
 	public function test_fires_registered_post_type_actions() {
@@ -216,8 +197,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertFalse( post_type_supports( 'notaposttype', 'notafeature' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21586' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '41172' )]
 	public function test_post_type_with_no_support() {
@@ -234,8 +213,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		_unregister_post_type( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23302' )]
 	public function test_post_type_with_no_feed() {
 		global $wp_rewrite;
@@ -247,8 +224,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		_unregister_post_type( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30013' )]
 	public function test_get_post_type_object_with_non_scalar_values() {
 		$this->assertFalse( post_type_exists( 'foo' ) );
@@ -267,8 +242,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertFalse( post_type_exists( 'foo' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33023' )]
 	public function test_get_post_type_object_casting() {
 		register_post_type( 'foo' );
@@ -284,8 +257,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		_unregister_post_type( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38844' )]
 	public function test_get_post_type_object_includes_menu_icon_for_builtin_post_types() {
 		$this->assertSame( 'dashicons-admin-post', get_post_type_object( 'post' )->menu_icon );
@@ -293,23 +264,17 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertSame( 'dashicons-admin-media', get_post_type_object( 'attachment' )->menu_icon );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type() {
 		register_post_type( 'foo' );
 		$this->assertTrue( unregister_post_type( 'foo' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_unknown_post_type() {
 		$this->assertWPError( unregister_post_type( 'foo' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_twice() {
 		register_post_type( 'foo' );
@@ -317,8 +282,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertWPError( unregister_post_type( 'foo' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_disallow_builtin_post_type() {
 		$this->assertWPError( unregister_post_type( 'post' ) );
@@ -328,8 +291,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertWPError( unregister_post_type( 'nav_menu_item' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_removes_query_vars() {
 		global $wp;
@@ -347,8 +308,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertNotContains( 'bar', $wp->public_query_vars );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_removes_rewrite_tags() {
 		$this->set_permalink_structure( '/%postname%' );
@@ -373,8 +332,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertCount( --$count_before, $wp_rewrite->rewritereplace ); // Array was reduced by one value.
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_removes_rewrite_rules() {
 		$this->set_permalink_structure( '/%postname%' );
@@ -394,8 +351,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertNotContains( 'index.php?post_type=foo', $wp_rewrite->extra_rules_top );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_removes_custom_meta_capabilities() {
 		global $post_type_meta_caps;
@@ -420,8 +375,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 'edit_bar', $post_type_meta_caps );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_removes_post_type_supports() {
 		global $_wp_post_type_features;
@@ -447,8 +400,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 'foo', $_wp_post_type_features );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_removes_post_type_from_taxonomies() {
 		global $wp_taxonomies;
@@ -469,8 +420,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertEmpty( get_object_taxonomies( 'foo' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_removes_the_future_post_hooks() {
 		global $wp_filter;
@@ -488,8 +437,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 'future_foo', $wp_filter );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_removes_meta_box_callback() {
 		global $wp_filter;
@@ -508,8 +455,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 'add_meta_boxes_foo', $wp_filter );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_unregister_post_type_removes_post_type_from_global() {
 		global $wp_post_types;
@@ -530,8 +475,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertNull( get_post_type_object( 'foo' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14761' )]
 	public function test_post_type_does_not_exist_after_unregister_post_type() {
 		register_post_type(
@@ -546,8 +489,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertFalse( post_type_exists( 'foo' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34010' )]
 	public function test_get_post_types_by_support_single_feature() {
 		$this->assertContains( 'post', get_post_types_by_support( 'title' ) );
@@ -556,24 +497,18 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertContains( 'nav_menu_item', get_post_types_by_support( 'title' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34010' )]
 	public function test_get_post_types_by_support_multiple_features() {
 		$this->assertContains( 'post', get_post_types_by_support( array( 'thumbnail', 'author' ) ) );
 		$this->assertContains( 'page', get_post_types_by_support( array( 'thumbnail', 'author' ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34010' )]
 	public function test_get_post_types_by_support_or_operator() {
 		$this->assertContains( 'post', get_post_types_by_support( array( 'post-formats', 'page-attributes' ), 'or' ) );
 		$this->assertContains( 'page', get_post_types_by_support( array( 'post-formats', 'page-attributes' ), 'or' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34010' )]
 	public function test_get_post_types_by_support_not_operator() {
 		$this->assertContains( 'attachment', get_post_types_by_support( array( 'thumbnail' ), 'not' ) );
@@ -581,22 +516,16 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertContains( 'nav_menu_item', get_post_types_by_support( array( 'thumbnail' ), 'not' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34010' )]
 	public function test_get_post_types_by_support_excluding_features() {
 		$this->assertSameSets( array(), get_post_types_by_support( array( 'post-formats', 'page-attributes' ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34010' )]
 	public function test_get_post_types_by_support_non_existent_feature() {
 		$this->assertSameSets( array(), get_post_types_by_support( 'somefeature' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41172' )]
 	public function test_post_type_supports_autosave_based_on_editor_support() {
 		$this->assertFalse( post_type_supports( 'attachment', 'autosave' ) );
@@ -610,8 +539,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		_unregister_post_type( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41172' )]
 	public function test_removing_autosave_support_removes_rest_api_controller() {
 		register_post_type(
@@ -631,8 +558,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		_unregister_post_type( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41172' )]
 	public function test_removing_editor_support_does_not_remove_autosave_support() {
 		register_post_type(
@@ -648,8 +573,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertTrue( post_type_supports( 'foo', 'autosave' ), 'Post type should still support autosaves.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'oembed' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '35567' )]
 	public function test_register_post_type_is_embeddable_should_default_to_value_of_public() {
@@ -660,8 +583,6 @@ class Tests_Post_Types extends WP_UnitTestCase {
 		$this->assertTrue( $post_type->embeddable, 'Public post type should be embeddable by default' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'oembed' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '35567' )]
 	public function test_register_post_type_override_is_embeddable() {
