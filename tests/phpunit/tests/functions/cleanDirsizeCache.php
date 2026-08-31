@@ -3,27 +3,49 @@
 /**
  * Tests specific to the directory size caching.
  *
- * @group functions
  *
- * @covers ::clean_dirsize_cache
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'clean_dirsize_cache' )]
 class Tests_Functions_CleanDirsizeCache extends WP_UnitTestCase {
 
 	/**
 	 * Tests the handling of invalid data passed as the $path parameter.
 	 *
-	 * @ticket 52241
 	 *
-	 * @dataProvider data_clean_dirsize_cache_with_invalid_inputs
 	 *
 	 * @param mixed  $path             Path input to use in the test.
 	 * @param string $expected_message Expected notice message.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52241' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_clean_dirsize_cache_with_invalid_inputs' )]
 	public function test_clean_dirsize_cache_with_invalid_inputs( $path, $expected_message ) {
-		$this->expectNotice();
-		$this->expectNoticeMessage( $expected_message );
+		$notices = array();
+		set_error_handler(
+			static function ( int $severity, string $message ) use ( &$notices ): bool {
+				$notices[] = compact( 'severity', 'message' );
+				return true;
+			},
+			E_USER_NOTICE
+		);
 
-		clean_dirsize_cache( $path );
+		try {
+			clean_dirsize_cache( $path );
+		} finally {
+			restore_error_handler();
+		}
+
+		$this->assertSame(
+			array(
+				array(
+					'severity' => E_USER_NOTICE,
+					'message'  => $expected_message,
+				),
+			),
+			$notices
+		);
 	}
 
 	/**
@@ -31,7 +53,7 @@ class Tests_Functions_CleanDirsizeCache extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_clean_dirsize_cache_with_invalid_inputs() {
+	public static function data_clean_dirsize_cache_with_invalid_inputs() {
 		return array(
 			'null'         => array(
 				'path'             => null,
@@ -55,13 +77,13 @@ class Tests_Functions_CleanDirsizeCache extends WP_UnitTestCase {
 	/**
 	 * Tests the handling of a non-path text string passed as the $path parameter.
 	 *
-	 * @ticket 52241
 	 *
-	 * @dataProvider data_clean_dirsize_cache_with_non_path_string
 	 *
 	 * @param string $path           Path input to use in the test.
 	 * @param int    $expected_count Expected number of paths in the cache after cleaning.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52241' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_clean_dirsize_cache_with_non_path_string' )]
 	public function test_clean_dirsize_cache_with_non_path_string( $path, $expected_count ) {
 		// Set the dirsize cache to our mock.
 		set_transient( 'dirsize_cache', $this->mock_dirsize_cache_with_non_path_string() );
@@ -78,7 +100,7 @@ class Tests_Functions_CleanDirsizeCache extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_clean_dirsize_cache_with_non_path_string() {
+	public static function data_clean_dirsize_cache_with_non_path_string() {
 		return array(
 			'single dot'                        => array(
 				'path'           => '.',
@@ -105,11 +127,11 @@ class Tests_Functions_CleanDirsizeCache extends WP_UnitTestCase {
 	/**
 	 * Tests the behavior of the function when the transient doesn't exist.
 	 *
-	 * @ticket 52241
-	 * @ticket 53635
 	 *
-	 * @covers ::recurse_dirsize
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52241' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '53635' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'recurse_dirsize' )]
 	public function test_recurse_dirsize_without_transient() {
 		delete_transient( 'dirsize_cache' );
 
@@ -123,11 +145,11 @@ class Tests_Functions_CleanDirsizeCache extends WP_UnitTestCase {
 	 *
 	 * In particular, this tests that no PHP TypeErrors are being thrown.
 	 *
-	 * @ticket 52241
-	 * @ticket 53635
 	 *
-	 * @covers ::recurse_dirsize
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52241' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '53635' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'recurse_dirsize' )]
 	public function test_recurse_dirsize_with_invalid_transient() {
 		set_transient( 'dirsize_cache', 'this is not a valid transient for dirsize cache' );
 

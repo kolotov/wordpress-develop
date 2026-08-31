@@ -2,21 +2,21 @@
 /**
  * Tests for _wp_connectors_mask_api_key().
  *
- * @group connectors
- * @covers ::_wp_connectors_mask_api_key
  */
+#[\PHPUnit\Framework\Attributes\Group( 'connectors' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_connectors_mask_api_key' )]
 class Tests_Connectors_WpConnectorsMaskApiKey extends WP_UnitTestCase {
 
 	/**
 	 * Tests that API keys are masked correctly.
 	 *
-	 * @ticket 64730
 	 *
-	 * @dataProvider data_mask_api_key
 	 *
 	 * @param string $input    API key to mask.
 	 * @param string $expected Expected masked result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64730' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_mask_api_key' )]
 	public function test_mask_api_key( string $input, string $expected ) {
 		$this->assertSame( $expected, _wp_connectors_mask_api_key( $input ) );
 	}
@@ -29,7 +29,7 @@ class Tests_Connectors_WpConnectorsMaskApiKey extends WP_UnitTestCase {
 	 *     @type string $expected Expected masked result.
 	 * }
 	 */
-	public function data_mask_api_key(): array {
+	public static function data_mask_api_key(): array {
 		$bullet = "\u{2022}";
 
 		return array(

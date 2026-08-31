@@ -1,9 +1,12 @@
 <?php
 
 /**
- * @group post
- * @covers ::wp_publish_post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_publish_post' )]
 class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 
 	/**
@@ -39,9 +42,9 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22944
-	 * @covers ::wp_insert_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22944' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_post' )]
 	public function test_wp_insert_post_and_wp_publish_post_with_future_date() {
 		$future_date = gmdate( 'Y-m-d H:i:s', time() + 10000000 );
 		$post_id     = self::factory()->post->create(
@@ -63,9 +66,9 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48145
-	 * @covers ::wp_insert_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48145' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_post' )]
 	public function test_wp_insert_post_should_default_to_publish_if_post_date_is_within_59_seconds_from_current_time() {
 		$future_date = gmdate( 'Y-m-d H:i:s', time() + 59 );
 		$post_id     = self::factory()->post->create(
@@ -80,9 +83,9 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22944
-	 * @covers ::wp_update_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22944' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_post' )]
 	public function test_wp_update_post_with_content_filtering() {
 		kses_remove_filters();
 
@@ -111,8 +114,8 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22944
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22944' )]
 	public function test_wp_publish_post_and_avoid_content_filtering() {
 		kses_remove_filters();
 
@@ -138,8 +141,8 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 	/**
 	 * Ensure wp_publish_post does not add default category in error.
 	 *
-	 * @ticket 51292
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51292' )]
 	public function test_wp_publish_post_respects_current_categories() {
 		$post_id     = self::$auto_draft_id;
 		$category_id = self::factory()->term->create( array( 'taxonomy' => 'category' ) );
@@ -158,9 +161,9 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 	/**
 	 * Ensure wp_publish_post adds default category.
 	 *
-	 * @covers ::wp_publish_post
-	 * @ticket 51292
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51292' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_publish_post' )]
 	public function test_wp_publish_post_adds_default_category() {
 		$post_id = self::$auto_draft_id;
 
@@ -178,9 +181,9 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 	/**
 	 * Ensure wp_publish_post adds default category when tagged.
 	 *
-	 * @covers ::wp_publish_post
-	 * @ticket 51292
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51292' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_publish_post' )]
 	public function test_wp_publish_post_adds_default_category_when_tagged() {
 		$post_id = self::$auto_draft_id;
 		$tag_id  = self::factory()->term->create( array( 'taxonomy' => 'post_tag' ) );
@@ -199,9 +202,9 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 	/**
 	 * Ensure wp_publish_post does not add default term in error.
 	 *
-	 * @covers ::wp_publish_post
-	 * @ticket 51292
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51292' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_publish_post' )]
 	public function test_wp_publish_post_respects_current_terms() {
 		// Create custom taxonomy to test with.
 		register_taxonomy(
@@ -234,9 +237,9 @@ class Tests_Post_wpPublishPost extends WP_UnitTestCase {
 	/**
 	 * Ensure wp_publish_post adds default term.
 	 *
-	 * @covers ::wp_publish_post
-	 * @ticket 51292
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51292' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_publish_post' )]
 	public function test_wp_publish_post_adds_default_term() {
 		// Create custom taxonomy to test with.
 		register_taxonomy(

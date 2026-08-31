@@ -1,30 +1,30 @@
 <?php
 
 /**
- * @group compat
  *
- * @covers ::array_find_key
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'array_find_key' )]
 class Test_Compat_arrayFindKey extends WP_UnitTestCase {
 
 	/**
 	 * Test that array_find_key() is always available (either from PHP or WP).
 	 *
-	 * @ticket 62558
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62558' )]
 	public function test_array_find_key_availability() {
 		$this->assertTrue( function_exists( 'array_find_key' ) );
 	}
 
 	/**
-	 * @dataProvider data_array_find_key
 	 *
-	 * @ticket 62558
 	 *
 	 * @param mixed $expected The expected value.
 	 * @param array $arr The array.
 	 * @param callable $callback The callback.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_array_find_key' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62558' )]
 	public function test_array_find_key( $expected, array $arr, callable $callback ) {
 		$this->assertSame( $expected, array_find_key( $arr, $callback ) );
 	}
@@ -34,7 +34,7 @@ class Test_Compat_arrayFindKey extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_array_find_key(): array {
+	public static function data_array_find_key(): array {
 		return array(
 			'empty array'          => array(
 				'expected' => null,

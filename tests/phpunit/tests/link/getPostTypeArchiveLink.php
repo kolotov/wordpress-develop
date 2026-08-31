@@ -1,13 +1,13 @@
 <?php
 /**
- * @group link
- * @covers ::get_post_type_archive_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_type_archive_link' )]
 class Tests_Link_GetPostTypeArchiveLink extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 19902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19902' )]
 	public function test_get_post_archive_link_with_post_archive_on_front_page() {
 		update_option( 'show_on_front', 'posts' );
 		$actual   = get_post_type_archive_link( 'post' );
@@ -16,8 +16,8 @@ class Tests_Link_GetPostTypeArchiveLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 19902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19902' )]
 	public function test_get_post_archive_link_with_post_archive_on_a_blog_page() {
 		$page_for_posts = self::factory()->post->create(
 			array(

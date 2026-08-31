@@ -3,11 +3,11 @@
 /**
  * Tests for the REST list controller for abilities endpoint.
  *
- * @covers WP_REST_Abilities_V1_List_Controller
  *
- * @group abilities-api
- * @group restapi
  */
+#[\PHPUnit\Framework\Attributes\Group( 'abilities-api' )]
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Abilities_V1_List_Controller::class )]
 class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 
 	/**
@@ -298,8 +298,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test listing all abilities.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_items(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
 		$response = $this->server->dispatch( $request );
@@ -321,8 +321,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test getting a specific ability.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_item(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/test/calculator' );
 		$response = $this->server->dispatch( $request );
@@ -344,8 +344,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test getting a specific ability with only selected fields.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_item_with_selected_fields(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/test/calculator' );
 		$request->set_param( '_fields', 'name,label' );
@@ -364,8 +364,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test getting a specific ability with embed context.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_item_with_embed_context(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/test/calculator' );
 		$request->set_param( 'context', 'embed' );
@@ -385,8 +385,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test getting a non-existent ability returns 404.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_item_not_found(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/non/existent' );
 		$response = $this->server->dispatch( $request );
@@ -400,8 +400,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test getting an ability that does not show in REST returns 404.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_item_not_show_in_rest(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/test/not-show-in-rest' );
 		$response = $this->server->dispatch( $request );
@@ -415,8 +415,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test that an ability with only the `public` meta flag is exposed in REST.
 	 *
-	 * @ticket 65568
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65568' )]
 	public function test_get_item_public_meta_exposes_in_rest(): void {
 		$this->register_test_ability(
 			'test/public-ability',
@@ -445,8 +445,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test that an explicit `show_in_rest` value of false hides an ability even when `public` is true.
 	 *
-	 * @ticket 65568
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65568' )]
 	public function test_get_item_public_true_show_in_rest_false_is_hidden(): void {
 		$this->register_test_ability(
 			'test/public-optout',
@@ -475,8 +475,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test permission check for listing abilities.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_items_permission_denied(): void {
 		// Test with non-logged-in user
 		wp_set_current_user( 0 );
@@ -490,8 +490,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test pagination headers.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_pagination_headers(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
 		$request->set_param( 'per_page', 10 );
@@ -511,8 +511,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test HEAD method returns empty body with proper headers.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_head_request(): void {
 		$request  = new WP_REST_Request( 'HEAD', '/wp-abilities/v1/abilities' );
 		$response = $this->server->dispatch( $request );
@@ -530,8 +530,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test pagination links.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_pagination_links(): void {
 		// Test first page (should have 'next' link header but no 'prev')
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
@@ -572,8 +572,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test collection parameters.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_collection_params(): void {
 		// Test per_page parameter
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
@@ -605,8 +605,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test response links for individual abilities.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_ability_response_links(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/test/calculator' );
 		$response = $this->server->dispatch( $request );
@@ -630,8 +630,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test context parameter.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_context_parameter(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/test/calculator' );
 		$request->set_param( 'context', 'view' );
@@ -651,8 +651,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test schema retrieval.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_schema(): void {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp-abilities/v1/abilities' );
 		$response = $this->server->dispatch( $request );
@@ -683,8 +683,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test that the item schema declares the `public` meta property.
 	 *
-	 * @ticket 65568
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65568' )]
 	public function test_get_schema_meta_declares_public(): void {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp-abilities/v1/abilities' );
 		$response = $this->server->dispatch( $request );
@@ -699,8 +699,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test ability name with valid special characters.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_ability_name_with_valid_special_characters(): void {
 		// Register ability with hyphen (valid).
 		$this->register_test_ability(
@@ -733,7 +733,7 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{0: string}>
 	 */
-	public function data_invalid_ability_names_provider(): array {
+	public static function data_invalid_ability_names_provider(): array {
 		return array(
 			'@ symbol'          => array( 'test@ability' ),
 			'space'             => array( 'test ability' ),
@@ -749,12 +749,12 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test ability names with invalid special characters.
 	 *
-	 * @ticket 64098
 	 *
-	 * @dataProvider data_invalid_ability_names_provider
 	 *
 	 * @param string $name Invalid ability name to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_ability_names_provider' )]
 	public function test_ability_name_with_invalid_special_characters( string $name ): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/' . $name );
 		$response = $this->server->dispatch( $request );
@@ -765,9 +765,9 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test extremely long ability names.
 	 *
-	 * @ticket 64098
-	 * @ticket 65644
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65644' )]
 	public function test_extremely_long_ability_names(): void {
 		// Create a very long but valid ability name
 		$long_name = 'test/' . str_repeat( 'a', 1000 );
@@ -784,7 +784,7 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{0: array<string, mixed>}>
 	 */
-	public function data_invalid_pagination_params_provider(): array {
+	public static function data_invalid_pagination_params_provider(): array {
 		return array(
 			'Zero page'            => array( array( 'page' => 0 ) ),
 			'Negative page'        => array( array( 'page' => -1 ) ),
@@ -799,12 +799,12 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test pagination parameters with invalid values.
 	 *
-	 * @ticket 64098
 	 *
-	 * @dataProvider data_invalid_pagination_params_provider
 	 *
 	 * @param array<string, mixed> $params Invalid pagination parameters.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_pagination_params_provider' )]
 	public function test_invalid_pagination_parameters( array $params ): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
 		$request->set_query_params( $params );
@@ -826,8 +826,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test filtering abilities by category.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_filter_by_category(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
 		$request->set_param( 'category', 'math' );
@@ -852,8 +852,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test filtering by non-existent category returns empty results.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_filter_by_nonexistent_category(): void {
 		// Ensure category doesn't exist - test should fail if it does.
 		$this->assertFalse(
@@ -875,8 +875,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test filtering abilities by namespace.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_namespace(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
 		$request->set_param( 'namespace', 'test' );
@@ -896,8 +896,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test filtering by non-existent namespace returns empty results.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_nonexistent_namespace(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
 		$request->set_param( 'namespace', 'nonexistent' );
@@ -913,8 +913,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	 * The 'test/not-show-in-rest' fixture matches the 'test' namespace but is
 	 * registered without `show_in_rest => true`, so it must remain excluded.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_namespace_still_respects_show_in_rest(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
 		$request->set_param( 'namespace', 'test' );
@@ -932,8 +932,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	 * value is passed as a string, the way it arrives over the query string, so
 	 * this also confirms the meta schema coerces it to a boolean before matching.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_annotation(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
 		$request->set_param( 'meta', array( 'annotations' => array( 'readonly' => 'true' ) ) );
@@ -953,8 +953,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	 *
 	 * No fixture marks itself destructive, so the result set is empty.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_non_matching_annotation(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
 		$request->set_param( 'meta', array( 'annotations' => array( 'destructive' => true ) ) );
@@ -969,8 +969,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	 *
 	 * All conditions must match (AND logic).
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_multiple_meta_conditions(): void {
 		$this->register_test_ability(
 			'test/read-only-idempotent',
@@ -1034,8 +1034,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	 * The forced `show_in_rest => true` condition must always win, even when the
 	 * caller passes `show_in_rest => false` through the meta parameter.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_meta_cannot_override_show_in_rest(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities' );
 		$request->set_param( 'meta', array( 'show_in_rest' => false ) );
@@ -1057,8 +1057,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	 * and the strict meta match never equals the stored boolean. The ability is
 	 * excluded.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_custom_meta_without_declared_type_is_not_coerced(): void {
 		$this->register_featured_ability();
 
@@ -1083,8 +1083,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	 * "true" to a boolean before matching, so the ability is included. This is
 	 * the supported way to make a custom meta key filterable.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_can_declare_custom_meta_type_for_coercion(): void {
 		$this->register_featured_ability();
 
@@ -1121,8 +1121,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test that schema keywords outside the allow-list are stripped from ability schemas in REST response.
 	 *
-	 * @ticket 65035
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65035' )]
 	public function test_unsupported_schema_keywords_stripped_from_response(): void {
 		$this->register_test_ability(
 			'test/with-unsupported-keywords',
@@ -1205,8 +1205,8 @@ class Tests_REST_API_WpRestAbilitiesV1ListController extends WP_UnitTestCase {
 	/**
 	 * Test that per-property `required` booleans become a draft-04 `required` array.
 	 *
-	 * @ticket 64955
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64955' )]
 	public function test_required_property_booleans_converted_to_draft_04_array(): void {
 		$this->register_test_ability(
 			'test/required-booleans',

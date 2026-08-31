@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @group meta
- * @covers ::is_protected_meta
  */
+#[\PHPUnit\Framework\Attributes\Group( 'meta' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'is_protected_meta' )]
 class Tests_Meta_isProtectedMeta extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_is_protected_meta_true
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_protected_meta_true' )]
 	public function test_is_protected_meta_true( $key ) {
 		$this->assertTrue( is_protected_meta( $key ) );
 	}
 
-	public function data_is_protected_meta_true() {
+	public static function data_is_protected_meta_true() {
 		$protected_keys = array(
 			array( '_wp_attachment' ),
 		);
@@ -29,13 +29,13 @@ class Tests_Meta_isProtectedMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_is_protected_meta_false
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_protected_meta_false' )]
 	public function test_is_protected_meta_false( $key ) {
 		$this->assertFalse( is_protected_meta( $key ) );
 	}
 
-	public function data_is_protected_meta_false() {
+	public static function data_is_protected_meta_false() {
 		$unprotected_keys = array(
 			array( 'singleword' ),
 			array( 'two_words' ),

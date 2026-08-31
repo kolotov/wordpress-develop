@@ -3,8 +3,8 @@
 /**
  * Tests for the WP_Customize_Section class.
  *
- * @group customize
  */
+#[\PHPUnit\Framework\Attributes\Group( 'customize' )]
 class Tests_WP_Customize_Section extends WP_UnitTestCase {
 	protected static $admin_id;
 	protected static $user_ids = array();

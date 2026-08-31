@@ -79,7 +79,7 @@ jobs:
     uses: ./.github/workflows/reusable-support-json-reader-v1.yml
     permissions:
       contents: read
-    if: ${{ github.repository == 'WordPress/wordpress-develop' }}
+    if: ${{ github.repository == 'kolotov/wordpress-develop' }}
     with:
       wp-version: ${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}
 
@@ -127,7 +127,8 @@ jobs:
       actions: read
       contents: read
     needs: [ build-test-matrix, environment-tests-mysql ]
-    if: ${{ github.repository == 'WordPress/wordpress-develop' && github.event_name != 'pull_request' && always() }}
+    # Send Slack notifications for non-pull-request runs in this fork.
+    if: ${{ github.repository == 'kolotov/wordpress-develop' && github.event_name != 'pull_request' && always() }}
     with:
       calling_status: ${{ contains( needs.*.result, 'cancelled' ) && 'cancelled' || contains( needs.*.result, 'failure' ) && 'failure' || 'success' }}
     secrets:
@@ -143,6 +144,7 @@ jobs:
     permissions:
       actions: write
     needs: [ build-test-matrix, environment-tests-mysql, slack-notifications ]
+    # Upstream automatic reruns remain disabled in this fork.
     if: |
       always() &&
       github.repository == 'WordPress/wordpress-develop' &&

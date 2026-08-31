@@ -1,8 +1,6 @@
 <?php
-/**
- * @group plugins
- * @group admin
- */
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 
 	/**
@@ -77,15 +75,15 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 	/**
 	 * Tests the position parameter.
 	 *
-	 * @ticket 39776
 	 *
-	 * @covers ::add_submenu_page
 	 *
 	 * @param int $position          The position passed for the new item.
 	 * @param int $expected_position Where the new item is expected to appear.
 	 *
-	 * @dataProvider data_submenu_position
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39776' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_submenu_position' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_submenu_page' )]
 	public function test_submenu_position( $position, $expected_position ) {
 		global $submenu;
 		global $menu;
@@ -114,26 +112,26 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 	/**
 	 * Tests the position parameter for menu helper functions.
 	 *
-	 * @ticket 39776
-	 * @group ms-excluded
 	 *
-	 * @covers ::add_management_page
-	 * @covers ::add_options_page
-	 * @covers ::add_theme_page
-	 * @covers ::add_plugins_page
-	 * @covers ::add_users_page
-	 * @covers ::add_dashboard_page
-	 * @covers ::add_posts_page
-	 * @covers ::add_media_page
-	 * @covers ::add_links_page
-	 * @covers ::add_pages_page
-	 * @covers ::add_comments_page
 	 *
 	 * @param int $position          The position passed for the new item.
 	 * @param int $expected_position Where the new item is expected to appear.
 	 *
-	 * @dataProvider data_submenu_position
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39776' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_submenu_position' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_management_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_options_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_theme_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_plugins_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_users_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_dashboard_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_posts_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_media_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_links_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_pages_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_comments_page' )]
 	public function test_submenu_helpers_position( $position, $expected_position ) {
 		global $submenu;
 		global $menu;
@@ -236,7 +234,7 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	private function submenus_to_add() {
+	private static function submenus_to_add() {
 		return array(
 			array( 'Submenu Position', 'Submenu Position', 'manage_options', 'sub-page', '' ),
 			array( 'Submenu Position 2', 'Submenu Position 2', 'manage_options', 'sub-page2', '' ),
@@ -258,8 +256,8 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_submenu_position() {
-		$menu_count = count( $this->submenus_to_add() );
+	public static function data_submenu_position() {
+		$menu_count = count( self::submenus_to_add() );
 		return array(
 			array( null, $menu_count ),        // Insert at the end of the menu if null is passed. Default behavior.
 			array( 0, 0 ),                     // Insert at the beginning of the menu if 0 is passed.
@@ -283,8 +281,8 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 	/**
 	 * Test that when a submenu has the same slug as a parent item, that it's just appended and ignores the position.
 	 *
-	 * @ticket 48599
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48599' )]
 	public function test_position_when_parent_slug_child_slug_are_the_same() {
 		global $submenu, $menu;
 
@@ -315,8 +313,8 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 	/**
 	 * Passing a string as position will fail in submenu.
 	 *
-	 * @ticket 48599
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48599' )]
 	public function test_passing_string_as_position_fires_doing_it_wrong_submenu() {
 		$this->setExpectedIncorrectUsage( 'add_submenu_page' );
 		global $submenu, $menu;
@@ -344,8 +342,8 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 	/**
 	 * Passing a string as position will fail in menu.
 	 *
-	 * @ticket 54798
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54798' )]
 	public function test_passing_float_as_position_does_not_override_int() {
 		global $submenu, $menu;
 
@@ -401,17 +399,13 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		deactivate_plugins( 'hello.php' );
 	}
 
-	/**
-	 * @covers ::get_plugin_files
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_plugin_files' )]
 	public function test_get_plugin_files_single() {
 		$name = 'hello.php';
 		$this->assertSame( array( $name ), get_plugin_files( $name ) );
 	}
 
-	/**
-	 * @covers ::get_plugin_files
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_plugin_files' )]
 	public function test_get_plugin_files_folder() {
 		$plugin_dir = WP_PLUGIN_DIR . '/list_files_test_plugin';
 		@mkdir( $plugin_dir );
@@ -435,9 +429,7 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		$this->assertSame( $expected, $plugin_files );
 	}
 
-	/**
-	 * @covers ::get_mu_plugins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_mu_plugins' )]
 	public function test_get_mu_plugins_when_mu_plugins_exists_but_is_empty() {
 		mkdir( WPMU_PLUGIN_DIR );
 
@@ -448,17 +440,13 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		$this->assertSame( array(), $mu_plugins );
 	}
 
-	/**
-	 * @covers ::get_mu_plugins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_mu_plugins' )]
 	public function test_get_mu_plugins_when_mu_plugins_directory_does_not_exist() {
 		$this->assertFileDoesNotExist( WPMU_PLUGIN_DIR );
 		$this->assertSame( array(), get_mu_plugins() );
 	}
 
-	/**
-	 * @covers ::get_mu_plugins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_mu_plugins' )]
 	public function test_get_mu_plugins_should_ignore_index_php_containing_silence_is_golden() {
 		mkdir( WPMU_PLUGIN_DIR );
 
@@ -472,9 +460,7 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		$this->assertSame( array(), $mu_plugins );
 	}
 
-	/**
-	 * @covers ::get_mu_plugins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_mu_plugins' )]
 	public function test_get_mu_plugins_should_not_ignore_index_php_containing_something_other_than_silence_is_golden() {
 		mkdir( WPMU_PLUGIN_DIR );
 
@@ -488,9 +474,7 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		$this->assertSame( array( 'index.php' ), array_keys( $found ) );
 	}
 
-	/**
-	 * @covers ::get_mu_plugins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_mu_plugins' )]
 	public function test_get_mu_plugins_should_ignore_files_without_php_extensions() {
 		mkdir( WPMU_PLUGIN_DIR );
 
@@ -505,18 +489,14 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		$this->assertSame( array( 'foo.php' ), array_keys( $found ) );
 	}
 
-	/**
-	 * @covers ::_sort_uname_callback
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_sort_uname_callback' )]
 	public function test__sort_uname_callback() {
 		$this->assertLessThan( 0, _sort_uname_callback( array( 'Name' => 'a' ), array( 'Name' => 'b' ) ) );
 		$this->assertGreaterThan( 0, _sort_uname_callback( array( 'Name' => 'c' ), array( 'Name' => 'b' ) ) );
 		$this->assertSame( 0, _sort_uname_callback( array( 'Name' => 'a' ), array( 'Name' => 'a' ) ) );
 	}
 
-	/**
-	 * @covers ::get_dropins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_dropins' )]
 	public function test_get_dropins_empty() {
 		$this->_back_up_drop_ins();
 
@@ -526,9 +506,7 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		$this->_restore_drop_ins();
 	}
 
-	/**
-	 * @covers ::get_dropins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_dropins' )]
 	public function test_get_dropins_not_empty() {
 		$this->_back_up_drop_ins();
 
@@ -546,16 +524,12 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		$this->_restore_drop_ins();
 	}
 
-	/**
-	 * @covers ::is_network_only_plugin
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_network_only_plugin' )]
 	public function test_is_network_only_plugin_hello() {
 		$this->assertFalse( is_network_only_plugin( 'hello.php' ) );
 	}
 
-	/**
-	 * @covers ::is_network_only_plugin
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_network_only_plugin' )]
 	public function test_is_network_only_plugin() {
 		$p = $this->_create_plugin( "<?php\n/*\nPlugin Name: test\nNetwork: true" );
 
@@ -566,9 +540,7 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		$this->assertTrue( $network_only );
 	}
 
-	/**
-	 * @covers ::activate_plugins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'activate_plugins' )]
 	public function test_activate_plugins_single_no_array() {
 		$name = 'hello.php';
 		activate_plugins( $name );
@@ -576,9 +548,7 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		deactivate_plugins( $name );
 	}
 
-	/**
-	 * @covers ::activate_plugins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'activate_plugins' )]
 	public function test_activate_plugins_single_array() {
 		$name = 'hello.php';
 		activate_plugins( array( $name ) );
@@ -586,9 +556,7 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		deactivate_plugins( $name );
 	}
 
-	/**
-	 * @covers ::validate_active_plugins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'validate_active_plugins' )]
 	public function test_validate_active_plugins_remove_invalid() {
 		$plugin = $this->_create_plugin();
 
@@ -599,23 +567,17 @@ class Tests_Admin_IncludesPlugin extends WP_UnitTestCase {
 		$this->assertArrayHasKey( $plugin[0], $result );
 	}
 
-	/**
-	 * @covers ::validate_active_plugins
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'validate_active_plugins' )]
 	public function test_validate_active_plugins_empty() {
 		$this->assertSame( array(), validate_active_plugins() );
 	}
 
-	/**
-	 * @covers ::is_uninstallable_plugin
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_uninstallable_plugin' )]
 	public function test_is_uninstallable_plugin() {
 		$this->assertFalse( is_uninstallable_plugin( 'hello' ) );
 	}
 
-	/**
-	 * @covers ::is_uninstallable_plugin
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_uninstallable_plugin' )]
 	public function test_is_uninstallable_plugin_true() {
 		$plugin = $this->_create_plugin();
 

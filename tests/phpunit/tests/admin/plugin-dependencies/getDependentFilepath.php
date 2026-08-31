@@ -7,26 +7,23 @@
 
 require_once __DIR__ . '/base.php';
 
-/**
- * @group admin
- * @group plugins
- *
- * @covers WP_Plugin_Dependencies::get_dependent_filepath
- * @covers WP_Plugin_Dependencies::get_plugin_dirnames
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependent_filepath' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_plugin_dirnames' )]
 class Tests_Admin_WPPluginDependencies_GetDependentFilepath extends WP_PluginDependencies_UnitTestCase {
 
 	/**
 	 * Tests that the expected dependent filepath is retrieved.
 	 *
-	 * @ticket 22316
 	 *
-	 * @dataProvider data_get_dependent_filepath
 	 *
 	 * @param string       $dependent_slug The dependent slug.
 	 * @param string[]     $plugins        An array of plugin data.
 	 * @param string|false $expected       The expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_dependent_filepath' )]
 	public function test_should_return_filepaths_for_installed_dependents( $dependent_slug, $plugins, $expected ) {
 		$this->set_property_value( 'plugins', $plugins );
 		self::$instance::initialize();
@@ -43,7 +40,7 @@ class Tests_Admin_WPPluginDependencies_GetDependentFilepath extends WP_PluginDep
 	 *
 	 * @return array[]
 	 */
-	public function data_get_dependent_filepath() {
+	public static function data_get_dependent_filepath() {
 		return array(
 			'a plugin that exists'            => array(
 				'dependent_slug' => 'dependent',

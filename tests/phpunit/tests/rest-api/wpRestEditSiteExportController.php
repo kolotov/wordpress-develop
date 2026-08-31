@@ -6,10 +6,14 @@
  * @subpackage REST_API
  * @since 5.9.0
  *
- * @covers WP_REST_Edit_Site_Export_Controller
  *
- * @group restapi
+
  */
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Edit_Site_Export_Controller::class )]
 class Tests_REST_WpRestEditSiteExportController extends WP_Test_REST_Controller_Testcase {
 
 	/**
@@ -55,9 +59,9 @@ class Tests_REST_WpRestEditSiteExportController extends WP_Test_REST_Controller_
 	}
 
 	/**
-	 * @covers WP_REST_Edit_Site_Export_Controller::register_routes
-	 * @ticket 54448
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54448' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Edit_Site_Export_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
 		$this->assertArrayHasKey( static::REQUEST_ROUTE, $routes );
@@ -65,10 +69,10 @@ class Tests_REST_WpRestEditSiteExportController extends WP_Test_REST_Controller_
 	}
 
 	/**
-	 * @covers WP_REST_Edit_Site_Export_Controller::permissions_check
 	 *
-	 * @ticket 54448
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54448' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Edit_Site_Export_Controller', 'permissions_check' )]
 	public function test_export_for_no_user_permissions() {
 		wp_set_current_user( 0 );
 
@@ -79,10 +83,10 @@ class Tests_REST_WpRestEditSiteExportController extends WP_Test_REST_Controller_
 	}
 
 	/**
-	 * @covers WP_REST_Edit_Site_Export_Controller::permissions_check
 	 *
-	 * @ticket 54448
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54448' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Edit_Site_Export_Controller', 'permissions_check' )]
 	public function test_export_for_user_with_insufficient_permissions() {
 		wp_set_current_user( self::$subscriber_id );
 
@@ -93,57 +97,57 @@ class Tests_REST_WpRestEditSiteExportController extends WP_Test_REST_Controller_
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_context_param() {
 		// Controller does not use get_context_param().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_item() {
 		// Controller does not implement get_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_items() {
 		// Controller does not implement get_items().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_create_item() {
 		// Controller does not implement create_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_update_item() {
 		// Controller does not implement update_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_delete_item() {
 		// Controller does not implement delete_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_prepare_item() {
 		// Controller does not implement prepare_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_item_schema() {
 		// Controller does not implement get_item_schema().
 	}

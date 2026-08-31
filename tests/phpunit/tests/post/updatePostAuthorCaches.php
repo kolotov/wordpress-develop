@@ -8,12 +8,12 @@
 /**
  * Test class for `update_post_author_caches()`.
  *
- * @group post
- * @group query
- * @group user
  *
- * @covers ::update_post_author_caches
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'update_post_author_caches' )]
 class Tests_Post_UpdatePostAuthorCaches extends WP_UnitTestCase {
 
 	/**
@@ -50,8 +50,8 @@ class Tests_Post_UpdatePostAuthorCaches extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55716
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55716' )]
 	public function test_update_post_author_caches() {
 		$action = new MockAction();
 		add_filter( 'update_user_metadata_cache', array( $action, 'filter' ), 10, 2 );

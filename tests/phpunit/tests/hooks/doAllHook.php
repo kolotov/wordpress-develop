@@ -3,9 +3,9 @@
 /**
  * Test the do_all_hook method of WP_Hook
  *
- * @group hooks
- * @covers WP_Hook::do_all_hook
  */
+#[\PHPUnit\Framework\Attributes\Group( 'hooks' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Hook::class, 'do_all_hook' )]
 class Tests_Hooks_DoAllHook extends WP_UnitTestCase {
 
 	public function test_do_all_hook_with_multiple_calls() {

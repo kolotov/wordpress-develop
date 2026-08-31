@@ -3,23 +3,23 @@
 /**
  * Tests for `wp_admin_notice()`.
  *
- * @group functions
  *
- * @covers ::wp_admin_notice
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_admin_notice' )]
 class Tests_Functions_WpAdminNotice extends WP_UnitTestCase {
 
 	/**
 	 * Tests that `wp_admin_notice()` outputs the expected admin notice markup.
 	 *
-	 * @ticket 57791
 	 *
-	 * @dataProvider data_should_output_admin_notice
 	 *
 	 * @param string $message  The message to output.
 	 * @param array  $args     Arguments for the admin notice.
 	 * @param string $expected The expected admin notice markup.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57791' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_output_admin_notice' )]
 	public function test_should_output_admin_notice( $message, $args, $expected ) {
 		ob_start();
 		wp_admin_notice( $message, $args );
@@ -33,7 +33,7 @@ class Tests_Functions_WpAdminNotice extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_output_admin_notice() {
+	public static function data_should_output_admin_notice() {
 		return array(
 			'defaults'                                  => array(
 				'message'  => 'A notice with defaults.',
@@ -290,10 +290,10 @@ class Tests_Functions_WpAdminNotice extends WP_UnitTestCase {
 	/**
 	 * Tests that `_doing_it_wrong()` is thrown when a 'type' containing spaces is passed.
 	 *
-	 * @ticket 57791
 	 *
 	 * @expectedIncorrectUsage wp_get_admin_notice
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57791' )]
 	public function test_should_throw_doing_it_wrong_with_a_type_containing_spaces() {
 		ob_start();
 		wp_admin_notice(
@@ -311,8 +311,8 @@ class Tests_Functions_WpAdminNotice extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_admin_notice()` fires the 'wp_admin_notice' action.
 	 *
-	 * @ticket 57791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57791' )]
 	public function test_should_fire_wp_admin_notice_action() {
 		$action = new MockAction();
 		add_action( 'wp_admin_notice', array( $action, 'action' ) );

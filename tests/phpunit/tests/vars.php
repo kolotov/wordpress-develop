@@ -2,8 +2,8 @@
 /**
  * Test functions in wp-includes/vars.php
  *
- * @group vars
  */
+#[\PHPUnit\Framework\Attributes\Group( 'vars' )]
 class Tests_Vars extends WP_UnitTestCase {
 
 	/**
@@ -34,7 +34,7 @@ class Tests_Vars extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function get_data_to_test_wp_is_mobile(): array {
+	public static function get_data_to_test_wp_is_mobile(): array {
 		return array(
 			'mobile client hint'  => array(
 				'headers'  => array(
@@ -104,15 +104,12 @@ class Tests_Vars extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59370
-	 *
-	 * @covers ::wp_is_mobile
-	 *
-	 * @dataProvider get_data_to_test_wp_is_mobile
-	 *
 	 * @param array $headers  Headers in $_SERVER.
 	 * @param bool  $expected Whether expected.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59370' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_is_mobile' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'get_data_to_test_wp_is_mobile' )]
 	public function test_wp_is_mobile( array $headers, bool $expected ) {
 		foreach ( $headers as $key => $value ) {
 			$_SERVER[ $key ] = $value;
@@ -122,9 +119,8 @@ class Tests_Vars extends WP_UnitTestCase {
 
 	/**
 	 * Tests that filter can override output of wp_is_mobile() to be true.
-	 *
-	 * @covers ::wp_is_mobile
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_is_mobile' )]
 	public function test_wp_is_mobile_is_true_with_filter() {
 		$this->assertFalse( wp_is_mobile() );
 		add_filter( 'wp_is_mobile', '__return_true' );
@@ -133,9 +129,8 @@ class Tests_Vars extends WP_UnitTestCase {
 
 	/**
 	 * Tests that filter can override output of wp_is_mobile() to be false.
-	 *
-	 * @covers ::wp_is_mobile
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_is_mobile' )]
 	public function test_wp_is_mobile_is_false_with_filter() {
 		$_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.60 Mobile Safari/537.36';
 		$this->assertTrue( wp_is_mobile() );

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group pomo
  */
+#[\PHPUnit\Framework\Attributes\Group( 'pomo' )]
 class Tests_POMO_TranslationEntry extends WP_UnitTestCase {
 
 	public function test_create_entry() {

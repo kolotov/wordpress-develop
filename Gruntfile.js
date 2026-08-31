@@ -101,7 +101,6 @@ module.exports = function(grunt) {
 			'.github/workflows/install-testing.yml',
 			'.github/workflows/slack-notifications.yml',
 			'.github/workflows/test-coverage.yml',
-			'.github/workflows/test-old-branches.yml',
 			'.github/workflows/upgrade-testing.yml'
 		],
 

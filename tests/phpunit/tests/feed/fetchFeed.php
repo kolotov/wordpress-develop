@@ -6,10 +6,12 @@
  * @subpackage UnitTests
  * @since 6.7.0
  *
- * @group feed
  *
- * @covers ::fetch_feed
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'feed' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'fetch_feed' )]
 class Tests_Feed_FetchFeed extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -19,8 +21,8 @@ class Tests_Feed_FetchFeed extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62354
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62354' )]
 	public function test_empty_charset_does_not_trigger_fatal_error() {
 		add_filter( 'pre_option_blog_charset', '__return_empty_string', 20 );
 
@@ -36,8 +38,8 @@ class Tests_Feed_FetchFeed extends WP_UnitTestCase {
 	/**
 	 * Ensure WP_Error object returned for 404 response.
 	 *
-	 * @ticket 64136
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64136' )]
 	public function test_fetch_feed_returns_error_for_404_response() {
 		// Priority 15 to ensure this runs after the mocked_rss_response filter.
 		add_filter( 'pre_http_request', array( $this, 'mocked_rss_404_error_response' ), 15 );
@@ -51,8 +53,8 @@ class Tests_Feed_FetchFeed extends WP_UnitTestCase {
 	/**
 	 * Ensure fetch_feed() returns WP_Error if any feed errors.
 	 *
-	 * @ticket 64136
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64136' )]
 	public function test_fetch_feed_multiple_returns_error_if_any_feed_errors() {
 		// Priority 15 to ensure this runs after the mocked_rss_response filter.
 		add_filter( 'pre_http_request', array( $this, 'mocked_rss_404_error_response' ), 15 );
@@ -79,8 +81,8 @@ class Tests_Feed_FetchFeed extends WP_UnitTestCase {
 	/**
 	 * Ensure fetch_feed() includes messages for all feeds that error.
 	 *
-	 * @ticket 64136
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64136' )]
 	public function test_fetch_feed_multiple_returns_error_if_all_feeds_error() {
 		// Priority 15 to ensure this runs after the mocked_rss_response filter.
 		add_filter( 'pre_http_request', array( $this, 'mocked_rss_404_error_response' ), 15 );
@@ -94,8 +96,8 @@ class Tests_Feed_FetchFeed extends WP_UnitTestCase {
 	/**
 	 * Ensure fetch_feed() returns a SimplePie object for an empty URL (string).
 	 *
-	 * @ticket 64136
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64136' )]
 	public function test_fetch_feed_returns_a_simplepie_object_for_unspecified_url_string() {
 		$feed = fetch_feed( '' );
 
@@ -105,8 +107,8 @@ class Tests_Feed_FetchFeed extends WP_UnitTestCase {
 	/**
 	 * Ensure fetch_feed() returns a SimplePie object for an empty URL (array).
 	 *
-	 * @ticket 64136
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64136' )]
 	public function test_fetch_feed_returns_a_simplepie_object_for_unspecified_url_array() {
 		$feed = fetch_feed( array() );
 
@@ -122,8 +124,8 @@ class Tests_Feed_FetchFeed extends WP_UnitTestCase {
 	 * Secondly it confirms that the markup of the first two items match as they will
 	 * both be from the same feed URL as the array contains the WordPress News feed twice.
 	 *
-	 * @ticket 64136
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64136' )]
 	public function test_fetch_feed_supports_multiple_feeds() {
 		$feed    = fetch_feed( array( 'https://wordpress.org/news/feed/', 'https://wordpress.org/news/feed/atom/' ) );
 		$content = array();
@@ -143,12 +145,12 @@ class Tests_Feed_FetchFeed extends WP_UnitTestCase {
 	 * this test doesn't make any HTTP requests so it doesn't need to be
 	 * placed in the external-http group.
 	 *
-	 * @ticket 63717
 	 *
-	 * @group feed
 	 *
-	 * @covers ::fetch_feed
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63717' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'feed' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'fetch_feed' )]
 	public function test_fetch_feed_cached() {
 		$filter = new MockAction();
 		add_filter( 'pre_http_request', array( $filter, 'filter' ) );
@@ -163,14 +165,14 @@ class Tests_Feed_FetchFeed extends WP_UnitTestCase {
 	/**
 	 * Ensure that fetch_feed uses the global cache on Multisite.
 	 *
-	 * @ticket 63719
 	 *
-	 * @group feed
-	 * @group ms-required
 	 *
-	 * @covers ::fetch_feed
-	 * @covers WP_Feed_Cache_Transient
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63719' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'feed' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'fetch_feed' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_CLASS, 'WP_Feed_Cache_Transient' )]
 	public function test_fetch_feed_uses_global_cache() {
 		$second_blog_id = self::factory()->blog->create();
 

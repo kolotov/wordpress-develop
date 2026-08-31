@@ -3,9 +3,9 @@
 require_once __DIR__ . '/testcase-adjacent-image-link.php';
 
 /**
- * @group media
- * @covers ::get_adjacent_image_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_adjacent_image_link' )]
 class Tests_Media_GetAdjacentImageLink extends WP_Test_Adjacent_Image_Link_TestCase {
 	protected $default_args = array(
 		'prev' => true,
@@ -14,10 +14,10 @@ class Tests_Media_GetAdjacentImageLink extends WP_Test_Adjacent_Image_Link_TestC
 	);
 
 	/**
-	 * @ticket 45708
 	 *
-	 * @dataProvider data_get_adjacent_image_link
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45708' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_adjacent_image_link' )]
 	public function test_get_adjacent_image_link( $current_attachment_index, $expected_attachment_index, $expected, array $args = array() ) {
 		list( $expected, $args ) = $this->setup_test_scenario( $current_attachment_index, $expected_attachment_index, $expected, $args );
 
@@ -26,7 +26,7 @@ class Tests_Media_GetAdjacentImageLink extends WP_Test_Adjacent_Image_Link_TestC
 		$this->assertSame( $expected, $actual );
 	}
 
-	public function data_get_adjacent_image_link() {
+	public static function data_get_adjacent_image_link() {
 		return array(
 			// Happy paths.
 			'when has previous link'           => array(

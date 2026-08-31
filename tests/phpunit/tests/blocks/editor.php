@@ -6,8 +6,10 @@
  * @subpackage Blocks
  * @since 5.5.0
  *
- * @group blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+
+
 class Tests_Blocks_Editor extends WP_UnitTestCase {
 	/**
 	 * Sets up each test method.
@@ -97,8 +99,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_block_editor_context_no_settings() {
 		$context = new WP_Block_Editor_Context();
 
@@ -107,8 +109,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_block_editor_context_post() {
 		$context = new WP_Block_Editor_Context( array( 'post' => get_post() ) );
 
@@ -117,8 +119,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55301
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55301' )]
 	public function test_block_editor_context_widgets() {
 		$context = new WP_Block_Editor_Context( array( 'name' => 'core/edit-widgets' ) );
 
@@ -127,8 +129,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55301
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55301' )]
 	public function test_block_editor_context_widgets_customizer() {
 		$context = new WP_Block_Editor_Context( array( 'name' => 'core/customize-widgets' ) );
 
@@ -137,8 +139,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55301
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55301' )]
 	public function test_block_editor_context_site() {
 		$context = new WP_Block_Editor_Context( array( 'name' => 'core/edit-site' ) );
 
@@ -147,9 +149,9 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 * @expectedDeprecated block_categories
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_get_block_categories_deprecated_filter_post_object() {
 		add_filter( 'block_categories', array( $this, 'filter_set_block_categories_post' ), 10, 2 );
 
@@ -170,9 +172,9 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 * @expectedDeprecated block_categories
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_get_block_categories_deprecated_filter_post_editor() {
 		add_filter( 'block_categories', array( $this, 'filter_set_block_categories_post' ), 10, 2 );
 
@@ -194,8 +196,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_get_allowed_block_types_default() {
 		$post_editor_context = new WP_Block_Editor_Context( array( 'post' => get_post() ) );
 		$allowed_block_types = get_allowed_block_types( $post_editor_context );
@@ -204,9 +206,9 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 * @expectedDeprecated allowed_block_types
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_get_allowed_block_types_deprecated_filter_post_editor() {
 		add_filter( 'allowed_block_types', array( $this, 'filter_set_allowed_block_types_post' ), 10, 2 );
 
@@ -219,8 +221,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_get_default_block_editor_settings() {
 		$settings = get_default_block_editor_settings();
 
@@ -325,8 +327,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56815
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56815' )]
 	public function test_get_default_block_editor_settings_max_upload_file_size() {
 		// Force the return value of wp_max_upload_size() to be 500.
 		add_filter(
@@ -350,8 +352,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53397
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53397' )]
 	public function test_get_legacy_widget_block_editor_settings() {
 		$settings = get_legacy_widget_block_editor_settings();
 		$this->assertCount( 1, $settings );
@@ -379,8 +381,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_get_block_editor_settings_overrides_default_settings_all_editors() {
 		function filter_allowed_block_types_my_editor() {
 			return array( 'test/filtered-my-block' );
@@ -426,8 +428,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58534
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58534' )]
 	public function test_wp_get_first_block() {
 		$block_name               = 'core/paragraph';
 		$blocks                   = array(
@@ -462,8 +464,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58534
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58534' )]
 	public function test_wp_get_post_content_block_attributes() {
 		$attributes_with_layout = array(
 			'layout' => array(
@@ -485,8 +487,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53458
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53458' )]
 	public function test_get_block_editor_settings_theme_json_settings() {
 		switch_theme( 'block-theme' );
 
@@ -558,8 +560,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59358' )]
 	public function test_get_block_editor_settings_without_post_content_block() {
 
 		$post_editor_context = new WP_Block_Editor_Context( array( 'post' => get_post() ) );
@@ -570,9 +572,9 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 * @expectedDeprecated block_editor_settings
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_get_block_editor_settings_deprecated_filter_post_editor() {
 		add_filter( 'block_editor_settings', array( $this, 'filter_set_block_editor_settings_post' ), 10, 2 );
 
@@ -591,8 +593,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_block_editor_rest_api_preload_no_paths() {
 		$editor_context = new WP_Block_Editor_Context();
 		block_editor_rest_api_preload( array(), $editor_context );
@@ -602,9 +604,9 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 * @expectedDeprecated block_editor_preload_paths
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_block_editor_rest_api_preload_deprecated_filter_post_editor() {
 		function filter_remove_preload_paths( $preload_paths, $post ) {
 			if ( empty( $post ) ) {
@@ -629,8 +631,8 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52920' )]
 	public function test_block_editor_rest_api_preload_filter_all() {
 		function filter_add_preload_paths( $preload_paths, WP_Block_Editor_Context $context ) {
 			if ( empty( $context->post ) ) {
@@ -658,14 +660,14 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54558
-	 * @dataProvider data_block_editor_rest_api_preload_adds_missing_leading_slash
 	 *
-	 * @covers ::block_editor_rest_api_preload
 	 *
 	 * @param array  $preload_paths The paths to preload.
 	 * @param string $expected      The expected substring.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54558' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_block_editor_rest_api_preload_adds_missing_leading_slash' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'block_editor_rest_api_preload' )]
 	public function test_block_editor_rest_api_preload_adds_missing_leading_slash( array $preload_paths, $expected ) {
 		block_editor_rest_api_preload( $preload_paths, new WP_Block_Editor_Context() );
 		$haystack = implode( '', wp_scripts()->registered['wp-api-fetch']->extra['after'] );
@@ -673,10 +675,10 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57547
 	 *
-	 * @covers ::get_classic_theme_supports_block_editor_settings
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57547' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_classic_theme_supports_block_editor_settings' )]
 	public function test_get_classic_theme_supports_block_editor_settings() {
 		$font_sizes = array(
 			array(
@@ -715,7 +717,7 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_block_editor_rest_api_preload_adds_missing_leading_slash() {
+	public static function data_block_editor_rest_api_preload_adds_missing_leading_slash() {
 		return array(
 			'a string without a slash'               => array(
 				'preload_paths' => array( 'wp/v2/blocks' ),
@@ -745,14 +747,14 @@ class Tests_Blocks_Editor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62797
 	 *
-	 * @covers ::block_editor_rest_api_preload
 	 *
 	 * Some valid JSON-encoded data is dangerous to embed in HTML without appropriate
 	 * escaping. This test includes an example of data that would prevent the enclosing
 	 * `<script></script>` tag from closing on its apparent closer and remain open.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62797' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'block_editor_rest_api_preload' )]
 	public function test_ensure_preload_data_script_tag_closes() {
 		add_theme_support( 'html5', array( 'script' ) );
 		register_rest_route(

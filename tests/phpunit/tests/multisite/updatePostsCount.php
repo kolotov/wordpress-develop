@@ -3,23 +3,23 @@
 /**
  * Test that update_posts_count() gets called via default filters on multisite.
  *
- * @group ms-required
- * @group ms-site
- * @group multisite
  *
- * @covers ::update_posts_count
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'update_posts_count' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_update_posts_count_on_transition_post_status' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_update_posts_count_on_delete' )]
 class Tests_Multisite_UpdatePostsCount extends WP_UnitTestCase {
 
 	/**
 	 * Tests that posts count is updated correctly when posts are added or deleted.
 	 *
-	 * @ticket 27952
-	 * @ticket 53443
 	 *
-	 * @covers ::_update_posts_count_on_transition_post_status
-	 * @covers ::_update_posts_count_on_delete
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27952' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '53443' )]
 	public function test_update_posts_count() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );

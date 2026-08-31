@@ -1,9 +1,8 @@
 <?php
 
-/**
- * @group media
- * @group admin
- */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'attachment_submitbox_metadata' )]
 class Tests_Admin_IncludesMedia extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -18,15 +17,14 @@ class Tests_Admin_IncludesMedia extends WP_UnitTestCase {
 	 * When the stored value cannot be normalized, it should be treated as missing so that the
 	 * filesystem fallback runs instead.
 	 *
-	 * @ticket 65686
 	 *
-	 * @covers ::attachment_submitbox_metadata
 	 *
-	 * @dataProvider data_attachment_submitbox_metadata_filesize
 	 *
 	 * @param mixed            $filesize The `filesize` value stored in the attachment metadata.
 	 * @param int<0, max>|null $expected The expected file size in bytes, or null if none should be displayed.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65686' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attachment_submitbox_metadata_filesize' )]
 	public function test_attachment_submitbox_metadata_filesize( $filesize, ?int $expected ) {
 		$id = self::factory()->attachment->create_object(
 			array(
@@ -64,7 +62,7 @@ class Tests_Admin_IncludesMedia extends WP_UnitTestCase {
 	 *
 	 * @return array<non-falsy-string, array{ filesize: mixed, expected: int<0, max>|null }>
 	 */
-	public function data_attachment_submitbox_metadata_filesize(): array {
+	public static function data_attachment_submitbox_metadata_filesize(): array {
 		return array(
 			'an integer'                  => array(
 				'filesize' => 12345,
@@ -128,14 +126,13 @@ class Tests_Admin_IncludesMedia extends WP_UnitTestCase {
 	/**
 	 * Tests that an unusable `filesize` in the attachment metadata falls back to the size of the file.
 	 *
-	 * @ticket 65686
 	 *
-	 * @covers ::attachment_submitbox_metadata
 	 *
-	 * @dataProvider data_attachment_submitbox_metadata_filesize_falls_back_to_the_file
 	 *
 	 * @param mixed $filesize The `filesize` value stored in the attachment metadata.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65686' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attachment_submitbox_metadata_filesize_falls_back_to_the_file' )]
 	public function test_attachment_submitbox_metadata_filesize_falls_back_to_the_file( $filesize ) {
 		$id = self::factory()->attachment->create_upload_object( DIR_TESTDATA . '/images/canola.jpg' );
 		$this->assertIsInt( $id );
@@ -161,7 +158,7 @@ class Tests_Admin_IncludesMedia extends WP_UnitTestCase {
 	 *
 	 * @return array<non-falsy-string, array{ filesize: mixed }>
 	 */
-	public function data_attachment_submitbox_metadata_filesize_falls_back_to_the_file(): array {
+	public static function data_attachment_submitbox_metadata_filesize_falls_back_to_the_file(): array {
 		return array(
 			'a value smaller than a byte' => array( 'filesize' => 0.5 ),
 			'zero'                        => array( 'filesize' => 0 ),

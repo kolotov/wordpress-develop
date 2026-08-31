@@ -1,8 +1,13 @@
 <?php
 
-/**
- * @group admin
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+
+
+
+
+
+
+
 class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 	protected static $top           = array();
 	protected static $children      = array();
@@ -73,12 +78,9 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 * @ticket 15459
-	 *
-	 * @covers WP_Posts_List_Table::display_rows
-	 * @covers WP_Posts_List_Table::set_hierarchical_display
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15459' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'display_rows' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'set_hierarchical_display' )]
 	public function test_list_hierarchical_pages_first_page() {
 		$this->_test_list_hierarchical_page(
 			array(
@@ -92,12 +94,9 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 15459
-	 *
-	 * @covers WP_Posts_List_Table::display_rows
-	 * @covers WP_Posts_List_Table::set_hierarchical_display
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15459' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'display_rows' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'set_hierarchical_display' )]
 	public function test_list_hierarchical_pages_second_page() {
 		$this->_test_list_hierarchical_page(
 			array(
@@ -112,12 +111,9 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 15459
-	 *
-	 * @covers WP_Posts_List_Table::display_rows
-	 * @covers WP_Posts_List_Table::set_hierarchical_display
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15459' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'display_rows' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'set_hierarchical_display' )]
 	public function test_search_hierarchical_pages_first_page() {
 		$this->_test_list_hierarchical_page(
 			array(
@@ -132,12 +128,9 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 15459
-	 *
-	 * @covers WP_Posts_List_Table::display_rows
-	 * @covers WP_Posts_List_Table::set_hierarchical_display
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15459' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'display_rows' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'set_hierarchical_display' )]
 	public function test_search_hierarchical_pages_second_page() {
 		$this->_test_list_hierarchical_page(
 			array(
@@ -152,12 +145,9 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 15459
-	 *
-	 * @covers WP_Posts_List_Table::display_rows
-	 * @covers WP_Posts_List_Table::set_hierarchical_display
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15459' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'display_rows' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'set_hierarchical_display' )]
 	public function test_grandchildren_hierarchical_pages_first_page() {
 		// Page 6 is the first page with grandchildren.
 		$this->_test_list_hierarchical_page(
@@ -174,12 +164,9 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 15459
-	 *
-	 * @covers WP_Posts_List_Table::display_rows
-	 * @covers WP_Posts_List_Table::set_hierarchical_display
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15459' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'display_rows' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'set_hierarchical_display' )]
 	public function test_grandchildren_hierarchical_pages_second_page() {
 		// Page 7 is the second page with grandchildren.
 		$this->_test_list_hierarchical_page(
@@ -196,13 +183,10 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 64932
-	 *
-	 * @covers WP_Posts_List_Table::display_rows
-	 * @covers WP_Posts_List_Table::set_hierarchical_display
-	 * @covers WP_Posts_List_Table::column_title
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64932' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'display_rows' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'set_hierarchical_display' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'column_title' )]
 	public function test_child_page_row_title_has_hierarchy_description() {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 
@@ -224,13 +208,10 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		$this->assertStringContainsString( $expected, $output );
 	}
 
-	/**
-	 * @ticket 64932
-	 *
-	 * @covers WP_Posts_List_Table::display_rows
-	 * @covers WP_Posts_List_Table::set_hierarchical_display
-	 * @covers WP_Posts_List_Table::column_title
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64932' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'display_rows' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'set_hierarchical_display' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'column_title' )]
 	public function test_top_level_page_row_title_does_not_have_hierarchy_description() {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 
@@ -278,14 +259,16 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 			$args['posts_per_archive_page'] = -1;
 		}
 
-		// Effectively ignore the output until retrieving it later via `getActualOutput()`.
-		$this->expectOutputRegex( '`.`' );
-
 		$pages = new WP_Query( $args );
 
-		$this->table->set_hierarchical_display( true );
-		$this->table->display_rows( $pages->posts );
-		$output = $this->getActualOutput();
+		ob_start();
+		try {
+			$this->table->set_hierarchical_display( true );
+			$this->table->display_rows( $pages->posts );
+			$output = ob_get_contents();
+		} finally {
+			ob_end_clean();
+		}
 
 		// Clean up.
 		unset( $_REQUEST['paged'] );
@@ -321,11 +304,8 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		return $output;
 	}
 
-	/**
-	 * @ticket 37407
-	 *
-	 * @covers WP_Posts_List_Table::extra_tablenav
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37407' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'extra_tablenav' )]
 	public function test_filter_button_should_not_be_shown_if_there_are_no_posts() {
 		// Set post type to a non-existent one.
 		$this->table->screen->post_type = 'foo';
@@ -337,11 +317,8 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'id="post-query-submit"', $output );
 	}
 
-	/**
-	 * @ticket 37407
-	 *
-	 * @covers WP_Posts_List_Table::extra_tablenav
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37407' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'extra_tablenav' )]
 	public function test_months_dropdown_should_not_be_shown_if_there_are_no_posts() {
 		// Set post type to a non-existent one.
 		$this->table->screen->post_type = 'foo';
@@ -353,11 +330,8 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'id="filter-by-date"', $output );
 	}
 
-	/**
-	 * @ticket 37407
-	 *
-	 * @covers WP_Posts_List_Table::extra_tablenav
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37407' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'extra_tablenav' )]
 	public function test_category_dropdown_should_not_be_shown_if_there_are_no_posts() {
 		// Set post type to a non-existent one.
 		$this->table->screen->post_type = 'foo';
@@ -369,11 +343,8 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'id="cat"', $output );
 	}
 
-	/**
-	 * @ticket 38341
-	 *
-	 * @covers WP_Posts_List_Table::extra_tablenav
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38341' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'extra_tablenav' )]
 	public function test_empty_trash_button_should_not_be_shown_if_there_are_no_posts() {
 		// Set post type to a non-existent one.
 		$this->table->screen->post_type = 'foo';
@@ -385,11 +356,8 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'id="delete_all"', $output );
 	}
 
-	/**
-	 * @ticket 42066
-	 *
-	 * @covers WP_Posts_List_Table::get_views
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42066' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'get_views' )]
 	public function test_get_views_should_return_views_by_default() {
 		global $avail_post_stati;
 
@@ -427,17 +395,17 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65022
 	 *
-	 * @dataProvider data_no_title_excerpt_visibility
 	 *
-	 * @covers WP_Posts_List_Table::column_title
-	 * @covers WP_Posts_List_Table::get_no_title_excerpt
 	 *
 	 * @param string $mode_value  The list view mode ('list' or 'excerpt').
 	 * @param array  $post_args   Overrides for the post to create.
 	 * @param bool   $should_show Whether the trimmed excerpt should be shown.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65022' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_no_title_excerpt_visibility' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'column_title' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'get_no_title_excerpt' )]
 	public function test_no_title_excerpt_visibility( $mode_value, $post_args, $should_show ) {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 
@@ -467,7 +435,7 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_no_title_excerpt_visibility() {
+	public static function data_no_title_excerpt_visibility() {
 		return array(
 			'compact view, untitled'  => array( 'list', array(), true ),
 			'extended view, untitled' => array( 'excerpt', array(), false ),
@@ -476,12 +444,9 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 65022
-	 *
-	 * @covers WP_Posts_List_Table::column_title
-	 * @covers WP_Posts_List_Table::get_no_title_excerpt
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65022' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'column_title' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'get_no_title_excerpt' )]
 	public function test_no_title_excerpt_is_trimmed_to_15_words() {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 
@@ -508,11 +473,11 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 	/**
 	 * Ensures excerpt output is escaped, including markup reintroduced by the `wp_trim_words` filter.
 	 *
-	 * @ticket 65022
 	 *
-	 * @covers WP_Posts_List_Table::column_title
-	 * @covers WP_Posts_List_Table::get_no_title_excerpt
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65022' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'column_title' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'get_no_title_excerpt' )]
 	public function test_no_title_excerpt_is_escaped() {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 
@@ -541,11 +506,8 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		return '<script>alert(1)</script>';
 	}
 
-	/**
-	 * @ticket 65022
-	 *
-	 * @covers WP_Posts_List_Table::get_no_title_excerpt
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65022' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'get_no_title_excerpt' )]
 	public function test_no_title_excerpt_hidden_when_user_cannot_read_post() {
 		$author = self::factory()->user->create( array( 'role' => 'administrator' ) );
 
@@ -566,12 +528,9 @@ class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'class="trimmed-post-excerpt"', $output );
 	}
 
-	/**
-	 * @ticket 65022
-	 *
-	 * @covers WP_Posts_List_Table::column_cb
-	 * @covers WP_Posts_List_Table::get_no_title_excerpt
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65022' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'column_cb' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Posts_List_Table', 'get_no_title_excerpt' )]
 	public function test_checkbox_label_includes_no_title_excerpt() {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 

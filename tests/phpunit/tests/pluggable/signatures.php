@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @group pluggable
  *
- * @coversNothing
  */
+#[\PHPUnit\Framework\Attributes\Group( 'pluggable' )]
+#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Pluggable_Signatures extends WP_UnitTestCase {
 
 	/**
 	 * Tests that the signatures of all functions in pluggable.php match their expected signature.
 	 *
-	 * @ticket 33654
-	 * @ticket 33867
 	 *
-	 * @dataProvider get_defined_pluggable_functions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33654' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '33867' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'get_defined_pluggable_functions' )]
 	public function test_pluggable_function_signatures_match( $function_name ) {
 
 		$signatures = $this->get_pluggable_function_signatures();
@@ -52,9 +52,9 @@ class Tests_Pluggable_Signatures extends WP_UnitTestCase {
 	/**
 	 * Test the tests. Makes sure all the expected pluggable functions exist and that they live in pluggable.php.
 	 *
-	 * @ticket 33654
-	 * @ticket 33867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33654' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '33867' )]
 	public function test_all_pluggable_functions_exist() {
 
 		$defined  = wp_list_pluck( $this->get_defined_pluggable_functions(), 0 );
@@ -72,7 +72,7 @@ class Tests_Pluggable_Signatures extends WP_UnitTestCase {
 	 *
 	 * @return array Data provider array of pluggable function names.
 	 */
-	public function get_defined_pluggable_functions() {
+	public static function get_defined_pluggable_functions() {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 

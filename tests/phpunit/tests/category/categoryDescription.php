@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group taxonomy
- * @group category
  *
- * @covers ::category_description
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\Group( 'category' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'category_description' )]
 class Tests_Category_CategoryDescription extends WP_UnitTestCase {
 	public function test_success_query_by_id() {
 		$description = 'Foo';
@@ -39,9 +39,9 @@ class Tests_Category_CategoryDescription extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42605
-	 * @ticket 42771
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42605' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '42771' )]
 	public function test_should_return_description_for_term_from_another_taxonomy_on_primed_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -63,9 +63,9 @@ class Tests_Category_CategoryDescription extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42605
-	 * @ticket 42771
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42605' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '42771' )]
 	public function test_should_return_description_for_term_from_another_taxonomy_on_empty_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );
 

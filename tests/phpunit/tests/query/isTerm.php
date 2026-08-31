@@ -6,10 +6,10 @@
  * This exercises both query.php and rewrite.php: urls are fed through the rewrite code,
  * then we test the effects of each url on the wp_query object.
  *
- * @group query
- * @group rewrite
- * @group taxonomy
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Query_IsTerm extends WP_UnitTestCase {
 	protected $tag_id;
 	protected $cat_id;
@@ -108,8 +108,8 @@ class Tests_Query_IsTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26627
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26627' )]
 	public function test_cat_uncat_action_tax() {
 		// Category with taxonomy added.
 		add_action( 'pre_get_posts', array( $this, 'cat_uncat_action_tax' ), 11 );
@@ -134,8 +134,8 @@ class Tests_Query_IsTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26728
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26728' )]
 	public function test_tax_action_tax() {
 		// Taxonomy with taxonomy added.
 		$this->go_to( home_url( '/testtax/tax-slug2/' ) );
@@ -182,8 +182,8 @@ class Tests_Query_IsTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30623
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30623' )]
 	public function test_get_queried_object_with_custom_taxonomy_tax_query_and_field_term_id_should_return_term_object() {
 		// Don't override the args provided below.
 		remove_action( 'pre_get_posts', array( $this, 'pre_get_posts_tax_category_tax_query' ) );
@@ -210,8 +210,8 @@ class Tests_Query_IsTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30623
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30623' )]
 	public function test_get_queried_object_with_custom_taxonomy_tax_query_and_field_slug_should_return_term_object() {
 		// Don't override the args provided below.
 		remove_action( 'pre_get_posts', array( $this, 'pre_get_posts_tax_category_tax_query' ) );
@@ -239,8 +239,8 @@ class Tests_Query_IsTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30623
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30623' )]
 	public function test_get_queried_object_with_custom_taxonomy_tax_query_with_multiple_clauses_should_return_term_object_corresponding_to_the_first_queried_tax() {
 		// Don't override the args provided below.
 		remove_action( 'pre_get_posts', array( $this, 'pre_get_posts_tax_category_tax_query' ) );

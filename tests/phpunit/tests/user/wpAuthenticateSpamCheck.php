@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @group user
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_wpAuthenticateSpamCheck extends WP_UnitTestCase {
 
 	/**
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_wp_authenticate_spam_check_returns_user_when_single_site() {
 		$user_id     = self::factory()->user->create( array( 'role' => 'contributor' ) );
 		$user        = new WP_User( $user_id );
@@ -18,8 +18,8 @@ class Tests_User_wpAuthenticateSpamCheck extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_wp_authenticate_spam_check_returns_user_when_not_flagged() {
 		$user_id     = self::factory()->user->create( array( 'role' => 'contributor' ) );
 		$user        = new WP_User( $user_id );
@@ -30,8 +30,8 @@ class Tests_User_wpAuthenticateSpamCheck extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_wp_authenticate_spam_check_returns_wp_error_when_flagged() {
 		$user_id = self::factory()->user->create( array( 'role' => 'contributor' ) );
 		wp_update_user(

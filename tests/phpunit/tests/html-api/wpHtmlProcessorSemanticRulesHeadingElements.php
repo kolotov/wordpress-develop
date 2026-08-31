@@ -8,10 +8,9 @@
  *
  * @since 6.5.0
  *
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlProcessorSemanticRulesHeadingElements extends WP_UnitTestCase {
 	/*******************************************************************
 	 * RULES FOR "IN BODY" MODE
@@ -20,14 +19,14 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesHeadingElements extends WP_UnitT
 	/**
 	 * Verifies that H1 through H6 elements generate implied end tags.
 	 *
-	 * @ticket 60060
 	 *
-	 * @covers WP_HTML_Processor::step
 	 *
-	 * @dataProvider data_heading_elements
 	 *
 	 * @param string $tag_name Name of H1 - H6 element under test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60060' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_heading_elements' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step' )]
 	public function test_in_body_heading_element_closes_open_p_tag( $tag_name ) {
 		$processor = WP_HTML_Processor::create_fragment(
 			"<p>Open<{$tag_name}>Closed P</{$tag_name}><img></p>"
@@ -67,15 +66,15 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesHeadingElements extends WP_UnitT
 	/**
 	 * Verifies that H1 through H6 elements close an open H1 through H6 element.
 	 *
-	 * @ticket 60060
 	 *
-	 * @covers WP_HTML_Processor::step
 	 *
-	 * @dataProvider data_heading_combinations
 	 *
 	 * @param string $first_heading  H1 - H6 element appearing (unclosed) before the second.
 	 * @param string $second_heading H1 - H6 element appearing after the first.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60060' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_heading_combinations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step' )]
 	public function test_in_body_heading_element_closes_other_heading_elements( $first_heading, $second_heading ) {
 		$processor = WP_HTML_Processor::create_fragment(
 			"<div><{$first_heading} first> then <{$second_heading} second> and end </{$second_heading}><img></{$first_heading}></div>"

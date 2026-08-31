@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group date
- * @group datetime
- * @group post
  *
- * @covers ::get_permalink
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_permalink' )]
 class Tests_Date_GetPermalink extends WP_UnitTestCase {
 
 	public function tear_down() {
@@ -19,8 +19,8 @@ class Tests_Date_GetPermalink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48623
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48623' )]
 	public function test_should_return_correct_date_permalink_with_changed_time_zone() {
 		$timezone = 'America/Chicago';
 		update_option( 'timezone_string', $timezone );

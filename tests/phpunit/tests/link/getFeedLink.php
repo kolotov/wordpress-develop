@@ -1,25 +1,25 @@
 <?php
 
 /**
- * @group link
- * @covers ::get_feed_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_feed_link' )]
 class Tests_Link_GetFeedLink extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 51839
-	 * @dataProvider data_plain_permastruct
 	 *
 	 * @param string $expected Expected suffix to home_url().
 	 * @param string $type     Feed type to request.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51839' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_plain_permastruct' )]
 	public function tests_plain_permastruct( $expected, $type ) {
 		$this->set_permalink_structure( '' );
 
 		$this->assertSame( home_url( $expected ), get_feed_link( $type ) );
 	}
 
-	public function data_plain_permastruct() {
+	public static function data_plain_permastruct() {
 		return array(
 			array( '?feed=rss2', '' ),
 			array( '?feed=atom', 'atom' ),
@@ -30,12 +30,12 @@ class Tests_Link_GetFeedLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51839
-	 * @dataProvider data_pretty_permastruct
 	 *
 	 * @param string $expected Expected suffix to home_url().
 	 * @param string $type     Feed type to request.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51839' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_pretty_permastruct' )]
 	public function tests_pretty_permastruct( $expected, $type ) {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
 
@@ -43,19 +43,19 @@ class Tests_Link_GetFeedLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51839
-	 * @dataProvider data_pretty_permastruct
 	 *
 	 * @param string $expected Expected suffix to home_url().
 	 * @param string $type     Feed type to request.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51839' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_pretty_permastruct' )]
 	public function tests_pretty_permastruct_with_prefix( $expected, $type ) {
 		$this->set_permalink_structure( '/archives/%post_id%/%postname%/' );
 
 		$this->assertSame( home_url( $expected ), get_feed_link( $type ) );
 	}
 
-	public function data_pretty_permastruct() {
+	public static function data_pretty_permastruct() {
 		return array(
 			array( '/feed/', '' ),
 			array( '/feed/atom/', 'atom' ),

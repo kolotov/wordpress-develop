@@ -7,9 +7,9 @@
  *
  * @since 6.6.0
  *
- * @group blocks
- * @covers ::update_ignored_hooked_blocks_postmeta
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'update_ignored_hooked_blocks_postmeta' )]
 class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 	/**
 	 * Post object.
@@ -45,8 +45,8 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60759
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60759' )]
 	public function test_update_ignored_hooked_blocks_postmeta_preserves_entities() {
 		register_block_type(
 			'tests/my-block',
@@ -81,8 +81,8 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60759
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60759' )]
 	public function test_update_ignored_hooked_blocks_postmeta_dont_modify_no_post_id() {
 		register_block_type(
 			'tests/my-block',
@@ -108,8 +108,8 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60759
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60759' )]
 	public function test_update_ignored_hooked_blocks_postmeta_retains_content_if_not_set() {
 		register_block_type(
 			'tests/my-block',
@@ -140,8 +140,8 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60759
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60759' )]
 	public function test_update_ignored_hooked_blocks_postmeta_dont_modify_if_not_navigation() {
 		register_block_type(
 			'tests/my-block',
@@ -168,8 +168,8 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60759
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60759' )]
 	public function test_update_ignored_hooked_blocks_postmeta_dont_modify_if_no_post_type() {
 		register_block_type(
 			'tests/my-block',
@@ -195,8 +195,8 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62639
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62639' )]
 	public function test_update_ignored_hooked_blocks_postmeta_sets_correct_context_type() {
 		$action = new MockAction();
 		add_filter( 'hooked_block_types', array( $action, 'filter' ), 10, 4 );

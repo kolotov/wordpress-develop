@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group block-supports
  *
- * @covers ::wp_render_custom_css_support_styles
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_custom_css_support_styles' )]
 class Tests_Block_Supports_WpRenderCustomCssSupportStyles extends WP_UnitTestCase {
 	/**
 	 * @var string|null
@@ -34,16 +34,15 @@ class Tests_Block_Supports_WpRenderCustomCssSupportStyles extends WP_UnitTestCas
 	/**
 	 * Tests that custom CSS support adds a class name when valid CSS is present.
 	 *
-	 * @ticket 64544
 	 *
-	 * @covers ::wp_render_custom_css_support_styles
 	 *
-	 * @dataProvider data_adds_class_name
 	 *
 	 * @param string $block_name   The test block name to register.
 	 * @param array  $supports     The block support configuration.
 	 * @param array  $parsed_block The parsed block data.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64544' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_adds_class_name' )]
 	public function test_adds_class_name( $block_name, $supports, $parsed_block ) {
 		$this->test_block_name = $block_name;
 		register_block_type(
@@ -70,7 +69,7 @@ class Tests_Block_Supports_WpRenderCustomCssSupportStyles extends WP_UnitTestCas
 	 *
 	 * @return array
 	 */
-	public function data_adds_class_name() {
+	public static function data_adds_class_name() {
 		return array(
 			'class name is added when custom CSS is present'         => array(
 				'block_name'   => 'test/custom-css-block',
@@ -114,10 +113,9 @@ class Tests_Block_Supports_WpRenderCustomCssSupportStyles extends WP_UnitTestCas
 	/**
 	 * Tests that existing className is preserved when custom CSS class is added.
 	 *
-	 * @ticket 64544
 	 *
-	 * @covers ::wp_render_custom_css_support_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64544' )]
 	public function test_preserves_existing_class_name() {
 		$this->test_block_name = 'test/custom-css-block-existing';
 		register_block_type(
@@ -152,16 +150,15 @@ class Tests_Block_Supports_WpRenderCustomCssSupportStyles extends WP_UnitTestCas
 	/**
 	 * Tests that custom CSS support does not add a class name when CSS should not be applied.
 	 *
-	 * @ticket 64544
 	 *
-	 * @covers ::wp_render_custom_css_support_styles
 	 *
-	 * @dataProvider data_does_not_add_class_name
 	 *
 	 * @param string $block_name   The test block name to register.
 	 * @param array  $supports     The block support configuration.
 	 * @param array  $parsed_block The parsed block data.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64544' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_does_not_add_class_name' )]
 	public function test_does_not_add_class_name( $block_name, $supports, $parsed_block ) {
 		$this->test_block_name = $block_name;
 		register_block_type(
@@ -187,7 +184,7 @@ class Tests_Block_Supports_WpRenderCustomCssSupportStyles extends WP_UnitTestCas
 	 *
 	 * @return array
 	 */
-	public function data_does_not_add_class_name() {
+	public static function data_does_not_add_class_name() {
 		return array(
 			'support is disabled'            => array(
 				'block_name'   => 'test/custom-css-disabled',
@@ -276,10 +273,9 @@ class Tests_Block_Supports_WpRenderCustomCssSupportStyles extends WP_UnitTestCas
 	 * Tests that CSS is enqueued only once when the same block is rendered
 	 * multiple times, as happens inside a Query Loop.
 	 *
-	 * @ticket 65268
 	 *
-	 * @covers ::wp_render_custom_css_support_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65268' )]
 	public function test_css_not_duplicated_on_repeated_renders(): void {
 		$this->test_block_name = 'test/custom-css-query-loop-dedup';
 		register_block_type(

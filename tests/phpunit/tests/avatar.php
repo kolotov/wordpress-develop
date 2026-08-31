@@ -3,20 +3,20 @@
 /**
  * Test avatar related functions
  *
- * @group avatar
  */
+#[\PHPUnit\Framework\Attributes\Group( 'avatar' )]
 class Tests_Avatar extends WP_UnitTestCase {
 	/**
-	 * @ticket 21195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
 	public function test_get_avatar_url_gravatar_url() {
 		$url = get_avatar_url( 1 );
 		$this->assertSame( preg_match( '|^https?://secure.gravatar.com/avatar/[0-9a-f]{64}\?|', $url ), 1 );
 	}
 
 	/**
-	 * @ticket 21195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
 	public function test_get_avatar_url_size() {
 		$url = get_avatar_url( 1 );
 		$this->assertSame( preg_match( '|\?.*s=96|', $url ), 1 );
@@ -27,8 +27,8 @@ class Tests_Avatar extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
 	public function test_get_avatar_url_default() {
 		$url = get_avatar_url( 1 );
 		$this->assertSame( preg_match( '|\?.*d=mm|', $url ), 1 );
@@ -44,8 +44,8 @@ class Tests_Avatar extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
 	public function test_get_avatar_url_rating() {
 		$url = get_avatar_url( 1 );
 		$this->assertSame( preg_match( '|\?.*r=g|', $url ), 1 );
@@ -58,11 +58,11 @@ class Tests_Avatar extends WP_UnitTestCase {
 	/**
 	 * Ensures the get_avatar_url always returns an HTTPS scheme for gravatars.
 	 *
-	 * @ticket 21195
-	 * @ticket 37454
 	 *
-	 * @covers ::get_avatar_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '37454' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_avatar_url' )]
 	public function test_get_avatar_url_scheme() {
 		$url = get_avatar_url( 1 );
 		$this->assertSame( preg_match( '|^https://|', $url ), 1, 'Avatars should default to the HTTPS scheme' );
@@ -82,8 +82,8 @@ class Tests_Avatar extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
 	public function test_get_avatar_url_user() {
 		$url = get_avatar_url( 1 );
 
@@ -118,8 +118,8 @@ class Tests_Avatar extends WP_UnitTestCase {
 
 	protected $fake_url;
 	/**
-	 * @ticket 21195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
 	public function test_pre_get_avatar_url_filter() {
 		$this->fake_url = 'haha wat';
 
@@ -135,8 +135,8 @@ class Tests_Avatar extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
 	public function test_get_avatar_url_filter() {
 		$this->fake_url = 'omg lol';
 
@@ -151,8 +151,8 @@ class Tests_Avatar extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
 	public function test_get_avatar_comment_types_filter() {
 		$url = get_avatar_url( 1 );
 
@@ -222,8 +222,8 @@ class Tests_Avatar extends WP_UnitTestCase {
 
 	protected $fake_img;
 	/**
-	 * @ticket 21195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
 	public function test_pre_get_avatar_filter() {
 		$this->fake_img = 'YOU TOO?!';
 
@@ -238,8 +238,8 @@ class Tests_Avatar extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21195' )]
 	public function test_get_avatar_filter() {
 		$this->fake_url = 'YA RLY';
 
@@ -256,8 +256,8 @@ class Tests_Avatar extends WP_UnitTestCase {
 	/**
 	 * The `get_avatar_data()` function should return gravatar url when comment type allowed to retrieve avatars.
 	 *
-	 * @ticket 44033
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44033' )]
 	public function test_get_avatar_data_should_return_gravatar_url_when_input_avatar_comment_type() {
 		$comment_type = 'comment';
 		$comment      = self::factory()->comment->create_and_get(
@@ -276,8 +276,8 @@ class Tests_Avatar extends WP_UnitTestCase {
 	/**
 	 * The `get_avatar_data()` function should return invalid url when comment type not allowed to retrieve avatars.
 	 *
-	 * @ticket 44033
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44033' )]
 	public function test_get_avatar_data_should_return_invalid_url_when_input_not_avatar_comment_type() {
 		$comment_type = 'review';
 		$comment      = self::factory()->comment->create_and_get(

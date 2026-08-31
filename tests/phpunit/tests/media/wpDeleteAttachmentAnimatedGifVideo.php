@@ -3,9 +3,9 @@
 /**
  * Tests that wp_delete_attachment_files() removes the animated-GIF video companions.
  *
- * @group media
- * @covers ::wp_delete_attachment_files
  */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_delete_attachment_files' )]
 class Tests_Media_wpDeleteAttachmentAnimatedGifVideo extends WP_UnitTestCase {
 
 	public function tear_down(): void {
@@ -14,9 +14,7 @@ class Tests_Media_wpDeleteAttachmentAnimatedGifVideo extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 * @ticket 65549
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65549' )]
 	public function test_deletes_video_and_poster_companions(): void {
 		$attachment_id = self::factory()->attachment->create_upload_object( DIR_TESTDATA . '/images/canola.jpg' );
 		$this->assertIsInt( $attachment_id );
@@ -49,9 +47,7 @@ class Tests_Media_wpDeleteAttachmentAnimatedGifVideo extends WP_UnitTestCase {
 		$this->assertFileDoesNotExist( $poster_path, 'Poster companion should be deleted alongside the attachment.' );
 	}
 
-	/**
-	 * @ticket 65549
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65549' )]
 	public function test_deletes_only_video_when_no_poster_recorded(): void {
 		$attachment_id = self::factory()->attachment->create_upload_object( DIR_TESTDATA . '/images/canola.jpg' );
 		$this->assertIsInt( $attachment_id );
@@ -76,9 +72,7 @@ class Tests_Media_wpDeleteAttachmentAnimatedGifVideo extends WP_UnitTestCase {
 		$this->assertFileDoesNotExist( $video_path, 'Video companion should be deleted alongside the attachment.' );
 	}
 
-	/**
-	 * @ticket 65549
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65549' )]
 	public function test_noop_when_no_companion_metadata(): void {
 		$attachment_id = self::factory()->attachment->create_upload_object( DIR_TESTDATA . '/images/canola.jpg' );
 		$this->assertIsInt( $attachment_id );
@@ -99,8 +93,8 @@ class Tests_Media_wpDeleteAttachmentAnimatedGifVideo extends WP_UnitTestCase {
 	 * Guards against a companion key holding a non-string value (e.g. the array
 	 * form some metadata flows write).
 	 *
-	 * @ticket 65549
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65549' )]
 	public function test_noop_when_companion_metadata_is_not_a_string(): void {
 		$attachment_id = self::factory()->attachment->create_upload_object( DIR_TESTDATA . '/images/canola.jpg' );
 		$this->assertIsInt( $attachment_id );

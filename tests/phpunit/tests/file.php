@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group file
  */
+#[\PHPUnit\Framework\Attributes\Group( 'file' )]
 class Tests_File extends WP_UnitTestCase {
 
 	const BADCHARS = '"\'[]*&?$';
@@ -112,15 +112,15 @@ class Tests_File extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_wp_tempnam_filenames
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_tempnam_filenames' )]
 	public function test_wp_tempnam( $filename ) {
 		$file = wp_tempnam( $filename );
 		unlink( $file );
 
 		$this->assertNotEmpty( basename( basename( $file, '.tmp' ), '.zip' ) );
 	}
-	public function data_wp_tempnam_filenames() {
+	public static function data_wp_tempnam_filenames() {
 		return array(
 			array( '0.zip' ),
 			array( '0.1.2.3.zip' ),
@@ -134,12 +134,12 @@ class Tests_File extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_tempnam()` limits the filename's length to 252 characters.
 	 *
-	 * @ticket 35755
 	 *
-	 * @covers ::wp_tempnam
 	 *
-	 * @dataProvider data_wp_tempnam_should_limit_filename_length_to_252_characters
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35755' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_tempnam_should_limit_filename_length_to_252_characters' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_tempnam' )]
 	public function test_wp_tempnam_should_limit_filename_length_to_252_characters( $filename ) {
 		$file = wp_tempnam( $filename );
 
@@ -155,7 +155,7 @@ class Tests_File extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_tempnam_should_limit_filename_length_to_252_characters() {
+	public static function data_wp_tempnam_should_limit_filename_length_to_252_characters() {
 		return array(
 			'the limit before adding characters for uniqueness' => array( 'filename' => str_pad( '', 241, 'filename' ) ),
 			'one more than the limit before adding characters for uniqueness' => array( 'filename' => str_pad( '', 242, 'filename' ) ),
@@ -169,10 +169,10 @@ class Tests_File extends WP_UnitTestCase {
 	 * Tests that `wp_tempnam()` limits the filename's length to 252 characters
 	 * when there is a name conflict.
 	 *
-	 * @ticket 35755
 	 *
-	 * @covers ::wp_tempnam
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35755' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_tempnam' )]
 	public function test_wp_tempnam_should_limit_filename_length_to_252_characters_with_name_conflict() {
 		// Create a conflict by removing the randomness of the generated password.
 		add_filter(
@@ -203,10 +203,10 @@ class Tests_File extends WP_UnitTestCase {
 	 * Tests that `wp_tempnam()` limits the filename's length to 252 characters
 	 * when a 'random_password' filter returns passwords longer than 6 characters.
 	 *
-	 * @ticket 35755
 	 *
-	 * @covers ::wp_tempnam
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35755' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_tempnam' )]
 	public function test_wp_tempnam_should_limit_filename_length_to_252_characters_when_random_password_is_filtered() {
 		// Force random passwords to 12 characters.
 		add_filter(
@@ -231,10 +231,10 @@ class Tests_File extends WP_UnitTestCase {
 	 * Tests that `wp_tempnam()` limits the filename's length to 252 characters
 	 * when a 'wp_unique_filename' filter returns a filename longer than 252 characters.
 	 *
-	 * @ticket 35755
 	 *
-	 * @covers ::wp_tempnam
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35755' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_tempnam' )]
 	public function test_wp_tempnam_should_limit_filename_length_to_252_characters_when_wp_unique_filename_is_filtered() {
 		// Determine the number of additional characters added by `wp_tempnam()`.
 		$temp_dir                    = get_temp_dir();
@@ -275,10 +275,10 @@ class Tests_File extends WP_UnitTestCase {
 	 * when both a 'random_password' filter and a 'wp_unique_filename' filter
 	 * cause the filename to be greater than 252 characters.
 	 *
-	 * @ticket 35755
 	 *
-	 * @covers ::wp_tempnam
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35755' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_tempnam' )]
 	public function test_wp_tempnam_should_limit_filename_length_to_252_characters_when_random_password_and_wp_unique_filename_are_filtered() {
 		// Force random passwords to 12 characters.
 		add_filter(
@@ -325,8 +325,8 @@ class Tests_File extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47186
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47186' )]
 	public function test_file_signature_functions_as_expected() {
 		$file = wp_tempnam();
 		file_put_contents( $file, 'WordPress' );
@@ -358,8 +358,8 @@ class Tests_File extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47186
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47186' )]
 	public function test_file_signature_expected_failure() {
 		$file = wp_tempnam();
 		file_put_contents( $file, 'WordPress' );

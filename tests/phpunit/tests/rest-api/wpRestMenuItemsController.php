@@ -6,10 +6,23 @@
  * @subpackage REST_API
  * @since 5.9.0
  *
- * @group restapi
+
  *
- * @coversDefaultClass WP_REST_Menu_Items_Controller
  */
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Controller_Testcase {
 	/**
 	 * @var int
@@ -88,9 +101,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::register_routes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
 
@@ -101,9 +114,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_context_param
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_context_param' )]
 	public function test_context_param() {
 		// Collection.
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/menu-items' );
@@ -122,9 +135,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_collection_params
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_collection_params' )]
 	public function test_registered_query_params() {
 		$request    = new WP_REST_Request( 'OPTIONS', '/wp/v2/menu-items' );
 		$response   = rest_get_server()->dispatch( $request );
@@ -149,8 +162,8 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	public function test_registered_get_item_params() {
 		$request  = new WP_REST_Request( 'OPTIONS', sprintf( '/wp/v2/menu-items/%d', $this->menu_item_id ) );
 		$response = rest_get_server()->dispatch( $request );
@@ -160,9 +173,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_items' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/menu-items' );
@@ -172,9 +185,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_item' )]
 	public function test_get_item() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'GET', sprintf( '/wp/v2/menu-items/%d', $this->menu_item_id ) );
@@ -184,9 +197,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 54304
-	 * @covers ::get_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54304' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_items' )]
 	public function test_get_items_filter() {
 		add_filter( 'rest_menu_read_access', '__return_true' );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/menu-items' );
@@ -196,9 +209,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 54304
-	 * @covers ::get_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54304' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_item' )]
 	public function test_get_item_filter() {
 		add_filter( 'rest_menu_read_access', '__return_true' );
 		$request  = new WP_REST_Request( 'GET', sprintf( '/wp/v2/menu-items/%d', $this->menu_item_id ) );
@@ -208,9 +221,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_item' )]
 	public function test_get_item_edit() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'GET', sprintf( '/wp/v2/menu-items/%d', $this->menu_item_id ) );
@@ -221,10 +234,10 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_item
-	 * @covers ::prepare_links
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'prepare_links' )]
 	public function test_get_item_term_links() {
 		wp_set_current_user( self::$admin_id );
 
@@ -247,10 +260,10 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_item
-	 * @covers ::prepare_links
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'prepare_links' )]
 	public function test_get_item_term_posts() {
 		wp_set_current_user( self::$admin_id );
 
@@ -280,9 +293,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	 *
 	 * @see https://github.com/WordPress/gutenberg/pull/24673
 	 *
-	 * @ticket 40878
-	 * @covers ::get_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_item' )]
 	public function test_get_item_escapes_title() {
 		wp_set_current_user( self::$admin_id );
 
@@ -331,9 +344,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item() {
 		wp_set_current_user( self::$admin_id );
 
@@ -347,9 +360,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_invalid_invalid() {
 		wp_set_current_user( self::$admin_id );
 
@@ -367,9 +380,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_invalid_term() {
 		wp_set_current_user( self::$admin_id );
 
@@ -387,9 +400,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_change_position() {
 		wp_set_current_user( self::$admin_id );
 		$new_menu_id = wp_create_nav_menu( rand_str() );
@@ -416,9 +429,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_menu_order_must_be_set() {
 		wp_set_current_user( self::$admin_id );
 		$new_menu_id = wp_create_nav_menu( rand_str() );
@@ -449,9 +462,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_invalid_position_2() {
 		wp_set_current_user( self::$admin_id );
 		$new_menu_id = wp_create_nav_menu( rand_str() );
@@ -469,9 +482,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_invalid_position_3() {
 		wp_set_current_user( self::$admin_id );
 		$new_menu_id = wp_create_nav_menu( rand_str() );
@@ -489,9 +502,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_invalid_parent() {
 		wp_set_current_user( self::$admin_id );
 		wp_create_nav_menu( rand_str() );
@@ -508,9 +521,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_invalid_menu() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'POST', '/wp/v2/menu-items' );
@@ -526,9 +539,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_invalid_post() {
 		wp_set_current_user( self::$admin_id );
 
@@ -546,9 +559,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_invalid_post_type() {
 		wp_set_current_user( self::$admin_id );
 
@@ -566,9 +579,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_invalid_custom_link() {
 		wp_set_current_user( self::$admin_id );
 
@@ -586,9 +599,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_missing_custom_link_url() {
 		wp_set_current_user( self::$admin_id );
 
@@ -606,9 +619,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_invalid_custom_link_url() {
 		wp_set_current_user( self::$admin_id );
 
@@ -628,9 +641,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::update_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'update_item' )]
 	public function test_update_item() {
 		wp_set_current_user( self::$admin_id );
 
@@ -658,9 +671,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::update_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'update_item' )]
 	public function test_update_item_clean_xfn() {
 		wp_set_current_user( self::$admin_id );
 
@@ -692,9 +705,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 
 
 	/**
-	 * @ticket 40878
-	 * @covers ::update_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'update_item' )]
 	public function test_update_item_invalid() {
 		wp_set_current_user( self::$admin_id );
 		$post_id = self::factory()->post->create();
@@ -708,9 +721,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::delete_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'delete_item' )]
 	public function test_delete_item() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'DELETE', sprintf( '/wp/v2/menu-items/%d', $this->menu_item_id ) );
@@ -721,9 +734,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::delete_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'delete_item' )]
 	public function test_delete_item_no_force() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'DELETE', sprintf( '/wp/v2/menu-items/%d', $this->menu_item_id ) );
@@ -734,9 +747,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::delete_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'delete_item' )]
 	public function test_delete_item_invalid() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'DELETE', '/wp/v2/menu-items/9999' );
@@ -746,9 +759,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::prepare_item_for_response
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'prepare_item_for_response' )]
 	public function test_prepare_item() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/menu-items/' . $this->menu_item_id );
@@ -758,9 +771,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_item_schema
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
 		$request    = new WP_REST_Request( 'OPTIONS', '/wp/v2/menu-items' );
 		$response   = rest_get_server()->dispatch( $request );
@@ -787,9 +800,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_items_permissions_check
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_items_permissions_check' )]
 	public function test_get_items_no_permission() {
 		wp_set_current_user( 0 );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/menu-items' );
@@ -798,9 +811,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_item_permissions_check
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_item_permissions_check' )]
 	public function test_get_item_no_permission() {
 		wp_set_current_user( 0 );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/menu-items/' . $this->menu_item_id );
@@ -809,9 +822,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_items_permissions_check
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_items_permissions_check' )]
 	public function test_get_items_wrong_permission() {
 		wp_set_current_user( self::$subscriber_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/menu-items' );
@@ -820,9 +833,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_item_permissions_check
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'get_item_permissions_check' )]
 	public function test_get_item_wrong_permission() {
 		wp_set_current_user( self::$subscriber_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/menu-items/' . $this->menu_item_id );
@@ -1036,9 +1049,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'create_item' )]
 	public function test_create_item_properly_handles_slashed_data() {
 		wp_set_current_user( self::$admin_id );
 
@@ -1058,9 +1071,9 @@ class Tests_REST_WpRestMenuItemsController extends WP_Test_REST_Post_Type_Contro
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::update_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Items_Controller', 'update_item' )]
 	public function test_update_item_properly_handles_slashed_data() {
 		wp_set_current_user( self::$admin_id );
 

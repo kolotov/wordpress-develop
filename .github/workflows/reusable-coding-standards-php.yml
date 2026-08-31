@@ -10,7 +10,7 @@ on:
         description: 'The PHP version to use.'
         required: false
         type: 'string'
-        default: 'latest'
+        default: '8.5'
       old-branch:
         description: 'Whether this is an old branch that runs phpcbf instead of phpcs'
         required: false

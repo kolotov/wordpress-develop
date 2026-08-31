@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group canonical
- * @group rewrite
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'canonical' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Canonical_Category extends WP_Canonical_UnitTestCase {
 	public $structure = '/%category%/%postname%/';
 
@@ -25,13 +25,13 @@ class Tests_Canonical_Category extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_canonical_category
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_canonical_category' )]
 	public function test_canonical_category( $test_url, $expected, $ticket = 0, $expected_doing_it_wrong = array() ) {
 		$this->assertCanonical( $test_url, $expected, $ticket, $expected_doing_it_wrong );
 	}
 
-	public function data_canonical_category() {
+	public static function data_canonical_category() {
 		/*
 		 * Data format:
 		 * [0]: Test URL.

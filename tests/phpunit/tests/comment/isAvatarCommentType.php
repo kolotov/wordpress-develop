@@ -6,18 +6,18 @@
  *
  * @since 5.1.0
  *
- * @group comment
  *
- * @covers ::is_avatar_comment_type
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'is_avatar_comment_type' )]
 class Tests_Comment_IsAvatarCommentType extends WP_UnitTestCase {
 	/**
 	 * Test the `is_avatar_comment_type()` function.
 	 *
 	 * @since 5.1.0
 	 *
-	 * @dataProvider data_is_avatar_comment_type
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_avatar_comment_type' )]
 	public function test_function( $comment_type, $expected ) {
 		$this->assertSame( $expected, is_avatar_comment_type( $comment_type ) );
 	}
@@ -34,7 +34,7 @@ class Tests_Comment_IsAvatarCommentType extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_is_avatar_comment_type() {
+	public static function data_is_avatar_comment_type() {
 		return array(
 			array( null, false ),
 			array( '', false ),

@@ -12,10 +12,10 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  * @subpackage UnitTests
  * @since 3.4.0
  *
- * @group ajax
  *
- * @covers ::wp_ajax_replyto_comment
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_replyto_comment' )]
 class Tests_Ajax_wpAjaxReplytoComment extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -243,8 +243,8 @@ class Tests_Ajax_wpAjaxReplytoComment extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests blocking a comment from being saved on 'pre_comment_approved'.
 	 *
-	 * @ticket 39730
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39730' )]
 	public function test_pre_comments_approved() {
 
 		// Become an administrator.

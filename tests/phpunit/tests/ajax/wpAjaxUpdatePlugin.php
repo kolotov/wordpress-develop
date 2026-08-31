@@ -7,10 +7,10 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 /**
  * Testing Ajax handler for updating a plugin.
  *
- * @group ajax
  *
- * @covers ::wp_ajax_update_plugin
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_update_plugin' )]
 class Tests_Ajax_wpAjaxUpdatePlugin extends WP_Ajax_UnitTestCase {
 
 	public function test_missing_nonce() {
@@ -132,8 +132,8 @@ class Tests_Ajax_wpAjaxUpdatePlugin extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_update_plugin() {
 		$this->_setRole( 'administrator' );
 

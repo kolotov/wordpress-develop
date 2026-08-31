@@ -1,8 +1,8 @@
 <?php
 /**
- * @group query
- * @group search
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\Group( 'search' )]
 class Tests_Query_Search extends WP_UnitTestCase {
 	protected $q;
 	protected $post_type;
@@ -74,8 +74,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38099
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38099' )]
 	public function test_disable_search_exclusion_prefix() {
 		$title = '-HYPHENATION_TEST';
 
@@ -99,8 +99,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38099
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38099' )]
 	public function test_change_search_exclusion_prefix() {
 		$title = '#OCTOTHORPE_TEST';
 
@@ -129,8 +129,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33988
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33988' )]
 	public function test_s_should_exclude_term_prefixed_with_dash() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -156,8 +156,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33988
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33988' )]
 	public function test_s_should_exclude_first_term_if_prefixed_with_dash() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -183,8 +183,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33988
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33988' )]
 	public function test_s_should_not_exclude_for_dashes_in_the_middle_of_words() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -216,8 +216,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36195
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36195' )]
 	public function test_s_should_not_exclude_for_dashes_between_words() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -249,8 +249,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35361
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35361' )]
 	public function test_search_orderby_should_be_empty_when_search_string_is_longer_than_6_words_and_exclusion_operator_is_used() {
 		$q = new WP_Query(
 			array(
@@ -263,8 +263,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31025
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31025' )]
 	public function test_s_zero() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -295,8 +295,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35594
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35594' )]
 	public function test_search_should_respect_suppress_filters() {
 		add_filter( 'posts_search', array( $this, 'filter_posts_search' ) );
 		add_filter( 'posts_search_orderby', array( $this, 'filter_posts_search' ) );
@@ -313,8 +313,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35762
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35762' )]
 	public function test_search_post_excerpt() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -366,8 +366,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35762
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35762' )]
 	public function test_search_order_title_before_excerpt_and_content() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -411,8 +411,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	 * Unfiltered search queries for attachment post types should not include
 	 * filenames to ensure the postmeta JOINs don't happen on the front end.
 	 *
-	 * @ticket 22744
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22744' )]
 	public function test_exclude_file_names_in_attachment_search_by_default() {
 		$attachment = self::factory()->post->create(
 			array(
@@ -440,8 +440,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22744
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22744' )]
 	public function test_include_file_names_in_attachment_search_as_string() {
 		$attachment = self::factory()->post->create(
 			array(
@@ -470,8 +470,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22744
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22744' )]
 	public function test_include_file_names_in_attachment_search_as_array() {
 		$attachment = self::factory()->post->create(
 			array(
@@ -500,8 +500,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22744
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22744' )]
 	public function test_exclude_attachment_file_names_in_general_searches() {
 		$attachment = self::factory()->post->create(
 			array(
@@ -528,8 +528,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22744
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22744' )]
 	public function test_include_file_names_in_attachment_search_with_meta_query() {
 		$attachment = self::factory()->post->create(
 			array(
@@ -566,8 +566,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22744
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22744' )]
 	public function test_include_file_names_in_attachment_search_with_tax_query() {
 		$attachment = self::factory()->post->create(
 			array(
@@ -606,8 +606,8 @@ class Tests_Query_Search extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22744
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22744' )]
 	public function test_wp_query_removes_filter_wp_allow_query_attachment_by_filename() {
 		$attachment = self::factory()->post->create(
 			array(

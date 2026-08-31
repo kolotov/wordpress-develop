@@ -3,20 +3,20 @@
 /**
  * Tests for the wp_parse_list() function.
  *
- * @group functions
  *
- * @covers ::wp_parse_list
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_parse_list' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 class Tests_Functions_wpParseList extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 43977
 	 *
-	 * @dataProvider data_wp_parse_list
 	 *
 	 * @param mixed[]|string $input_list
 	 * @param array<scalar> $expected
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43977' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_parse_list' )]
 	public function test_wp_parse_list( $input_list, array $expected ): void {
 		$parsed_list = wp_parse_list( $input_list );
 		$this->assertThat(
@@ -37,7 +37,7 @@ class Tests_Functions_wpParseList extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ input_list: mixed[]|string, expected: array<scalar> }>
 	 */
-	public function data_wp_parse_list(): array {
+	public static function data_wp_parse_list(): array {
 		return array(
 			'ids only'            => array(
 				'input_list' => '1,2,3,4',

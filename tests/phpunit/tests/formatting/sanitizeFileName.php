@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::sanitize_file_name
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_file_name' )]
 class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
 	public function test_munges_extensions() {
 		// r17990
@@ -23,8 +23,8 @@ class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22363
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22363' )]
 	public function test_removes_accents() {
 		$in  = 'àáâãäåæçèéêëìíîïñòóôõöøùúûüýÿ';
 		$out = 'aaaaaaaeceeeeiiiinoooooouuuuyy';
@@ -34,9 +34,9 @@ class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
 	/**
 	 * Test that spaces are correctly replaced with dashes.
 	 *
-	 * @ticket 16330
-	 * @ticket 62995
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16330' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62995' )]
 	public function test_replaces_spaces() {
 		$urls = array(
 			'unencoded space.png'                         => 'unencoded-space.png',
@@ -67,8 +67,8 @@ class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16226
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16226' )]
 	public function test_replaces_percent_sign() {
 		$this->assertSame( 'a22b.jpg', sanitize_file_name( 'a%22b.jpg' ) );
 	}
@@ -85,13 +85,13 @@ class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_wp_filenames
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_filenames' )]
 	public function test_replaces_invalid_utf8_characters( $input, $expected ) {
 		$this->assertSame( $expected, sanitize_file_name( $input ) );
 	}
 
-	public function data_wp_filenames() {
+	public static function data_wp_filenames() {
 		return array(
 			array( urldecode( '%B1myfile.png' ), 'myfile.png' ),
 			array( urldecode( '%B1myfile' ), 'myfile' ),
@@ -104,13 +104,13 @@ class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
 	 * Tests that sanitize_file_name() replaces consecutive periods
 	 * with a single period.
 	 *
-	 * @ticket 57242
 	 *
-	 * @dataProvider data_sanitize_file_name_should_replace_consecutive_periods_with_a_single_period
 	 *
 	 * @param string $filename A filename with consecutive periods.
 	 * @param string $expected The expected filename after sanitization.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57242' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_file_name_should_replace_consecutive_periods_with_a_single_period' )]
 	public function test_sanitize_file_name_should_replace_consecutive_periods_with_a_single_period( $filename, $expected ) {
 		$this->assertSame( $expected, sanitize_file_name( $filename ) );
 	}
@@ -120,7 +120,7 @@ class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_sanitize_file_name_should_replace_consecutive_periods_with_a_single_period() {
+	public static function data_sanitize_file_name_should_replace_consecutive_periods_with_a_single_period() {
 		return array(
 			'consecutive periods at the start'         => array(
 				'filename' => '...filename.png',

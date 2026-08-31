@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 
 	/**
@@ -81,8 +81,8 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43177
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43177' )]
 	public function test_empty_content_multiple_spaces() {
 		$result = $this->myxmlrpcserver->wp_newComment(
 			array(
@@ -101,8 +101,8 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43177
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43177' )]
 	public function test_valid_comment_0_content() {
 		$result = $this->myxmlrpcserver->wp_newComment(
 			array(
@@ -120,8 +120,8 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43177
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43177' )]
 	public function test_valid_comment_allow_empty_content() {
 		add_filter( 'allow_empty_comment', '__return_true' );
 		$result = $this->myxmlrpcserver->wp_newComment(
@@ -189,8 +189,8 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 	/**
 	 * Ensure anonymous comments can be made via XML-RPC.
 	 *
-	 * @ticket 51595
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51595' )]
 	public function test_allowed_anon_comments() {
 		add_filter( 'xmlrpc_allow_anonymous_comments', '__return_true' );
 
@@ -214,8 +214,8 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 	/**
 	 * Ensure anonymous XML-RPC comments require a valid email.
 	 *
-	 * @ticket 51595
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51595' )]
 	public function test_anon_comments_require_email() {
 		add_filter( 'xmlrpc_allow_anonymous_comments', '__return_true' );
 
@@ -239,8 +239,8 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 	/**
 	 * Ensure valid users don't use the anon flow.
 	 *
-	 * @ticket 51595
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51595' )]
 	public function test_username_avoids_anon_flow() {
 		add_filter( 'xmlrpc_allow_anonymous_comments', '__return_true' );
 
@@ -266,13 +266,13 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 	/**
 	 * Ensure users can only comment on posts they're permitted to access.
 	 *
-	 * @dataProvider data_comments_observe_post_permissions
 	 *
 	 * @param string $post_key      Post identifier from the self::$posts array.
 	 * @param string $username      Username leaving comment.
 	 * @param bool   $expected      Expected result. True: successful comment. False: Refused comment.
 	 * @param string $anon_callback Optional. Allow anonymous comment callback. Default __return_false.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_comments_observe_post_permissions' )]
 	public function test_comments_observe_post_permissions( $post_key, $username, $expected, $anon_callback = '__return_false' ) {
 		add_filter( 'xmlrpc_allow_anonymous_comments', $anon_callback );
 
@@ -308,7 +308,7 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 	 *     @type string Optional. Allow anonymous comment callback. Default __return_false.
 	 * }
 	 */
-	public function data_comments_observe_post_permissions() {
+	public static function data_comments_observe_post_permissions() {
 		return array(
 			// 0: Post author, password protected public post.
 			array(

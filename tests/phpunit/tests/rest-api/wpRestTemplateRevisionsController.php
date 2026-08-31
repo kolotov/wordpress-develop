@@ -5,8 +5,17 @@
  * @package WordPress
  * @subpackage REST API
  *
- * @group restapi
+
  */
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+
+
+
+
+
+
+
+
 class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controller_Testcase {
 
 	/**
@@ -239,9 +248,9 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @covers WP_REST_Template_Revisions_Controller::register_routes
-	 * @ticket 56922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
 		$this->assertArrayHasKey(
@@ -267,9 +276,9 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @coversNothing
-	 * @ticket 56922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_context_param() {
 		// A proper data provider cannot be used because this method's signature must match the parent method.
 		// Therefore, actual tests are performed in the test_context_param_with_data_provider method.
@@ -277,13 +286,13 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_context_param_with_data_provider
-	 * @covers WP_REST_Template_Revisions_Controller::get_context_param
-	 * @ticket 56922
 	 *
 	 * @param string $rest_base   Base part of the REST API endpoint to test.
 	 * @param string $template_id Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_context_param_with_data_provider' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_context_param' )]
 	public function test_context_param_with_data_provider( $rest_base, $template_id ) {
 		// Collection.
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/' . $rest_base . '/' . $template_id . '/revisions' );
@@ -326,7 +335,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_context_param_with_data_provider() {
+	public static function data_context_param_with_data_provider() {
 		return array(
 			'templates'      => array( 'templates', self::TEST_THEME . '//' . self::TEMPLATE_NAME ),
 			'template parts' => array( 'template-parts', self::TEST_THEME . '//' . self::TEMPLATE_PART_NAME ),
@@ -334,9 +343,9 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @coversNothing
-	 * @ticket 56922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_get_items() {
 		// A proper data provider cannot be used because this method's signature must match the parent method.
 		// Therefore, actual tests are performed in the test_get_items_with_data_provider method.
@@ -344,14 +353,14 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_items_with_data_provider
-	 * @covers WP_REST_Template_Revisions_Controller::get_items
-	 * @ticket 56922
 	 *
 	 * @param string $parent_post_property_name A class property name that contains the parent post object.
 	 * @param string $rest_base                 Base part of the REST API endpoint to test.
 	 * @param string $template_id               Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_items_with_data_provider' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_items' )]
 	public function test_get_items_with_data_provider( $parent_post_property_name, $rest_base, $template_id ) {
 		wp_set_current_user( self::$admin_id );
 		$parent_post = self::$$parent_post_property_name;
@@ -420,15 +429,15 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_get_items_with_data_provider() {
+	public static function data_get_items_with_data_provider() {
 		return array(
 			'templates'      => array( 'template_post', 'templates', self::TEST_THEME . '//' . self::TEMPLATE_NAME ),
 			'template parts' => array( 'template_part_post', 'template-parts', self::TEST_THEME . '//' . self::TEMPLATE_PART_NAME ),
 		);
 	}
 	/**
-	 * @ticket 56481
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_should_return_no_response_body_for_head_requests() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request(
@@ -441,15 +450,15 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_items_endpoint_should_return_unauthorized_https_status_code_for_unauthorized_request
-	 * @covers WP_REST_Template_Revisions_Controller::get_items_permissions_check
-	 * @ticket 56922
-	 * @ticket 56481
 	 *
 	 * @param string $rest_base   Base part of the REST API endpoint to test.
 	 * @param string $template_id Template ID to use in the test.
 	 * @param string $method HTTP method to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_items_endpoint_should_return_unauthorized_https_status_code_for_unauthorized_request' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_items_permissions_check' )]
 	public function test_get_items_endpoint_should_return_unauthorized_https_status_code_for_unauthorized_request( $rest_base, $template_id, $method ) {
 		wp_set_current_user( 0 );
 		$request  = new WP_REST_Request( $method, '/wp/v2/' . $rest_base . '/' . $template_id . '/revisions' );
@@ -462,7 +471,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_get_items_endpoint_should_return_unauthorized_https_status_code_for_unauthorized_request() {
+	public static function data_get_items_endpoint_should_return_unauthorized_https_status_code_for_unauthorized_request() {
 		return array(
 			'templates, GET request'       => array( 'templates', self::TEST_THEME . '//' . self::TEMPLATE_NAME, 'GET' ),
 			'templates, HEAD request'      => array( 'templates', self::TEST_THEME . '//' . self::TEMPLATE_NAME, 'HEAD' ),
@@ -472,15 +481,15 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_items_endpoint_should_return_forbidden_https_status_code_for_users_with_insufficient_permissions
-	 * @covers WP_REST_Template_Revisions_Controller::get_items_permissions_check
-	 * @ticket 56922
-	 * @ticket 56481
 	 *
 	 * @param string $rest_base   Base part of the REST API endpoint to test.
 	 * @param string $template_id Template ID to use in the test.
 	 * @param string $method HTTP method to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_items_endpoint_should_return_forbidden_https_status_code_for_users_with_insufficient_permissions' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_items_permissions_check' )]
 	public function test_get_items_endpoint_should_return_forbidden_https_status_code_for_users_with_insufficient_permissions( $rest_base, string $template_id, $method ) {
 		wp_set_current_user( self::$contributor_id );
 		$request  = new WP_REST_Request( $method, '/wp/v2/' . $rest_base . '/' . $template_id . '/revisions' );
@@ -493,7 +502,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_get_items_endpoint_should_return_forbidden_https_status_code_for_users_with_insufficient_permissions() {
+	public static function data_get_items_endpoint_should_return_forbidden_https_status_code_for_users_with_insufficient_permissions() {
 		return array(
 			'templates, GET request'       => array( 'templates', self::TEST_THEME . '//' . self::TEMPLATE_NAME, 'GET' ),
 			'templates, HEAD request'      => array( 'templates', self::TEST_THEME . '//' . self::TEMPLATE_NAME, 'HEAD' ),
@@ -503,12 +512,12 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_items_for_templates_based_on_theme_files_should_return_bad_response_status
-	 * @ticket 61970
 	 *
 	 * @param string $rest_base   Base part of the REST API endpoint to test.
 	 * @param string $template_id Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61970' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_items_for_templates_based_on_theme_files_should_return_bad_response_status' )]
 	public function test_get_items_for_templates_based_on_theme_files_should_return_bad_response_status( $rest_base, $template_id ) {
 		wp_set_current_user( self::$admin_id );
 		switch_theme( 'block-theme' );
@@ -529,7 +538,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_get_items_for_templates_based_on_theme_files_should_return_bad_response_status() {
+	public static function data_get_items_for_templates_based_on_theme_files_should_return_bad_response_status() {
 		return array(
 			'templates'      => array( 'templates', self::TEST_THEME . '//page-home' ),
 			'template parts' => array( 'template-parts', self::TEST_THEME . '//small-header' ),
@@ -537,12 +546,12 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_item_for_templates_based_on_theme_files_should_return_bad_response_status
-	 * @ticket 56922
 	 *
 	 * @param string $rest_base   Base part of the REST API endpoint to test.
 	 * @param string $template_id Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_item_for_templates_based_on_theme_files_should_return_bad_response_status' )]
 	public function test_get_item_for_templates_based_on_theme_files_should_return_bad_response_status( $rest_base, $template_id ) {
 		wp_set_current_user( self::$admin_id );
 		switch_theme( 'block-theme' );
@@ -563,7 +572,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_get_item_for_templates_based_on_theme_files_should_return_bad_response_status() {
+	public static function data_get_item_for_templates_based_on_theme_files_should_return_bad_response_status() {
 		return array(
 			'templates'      => array( 'templates', self::TEST_THEME . '//page-home' ),
 			'template parts' => array( 'template-parts', self::TEST_THEME . '//small-header' ),
@@ -571,9 +580,9 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @coversNothing
-	 * @ticket 56922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_get_item() {
 		// A proper data provider cannot be used because this method's signature must match the parent method.
 		// Therefore, actual tests are performed in the test_get_item_with_data_provider method.
@@ -581,14 +590,14 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_item_with_data_provider
-	 * @covers WP_REST_Template_Revisions_Controller::get_item
-	 * @ticket 56922
 	 *
 	 * @param string  $parent_post_property_name  A class property name that contains the parent post object.
 	 * @param string  $rest_base                  Base part of the REST API endpoint to test.
 	 * @param string  $template_id                Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_item_with_data_provider' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_item' )]
 	public function test_get_item_with_data_provider( $parent_post_property_name, $rest_base, $template_id ) {
 		wp_set_current_user( self::$admin_id );
 
@@ -618,8 +627,8 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @ticket 56481
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_item_should_return_no_response_body_for_head_requests() {
 		wp_set_current_user( self::$admin_id );
 		$revisions   = wp_get_post_revisions( self::$template_post, array( 'fields' => 'ids' ) );
@@ -635,7 +644,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_get_item_with_data_provider() {
+	public static function data_get_item_with_data_provider() {
 		return array(
 			'templates'      => array( 'template_post', 'templates', self::TEST_THEME . '//' . self::TEMPLATE_NAME ),
 			'template parts' => array( 'template_part_post', 'template-parts', self::TEST_THEME . '//' . self::TEMPLATE_PART_NAME ),
@@ -643,14 +652,14 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_item_with_data_provider
-	 * @covers       WP_REST_Template_Revisions_Controller::get_item
-	 * @ticket 56922
 	 *
 	 * @param string $parent_post_property_name A class property name that contains the parent post object.
 	 * @param string $rest_base Base part of the REST API endpoint to test.
 	 * @param string $template_id Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_item_with_data_provider' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_item' )]
 	public function test_get_item_head_request_with_specified_fields_returns_success_response( $parent_post_property_name, $rest_base, $template_id ) {
 		wp_set_current_user( self::$admin_id );
 
@@ -674,14 +683,14 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_items_with_data_provider
-	 * @covers       WP_REST_Template_Revisions_Controller::get_items
-	 * @ticket 56922
 	 *
 	 * @param string $parent_post_property_name A class property name that contains the parent post object.
 	 * @param string $rest_base Base part of the REST API endpoint to test.
 	 * @param string $template_id Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_items_with_data_provider' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_items' )]
 	public function test_get_items_head_request_with_specified_fields_returns_success_response( $parent_post_property_name, $rest_base, $template_id ) {
 		wp_set_current_user( self::$admin_id );
 		$parent_post = self::$$parent_post_property_name;
@@ -702,15 +711,15 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_item_not_found
-	 * @covers WP_REST_Template_Revisions_Controller::get_item
-	 * @ticket 56922
-	 * @ticket 56481
 	 *
 	 * @param string  $parent_post_property_name  A class property name that contains the parent post object.
 	 * @param string  $rest_base                  Base part of the REST API endpoint to test.
 	 * @param string  $method                     HTTP method to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_item_not_found' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_item' )]
 	public function test_get_item_not_found( $parent_post_property_name, $rest_base, $method ) {
 		wp_set_current_user( self::$admin_id );
 
@@ -729,7 +738,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_get_item_not_found() {
+	public static function data_get_item_not_found() {
 		return array(
 			'templates, GET request'       => array( 'template_post', 'templates', 'GET' ),
 			'templates, HEAD request'      => array( 'template_post', 'templates', 'HEAD' ),
@@ -739,10 +748,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_item_invalid_parent_id
-	 * @covers WP_REST_Template_Revisions_Controller::get_item
-	 * @ticket 59875
-	 * @ticket 56481
 	 *
 	 * @param string $parent_post_property_name        A class property name that contains the parent post object.
 	 * @param string $actual_parent_post_property_name A class property name that contains the parent post object.
@@ -750,6 +755,10 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 * @param string $template_id                      Template ID to use in the test.
 	 * @param string $method HTTP method to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59875' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_item_invalid_parent_id' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_item' )]
 	public function test_get_item_invalid_parent_id( $parent_post_property_name, $actual_parent_post_property_name, $rest_base, $template_id, $method ) {
 		wp_set_current_user( self::$admin_id );
 
@@ -772,7 +781,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_get_item_invalid_parent_id() {
+	public static function data_get_item_invalid_parent_id() {
 		return array(
 			'templates, GET request'       => array(
 				'template_post',
@@ -806,9 +815,9 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @coversNothing
-	 * @ticket 56922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_prepare_item() {
 		// A proper data provider cannot be used because this method's signature must match the parent method.
 		// Therefore, actual tests are performed in the test_prepare_item_with_data_provider method.
@@ -816,14 +825,14 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_prepare_item_with_data_provider
-	 * @covers WP_REST_Template_Revisions_Controller::prepare_item_for_response
-	 * @ticket 56922
 	 *
 	 * @param string $parent_post_property_name A class property name that contains the parent post object.
 	 * @param string $rest_base                 Base part of the REST API endpoint to test.
 	 * @param string $template_id               Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_prepare_item_with_data_provider' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'prepare_item_for_response' )]
 	public function test_prepare_item_with_data_provider( $parent_post_property_name, $rest_base, $template_id ) {
 		$parent_post = self::$$parent_post_property_name;
 		$revisions   = wp_get_post_revisions( $parent_post, array( 'fields' => 'ids' ) );
@@ -881,7 +890,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_prepare_item_with_data_provider() {
+	public static function data_prepare_item_with_data_provider() {
 		return array(
 			'templates'      => array( 'template_post', 'templates', self::TEST_THEME . '//' . self::TEMPLATE_NAME ),
 			'template parts' => array( 'template_part_post', 'template-parts', self::TEST_THEME . '//' . self::TEMPLATE_PART_NAME ),
@@ -889,9 +898,9 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @coversNothing
-	 * @ticket 56922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_get_item_schema() {
 		// A proper data provider cannot be used because this method's signature must match the parent method.
 		// Therefore, actual tests are performed in the test_prepare_item_with_data_provider method.
@@ -899,15 +908,15 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_get_item_schema_with_data_provider
-	 * @covers WP_REST_Template_Revisions_Controller::get_item_schema
-	 * @ticket 56922
 	 *
 	 * @param string $rest_base             Base part of the REST API endpoint to test.
 	 * @param string $template_id           Template ID to use in the test.
 	 * @param int    $properties_count      Number of properties to check for in the schema.
 	 * @param array  $additional_properties Additional properties to check for in the schema.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_item_schema_with_data_provider' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_item_schema' )]
 	public function test_get_item_schema_with_data_provider( $rest_base, $template_id, $properties_count, $additional_properties = array() ) {
 		$request    = new WP_REST_Request( 'OPTIONS', '/wp/v2/' . $rest_base . '/' . $template_id . '/revisions' );
 		$response   = rest_get_server()->dispatch( $request );
@@ -943,7 +952,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_get_item_schema_with_data_provider() {
+	public static function data_get_item_schema_with_data_provider() {
 		return array(
 			'templates'      => array(
 				'templates',
@@ -961,35 +970,38 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @coversNothing
-	 * @ticket 56922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	public function test_create_item() {
-		$this->markTestSkipped(
-			sprintf(
-				"The '%s' controller doesn't currently support the ability to create template revisions.",
-				WP_REST_Template_Revisions_Controller::class
-			)
-		);
+		wp_set_current_user( self::$admin_id );
+		$revision_count = count( wp_get_post_revisions( self::$template_post ) );
+		$request        = new WP_REST_Request( 'POST', '/wp/v2/templates/' . self::TEST_THEME . '//' . self::TEMPLATE_NAME . '/revisions' );
+		$response       = rest_get_server()->dispatch( $request );
+
+		$this->assertErrorResponse( 'rest_template_not_found', $response, 404 );
+		$this->assertCount( $revision_count, wp_get_post_revisions( self::$template_post ) );
 	}
 
 	/**
-	 * @coversNothing
-	 * @ticket 56922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	public function test_update_item() {
-		$this->markTestSkipped(
-			sprintf(
-				"The '%s' controller doesn't currently support the ability to update template revisions.",
-				WP_REST_Template_Revisions_Controller::class
-			)
-		);
+		wp_set_current_user( self::$admin_id );
+		$revisions      = wp_get_post_revisions( self::$template_post );
+		$revision       = reset( $revisions );
+		$original_title = $revision->post_title;
+		$request        = new WP_REST_Request( 'POST', '/wp/v2/templates/' . self::TEST_THEME . '//' . self::TEMPLATE_NAME . '/revisions/' . $revision->ID );
+		$request->set_param( 'title', 'Updated revision title' );
+		$response = rest_get_server()->dispatch( $request );
+
+		$this->assertErrorResponse( 'rest_template_not_found', $response, 404 );
+		$this->assertSame( $original_title, get_post( $revision->ID )->post_title );
 	}
 
 	/**
-	 * @coversNothing
-	 * @ticket 56922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_delete_item() {
 		// A proper data provider cannot be used because this method's signature must match the parent method.
 		// Therefore, actual tests are performed in the test_delete_item_with_data_provider method.
@@ -997,15 +1009,15 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_delete_item_with_data_provider
-	 * @covers WP_REST_Templates_Controller::delete_item
-	 * @ticket 56922
 	 *
 	 * @param string $parent_post_property_name A class property name that contains the parent post object.
 	 * @param string $revisions_property_name   A class property name that contains the revisions array.
 	 * @param string $rest_base                 Base part of the REST API endpoint to test.
 	 * @param string $template_id               Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_delete_item_with_data_provider' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'delete_item' )]
 	public function test_delete_item_with_data_provider( $parent_post_property_name, $revisions_property_name, $rest_base, $template_id ) {
 		wp_set_current_user( self::$admin_id );
 
@@ -1028,7 +1040,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_delete_item_with_data_provider() {
+	public static function data_delete_item_with_data_provider() {
 		return array(
 			'templates'      => array(
 				'template_post',
@@ -1046,15 +1058,15 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_delete_item_incorrect_permission
-	 * @covers WP_REST_Templates_Controller::delete_item
-	 * @ticket 56922
 	 *
 	 * @param string $parent_post_property_name A class property name that contains the parent post object.
 	 * @param string $revisions_property_name   A class property name that contains the revisions array.
 	 * @param string $rest_base                 Base part of the REST API endpoint to test.
 	 * @param string $template_id               Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_delete_item_incorrect_permission' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'delete_item' )]
 	public function test_delete_item_incorrect_permission( $parent_post_property_name, $revisions_property_name, $rest_base, $template_id ) {
 		wp_set_current_user( self::$contributor_id );
 		$parent_post = self::$$parent_post_property_name;
@@ -1074,7 +1086,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_delete_item_incorrect_permission() {
+	public static function data_delete_item_incorrect_permission() {
 		return array(
 			'templates'      => array(
 				'template_post',
@@ -1092,15 +1104,15 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_delete_item_no_permission
-	 * @covers WP_REST_Templates_Controller::delete_item
-	 * @ticket 56922
 	 *
 	 * @param string $parent_post_property_name A class property name that contains the parent post object.
 	 * @param string $revisions_property_name   A class property name that contains the revisions array.
 	 * @param string $rest_base                 Base part of the REST API endpoint to test.
 	 * @param string $template_id               Template ID to use in the test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_delete_item_no_permission' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'delete_item' )]
 	public function test_delete_item_no_permission( $parent_post_property_name, $revisions_property_name, $rest_base, $template_id ) {
 		wp_set_current_user( 0 );
 
@@ -1121,7 +1133,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_delete_item_no_permission() {
+	public static function data_delete_item_no_permission() {
 		return array(
 			'templates'      => array(
 				'template_post',
@@ -1139,14 +1151,14 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	}
 
 	/**
-	 * @dataProvider data_delete_item_not_found
-	 * @covers WP_REST_Template_Revisions_Controller::get_item
-	 * @ticket 56922
 	 *
 	 * @param string $parent_post_property_name A class property name that contains the parent post object.
 	 * @param string $revisions_property_name   A class property name that contains the revisions array.
 	 * @param string $rest_base                 Base part of the REST API endpoint to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_delete_item_not_found' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_item' )]
 	public function test_delete_item_not_found( $parent_post_property_name, $revisions_property_name, $rest_base ) {
 		wp_set_current_user( self::$admin_id );
 
@@ -1167,7 +1179,7 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	 *
 	 * @return array
 	 */
-	public function data_delete_item_not_found() {
+	public static function data_delete_item_not_found() {
 		return array(
 			'templates'      => array(
 				'template_post',
@@ -1185,10 +1197,10 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 	/**
 	 * Tests for the pagination.
 	 *
-	 * @ticket 62292
 	 *
-	 * @covers WP_REST_Template_Revisions_Controller::get_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62292' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'get_items' )]
 	public function test_get_template_revisions_pagination() {
 		wp_set_current_user( self::$admin_id );
 

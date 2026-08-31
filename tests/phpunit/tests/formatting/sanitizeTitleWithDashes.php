@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::sanitize_title_with_dashes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_title_with_dashes' )]
 class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	public function test_strips_html() {
 		$input    = 'Captain <strong>Awesome</strong>';
@@ -66,8 +66,8 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31790' )]
 	public function test_replaces_nbsp_entities() {
 		$this->assertSame( 'dont-break-the-space', sanitize_title_with_dashes( "don't&nbsp;break&#160;the&nbsp;space", '', 'save' ) );
 	}
@@ -78,23 +78,23 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31790' )]
 	public function test_replaces_ndash_mdash_entities() {
 		$this->assertSame( 'do-the-dash', sanitize_title_with_dashes( 'Do &ndash; the &#8211; Dash', '', 'save' ) );
 		$this->assertSame( 'do-the-dash', sanitize_title_with_dashes( 'Do &mdash; the &#8212; Dash', '', 'save' ) );
 	}
 
 	/**
-	 * @ticket 64089
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64089' )]
 	public function test_replaces_non_breaking_hyphen() {
 		$this->assertSame( 'do-the-dash', sanitize_title_with_dashes( 'Do‑the Dash', '', 'save' ) );
 	}
 
 	/**
-	 * @ticket 64089
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64089' )]
 	public function test_replaces_non_breaking_hyphen_entity() {
 		$this->assertSame( 'do-the-dash', sanitize_title_with_dashes( 'Do &#8209; the Dash', '', 'save' ) );
 	}
@@ -118,8 +118,8 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49791' )]
 	public function test_replaces_bullet() {
 		$this->assertSame( 'fancy-title-amazing', sanitize_title_with_dashes( 'Fancy Title • Amazing', '', 'save' ) );
 	}
@@ -132,8 +132,8 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 10792
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10792' )]
 	public function test_replaces_forward_slash() {
 		$this->assertSame( 'songs-by-lennon-mccartney', sanitize_title_with_dashes( 'songs by Lennon/McCartney', '', 'save' ) );
 		$this->assertSame( 'songs-by-lennon-mccartney', sanitize_title_with_dashes( 'songs by Lennon//McCartney', '', 'save' ) );
@@ -143,34 +143,34 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 19820
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19820' )]
 	public function test_replaces_multiply_sign() {
 		$this->assertSame( '6x7-is-42', sanitize_title_with_dashes( '6×7 is 42', '', 'save' ) );
 	}
 
 	/**
-	 * @ticket 20772
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20772' )]
 	public function test_replaces_standalone_diacritic() {
 		$this->assertSame( 'aaaa', sanitize_title_with_dashes( 'āáǎà', '', 'save' ) );
 	}
 
 	/**
-	 * @ticket 22395
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22395' )]
 	public function test_replaces_acute_accents() {
 		$this->assertSame( 'aaaa', sanitize_title_with_dashes( 'ááa´aˊ', '', 'save' ) );
 	}
 
 	/**
-	 * @ticket 47912
-	 * @ticket 55117
-	 * @dataProvider data_removes_non_visible_characters_without_width
 	 *
 	 * @param string $title     The title to be sanitized.
 	 * @param string $expected  Expected sanitized title.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47912' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55117' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_removes_non_visible_characters_without_width' )]
 	public function test_removes_non_visible_characters_without_width( $title, $expected = '' ) {
 		$this->assertSame( $expected, sanitize_title_with_dashes( $title, '', 'save' ) );
 	}
@@ -180,7 +180,7 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_removes_non_visible_characters_without_width() {
+	public static function data_removes_non_visible_characters_without_width() {
 		return array(
 			// Only the non-visible characters.
 			'only %e2%80%8b'     => array( '%e2%80%8b' ),
@@ -217,13 +217,13 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47912
-	 * @ticket 55117
-	 * @dataProvider data_non_visible_characters_without_width_when_not_save
 	 *
 	 * @param string $title     The title to be sanitized.
 	 * @param string $expected  Expected sanitized title.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47912' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55117' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_non_visible_characters_without_width_when_not_save' )]
 	public function test_non_visible_characters_without_width_when_not_save( $title, $expected = '' ) {
 		$this->assertSame( $expected, sanitize_title_with_dashes( $title ) );
 	}
@@ -233,7 +233,7 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_non_visible_characters_without_width_when_not_save() {
+	public static function data_non_visible_characters_without_width_when_not_save() {
 		return array(
 			// Just the non-visible characters.
 			'only %e2%80%8b'     => array( '%e2%80%8b', '%e2%80%8b' ),
@@ -270,12 +270,12 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47912
-	 * @dataProvider data_converts_non_visible_characters_with_width_to_hyphen
 	 *
 	 * @param string $title     The title to be sanitized.
 	 * @param string $expected  Expected sanitized title.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47912' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_converts_non_visible_characters_with_width_to_hyphen' )]
 	public function test_converts_non_visible_characters_with_width_to_hyphen( $title, $expected = '' ) {
 		$this->assertSame( $expected, sanitize_title_with_dashes( $title, '', 'save' ) );
 	}
@@ -285,7 +285,7 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_converts_non_visible_characters_with_width_to_hyphen() {
+	public static function data_converts_non_visible_characters_with_width_to_hyphen() {
 		return array(
 			// Only the non-visible characters.
 			'only %e2%80%80'     => array( '%e2%80%80' ),
@@ -328,12 +328,12 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47912
-	 * @dataProvider data_non_visible_characters_with_width_to_hyphen_when_not_save
 	 *
 	 * @param string $title     The title to be sanitized.
 	 * @param string $expected  Expected sanitized title.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47912' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_non_visible_characters_with_width_to_hyphen_when_not_save' )]
 	public function test_non_visible_characters_with_width_to_hyphen_when_not_save( $title, $expected = '' ) {
 		$this->assertSame( $expected, sanitize_title_with_dashes( $title ) );
 	}
@@ -343,7 +343,7 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_non_visible_characters_with_width_to_hyphen_when_not_save() {
+	public static function data_non_visible_characters_with_width_to_hyphen_when_not_save() {
 		return array(
 			// Just the non-visible characters.
 			'only %e2%80%8b'     => array( '%e2%80%8b', '%e2%80%8b' ),

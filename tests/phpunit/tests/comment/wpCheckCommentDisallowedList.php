@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::wp_check_comment_disallowed_list
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_check_comment_disallowed_list' )]
 class Tests_Comment_wpCheckCommentDisallowedList extends WP_UnitTestCase {
 
 	public function test_should_return_true_when_content_matches_disallowed_keys() {
@@ -23,8 +23,8 @@ class Tests_Comment_wpCheckCommentDisallowedList extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37208
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37208' )]
 	public function test_should_return_true_when_content_with_html_matches_disallowed_keys() {
 		$author       = 'Sting';
 		$author_email = 'sting@example.com';
@@ -41,8 +41,8 @@ class Tests_Comment_wpCheckCommentDisallowedList extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57207
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57207' )]
 	public function test_should_return_true_when_content_with_non_latin_words_matches_disallowed_keys() {
 		$author       = 'Setup';
 		$author_email = 'setup@example.com';
@@ -89,8 +89,8 @@ class Tests_Comment_wpCheckCommentDisallowedList extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37208
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37208' )]
 	public function test_should_return_true_when_link_matches_disallowed_keys() {
 		$author       = 'Rainier Wolfcastle';
 		$author_email = 'rainier@wolfcastle.com';

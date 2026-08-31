@@ -10,10 +10,10 @@ require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
 /**
  * Class for testing ajax crop image functionality.
  *
- * @group ajax
  *
- * @covers ::wp_ajax_crop_image
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_crop_image' )]
 class Tests_Ajax_WpAjaxCropImage extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -50,8 +50,8 @@ class Tests_Ajax_WpAjaxCropImage extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that attachment properties are copied over to the cropped image.
 	 *
-	 * @ticket 37750
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37750' )]
 	public function test_it_copies_metadata_from_original_image() {
 		$this->attachment = $this->make_attachment( true );
 		$this->prepare_post( $this->attachment );
@@ -78,8 +78,8 @@ class Tests_Ajax_WpAjaxCropImage extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that post_title gets populated if it wasn't modified.
 	 *
-	 * @ticket 37750
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37750' )]
 	public function test_it_populates_title_if_title_was_not_modified() {
 
 		$this->attachment = $this->make_attachment( true );
@@ -112,8 +112,8 @@ class Tests_Ajax_WpAjaxCropImage extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that attachment properties get populated if they are not defined (but specific logic depends on the actual property).
 	 *
-	 * @ticket 37750
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37750' )]
 	public function test_it_doesnt_generate_new_metadata_if_metadata_is_empty() {
 		$this->attachment = $this->make_attachment( false );
 		$this->prepare_post( $this->attachment );

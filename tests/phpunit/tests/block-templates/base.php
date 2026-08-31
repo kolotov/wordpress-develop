@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @covers ::get_template_hierarchy
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_template_hierarchy' )]
 abstract class WP_Block_Templates_UnitTestCase extends WP_UnitTestCase {
 	const TEST_THEME = 'block-theme';
 

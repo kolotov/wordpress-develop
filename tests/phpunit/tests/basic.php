@@ -3,15 +3,15 @@
 /**
  * Test the content in some root directory files.
  *
- * @group basic
  */
+#[\PHPUnit\Framework\Attributes\Group( 'basic' )]
 class Tests_Basic extends WP_UnitTestCase {
 
 	/**
 	 * Test copyright year in license.txt.
 	 *
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_license() {
 		// This test is designed to only run on trunk.
 		$this->skipOnAutomatedBranches();
@@ -27,8 +27,8 @@ class Tests_Basic extends WP_UnitTestCase {
 	/**
 	 * Test latest stable version is included in SECURITY.md.
 	 *
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_security_md() {
 		// This test is designed to only run on trunk.
 		$this->skipOnAutomatedBranches();
@@ -45,8 +45,8 @@ class Tests_Basic extends WP_UnitTestCase {
 	/**
 	 * Test the version number in package.json is correct.
 	 *
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_package_json() {
 		$package_json    = file_get_contents( dirname( ABSPATH ) . '/package.json' );
 		$package_json    = json_decode( $package_json, true );
@@ -65,10 +65,10 @@ class Tests_Basic extends WP_UnitTestCase {
 	/**
 	 * Test engines.node is included in package.json.
 	 *
-	 * @depends test_package_json
 	 *
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_package_json' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_package_json_node_engine( $package_json ) {
 		$this->assertArrayHasKey( 'engines', $package_json );
 		$this->assertArrayHasKey( 'node', $package_json['engines'] );
@@ -81,10 +81,10 @@ class Tests_Basic extends WP_UnitTestCase {
 	 * to match the version in package.json. This test is intended to ensure
 	 * the version numbers are correct in production branches.
 	 *
-	 * @coversNothing
 	 *
-	 * @dataProvider data_package_lock_json
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_package_lock_json' )]
 	public function test_package_lock_json( $path ) {
 		$package_lock_json = file_get_contents( dirname( ABSPATH ) . '/package-lock.json' );
 		$package_lock_json = json_decode( $package_lock_json, true );
@@ -112,7 +112,7 @@ class Tests_Basic extends WP_UnitTestCase {
 	 *
 	 * @return array[] Data provider.
 	 */
-	public function data_package_lock_json() {
+	public static function data_package_lock_json() {
 		return array(
 			'top level' => array( 'version' ),
 			'package'   => array( 'packages..version' ),
@@ -122,8 +122,8 @@ class Tests_Basic extends WP_UnitTestCase {
 	/**
 	 * Test the version number in composer.json is correct.
 	 *
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_composer_json() {
 		$composer_json   = file_get_contents( dirname( ABSPATH ) . '/composer.json' );
 		$composer_json   = json_decode( $composer_json, true );
@@ -140,8 +140,8 @@ class Tests_Basic extends WP_UnitTestCase {
 	/**
 	 * Test the src wp_version always ends with '-src'.
 	 *
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_src_wp_version_ends_with_src() {
 		$version_file = dirname( ABSPATH ) . '/src/wp-includes/version.php';
 
@@ -153,8 +153,8 @@ class Tests_Basic extends WP_UnitTestCase {
 	/**
 	 * Test the build wp_version never ends with '-src'.
 	 *
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_build_wp_version_does_not_end_with_src() {
 		$version_file = dirname( ABSPATH ) . '/build/wp-includes/version.php';
 

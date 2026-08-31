@@ -3,17 +3,17 @@
 /**
  * Test 'site_details' functionality.
  *
- * @group ms-required
- * @group ms-site
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_allowed_options
 	 *
-	 * @ticket 40063
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_allowed_options' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '40063' )]
 	public function test_update_allowed_option_deletes_site_details_cache( $allowed_option, $temporary_value ) {
 		$site = get_site();
 
@@ -29,10 +29,10 @@ class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_allowed_options
 	 *
-	 * @ticket 40063
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_allowed_options' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '40063' )]
 	public function test_update_allowed_option_deletes_blog_details_cache( $allowed_option, $temporary_value ) {
 		$blog_details = get_blog_details();
 
@@ -48,10 +48,10 @@ class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_allowed_options
 	 *
-	 * @ticket 40063
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_allowed_options' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '40063' )]
 	public function test_update_allowed_option_does_not_delete_site_cache( $allowed_option, $temporary_value ) {
 		$site = get_site();
 
@@ -63,14 +63,14 @@ class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 		/* Reset to original value. */
 		update_option( $allowed_option, $original_value );
 
-		$this->assertNotFalse( $cached_result );
+		$this->assertIsObject( $cached_result );
 	}
 
 	/**
-	 * @dataProvider data_allowed_options
 	 *
-	 * @ticket 40063
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_allowed_options' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '40063' )]
 	public function test_update_allowed_option_does_not_delete_short_blog_details_cache( $allowed_option, $temporary_value ) {
 		$blog_details = get_blog_details( null, false );
 
@@ -82,14 +82,14 @@ class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 		/* Reset to original value. */
 		update_option( $allowed_option, $original_value );
 
-		$this->assertNotFalse( $cached_result );
+		$this->assertIsObject( $cached_result );
 	}
 
 	/**
-	 * @dataProvider data_allowed_options
 	 *
-	 * @ticket 40063
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_allowed_options' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '40063' )]
 	public function test_update_allowed_option_does_not_update_sites_last_changed( $allowed_option, $temporary_value ) {
 		$last_changed = wp_cache_get_last_changed( 'sites' );
 
@@ -104,7 +104,7 @@ class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 		$this->assertSame( $new_last_changed, $last_changed );
 	}
 
-	public function data_allowed_options() {
+	public static function data_allowed_options() {
 		return array(
 			array( 'blogname', 'Custom Site' ),
 			array( 'home', 'http://custom-site-url.org' ),
@@ -114,8 +114,8 @@ class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40063
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40063' )]
 	public function test_update_random_blog_option_does_not_delete_cache() {
 		$site = get_site();
 
@@ -124,12 +124,12 @@ class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 
 		delete_option( 'foobar_option' );
 
-		$this->assertNotFalse( $cached_result );
+		$this->assertIsObject( $cached_result );
 	}
 
 	/**
-	 * @ticket 40247
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40247' )]
 	public function test_site_details_cached_including_false_values() {
 		$id = self::factory()->blog->create();
 
@@ -143,7 +143,7 @@ class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 		wp_delete_site( $id );
 		wp_update_network_site_counts();
 
-		$this->assertNotFalse( $cached_details );
+		$this->assertIsObject( $cached_details );
 	}
 
 	public function test_site_details_filter_with_blogname() {
@@ -161,8 +161,8 @@ class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40458
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40458' )]
 	public function test_site_details_filter_with_custom_value_isetter() {
 		add_filter( 'site_details', array( $this, '_filter_site_details_custom_value' ) );
 		$site               = get_site();
@@ -173,8 +173,8 @@ class Tests_Multisite_SiteDetails extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40458
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40458' )]
 	public function test_site_details_filter_with_custom_value_getter() {
 		add_filter( 'site_details', array( $this, '_filter_site_details_custom_value' ) );
 		$site         = get_site();

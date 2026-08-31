@@ -1,9 +1,9 @@
 <?php
 /**
- * @group author
- * @group user
- * @covers ::wp_list_authors
  */
+#[\PHPUnit\Framework\Attributes\Group( 'author' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_list_authors' )]
 class Tests_User_wpListAuthors extends WP_UnitTestCase {
 	public static $user_ids = array();
 	public static $fred_id;
@@ -149,8 +149,8 @@ class Tests_User_wpListAuthors extends WP_UnitTestCase {
 	/**
 	 * Ensures the 'optioncount' parameter does not throw an error when there are authors without posts.
 	 *
-	 * @ticket 57011
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57011' )]
 	public function test_wp_list_authors_optioncount_should_not_error_for_empty_authors() {
 		/*
 		 * The main purpose of this test is to ensure that the error below is not thrown:
@@ -286,8 +286,8 @@ class Tests_User_wpListAuthors extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26538
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26538' )]
 	public function test_wp_list_authors_feed_type() {
 		$url0 = get_author_feed_link( self::$user_ids[0], 'atom' );
 		$url1 = get_author_feed_link( self::$user_ids[1], 'atom' );

@@ -9,8 +9,8 @@
 /**
  * Test wp-includes/widgets/class-wp-widget-media-image.php
  *
- * @group widgets
  */
+#[\PHPUnit\Framework\Attributes\Group( 'widgets' )]
 class Tests_Widgets_wpWidgetMediaImage extends WP_UnitTestCase {
 
 	/**
@@ -29,8 +29,8 @@ class Tests_Widgets_wpWidgetMediaImage extends WP_UnitTestCase {
 	/**
 	 * Test get_instance_schema method.
 	 *
-	 * @covers WP_Widget_Media_Image::get_instance_schema
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Image', 'get_instance_schema' )]
 	public function test_get_instance_schema() {
 		$widget = new WP_Widget_Media_Image();
 		$schema = $widget->get_instance_schema();
@@ -60,10 +60,10 @@ class Tests_Widgets_wpWidgetMediaImage extends WP_UnitTestCase {
 	/**
 	 * Test schema filtering.
 	 *
-	 * @covers WP_Widget_Media_Image::get_instance_schema
 	 *
-	 * @ticket 45029
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45029' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Image', 'get_instance_schema' )]
 	public function test_get_instance_schema_filtering() {
 		$widget = new WP_Widget_Media_Image();
 		$schema = $widget->get_instance_schema();
@@ -92,8 +92,8 @@ class Tests_Widgets_wpWidgetMediaImage extends WP_UnitTestCase {
 	/**
 	 * Test constructor.
 	 *
-	 * @covers WP_Widget_Media_Image::__construct
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Image', '__construct' )]
 	public function test_constructor() {
 		$widget = new WP_Widget_Media_Image();
 
@@ -121,8 +121,8 @@ class Tests_Widgets_wpWidgetMediaImage extends WP_UnitTestCase {
 	/**
 	 * Test get_instance_schema method.
 	 *
-	 * @covers WP_Widget_Media_Image::update
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Image', 'update' )]
 	public function test_update() {
 		$widget   = new WP_Widget_Media_Image();
 		$instance = array();
@@ -407,9 +407,9 @@ class Tests_Widgets_wpWidgetMediaImage extends WP_UnitTestCase {
 	/**
 	 * Test render_media method.
 	 *
-	 * @covers WP_Widget_Media_Image::render_media
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Image', 'render_media' )]
 	public function test_render_media() {
 		$widget = new WP_Widget_Media_Image();
 
@@ -607,8 +607,8 @@ class Tests_Widgets_wpWidgetMediaImage extends WP_UnitTestCase {
 	/**
 	 * Test enqueue_admin_scripts method.
 	 *
-	 * @covers WP_Widget_Media_Image::enqueue_admin_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Image', 'enqueue_admin_scripts' )]
 	public function test_enqueue_admin_scripts() {
 		set_current_screen( 'widgets.php' );
 		$widget = new WP_Widget_Media_Image();
@@ -620,8 +620,8 @@ class Tests_Widgets_wpWidgetMediaImage extends WP_UnitTestCase {
 	/**
 	 * Test render_control_template_scripts method.
 	 *
-	 * @covers WP_Widget_Media_Image::render_control_template_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Image', 'render_control_template_scripts' )]
 	public function test_render_control_template_scripts() {
 		$widget = new WP_Widget_Media_Image();
 

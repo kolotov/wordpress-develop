@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_GetPostsByAuthorSql extends WP_UnitTestCase {
 
 	/**

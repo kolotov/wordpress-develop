@@ -1,8 +1,13 @@
 <?php
 
 /**
- * @group option
  */
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_Transient extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -14,10 +19,10 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_transient
-	 * @covers ::set_transient
-	 * @covers ::delete_transient
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_transient' )]
 	public function test_the_basics() {
 		$key    = 'key1';
 		$value  = 'value1';
@@ -35,10 +40,10 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_transient
-	 * @covers ::set_transient
-	 * @covers ::delete_transient
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_transient' )]
 	public function test_serialized_data() {
 		$key   = rand_str();
 		$value = array(
@@ -56,12 +61,12 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22807
 	 *
-	 * @covers ::get_option
-	 * @covers ::set_transient
-	 * @covers ::update_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22807' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_transient_data_with_timeout() {
 		$key   = rand_str();
 		$value = rand_str();
@@ -83,10 +88,10 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 	/**
 	 * Ensure get_transient() makes a single database request.
 	 *
-	 * @ticket 61193
 	 *
-	 * @covers ::get_transient
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61193' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_transient' )]
 	public function test_get_transient_with_timeout_makes_a_single_database_call() {
 		global $wpdb;
 		$key                        = 'test_transient';
@@ -129,10 +134,10 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 	/**
 	 * Ensure set_transient() primes the option cache checking for an existing transient.
 	 *
-	 * @ticket 61193
 	 *
-	 * @covers ::set_transient
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61193' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
 	public function test_set_transient_primes_option_cache() {
 		global $wpdb;
 		$key                        = 'test_transient';
@@ -162,13 +167,13 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22807
 	 *
-	 * @covers ::set_transient
-	 * @covers ::get_transient
-	 * @covers ::get_option
-	 * @covers ::update_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22807' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_transient_add_timeout() {
 		$key    = rand_str();
 		$value  = rand_str();
@@ -190,11 +195,11 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 	/**
 	 * If get_option( $transient_timeout ) returns false, don't bother trying to delete the transient.
 	 *
-	 * @ticket 30380
 	 *
-	 * @covers ::set_transient
-	 * @covers ::get_transient
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30380' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_transient' )]
 	public function test_nonexistent_key_dont_delete_if_false() {
 		// Create a bogus a transient.
 		$key = 'test_transient';
@@ -221,11 +226,11 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30380
 	 *
-	 * @covers ::set_transient
-	 * @covers ::get_transient
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30380' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_transient' )]
 	public function test_nonexistent_key_old_timeout() {
 		// Create a transient.
 		$key = 'test_transient';

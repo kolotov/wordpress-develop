@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group author
- * @group user
  *
- * @covers ::get_the_author_posts
  */
+#[\PHPUnit\Framework\Attributes\Group( 'author' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_author_posts' )]
 class Tests_User_GetTheAuthorPosts extends WP_UnitTestCase {
 	protected static $author_id = 0;
 	protected static $post_id   = 0;
@@ -46,8 +46,8 @@ class Tests_User_GetTheAuthorPosts extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30904
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30904' )]
 	public function test_get_the_author_posts_with_custom_post_type() {
 		register_post_type( 'wptests_pt' );
 

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group editor
  *
- * @covers ::_enable_content_editor_for_navigation_post_type
  */
+#[\PHPUnit\Framework\Attributes\Group( 'editor' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_enable_content_editor_for_navigation_post_type' )]
 class Tests_Editor_EnableContentEditorForNavigationPostType extends WP_UnitTestCase {
 	const NAVIGATION_POST_TYPE = 'wp_navigation';
 
@@ -14,15 +14,15 @@ class Tests_Editor_EnableContentEditorForNavigationPostType extends WP_UnitTestC
 	}
 
 	/**
-	 * @ticket 56266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56266' )]
 	public function test_should_be_enabled_by_default() {
 		$this->assertTrue( post_type_supports( static::NAVIGATION_POST_TYPE, 'editor' ) );
 	}
 
 	/**
-	 * @ticket 56266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56266' )]
 	public function test_should_enable() {
 		$post = $this->create_post( static::NAVIGATION_POST_TYPE );
 
@@ -32,8 +32,8 @@ class Tests_Editor_EnableContentEditorForNavigationPostType extends WP_UnitTestC
 	}
 
 	/**
-	 * @ticket 56266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56266' )]
 	public function test_should_reenable_when_disabled() {
 		$post = $this->create_post( static::NAVIGATION_POST_TYPE );
 
@@ -47,11 +47,11 @@ class Tests_Editor_EnableContentEditorForNavigationPostType extends WP_UnitTestC
 	}
 
 	/**
-	 * @dataProvider data_should_not_enable
-	 * @ticket       56266
 	 *
 	 * @param string $post_type Post type to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_enable' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56266' )]
 	public function test_should_not_enable( $post_type ) {
 		$post = $this->create_post( $post_type );
 
@@ -65,7 +65,7 @@ class Tests_Editor_EnableContentEditorForNavigationPostType extends WP_UnitTestC
 	 *
 	 * @return array
 	 */
-	public function data_should_not_enable() {
+	public static function data_should_not_enable() {
 		return array(
 			'invalid post type'   => array( 'book' ),
 			'attachments'         => array( 'attachments' ),
@@ -76,11 +76,11 @@ class Tests_Editor_EnableContentEditorForNavigationPostType extends WP_UnitTestC
 	}
 
 	/**
-	 * @dataProvider data_should_not_change_post_type_support
-	 * @ticket       56266
 	 *
 	 * @param string $post_type Post type to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_change_post_type_support' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56266' )]
 	public function test_should_not_change_post_type_support( $post_type ) {
 		$post = $this->create_post( $post_type );
 
@@ -98,7 +98,7 @@ class Tests_Editor_EnableContentEditorForNavigationPostType extends WP_UnitTestC
 	 *
 	 * @return array
 	 */
-	public function data_should_not_change_post_type_support() {
+	public static function data_should_not_change_post_type_support() {
 		return array(
 			'post'                => array( 'post' ),
 			'page'                => array( 'page' ),

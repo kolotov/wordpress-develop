@@ -3,24 +3,33 @@
 /**
  * Tests for the `wp_generate_attachment_metadata()` function.
  *
- * @group media
- * @covers ::wp_generate_attachment_metadata
  */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_generate_attachment_metadata' )]
 class Tests_Media_wpGenerateAttachmentMetadata extends WP_UnitTestCase {
 
 	public function tear_down() {
+		remove_filter( 'upload_mimes', array( $this, 'allow_psd_upload' ) );
 		$this->remove_added_uploads();
 
 		parent::tear_down();
 	}
 
+	public function allow_psd_upload( $mimes ) {
+		$mimes['psd'] = 'application/octet-stream';
+
+		return $mimes;
+	}
+
 	/**
 	 * Tests that filesize meta is generated for JPEGs.
 	 *
-	 * @ticket 49412
 	 *
-	 * @covers ::wp_create_image_subsizes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49412' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_create_image_subsizes' )]
 	public function test_wp_generate_attachment_metadata_includes_filesize_in_jpg_meta() {
 		$attachment = $this->factory->attachment->create_upload_object( DIR_TESTDATA . '/images/canola.jpg' );
 
@@ -38,10 +47,10 @@ class Tests_Media_wpGenerateAttachmentMetadata extends WP_UnitTestCase {
 	/**
 	 * Checks that filesize meta is generated for PNGs.
 	 *
-	 * @ticket 49412
 	 *
-	 * @covers ::wp_create_image_subsizes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49412' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_create_image_subsizes' )]
 	public function test_wp_generate_attachment_metadata_includes_filesize_in_png_meta() {
 		$attachment = $this->factory->attachment->create_upload_object( DIR_TESTDATA . '/images/test-image.png' );
 
@@ -53,8 +62,8 @@ class Tests_Media_wpGenerateAttachmentMetadata extends WP_UnitTestCase {
 	/**
 	 * Checks that filesize meta is generated for PDFs.
 	 *
-	 * @ticket 49412
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49412' )]
 	public function test_wp_generate_attachment_metadata_includes_filesize_in_pdf_meta() {
 		$attachment = $this->factory->attachment->create_upload_object( DIR_TESTDATA . '/images/wordpress-gsoc-flyer.pdf' );
 
@@ -66,18 +75,12 @@ class Tests_Media_wpGenerateAttachmentMetadata extends WP_UnitTestCase {
 	/**
 	 * Checks that filesize meta is generated for PSDs.
 	 *
-	 * @ticket 49412
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49412' )]
 	public function test_wp_generate_attachment_metadata_includes_filesize_in_psd_meta() {
 		if ( is_multisite() ) {
 			// PSD mime type is not allowed by default on multisite.
-			add_filter(
-				'upload_mimes',
-				static function ( $mimes ) {
-					$mimes['psd'] = 'application/octet-stream';
-					return $mimes;
-				}
-			);
+			add_filter( 'upload_mimes', array( $this, 'allow_psd_upload' ) );
 		}
 
 		$attachment = $this->factory->attachment->create_upload_object( DIR_TESTDATA . '/images/test-image.psd' );
@@ -90,8 +93,8 @@ class Tests_Media_wpGenerateAttachmentMetadata extends WP_UnitTestCase {
 	/**
 	 * Checks that large PNG uploads generate PNG `-scaled` thumbnails.
 	 *
-	 * @ticket 62900
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62900' )]
 	public function test_wp_generate_attachment_metadata_png_thumbnail_smaller_than_original() {
 		// Use the test-image-large.png test file.
 		$attachment = $this->factory->attachment->create_upload_object( DIR_TESTDATA . '/images/png-tests/test-image-large.png' );

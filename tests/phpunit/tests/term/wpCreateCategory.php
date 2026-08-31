@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group taxonomy
- * @covers ::wp_create_category
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_create_category' )]
 class Tests_Term_WpCreateCategory extends WP_UnitTestCase {
 
 	/**

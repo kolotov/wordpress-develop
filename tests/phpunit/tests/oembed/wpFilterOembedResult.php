@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group oembed
  *
- * @covers ::wp_filter_oembed_result
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_filter_oembed_result' )]
+#[\PHPUnit\Framework\Attributes\Group( 'oembed' )]
 class Tests_oEmbed_wpFilterOembedResult extends WP_UnitTestCase {
 
 	public function test_filter_oembed_result_trusted_malicious_iframe() {
@@ -158,8 +158,8 @@ EOD;
 	}
 
 	/**
-	 * @dataProvider data_wp_filter_pre_oembed_custom_result
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_filter_pre_oembed_custom_result' )]
 	public function test_wp_filter_pre_oembed_custom_result( $html, $expected ) {
 		$data   = (object) array(
 			'type'  => 'rich',
@@ -170,7 +170,7 @@ EOD;
 		$this->assertEqualHTML( $expected, $actual );
 	}
 
-	public function data_wp_filter_pre_oembed_custom_result() {
+	public static function data_wp_filter_pre_oembed_custom_result() {
 		return array(
 			array(
 				'<blockquote></blockquote><iframe title=""></iframe>',
@@ -192,8 +192,8 @@ EOD;
 	}
 
 	/**
-	 * @group feed
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'feed' )]
 	public function test_filter_feed_content() {
 		$html   = '<blockquote></blockquote><iframe></iframe>';
 		$actual = _oembed_filter_feed_content( wp_filter_oembed_result( $html, (object) array( 'type' => 'rich' ), '' ) );

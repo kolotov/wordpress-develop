@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_deletePost extends WP_XMLRPC_UnitTestCase {
 
 	public function test_invalid_username_password() {

@@ -1,22 +1,22 @@
 <?php
 
 /**
- * @group functions
  *
- * @covers ::wp_nonce_url
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_nonce_url' )]
 class Tests_Functions_WpNonceUrl extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_nonce_url() appends the nonce name and value to the URL.
 	 *
-	 * @ticket 54870
 	 *
-	 * @dataProvider data_should_append_nonce_name_and_value
 	 *
 	 * @param string     $actionurl URL to add nonce action.
 	 * @param int|string $action    Optional. Nonce action name. Default -1.
 	 * @param string     $name      Optional. Nonce name. Default '_wpnonce'.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54870' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_append_nonce_name_and_value' )]
 	public function test_should_append_nonce_name_and_value( $actionurl, $action = -1, $name = '_wpnonce' ) {
 		$actual        = wp_nonce_url( $actionurl, $action, $name );
 		$url_with_name = "$actionurl?$name=";
@@ -39,7 +39,7 @@ class Tests_Functions_WpNonceUrl extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_append_nonce_name_and_value() {
+	public static function data_should_append_nonce_name_and_value() {
 		return array(
 			'http:// and default action/name'             => array(
 				'actionurl' => 'http://example.org/',
@@ -98,13 +98,13 @@ class Tests_Functions_WpNonceUrl extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_nonce_url() handles existing query args.
 	 *
-	 * @ticket 54870
 	 *
-	 * @dataProvider data_should_handle_existing_query_args
 	 *
 	 * @param string $actionurl URL to add nonce action.
 	 * @param string $expected  The expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54870' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_handle_existing_query_args' )]
 	public function test_should_handle_existing_query_args( $actionurl, $expected ) {
 		$actual = wp_nonce_url( $actionurl );
 
@@ -126,7 +126,7 @@ class Tests_Functions_WpNonceUrl extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_handle_existing_query_args() {
+	public static function data_should_handle_existing_query_args() {
 		return array(
 			'one query arg'            => array(
 				'actionurl' => 'http://example.org/?hello=world',

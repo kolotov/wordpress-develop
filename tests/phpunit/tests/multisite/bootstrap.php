@@ -3,10 +3,10 @@
 /**
  * Tests specific to the bootstrap process of Multisite.
  *
- * @group ms-bootstrap
- * @group ms-required
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-bootstrap' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 
 	protected static $network_ids;
@@ -115,20 +115,20 @@ class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27003
-	 * @dataProvider data_get_network_by_path
 	 *
 	 * @param string $expected_key The array key associated with expected data for the test.
 	 * @param string $domain       The requested domain.
 	 * @param string $path         The requested path.
 	 * @param string $message      The message to pass for failed tests.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27003' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_network_by_path' )]
 	public function test_get_network_by_path( $expected_key, $domain, $path, $message ) {
 		$network = get_network_by_path( $domain, $path );
 		$this->assertSame( self::$network_ids[ $expected_key ], $network->id, $message );
 	}
 
-	public function data_get_network_by_path() {
+	public static function data_get_network_by_path() {
 		return array(
 			array( 'wordpress.org/', 'wordpress.org', '/', 'A standard domain and path request should work.' ),
 			array( 'wordpress.net/', 'wordpress.net', '/notapath/', 'A missing path on a top level domain should find the correct network.' ),
@@ -146,14 +146,14 @@ class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37217
-	 * @dataProvider data_get_network_by_path_with_zero_path_segments
 	 *
 	 * @param string $expected_key The array key associated with expected data for the test.
 	 * @param string $domain       The requested domain.
 	 * @param string $path         The requested path.
 	 * @param string $message      The message to pass for failed tests.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37217' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_network_by_path_with_zero_path_segments' )]
 	public function test_get_network_by_path_with_zero_path_segments( $expected_key, $domain, $path, $message ) {
 		add_filter( 'network_by_path_segments_count', '__return_zero' );
 
@@ -164,7 +164,7 @@ class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 		$this->assertSame( self::$network_ids[ $expected_key ], $network->id, $message );
 	}
 
-	public function data_get_network_by_path_with_zero_path_segments() {
+	public static function data_get_network_by_path_with_zero_path_segments() {
 		return array(
 			array( 'wordpress.org/', 'wordpress.org', '/', 'A standard domain and path request should work.' ),
 			array( 'wordpress.net/', 'wordpress.net', '/notapath/', 'A network matching a top level domain should be found regardless of path.' ),
@@ -194,26 +194,26 @@ class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27003
-	 * @ticket 27927
-	 * @dataProvider data_get_site_by_path
 	 *
 	 * @param string $expected_key The array key associated with expected data for the test.
 	 * @param string $domain       The requested domain.
 	 * @param string $path         The requested path.
 	 * @param int    $segments     Optional. Number of segments to use in `get_site_by_path()`.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27003' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '27927' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_site_by_path' )]
 	public function test_get_site_by_path( $expected_key, $domain, $path, $segments = null ) {
 		$site = get_site_by_path( $domain, $path, $segments );
 
 		if ( $expected_key ) {
-			$this->assertEquals( self::$site_ids[ $expected_key ], $site->blog_id );
+			$this->assertSame( self::$site_ids[ $expected_key ], (int) $site->blog_id );
 		} else {
 			$this->assertFalse( $site );
 		}
 	}
 
-	public function data_get_site_by_path() {
+	public static function data_get_site_by_path() {
 		return array(
 			array( 'wordpress.org/', 'wordpress.org', '/notapath/' ),
 			array( 'wordpress.org/', 'www.wordpress.org', '/notapath/' ),
@@ -247,14 +247,14 @@ class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27884
-	 * @dataProvider data_multisite_bootstrap
 	 *
 	 * @param string $site_key    The array key associated with the expected site for the test.
 	 * @param string $network_key The array key associated with the expected network for the test.
 	 * @param string $domain      The requested domain.
 	 * @param string $path        The requested path.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27884' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_multisite_bootstrap' )]
 	public function test_multisite_bootstrap( $site_key, $network_key, $domain, $path ) {
 		global $current_blog;
 
@@ -275,7 +275,7 @@ class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 		$this->assertEqualSetsWithIndex( $expected, $actual );
 	}
 
-	public function data_multisite_bootstrap() {
+	public static function data_multisite_bootstrap() {
 		return array(
 			array( 'wordpress.org/', 'wordpress.org/', 'wordpress.org', '/' ),
 			array( 'wordpress.org/', 'wordpress.org/', 'wordpress.org', '/2014/04/23/hello-world/' ),
@@ -294,8 +294,8 @@ class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27884
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27884' )]
 	public function test_multisite_bootstrap_additional_path_segments() {
 		global $current_blog;
 
@@ -319,8 +319,8 @@ class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37053
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37053' )]
 	public function test_get_site_by_path_returns_wp_site() {
 		add_filter( 'pre_get_site_by_path', array( $this, 'filter_pre_get_site_by_path' ), 10, 3 );
 

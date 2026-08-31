@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @group date
- * @group datetime
- * @group comment
  *
- * @covers ::get_comment_date
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_date' )]
 class Tests_Date_GetCommentDate extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 51184
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_comment_date_returns_correct_time_with_comment_id() {
 		$c = self::factory()->comment->create( array( 'comment_date' => '2020-08-29 01:51:00' ) );
 
@@ -19,8 +19,8 @@ class Tests_Date_GetCommentDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51184
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_comment_date_returns_correct_time_with_empty_format() {
 		$c = self::factory()->comment->create( array( 'comment_date' => '2020-08-29 01:51:00' ) );
 
@@ -29,8 +29,8 @@ class Tests_Date_GetCommentDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51184
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_comment_time_returns_correct_time() {
 		$c = self::factory()->comment->create( array( 'comment_date' => '2020-08-29 01:51:00' ) );
 
@@ -39,8 +39,8 @@ class Tests_Date_GetCommentDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51184
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_comment_time_returns_correct_time_with_empty_format() {
 		$c = self::factory()->comment->create( array( 'comment_date' => '2020-08-29 01:51:00' ) );
 

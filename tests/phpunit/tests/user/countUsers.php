@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @group user
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_CountUsers extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 22993
 	 *
-	 * @dataProvider data_count_users_strategies
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22993' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_count_users_strategies' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_count_users_is_accurate( $strategy ) {
 		// Setup users.
 		$admin       = self::factory()->user->create(
@@ -67,13 +67,13 @@ class Tests_User_CountUsers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22993
-	 * @ticket 36196
-	 * @group multisite
-	 * @group ms-required
 	 *
-	 * @dataProvider data_count_users_strategies
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22993' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '36196' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_count_users_strategies' )]
 	public function test_count_users_multisite_is_accurate( $strategy ) {
 		// Setup users.
 		$admin       = self::factory()->user->create(
@@ -176,12 +176,12 @@ class Tests_User_CountUsers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42014
-	 * @group multisite
-	 * @group ms-required
 	 *
-	 * @dataProvider data_count_users_strategies
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42014' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_count_users_strategies' )]
 	public function test_count_users_multisite_queries_correct_roles( $strategy ) {
 		$site_id = (int) self::factory()->blog->create();
 
@@ -205,10 +205,10 @@ class Tests_User_CountUsers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34495
 	 *
-	 * @dataProvider data_count_users_strategies
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34495' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_count_users_strategies' )]
 	public function test_count_users_is_accurate_with_multiple_roles( $strategy ) {
 
 		// Setup users.
@@ -249,10 +249,10 @@ class Tests_User_CountUsers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29785
 	 *
-	 * @dataProvider data_count_users_strategies
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29785' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_count_users_strategies' )]
 	public function test_count_users_should_not_count_users_who_are_not_in_posts_table( $strategy ) {
 		global $wpdb;
 
@@ -278,7 +278,7 @@ class Tests_User_CountUsers extends WP_UnitTestCase {
 		$this->assertSameSets( $count, $count2 );
 	}
 
-	public function data_count_users_strategies() {
+	public static function data_count_users_strategies() {
 		return array(
 			array(
 				'time',

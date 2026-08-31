@@ -2,9 +2,9 @@
 /**
  * Test WP_Session_Tokens and WP_User_Meta_Session_Tokens, in wp-includes/session.php
  *
- * @group user
- * @group session
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\Group( 'session' )]
 class Tests_User_Session extends WP_UnitTestCase {
 
 	/**

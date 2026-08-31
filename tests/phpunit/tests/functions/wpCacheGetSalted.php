@@ -3,18 +3,18 @@
 /**
  * Tests for the behavior of `wp_cache_get_salted()`
  *
- * @group functions
- * @group cache
  *
- * @covers ::wp_cache_get_salted
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_cache_get_salted' )]
 class Tests_Functions_wpCacheGetSalted extends WP_UnitTestCase {
 
 	/**
 	 * Test that wp_cache_get_salted returns the cached data.
 	 *
-	 * @ticket 59592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59592' )]
 	public function test_wp_cache_get_salted_return_data() {
 		$last_changed = wp_cache_get_last_changed( 'query_data' );
 		$cache_value  = array(
@@ -34,8 +34,8 @@ class Tests_Functions_wpCacheGetSalted extends WP_UnitTestCase {
 	/**
 	 * Test that wp_cache_get_salted returns the cached data with a salt.
 	 *
-	 * @ticket 59592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59592' )]
 	public function test_wp_cache_get_salted_return_data_array_salt() {
 		$last_changed        = array(
 			wp_cache_get_last_changed( 'query_data_1' ),
@@ -59,10 +59,10 @@ class Tests_Functions_wpCacheGetSalted extends WP_UnitTestCase {
 	/**
 	 * Test that wp_cache_get_salted returns false when no data is cached.
 	 *
-	 * @dataProvider data_wp_cache_get_salted_return_false
 	 *
-	 * @ticket 59592
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_cache_get_salted_return_false' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59592' )]
 	public function test_wp_cache_get_salted_return_false( $cache_value ) {
 		wp_cache_set( 'cache_key', $cache_value, 'query_data' );
 		$last_changed = wp_cache_get_last_changed( 'query_data' );
@@ -74,7 +74,7 @@ class Tests_Functions_wpCacheGetSalted extends WP_UnitTestCase {
 	 *
 	 * @return array[] Data provider.
 	 */
-	public function data_wp_cache_get_salted_return_false() {
+	public static function data_wp_cache_get_salted_return_false() {
 		return array(
 			array( false ),
 			array( null ),

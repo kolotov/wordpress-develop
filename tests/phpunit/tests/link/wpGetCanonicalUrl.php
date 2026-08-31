@@ -2,10 +2,10 @@
 /**
  * Tests for the wp_get_canonical_url() function.
  *
- * @group link
- * @group canonical
- * @covers ::wp_get_canonical_url
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\Group( 'canonical' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_canonical_url' )]
 class Tests_Link_WpGetCanonicalUrl extends WP_UnitTestCase {
 
 	/**
@@ -170,8 +170,8 @@ class Tests_Link_WpGetCanonicalUrl extends WP_UnitTestCase {
 	/**
 	 * Tests that attachments with 'inherit' status properly receive a canonical URL.
 	 *
-	 * @ticket 63041
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63041' )]
 	public function test_attachment_canonical_url() {
 		$this->go_to( get_attachment_link( self::$attachment_id ) );
 		$canonical_url = wp_get_canonical_url( self::$attachment_id );

@@ -7,10 +7,12 @@
  * @subpackage UnitTests
  * @since 7.1.0
  *
- * @group privacy
  *
- * @covers ::_reset_privacy_policy_page_for_post
  */
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_reset_privacy_policy_page_for_post' )]
 class Tests_Privacy_WpPrivacyResetPolicyPageForPost extends WP_UnitTestCase {
 	/**
 	 * ID of the page set as the Privacy Policy page.
@@ -35,8 +37,8 @@ class Tests_Privacy_WpPrivacyResetPolicyPageForPost extends WP_UnitTestCase {
 	 * Tests that trashing the Privacy Policy page does NOT reset the option,
 	 * so that restoring from trash preserves the assignment.
 	 *
-	 * @ticket 56694
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56694' )]
 	public function test_trashing_privacy_policy_page_does_not_reset_option(): void {
 		wp_trash_post( $this->policy_page_id );
 
@@ -50,8 +52,8 @@ class Tests_Privacy_WpPrivacyResetPolicyPageForPost extends WP_UnitTestCase {
 	/**
 	 * Tests that permanently deleting the Privacy Policy page resets the option to 0.
 	 *
-	 * @ticket 56694
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56694' )]
 	public function test_deleting_privacy_policy_page_resets_option(): void {
 		wp_delete_post( $this->policy_page_id, true );
 
@@ -61,8 +63,8 @@ class Tests_Privacy_WpPrivacyResetPolicyPageForPost extends WP_UnitTestCase {
 	/**
 	 * Tests that trashing a different page does not change the option.
 	 *
-	 * @ticket 56694
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56694' )]
 	public function test_trashing_a_different_page_does_not_reset_option(): void {
 		$other_page_id = self::factory()->post->create( array( 'post_type' => 'page' ) );
 		$this->assertIsInt( $other_page_id );
@@ -78,8 +80,8 @@ class Tests_Privacy_WpPrivacyResetPolicyPageForPost extends WP_UnitTestCase {
 	/**
 	 * Tests that deleting a non-page post type does not change the option.
 	 *
-	 * @ticket 56694
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56694' )]
 	public function test_deleting_non_page_post_type_does_not_reset_option(): void {
 		$post_id = self::factory()->post->create( array( 'post_type' => 'post' ) );
 		$this->assertIsInt( $post_id );
@@ -96,10 +98,10 @@ class Tests_Privacy_WpPrivacyResetPolicyPageForPost extends WP_UnitTestCase {
 	 * Tests that WP_Privacy_Policy_Content::notice() resets the option to 0
 	 * when the stored ID points to a page that no longer exists.
 	 *
-	 * @ticket 56694
 	 *
-	 * @covers WP_Privacy_Policy_Content::notice
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56694' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Privacy_Policy_Content', 'notice' )]
 	public function test_notice_self_heals_when_policy_page_does_not_exist(): void {
 		require_once ABSPATH . 'wp-admin/includes/class-wp-privacy-policy-content.php';
 
@@ -128,8 +130,8 @@ class Tests_Privacy_WpPrivacyResetPolicyPageForPost extends WP_UnitTestCase {
 	 * Tests that _reset_privacy_policy_page_for_post() does not call
 	 * update_option() when wp_page_for_privacy_policy is already 0.
 	 *
-	 * @ticket 56694
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56694' )]
 	public function test_no_update_option_when_policy_page_already_zero(): void {
 		update_option( 'wp_page_for_privacy_policy', 0 );
 
@@ -157,8 +159,8 @@ class Tests_Privacy_WpPrivacyResetPolicyPageForPost extends WP_UnitTestCase {
 	 * Tests that untrashing the Privacy Policy page preserves the option,
 	 * confirming the trash/restore cycle keeps the assignment intact.
 	 *
-	 * @ticket 56694
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56694' )]
 	public function test_untrashing_privacy_policy_page_preserves_option(): void {
 		wp_trash_post( $this->policy_page_id );
 		wp_untrash_post( $this->policy_page_id );

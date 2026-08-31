@@ -2,8 +2,13 @@
 /**
  * Test WP_User_Query, in wp-includes/class-wp-user-query.php.
  *
- * @group user
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+
+
+
+
+
 class Tests_User_Query extends WP_UnitTestCase {
 	protected static $author_ids;
 	protected static $sub_ids;
@@ -152,8 +157,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55594
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55594' )]
 	public function test_get_all_primed_users() {
 		$filter = new MockAction();
 		add_filter( 'update_user_metadata_cache', array( $filter, 'filter' ), 10, 2 );
@@ -172,8 +177,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39297
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39297' )]
 	public function test_get_total_is_int() {
 		$users       = new WP_User_Query( array( 'blog_id' => get_current_blog_id() ) );
 		$total_users = $users->get_total();
@@ -182,8 +187,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_orderby_should_convert_non_prefixed_keys
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_orderby_should_convert_non_prefixed_keys' )]
 	public function test_orderby_should_convert_non_prefixed_keys( $short_key, $full_key ) {
 		$q = new WP_User_Query(
 			array(
@@ -194,7 +199,7 @@ class Tests_User_Query extends WP_UnitTestCase {
 		$this->assertStringContainsString( "ORDER BY $full_key", $q->query_orderby );
 	}
 
-	public function data_orderby_should_convert_non_prefixed_keys() {
+	public static function data_orderby_should_convert_non_prefixed_keys() {
 		return array(
 			array( 'nicename', 'user_nicename' ),
 			array( 'email', 'user_email' ),
@@ -224,8 +229,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27887
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27887' )]
 	public function test_orderby_meta_value_num() {
 		update_user_meta( self::$author_ids[0], 'user_age', '101' );
 		update_user_meta( self::$author_ids[1], 'user_age', '20' );
@@ -246,8 +251,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31265
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31265' )]
 	public function test_orderby_somekey_where_meta_key_is_somekey() {
 		update_user_meta( self::$author_ids[0], 'foo', 'zzz' );
 		update_user_meta( self::$author_ids[1], 'foo', 'aaa' );
@@ -268,8 +273,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31265
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31265' )]
 	public function test_orderby_clause_key() {
 		add_user_meta( self::$author_ids[0], 'foo', 'aaa' );
 		add_user_meta( self::$author_ids[1], 'foo', 'zzz' );
@@ -293,8 +298,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31265
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31265' )]
 	public function test_orderby_clause_key_as_secondary_sort() {
 		$u1 = self::factory()->user->create(
 			array(
@@ -336,8 +341,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31265
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31265' )]
 	public function test_orderby_more_than_one_clause_key() {
 		add_user_meta( self::$author_ids[0], 'foo', 'jjj' );
 		add_user_meta( self::$author_ids[1], 'foo', 'zzz' );
@@ -370,8 +375,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30064
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30064' )]
 	public function test_orderby_include_with_empty_include() {
 		$q = new WP_User_Query(
 			array(
@@ -383,8 +388,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30064
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30064' )]
 	public function test_orderby_include() {
 		global $wpdb;
 
@@ -404,8 +409,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30064
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30064' )]
 	public function test_orderby_include_duplicate_values() {
 		global $wpdb;
 
@@ -425,8 +430,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31265
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31265' )]
 	public function test_orderby_space_separated() {
 		$q = new WP_User_Query(
 			array(
@@ -439,8 +444,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31265
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31265' )]
 	public function test_orderby_flat_array() {
 		$q = new WP_User_Query(
 			array(
@@ -452,8 +457,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31265
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31265' )]
 	public function test_orderby_array_contains_invalid_item() {
 		$q = new WP_User_Query(
 			array(
@@ -465,8 +470,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31265
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31265' )]
 	public function test_orderby_array_contains_all_invalid_items() {
 		$q = new WP_User_Query(
 			array(
@@ -478,8 +483,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31265
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31265' )]
 	public function test_orderby_array() {
 		$q = new WP_User_Query(
 			array(
@@ -495,8 +500,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31265
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31265' )]
 	public function test_orderby_array_should_discard_invalid_columns() {
 		$q = new WP_User_Query(
 			array(
@@ -512,8 +517,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28631
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28631' )]
 	public function test_number() {
 		// +1 for the default user created by the test suite.
 		$users = new WP_User_Query( array( 'blog_id' => get_current_blog_id() ) );
@@ -549,8 +554,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21119
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21119' )]
 	public function test_prepare_query() {
 		$query = new WP_User_Query();
 		$this->assertEmpty( $query->query_fields );
@@ -614,8 +619,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23849
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23849' )]
 	public function test_meta_query_with_role() {
 		add_user_meta( self::$author_ids[0], 'foo', 'bar' );
 		add_user_meta( self::$author_ids[1], 'foo', 'baz' );
@@ -658,8 +663,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_roles_and_caps_should_be_populated_for_explicit_value_of_blog_id_on_nonms() {
 		$query = new WP_User_Query(
 			array(
@@ -677,8 +682,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_roles_and_caps_should_be_populated_for_explicit_value_of_current_blog_id_on_ms() {
 		$query = new WP_User_Query(
 			array(
@@ -696,8 +701,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_roles_and_caps_should_be_populated_for_explicit_value_of_different_blog_id_on_ms_when_fields_all_with_meta() {
 		$b = self::factory()->blog->create();
 
@@ -720,9 +725,9 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31878
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31878' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_roles_and_caps_should_be_populated_for_explicit_value_of_different_blog_id_on_ms_when_fields_all() {
 		$b = self::factory()->blog->create();
 		add_user_to_blog( $b, self::$author_ids[0], 'author' );
@@ -744,10 +749,10 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32019
-	 * @group ms-required
 	 * @expectedDeprecated WP_User_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32019' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_who_authors() {
 		$b = self::factory()->blog->create();
 
@@ -770,10 +775,10 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32019
-	 * @group ms-required
 	 * @expectedDeprecated WP_User_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32019' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_who_authors_should_work_alongside_meta_query() {
 		$b = self::factory()->blog->create();
 
@@ -805,10 +810,10 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36724
-	 * @group ms-required
 	 * @expectedDeprecated WP_User_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36724' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_who_authors_should_work_alongside_meta_params() {
 		$b = self::factory()->blog->create();
 
@@ -836,8 +841,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32250
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32250' )]
 	public function test_has_published_posts_with_value_true_should_show_authors_of_posts_in_public_post_types() {
 		register_post_type( 'wptests_pt_public', array( 'public' => true ) );
 		register_post_type( 'wptests_pt_private', array( 'public' => false ) );
@@ -870,8 +875,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32250
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32250' )]
 	public function test_has_published_posts_should_obey_post_types() {
 		register_post_type( 'wptests_pt_public', array( 'public' => true ) );
 		register_post_type( 'wptests_pt_private', array( 'public' => false ) );
@@ -911,8 +916,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32250
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32250' )]
 	public function test_has_published_posts_should_ignore_non_published_posts() {
 		register_post_type( 'wptests_pt_public', array( 'public' => true ) );
 		register_post_type( 'wptests_pt_private', array( 'public' => false ) );
@@ -952,9 +957,9 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32250
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32250' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_has_published_posts_should_respect_blog_id() {
 		$blogs = self::factory()->blog->create_many( 2 );
 
@@ -997,8 +1002,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32592' )]
 	public function test_top_level_or_meta_query_should_eliminate_duplicate_matches() {
 		add_user_meta( self::$author_ids[0], 'foo', 'bar' );
 		add_user_meta( self::$author_ids[1], 'foo', 'bar' );
@@ -1027,8 +1032,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32592' )]
 	public function test_nested_or_meta_query_should_eliminate_duplicate_matches() {
 		add_user_meta( self::$author_ids[0], 'foo', 'bar' );
 		add_user_meta( self::$author_ids[1], 'foo', 'bar' );
@@ -1065,8 +1070,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36624' )]
 	public function test_nicename_returns_user_with_nicename() {
 		wp_update_user(
 			array(
@@ -1089,8 +1094,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36624' )]
 	public function test_nicename__in_returns_users_with_included_nicenames() {
 		wp_update_user(
 			array(
@@ -1127,8 +1132,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36624' )]
 	public function test_nicename__not_in_returns_users_without_included_nicenames() {
 		wp_update_user(
 			array(
@@ -1165,8 +1170,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36624' )]
 	public function test_orderby_nicename__in() {
 		wp_update_user(
 			array(
@@ -1204,8 +1209,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36624' )]
 	public function test_login_returns_user_with_login() {
 
 		$user_login = get_userdata( self::$author_ids[0] )->user_login;
@@ -1224,8 +1229,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36624' )]
 	public function test_login__in_returns_users_with_included_logins() {
 		$user_login1 = get_userdata( self::$author_ids[0] )->user_login;
 		$user_login2 = get_userdata( self::$author_ids[1] )->user_login;
@@ -1245,8 +1250,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36624' )]
 	public function test_login__not_in_returns_users_without_included_logins() {
 		$user_login1 = get_userdata( self::$author_ids[0] )->user_login;
 		$user_login2 = get_userdata( self::$author_ids[1] )->user_login;
@@ -1266,8 +1271,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36624' )]
 	public function test_orderby_login__in() {
 		$user_login1 = get_userdata( self::$author_ids[0] )->user_login;
 		$user_login2 = get_userdata( self::$author_ids[1] )->user_login;
@@ -1288,8 +1293,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25145
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25145' )]
 	public function test_paged() {
 		$q = new WP_User_Query(
 			array(
@@ -1305,8 +1310,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33449
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33449' )]
 	public function test_query_vars_should_be_filled_in_after_pre_get_users() {
 		$query_vars = array( 'blog_id', 'role', 'meta_key', 'meta_value', 'meta_compare', 'include', 'exclude', 'search', 'search_columns', 'orderby', 'order', 'offset', 'number', 'paged', 'count_total', 'fields', 'who', 'has_published_posts' );
 
@@ -1326,8 +1331,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_get_single_role_by_user_query() {
 		$wp_user_search = new WP_User_Query( array( 'role' => 'subscriber' ) );
 		$users          = $wp_user_search->get_results();
@@ -1336,8 +1341,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_get_multiple_roles_by_user_query() {
 		$wp_user_search = new WP_User_Query( array( 'role__in' => array( 'subscriber', 'editor' ) ) );
 		$users          = $wp_user_search->get_results();
@@ -1345,8 +1350,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_get_single_role_by_string() {
 		$users = get_users(
 			array(
@@ -1358,8 +1363,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_get_single_role_by_string_which_is_similar() {
 		$another_editor = self::factory()->user->create(
 			array(
@@ -1381,8 +1386,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_get_single_role_by_array() {
 		$users = get_users(
 			array(
@@ -1394,8 +1399,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_get_multiple_roles_should_only_match_users_who_have_each_role() {
 		$users = new WP_User_Query( array( 'role' => array( 'subscriber', 'editor' ) ) );
 		$users = $users->get_results();
@@ -1416,8 +1421,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_get_multiple_roles_or() {
 		$users = new WP_User_Query( array( 'role__in' => array( 'subscriber', 'editor', 'administrator' ) ) );
 		$users = $users->get_results();
@@ -1428,8 +1433,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_get_multiple_roles_by_comma_separated_list() {
 		$users = get_users(
 			array(
@@ -1454,8 +1459,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_get_multiple_roles_with_meta() {
 		// Create administrator user + meta.
 		update_user_meta( self::$admin_ids[0], 'mk1', 1 );
@@ -1501,8 +1506,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_role_exclusion() {
 		$users = get_users(
 			array(
@@ -1524,8 +1529,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_role__in_role__not_in_combined() {
 		foreach ( self::$sub_ids as $subscriber ) {
 			$subscriber = get_user_by( 'ID', $subscriber );
@@ -1551,8 +1556,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_role__not_in_role_combined() {
 		$subscriber = get_user_by( 'ID', self::$sub_ids[0] );
 		$subscriber->add_role( 'editor' );
@@ -1568,8 +1573,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
 	public function test_role__not_in_user_without_role() {
 		$user_without_rule = get_user_by( 'ID', self::$sub_ids[0] );
 
@@ -1595,9 +1600,9 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_blog_id_should_restrict_by_blog_without_requiring_a_named_role() {
 		$sites = self::factory()->blog->create_many( 2 );
 
@@ -1615,10 +1620,10 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22212
-	 * @ticket 21119
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22212' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '21119' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_calling_prepare_query_a_second_time_should_not_add_another_cap_query_on_multisite() {
 		$site_id = get_current_blog_id();
 		add_user_to_blog( $site_id, self::$author_ids[0], 'author' );
@@ -1652,8 +1657,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39643
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39643' )]
 	public function test_search_by_display_name_only() {
 
 		$new_user1          = self::factory()->user->create(
@@ -1680,8 +1685,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39643
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39643' )]
 	public function test_search_by_display_name_only_ignore_others() {
 
 		$new_user1          = self::factory()->user->create(
@@ -1708,8 +1713,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44169
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44169' )]
 	public function test_users_pre_query_filter_should_bypass_database_query() {
 		add_filter( 'users_pre_query', array( __CLASS__, 'filter_users_pre_query' ), 10, 2 );
 
@@ -1733,8 +1738,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47719
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47719' )]
 	public function test_include_should_return_no_users_when_0() {
 		$query = new WP_User_Query(
 			array(
@@ -1753,9 +1758,9 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_get_single_capability_by_string() {
 		$wp_user_search = new WP_User_Query( array( 'capability' => 'install_plugins' ) );
 		$users          = $wp_user_search->get_results();
@@ -1771,9 +1776,9 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_get_single_capability_by_string_multisite() {
 		$wp_user_search = new WP_User_Query( array( 'capability' => array( 'install_plugins' ) ) );
 		$users          = $wp_user_search->get_results();
@@ -1793,8 +1798,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_single_capability_invalid() {
 		$wp_user_search = new WP_User_Query( array( 'capability' => 'foo_bar' ) );
 		$users          = $wp_user_search->get_results();
@@ -1803,8 +1808,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_single_capability_by_array() {
 		$wp_user_search = new WP_User_Query( array( 'capability' => array( 'install_plugins' ) ) );
 		$users          = $wp_user_search->get_results();
@@ -1820,8 +1825,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_single_capability_added_to_user() {
 		foreach ( self::$sub_ids as $subscriber ) {
 			$subscriber = get_user_by( 'ID', $subscriber );
@@ -1840,8 +1845,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_multiple_capabilities_should_only_match_users_who_have_each_capability_test() {
 		wp_roles()->add_role( 'role_1', 'Role 1', array( 'role_1_cap' => true ) );
 		wp_roles()->add_role( 'role_2', 'Role 2', array( 'role_2_cap' => true ) );
@@ -1865,8 +1870,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_multiple_capabilities_should_only_match_users_who_have_each_capability_added_to_user() {
 		$admin1 = get_user_by( 'ID', self::$admin_ids[0] );
 		$admin1->add_cap( 'custom_cap' );
@@ -1881,8 +1886,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_multiple_capabilities_or() {
 		$wp_user_search = new WP_User_Query( array( 'capability__in' => array( 'publish_posts', 'edit_posts' ) ) );
 		$users          = $wp_user_search->get_results();
@@ -1894,8 +1899,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_multiple_capabilities_or_added_to_user() {
 		$user = self::factory()->user->create_and_get( array( 'role' => 'subscriber' ) );
 		$user->add_cap( 'custom_cap' );
@@ -1910,8 +1915,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_capability_exclusion() {
 		$wp_user_search = new WP_User_Query( array( 'capability__not_in' => array( 'publish_posts', 'edit_posts' ) ) );
 		$users          = $wp_user_search->get_results();
@@ -1924,8 +1929,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_capability_exclusion_added_to_user() {
 		$user = self::factory()->user->create_and_get( array( 'role' => 'subscriber' ) );
 		$user->add_cap( 'custom_cap' );
@@ -1941,8 +1946,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_capability__in_capability__not_in_combined() {
 		$wp_user_search = new WP_User_Query(
 			array(
@@ -1960,9 +1965,9 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16841
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_get_single_capability_multisite_blog_id() {
 		$blog_id = self::factory()->blog->create();
 
@@ -1991,12 +1996,12 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53177
-	 * @dataProvider data_returning_field_subset_as_string
 	 *
 	 * @param string $field
 	 * @param mixed  $expected
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53177' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_returning_field_subset_as_string' )]
 	public function test_returning_field_subset_as_string( $field, $expected ) {
 		$q       = new WP_User_Query(
 			array(
@@ -2014,53 +2019,53 @@ class Tests_User_Query extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_returning_field_subset_as_string() {
+	public static function data_returning_field_subset_as_string() {
 		$data = array(
 			'id'            => array(
-				'fields'   => 'id',
+				'field'    => 'id',
 				'expected' => array( '1' ),
 			),
 			'ID'            => array(
-				'fields'   => 'ID',
+				'field'    => 'ID',
 				'expected' => array( '1' ),
 			),
 			'user_login'    => array(
-				'fields'   => 'user_login',
+				'field'    => 'user_login',
 				'expected' => array( 'admin' ),
 			),
 			'user_nicename' => array(
-				'fields'   => 'user_nicename',
+				'field'    => 'user_nicename',
 				'expected' => array( 'admin' ),
 			),
 			'user_email'    => array(
-				'fields'   => 'user_email',
+				'field'    => 'user_email',
 				'expected' => array( WP_TESTS_EMAIL ),
 			),
 			'user_url'      => array(
-				'fields'   => 'user_url',
+				'field'    => 'user_url',
 				'expected' => array( wp_guess_url() ),
 			),
 			'user_status'   => array(
-				'fields'   => 'user_status',
+				'field'    => 'user_status',
 				'expected' => array( '0' ),
 			),
 			'display_name'  => array(
-				'fields'   => 'display_name',
+				'field'    => 'display_name',
 				'expected' => array( 'admin' ),
 			),
 			'invalid_field' => array(
-				'fields'   => 'invalid_field',
+				'field'    => 'invalid_field',
 				'expected' => array( '1' ),
 			),
 		);
 
 		if ( is_multisite() ) {
 			$data['spam']    = array(
-				'fields'   => 'spam',
+				'field'    => 'spam',
 				'expected' => array( '0' ),
 			);
 			$data['deleted'] = array(
-				'fields'   => 'deleted',
+				'field'    => 'deleted',
 				'expected' => array( '0' ),
 			);
 		}
@@ -2069,12 +2074,12 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53177
-	 * @dataProvider data_returning_field_subset_as_array
 	 *
 	 * @param array $field
 	 * @param mixed $expected
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53177' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_returning_field_subset_as_array' )]
 	public function test_returning_field_subset_as_array( $field, $expected ) {
 		$q       = new WP_User_Query(
 			array(
@@ -2096,55 +2101,55 @@ class Tests_User_Query extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_returning_field_subset_as_array() {
+	public static function data_returning_field_subset_as_array() {
 		$data = array(
 			'id'                 => array(
-				'fields'   => array( 'id' ),
+				'field'    => array( 'id' ),
 				'expected' => array(
 					'ID' => '1',
 					'id' => '1',
 				),
 			),
 			'ID'                 => array(
-				'fields'   => array( 'ID' ),
+				'field'    => array( 'ID' ),
 				'expected' => array(
 					'ID' => '1',
 					'id' => '1',
 				),
 			),
 			'user_login'         => array(
-				'fields'   => array( 'user_login' ),
+				'field'    => array( 'user_login' ),
 				'expected' => array( 'user_login' => 'admin' ),
 			),
 			'user_nicename'      => array(
-				'fields'   => array( 'user_nicename' ),
+				'field'    => array( 'user_nicename' ),
 				'expected' => array( 'user_nicename' => 'admin' ),
 			),
 			'user_email'         => array(
-				'fields'   => array( 'user_email' ),
+				'field'    => array( 'user_email' ),
 				'expected' => array( 'user_email' => WP_TESTS_EMAIL ),
 			),
 			'user_url'           => array(
-				'fields'   => array( 'user_url' ),
+				'field'    => array( 'user_url' ),
 				'expected' => array( 'user_url' => wp_guess_url() ),
 			),
 			'user_status'        => array(
-				'fields'   => array( 'user_status' ),
+				'field'    => array( 'user_status' ),
 				'expected' => array( 'user_status' => '0' ),
 			),
 			'display_name'       => array(
-				'fields'   => array( 'display_name' ),
+				'field'    => array( 'display_name' ),
 				'expected' => array( 'display_name' => 'admin' ),
 			),
 			'invalid_field'      => array(
-				'fields'   => array( 'invalid_field' ),
+				'field'    => array( 'invalid_field' ),
 				'expected' => array(
 					'ID' => '1',
 					'id' => '1',
 				),
 			),
 			'valid array inc id' => array(
-				'fields'   => array( 'display_name', 'user_email', 'id' ),
+				'field'    => array( 'display_name', 'user_email', 'id' ),
 				'expected' => array(
 					'display_name' => 'admin',
 					'user_email'   => WP_TESTS_EMAIL,
@@ -2153,7 +2158,7 @@ class Tests_User_Query extends WP_UnitTestCase {
 				),
 			),
 			'valid array inc ID' => array(
-				'fields'   => array( 'display_name', 'user_email', 'ID' ),
+				'field'    => array( 'display_name', 'user_email', 'ID' ),
 				'expected' => array(
 					'display_name' => 'admin',
 					'user_email'   => WP_TESTS_EMAIL,
@@ -2162,18 +2167,18 @@ class Tests_User_Query extends WP_UnitTestCase {
 				),
 			),
 			'partly valid array' => array(
-				'fields'   => array( 'display_name', 'invalid_field' ),
+				'field'    => array( 'display_name', 'invalid_field' ),
 				'expected' => array( 'display_name' => 'admin' ),
 			),
 		);
 
 		if ( is_multisite() ) {
 			$data['spam']    = array(
-				'fields'   => array( 'spam' ),
+				'field'    => array( 'spam' ),
 				'expected' => array( 'spam' => '0' ),
 			);
 			$data['deleted'] = array(
-				'fields'   => array( 'deleted' ),
+				'field'    => array( 'deleted' ),
 				'expected' => array( 'deleted' => '0' ),
 			);
 		}
@@ -2182,8 +2187,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53177
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53177' )]
 	public function test_returning_field_all() {
 		$q         = new WP_User_Query(
 			array(
@@ -2218,10 +2223,10 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53177
 	 *
-	 * @covers WP_User_Query::prepare_query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53177' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'prepare_query' )]
 	public function test_returning_field_user_registered() {
 		$q       = new WP_User_Query(
 			array(
@@ -2234,14 +2239,14 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_compat_fields
-	 * @ticket 58897
 	 *
-	 * @covers WP_User_Query::__get()
 	 *
 	 * @param string $property_name Property name to get.
 	 * @param mixed $expected       Expected value.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_compat_fields' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58897' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', '__get' )]
 	public function test_should_get_compat_fields( $property_name, $expected ) {
 		$user_query = new WP_User_Query();
 
@@ -2249,31 +2254,30 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58897
 	 *
-	 * @covers WP_User_Query::__get()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58897' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', '__get' )]
 	public function test_should_throw_deprecation_when_getting_dynamic_property() {
 		$user_query = new WP_User_Query();
 
-		$this->expectDeprecation();
-		$this->expectDeprecationMessage(
-			'WP_User_Query::__get(): ' .
-			'The property `undefined_property` is not declared. Getting a dynamic property is ' .
-			'deprecated since version 6.4.0! Instead, declare the property on the class.'
+		$this->assertExpectedUserDeprecation(
+			'WP_User_Query::__get(): The property `undefined_property` is not declared. Getting a dynamic property is deprecated since version 6.4.0! Instead, declare the property on the class.',
+			function () use ( $user_query ) {
+				$this->assertNull( $user_query->undefined_property, 'Getting a dynamic property should return null from WP_User_Query::__get()' );
+			}
 		);
-		$this->assertNull( $user_query->undefined_property, 'Getting a dynamic property should return null from WP_User_Query::__get()' );
 	}
 
 	/**
-	 * @dataProvider data_compat_fields
-	 * @ticket 58897
 	 *
-	 * @covers WP_User_Query::__set()
 	 *
 	 * @param string $property_name Property name to set.
 	 */
-	public function test_should_set_compat_fields( $property_name ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_compat_fields' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58897' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', '__set' )]
+	public function test_should_set_compat_fields( $property_name, $expected ) {
 		$user_query = new WP_User_Query();
 		$value      = uniqid();
 
@@ -2282,31 +2286,30 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58897
 	 *
-	 * @covers WP_User_Query::__set()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58897' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', '__set' )]
 	public function test_should_throw_deprecation_when_setting_dynamic_property() {
 		$user_query = new WP_User_Query();
 
-		$this->expectDeprecation();
-		$this->expectDeprecationMessage(
-			'WP_User_Query::__set(): ' .
-			'The property `undefined_property` is not declared. Setting a dynamic property is ' .
-			'deprecated since version 6.4.0! Instead, declare the property on the class.'
+		$this->assertExpectedUserDeprecation(
+			'WP_User_Query::__set(): The property `undefined_property` is not declared. Setting a dynamic property is deprecated since version 6.4.0! Instead, declare the property on the class.',
+			function () use ( $user_query ) {
+				$user_query->undefined_property = 'some value';
+			}
 		);
-		$user_query->undefined_property = 'some value';
 	}
 
 	/**
-	 * @dataProvider data_compat_fields
-	 * @ticket 58897
 	 *
-	 * @covers WP_User_Query::__isset()
 	 *
 	 * @param string $property_name Property name to check.
 	 * @param mixed $expected       Expected value.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_compat_fields' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58897' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', '__isset' )]
 	public function test_should_isset_compat_fields( $property_name, $expected ) {
 		$user_query = new WP_User_Query();
 
@@ -2319,31 +2322,30 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58897
 	 *
-	 * @covers WP_User_Query::__isset()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58897' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', '__isset' )]
 	public function test_should_throw_deprecation_when_isset_of_dynamic_property() {
 		$user_query = new WP_User_Query();
 
-		$this->expectDeprecation();
-		$this->expectDeprecationMessage(
-			'WP_User_Query::__isset(): ' .
-			'The property `undefined_property` is not declared. Checking `isset()` on a dynamic property ' .
-			'is deprecated since version 6.4.0! Instead, declare the property on the class.'
+		$this->assertExpectedUserDeprecation(
+			'WP_User_Query::__isset(): The property `undefined_property` is not declared. Checking `isset()` on a dynamic property is deprecated since version 6.4.0! Instead, declare the property on the class.',
+			function () use ( $user_query ) {
+				$this->assertFalse( isset( $user_query->undefined_property ), 'Checking a dynamic property should return false from WP_User_Query::__isset()' );
+			}
 		);
-		$this->assertFalse( isset( $user_query->undefined_property ), 'Checking a dynamic property should return false from WP_User_Query::__isset()' );
 	}
 
 	/**
-	 * @dataProvider data_compat_fields
-	 * @ticket 58897
 	 *
-	 * @covers WP_User_Query::__unset()
 	 *
 	 * @param string $property_name Property name to unset.
 	 */
-	public function test_should_unset_compat_fields( $property_name ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_compat_fields' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58897' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', '__unset' )]
+	public function test_should_unset_compat_fields( $property_name, $expected ) {
 		$user_query = new WP_User_Query();
 
 		unset( $user_query->$property_name );
@@ -2351,20 +2353,19 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58897
 	 *
-	 * @covers WP_User_Query::__unset()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58897' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', '__unset' )]
 	public function test_should_throw_deprecation_when_unset_of_dynamic_property() {
 		$user_query = new WP_User_Query();
 
-		$this->expectDeprecation();
-		$this->expectDeprecationMessage(
-			'WP_User_Query::__unset(): ' .
-			'A property `undefined_property` is not declared. Unsetting a dynamic property is ' .
-			'deprecated since version 6.4.0! Instead, declare the property on the class.'
+		$this->assertExpectedUserDeprecation(
+			'WP_User_Query::__unset(): A property `undefined_property` is not declared. Unsetting a dynamic property is deprecated since version 6.4.0! Instead, declare the property on the class.',
+			function () use ( $user_query ) {
+				unset( $user_query->undefined_property );
+			}
 		);
-		unset( $user_query->undefined_property );
 	}
 
 	/**
@@ -2372,7 +2373,7 @@ class Tests_User_Query extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_compat_fields() {
+	public static function data_compat_fields() {
 		return array(
 			'results'     => array(
 				'property_name' => 'results',
@@ -2386,8 +2387,8 @@ class Tests_User_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56841' )]
 	public function test_query_does_not_have_leading_whitespace() {
 		$q = new WP_User_Query(
 			array(

@@ -3,17 +3,17 @@
 /**
  * Tests for the wp_timezone_override_offset() function.
  *
- * @group functions
  *
- * @covers ::wp_timezone_override_offset
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_timezone_override_offset' )]
 class Tests_Functions_wpTimezoneOverrideOffset extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 59980
 	 *
-	 * @dataProvider data_wp_timezone_override_offset
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59980' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_timezone_override_offset' )]
 	public function test_wp_timezone_override_offset( $timezone_string, $expected ) {
 		update_option( 'timezone_string', $timezone_string );
 		$this->assertSame( $expected, wp_timezone_override_offset() );
@@ -27,13 +27,13 @@ class Tests_Functions_wpTimezoneOverrideOffset extends WP_UnitTestCase {
 	 *     @type string $expected        Expected return value.
 	 * }
 	 */
-	public function data_wp_timezone_override_offset() {
+	public static function data_wp_timezone_override_offset() {
 		return array(
 			'no timezone string option set' => array( '', false ),
 			'bad option set'                => array( 'BAD_TIME_ZONE', false ),
 			'UTC option set'                => array( 'UTC', 0.0 ),
 			'EST option set'                => array( 'EST', -5.0 ),
-			'NST option set'                => array( 'America/St_Johns', $this->is_timezone_in_dst( 'America/St_Johns' ) ? -2.5 : -3.5 ),
+			'NST option set'                => array( 'America/St_Johns', self::is_timezone_in_dst( 'America/St_Johns' ) ? -2.5 : -3.5 ),
 		);
 	}
 
@@ -43,7 +43,7 @@ class Tests_Functions_wpTimezoneOverrideOffset extends WP_UnitTestCase {
 	 * @param string $timezone_string The timezone identifier (e.g., 'America/St_Johns').
 	 * @return bool Whether the timezone is observing DST.
 	 */
-	private function is_timezone_in_dst( $timezone_string ) {
+	private static function is_timezone_in_dst( $timezone_string ) {
 		$timezone    = new DateTimeZone( $timezone_string );
 		$timestamp   = time();
 		$transitions = $timezone->getTransitions( $timestamp, $timestamp );

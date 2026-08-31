@@ -3,22 +3,22 @@
 /**
  * Tests for the wp_parse_id_list() function.
  *
- * @group functions
  *
- * @covers ::wp_parse_id_list
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_parse_id_list' )]
 class Tests_Functions_wpParseIdList extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 22074
-	 * @ticket 60218
 	 *
-	 * @dataProvider data_wp_parse_id_list
-	 * @dataProvider data_unexpected_input
 	 *
 	 * @param mixed[]|string $input_list
 	 * @param array<non-negative-int> $expected
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22074' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60218' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_parse_id_list' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unexpected_input' )]
 	public function test_wp_parse_id_list( $input_list, array $expected ): void {
 		$parsed_list = wp_parse_id_list( $input_list );
 		$this->assertThat(
@@ -39,7 +39,7 @@ class Tests_Functions_wpParseIdList extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ input_list: mixed[]|string, expected: array<non-negative-int> }>
 	 */
-	public function data_wp_parse_id_list(): array {
+	public static function data_wp_parse_id_list(): array {
 		return array(
 			'regular'                  => array(
 				'input_list' => '1,2,3,4',
@@ -82,7 +82,7 @@ class Tests_Functions_wpParseIdList extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ input_list: mixed[]|string, expected: array<non-negative-int> }>
 	 */
-	public function data_unexpected_input(): array {
+	public static function data_unexpected_input(): array {
 		return array(
 			'string with commas' => array(
 				'input_list' => '1,2,string with spaces',

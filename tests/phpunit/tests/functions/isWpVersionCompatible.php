@@ -3,10 +3,10 @@
 /**
  * Tests the is_wp_version_compatible() function.
  *
- * @group functions
  *
- * @covers ::is_wp_version_compatible
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'is_wp_version_compatible' )]
 class Tests_Functions_IsWpVersionCompatible extends WP_UnitTestCase {
 	/**
 	 * The current WordPress version.
@@ -43,14 +43,14 @@ class Tests_Functions_IsWpVersionCompatible extends WP_UnitTestCase {
 	/**
 	 * Tests is_wp_version_compatible().
 	 *
-	 * @dataProvider data_is_wp_version_compatible
 	 *
-	 * @ticket 54257
-	 * @ticket 61781
 	 *
 	 * @param mixed $required The minimum required WordPress version.
 	 * @param bool  $expected The expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_wp_version_compatible' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '54257' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61781' )]
 	public function test_is_wp_version_compatible( $required, $expected ) {
 		$this->assertSame( $expected, is_wp_version_compatible( $required ) );
 	}
@@ -60,7 +60,7 @@ class Tests_Functions_IsWpVersionCompatible extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_is_wp_version_compatible() {
+	public static function data_is_wp_version_compatible() {
 		$wp_version     = wp_get_wp_version();
 		$version_parts  = explode( '.', $wp_version );
 		$lower_version  = $version_parts;
@@ -133,15 +133,15 @@ class Tests_Functions_IsWpVersionCompatible extends WP_UnitTestCase {
 	/**
 	 * Tests that is_wp_version_compatible() gracefully handles incorrect version numbering.
 	 *
-	 * @dataProvider data_is_wp_version_compatible_should_gracefully_handle_trailing_point_zero_version_numbers
 	 *
-	 * @ticket 59448
-	 * @ticket 61781
 	 *
 	 * @param mixed  $required The minimum required WordPress version.
 	 * @param string $wp       The value for the $wp_version global variable.
 	 * @param bool   $expected The expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_wp_version_compatible_should_gracefully_handle_trailing_point_zero_version_numbers' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59448' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61781' )]
 	public function test_is_wp_version_compatible_should_gracefully_handle_trailing_point_zero_version_numbers( $required, $wp, $expected ) {
 		$GLOBALS['_wp_tests_wp_version'] = $wp;
 		$this->assertSame( $expected, is_wp_version_compatible( $required ), 'The expected result was not returned.' );
@@ -152,7 +152,7 @@ class Tests_Functions_IsWpVersionCompatible extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_is_wp_version_compatible_should_gracefully_handle_trailing_point_zero_version_numbers() {
+	public static function data_is_wp_version_compatible_should_gracefully_handle_trailing_point_zero_version_numbers() {
 		return array(
 			'an incorrect trailing .0 and the same version' => array(
 				'required' => '5.2.0',
@@ -205,15 +205,15 @@ class Tests_Functions_IsWpVersionCompatible extends WP_UnitTestCase {
 	/**
 	 * Tests is_wp_version_compatible() with development versions.
 	 *
-	 * @dataProvider data_is_wp_version_compatible_with_development_versions
 	 *
-	 * @ticket 54257
-	 * @ticket 61781
 	 *
 	 * @param string $required  The minimum required WordPress version.
 	 * @param string $wp        The value for the $wp_version global variable.
 	 * @param bool   $expected  The expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_wp_version_compatible_with_development_versions' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '54257' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61781' )]
 	public function test_is_wp_version_compatible_with_development_versions( $required, $wp, $expected ) {
 		$GLOBALS['_wp_tests_wp_version'] = $wp;
 		$this->assertSame( $expected, is_wp_version_compatible( $required ) );
@@ -224,7 +224,7 @@ class Tests_Functions_IsWpVersionCompatible extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_is_wp_version_compatible_with_development_versions() {
+	public static function data_is_wp_version_compatible_with_development_versions() {
 		// For consistent results, remove possible suffixes.
 		list( $version ) = explode( '-', wp_get_wp_version() );
 

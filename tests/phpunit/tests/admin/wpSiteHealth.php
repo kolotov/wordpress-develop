@@ -1,11 +1,16 @@
 <?php
 
-/**
- * @group admin
- * @group site-health
- *
- * @coversDefaultClass WP_Site_Health
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'site-health' )]
+
+
+
+
+
+
+
+
+
 class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 
 	/**
@@ -31,10 +36,8 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 		$this->instance = new WP_Site_Health();
 	}
 
-	/**
-	 * @ticket 55791
-	 * @covers ::__construct()
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55791' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', '__construct' )]
 	public function test_mysql_recommended_version_matches_readme_html() {
 		$reflection          = new ReflectionClass( $this->instance );
 		$reflection_property = $reflection->getProperty( 'mysql_recommended_version' );
@@ -48,10 +51,8 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 		$this->assertSame( $matches[1], $reflection_property->getValue( $this->instance ) );
 	}
 
-	/**
-	 * @ticket 55791
-	 * @covers ::__construct()
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55791' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', '__construct' )]
 	public function test_mariadb_recommended_version_matches_readme_html() {
 		$reflection          = new ReflectionClass( $this->instance );
 		$reflection_property = $reflection->getProperty( 'mariadb_recommended_version' );
@@ -69,8 +70,8 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	/**
 	 * Ensure Site Health reports correctly cron job reports.
 	 *
-	 * @ticket 47223
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47223' )]
 	public function test_cron_health_checks_critical() {
 		// Clear the cron array.
 		_set_cron_array( array() );
@@ -86,9 +87,9 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	/**
 	 * Ensure Site Health reports correctly cron job reports.
 	 *
-	 * @dataProvider data_cron_health_checks
-	 * @ticket 47223
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_cron_health_checks' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '47223' )]
 	public function test_cron_health_checks( $times, $expected_status, $expected_label, $expected_late, $expected_missed ) {
 		/*
 		 * Clear the cron array.
@@ -126,7 +127,7 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	 * 4. bool         Expected outcome has_late_cron()
 	 * 5. bool         Expected outcome has_missed_cron()
 	 */
-	public function data_cron_health_checks() {
+	public static function data_cron_health_checks() {
 		return array(
 			array(
 				'+5 minutes',
@@ -162,14 +163,12 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 56041
-	 * @dataProvider data_get_page_cache
-	 * @covers ::get_test_page_cache()
-	 * @covers ::get_page_cache_detail()
-	 * @covers ::get_page_cache_headers()
-	 * @covers ::check_for_page_caching()
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56041' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_page_cache' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', 'get_test_page_cache' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', 'get_page_cache_detail' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', 'get_page_cache_headers' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', 'check_for_page_caching' )]
 	public function test_get_page_cache( array $responses, string $expected_status, string $expected_label, bool $has_basic_auth = false, bool $delay_the_response = false ) {
 		$expected_props = array(
 			'badge'  => array(
@@ -259,7 +258,6 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	 *
 	 * Gets response data for WP_Site_Health::get_test_page_cache().
 	 *
-	 * @ticket 56041
 	 *
 	 * @return array<string, array{
 	 *     responses: array<int, string|array<string, string|string[]>>,
@@ -269,7 +267,8 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	 *     delay_the_response?: bool,
 	 * }>
 	 */
-	public function data_get_page_cache(): array {
+	#[\PHPUnit\Framework\Attributes\Ticket( '56041' )]
+	public static function data_get_page_cache(): array {
 		$recommended_label = 'Page cache is not detected but the server response time is OK';
 		$good_label        = 'Page cache is detected and the server response time is good';
 		$critical_label    = 'Page cache is not detected and the server response time is slow';
@@ -487,10 +486,8 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @group ms-excluded
-	 * @ticket 56040
-	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56040' )]
 	public function test_object_cache_default_thresholds_non_multisite() {
 		// Set thresholds so high they should never be exceeded.
 		add_filter(
@@ -514,19 +511,15 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	}
 
 
-	/**
-	 * @group ms-required
-	 * @ticket 56040
-	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56040' )]
 	public function test_object_cache_default_thresholds_on_multisite() {
 		$this->assertTrue(
 			$this->instance->should_suggest_persistent_object_cache()
 		);
 	}
 
-	/**
-	 * @ticket 56040
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56040' )]
 	public function test_object_cache_thresholds_check_can_be_bypassed() {
 		add_filter( 'site_status_should_suggest_persistent_object_cache', '__return_true' );
 		$this->assertTrue(
@@ -539,10 +532,8 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider data_object_cache_thresholds
-	 * @ticket 56040
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_object_cache_thresholds' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56040' )]
 	public function test_object_cache_thresholds( $threshold, $count ) {
 		add_filter(
 			'site_status_persistent_object_cache_thresholds',
@@ -559,9 +550,9 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	/**
 	 * Data provider for test_object_cache_thresholds().
 	 *
-	 * @ticket 56040
 	 */
-	public function data_object_cache_thresholds() {
+	#[\PHPUnit\Framework\Attributes\Ticket( '56040' )]
+	public static function data_object_cache_thresholds() {
 		return array(
 			array( 'comments_count', 0 ),
 			array( 'posts_count', 0 ),
@@ -576,10 +567,10 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	/**
 	 * Tests get_test_autoloaded_options() when autoloaded options less than warning size.
 	 *
-	 * @ticket 61276
 	 *
-	 * @covers ::get_test_autoloaded_options()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61276' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', 'get_test_autoloaded_options' )]
 	public function test_wp_autoloaded_options_test_no_warning() {
 		$expected_label  = esc_html__( 'Autoloaded options are acceptable' );
 		$expected_status = 'good';
@@ -592,10 +583,10 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	/**
 	 * Tests get_test_autoloaded_options() when autoloaded options more than warning size.
 	 *
-	 * @ticket 61276
 	 *
-	 * @covers ::get_test_autoloaded_options()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61276' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', 'get_test_autoloaded_options' )]
 	public function test_wp_autoloaded_options_test_warning() {
 		self::set_autoloaded_option( 800000 );
 
@@ -610,10 +601,10 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	/**
 	 * Tests get_autoloaded_options_size().
 	 *
-	 * @ticket 61276
 	 *
-	 * @covers ::get_autoloaded_options_size()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61276' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', 'get_autoloaded_options_size' )]
 	public function test_get_autoloaded_options_size() {
 		global $wpdb;
 
@@ -652,10 +643,10 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	/**
 	 * Tests get_test_opcode_cache() return structure.
 	 *
-	 * @ticket 63697
 	 *
-	 * @covers ::get_test_opcode_cache()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63697' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', 'get_test_opcode_cache' )]
 	public function test_get_test_opcode_cache_return_structure() {
 		$result = $this->instance->get_test_opcode_cache();
 
@@ -683,10 +674,10 @@ class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 	 *
 	 * Covers: opcache enabled, disabled, not available, and opcache_get_status() returns false.
 	 *
-	 * @ticket 63697
 	 *
-	 * @covers ::get_test_opcode_cache()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63697' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Site_Health', 'get_test_opcode_cache' )]
 	public function test_get_test_opcode_cache_result_by_environment() {
 		$result = $this->instance->get_test_opcode_cache();
 

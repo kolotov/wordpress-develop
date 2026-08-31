@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::get_page_of_comment
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_page_of_comment' )]
 class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 
 	public function test_last_comment() {
@@ -97,8 +97,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 11334
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11334' )]
 	public function test_subsequent_calls_should_hit_cache() {
 		$p = self::factory()->post->create();
 		$c = self::factory()->comment->create( array( 'comment_post_ID' => $p ) );
@@ -114,8 +114,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 11334
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11334' )]
 	public function test_cache_hits_should_be_sensitive_to_comment_type() {
 		$p       = self::factory()->post->create();
 		$comment = self::factory()->comment->create(
@@ -161,8 +161,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 11334
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11334' )]
 	public function test_cache_should_be_invalidated_when_comment_is_approved() {
 		$p = self::factory()->post->create();
 		$c = self::factory()->comment->create(
@@ -182,8 +182,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 11334
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11334' )]
 	public function test_cache_should_be_invalidated_when_comment_is_deleted() {
 		$p = self::factory()->post->create();
 		$c = self::factory()->comment->create( array( 'comment_post_ID' => $p ) );
@@ -198,8 +198,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 11334
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11334' )]
 	public function test_cache_should_be_invalidated_when_comment_is_spammed() {
 		$p = self::factory()->post->create();
 		$c = self::factory()->comment->create( array( 'comment_post_ID' => $p ) );
@@ -214,8 +214,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 11334
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11334' )]
 	public function test_cache_should_be_invalidated_when_older_comment_is_published() {
 		$now = time();
 
@@ -248,8 +248,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34057
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34057' )]
 	public function test_query_should_be_limited_to_comments_on_the_proper_post() {
 		$posts = self::factory()->post->create_many( 2 );
 
@@ -279,8 +279,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 13939
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '13939' )]
 	public function test_only_top_level_comments_should_be_included_in_older_count() {
 		$post = self::factory()->post->create();
 
@@ -326,8 +326,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 13939
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '13939' )]
 	public function test_comments_per_page_option_should_be_fallback_when_query_var_is_not_available() {
 		$now = time();
 
@@ -358,9 +358,9 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31101
-	 * @ticket 39280
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31101' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '39280' )]
 	public function test_should_ignore_comment_order() {
 		$now = time();
 
@@ -398,9 +398,9 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31101
-	 * @ticket 39280
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31101' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '39280' )]
 	public function test_should_ignore_default_comment_page() {
 		$now = time();
 
@@ -438,8 +438,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8973
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8973' )]
 	public function test_page_number_when_unapproved_comments_are_included_for_current_commenter() {
 		$post         = self::factory()->post->create();
 		$comment_args = array(
@@ -494,8 +494,8 @@ class Tests_Comment_GetPageOfComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8973
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8973' )]
 	public function test_page_number_when_unapproved_comments_are_included_for_current_user() {
 		$current_user = get_current_user_id();
 		$post         = self::factory()->post->create();

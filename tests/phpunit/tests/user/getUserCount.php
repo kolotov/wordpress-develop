@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @group user
- * @covers ::get_user_count
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_user_count' )]
 class Tests_User_GetUserCount extends WP_UnitTestCase {
 	/**
-	 * @ticket 40386
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40386' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_wp_update_network_counts_on_different_network() {
 		$different_network_id = self::factory()->network->create(
 			array(
@@ -28,10 +28,10 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37866
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37866' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_get_user_count_on_different_network() {
 		$different_network_id = self::factory()->network->create(
 			array(
@@ -53,10 +53,10 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22917
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22917' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_enable_live_network_user_counts_filter() {
 		// False for large networks by default.
 		add_filter( 'enable_live_network_counts', '__return_false' );
@@ -84,8 +84,8 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38741
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38741' )]
 	public function test_get_user_count_update() {
 		wp_update_user_counts();
 		$current_network_user_count = get_user_count();
@@ -98,9 +98,9 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38741
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38741' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_get_user_count_update_on_delete() {
 		wp_update_user_counts();
 		$current_network_user_count = get_user_count();
@@ -119,9 +119,9 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38741
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38741' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_get_user_count_update_on_delete_multisite() {
 		wp_update_user_counts();
 		$current_network_user_count = get_user_count();
@@ -140,10 +140,10 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38741
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38741' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_get_user_count() {
 		// Refresh the cache.
 		wp_update_network_counts();

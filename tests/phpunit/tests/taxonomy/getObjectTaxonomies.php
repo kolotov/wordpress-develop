@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group taxonomy
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Taxonomy_GetObjectTaxonomies extends WP_UnitTestCase {
 	public function set_up() {
 		parent::set_up();
@@ -48,8 +48,8 @@ class Tests_Taxonomy_GetObjectTaxonomies extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37368
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37368' )]
 	public function test_should_return_all_attachment_taxonomies_for_attachment_object_type() {
 		register_taxonomy( 'wptests_tax2', 'attachment:image' );
 
@@ -69,8 +69,8 @@ class Tests_Taxonomy_GetObjectTaxonomies extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37368
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37368' )]
 	public function test_should_respect_output_objects_when_object_is_attachment() {
 		register_taxonomy( 'wptests_tax2', 'attachment:image' );
 

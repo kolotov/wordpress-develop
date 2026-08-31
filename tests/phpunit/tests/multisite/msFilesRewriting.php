@@ -6,10 +6,10 @@
  * The ms-files group tag must be used for these tests to run as the constants
  * set in ms_upload_constants() conflict with a non ms-files configuration.
  *
- * @group ms-files
- * @group ms-required
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-files' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_msFilesRewriting extends WP_UnitTestCase {
 
 	public function set_up() {

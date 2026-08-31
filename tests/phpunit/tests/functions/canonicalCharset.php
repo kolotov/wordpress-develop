@@ -5,21 +5,23 @@
  *
  * @since 4.8.0
  *
- * @group functions
  *
- * @covers ::_canonical_charset
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_canonical_charset' )]
 class Tests_Functions_CanonicalCharset extends WP_UnitTestCase {
 	/**
 	 * Ensures that charset variants for common encodings normalize to the expected form.
 	 *
-	 * @ticket 61182
 	 *
-	 * @dataProvider data_charset_normalizations
 	 *
 	 * @param string $given_charset      Potential charset provided by user.
 	 * @param string $normalized_charset Expected normalized form of charset.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61182' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_charset_normalizations' )]
 	public function test_properly_normalizes_charset_variants( $given_charset, $normalized_charset ) {
 		$this->assertSame(
 			$normalized_charset,
@@ -61,10 +63,10 @@ class Tests_Functions_CanonicalCharset extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23688
 	 *
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23688' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_update_option_blog_charset() {
 		$orig_blog_charset = get_option( 'blog_charset' );
 

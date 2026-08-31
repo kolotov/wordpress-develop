@@ -1,7 +1,7 @@
 <?php
 /**
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Query_CommentCount extends WP_UnitTestCase {
 	public static $post_ids = array();
 	public $q;

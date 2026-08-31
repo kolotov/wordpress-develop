@@ -3,9 +3,9 @@
 /**
  * Tests specific to `get_space_allowed()` in multisite.
  *
- * @group ms-required
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_GetSpaceAllowed extends WP_UnitTestCase {
 
 	/**
@@ -31,12 +31,12 @@ class Tests_Multisite_GetSpaceAllowed extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_blog_upload_space
 	 *
 	 * @param mixed $site_option    Option to assign to the site's `blog_upload_space`.
 	 * @param mixed $network_option Option to assign to the network's `blog_upload_space`.
 	 * @param int   $expected       Expected return value.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_blog_upload_space' )]
 	public function test_get_space_allowed( $site_option, $network_option, $expected ) {
 		update_option( 'blog_upload_space', $site_option );
 		update_site_option( 'blog_upload_space', $network_option );
@@ -44,7 +44,7 @@ class Tests_Multisite_GetSpaceAllowed extends WP_UnitTestCase {
 		$this->assertSame( $expected, get_space_allowed() );
 	}
 
-	public function data_blog_upload_space() {
+	public static function data_blog_upload_space() {
 		return array(
 			// A valid site option will be preferred over a network option.
 			array( 111, 200, 111 ),

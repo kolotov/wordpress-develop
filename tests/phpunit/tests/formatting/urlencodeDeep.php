@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @group formatting
- * @ticket 22300
  *
- * @covers ::urlencode_deep
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '22300' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'urlencode_deep' )]
 class Tests_Formatting_UrlencodeDeep extends WP_UnitTestCase {
 
 	/**
 	 * Tests the urlencode_deep() function pair by pair.
 	 *
-	 * @dataProvider data_urlencode_deep
 	 *
 	 * @param string $input
 	 * @param string $expected
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_urlencode_deep' )]
 	public function test_urlencode_deep_should_encode_individual_value( $input, $expected ) {
 		$this->assertSame( $expected, urlencode_deep( $input ) );
 	}
@@ -23,7 +23,7 @@ class Tests_Formatting_UrlencodeDeep extends WP_UnitTestCase {
 	/**
 	 * Data provider.
 	 */
-	public function data_urlencode_deep() {
+	public static function data_urlencode_deep() {
 		return array(
 			array( 'qwerty123456', 'qwerty123456' ),
 			array( '|!"£$%&/()=?', '%7C%21%22%C2%A3%24%25%26%2F%28%29%3D%3F' ),

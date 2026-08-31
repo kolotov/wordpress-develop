@@ -1,10 +1,12 @@
 <?php
 
 /**
- * @group block-supports
  *
- * @covers ::wp_render_elements_support
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+
+
+
 class Tests_Block_Supports_WpRenderElementsSupport extends WP_UnitTestCase {
 	/**
 	 * @var string|null
@@ -21,10 +23,10 @@ class Tests_Block_Supports_WpRenderElementsSupport extends WP_UnitTestCase {
 	 * Tests that block supports leaves block content alone if the block type
 	 * isn't registered.
 	 *
-	 * @ticket 59578
 	 *
-	 * @covers ::wp_render_elements_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59578' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_leaves_block_content_alone_when_block_type_not_registered() {
 		$block = array(
 			'blockName' => 'test/element-block-supports',
@@ -51,17 +53,17 @@ class Tests_Block_Supports_WpRenderElementsSupport extends WP_UnitTestCase {
 	/**
 	 * Tests that elements block support applies the correct classname.
 	 *
-	 * @ticket 59555
 	 *
-	 * @covers ::wp_render_elements_support
 	 *
-	 * @dataProvider data_elements_block_support_class
 	 *
 	 * @param array  $color_settings  The color block support settings used for elements support.
 	 * @param array  $elements_styles The elements styles within the block attributes.
 	 * @param string $block_markup    Original block markup.
 	 * @param string $expected_markup Resulting markup after application of elements block support.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59555' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_elements_block_support_class' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_elements_block_support_class( $color_settings, $elements_styles, $block_markup, $expected_markup ) {
 		$this->test_block_name = 'test/element-block-supports';
 
@@ -114,10 +116,10 @@ class Tests_Block_Supports_WpRenderElementsSupport extends WP_UnitTestCase {
 	 * render filter should fail gracefully rather than passing an array to
 	 * `preg_match()`.
 	 *
-	 * @ticket 65379
 	 *
-	 * @covers ::wp_render_elements_class_name
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65379' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_elements_class_name' )]
 	public function test_elements_block_support_class_with_non_string_class_name(): void {
 		$block = array(
 			'blockName' => 'core/paragraph',
@@ -138,10 +140,10 @@ class Tests_Block_Supports_WpRenderElementsSupport extends WP_UnitTestCase {
 	/**
 	 * Tests that a 'my-wp-elements-*' class name is skipped from processing.
 	 *
-	 * @ticket 65379
 	 *
-	 * @covers ::wp_render_elements_class_name
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65379' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_elements_class_name' )]
 	public function test_elements_block_support_class_with_invalid_elements_prefix(): void {
 		$block = array(
 			'blockName' => 'core/paragraph',
@@ -163,10 +165,10 @@ class Tests_Block_Supports_WpRenderElementsSupport extends WP_UnitTestCase {
 	 * Tests that duplicate blocks get distinct elements class names
 	 * on their rendered markup to avoid CSS cascade conflicts.
 	 *
-	 * @ticket 65435
 	 *
-	 * @covers ::wp_get_elements_class_name
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65435' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_elements_class_name' )]
 	public function test_elements_block_support_class_with_duplicate_blocks(): void {
 		$this->test_block_name = 'test/element-block-supports';
 
@@ -228,7 +230,7 @@ class Tests_Block_Supports_WpRenderElementsSupport extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_elements_block_support_class() {
+	public static function data_elements_block_support_class() {
 		$color_styles = array(
 			'text'       => 'var:preset|color|vivid-red',
 			'background' => '#fff',

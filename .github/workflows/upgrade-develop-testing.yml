@@ -7,8 +7,7 @@ on:
   push:
     branches:
       - trunk
-      - '6.[8-9]'
-      - '[7-9].[0-9]'
+      - '7.[0-9]'
     paths:
       # Any change to a source PHP file should run checks.
       - 'src/**.php'
@@ -18,8 +17,7 @@ on:
   pull_request:
     branches:
       - trunk
-      - '6.[8-9]'
-      - '[7-9].[0-9]'
+      - '7.[0-9]'
     paths:
       # Any change to a source PHP file should run checks.
       - 'src/**.php'
@@ -45,31 +43,22 @@ jobs:
     name: Build
     uses: ./.github/workflows/reusable-build-package.yml
     if: |
-      startsWith( github.repository, 'WordPress/' ) && (
-        github.repository == 'WordPress/wordpress-develop' || (
-          github.event_name == 'pull_request' && (
-            ! github.event.repository.private ||
-            ! github.event.pull_request.draft ||
-            contains( github.event.pull_request.labels.*.name, 'Draft Workflow Runs' )
-          )
+      github.repository == 'kolotov/wordpress-develop' || (
+        github.event_name == 'pull_request' && (
+          ! github.event.repository.private ||
+          ! github.event.pull_request.draft ||
+          contains( github.event.pull_request.labels.*.name, 'Draft Workflow Runs' )
         )
       )
     permissions:
       contents: read
 
-# Because the number of jobs spawned can quickly balloon out of control, the following methodology is applied when
-# building out the matrix below:
-#
-# - The two most recent releases of WordPress are always tested.
-# - After a branch is created, the pre-release version is also added.
-# - The oldest version of WordPress receiving security updates as a courtesy that also runs on a PHP version supported by trunk
-#   should always be tested.
-# - PHP and DB versions are kept to a minimum. In general this should be the highest and lowest supported versions of each with excludes
-#   being updated to keep the matrix as small as is reasonable.
+# This fork supports the current WordPress 7.x line on PHP 8.5 only.
+# Test upgrades from the released 7.x versions into the current development checkout.
   upgrade-tests-develop:
     name: Upgrade from ${{ matrix.wp }}
     uses: ./.github/workflows/reusable-upgrade-testing.yml
-    if: ${{ github.repository == 'WordPress/wordpress-develop' }}
+    if: ${{ github.repository == 'kolotov/wordpress-develop' }}
     needs: [ build ]
     permissions:
       contents: read
@@ -77,11 +66,10 @@ jobs:
       fail-fast: false
       matrix:
         os: [ 'ubuntu-24.04' ]
-        php: [ '7.4', '8.4' ]
+        php: [ '8.5' ]
         db-type: [ 'mysql' ]
         db-version: [ '5.7', '8.4' ]
-        # WordPress 5.3 is the oldest version that supports PHP 7.4.
-        wp: [ '5.3', '7.0', '7.1' ]
+        wp: [ '7.0', '7.1' ]
         multisite: [ false, true ]
     with:
       os: ${{ matrix.os }}
@@ -98,7 +86,7 @@ jobs:
     uses: ./.github/workflows/reusable-upgrade-testing.yml
     # This job also runs for the push event, which has no draft state to check.
     if: |
-      github.repository != 'WordPress/wordpress-develop' && (
+      github.repository != 'kolotov/wordpress-develop' && (
         github.event_name != 'pull_request' ||
         ! github.event.repository.private ||
         ! github.event.pull_request.draft ||
@@ -111,7 +99,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ 'ubuntu-24.04' ]
-        php: [ '7.4', '8.4' ]
+        php: [ '8.5' ]
         db-type: [ 'mysql' ]
         db-version: [ '8.4' ]
         wp: [ '7.0', '7.1' ]
@@ -132,7 +120,8 @@ jobs:
       actions: read
       contents: read
     needs: [ upgrade-tests-develop ]
-    if: ${{ github.repository == 'WordPress/wordpress-develop' && github.event_name != 'pull_request' && always() }}
+    # Send Slack notifications for non-pull-request runs in this fork.
+    if: ${{ github.repository == 'kolotov/wordpress-develop' && github.event_name != 'pull_request' && always() }}
     with:
       calling_status: ${{ contains( needs.*.result, 'cancelled' ) && 'cancelled' || contains( needs.*.result, 'failure' ) && 'failure' || 'success' }}
     secrets:
@@ -148,6 +137,7 @@ jobs:
     permissions:
       actions: write
     needs: [ slack-notifications ]
+    # Upstream automatic reruns remain disabled in this fork.
     if: |
       always() &&
       github.repository == 'WordPress/wordpress-develop' &&

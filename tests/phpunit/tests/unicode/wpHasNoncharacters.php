@@ -3,21 +3,21 @@
  * Unit tests covering WordPress’ UTF-8 handling: noncharacter detection.
  *
  * @package WordPress
- * @group unicode
  *
- * @covers ::wp_has_noncharacters
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_has_noncharacters' )]
+#[\PHPUnit\Framework\Attributes\Group( 'unicode' )]
 class Tests_Unicode_WpHasNoncharacters extends WP_UnitTestCase {
 
 	/**
 	 * Ensures that a noncharacter inside a string will be properly detected.
 	 *
-	 * @ticket 63863
 	 *
-	 * @dataProvider data_noncharacters
 	 *
 	 * @param string $noncharacter Noncharacter as a UTF-8 string.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63863' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_noncharacters' )]
 	public function test_detects_non_characters( string $noncharacter ) {
 		$this->assertTrue(
 			wp_has_noncharacters( $noncharacter ),
@@ -43,8 +43,8 @@ class Tests_Unicode_WpHasNoncharacters extends WP_UnitTestCase {
 	/**
 	 * Ensures that invalid UTF-8 does not prevent noncharacter detection.
 	 *
-	 * @ticket 65372
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
 	public function test_detects_non_characters_when_string_contains_invalid_utf8() {
 		$this->assertTrue(
 			wp_has_noncharacters( "Invalid byte \xF1 before \u{FDD0}." ),
@@ -65,8 +65,8 @@ class Tests_Unicode_WpHasNoncharacters extends WP_UnitTestCase {
 	/**
 	 * Ensures that Unicode characters are not falsely detect as noncharacters.
 	 *
-	 * @ticket 63863
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63863' )]
 	public function test_avoids_false_positives() {
 		// Get all the noncharacters in one long string, each surrounded on both sides by null bytes.
 		$noncharacters = implode(

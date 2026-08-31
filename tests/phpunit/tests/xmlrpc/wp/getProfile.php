@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group xmlrpc
- * @group user
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_XMLRPC_wp_getProfile extends WP_XMLRPC_UnitTestCase {
 
 	public function test_invalid_username_password() {

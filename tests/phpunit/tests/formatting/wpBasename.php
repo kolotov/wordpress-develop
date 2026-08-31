@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wp_basename
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_basename' )]
 class Tests_Formatting_wpBasename extends WP_UnitTestCase {
 
 	public function test_wp_basename_unix() {
@@ -22,8 +22,8 @@ class Tests_Formatting_wpBasename extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22138
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22138' )]
 	public function test_wp_basename_windows() {
 		$this->assertSame(
 			'file.txt',
@@ -32,8 +32,8 @@ class Tests_Formatting_wpBasename extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22138
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22138' )]
 	public function test_wp_basename_windows_utf8_support() {
 		$this->assertSame(
 			'щипцы.txt',

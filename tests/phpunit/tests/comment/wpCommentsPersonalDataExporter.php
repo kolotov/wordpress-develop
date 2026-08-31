@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group comment
- * @group privacy
  *
- * @covers ::wp_comments_personal_data_exporter
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_comments_personal_data_exporter' )]
 class Tests_Comment_wpCommentsPersonalDataExporter extends WP_UnitTestCase {
 
 	protected static $post_id;
@@ -17,8 +17,8 @@ class Tests_Comment_wpCommentsPersonalDataExporter extends WP_UnitTestCase {
 	/**
 	 * Testing the `wp_comments_personal_data_exporter()` function.
 	 *
-	 * @ticket 43440
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43440' )]
 	public function test_wp_comments_personal_data_exporter() {
 		$args = array(
 			'comment_post_ID'      => self::$post_id,
@@ -62,8 +62,8 @@ class Tests_Comment_wpCommentsPersonalDataExporter extends WP_UnitTestCase {
 	/**
 	 * Testing the `wp_comments_personal_data_exporter()` function for no comments found.
 	 *
-	 * @ticket 43440
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43440' )]
 	public function test_wp_comments_personal_data_exporter_no_comments_found() {
 
 		$actual = wp_comments_personal_data_exporter( 'nocommentsfound@local.host' );
@@ -79,8 +79,8 @@ class Tests_Comment_wpCommentsPersonalDataExporter extends WP_UnitTestCase {
 	/**
 	 * Testing the `wp_comments_personal_data_exporter()` function for an empty comment property.
 	 *
-	 * @ticket 43440
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43440' )]
 	public function test_wp_comments_personal_data_exporter_empty_comment_prop() {
 		$args = array(
 			'comment_post_ID'      => self::$post_id,
@@ -109,8 +109,8 @@ class Tests_Comment_wpCommentsPersonalDataExporter extends WP_UnitTestCase {
 	/**
 	 * Testing the `wp_comments_personal_data_exporter()` function with an empty second page.
 	 *
-	 * @ticket 43440
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43440' )]
 	public function test_wp_comments_personal_data_exporter_empty_second_page() {
 		$args = array(
 			'comment_post_ID'      => self::$post_id,
@@ -136,8 +136,8 @@ class Tests_Comment_wpCommentsPersonalDataExporter extends WP_UnitTestCase {
 	/**
 	 * Testing that `wp_comments_personal_data_exporter()` orders comments by ID.
 	 *
-	 * @ticket 57700
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57700' )]
 	public function test_wp_comments_personal_data_exporter_orders_comments_by_id() {
 
 		$args = array(

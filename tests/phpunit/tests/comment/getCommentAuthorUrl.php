@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::get_comment_author_url
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_author_url' )]
 class Tests_Comment_GetCommentAuthorUrl extends WP_UnitTestCase {
 
 	private static $comment;
@@ -26,8 +26,8 @@ class Tests_Comment_GetCommentAuthorUrl extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41334
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41334' )]
 	public function test_comment_author_url_passes_correct_comment_id() {
 		add_filter( 'get_comment_author_url', array( $this, 'get_comment_author_url_filter' ), 99, 3 );
 

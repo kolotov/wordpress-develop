@@ -6,8 +6,8 @@
  * we're using a real XML parser, this confirms that the feed is valid, well formed,
  * and contains the right stuff.
  *
- * @group feed
  */
+#[\PHPUnit\Framework\Attributes\Group( 'feed' )]
 class Tests_Feed_Atom extends WP_UnitTestCase {
 	public static $user_id;
 	public static $posts;
@@ -218,8 +218,8 @@ class Tests_Feed_Atom extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33591
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33591' )]
 	public function test_atom_enclosure_with_extended_url_length_type_parsing() {
 		$enclosures = array(
 			array(

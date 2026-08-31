@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group user
- * @group slashes
- * @ticket 21767
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '21767' )]
 class Tests_User_Slashes extends WP_UnitTestCase {
 
 	/*

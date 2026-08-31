@@ -7,10 +7,12 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 /**
  * Testing Ajax handler for deleting a plugin.
  *
- * @group ajax
  *
- * @covers ::wp_ajax_delete_plugin
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_delete_plugin' )]
 class Tests_Ajax_wpAjaxDeletePlugin extends WP_Ajax_UnitTestCase {
 
 	public function test_missing_nonce() {
@@ -128,12 +130,15 @@ class Tests_Ajax_wpAjaxDeletePlugin extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-excluded
 	 *
-	 * @covers ::delete_plugins
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_plugins' )]
 	public function test_delete_plugin() {
 		$this->_setRole( 'administrator' );
+		$plugin_file = WP_PLUGIN_DIR . '/foo.php';
+
+		$this->assertNotFalse( file_put_contents( $plugin_file, "<?php\n" ) );
 
 		$_POST['_ajax_nonce'] = wp_create_nonce( 'updates' );
 		$_POST['plugin']      = 'foo.php';
@@ -141,9 +146,15 @@ class Tests_Ajax_wpAjaxDeletePlugin extends WP_Ajax_UnitTestCase {
 
 		// Make the request.
 		try {
-			$this->_handleAjax( 'delete-plugin' );
-		} catch ( WPAjaxDieContinueException $e ) {
-			unset( $e );
+			try {
+				$this->_handleAjax( 'delete-plugin' );
+			} catch ( WPAjaxDieContinueException $e ) {
+				unset( $e );
+			}
+		} finally {
+			if ( file_exists( $plugin_file ) ) {
+				unlink( $plugin_file );
+			}
 		}
 
 		// Get the response.

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_wpListPages extends WP_UnitTestCase {
 	/**
 	 * Editor user ID.
@@ -161,8 +161,8 @@ class Tests_Post_wpListPages extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61749
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61749' )]
 	public function test_wp_list_pages_depth_equals_zero() {
 		$expected = '<li class="pagenav">Pages<ul><li class="page_item page-item-' . self::$parent_1 . ' page_item_has_children"><a href="' . get_permalink( self::$parent_1 ) . '">Parent 1</a>
 <ul class=\'children\'>
@@ -486,8 +486,8 @@ class Tests_Post_wpListPages extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 17590
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17590' )]
 	public function test_wp_list_pages_classes_with_hierarchical_cpt() {
 		$args = array(
 			'echo'      => false,

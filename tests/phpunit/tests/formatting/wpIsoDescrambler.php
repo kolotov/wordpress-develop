@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wp_iso_descrambler
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_iso_descrambler' )]
 class Tests_Formatting_wpIsoDescrambler extends WP_UnitTestCase {
 	/*
 	 * Decodes text in RFC2047 "Q"-encoding, e.g.

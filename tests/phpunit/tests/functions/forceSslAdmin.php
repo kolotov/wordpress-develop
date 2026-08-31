@@ -4,10 +4,10 @@
  *
  * @since 6.8.0
  *
- * @group functions
  *
- * @covers ::force_ssl_admin
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'force_ssl_admin' )]
 class Tests_Functions_ForceSslAdmin extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -19,11 +19,11 @@ class Tests_Functions_ForceSslAdmin extends WP_UnitTestCase {
 	/**
 	 * Tests that force_ssl_admin() returns expected values based on various inputs.
 	 *
-	 * @dataProvider data_force_ssl_admin
 	 *
 	 * @param mixed $input    The input value to test.
 	 * @param bool  $expected The expected result for subsequent calls.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_force_ssl_admin' )]
 	public function test_force_ssl_admin( $input, $expected ) {
 		// The first call always returns the previous value.
 		$this->assertFalse( force_ssl_admin( $input ), 'First call did not return the expected value' );
@@ -37,7 +37,7 @@ class Tests_Functions_ForceSslAdmin extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_force_ssl_admin() {
+	public static function data_force_ssl_admin() {
 		return array(
 			'default'          => array( null, false ),
 			'true'             => array( true, true ),

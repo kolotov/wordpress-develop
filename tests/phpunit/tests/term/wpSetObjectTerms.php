@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group taxonomy
  *
- * @covers ::wp_set_object_terms
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_set_object_terms' )]
 class Tests_Term_WpSetObjectTerms extends WP_UnitTestCase {
 	protected static $taxonomy = 'category';
 	protected static $post_ids = array();
@@ -16,8 +16,8 @@ class Tests_Term_WpSetObjectTerms extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26570
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26570' )]
 	public function test_set_object_terms() {
 		$non_hier = rand_str( 10 );
 		$hier     = rand_str( 10 );
@@ -436,12 +436,12 @@ class Tests_Term_WpSetObjectTerms extends WP_UnitTestCase {
 	/**
 	 * Tests that empty values clear an object of all terms.
 	 *
-	 * @ticket 57923
 	 *
-	 * @dataProvider data_empty_value_should_clear_terms
 	 *
 	 * @param mixed $empty_value An empty value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57923' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_empty_value_should_clear_terms' )]
 	public function test_empty_value_should_clear_terms( $empty_value ) {
 		$post_id = self::$post_ids[0];
 
@@ -465,7 +465,7 @@ class Tests_Term_WpSetObjectTerms extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_empty_value_should_clear_terms() {
+	public static function data_empty_value_should_clear_terms() {
 		return array(
 			'(bool) false' => array( false ),
 			'null'         => array( null ),

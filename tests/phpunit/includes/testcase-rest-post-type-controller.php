@@ -40,7 +40,7 @@ abstract class WP_Test_REST_Post_Type_Controller_Testcase extends WP_Test_REST_C
 					$this->assertSame( $post->post_parent, $data['parent'] );
 				} else {
 					$this->assertSame( $post->post_parent, $data['parent']['id'] );
-					$this->check_get_post_response( $data['parent'], get_post( $data['parent']['id'] ), 'view-parent' );
+					$this->check_get_post_response( $data['parent'], get_post( $data['parent']['id'] ) );
 				}
 			} else {
 				$this->assertEmpty( $data['parent'] );

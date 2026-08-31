@@ -3,10 +3,10 @@
 /**
  * Tests specific to sites in multisite.
  *
- * @group ms-required
- * @group ms-site
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_Site extends WP_UnitTestCase {
 	protected $suppress                = false;
 	protected $site_status_hooks       = array();
@@ -15,16 +15,25 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	protected static $network_ids;
 	protected static $site_ids;
 	protected static $uninitialized_site_id;
+	private $https_was_set;
+	private $https;
 
 	public function set_up() {
 		global $wpdb;
 		parent::set_up();
-		$this->suppress = $wpdb->suppress_errors();
+		$this->suppress      = $wpdb->suppress_errors();
+		$this->https_was_set = array_key_exists( 'HTTPS', $_SERVER );
+		$this->https         = $_SERVER['HTTPS'] ?? null;
 	}
 
 	public function tear_down() {
 		global $wpdb;
 		$wpdb->suppress_errors( $this->suppress );
+		if ( $this->https_was_set ) {
+			$_SERVER['HTTPS'] = $this->https;
+		} else {
+			unset( $_SERVER['HTTPS'] );
+		}
 		parent::tear_down();
 	}
 
@@ -152,7 +161,12 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		$this->assertEquals( $details, wp_cache_get( $blog_id . 'short', 'blog-details' ) );
 
 		// get_blogaddress_by_name().
-		$this->assertSame( 'http://' . $details->domain . $details->path, get_blogaddress_by_name( trim( $details->path, '/' ) ) );
+		if ( is_subdomain_install() ) {
+			$expected_address = 'http://' . trim( $details->path, '/' ) . '.' . $details->domain . '/';
+		} else {
+			$expected_address = 'http://' . $details->domain . $details->path;
+		}
+		$this->assertSame( $expected_address, get_blogaddress_by_name( trim( $details->path, '/' ) ) );
 
 		// These are empty until get_blog_details() is called with $get_all = true.
 		$this->assertFalse( wp_cache_get( $blog_id, 'blog-details' ) );
@@ -416,8 +430,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	/**
 	 * Test cached data for a site that does not exist and then again after it exists.
 	 *
-	 * @ticket 23405
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23405' )]
 	public function test_get_blog_details_when_site_does_not_exist() {
 		// Create an unused site so that we can then assume an invalid site ID.
 		$blog_id = self::factory()->blog->create();
@@ -442,8 +456,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26410
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26410' )]
 	public function test_blog_details_cache_invalidation() {
 		update_option( 'blogname', 'foo' );
 		$details = get_site( get_current_blog_id() );
@@ -562,12 +576,20 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	public function test_switch_upload_dir() {
 		$this->assertTrue( is_main_site() );
 
-		$site = get_current_site();
-		$date = date_format( date_create( 'now' ), 'Y/m' );
+		$site          = get_current_site();
+		$date          = date_format( date_create( 'now' ), 'Y/m' );
+		$worker_subdir = '';
+		$test_token    = getenv( 'UNIQUE_TEST_TOKEN' );
+		if ( false === $test_token || '' === $test_token ) {
+			$test_token = getenv( 'TEST_TOKEN' );
+		}
+		if ( false !== $test_token && '' !== $test_token ) {
+			$worker_subdir = '/.paratest-' . preg_replace( '/[^0-9A-Za-z_]/', '_', $test_token );
+		}
 
 		$info = wp_upload_dir();
 		$this->assertSame( 'http://' . $site->domain . '/wp-content/uploads/' . $date, $info['url'] );
-		$this->assertSame( ABSPATH . 'wp-content/uploads/' . $date, $info['path'] );
+		$this->assertSame( ABSPATH . 'wp-content/uploads' . $worker_subdir . '/' . $date, $info['path'] );
 		$this->assertSame( '/' . $date, $info['subdir'] );
 		$this->assertFalse( $info['error'] );
 
@@ -576,14 +598,14 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		switch_to_blog( $blog_id );
 		$info = wp_upload_dir();
 		$this->assertSame( 'http://' . $site->domain . '/wp-content/uploads/sites/' . get_current_blog_id() . '/' . $date, $info['url'] );
-		$this->assertSame( ABSPATH . 'wp-content/uploads/sites/' . get_current_blog_id() . '/' . $date, $info['path'] );
+		$this->assertSame( ABSPATH . 'wp-content/uploads/sites/' . get_current_blog_id() . $worker_subdir . '/' . $date, $info['path'] );
 		$this->assertSame( '/' . $date, $info['subdir'] );
 		$this->assertFalse( $info['error'] );
 		restore_current_blog();
 
 		$info = wp_upload_dir();
 		$this->assertSame( 'http://' . $site->domain . '/wp-content/uploads/' . $date, $info['url'] );
-		$this->assertSame( ABSPATH . 'wp-content/uploads/' . $date, $info['path'] );
+		$this->assertSame( ABSPATH . 'wp-content/uploads' . $worker_subdir . '/' . $date, $info['path'] );
 		$this->assertSame( '/' . $date, $info['subdir'] );
 		$this->assertFalse( $info['error'] );
 	}
@@ -696,8 +718,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 14867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14867' )]
 	public function test_get_blogaddress_by_id_scheme_reflects_blog_scheme() {
 		$blog = self::factory()->blog->create();
 
@@ -709,8 +731,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 14867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14867' )]
 	public function test_get_blogaddress_by_id_scheme_is_unaffected_by_request() {
 		$blog = self::factory()->blog->create();
 
@@ -727,9 +749,9 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33620
-	 * @dataProvider data_new_blog_url_schemes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33620' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_new_blog_url_schemes' )]
 	public function test_new_blog_url_schemes( $home_scheme, $siteurl_scheme, $force_ssl_admin ) {
 		$current_site = get_current_site();
 
@@ -743,7 +765,14 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		force_ssl_admin( $force_ssl_admin );
 
 		// Install:
-		$new = wpmu_create_blog( $current_site->domain, '/new-blog/', 'New Blog', get_current_user_id() );
+		if ( is_subdomain_install() ) {
+			$domain = 'new-blog.' . $current_site->domain;
+			$path   = '/';
+		} else {
+			$domain = $current_site->domain;
+			$path   = '/new-blog/';
+		}
+		$new = wpmu_create_blog( $domain, $path, 'New Blog', get_current_user_id() );
 
 		// Reset:
 		update_option( 'home', $home );
@@ -752,11 +781,13 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 
 		// Assert:
 		$this->assertNotWPError( $new );
-		$this->assertSame( $home_scheme, parse_url( get_blog_option( $new, 'home' ), PHP_URL_SCHEME ) );
-		$this->assertSame( $siteurl_scheme, parse_url( get_blog_option( $new, 'siteurl' ), PHP_URL_SCHEME ) );
+		$expected_home_scheme    = is_subdomain_install() ? 'http' : $home_scheme;
+		$expected_siteurl_scheme = is_subdomain_install() ? 'http' : $siteurl_scheme;
+		$this->assertSame( $expected_home_scheme, parse_url( get_blog_option( $new, 'home' ), PHP_URL_SCHEME ) );
+		$this->assertSame( $expected_siteurl_scheme, parse_url( get_blog_option( $new, 'siteurl' ), PHP_URL_SCHEME ) );
 	}
 
-	public function data_new_blog_url_schemes() {
+	public static function data_new_blog_url_schemes() {
 		return array(
 			array(
 				'https',
@@ -787,8 +818,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36918
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36918' )]
 	public function test_new_blog_locale() {
 		$current_site = get_current_site();
 
@@ -822,8 +853,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40503' )]
 	public function test_different_network_language() {
 		$network = get_network( self::$network_ids['make.wordpress.org/'] );
 
@@ -850,23 +881,23 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_is_main_site_different_network() {
 		$this->assertTrue( is_main_site( self::$site_ids['make.wordpress.org/'], self::$network_ids['make.wordpress.org/'] ) );
 	}
 
 	/**
-	 * @ticket 29684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_is_main_site_different_network_random_site() {
 		$this->assertFalse( is_main_site( self::$site_ids['make.wordpress.org/foo/'], self::$network_ids['make.wordpress.org/'] ) );
 	}
 
 	/**
-	 * @ticket 40201
-	 * @dataProvider data_get_site_caches
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_site_caches' )]
 	public function test_clean_blog_cache( $key, $group ) {
 		$site = get_site( self::$site_ids['make.wordpress.org/'] );
 
@@ -890,9 +921,9 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40201
-	 * @dataProvider data_get_site_caches
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_site_caches' )]
 	public function test_clean_blog_cache_with_id( $key, $group ) {
 		$site = get_site( self::$site_ids['make.wordpress.org/'] );
 
@@ -916,20 +947,20 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40201
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
 	public function test_clean_blog_cache_resets_last_changed() {
 		$site = get_site( self::$site_ids['make.wordpress.org/'] );
 
 		wp_cache_delete( 'last_changed', 'sites' );
 
 		clean_blog_cache( $site );
-		$this->assertNotFalse( wp_cache_get( 'last_changed', 'sites' ) );
+		$this->assertIsString( wp_cache_get( 'last_changed', 'sites' ) );
 	}
 
 	/**
-	 * @ticket 40201
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
 	public function test_clean_blog_cache_fires_action() {
 		$site = get_site( self::$site_ids['make.wordpress.org/'] );
 
@@ -940,8 +971,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40201
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
 	public function test_clean_blog_cache_bails_on_suspend_cache_invalidation() {
 		$site = get_site( self::$site_ids['make.wordpress.org/'] );
 
@@ -954,8 +985,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40201
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
 	public function test_clean_blog_cache_bails_on_empty_input() {
 		$old_count = did_action( 'clean_site_cache' );
 
@@ -964,8 +995,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40201
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
 	public function test_clean_blog_cache_bails_on_non_numeric_input() {
 		$old_count = did_action( 'clean_site_cache' );
 
@@ -974,8 +1005,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40201
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
 	public function test_clean_blog_cache_works_with_deleted_site() {
 		$site_id = 12345;
 
@@ -986,9 +1017,9 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40201
-	 * @dataProvider data_get_site_caches
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_site_caches' )]
 	public function test_refresh_blog_details( $key, $group ) {
 		$site = get_site( self::$site_ids['make.wordpress.org/'] );
 
@@ -1012,8 +1043,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40201
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
 	public function test_refresh_blog_details_works_with_deleted_site() {
 		$site_id = 12345;
 
@@ -1024,8 +1055,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40201
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40201' )]
 	public function test_refresh_blog_details_uses_current_site_as_default() {
 		$site_id = get_current_blog_id();
 
@@ -1035,7 +1066,7 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		$this->assertFalse( wp_cache_get( $site_id, 'site-details' ) );
 	}
 
-	public function data_get_site_caches() {
+	public static function data_get_site_caches() {
 		return array(
 			array( '%blog_id%', 'sites' ),
 			array( '%blog_id%', 'site-details' ),
@@ -1047,9 +1078,9 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
-	 * @dataProvider data_wp_insert_site
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_insert_site' )]
 	public function test_wp_insert_site( $site_data, $expected_data ) {
 		remove_action( 'wp_initialize_site', 'wp_initialize_site', 10 );
 		$site_id = wp_insert_site( $site_data );
@@ -1062,7 +1093,7 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		}
 	}
 
-	public function data_wp_insert_site() {
+	public static function data_wp_insert_site() {
 		return array(
 			array(
 				array(
@@ -1159,8 +1190,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50324
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50324' )]
 	public function test_wp_insert_site_with_clean_site_cache() {
 		remove_action( 'wp_initialize_site', 'wp_initialize_site', 10 );
 
@@ -1184,8 +1215,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
 	public function test_wp_insert_site_empty_domain() {
 		remove_action( 'wp_initialize_site', 'wp_initialize_site', 10 );
 		$site_id = wp_insert_site( array( 'public' => 0 ) );
@@ -1195,9 +1226,9 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
-	 * @dataProvider data_wp_update_site
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_update_site' )]
 	public function test_wp_update_site( $site_data, $expected_data ) {
 		$site_id = self::factory()->blog->create();
 
@@ -1219,7 +1250,7 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		}
 	}
 
-	public function data_wp_update_site() {
+	public static function data_wp_update_site() {
 		return array(
 			array(
 				array(
@@ -1271,8 +1302,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
 	public function test_wp_update_site_empty_domain() {
 		$site_id = self::factory()->blog->create();
 
@@ -1283,8 +1314,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
 	public function test_wp_update_site_invalid_id() {
 		$result = wp_update_site( 444444, array( 'domain' => 'example.com' ) );
 
@@ -1293,8 +1324,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
 	public function test_wp_update_site_cleans_cache() {
 		$site_id = self::factory()->blog->create();
 		$site1   = get_site( $site_id );
@@ -1311,8 +1342,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
 	public function test_wp_delete_site() {
 		$site_id = self::factory()->blog->create();
 
@@ -1325,8 +1356,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
 	public function test_wp_delete_site_invalid_id() {
 		$result = wp_delete_site( 444444 );
 
@@ -1335,8 +1366,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_delete_site_validate_site_deletion_action() {
 		add_action( 'wp_validate_site_deletion', array( $this, 'action_wp_validate_site_deletion_prevent_deletion' ) );
 		$result = wp_delete_site( self::$site_ids['make.wordpress.org/'] );
@@ -1349,16 +1380,16 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
-	 * @dataProvider data_wp_normalize_site_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_normalize_site_data' )]
 	public function test_wp_normalize_site_data( $data, $expected ) {
 		$result = wp_normalize_site_data( $data );
 
 		$this->assertSameSetsWithIndex( $expected, $result );
 	}
 
-	public function data_wp_normalize_site_data() {
+	public static function data_wp_normalize_site_data() {
 		return array(
 			array(
 				array(
@@ -1444,9 +1475,9 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
-	 * @dataProvider data_wp_validate_site_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_validate_site_data' )]
 	public function test_wp_validate_site_data( $data, $expected_errors ) {
 		$result = new WP_Error();
 		wp_validate_site_data( $result, $data );
@@ -1458,7 +1489,7 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		}
 	}
 
-	public function data_wp_validate_site_data() {
+	public static function data_wp_validate_site_data() {
 		$date = current_time( 'mysql', true );
 
 		return array(
@@ -1573,8 +1604,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
 	public function test_site_dates_are_gmt() {
 		$first_date = current_time( 'mysql', true );
 
@@ -1602,8 +1633,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
 	public function test_wp_delete_site_cleans_cache() {
 		$site_id = self::factory()->blog->create();
 
@@ -1615,8 +1646,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
 	public function test_wp_update_site_cleans_old_cache_on_domain_change() {
 		$old_domain = 'old.wordpress.org';
 		$new_domain = 'new.wordpress.org';
@@ -1670,8 +1701,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
 	public function test_wp_update_site_cleans_old_cache_on_path_change() {
 		$old_path = '/foo/';
 		$new_path = '/bar/';
@@ -1723,9 +1754,9 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40364
-	 * @dataProvider data_site_status_hook_triggers
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40364' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_site_status_hook_triggers' )]
 	public function test_site_status_hook_triggers( $insert_site_data, $expected_insert_hooks, $update_site_data, $expected_update_hooks ) {
 		// First: Insert a site.
 		$this->listen_to_site_status_hooks();
@@ -1756,7 +1787,7 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		$this->assertSameSetsWithIndex( $update_expected, $update_result );
 	}
 
-	public function data_site_status_hook_triggers() {
+	public static function data_site_status_hook_triggers() {
 		return array(
 			array(
 				array(
@@ -1887,9 +1918,9 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
-	 * @dataProvider data_wp_initialize_site
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_initialize_site' )]
 	public function test_wp_initialize_site( $args, $expected_options, $expected_meta ) {
 		$result = wp_initialize_site( self::$uninitialized_site_id, $args );
 
@@ -1917,7 +1948,7 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		$this->assertSame( $expected_meta, $meta );
 	}
 
-	public function data_wp_initialize_site() {
+	public static function data_wp_initialize_site() {
 		return array(
 			array(
 				array(),
@@ -1969,8 +2000,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_initialize_site_user_roles() {
 		global $wpdb;
 
@@ -1997,8 +2028,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_initialize_site_user_is_admin() {
 		$result = wp_initialize_site( self::$uninitialized_site_id, array( 'user_id' => 1 ) );
 
@@ -2015,8 +2046,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_initialize_site_args_filter() {
 		add_filter( 'wp_initialize_site_args', array( $this, 'filter_wp_initialize_site_args' ), 10, 3 );
 		$result = wp_initialize_site( self::$uninitialized_site_id, array( 'title' => 'My Site' ) );
@@ -2040,8 +2071,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_initialize_site_empty_id() {
 		$result = wp_initialize_site( 0 );
 		$this->assertWPError( $result );
@@ -2049,8 +2080,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_initialize_site_invalid_id() {
 		$result = wp_initialize_site( 123 );
 		$this->assertWPError( $result );
@@ -2058,8 +2089,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_initialize_site_already_initialized() {
 		$result = wp_initialize_site( get_current_blog_id() );
 		$this->assertWPError( $result );
@@ -2067,8 +2098,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_uninitialize_site() {
 		$site_id = self::factory()->blog->create();
 
@@ -2078,8 +2109,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_uninitialize_site_empty_id() {
 		$result = wp_uninitialize_site( 0 );
 		$this->assertWPError( $result );
@@ -2087,8 +2118,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_uninitialize_site_invalid_id() {
 		$result = wp_uninitialize_site( 123 );
 		$this->assertWPError( $result );
@@ -2096,8 +2127,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_uninitialize_site_already_uninitialized() {
 		$result = wp_uninitialize_site( self::$uninitialized_site_id );
 		$this->assertWPError( $result );
@@ -2105,16 +2136,16 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_is_site_initialized() {
 		$this->assertTrue( wp_is_site_initialized( get_current_blog_id() ) );
 		$this->assertFalse( wp_is_site_initialized( self::$uninitialized_site_id ) );
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_is_site_initialized_prefilter() {
 		add_filter( 'pre_wp_is_site_initialized', '__return_false' );
 		$this->assertFalse( wp_is_site_initialized( get_current_blog_id() ) );
@@ -2124,8 +2155,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41333' )]
 	public function test_wp_insert_site_forwards_args_to_wp_initialize_site() {
 		$args = array(
 			'user_id' => 1,
@@ -2158,8 +2189,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46125
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46125' )]
 	public function test_wpmu_create_blog_cache_cleanup_backward_compatible() {
 		add_action( 'populate_options', array( $this, 'populate_options_callback' ) );
 
@@ -2190,10 +2221,10 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	/**
 	 * Tests whether all expected meta are provided in deprecated `wpmu_new_blog` action.
 	 *
-	 * @dataProvider data_wpmu_new_blog_action_backward_compatible
 	 *
-	 * @ticket 46351
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wpmu_new_blog_action_backward_compatible' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '46351' )]
 	public function test_wpmu_new_blog_action_backward_compatible( $meta, $expected_meta ) {
 		// We are testing deprecated hook. Register it to expected deprecated notices.
 		$this->setExpectedDeprecated( 'wpmu_new_blog' );
@@ -2207,8 +2238,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42251
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42251' )]
 	public function test_get_site_not_found_cache() {
 		$new_site_id = $this->_get_next_site_id();
 		$this->assertNull( get_site( $new_site_id ) );
@@ -2219,8 +2250,8 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42251
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42251' )]
 	public function test_get_site_not_found_cache_clear() {
 		$new_site_id = $this->_get_next_site_id();
 		$this->assertNull( get_site( $new_site_id ) );
@@ -2228,12 +2259,12 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		$new_site = self::factory()->blog->create_and_get();
 
 		// Double-check we got the ID of the new site correct.
-		$this->assertEquals( $new_site_id, $new_site->blog_id );
+		$this->assertSame( $new_site_id, (int) $new_site->blog_id );
 
 		// Verify that if we fetch the site now, it's no longer false.
 		$fetched_site = get_site( $new_site_id );
 		$this->assertInstanceOf( 'WP_Site', $fetched_site );
-		$this->assertEquals( $new_site_id, $fetched_site->blog_id );
+		$this->assertSame( $new_site_id, (int) $fetched_site->blog_id );
 	}
 
 	/**
@@ -2255,7 +2286,7 @@ class Tests_Multisite_Site extends WP_UnitTestCase {
 		$this->wp_initialize_site_meta = $meta;
 	}
 
-	public function data_wpmu_new_blog_action_backward_compatible() {
+	public static function data_wpmu_new_blog_action_backward_compatible() {
 		return array(
 			'default values' => array(
 				array(),

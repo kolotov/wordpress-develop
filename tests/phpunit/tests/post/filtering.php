@@ -6,9 +6,9 @@
  * These tests don't care what code is responsible for filtering
  * or how it is called, just that it happens when a post is saved.
  *
- * @group post
- * @group formatting
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 class Tests_Post_Filtering extends WP_UnitTestCase {
 	public function set_up() {
 		parent::set_up();
@@ -75,8 +75,8 @@ EOF;
 	/**
 	 * test kses bug. xhtml does not require space before closing empty element
 	 *
-	 * @ticket 12394
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12394' )]
 	public function test_post_content_xhtml_empty_elem() {
 		$content = <<<EOF
 <img src='foo' width='500' height='300'/>

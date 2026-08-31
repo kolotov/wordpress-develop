@@ -2,10 +2,10 @@
 /**
  * Test wp_set_options_autoload().
  *
- * @group option
  *
- * @covers ::wp_set_options_autoload
  */
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_set_options_autoload' )]
 class Tests_Option_WpSetOptionsAutoload extends WP_UnitTestCase {
 
 	/**
@@ -13,8 +13,8 @@ class Tests_Option_WpSetOptionsAutoload extends WP_UnitTestCase {
 	 *
 	 * The values 'yes' and 'no' are only supported for backward compatibility.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_options_autoload_yes() {
 		global $wpdb;
 
@@ -44,8 +44,8 @@ class Tests_Option_WpSetOptionsAutoload extends WP_UnitTestCase {
 	 *
 	 * The values 'yes' and 'no' are only supported for backward compatibility.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_options_autoload_no() {
 		global $wpdb;
 
@@ -72,8 +72,8 @@ class Tests_Option_WpSetOptionsAutoload extends WP_UnitTestCase {
 	/**
 	 * Tests that setting options' autoload value to the same value as prior works as expected.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_options_autoload_same() {
 		global $wpdb;
 
@@ -97,8 +97,8 @@ class Tests_Option_WpSetOptionsAutoload extends WP_UnitTestCase {
 	/**
 	 * Tests that setting missing option's autoload value does not do anything.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_options_autoload_missing() {
 		global $wpdb;
 
@@ -119,8 +119,8 @@ class Tests_Option_WpSetOptionsAutoload extends WP_UnitTestCase {
 	/**
 	 * Tests that setting option's autoload value only updates those that need to be updated.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_options_autoload_mixed() {
 		global $wpdb;
 
@@ -147,8 +147,8 @@ class Tests_Option_WpSetOptionsAutoload extends WP_UnitTestCase {
 	/**
 	 * Tests setting option's autoload value with boolean true.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_options_autoload_true() {
 		global $wpdb;
 
@@ -171,8 +171,8 @@ class Tests_Option_WpSetOptionsAutoload extends WP_UnitTestCase {
 	/**
 	 * Tests setting option's autoload value with boolean false.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_options_autoload_false() {
 		global $wpdb;
 

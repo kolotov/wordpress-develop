@@ -1,22 +1,22 @@
 <?php
 
 /**
- * @group functions
  *
- * @covers ::_wp_check_alternate_file_names
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_check_alternate_file_names' )]
 class Tests_Functions_WpCheckAlternateFileNames extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_wp_check_alternate_file_names
 	 *
-	 * @ticket 55199
 	 *
 	 * @param array  $filenames Array of filenames to check.
 	 * @param string $dir       The directory to check.
 	 * @param array  $files     An array of existing files in the directory.
 	 * @param bool   $expected  Expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_check_alternate_file_names' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55199' )]
 	public function test_wp_check_alternate_file_names( $filenames, $dir, $files, $expected ) {
 		$this->assertSame( $expected, _wp_check_alternate_file_names( $filenames, $dir, $files ) );
 	}
@@ -26,7 +26,7 @@ class Tests_Functions_WpCheckAlternateFileNames extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_check_alternate_file_names() {
+	public static function data_wp_check_alternate_file_names() {
 		return array(
 			'an existing file'                         => array(
 				'filenames' => array( 'canola.jpg' ),

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_IsPostPubliclyViewable extends WP_UnitTestCase {
 
 	/**
@@ -40,14 +40,14 @@ class Tests_Post_IsPostPubliclyViewable extends WP_UnitTestCase {
 	/**
 	 * Unit tests for is_post_publicly_viewable().
 	 *
-	 * @dataProvider data_is_post_publicly_viewable
-	 * @ticket 49380
 	 *
 	 * @param string $post_type   The post type.
 	 * @param string $post_status The post status.
 	 * @param bool   $expected    The expected result of the function call.
 	 * @param string $parent_key  The parent key as set up in shared fixtures.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_post_publicly_viewable' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '49380' )]
 	public function test_is_post_publicly_viewable( $post_type, $post_status, $expected, $parent_key = '' ) {
 		$date = '';
 		if ( 'future' === $post_status ) {
@@ -76,7 +76,7 @@ class Tests_Post_IsPostPubliclyViewable extends WP_UnitTestCase {
 	 *     @type string $parent_key  The parent key as set up in shared fixtures.
 	 * }
 	 */
-	public function data_is_post_publicly_viewable() {
+	public static function data_is_post_publicly_viewable() {
 		return array(
 			array( 'post', 'publish', true ),
 			array( 'post', 'private', false ),

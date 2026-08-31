@@ -6,8 +6,9 @@
  * @subpackage Blocks
  * @since 5.5.0
  *
- * @group blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+
 class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 
 	/**
@@ -48,8 +49,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_constructor_assigns_properties_from_parsed_block() {
 		$this->registry->register( 'core/example', array() );
 
@@ -66,9 +67,9 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
-	 * @ticket 59797
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59797' )]
 	public function test_constructor_assigns_block_type_from_registry() {
 		$block_type_settings = array(
 			'attributes' => array(
@@ -99,8 +100,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_lazily_assigns_attributes_with_defaults() {
 		$this->registry->register(
 			'core/example',
@@ -133,8 +134,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_lazily_assigns_attributes_with_only_defaults() {
 		$this->registry->register(
 			'core/example',
@@ -161,8 +162,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_constructor_assigns_context_from_block_type() {
 		$this->registry->register(
 			'core/example',
@@ -182,8 +183,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_constructor_maps_inner_blocks() {
 		$this->registry->register( 'core/example', array() );
 
@@ -198,8 +199,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_constructor_prepares_context_for_inner_blocks() {
 		$this->registry->register(
 			'core/outer',
@@ -234,8 +235,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_constructor_assigns_merged_context() {
 		$this->registry->register(
 			'core/example',
@@ -278,8 +279,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_render_static_block_type_returns_own_content() {
 		$this->registry->register( 'core/static', array() );
 		$this->registry->register(
@@ -300,8 +301,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_render_passes_block_for_render_callback() {
 		$this->registry->register(
 			'core/greeting',
@@ -321,8 +322,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_render_applies_render_block_filter() {
 		$this->registry->register( 'core/example', array() );
 
@@ -341,8 +342,8 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46187
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46187' )]
 	public function test_render_applies_dynamic_render_block_filter() {
 		$this->registry->register( 'core/example', array() );
 
@@ -365,7 +366,7 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_provider_test_render_enqueues_scripts_and_styles(): array {
+	public static function data_provider_test_render_enqueues_scripts_and_styles(): array {
 		$block_markup = <<<'HTML'
 <!-- wp:static -->
 <div class="static">
@@ -641,10 +642,7 @@ HTML
 	}
 
 	/**
-	 * @ticket 63676
-	 * @covers WP_Block::render()
 	 *
-	 * @dataProvider data_provider_test_render_enqueues_scripts_and_styles
 	 *
 	 * @param Closure|null $set_up
 	 * @param string       $block_markup
@@ -652,6 +650,9 @@ HTML
 	 * @param string[]     $expected_scripts
 	 * @param string[]     $expected_script_modules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63676' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_test_render_enqueues_scripts_and_styles' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block', 'render' )]
 	public function test_render_enqueues_scripts_and_styles( ?Closure $set_up, string $block_markup, string $expected_rendered_block, array $expected_styles, array $expected_scripts, array $expected_script_modules ) {
 		if ( $set_up instanceof Closure ) {
 			$set_up();
@@ -725,8 +726,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_passes_attributes_to_render_callback() {
 		$this->registry->register(
 			'core/greeting',
@@ -759,8 +760,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_passes_content_to_render_callback() {
 		$this->registry->register(
 			'core/outer',
@@ -788,8 +789,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 52991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_build_query_vars_from_query_block() {
 		$this->registry->register(
 			'core/example',
@@ -836,8 +837,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 65373
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65373' )]
 	public function test_build_query_vars_from_query_block_exclude_current(): void {
 		$this->registry->register(
 			'core/example',
@@ -866,8 +867,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 64416
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64416' )]
 	public function test_build_query_vars_from_query_block_tax_query_old_format() {
 		$this->registry->register(
 			'core/example',
@@ -911,8 +912,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 64416
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64416' )]
 	public function test_build_query_vars_from_query_block_tax_query_include_exclude() {
 		$this->registry->register(
 			'core/example',
@@ -962,8 +963,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 62014
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62014' )]
 	public function test_build_query_vars_from_query_block_standard_post_formats() {
 		$this->registry->register(
 			'core/example',
@@ -1001,8 +1002,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 62014
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62014' )]
 	public function test_build_query_vars_from_query_block_post_format() {
 		$this->registry->register(
 			'core/example',
@@ -1040,8 +1041,8 @@ HTML
 		);
 	}
 	/**
-	 * @ticket 62014
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62014' )]
 	public function test_build_query_vars_from_query_block_post_formats_with_category() {
 		$this->registry->register(
 			'core/example',
@@ -1090,8 +1091,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 52991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_build_query_vars_from_query_block_no_context() {
 		$this->registry->register( 'core/example', array() );
 
@@ -1113,8 +1114,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 52991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_build_query_vars_from_query_block_first_page() {
 		$this->registry->register(
 			'core/example',
@@ -1147,8 +1148,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 52991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_build_query_vars_from_query_block_page_no_offset() {
 		$this->registry->register(
 			'core/example',
@@ -1180,8 +1181,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 52991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_build_query_vars_from_query_block_page_with_offset() {
 		$this->registry->register(
 			'core/example',
@@ -1213,8 +1214,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 62901
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62901' )]
 	public function test_build_query_vars_from_query_block_with_top_level_parent() {
 		$this->registry->register(
 			'core/example',
@@ -1248,8 +1249,8 @@ HTML
 	/**
 	 * Ensure requesting only sticky posts returns only sticky posts.
 	 *
-	 * @ticket 62908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62908' )]
 	public function test_build_query_vars_from_block_query_only_sticky_posts() {
 		$this->factory()->post->create_many( 5 );
 		$sticky_post_id = $this->factory()->post->create(
@@ -1296,8 +1297,8 @@ HTML
 	/**
 	 * Ensure excluding sticky posts returns only non-sticky posts.
 	 *
-	 * @ticket 62908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62908' )]
 	public function test_build_query_vars_from_block_query_exclude_sticky_posts() {
 		$not_sticky_post_ids = $this->factory()->post->create_many( 5 );
 		$sticky_post_id      = $this->factory()->post->create(
@@ -1343,8 +1344,8 @@ HTML
 	/**
 	 * Ensure ignoring sticky posts includes both sticky and non-sticky posts.
 	 *
-	 * @ticket 62908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62908' )]
 	public function test_build_query_vars_from_block_query_ignore_sticky_posts() {
 		$not_sticky_post_ids = $this->factory()->post->create_many( 5 );
 		$sticky_post_id      = $this->factory()->post->create(
@@ -1388,8 +1389,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 56467
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
 	public function test_query_loop_block_query_vars_filter() {
 		$this->registry->register(
 			'core/example',
@@ -1430,8 +1431,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 52991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_block_has_support() {
 		$this->registry->register(
 			'core/example',
@@ -1460,8 +1461,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 52991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_block_has_support_no_supports() {
 		$this->registry->register( 'core/example', array() );
 		$block_type  = $this->registry->get_registered( 'core/example' );
@@ -1470,8 +1471,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 52991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_block_has_support_provided_defaults() {
 		$this->registry->register(
 			'core/example',
@@ -1491,14 +1492,14 @@ HTML
 	}
 
 	/**
-	 * @ticket 58532
 	 *
-	 * @dataProvider data_block_has_support_string
 	 *
 	 * @param array  $block_data Block data.
 	 * @param string $support    Support string to check.
 	 * @param bool   $expected   Expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58532' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_block_has_support_string' )]
 	public function test_block_has_support_string( $block_data, $support, $expected, $message ) {
 		$this->registry->register( 'core/example', $block_data );
 		$block_type  = $this->registry->get_registered( 'core/example' );
@@ -1509,7 +1510,7 @@ HTML
 	/**
 	 * Data provider for test_block_has_support_string
 	 */
-	public function data_block_has_support_string() {
+	public static function data_block_has_support_string() {
 		return array(
 			array(
 				array(),
@@ -1566,8 +1567,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 51612
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51612' )]
 	public function test_block_filters_for_inner_blocks() {
 		$pre_render_callback           = new MockAction();
 		$render_block_data_callback    = new MockAction();

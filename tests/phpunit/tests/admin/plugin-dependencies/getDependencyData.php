@@ -7,22 +7,19 @@
 
 require_once __DIR__ . '/base.php';
 
-/**
- * @group admin
- * @group plugins
- *
- * @covers WP_Plugin_Dependencies::get_dependency_data
- * @covers WP_Plugin_Dependencies::get_dependency_api_data
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependency_data' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependency_api_data' )]
 class Tests_Admin_WPPluginDependencies_GetDependencyData extends WP_PluginDependencies_UnitTestCase {
 
 	/**
 	 * Tests that dependency data is retrieved.
 	 *
-	 * @ticket 22316
 	 *
 	 * @global string $pagenow The filename of the current screen.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_get_dependency_data() {
 		global $pagenow;
 
@@ -47,10 +44,10 @@ class Tests_Admin_WPPluginDependencies_GetDependencyData extends WP_PluginDepend
 	/**
 	 * Tests that false is returned when no dependency data exists.
 	 *
-	 * @ticket 22316
 	 *
 	 * @global string $pagenow The filename of the current screen.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_return_false_when_no_dependency_data_exists() {
 		global $pagenow;
 
@@ -74,8 +71,8 @@ class Tests_Admin_WPPluginDependencies_GetDependencyData extends WP_PluginDepend
 	/**
 	 * Tests that a 'slug' key in the Plugins API response object is not assumed.
 	 *
-	 * @ticket 60540
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60540' )]
 	public function test_should_not_assume_a_slug_key_exists_in_the_response() {
 		global $pagenow;
 

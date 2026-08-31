@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @group date
- * @group datetime
- * @group post
  *
- * @covers ::get_the_date
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_date' )]
 class Tests_Date_GetTheDate extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 13771
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '13771' )]
 	public function test_get_the_date_returns_correct_time_with_post_id() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2014-03-01 16:35:00' ) );
 
@@ -19,8 +19,8 @@ class Tests_Date_GetTheDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28310
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_the_date_returns_false_with_null_or_non_existing_post() {
 		$this->assertFalse( get_the_date() );
 		$this->assertFalse( get_the_date( 'F j, Y h:i:s' ) );
@@ -29,8 +29,8 @@ class Tests_Date_GetTheDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51184
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_the_date_returns_correct_time_with_empty_format() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2020-08-29 01:51:00' ) );
 
@@ -39,8 +39,8 @@ class Tests_Date_GetTheDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28310
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_the_time_returns_correct_time_with_post_id() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2014-03-01 16:35:00' ) );
 
@@ -48,8 +48,8 @@ class Tests_Date_GetTheDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28310
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_the_time_returns_false_with_null_or_non_existing_post() {
 		$this->assertFalse( get_the_time() );
 		$this->assertFalse( get_the_time( 'h:i:s' ) );
@@ -58,8 +58,8 @@ class Tests_Date_GetTheDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51184
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_the_time_returns_correct_time_with_empty_format() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2020-08-29 01:51:00' ) );
 

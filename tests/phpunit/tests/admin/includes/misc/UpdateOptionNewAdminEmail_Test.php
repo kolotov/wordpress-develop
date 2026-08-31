@@ -1,15 +1,10 @@
 <?php
 
-/**
- * @group admin
- *
- * @covers ::update_option_new_admin_email
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'update_option_new_admin_email' )]
 class Tests_Admin_Includes_Misc_UpdateOptionNewAdminEmail_Test extends WP_UnitTestCase {
 
-	/**
-	 * @ticket 59520
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59520' )]
 	public function test_new_admin_email_subject_filter() {
 		// Default value.
 		$mailer = tests_retrieve_phpmailer_instance();

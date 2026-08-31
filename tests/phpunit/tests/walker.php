@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group post
- * @group menu
- * @group taxonomy
- * @group walker
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'menu' )]
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\Group( 'walker' )]
 class Tests_Walker extends WP_UnitTestCase {
 
 	/**
@@ -273,8 +273,8 @@ class Tests_Walker extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53474
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53474' )]
 	public function test_multiple_items_non_numeric_parent() {
 
 		$items  = array(

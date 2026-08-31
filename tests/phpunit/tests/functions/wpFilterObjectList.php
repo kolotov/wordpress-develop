@@ -3,9 +3,9 @@
 /**
  * Test wp_filter_object_list().
  *
- * @group functions
- * @covers ::wp_filter_object_list
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_filter_object_list' )]
 class Tests_Functions_wpFilterObjectList extends WP_UnitTestCase {
 	public $object_list = array();
 	public $array_list  = array();

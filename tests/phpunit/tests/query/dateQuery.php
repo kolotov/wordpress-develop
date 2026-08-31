@@ -3,12 +3,12 @@
 /**
  * Tests to make sure querying posts based on various date parameters using "date_query" works as expected.
  *
- * @ticket 18694
  *
- * @group query
- * @group date
- * @group datequery
  */
+#[\PHPUnit\Framework\Attributes\Ticket( '18694' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datequery' )]
 class Tests_Query_DateQuery extends WP_UnitTestCase {
 
 	public $q;
@@ -182,8 +182,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26653
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26653' )]
 	public function test_date_query_inclusive_between_dates() {
 		$p1 = self::factory()->post->create( array( 'post_date' => '2006-12-18 09:42:29' ) );
 		$p2 = self::factory()->post->create( array( 'post_date' => '2007-01-18 10:42:29' ) );
@@ -211,8 +211,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Y() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -252,8 +252,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Y_inclusive() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -295,8 +295,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Ym() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -336,8 +336,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Ym_inclusive() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -379,8 +379,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Ymd() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -420,8 +420,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Ymd_inclusive() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -463,8 +463,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_YmdHi() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -504,8 +504,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_YmdHi_inclusive() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -547,8 +547,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_YmdHis() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -588,8 +588,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_YmdHis_inclusive() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -631,8 +631,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29908
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_non_parseable() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -753,8 +753,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28063
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28063' )]
 	public function test_date_query_dayofweek_iso() {
 		$p1 = self::factory()->post->create( array( 'post_date' => '2014-10-31 10:42:29' ) );
 		$p2 = self::factory()->post->create( array( 'post_date' => '2014-10-30 10:42:29' ) );
@@ -790,8 +790,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34228
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34228' )]
 	public function test_date_query_hour_should_not_ignore_0() {
 		$p1 = self::factory()->post->create( array( 'post_date' => '2014-10-21 00:42:29' ) );
 		$p2 = self::factory()->post->create( array( 'post_date' => '2014-10-21 01:42:29' ) );
@@ -958,8 +958,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25775
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25775' )]
 	public function test_date_query_with_taxonomy_join() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -996,8 +996,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29822
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29822' )]
 	public function test_date_query_one_nested_query() {
 		$p1    = self::factory()->post->create( array( 'post_date' => '2004-10-01 13:42:29' ) );
 		$p2    = self::factory()->post->create( array( 'post_date' => '2004-01-22 14:34:29' ) );
@@ -1027,8 +1027,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29822
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29822' )]
 	public function test_date_query_one_nested_query_multiple_columns_relation_and() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -1088,8 +1088,8 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29822
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29822' )]
 	public function test_date_query_nested_query_multiple_columns_mixed_relations() {
 		$p1 = self::factory()->post->create(
 			array(

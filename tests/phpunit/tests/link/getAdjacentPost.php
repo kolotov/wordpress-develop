@@ -1,14 +1,14 @@
 <?php
 /**
- * @group link
- * @covers ::get_adjacent_post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_adjacent_post' )]
 class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	protected $exclude_term;
 
 	/**
-	 * @ticket 17807
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17807' )]
 	public function test_get_adjacent_post() {
 		// Need some sample posts to test adjacency.
 		$post_one = self::factory()->post->create_and_get(
@@ -87,8 +87,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22112
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22112' )]
 	public function test_get_adjacent_post_exclude_self_term() {
 		// Bump term_taxonomy to mimic shared term offsets.
 		global $wpdb;
@@ -174,8 +174,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32833
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32833' )]
 	public function test_get_adjacent_post_excluded_terms() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -208,8 +208,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32833
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32833' )]
 	public function test_get_adjacent_post_excluded_terms_should_not_require_posts_to_have_terms_in_any_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -245,8 +245,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35211
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35211' )]
 	public function test_get_adjacent_post_excluded_terms_filter() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -279,8 +279,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43521
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43521' )]
 	public function test_get_adjacent_post_excluded_terms_filter_should_apply_to_empty_excluded_terms_parameter() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -313,8 +313,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43521
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43521' )]
 	public function test_excluded_terms_filter_empty() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -352,8 +352,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63920' )]
 	public function test_get_adjacent_post_returns_empty_string_when_wp_get_object_terms_returns_wp_error() {
 		register_taxonomy( 'wptests_error_tax', 'post' );
 
@@ -393,8 +393,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63920' )]
 	public function test_get_adjacent_post_empty_term_array_after_exclusions() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -427,8 +427,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63920' )]
 	public function test_get_adjacent_post_term_array_processing_order() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -488,8 +488,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63920' )]
 	public function test_get_adjacent_post_invalid_taxonomy() {
 		self::factory()->post->create(
 			array(
@@ -511,8 +511,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41131
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41131' )]
 	public function test_get_adjacent_post_cache() {
 		// Need some sample posts to test adjacency.
 		$post_one = self::factory()->post->create_and_get(
@@ -591,8 +591,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	/**
 	 * Test get_adjacent_post with posts having identical post_date.
 	 *
-	 * @ticket 8107
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8107' )]
 	public function test_get_adjacent_post_with_identical_dates() {
 		$identical_date = '2024-01-01 12:00:00';
 
@@ -625,8 +625,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	/**
 	 * Test get_adjacent_post with mixed dates and identical dates.
 	 *
-	 * @ticket 8107
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8107' )]
 	public function test_get_adjacent_post_mixed_dates_with_identical_groups() {
 		// Create posts with different dates.
 		$post_early = self::factory()->post->create(
@@ -698,8 +698,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	/**
 	 * Test get_adjacent_post navigation through all posts with identical dates.
 	 *
-	 * @ticket 8107
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8107' )]
 	public function test_get_adjacent_post_navigation_through_identical_dates() {
 		$identical_date = '2024-01-01 12:00:00';
 
@@ -744,8 +744,8 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	/**
 	 * Test get_adjacent_post with identical dates and category filtering.
 	 *
-	 * @ticket 8107
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8107' )]
 	public function test_get_adjacent_post_identical_dates_with_category() {
 		$identical_date = '2024-01-01 12:00:00';
 		$category_id    = self::factory()->category->create( array( 'name' => 'Test Category' ) );

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::_wp_specialchars
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_specialchars' )]
 class Tests_Formatting_wpSpecialchars extends WP_UnitTestCase {
 	public function test_wp_specialchars_basics() {
 		$html = '&amp;&lt;hello world&gt;';
@@ -51,14 +51,14 @@ class Tests_Formatting_wpSpecialchars extends WP_UnitTestCase {
 	/**
 	 * Check some of the double-encoding features for entity references.
 	 *
-	 * @ticket 17780
-	 * @dataProvider data_double_encoding
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17780' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_double_encoding' )]
 	public function test_double_encoding( $input, $output ) {
 		return $this->assertSame( $output, _wp_specialchars( $input, ENT_NOQUOTES, false, true ) );
 	}
 
-	public function data_double_encoding() {
+	public static function data_double_encoding() {
 		return array(
 			array(
 				'This & that, this &amp; that, &#8212; &quot; &QUOT; &Uacute; &nbsp; &#34; &#034; &#0034; &#x00022; &#x22; &dollar; &times;',
@@ -78,14 +78,14 @@ class Tests_Formatting_wpSpecialchars extends WP_UnitTestCase {
 	/**
 	 * Check some of the double-encoding features for entity references.
 	 *
-	 * @ticket 17780
-	 * @dataProvider data_no_double_encoding
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17780' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_no_double_encoding' )]
 	public function test_no_double_encoding( $input, $output ) {
 		return $this->assertSame( $output, _wp_specialchars( $input, ENT_NOQUOTES, false, false ) );
 	}
 
-	public function data_no_double_encoding() {
+	public static function data_no_double_encoding() {
 		return array(
 			array(
 				'This & that, this &amp; that, &#8212; &quot; &QUOT; &Uacute; &nbsp; &#34; &#034; &#0034; &#x00022; &#x22; &dollar; &times;',

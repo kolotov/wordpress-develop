@@ -12,10 +12,10 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  * @subpackage UnitTests
  * @since 6.3.2
  *
- * @group ajax
  *
- * @covers ::wp_ajax_parse-media-shortcode
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_parse_media_shortcode' )]
 class Tests_Ajax_wpAjaxParseMediaShortcode extends WP_Ajax_UnitTestCase {
 	const SHORTCODE_RETURN_VALUE = 'TEST';
 	private static $media_id;
@@ -35,8 +35,8 @@ class Tests_Ajax_wpAjaxParseMediaShortcode extends WP_Ajax_UnitTestCase {
 		);
 	}
 	/**
-	 * @dataProvider shortcode_provider
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'shortcode_provider' )]
 	public function test_parse_shortcode( array $payload, $expected ) {
 		add_shortcode( 'test', array( $this, 'shortcode_test' ) );
 
@@ -66,7 +66,7 @@ class Tests_Ajax_wpAjaxParseMediaShortcode extends WP_Ajax_UnitTestCase {
 		return self::SHORTCODE_RETURN_VALUE;
 	}
 
-	public function shortcode_provider() {
+	public static function shortcode_provider() {
 		return array(
 			'gallery_shortcode_is_allowed'         => array(
 				'payload'  => array( 'shortcode' => '[gallery ids=" ' . self::$media_id . '"]' ),

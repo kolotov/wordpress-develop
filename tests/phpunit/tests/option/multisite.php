@@ -3,20 +3,28 @@
 /**
  * Tests specific to network and site options in Multisite.
  *
- * @group option
- * @group ms-option
- * @group ms-required
- * @group multisite
  */
+
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-option' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Option_Multisite extends WP_UnitTestCase {
 
 	/**
-	 * @covers ::get_blog_option
-	 * @covers ::get_option
-	 * @covers ::add_blog_option
-	 * @covers ::update_blog_option
-	 * @covers ::delete_blog_option
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_blog_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_blog_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_blog_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_blog_option' )]
 	public function test_from_same_site() {
 		$key    = __FUNCTION__ . '_1';
 		$key2   = __FUNCTION__ . '_2';
@@ -55,12 +63,12 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_blog_option
-	 * @covers ::get_option
-	 * @covers ::add_blog_option
-	 * @covers ::update_blog_option
-	 * @covers ::delete_blog_option
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_blog_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_blog_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_blog_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_blog_option' )]
 	public function test_from_same_site_with_null_blog_id() {
 		$key    = __FUNCTION__ . '_1';
 		$key2   = __FUNCTION__ . '_2';
@@ -98,12 +106,12 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_blog_option
-	 * @covers ::get_option
-	 * @covers ::add_blog_option
-	 * @covers ::update_blog_option
-	 * @covers ::delete_blog_option
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_blog_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_blog_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_blog_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_blog_option' )]
 	public function test_with_another_site() {
 		$user_id = self::factory()->user->create();
 		$this->assertIsInt( $user_id );
@@ -152,10 +160,10 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group multisite
 	 *
-	 * @covers ::get_site_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_site_notoptions() {
 		$network_id     = get_current_network_id();
 		$notoptions_key = "{$network_id}:notoptions";
@@ -174,9 +182,9 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::users_can_register_signup_filter
-	 * @covers ::get_site_option
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'users_can_register_signup_filter' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_users_can_register_signup_filter() {
 
 		get_site_option( 'registration' );
@@ -193,17 +201,17 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_illegal_names
 	 *
-	 * @covers ::update_site_option
-	 * @covers ::get_site_option
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_illegal_names' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_site_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_sanitize_network_option_illegal_names( $option_value, $sanitized_option_value ) {
 		update_site_option( 'illegal_names', $option_value );
 		$this->assertSame( $sanitized_option_value, get_site_option( 'illegal_names' ) );
 	}
 
-	public function data_illegal_names() {
+	public static function data_illegal_names() {
 		return array(
 			array( array( '', 'Woo', '' ), array( 'Woo' ) ),
 			array( 'foo bar', array( 'foo', 'bar' ) ),
@@ -212,34 +220,34 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_email_domains
 	 *
 	 * @param $option_value
 	 * @param $sanitized_option_value
 	 *
-	 * @covers ::update_site_option
-	 * @covers ::get_site_option
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_email_domains' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_site_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_sanitize_network_option_limited_email_domains( $option_value, $sanitized_option_value ) {
 		update_site_option( 'limited_email_domains', $option_value );
 		$this->assertSame( $sanitized_option_value, get_site_option( 'limited_email_domains' ) );
 	}
 
 	/**
-	 * @dataProvider data_email_domains
 	 *
 	 * @param $option_value
 	 * @param $sanitized_option_value
 	 *
-	 * @covers ::update_site_option
-	 * @covers ::get_site_option
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_email_domains' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_site_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_sanitize_network_option_banned_email_domains( $option_value, $sanitized_option_value ) {
 		update_site_option( 'banned_email_domains', $option_value );
 		$this->assertSame( $sanitized_option_value, get_site_option( 'banned_email_domains' ) );
 	}
 
-	public function data_email_domains() {
+	public static function data_email_domains() {
 		return array(
 			array( array( 'woo', '', 'boo.com', 'foo.net.biz..' ), array( 'woo', 'boo.com' ) ),
 			array( "foo\nbar", array( 'foo', 'bar' ) ),

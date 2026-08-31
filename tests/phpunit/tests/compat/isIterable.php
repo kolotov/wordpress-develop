@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @group compat
  *
- * @covers ::is_iterable
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Compat_isIterable extends WP_UnitTestCase {
 
 	/**
 	 * Test that is_iterable() is always available (either from PHP or WP).
 	 *
-	 * @ticket 43619
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43619' )]
 	public function test_is_iterable_availability() {
 		$this->assertTrue( function_exists( 'is_iterable' ) );
 	}
@@ -19,13 +19,13 @@ class Tests_Compat_isIterable extends WP_UnitTestCase {
 	/**
 	 * Test is_iterable() polyfill.
 	 *
-	 * @ticket 43619
 	 *
-	 * @dataProvider data_is_iterable_functionality
 	 *
 	 * @param mixed $variable    Variable to check.
 	 * @param bool  $is_iterable The expected return value of PHP 7.1 is_iterable() function.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43619' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_iterable_functionality' )]
 	public function test_is_iterable_functionality( $variable, $is_iterable ) {
 		$this->assertSame( $is_iterable, is_iterable( $variable ) );
 	}
@@ -33,7 +33,6 @@ class Tests_Compat_isIterable extends WP_UnitTestCase {
 	/**
 	 * Data provider for test_is_iterable_functionality().
 	 *
-	 * @ticket 43619
 	 *
 	 * @return array {
 	 *     @type array {
@@ -42,7 +41,8 @@ class Tests_Compat_isIterable extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_is_iterable_functionality() {
+	#[\PHPUnit\Framework\Attributes\Ticket( '43619' )]
+	public static function data_is_iterable_functionality() {
 		return array(
 			'empty array'           => array(
 				'variable'    => array(),

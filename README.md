@@ -2,6 +2,45 @@
 
 Welcome to the WordPress development repository! Please check out the [contributor handbook](https://make.wordpress.org/core/handbook/) for information about how to open bug reports, contribute patches, test changes, write documentation, or get involved in any way you can.
 
+## Fork PHPUnit support policy
+
+The `phpunit-13` branch intentionally targets a **current-only** PHP test stack.
+The versions below are the active migration baseline, not minimums in a broad
+backward-compatibility matrix:
+
+- PHP 8.5
+- PHPUnit 13
+- the current WordPress 7.x development line carried by this branch
+- the current MariaDB, Memcached, and runtime versions locked by the paired
+  `wp-phpunit` runtime and `tools/phpunit13/runtime-image.lock`
+
+Compatibility with PHP 8.4 or earlier, PHPUnit 12 or earlier, unsupported older
+WordPress generations, and legacy database/runtime variants is intentionally out
+of scope. This remains true even where upstream WordPress Core supports a broader
+matrix.
+
+This is a deliberate architecture boundary, not unfinished migration work. The
+PHPUnit 13 branch removes historical compatibility tails so it can use current
+PHPUnit public APIs and PHP attributes directly, share one reproducible runtime
+with `wp-phpunit`, and avoid carrying polyfills, aliases, conditional code, and
+parallel test paths for versions this branch does not validate.
+
+A failure that occurs only on an unsupported version is therefore **not a
+regression of this fork**. Contributors and automated agents must not restore
+removed compatibility shims, old-version branches, PHPUnit-internal APIs,
+polyfills, legacy metadata, or skipped compatibility paths merely to make an
+unsupported version pass. Expanding the supported matrix requires an explicit
+policy change first and a maintained CI/runtime definition for that version.
+
+Regressions inside the declared current baseline are still real regressions: do
+not hide them by weakening assertions, skipping tests, or suppressing warnings
+and diagnostics.
+
+The generic WordPress development instructions below are inherited from upstream
+and may describe environments useful to WordPress Core generally. They do not
+override this branch's PHPUnit 13 support policy or expand its validated PHP test
+matrix.
+
 * [Getting Started](#getting-started)
 * [Credentials](#credentials)
 
@@ -83,18 +122,50 @@ npm run env:cli -- help
 
 #### To run the tests
 
-These commands run the PHP and end-to-end test suites, respectively:
+The PHPUnit 13 migration branch runs PHP tests only through the WordPress-owned
+container runner. Published validation requires the provider commit in
+`composer.lock` to match `tools/phpunit13/runtime-image.lock`; the tested
+`wp-phpunit` runtime plus MariaDB and Memcached are then consumed by immutable
+image digests. Local and GitHub jobs execute the same `run-profile.sh` /
+`run-tests.sh` semantics with Podman and Docker respectively.
+
+Run the main local profiles with:
 
 ```
-npm run test:php
+./tools/phpunit13/run-local-podman.sh single-site
+./tools/phpunit13/run-local-podman.sh multisite
+./tools/phpunit13/run-local-podman.sh single-site-memcached
+./tools/phpunit13/run-local-podman.sh multisite-memcached
+./tools/phpunit13/run-local-podman.sh single-site-port
+./tools/phpunit13/run-local-podman.sh multisite-port
+./tools/phpunit13/run-local-podman.sh html-api
+./tools/phpunit13/run-local-podman.sh audit
+```
+
+For unpublished paired `wp-phpunit` changes, point one variable at the provider
+checkout. The same checkout supplies both the runtime definition and Composer
+path repository, preventing mixed provider states:
+
+```
+WP_PHPUNIT_SOURCE_HOST=../wp-phpunit \
+./tools/phpunit13/run-local-podman.sh single-site
+```
+
+After the provider is published, refresh `composer.lock` with Composer and run
+`./tools/phpunit13/update-runtime-image-lock.sh` to resolve the tested runtime,
+MariaDB, and Memcached images to immutable digests. The GHCR runtime package must
+be readable by this repository; public package visibility is the simplest setup
+for community use.
+
+Without the unpublished override, local and GitHub validation require the same
+published provider reference and runtime image lock. PHP, Composer, Node, npm,
+PHPUnit, MariaDB, and Memcached on the host are not part of the supported PHPUnit
+validation path.
+
+End-to-end tests continue to use the regular WordPress development environment:
+
+```
 npm run test:e2e
-```
-
-You can pass extra parameters into the PHP tests by adding `--` and then the [command-line options](https://docs.phpunit.de/en/10.4/textui.html#command-line-options):
-
-```
-npm run test:php -- --filter <test name>
-npm run test:php -- --group <group name or ticket number>
 ```
 
 To run the JavaScript (QUnit) tests:

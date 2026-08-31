@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @group date
- * @group datetime
- * @group post
  *
- * @covers ::the_date
- * @covers ::the_weekday_date
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'the_date' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'the_weekday_date' )]
 class Tests_Date_TheDate extends WP_UnitTestCase {
 
 	/** @var array $hooks_called Count of hooks called. */
@@ -87,8 +87,8 @@ class Tests_Date_TheDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33750
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33750' )]
 	public function test_the_date() {
 		ob_start();
 		the_date();
@@ -127,8 +127,8 @@ class Tests_Date_TheDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47354
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47354' )]
 	public function test_the_weekday_date() {
 		ob_start();
 		the_weekday_date();

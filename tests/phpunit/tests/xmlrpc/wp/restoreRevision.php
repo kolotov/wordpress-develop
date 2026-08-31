@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_restoreRevision extends WP_XMLRPC_UnitTestCase {
 	public $post_id;
 	public $revision_id;

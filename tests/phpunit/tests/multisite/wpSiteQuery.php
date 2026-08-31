@@ -3,10 +3,10 @@
 /**
  * Test site query functionality in multisite.
  *
- * @group ms-required
- * @group ms-site
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 	protected static $network_ids;
 	protected static $site_ids;
@@ -775,8 +775,8 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41197
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41197' )]
 	public function test_wp_site_query_cache_with_different_fields_no_count() {
 		$q                 = new WP_Site_Query();
 		$query_1           = $q->query(
@@ -802,8 +802,8 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41197
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41197' )]
 	public function test_wp_site_query_cache_with_different_fields_active_count() {
 		$q = new WP_Site_Query();
 
@@ -831,8 +831,8 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41197
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41197' )]
 	public function test_wp_site_query_cache_with_same_fields_different_count() {
 		$q = new WP_Site_Query();
 
@@ -860,8 +860,8 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55462
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55462' )]
 	public function test_wp_site_query_cache_with_same_fields_same_cache_fields() {
 		$q = new WP_Site_Query();
 
@@ -892,8 +892,8 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55462
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55462' )]
 	public function test_wp_site_query_cache_with_same_fields_different_cache_fields() {
 		$q = new WP_Site_Query();
 
@@ -924,9 +924,9 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40229
-	 * @dataProvider data_wp_site_query_meta_query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40229' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_site_query_meta_query' )]
 	public function test_wp_site_query_meta_query( $query, $expected, $strict ) {
 		if ( ! is_site_meta_supported() ) {
 			$this->markTestSkipped( 'Test only runs with the blogmeta database table installed.' );
@@ -955,7 +955,7 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 		}
 	}
 
-	public function data_wp_site_query_meta_query() {
+	public static function data_wp_site_query_meta_query() {
 		return array(
 			array(
 				array(
@@ -1111,9 +1111,9 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45749
-	 * @ticket 47599
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45749' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '47599' )]
 	public function test_sites_pre_query_filter_should_bypass_database_query() {
 		add_filter( 'sites_pre_query', array( __CLASS__, 'filter_sites_pre_query' ), 10, 2 );
 
@@ -1141,8 +1141,8 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51333
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51333' )]
 	public function test_sites_pre_query_filter_should_set_sites_property() {
 		add_filter( 'sites_pre_query', array( __CLASS__, 'filter_sites_pre_query_and_set_sites' ), 10, 2 );
 
@@ -1163,8 +1163,8 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56841' )]
 	public function test_wp_site_query_does_not_have_leading_whitespace() {
 		$q = new WP_Site_Query();
 

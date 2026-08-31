@@ -4,22 +4,22 @@
  * Unit tests covering WordPress’ UTF-8 handling.
  *
  * @package WordPress
- * @group unicode
  *
- * @covers ::wp_check_invalid_utf8
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_check_invalid_utf8' )]
+#[\PHPUnit\Framework\Attributes\Group( 'unicode' )]
 class Tests_Unicode_WpCheckInvalidUtf8 extends WP_UnitTestCase {
 
 	/**
 	 * Verifies that WordPress can properly detect valid and invalid UTF-8.
 	 *
-	 * @ticket 63837
 	 *
-	 * @dataProvider data_utf8_test_data
 	 *
 	 * @param string      $bytes    Bytes as a PHP string.
 	 * @param string|null $scrubbed Expected checked value, if string isn’t valid UTF-8.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63837' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_utf8_test_data' )]
 	public function test_properly_checks_utf8( string $bytes, ?string $scrubbed = null ) {
 		if ( null === $scrubbed ) {
 			$this->assertSame(

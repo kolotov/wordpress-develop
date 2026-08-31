@@ -6,10 +6,17 @@
  * @subpackage Block Supports
  * @since 7.1.0
  *
- * @group block-supports
  *
- * @covers ::wp_render_block_states_support
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_block_states_support' )]
 class Tests_Block_Supports_States extends WP_UnitTestCase {
 
 	/**
@@ -87,10 +94,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that fallback border-style declarations are added after CSS generation.
 	 *
-	 * @covers ::wp_get_state_declarations_with_fallback_border_styles
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_state_declarations_with_fallback_border_styles' )]
 	public function test_adds_fallback_border_style_declarations() {
 		$actual = wp_get_state_declarations_with_fallback_border_styles(
 			array(
@@ -113,10 +120,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that authored border-style declarations are preserved.
 	 *
-	 * @covers ::wp_get_state_declarations_with_fallback_border_styles
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_state_declarations_with_fallback_border_styles' )]
 	public function test_preserves_authored_border_style_declarations() {
 		$actual = wp_get_state_declarations_with_fallback_border_styles(
 			array(
@@ -139,11 +146,11 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that background-image reset is added when a state sets a solid background-color.
 	 *
-	 * @covers ::wp_get_state_declarations_with_background_resets
 	 *
-	 * @ticket 65561
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65561' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_state_declarations_with_background_resets' )]
 	public function test_adds_background_image_reset_for_solid_background_color() {
 		$actual = wp_get_state_declarations_with_background_resets(
 			array(
@@ -163,10 +170,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that background-image reset is not added when the state also sets a legacy gradient.
 	 *
-	 * @covers ::wp_get_state_declarations_with_background_resets
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_state_declarations_with_background_resets' )]
 	public function test_no_background_image_reset_when_state_sets_legacy_gradient() {
 		$actual = wp_get_state_declarations_with_background_resets(
 			array(
@@ -187,10 +194,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that background-image reset is not added when the state also sets a modern gradient.
 	 *
-	 * @covers ::wp_get_state_declarations_with_background_resets
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_state_declarations_with_background_resets' )]
 	public function test_no_background_image_reset_when_state_sets_modern_gradient() {
 		$actual = wp_get_state_declarations_with_background_resets(
 			array(
@@ -211,10 +218,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that declarations without background-color are returned unchanged.
 	 *
-	 * @covers ::wp_get_state_declarations_with_background_resets
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_state_declarations_with_background_resets' )]
 	public function test_no_background_reset_when_no_background_color() {
 		$input  = array(
 			'color' => '#ff0000 !important',
@@ -227,10 +234,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that fallback dimension styles are added for aspect ratio.
 	 *
-	 * @covers ::wp_get_state_style_with_fallback_dimension_styles
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_state_style_with_fallback_dimension_styles' )]
 	public function test_adds_fallback_dimension_styles_for_aspect_ratio() {
 		$actual = wp_get_state_style_with_fallback_dimension_styles(
 			array(
@@ -255,10 +262,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that fallback dimension styles are not added for the default aspect ratio.
 	 *
-	 * @covers ::wp_get_state_style_with_fallback_dimension_styles
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_state_style_with_fallback_dimension_styles' )]
 	public function test_does_not_add_fallback_dimension_styles_for_default_aspect_ratio() {
 		$actual = wp_get_state_style_with_fallback_dimension_styles(
 			array(
@@ -281,10 +288,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that fallback aspectRatio styles are added for height.
 	 *
-	 * @covers ::wp_get_state_style_with_fallback_dimension_styles
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_state_style_with_fallback_dimension_styles' )]
 	public function test_adds_fallback_aspect_ratio_style_for_height() {
 		$actual = wp_get_state_style_with_fallback_dimension_styles(
 			array(
@@ -309,10 +316,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	 * Tests that modifier classes on the first compound selector are preserved
 	 * when state selectors are scoped to the block wrapper.
 	 *
-	 * @covers ::wp_build_state_selector
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_build_state_selector' )]
 	public function test_build_state_selector_preserves_first_compound_modifier_classes() {
 		$actual = wp_build_state_selector(
 			'.wp-states-test',
@@ -330,10 +337,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	 * Tests that child combinators without surrounding spaces are preserved when
 	 * state selectors are scoped to the block wrapper.
 	 *
-	 * @covers ::wp_build_state_selector
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_build_state_selector' )]
 	public function test_build_state_selector_preserves_child_combinator_without_spaces() {
 		$actual = wp_build_state_selector(
 			'.wp-states-test',
@@ -350,10 +357,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that selector lists are split without splitting selector-function arguments.
 	 *
-	 * @covers ::wp_build_state_selector
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_build_state_selector' )]
 	public function test_build_state_selector_splits_selector_lists_without_splitting_selector_function_arguments() {
 		$actual = wp_build_state_selector(
 			'.wp-states-test',
@@ -370,10 +377,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that preset values are converted to CSS custom property references.
 	 *
-	 * @covers ::wp_normalize_state_preset_vars
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_normalize_state_preset_vars' )]
 	public function test_converts_state_preset_vars_to_css_vars() {
 		$actual = wp_normalize_state_preset_vars(
 			array(
@@ -396,10 +403,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that block content is returned unchanged when the block name is missing.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_returns_unchanged_when_block_name_missing() {
 		$block_content = '<div class="wp-block-test">Hello</div>';
 		$block         = array(
@@ -415,10 +422,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that block content is returned unchanged when content is empty.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_returns_unchanged_when_block_content_empty() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -439,10 +446,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that block content is returned unchanged when the block has no configured pseudo-states.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_returns_unchanged_when_block_has_no_configured_pseudo_states() {
 		$this->test_block_name = 'test/no-pseudo-state-config';
 		register_block_type(
@@ -474,10 +481,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that block content is returned unchanged when no pseudo-state styles are set.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_returns_unchanged_when_no_state_styles_set() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -499,10 +506,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that block content is returned unchanged when the pseudo-state key is an empty array.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_returns_unchanged_when_state_style_is_empty_array() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -524,10 +531,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that hover text color generates scoped CSS with !important.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_text_color_generates_scoped_css() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -548,10 +555,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that hover background color generates scoped CSS.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_background_color_generates_scoped_css() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -572,10 +579,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that hover text and background color both appear in a single rule.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_text_and_background_color_in_same_rule() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -604,10 +611,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	 * Tests that a font family stored as a preset reference is resolved to a CSS
 	 * custom property in the generated style tag.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_font_family_preset_reference_generates_css_custom_property() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -632,10 +639,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that hover font size generates scoped CSS.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_font_size_generates_scoped_css() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -660,10 +667,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that hover border width and color generate a scoped style tag.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_border_width_and_color_generate_scoped_css() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -705,10 +712,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that explicitly-authored hover border style declarations use !important.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_authored_border_style_generates_important_css_declaration() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -737,10 +744,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that explicitly-authored side border style declarations use !important.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_authored_side_border_style_generates_important_css_declaration() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -771,10 +778,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that hover side border color declarations use !important.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_side_border_color_generates_important_css_declaration() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -809,10 +816,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that a preset hover border color is emitted as a CSS declaration.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_preset_border_color_generates_css_declaration() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -850,10 +857,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that hover border radius generates scoped CSS.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_hover_border_radius_generates_scoped_css() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -878,10 +885,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that multiple states each generate a separate scoped CSS rule.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_multiple_states_generate_separate_css_rules() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -906,10 +913,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that unconfigured pseudo-state keys are ignored.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_unconfigured_pseudo_state_is_ignored() {
 		$this->ensure_block_registered( 'core/button' );
 
@@ -931,8 +938,8 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that a responsive root state generates media-query scoped CSS.
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
 	public function test_responsive_root_state_generates_media_query_scoped_css() {
 		$this->ensure_block_registered( 'test/responsive-root-state' );
 
@@ -968,10 +975,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that responsive text alignment generates media-query scoped CSS.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65615
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65615' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_responsive_text_alignment_generates_media_query_scoped_css() {
 		$this->ensure_block_registered( 'core/paragraph' );
 
@@ -1010,10 +1017,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that a responsive background gradient generates media-query scoped CSS.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65561
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65561' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_responsive_background_gradient_generates_media_query_scoped_css() {
 		$this->ensure_block_registered( 'core/group' );
 
@@ -1049,10 +1056,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that a responsive element color generates media-query scoped CSS.
 	 *
-	 * @covers ::wp_render_block_states_support
 	 *
-	 * @ticket 65164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_block_states_support' )]
 	public function test_responsive_element_color_generates_media_query_scoped_css() {
 		$this->ensure_block_registered( 'core/group' );
 
@@ -1092,8 +1099,8 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that a responsive pseudo-state generates media-query scoped CSS.
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
 	public function test_responsive_pseudo_state_generates_media_query_scoped_css() {
 		$this->ensure_block_registered(
 			'core/button',
@@ -1140,10 +1147,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	 * so it shares a selector with the base layout (the inner block wrapper for
 	 * wrapper blocks) instead of being scoped to a separate `wp-states-...` class.
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
-	 * @ticket 65164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_responsive_block_gap_state_generates_layout_spacing_css() {
 		$this->ensure_block_registered(
 			'test/responsive-flow-layout-state',
@@ -1205,10 +1212,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that responsive block gap state CSS uses the block's active layout type.
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
-	 * @ticket 65164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_responsive_block_gap_state_uses_active_layout_type() {
 		$this->ensure_block_registered(
 			'test/responsive-flex-layout-state',
@@ -1266,10 +1273,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that responsive layout state CSS can override grid layout values.
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
-	 * @ticket 65164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_responsive_layout_state_generates_grid_layout_css() {
 		$this->ensure_block_registered(
 			'test/responsive-grid-layout-state',
@@ -1316,10 +1323,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that responsive layout state CSS can override grid columns.
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
-	 * @ticket 65164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_responsive_layout_state_generates_grid_column_count_css() {
 		$this->ensure_block_registered(
 			'test/responsive-grid-column-layout-state',
@@ -1367,10 +1374,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	 * Tests that different responsive layout states generate different container
 	 * classes, even when the base layout configuration is identical.
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
-	 * @ticket 65164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_responsive_layout_state_generates_distinct_container_classes_for_distinct_viewport_styles() {
 		$this->ensure_block_registered(
 			'test/responsive-grid-distinct-layout-state',
@@ -1452,10 +1459,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that responsive grid layout and block gap state CSS are both generated.
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
-	 * @ticket 65164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_responsive_layout_state_generates_grid_columns_and_gap_css() {
 		$this->ensure_block_registered(
 			'test/responsive-grid-columns-gap-layout-state',
@@ -1516,10 +1523,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that responsive grid block gap CSS does not repeat unchanged layout declarations.
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
-	 * @ticket 65164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_responsive_grid_block_gap_state_only_outputs_changed_layout_css() {
 		$this->ensure_block_registered(
 			'test/responsive-grid-gap-state',
@@ -1587,10 +1594,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that responsive child layout state CSS is generated.
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
-	 * @ticket 65164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_responsive_child_layout_state_generates_grid_span_css() {
 		$this->ensure_block_registered( 'test/responsive-child-layout-state' );
 
@@ -1633,10 +1640,10 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	 * while the wp-container-... layout class lives on the inner wrapper, causing
 	 * the responsive @media rule to apply to the wrong element.
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
-	 * @ticket 65164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_responsive_layout_state_targets_inner_wrapper_for_wrapper_blocks() {
 		$this->ensure_block_registered(
 			'test/responsive-wrapper-grid-state',
@@ -1695,8 +1702,8 @@ class Tests_Block_Supports_States extends WP_UnitTestCase {
 	/**
 	 * Tests that state declarations are marked important.
 	 *
-	 * @ticket 65239
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
 	public function test_state_declarations_generate_important_css() {
 		$this->ensure_block_registered( 'core/button' );
 

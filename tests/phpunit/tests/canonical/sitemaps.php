@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group canonical
- * @group rewrite
- * @group query
- * @group sitemaps
  */
+#[\PHPUnit\Framework\Attributes\Group( 'canonical' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\Group( 'sitemaps' )]
 class Tests_Canonical_Sitemaps extends WP_Canonical_UnitTestCase {
 
 	public function set_up() {
@@ -43,9 +43,9 @@ class Tests_Canonical_Sitemaps extends WP_Canonical_UnitTestCase {
 	/**
 	 * Ensure sitemaps redirects work as expected with pretty permalinks.
 	 *
-	 * @dataProvider data_sitemaps_canonical_pretty_redirects
-	 * @ticket 50910
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sitemaps_canonical_pretty_redirects' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50910' )]
 	public function test_sitemaps_canonical_pretty_redirects( $test_url, $expected ) {
 		$this->set_permalink_structure( '/%postname%/' );
 		$this->assertCanonical( $test_url, $expected, 50910 );
@@ -54,9 +54,9 @@ class Tests_Canonical_Sitemaps extends WP_Canonical_UnitTestCase {
 	/**
 	 * Ensure sitemaps redirects work as expected with a more custom rewrite structure.
 	 *
-	 * @dataProvider data_sitemaps_canonical_pretty_redirects
-	 * @ticket 61931
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sitemaps_canonical_pretty_redirects' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61931' )]
 	public function test_sitemaps_canonical_custom_pretty_redirects( $test_url, $expected ) {
 		$this->set_permalink_structure( '/%category%/%year%/%monthnum%/%postname%/' );
 		$this->assertCanonical( $test_url, $expected, 61931 );
@@ -98,9 +98,9 @@ class Tests_Canonical_Sitemaps extends WP_Canonical_UnitTestCase {
 	/**
 	 * Ensure sitemaps redirects work as expected with ugly permalinks.
 	 *
-	 * @dataProvider data_sitemaps_canonical_ugly_redirects
-	 * @ticket 50910
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sitemaps_canonical_ugly_redirects' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50910' )]
 	public function test_sitemaps_canonical_ugly_redirects( $test_url, $expected ) {
 		$this->set_permalink_structure( '' );
 		$this->assertCanonical( $test_url, $expected, 50910 );
@@ -116,7 +116,7 @@ class Tests_Canonical_Sitemaps extends WP_Canonical_UnitTestCase {
 	 *     @type string $1 The expected canonical URL.
 	 * }
 	 */
-	public function data_sitemaps_canonical_ugly_redirects() {
+	public static function data_sitemaps_canonical_ugly_redirects() {
 		return array(
 			// Ugly permalinks remain ugly.
 			array( '/?sitemap=index', '/?sitemap=index' ),

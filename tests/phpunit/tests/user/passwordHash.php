@@ -7,8 +7,8 @@
  * hash post passwords and as a fallback to verify old passwords that were hashed by phpass. The
  * library therefore needs to remain compatible with the latest versions of PHP.
  *
- * @covers PasswordHash
  */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_User_PasswordHash extends WP_UnitTestCase {
 
 	public static function set_up_before_class() {
@@ -23,13 +23,12 @@ class Tests_User_PasswordHash extends WP_UnitTestCase {
 	 * The notice that we should not see:
 	 * `Deprecated: Implicit conversion from float to int loses precision`.
 	 *
-	 * @ticket 56340
 	 *
-	 * @covers PasswordHash::gensalt_blowfish
 	 *
-	 * @requires PHP 8.1
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56340' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhp( '>= 8.1.0' )]
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_gensalt_blowfish_should_not_throw_deprecation_notice_on_php81() {
 		$hasher = new PasswordHash( 8, true );
 		$hasher->gensalt_blowfish( 'a password string' );

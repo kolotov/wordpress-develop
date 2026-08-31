@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group oembed
  *
- * @covers ::get_oembed_response_data
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_oembed_response_data' )]
+#[\PHPUnit\Framework\Attributes\Group( 'oembed' )]
 class Tests_oEmbed_GetOembedResponseData extends WP_UnitTestCase {
 	public function set_up() {
 		parent::set_up();
@@ -156,8 +156,8 @@ class Tests_oEmbed_GetOembedResponseData extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47574' )]
 	public function test_get_oembed_response_data_with_public_true_custom_post_status() {
 		// Custom status with 'public' => true.
 		register_post_status( 'public', array( 'public' => true ) );
@@ -172,8 +172,8 @@ class Tests_oEmbed_GetOembedResponseData extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47574' )]
 	public function test_get_oembed_response_data_with_public_false_custom_post_status() {
 		// Custom status with 'public' => false.
 		register_post_status( 'private_foo', array( 'public' => false ) );
@@ -188,8 +188,8 @@ class Tests_oEmbed_GetOembedResponseData extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47574' )]
 	public function test_get_oembed_response_data_with_unregistered_custom_post_status() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -253,8 +253,8 @@ class Tests_oEmbed_GetOembedResponseData extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62094
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62094' )]
 	public function test_get_oembed_response_data_has_correct_thumbnail_size() {
 		$post = self::factory()->post->create_and_get();
 

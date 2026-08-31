@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group canonical
- * @group rewrite
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'canonical' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Canonical_CustomRules extends WP_Canonical_UnitTestCase {
 
 	public function set_up() {
@@ -16,13 +16,13 @@ class Tests_Canonical_CustomRules extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data' )]
 	public function test( $test_url, $expected, $ticket = 0, $expected_doing_it_wrong = array() ) {
 		$this->assertCanonical( $test_url, $expected, $ticket, $expected_doing_it_wrong );
 	}
 
-	public function data() {
+	public static function data() {
 		/*
 		 * Data format:
 		 * [0]: Test URL.

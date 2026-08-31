@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getOptions extends WP_XMLRPC_UnitTestCase {
 
 	public function test_invalid_username_password() {
@@ -30,8 +30,8 @@ class Tests_XMLRPC_wp_getOptions extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20201
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20201' )]
 	public function test_option_values_subscriber() {
 		global $wp_version;
 		$this->make_user_by_role( 'subscriber' );

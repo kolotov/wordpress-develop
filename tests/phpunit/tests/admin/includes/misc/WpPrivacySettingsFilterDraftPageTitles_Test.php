@@ -1,25 +1,25 @@
 <?php
 
 /**
- * @group admin
- * @group privacy
  *
- * @covers ::_wp_privacy_settings_filter_draft_page_titles
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_privacy_settings_filter_draft_page_titles' )]
 class Tests_Admin_Includes_Misc_WpPrivacySettingsFilterDraftPageTitles_Test extends WP_UnitTestCase {
 
 	/**
 	 * Tests that _wp_privacy_settings_filter_draft_page_titles() appends '(Draft)' when appropriate.
 	 *
-	 * @ticket 65202
 	 *
-	 * @dataProvider data_wp_privacy_settings_filter_draft_page_titles
 	 *
 	 * @param string $expected    The expected title.
 	 * @param string $title       The input title.
 	 * @param string $post_status The post status.
 	 * @param string $screen_id   The current screen ID.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65202' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_privacy_settings_filter_draft_page_titles' )]
 	public function test_wp_privacy_settings_filter_draft_page_titles( $expected, $title, $post_status, $screen_id ) {
 		set_current_screen( $screen_id );
 
@@ -40,7 +40,7 @@ class Tests_Admin_Includes_Misc_WpPrivacySettingsFilterDraftPageTitles_Test exte
 	 *     screen_id:   string,
 	 * }>
 	 */
-	public function data_wp_privacy_settings_filter_draft_page_titles(): array {
+	public static function data_wp_privacy_settings_filter_draft_page_titles(): array {
 		return array(
 			'draft page on privacy screen'     => array(
 				'expected'    => 'Privacy Policy (Draft)',

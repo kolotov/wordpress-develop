@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group compat
- * @group security-153
  *
- * @covers ::mb_substr
- * @covers ::_mb_substr
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\Group( 'security-153' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'mb_substr' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_mb_substr' )]
 class Tests_Compat_mbSubstr extends WP_UnitTestCase {
 
 	/**
@@ -21,8 +21,8 @@ class Tests_Compat_mbSubstr extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_utf8_substrings
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_utf8_substrings' )]
 	public function test_mb_substr( $input_string, $start, $length ) {
 		$this->assertSame(
 			mb_substr( $input_string, $start, $length, 'UTF-8' ),
@@ -31,8 +31,8 @@ class Tests_Compat_mbSubstr extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_utf8_substrings
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_utf8_substrings' )]
 	public function test_8bit_mb_substr( $input_string, $start, $length ) {
 		$this->assertSame(
 			mb_substr( $input_string, $start, $length, '8bit' ),
@@ -45,7 +45,7 @@ class Tests_Compat_mbSubstr extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_utf8_substrings() {
+	public static function data_utf8_substrings() {
 		return array(
 			'positive start, positive length'              => array( 'баба', 0, 3 ),
 			'positive start, negative length'              => array( 'баба', 0, -1 ),
@@ -96,11 +96,11 @@ class Tests_Compat_mbSubstr extends WP_UnitTestCase {
 	/**
 	 * @link https://github.com/php/php-src/blob/php-5.6.8/ext/mbstring/tests/mb_substr_variation1.phpt
 	 *
-	 * @dataProvider data_mb_substr_phpcore_input_type_handling
 	 *
 	 * @param mixed  $input    Input to pass to the function.
 	 * @param string $expected Expected function output.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_mb_substr_phpcore_input_type_handling' )]
 	public function test_mb_substr_phpcore_input_type_handling( $input, $expected ) {
 		$start  = 0;
 		$length = 5;
@@ -113,7 +113,7 @@ class Tests_Compat_mbSubstr extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_mb_substr_phpcore_input_type_handling() {
+	public static function data_mb_substr_phpcore_input_type_handling() {
 		$heredoc = <<<EOT
 hello world
 EOT;

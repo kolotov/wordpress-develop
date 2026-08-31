@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_Objects extends WP_UnitTestCase {
 
 	public function test_get_post() {
@@ -99,8 +99,8 @@ class Tests_Post_Objects extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22882
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22882' )]
 	public function test_get_post_ancestors_with_falsey_values() {
 		foreach ( array( null, 0, false, '0', '' ) as $post_id ) {
 			$this->assertIsArray( get_post_ancestors( $post_id ) );
@@ -185,8 +185,8 @@ class Tests_Post_Objects extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53235
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53235' )]
 	public function test_numeric_properties_should_be_cast_to_ints() {
 		$post_id  = self::factory()->post->create();
 		$contexts = array( 'raw', 'edit', 'db', 'display', 'attribute', 'js' );
@@ -220,8 +220,8 @@ class Tests_Post_Objects extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22223
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22223' )]
 	public function test_get_post_cache() {
 		global $wpdb;
 

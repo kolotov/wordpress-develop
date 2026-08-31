@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getPages extends WP_XMLRPC_UnitTestCase {
 	protected static $post_id;
 	protected static $editor_id;
@@ -66,8 +66,8 @@ class Tests_XMLRPC_wp_getPages extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20629
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20629' )]
 	public function test_semi_capable_user() {
 		add_filter( 'map_meta_cap', array( $this, 'remove_editor_edit_page_cap' ), 10, 4 );
 

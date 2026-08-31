@@ -1,21 +1,18 @@
 <?php
 
-/**
- * @group admin
- *
- * @covers ::wp_doc_link_parse
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_doc_link_parse' )]
 class Tests_Admin_Includes_Misc_WpDocLinkParse_Test extends WP_UnitTestCase {
 
 	/**
 	 * Tests wp_doc_link_parse() with various PHP content.
 	 *
-	 * @dataProvider data_wp_doc_link_parse
-	 * @ticket 65182
 	 *
 	 * @param string $content  The PHP content to parse.
 	 * @param array  $expected The expected array of function names.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65182' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_doc_link_parse' )]
 	public function test_wp_doc_link_parse( $content, $expected ) {
 		$this->assertSame( $expected, wp_doc_link_parse( $content ) );
 	}
@@ -28,7 +25,7 @@ class Tests_Admin_Includes_Misc_WpDocLinkParse_Test extends WP_UnitTestCase {
 	 *     expected: string[],
 	 * }>
 	 */
-	public function data_wp_doc_link_parse(): array {
+	public static function data_wp_doc_link_parse(): array {
 		return array(
 			'empty string'              => array(
 				'content'  => '',
@@ -86,8 +83,8 @@ class Tests_Admin_Includes_Misc_WpDocLinkParse_Test extends WP_UnitTestCase {
 	/**
 	 * Tests the `documentation_ignore_functions` filter.
 	 *
-	 * @ticket 65182
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65182' )]
 	public function test_wp_doc_link_parse_filter() {
 		$filter = function ( $ignore ) {
 			$ignore[] = 'wp_remote_get';

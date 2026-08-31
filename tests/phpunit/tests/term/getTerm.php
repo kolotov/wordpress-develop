@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group taxonomy
  *
- * @covers ::get_term
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_term' )]
 class Tests_Term_GetTerm extends WP_UnitTestCase {
 	/**
 	 * Shared terms.
@@ -153,9 +153,9 @@ class Tests_Term_GetTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 14162
-	 * @ticket 53235
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14162' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '53235' )]
 	public function test_numeric_properties_should_be_cast_to_ints() {
 		global $wpdb;
 
@@ -179,16 +179,16 @@ class Tests_Term_GetTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34332
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34332' )]
 	public function test_should_return_null_when_provided_taxonomy_does_not_match_actual_term_taxonomy() {
 		$term_id = self::$term->term_id;
 		$this->assertNull( get_term( $term_id, 'category' ) );
 	}
 
 	/**
-	 * @ticket 34533
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34533' )]
 	public function test_should_return_wp_error_when_term_is_shared_and_no_taxonomy_is_specified() {
 		$terms = self::$shared_terms;
 
@@ -198,8 +198,8 @@ class Tests_Term_GetTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34533
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34533' )]
 	public function test_should_return_term_when_term_is_shared_and_correct_taxonomy_is_specified() {
 		$terms = self::$shared_terms;
 
@@ -210,8 +210,8 @@ class Tests_Term_GetTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34533
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34533' )]
 	public function test_should_return_null_when_term_is_shared_and_incorrect_taxonomy_is_specified() {
 		$terms = self::$shared_terms;
 
@@ -221,8 +221,8 @@ class Tests_Term_GetTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34533
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34533' )]
 	public function test_shared_term_in_cache_should_be_ignored_when_specifying_a_different_taxonomy() {
 		$terms = self::$shared_terms;
 
@@ -240,8 +240,8 @@ class Tests_Term_GetTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34533
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34533' )]
 	public function test_should_return_error_when_only_matching_term_is_in_an_invalid_taxonomy() {
 		$term_id = self::$term->term_id;
 
@@ -253,8 +253,8 @@ class Tests_Term_GetTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34533
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34533' )]
 	public function test_term_should_be_returned_when_id_is_shared_only_with_invalid_taxonomies() {
 		$terms = self::$shared_terms;
 

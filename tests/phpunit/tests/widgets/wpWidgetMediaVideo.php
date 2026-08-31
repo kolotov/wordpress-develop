@@ -9,8 +9,8 @@
 /**
  * Test wp-includes/widgets/class-wp-widget-media-video.php
  *
- * @group widgets
  */
+#[\PHPUnit\Framework\Attributes\Group( 'widgets' )]
 class Tests_Widgets_wpWidgetMediaVideo extends WP_UnitTestCase {
 
 	/**
@@ -29,8 +29,8 @@ class Tests_Widgets_wpWidgetMediaVideo extends WP_UnitTestCase {
 	/**
 	 * Test get_instance_schema method.
 	 *
-	 * @covers WP_Widget_Media_Video::get_instance_schema
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Video', 'get_instance_schema' )]
 	public function test_get_instance_schema() {
 		$widget = new WP_Widget_Media_Video();
 		$schema = $widget->get_instance_schema();
@@ -54,10 +54,10 @@ class Tests_Widgets_wpWidgetMediaVideo extends WP_UnitTestCase {
 	/**
 	 * Test schema filtering.
 	 *
-	 * @covers WP_Widget_Media_Video::get_instance_schema
 	 *
-	 * @ticket 45029
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45029' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Video', 'get_instance_schema' )]
 	public function test_get_instance_schema_filtering() {
 		$widget = new WP_Widget_Media_Video();
 		$schema = $widget->get_instance_schema();
@@ -86,8 +86,8 @@ class Tests_Widgets_wpWidgetMediaVideo extends WP_UnitTestCase {
 	/**
 	 * Test constructor.
 	 *
-	 * @covers WP_Widget_Media_Video::__construct
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Video', '__construct' )]
 	public function test_constructor() {
 		$widget = new WP_Widget_Media_Video();
 
@@ -115,8 +115,8 @@ class Tests_Widgets_wpWidgetMediaVideo extends WP_UnitTestCase {
 	/**
 	 * Test get_instance_schema method.
 	 *
-	 * @covers WP_Widget_Media_Video::update
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Video', 'update' )]
 	public function test_update() {
 		$widget   = new WP_Widget_Media_Video();
 		$instance = array();
@@ -215,9 +215,9 @@ class Tests_Widgets_wpWidgetMediaVideo extends WP_UnitTestCase {
 	/**
 	 * Test render_media method.
 	 *
-	 * @covers WP_Widget_Media_Video::render_media
-	 * @covers WP_Widget_Media_Video::inject_video_max_width_style
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Video', 'render_media' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Video', 'inject_video_max_width_style' )]
 	public function test_render_media() {
 		$test_movie_file = __FILE__ . '../../data/uploads/small-video.m4v';
 		$widget          = new WP_Widget_Media_Video();
@@ -303,8 +303,8 @@ class Tests_Widgets_wpWidgetMediaVideo extends WP_UnitTestCase {
 	 *
 	 * @global WP_Scripts $wp_scripts
 	 * @global WP_Styles $wp_styles
-	 * @covers WP_Widget_Media_Video::enqueue_preview_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Video', 'enqueue_preview_scripts' )]
 	public function test_enqueue_preview_scripts() {
 		global $wp_scripts, $wp_styles;
 		$widget = new WP_Widget_Media_Video();
@@ -328,8 +328,8 @@ class Tests_Widgets_wpWidgetMediaVideo extends WP_UnitTestCase {
 	/**
 	 * Test enqueue_admin_scripts method.
 	 *
-	 * @covers WP_Widget_Media_Video::enqueue_admin_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Video', 'enqueue_admin_scripts' )]
 	public function test_enqueue_admin_scripts() {
 		set_current_screen( 'widgets.php' );
 		$widget = new WP_Widget_Media_Video();
@@ -341,8 +341,8 @@ class Tests_Widgets_wpWidgetMediaVideo extends WP_UnitTestCase {
 	/**
 	 * Test render_control_template_scripts method.
 	 *
-	 * @covers WP_Widget_Media_Video::render_control_template_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Video', 'render_control_template_scripts' )]
 	public function test_render_control_template_scripts() {
 		$widget = new WP_Widget_Media_Video();
 

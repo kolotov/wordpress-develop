@@ -3,11 +3,11 @@
 /**
  * Tests for the REST controller for the ability categories endpoint.
  *
- * @covers WP_REST_Abilities_V1_Categories_Controller
  *
- * @group abilities-api
- * @group restapi
  */
+#[\PHPUnit\Framework\Attributes\Group( 'abilities-api' )]
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Abilities_V1_Categories_Controller::class )]
 class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCase {
 
 	/**
@@ -139,8 +139,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test listing all ability categories.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_items(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories' );
 		$response = $this->server->dispatch( $request );
@@ -162,8 +162,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test getting a specific ability category.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_item(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories/test-data-retrieval' );
 		$response = $this->server->dispatch( $request );
@@ -180,8 +180,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test getting an ability category with meta.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_item_with_meta(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories/test-communication' );
 		$response = $this->server->dispatch( $request );
@@ -198,8 +198,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test getting a specific ability category with only selected fields.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_item_with_selected_fields(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories/test-data-retrieval' );
 		$request->set_param( '_fields', 'slug,label' );
@@ -218,8 +218,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test getting a non-existent ability category returns 404.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_item_not_found(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories/non-existent' );
 		$response = $this->server->dispatch( $request );
@@ -233,8 +233,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test permission check for listing ability categories.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_items_permission_denied(): void {
 		wp_set_current_user( 0 );
 
@@ -247,8 +247,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test permission check for single ability category.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_item_permission_denied(): void {
 		wp_set_current_user( 0 );
 
@@ -261,8 +261,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test pagination headers.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_pagination_headers(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories' );
 		$request->set_param( 'per_page', 10 );
@@ -282,8 +282,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test HEAD method returns empty body with proper headers.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_head_request(): void {
 		$request  = new WP_REST_Request( 'HEAD', '/wp-abilities/v1/categories' );
 		$response = $this->server->dispatch( $request );
@@ -299,8 +299,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test pagination links.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_pagination_links(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories' );
 		$request->set_param( 'per_page', 10 );
@@ -337,8 +337,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test collection parameters.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_collection_params(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories' );
 		$request->set_param( 'per_page', 5 );
@@ -366,8 +366,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test response links for individual ability categories.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_ability_category_response_links(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories/test-data-retrieval' );
 		$response = $this->server->dispatch( $request );
@@ -390,8 +390,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test context parameter.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_context_parameter(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories/test-data-retrieval' );
 		$request->set_param( 'context', 'view' );
@@ -411,8 +411,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test schema retrieval.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_schema(): void {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp-abilities/v1/categories' );
 		$response = $this->server->dispatch( $request );
@@ -442,8 +442,8 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test ability category slug with valid format.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_ability_category_slug_with_valid_format(): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories/test-data-retrieval' );
 		$response = $this->server->dispatch( $request );
@@ -455,7 +455,7 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	 *
 	 * @return array<string, array{0: string}>
 	 */
-	public function data_invalid_ability_category_slugs_provider(): array {
+	public static function data_invalid_ability_category_slugs_provider(): array {
 		return array(
 			'Uppercase'         => array( 'Data-Retrieval' ),
 			'@ symbol'          => array( 'data@retrieval' ),
@@ -469,12 +469,12 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test ability category slugs with invalid format.
 	 *
-	 * @ticket 64098
 	 *
-	 * @dataProvider data_invalid_ability_category_slugs_provider
 	 *
 	 * @param string $slug Invalid ability category slug to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_ability_category_slugs_provider' )]
 	public function test_ability_category_slug_with_invalid_format( string $slug ): void {
 		$request  = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories/' . $slug );
 		$response = $this->server->dispatch( $request );
@@ -487,7 +487,7 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	 *
 	 * @return array<string, array{0: array<string, mixed>}>
 	 */
-	public function data_invalid_pagination_params_provider(): array {
+	public static function data_invalid_pagination_params_provider(): array {
 		return array(
 			'Zero page'            => array( array( 'page' => 0 ) ),
 			'Negative page'        => array( array( 'page' => -1 ) ),
@@ -502,12 +502,12 @@ class Tests_REST_API_WpRestAbilitiesV1CategoriesController extends WP_UnitTestCa
 	/**
 	 * Test pagination parameters with invalid values.
 	 *
-	 * @ticket 64098
 	 *
-	 * @dataProvider data_invalid_pagination_params_provider
 	 *
 	 * @param array<string, mixed> $params Invalid pagination parameters.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_pagination_params_provider' )]
 	public function test_invalid_pagination_parameters( array $params ): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/categories' );
 		$request->set_query_params( $params );

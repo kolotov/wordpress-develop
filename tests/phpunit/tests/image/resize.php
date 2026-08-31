@@ -86,12 +86,8 @@ abstract class WP_Tests_Image_Resize_UnitTestCase extends WP_Image_UnitTestCase 
 	/**
 	 * Test resizing AVIF image.
 	 *
-	 * @ticket 51228
-	 *
-	 * Temporarily disabled until we can figure out why it fails on the Trixie based PHP container.
-	 * See https://core.trac.wordpress.org/ticket/63932.
-	 * @requires PHP < 8.3
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51228' )]
 	public function test_resize_avif() {
 		$file   = DIR_TESTDATA . '/images/avif-lossy.avif';
 		$editor = wp_get_image_editor( $file );
@@ -118,8 +114,8 @@ abstract class WP_Tests_Image_Resize_UnitTestCase extends WP_Image_UnitTestCase 
 	/**
 	 * Test resizing HEIC image.
 	 *
-	 * @ticket 53645
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53645' )]
 	public function test_resize_heic() {
 		$file   = DIR_TESTDATA . '/images/test-image.heic';
 		$editor = wp_get_image_editor( $file );
@@ -244,8 +240,8 @@ abstract class WP_Tests_Image_Resize_UnitTestCase extends WP_Image_UnitTestCase 
 	/**
 	 * Try resizing a non-existent image
 	 *
-	 * @ticket 6821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
 	public function test_resize_non_existent_image() {
 		$image = $this->resize_helper( DIR_TESTDATA . '/images/test-non-existent-image.jpg', 25, 25 );
 

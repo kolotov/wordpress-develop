@@ -1,8 +1,11 @@
 <?php
 /**
- * @group option
- * @group user
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_user_setting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_all_user_settings' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_set_all_user_settings' )]
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_Option_UserSettings extends WP_UnitTestCase {
 	protected $user_id;
 
@@ -25,9 +28,6 @@ class Tests_Option_UserSettings extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_user_setting
-	 * @covers ::get_all_user_settings
-	 * @covers ::wp_set_all_user_settings
 	 */
 	public function test_set_user_setting() {
 		$foo = get_user_setting( 'foo' );
@@ -40,9 +40,6 @@ class Tests_Option_UserSettings extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_user_setting
-	 * @covers ::get_all_user_settings
-	 * @covers ::wp_set_all_user_settings
 	 */
 	public function test_set_user_setting_dashes() {
 		$foo = get_user_setting( 'foo' );
@@ -55,9 +52,6 @@ class Tests_Option_UserSettings extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_user_setting
-	 * @covers ::get_all_user_settings
-	 * @covers ::wp_set_all_user_settings
 	 */
 	public function test_set_user_setting_strip_asterisks() {
 		$foo = get_user_setting( 'foo' );

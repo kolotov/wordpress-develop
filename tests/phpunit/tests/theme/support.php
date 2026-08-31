@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group themes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'themes' )]
 class Tests_Theme_Support extends WP_UnitTestCase {
 
 	public function test_the_basics() {
@@ -54,8 +54,8 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22080
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22080' )]
 	public function test_post_thumbnails_mixed_args() {
 		add_theme_support( 'post-thumbnails', array( 'post', 'page' ) );
 		add_theme_support( 'post-thumbnails', array( 'page' ) );
@@ -75,10 +75,10 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24932
 	 *
 	 * @expectedIncorrectUsage add_theme_support( 'html5' )
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24932' )]
 	public function test_supports_html5() {
 		remove_theme_support( 'html5' );
 		$this->assertFalse( current_theme_supports( 'html5' ) );
@@ -97,10 +97,10 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24932
 	 *
 	 * @expectedIncorrectUsage add_theme_support( 'html5' )
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24932' )]
 	public function test_supports_html5_subset() {
 		remove_theme_support( 'html5' );
 		$this->assertFalse( current_theme_supports( 'html5' ) );
@@ -130,10 +130,10 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24932
 	 *
 	 * @expectedIncorrectUsage add_theme_support( 'html5' )
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24932' )]
 	public function test_supports_html5_invalid() {
 		remove_theme_support( 'html5' );
 		$this->assertFalse( add_theme_support( 'html5', 'comment-form' ) );
@@ -142,10 +142,10 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51390
 	 *
 	 * @expectedIncorrectUsage add_theme_support( 'post-formats' )
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51390' )]
 	public function test_supports_post_formats_doing_it_wrong() {
 		// The second parameter should be an array.
 		$this->assertFalse( add_theme_support( 'post-formats' ) );
@@ -159,8 +159,8 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 11611
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11611' )]
 	public function test_plugin_hook() {
 		$this->assertFalse( current_theme_supports( 'foobar' ) );
 		add_theme_support( 'foobar' );
@@ -177,8 +177,8 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55219
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55219' )]
 	public function test_plugin_hook_with_no_args() {
 		add_theme_support( 'foobar' );
 
@@ -188,8 +188,8 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26900
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26900' )]
 	public function test_supports_menus() {
 		// Start fresh.
 		foreach ( get_registered_nav_menus() as $location => $desc ) {
@@ -218,8 +218,8 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45125
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45125' )]
 	public function test_responsive_embeds() {
 		add_theme_support( 'responsive-embeds' );
 		$this->assertTrue( current_theme_supports( 'responsive-embeds' ) );

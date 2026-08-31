@@ -5,10 +5,9 @@
  * @package WordPress
  *
  * @since 6.6.0
- * @group html-api-token-map
  *
- * @coversDefaultClass WP_Token_Map
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api-token-map' )]
 class Tests_WpTokenMap extends WP_UnitTestCase {
 	/**
 	 * Number of unique HTML5 named character references, including
@@ -93,12 +92,12 @@ class Tests_WpTokenMap extends WP_UnitTestCase {
 	/**
 	 * Ensure the basic creation of a Token Map from an associative array.
 	 *
-	 * @ticket 60698
 	 *
-	 * @dataProvider data_input_arrays
 	 *
 	 * @param array $dataset Dataset to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60698' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_input_arrays' )]
 	public function test_creates_map_from_array_containing_proper_values( $dataset ) {
 		$map = WP_Token_Map::from_array( $dataset );
 
@@ -132,10 +131,10 @@ class Tests_WpTokenMap extends WP_UnitTestCase {
 	 * represented by a single byte, then the encoding scheme in the Token Map
 	 * will fail and lead to corruption.
 	 *
-	 * @ticket 60698
 	 *
 	 * @expectedIncorrectUsage WP_Token_Map::from_array
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60698' )]
 	public function test_rejects_words_which_are_too_long() {
 		$normal_length = str_pad( '', 255, '.' );
 		$too_long_word = "{$normal_length}.";
@@ -166,12 +165,12 @@ class Tests_WpTokenMap extends WP_UnitTestCase {
 	/**
 	 * Ensure isomorphic creation and export of a Token Map and associative arrays.
 	 *
-	 * @ticket 60698
 	 *
-	 * @dataProvider data_input_arrays
 	 *
 	 * @param array $dataset Dataset to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60698' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_input_arrays' )]
 	public function test_round_trips_through_associative_array( $dataset ) {
 		$map = WP_Token_Map::from_array( $dataset );
 		$this->assertEqualsCanonicalizing(
@@ -184,12 +183,12 @@ class Tests_WpTokenMap extends WP_UnitTestCase {
 	/**
 	 * Ensure the basic creation of a Token Map from a precomputed source table.
 	 *
-	 * @ticket 60698
 	 *
-	 * @dataProvider data_input_arrays
 	 *
 	 * @param array $dataset Dataset to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60698' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_input_arrays' )]
 	public function test_round_trips_through_precomputed_source_table( $dataset ) {
 		$seed         = WP_Token_Map::from_array( $dataset );
 		$source_table = $seed->precomputed_php_source_table();
@@ -222,8 +221,8 @@ class Tests_WpTokenMap extends WP_UnitTestCase {
 	 * Ensures that when two or more keys share a prefix that the longest
 	 * is matched first, to prevent tokens masking each other.
 	 *
-	 * @ticket 60698
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60698' )]
 	public function test_finds_longest_match_first() {
 		$map = WP_Token_Map::from_array(
 			array(
@@ -261,14 +260,14 @@ class Tests_WpTokenMap extends WP_UnitTestCase {
 	/**
 	 * Ensures that tokens shorter than the group key length are found.
 	 *
-	 * @ticket 60698
 	 *
-	 * @dataProvider data_short_substring_matches_of_each_other
 	 *
 	 * @param WP_Token_Map $map Token map containing appropriate mapping for test.
 	 * @param string       $search_document Document containing expected token at start of string.
 	 * @param string       $expected_token  Which token should be found at start of search document.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60698' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_short_substring_matches_of_each_other' )]
 	public function test_finds_short_matches_shorter_than_group_key_length( $map, $search_document, $expected_token ) {
 		$skip_bytes = 0;
 		$text       = 'antarctica is a continent';
@@ -305,13 +304,13 @@ class Tests_WpTokenMap extends WP_UnitTestCase {
 	/**
 	 * Ensures that Token Map searches at appropriate starting offset.
 	 *
-	 * @ticket 60698
 	 *
-	 * @dataProvider data_html5_test_dataset
 	 *
 	 * @param string $token       Token to find.
 	 * @param string $replacement Replacement string for token.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60698' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_html5_test_dataset' )]
 	public function test_reads_token_at_given_offset( $token, $replacement ) {
 		$document = "& another {$token} & then some";
 		$map      = self::get_html5_token_map();
@@ -340,13 +339,13 @@ class Tests_WpTokenMap extends WP_UnitTestCase {
 	/**
 	 * Ensures that all given tokens exist inside a constructed Token Map.
 	 *
-	 * @ticket 60698
 	 *
-	 * @dataProvider data_html5_test_dataset
 	 *
 	 * @param string $token       Token to find.
 	 * @param string $replacement Not used in this test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60698' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_html5_test_dataset' )]
 	public function test_detects_all_tokens( $token, $replacement ) {
 		$map = self::get_html5_token_map();
 
@@ -363,18 +362,23 @@ class Tests_WpTokenMap extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Ensures the HTML5 fixture contains the expected number of named character references.
+	 */
+	public function test_html5_test_dataset_has_expected_count() {
+		$this->assertSame(
+			self::KNOWN_COUNT_OF_ALL_HTML5_NAMED_CHARACTER_REFERENCES,
+			count( self::get_test_input_array( 'HTML5' ) ),
+			'Found the wrong number of HTML5 named character references: confirm the entities.json file.'
+		);
+	}
+
+	/**
 	 * Data provider.
 	 *
 	 * @return array[].
 	 */
-	public function data_html5_test_dataset() {
+	public static function data_html5_test_dataset() {
 		$html5 = self::get_test_input_array( 'HTML5' );
-
-		$this->assertSame(
-			self::KNOWN_COUNT_OF_ALL_HTML5_NAMED_CHARACTER_REFERENCES,
-			count( $html5 ),
-			'Found the wrong number of HTML5 named character references: confirm the entities.json file."'
-		);
 
 		foreach ( $html5 as $token => $replacement ) {
 			yield $token => array( $token, $replacement );

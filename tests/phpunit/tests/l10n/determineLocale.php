@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group l10n
- * @group i18n
  *
- * @covers ::determine_locale
  */
+#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
+#[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'determine_locale' )]
 class Tests_L10n_DetermineLocale extends WP_UnitTestCase {
 	protected $locale;
 	protected static $user_id;

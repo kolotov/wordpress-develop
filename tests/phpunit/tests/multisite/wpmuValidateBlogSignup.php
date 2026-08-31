@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group ms-required
- * @group multisite
  *
- * @covers ::wpmu_validate_blog_signup
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wpmu_validate_blog_signup' )]
 class Tests_Multisite_wpmuValidateBlogSignup extends WP_UnitTestCase {
 
 	protected static $super_admin_id;
@@ -53,14 +53,14 @@ class Tests_Multisite_wpmuValidateBlogSignup extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_validate_blogname
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_validate_blogname' )]
 	public function test_validate_blogname( $blog_name, $error_message ) {
 		$result = wpmu_validate_blog_signup( $blog_name, 'Foo Site Title', get_userdata( self::$super_admin_id ) );
 		$this->assertContains( 'blogname', $result['errors']->get_error_codes(), $error_message );
 	}
 
-	public function data_validate_blogname() {
+	public static function data_validate_blogname() {
 		$data = array(
 			array( '', 'Site names must not be empty.' ),
 			array( 'foo-hello', 'Site names must not contain hyphens.' ),
@@ -94,10 +94,10 @@ class Tests_Multisite_wpmuValidateBlogSignup extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39676
 	 *
-	 * @dataProvider data_filter_minimum_site_name_length
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39676' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_filter_minimum_site_name_length' )]
 	public function test_filter_minimum_site_name_length( $site_name, $minimum_length, $expect_error ) {
 		$this->minimum_site_name_length = $minimum_length;
 		add_filter( 'minimum_site_name_length', array( $this, 'filter_minimum_site_name_length' ) );
@@ -114,7 +114,7 @@ class Tests_Multisite_wpmuValidateBlogSignup extends WP_UnitTestCase {
 		}
 	}
 
-	public function data_filter_minimum_site_name_length() {
+	public static function data_filter_minimum_site_name_length() {
 		return array(
 			array( 'fooo', 5, true ),
 			array( 'foooo', 5, false ),
@@ -130,8 +130,8 @@ class Tests_Multisite_wpmuValidateBlogSignup extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43667
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43667' )]
 	public function test_signup_nonce_check() {
 		$original_php_self       = $_SERVER['PHP_SELF'];
 		$_SERVER['PHP_SELF']     = '/wp-signup.php';
@@ -145,8 +145,8 @@ class Tests_Multisite_wpmuValidateBlogSignup extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43667
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43667' )]
 	public function test_signup_nonce_check_invalid() {
 		$original_php_self       = $_SERVER['PHP_SELF'];
 		$_SERVER['PHP_SELF']     = '/wp-signup.php';

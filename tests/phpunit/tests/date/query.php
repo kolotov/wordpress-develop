@@ -5,12 +5,14 @@
  *
  * See query/dateQuery.php for tests that require WP_Query.
  *
- * @group date
- * @group datetime
- * @group datequery
  *
- * @covers WP_Date_Query
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datequery' )]
+
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Date_Query::class )]
 class Tests_Date_Query extends WP_UnitTestCase {
 	/**
 	 * @var WP_Date_Query $q
@@ -294,8 +296,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25775
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25775' )]
 	public function test_validate_column_with_date_query_valid_columns_filter() {
 		$q = new WP_Date_Query( array() );
 
@@ -312,8 +314,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25775
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25775' )]
 	public function test_validate_column_prefixed_column_name() {
 		$q = new WP_Date_Query( array() );
 
@@ -321,8 +323,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25775
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25775' )]
 	public function test_validate_column_prefixed_column_name_with_illegal_characters() {
 		$q = new WP_Date_Query( array() );
 
@@ -337,8 +339,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_in() {
 		$q = new WP_Date_Query( array() );
 
@@ -360,8 +362,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_not_in() {
 		$q = new WP_Date_Query( array() );
 
@@ -390,8 +392,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_between_single_non_numeric() {
 		$q = new WP_Date_Query( array() );
 
@@ -400,8 +402,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_between_array_with_other_than_two_items() {
 		$q = new WP_Date_Query( array() );
 
@@ -410,8 +412,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_between_incorrect_array_key() {
 		$q = new WP_Date_Query( array() );
 
@@ -427,8 +429,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_between_array_contains_non_numeric() {
 		$q = new WP_Date_Query( array() );
 
@@ -451,8 +453,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_not_between_single_non_numeric() {
 		$q = new WP_Date_Query( array() );
 
@@ -461,8 +463,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_not_between_array_with_other_than_two_items() {
 		$q = new WP_Date_Query( array() );
 
@@ -471,8 +473,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_not_between_incorrect_array_key() {
 		$q = new WP_Date_Query( array() );
 
@@ -488,8 +490,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_not_between_array_contains_non_numeric() {
 		$q = new WP_Date_Query( array() );
 
@@ -512,8 +514,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29801' )]
 	public function test_build_value_compare_default_value_non_numeric() {
 		$q = new WP_Date_Query( array() );
 
@@ -531,14 +533,14 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41782
 	 *
-	 * @dataProvider data_build_mysql_datetime
 	 *
 	 * @param array|string $datetime       Array or string date input.
 	 * @param string       $expected       Expected built result.
 	 * @param bool         $default_to_max Flag to default missing values to max.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41782' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_build_mysql_datetime' )]
 	public function test_build_mysql_datetime( $datetime, $expected, $default_to_max = false ) {
 		$q = new WP_Date_Query( array() );
 
@@ -548,7 +550,7 @@ class Tests_Date_Query extends WP_UnitTestCase {
 		$this->assertEqualsWithDelta( strtotime( $expected ), strtotime( $found ), 10, $message );
 	}
 
-	public function data_build_mysql_datetime() {
+	public static function data_build_mysql_datetime() {
 		return array(
 			array( '2019-06-04T08:18:24+03:00', '2019-06-04 05:18:24' ),
 			array( '2019-06-04T05:18:24+00:00', '2019-06-04 05:18:24' ),
@@ -564,14 +566,14 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41782
 	 *
-	 * @dataProvider data_build_mysql_datetime_with_custom_timezone
 	 *
 	 * @param array|string $datetime       Array or string date input.
 	 * @param string       $expected       Expected built result.
 	 * @param bool         $default_to_max Flag to default missing values to max.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41782' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_build_mysql_datetime_with_custom_timezone' )]
 	public function test_build_mysql_datetime_with_custom_timezone( $datetime, $expected, $default_to_max = false ) {
 		update_option( 'timezone_string', 'Europe/Helsinki' );
 
@@ -583,7 +585,7 @@ class Tests_Date_Query extends WP_UnitTestCase {
 		$this->assertEqualsWithDelta( strtotime( $expected ), strtotime( $found ), 10, $message );
 	}
 
-	public function data_build_mysql_datetime_with_custom_timezone() {
+	public static function data_build_mysql_datetime_with_custom_timezone() {
 		return array(
 			array( '2019-06-04T08:18:24+03:00', '2019-06-04 08:18:24' ),
 			array( '2019-06-04T05:18:24+00:00', '2019-06-04 08:18:24' ),
@@ -591,8 +593,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41782
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41782' )]
 	public function test_build_mysql_datetime_with_relative_date() {
 		update_option( 'timezone_string', 'Europe/Helsinki' );
 
@@ -613,8 +615,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34228
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34228' )]
 	public function test_build_time_query_should_not_discard_hour_0() {
 		global $wpdb;
 		$q = new WP_Date_Query( array() );
@@ -750,9 +752,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25834
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25834' )]
 	public function test_validate_date_query_before_after() {
 		// Valid values.
 		$valid_args = array(
@@ -797,9 +799,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25834
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25834' )]
 	public function test_validate_date_query_before_after_with_month() {
 		// Both are valid.
 		$args = array(
@@ -843,9 +845,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25834
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25834' )]
 	public function test_validate_date_values_week() {
 		// Valid values.
 		$weeks = range( 1, 53 );
@@ -896,9 +898,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25834
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25834' )]
 	public function test_validate_date_values_month() {
 		// Valid values.
 		$months = range( 1, 12 );
@@ -914,9 +916,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25834
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25834' )]
 	public function test_validate_date_values_day() {
 		// Valid values.
 		$days = range( 1, 31 );
@@ -971,9 +973,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25834
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25834' )]
 	public function test_validate_date_values_hour() {
 		// Valid values.
 		$hours = range( 0, 23 );
@@ -989,9 +991,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25834
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25834' )]
 	public function test_validate_date_values_minute() {
 		// Valid values.
 		$minutes = range( 0, 59 );
@@ -1007,9 +1009,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25834
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25834' )]
 	public function test_validate_date_values_second() {
 		// Valid values.
 		$seconds = range( 0, 59 );
@@ -1025,9 +1027,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25834
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25834' )]
 	public function test_validate_date_values_day_of_week() {
 		// Valid values.
 		$days_of_week = range( 1, 7 );
@@ -1043,9 +1045,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28063
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28063' )]
 	public function test_validate_date_values_day_of_week_iso() {
 		// Valid values.
 		$days_of_week = range( 1, 7 );
@@ -1061,9 +1063,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25834
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25834' )]
 	public function test_validate_date_values_day_of_year() {
 		// Valid values.
 		$days_of_year = range( 1, 366 );
@@ -1079,8 +1081,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31001
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31001' )]
 	public function test_validate_date_values_should_process_array_value_for_year() {
 		$p1 = self::factory()->post->create( array( 'post_date' => '2015-01-12 00:00:00' ) );
 		$p2 = self::factory()->post->create( array( 'post_date' => '2013-01-12 00:00:00' ) );
@@ -1101,8 +1103,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31001
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31001' )]
 	public function test_validate_date_values_should_process_array_value_for_day() {
 		$p1 = self::factory()->post->create( array( 'post_date' => '2015-01-12 00:00:00' ) );
 		$p2 = self::factory()->post->create( array( 'post_date' => '2015-01-10 00:00:00' ) );
@@ -1123,9 +1125,9 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31001
 	 * @expectedIncorrectUsage WP_Date_Query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31001' )]
 	public function test_validate_date_values_should_process_array_value_for_day_when_values_are_invalid() {
 		$p1 = self::factory()->post->create( array( 'post_date' => '2015-01-12 00:00:00' ) );
 		$p2 = self::factory()->post->create( array( 'post_date' => '2015-01-10 00:00:00' ) );
@@ -1147,8 +1149,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Date_Query::get_sql
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Date_Query', 'get_sql' )]
 	public function test_relation_in_query_and() {
 		$date_query = array(
 			'relation' => 'AND',
@@ -1192,8 +1194,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Date_Query::get_sql
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Date_Query', 'get_sql' )]
 	public function test_relation_in_query_or() {
 		$date_query = array(
 			'relation' => 'OR',
@@ -1240,8 +1242,8 @@ class Tests_Date_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Date_Query::get_sql
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Date_Query', 'get_sql' )]
 	public function test_relation_in_query_unsupported() {
 		$date_query = array(
 			'relation' => 'UNSUPPORTED',

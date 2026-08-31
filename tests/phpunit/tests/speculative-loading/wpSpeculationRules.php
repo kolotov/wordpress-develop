@@ -7,18 +7,23 @@
  */
 
 /**
- * @group speculative-loading
- * @coversDefaultClass WP_Speculation_Rules
  */
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'speculative-loading' )]
 class Tests_Speculative_Loading_wpSpeculationRules extends WP_UnitTestCase {
 
 	/**
 	 * Tests that adding a speculation rule is subject to the expected validation.
 	 *
-	 * @ticket 62503
-	 * @covers ::add_rule
-	 * @dataProvider data_add_rule
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_add_rule' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Speculation_Rules', 'add_rule' )]
 	public function test_add_rule( string $mode, string $id, array $rule, bool $expected ) {
 		$speculation_rules = new WP_Speculation_Rules();
 
@@ -37,9 +42,9 @@ class Tests_Speculative_Loading_wpSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that adding a speculation rule with a duplicate ID results in the expected behavior.
 	 *
-	 * @ticket 62503
-	 * @covers ::add_rule
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Speculation_Rules', 'add_rule' )]
 	public function test_add_rule_with_duplicate() {
 		$speculation_rules = new WP_Speculation_Rules();
 
@@ -223,9 +228,9 @@ class Tests_Speculative_Loading_wpSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that checking for existence of a rule works as expected.
 	 *
-	 * @ticket 62503
-	 * @covers ::has_rule
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Speculation_Rules', 'has_rule' )]
 	public function test_has_rule() {
 		$speculation_rules = new WP_Speculation_Rules();
 
@@ -239,9 +244,9 @@ class Tests_Speculative_Loading_wpSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that transforming a speculation rules object into JSON-encodable data works as expected.
 	 *
-	 * @ticket 62503
-	 * @covers ::jsonSerialize
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Speculation_Rules', 'jsonSerialize' )]
 	public function test_jsonSerialize() {
 		$prefetch_rule_1  = array( 'where' => array( 'href_matches' => '/*' ) );
 		$prefetch_rule_2  = array( 'where' => array( 'selector_matches' => '.prefetch-opt-in' ) );
@@ -290,10 +295,10 @@ class Tests_Speculative_Loading_wpSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that the mode validation method correctly identifies valid and invalid values.
 	 *
-	 * @ticket 62503
-	 * @covers ::is_valid_mode
-	 * @dataProvider data_is_valid_mode
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_valid_mode' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Speculation_Rules', 'is_valid_mode' )]
 	public function test_is_valid_mode( $mode, $expected ) {
 		if ( $expected ) {
 			$this->assertTrue( WP_Speculation_Rules::is_valid_mode( $mode ) );
@@ -316,10 +321,10 @@ class Tests_Speculative_Loading_wpSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that the eagerness validation method correctly identifies valid and invalid values.
 	 *
-	 * @ticket 62503
-	 * @covers ::is_valid_eagerness
-	 * @dataProvider data_is_valid_eagerness
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_valid_eagerness' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Speculation_Rules', 'is_valid_eagerness' )]
 	public function test_is_valid_eagerness( $eagerness, $expected ) {
 		if ( $expected ) {
 			$this->assertTrue( WP_Speculation_Rules::is_valid_eagerness( $eagerness ) );
@@ -344,10 +349,10 @@ class Tests_Speculative_Loading_wpSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that the source validation method correctly identifies valid and invalid values.
 	 *
-	 * @ticket 62503
-	 * @covers ::is_valid_source
-	 * @dataProvider data_is_valid_source
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_valid_source' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Speculation_Rules', 'is_valid_source' )]
 	public function test_is_valid_source( $source, $expected ) {
 		if ( $expected ) {
 			$this->assertTrue( WP_Speculation_Rules::is_valid_source( $source ) );

@@ -1,10 +1,10 @@
 <?php
 /**
- * @group pluggable
- * @group mail
  *
- * @covers ::wp_mail
  */
+#[\PHPUnit\Framework\Attributes\Group( 'pluggable' )]
+#[\PHPUnit\Framework\Attributes\Group( 'mail' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_mail' )]
 class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	public function set_up() {
 		parent::set_up();
@@ -91,8 +91,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 17305
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17305' )]
 	public function test_wp_mail_rfc2822_addresses() {
 		$to        = 'Name <address@tld.com>';
 		$from      = 'Another Name <another_address@different-tld.com>';
@@ -121,8 +121,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 17305
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17305' )]
 	public function test_wp_mail_multiple_rfc2822_to_addresses() {
 		$to      = 'Name <address@tld.com>, Another Name <another_address@different-tld.com>';
 		$subject = 'RFC2822 Testing';
@@ -154,8 +154,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18463
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18463' )]
 	public function test_wp_mail_to_address_no_name() {
 		$to      = '<address@tld.com>';
 		$subject = 'RFC2822 Testing';
@@ -169,8 +169,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23642
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23642' )]
 	public function test_wp_mail_return_value() {
 		// No errors.
 		$this->assertTrue( wp_mail( 'valid@address.com', 'subject', 'body' ) );
@@ -183,8 +183,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30266' )]
 	public function test_wp_mail_with_valid_from_header() {
 		$to       = 'address@tld.com';
 		$subject  = 'Testing';
@@ -199,8 +199,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 19847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19847' )]
 	public function test_wp_mail_with_from_header_missing_space() {
 		$to        = 'address@tld.com';
 		$subject   = 'Testing';
@@ -221,8 +221,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30266' )]
 	public function test_wp_mail_with_empty_from_header() {
 		// Make sure that we don't add any ports to the from header.
 		$url_parts = parse_url( 'http://' . WP_TESTS_DOMAIN );
@@ -240,8 +240,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30266' )]
 	public function test_wp_mail_with_empty_from_name_for_the_from_header() {
 		$to       = 'address@tld.com';
 		$subject  = 'Testing';
@@ -258,8 +258,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_mail() returns false with an empty home URL and does not error out on PHP 8.1.
 	 *
-	 * @ticket 54730
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54730' )]
 	public function test_wp_mail_with_empty_home_url() {
 		$to      = 'address@tld.com';
 		$subject = 'Testing';
@@ -278,8 +278,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30266' )]
 	public function test_wp_mail_with_valid_content_type_header() {
 		$to       = 'address@tld.com';
 		$subject  = 'Testing';
@@ -294,8 +294,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30266' )]
 	public function test_wp_mail_with_empty_content_type_header() {
 		$to       = 'address@tld.com';
 		$subject  = 'Testing';
@@ -310,8 +310,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30266' )]
 	public function test_wp_mail_with_empty_charset_for_the_content_type_header() {
 		$to       = 'address@tld.com';
 		$subject  = 'Testing';
@@ -326,8 +326,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43542
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43542' )]
 	public function test_wp_mail_does_not_duplicate_mime_version_header() {
 		$to       = 'user@example.com';
 		$subject  = 'Test email with a MIME-Version header';
@@ -359,8 +359,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	 * > Content-Transfer-Encoding header field is not present.
 	 * https://tools.ietf.org/html/rfc2045#section-6.1
 	 *
-	 * @ticket 28039
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28039' )]
 	public function test_wp_mail_content_transfer_encoding_in_quoted_printable_multipart() {
 		add_action( 'phpmailer_init', array( $this, 'wp_mail_quoted_printable' ) );
 		add_action( 'phpmailer_init', array( $this, 'wp_mail_set_text_message' ) );
@@ -376,8 +376,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21659
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21659' )]
 	public function test_wp_mail_addresses_arent_encoded() {
 		$to      = 'Lukáš To <to@example.org>';
 		$subject = 'Testing #21659';
@@ -418,8 +418,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	 * by the receiving MTA, so it's the admin's responsibility to
 	 * set it correctly.
 	 *
-	 * @ticket 37736
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37736' )]
 	public function test_wp_mail_sender_not_set() {
 		wp_mail( 'user@example.org', 'Testing the Sender field', 'The Sender field should not have been set.' );
 
@@ -429,8 +429,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35598
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35598' )]
 	public function test_phpmailer_exception_thrown() {
 		$to      = 'an_invalid_address';
 		$subject = 'Testing';
@@ -465,8 +465,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	 * Test that attachment file names are derived from array values when their
 	 * associative array keys are numeric.
 	 *
-	 * @ticket 28407
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28407' )]
 	public function test_wp_mail_sends_attachments_with_original_name() {
 		wp_mail(
 			'user@example.org',
@@ -493,8 +493,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	 * Test that attachment file names are derived from array keys when they
 	 * are non-empty strings.
 	 *
-	 * @ticket 28407
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28407' )]
 	public function test_wp_mail_sends_attachments_with_custom_name() {
 		wp_mail(
 			'user@example.org',
@@ -518,8 +518,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50720
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50720' )]
 	public function test_phpmailer_validator() {
 		$phpmailer = $GLOBALS['phpmailer'];
 		$this->assertTrue( $phpmailer->validateAddress( 'foo@192.168.1.1' ), 'Assert PHPMailer accepts IP address email addresses' );
@@ -528,8 +528,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	/**
 	 * Test for short-circuiting wp_mail().
 	 *
-	 * @ticket 35069
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35069' )]
 	public function test_wp_mail_can_be_shortcircuited() {
 		$result1 = wp_mail( WP_TESTS_EMAIL, 'Foo', 'Bar' );
 
@@ -562,12 +562,12 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_mail() can send embedded images.
 	 *
-	 * @ticket 28059
 	 *
-	 * @dataProvider data_wp_mail_can_send_embedded_images
 	 *
 	 * @param string[] $embeds The embeds to send.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28059' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_mail_can_send_embedded_images' )]
 	public function test_wp_mail_can_send_embedded_images( $embeds ) {
 		$message = '';
 		foreach ( $embeds as $key => $path ) {
@@ -629,8 +629,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_mail() can send embedded images as a multiple line string.
 	 *
-	 * @ticket 28059
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28059' )]
 	public function test_wp_mail_string_embeds() {
 		$embeds  = DIR_TESTDATA . '/images/canola.jpg' . "\n";
 		$embeds .= DIR_TESTDATA . '/images/test-image-2.gif';
@@ -662,8 +662,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	/**
 	 * Test that the encoding of the email does not bleed between long and short emails.
 	 *
-	 * @ticket 33972
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33972' )]
 	public function test_wp_mail_encoding_does_not_bleed() {
 		$content = str_repeat( 'A', 1000 );
 		wp_mail( WP_TESTS_EMAIL, 'Looong line testing', $content );
@@ -680,8 +680,8 @@ class Tests_Pluggable_wpMail extends WP_UnitTestCase {
 	/**
 	 * Test that wp_mail() can send a multipart/alternative email with plain text and html versions.
 	 *
-	 * @ticket 15448
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15448' )]
 	public function test_wp_mail_plain_and_html() {
 		$headers = 'Content-Type: multipart/alternative; boundary="TestBoundary"';
 		$to      = 'user@example.com';
@@ -726,8 +726,8 @@ EOT;
 	/**
 	 * Check workarounds using phpmailer_init still work around.
 	 *
-	 * @ticket 15448
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15448' )]
 	public function test_wp_mail_plain_and_html_workaround() {
 		$to      = 'user@example.com';
 		$subject = 'Test email with plain text derived from html version';

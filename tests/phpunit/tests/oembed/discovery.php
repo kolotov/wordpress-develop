@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @group oembed
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'oembed' )]
 class Tests_oEmbed_Discovery extends WP_UnitTestCase {
 	public function test_add_oembed_discovery_links_non_singular() {
 		$this->assertSame( '', get_echo( 'wp_oembed_add_discovery_links' ) );
@@ -15,8 +16,8 @@ class Tests_oEmbed_Discovery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34971
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34971' )]
 	public function test_add_oembed_discovery_links_static_front_page() {
 		update_option( 'show_on_front', 'page' );
 		update_option(
@@ -90,8 +91,8 @@ class Tests_oEmbed_Discovery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35567
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35567' )]
 	public function test_wp_oembed_add_discovery_links_non_embeddable_post_type_output_should_be_empty() {
 		register_post_type( 'not_embeddable', array( 'embeddable' => false ) );
 
@@ -105,9 +106,9 @@ class Tests_oEmbed_Discovery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64178
-	 * @covers ::wp_oembed_add_discovery_links
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64178' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_oembed_add_discovery_links' )]
 	public function test_wp_oembed_add_discovery_links_back_compat() {
 		$action       = 'wp_head';
 		$old_priority = 10;

@@ -24,5 +24,6 @@ jobs:
     name: Clean up pull requests
     permissions:
       pull-requests: write
+    # Trac-driven pull request cleanup is upstream-specific and disabled in this fork.
     if: ${{ github.repository == 'WordPress/wordpress-develop' }}
     uses: ./.github/workflows/reusable-cleanup-pull-requests.yml

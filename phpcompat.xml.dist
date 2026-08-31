@@ -66,8 +66,8 @@
 
 	<rule ref="PHPCompatibilityWP"/>
 
-	<!-- WordPress Core currently supports PHP 7.4+. -->
-	<config name="testVersion" value="7.4-"/>
+	<!-- This fork intentionally supports PHP 8.5 only. -->
+	<config name="testVersion" value="8.5"/>
 
 	<!--
 	#############################################################################

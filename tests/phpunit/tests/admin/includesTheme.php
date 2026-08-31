@@ -1,8 +1,6 @@
 <?php
-/**
- * @group admin
- * @group themes
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'themes' )]
 class Tests_Admin_IncludesTheme extends WP_UnitTestCase {
 
 	/**
@@ -51,11 +49,11 @@ class Tests_Admin_IncludesTheme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 10959
-	 * @ticket 11216
 	 * @expectedDeprecated get_theme
 	 * @expectedDeprecated get_themes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10959' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '11216' )]
 	public function test_page_templates() {
 		$theme = get_theme( 'Page Template Theme' );
 		$this->assertNotEmpty( $theme );
@@ -86,9 +84,7 @@ class Tests_Admin_IncludesTheme extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 18375
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_page_templates_different_post_types() {
 		$theme = wp_get_theme( 'page-templates' );
 		$this->assertNotEmpty( $theme );
@@ -112,9 +108,7 @@ class Tests_Admin_IncludesTheme extends WP_UnitTestCase {
 		$this->assertSame( array(), get_page_templates( null, 'bar' ) );
 	}
 
-	/**
-	 * @ticket 38766
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38766' )]
 	public function test_page_templates_for_post_types_with_trailing_periods() {
 		$theme = wp_get_theme( 'page-templates' );
 		$this->assertNotEmpty( $theme );
@@ -144,9 +138,7 @@ class Tests_Admin_IncludesTheme extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 38696
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38696' )]
 	public function test_page_templates_child_theme() {
 		$theme = wp_get_theme( 'page-templates-child' );
 		$this->assertNotEmpty( $theme );
@@ -188,9 +180,9 @@ class Tests_Admin_IncludesTheme extends WP_UnitTestCase {
 	 *
 	 * Differences in the structure can also trigger failure by causing PHP notices/warnings.
 	 *
-	 * @group external-http
-	 * @ticket 28121
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28121' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test_get_theme_featured_list_api() {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 		$featured_list_api = get_theme_feature_list( true );
@@ -202,8 +194,8 @@ class Tests_Admin_IncludesTheme extends WP_UnitTestCase {
 	 *
 	 * Differences in the structure can also trigger failure by causing PHP notices/warnings.
 	 *
-	 * @ticket 28121
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28121' )]
 	public function test_get_theme_featured_list_hardcoded() {
 		$featured_list_hardcoded = get_theme_feature_list( false );
 		$this->assertNonEmptyMultidimensionalArray( $featured_list_hardcoded );

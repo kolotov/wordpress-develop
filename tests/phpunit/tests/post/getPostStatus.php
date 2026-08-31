@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+
 class Tests_Post_GetPostStatus extends WP_UnitTestCase {
 
 	/**
@@ -76,12 +77,12 @@ class Tests_Post_GetPostStatus extends WP_UnitTestCase {
 	/**
 	 * Ensure `get_post_status()` resolves correctly for posts and attachments.
 	 *
-	 * @ticket 52326
-	 * @dataProvider data_get_post_status_resolves
 	 *
 	 * @param string $post_key The post key in self::$post_ids.
 	 * @param string $expected The expected get_post_status() return value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52326' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_post_status_resolves' )]
 	public function test_get_post_status_resolves( $post_key, $expected ) {
 		$this->assertSame( $expected, get_post_status( self::$post_ids[ $post_key ] ) );
 	}
@@ -94,7 +95,7 @@ class Tests_Post_GetPostStatus extends WP_UnitTestCase {
 	 *     @type string $expected The expected get_post_status() return value.
 	 * }
 	 */
-	public function data_get_post_status_resolves() {
+	public static function data_get_post_status_resolves() {
 		return array(
 			array( 'publish', 'publish' ),
 			array( 'future', 'future' ),
@@ -130,13 +131,13 @@ class Tests_Post_GetPostStatus extends WP_UnitTestCase {
 	/**
 	 * Ensure post status resolves after trashing parent posts.
 	 *
-	 * @ticket 52326
-	 * @dataProvider data_get_post_status_after_trashing
 	 *
 	 * @param string $post_to_test  The post key in self::$post_ids.
 	 * @param string $post_to_trash The post key to trash then delete in self::$post_ids.
 	 * @param string $expected      The expected result after trashing the post.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52326' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_post_status_after_trashing' )]
 	public function test_get_post_status_after_trashing( $post_to_test, $post_to_trash, $expected ) {
 		wp_trash_post( self::$post_ids[ $post_to_trash ] );
 		$this->assertSame( $expected, get_post_status( self::$post_ids[ $post_to_test ] ) );
@@ -154,7 +155,7 @@ class Tests_Post_GetPostStatus extends WP_UnitTestCase {
 	 *     @type string $expected      The expected result after trashing the post.
 	 * }
 	 */
-	public function data_get_post_status_after_trashing() {
+	public static function data_get_post_status_after_trashing() {
 		return array(
 			array( 'publish-attachment', 'publish', 'publish' ),
 			array( 'future-attachment', 'future', 'future' ),
@@ -168,14 +169,14 @@ class Tests_Post_GetPostStatus extends WP_UnitTestCase {
 	/**
 	 * Ensure the `post_states_html` filter works to modify post state output.
 	 *
-	 * @ticket 51403
 	 *
-	 * @dataProvider data_filter_post_states_html_should_enable_post_state_html_output_modification
 	 *
-	 * @covers ::_post_states
 	 *
 	 * @param string $post_state The post state to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51403' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_filter_post_states_html_should_enable_post_state_html_output_modification' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_post_states' )]
 	public function test_filter_post_states_html_should_enable_post_state_html_output_modification( $post_state ) {
 		$post = get_post( self::$post_ids[ $post_state ] );
 

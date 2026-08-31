@@ -5,10 +5,11 @@
  * @package WordPress
  * @since 7.1.0
  *
- * @group icons
  *
- * @coversDefaultClass WP_Icon_Collections_Registry
  */
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'icons' )]
 class Tests_Icons_WpIconCollectionsRegistry extends WP_UnitTestCase {
 
 	/**
@@ -46,7 +47,7 @@ class Tests_Icons_WpIconCollectionsRegistry extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_valid_collection_slugs() {
+	public static function data_valid_collection_slugs() {
 		return array(
 			'simple slug'            => array( 'mycollection' ),
 			'digit at the start'     => array( '1-collection' ),
@@ -60,12 +61,12 @@ class Tests_Icons_WpIconCollectionsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should register a collection with a valid slug.
 	 *
-	 * @ticket 64847
 	 *
-	 * @dataProvider data_valid_collection_slugs
 	 *
-	 * @covers ::register
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_collection_slugs' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icon_Collections_Registry', 'register' )]
 	public function test_register_collection( $slug ) {
 		$result = $this->collections->register( $slug, array( 'label' => 'My Collection' ) );
 
@@ -78,7 +79,7 @@ class Tests_Icons_WpIconCollectionsRegistry extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_invalid_collection_slugs() {
+	public static function data_invalid_collection_slugs() {
 		return array(
 			'non-string slug'         => array( 1 ),
 			'contains slash'          => array( 'plugin/icons' ),
@@ -93,16 +94,16 @@ class Tests_Icons_WpIconCollectionsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should fail to register a collection with an invalid slug.
 	 *
-	 * @ticket 64847
 	 *
-	 * @dataProvider data_invalid_collection_slugs
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Icon_Collections_Registry::register
 	 *
 	 * @param mixed $slug Invalid slug candidate.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_collection_slugs' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icon_Collections_Registry', 'register' )]
 	public function test_register_rejects_invalid_slug( $slug ) {
 		$result = $this->collections->register( $slug, array( 'label' => 'X' ) );
 		$this->assertFalse( $result );
@@ -111,12 +112,12 @@ class Tests_Icons_WpIconCollectionsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should fail to register the same collection twice.
 	 *
-	 * @ticket 64847
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Icon_Collections_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icon_Collections_Registry', 'register' )]
 	public function test_register_twice_fails() {
 		$this->assertTrue( $this->collections->register( 'my-collection', array( 'label' => 'A' ) ) );
 		$this->assertFalse( $this->collections->register( 'my-collection', array( 'label' => 'A' ) ) );
@@ -125,12 +126,12 @@ class Tests_Icons_WpIconCollectionsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should fail to register a collection with an unknown property.
 	 *
-	 * @ticket 64847
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Icon_Collections_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icon_Collections_Registry', 'register' )]
 	public function test_register_rejects_unknown_property() {
 		$result = $this->collections->register(
 			'my-collection',
@@ -146,10 +147,10 @@ class Tests_Icons_WpIconCollectionsRegistry extends WP_UnitTestCase {
 	 * Unregistering a collection should cascade and remove all icons
 	 * belonging to it, while leaving icons from other collections intact.
 	 *
-	 * @ticket 64847
 	 *
-	 * @covers ::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icon_Collections_Registry', 'unregister' )]
 	public function test_unregister_collection_cascades_to_icons() {
 		$this->collections->register( 'plugin-a', array( 'label' => 'A' ) );
 		$this->collections->register( 'plugin-b', array( 'label' => 'B' ) );
@@ -192,12 +193,12 @@ class Tests_Icons_WpIconCollectionsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should fail to unregister a collection that was never registered.
 	 *
-	 * @ticket 64847
 	 *
-	 * @covers ::unregister
 	 *
 	 * @expectedIncorrectUsage WP_Icon_Collections_Registry::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icon_Collections_Registry', 'unregister' )]
 	public function test_unregister_unknown_collection() {
 		$this->assertFalse( $this->collections->unregister( 'ghost' ) );
 	}

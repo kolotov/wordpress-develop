@@ -1,9 +1,9 @@
 <?php
 /**
- * @group user
  *
- * @covers ::wp_list_users
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_list_users' )]
 class Tests_User_wpListUsers extends WP_UnitTestCase {
 	private static $user_ids = array();
 
@@ -69,13 +69,13 @@ class Tests_User_wpListUsers extends WP_UnitTestCase {
 	/**
 	 * Test that wp_list_users() creates the expected list of users.
 	 *
-	 * @dataProvider data_should_create_a_user_list
 	 *
-	 * @ticket 15145
 	 *
 	 * @param array|string $args     The arguments to create a list of users.
 	 * @param string       $expected The expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_create_a_user_list' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '15145' )]
 	public function test_should_create_a_user_list( $args, $expected ) {
 		$actual = wp_list_users( $args );
 
@@ -97,7 +97,7 @@ class Tests_User_wpListUsers extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_should_create_a_user_list() {
+	public static function data_should_create_a_user_list() {
 		return array(
 			'defaults when no args are supplied' => array(
 				'args'     => '',
@@ -168,13 +168,13 @@ class Tests_User_wpListUsers extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_list_users() does not create a user list.
 	 *
-	 * @dataProvider data_should_not_create_a_user_list
 	 *
-	 * @ticket 15145
 	 *
 	 * @param array|string $args The arguments to create a list of users.
 	 */
-	public function test_should_not_create_a_user_list( $args ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_create_a_user_list' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '15145' )]
+	public function test_should_not_create_a_user_list( $args, $expected ) {
 		$actual = wp_list_users( $args );
 
 		if ( null === $actual ) {
@@ -189,7 +189,7 @@ class Tests_User_wpListUsers extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_should_not_create_a_user_list() {
+	public static function data_should_not_create_a_user_list() {
 		return array(
 			'an empty user query result' => array(
 				'args'     => array(

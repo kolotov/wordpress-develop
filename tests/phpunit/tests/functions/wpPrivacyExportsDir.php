@@ -2,15 +2,15 @@
 /**
  * Tests for the wp_privacy_exports_dir function.
  *
- * @group functions
  *
- * @covers ::wp_privacy_exports_dir
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_privacy_exports_dir' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 class Tests_Functions_wpPrivacyExportsDir extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 59710
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59710' )]
 	public function test_wp_privacy_exports_dir() {
 		$upload_dir = wp_upload_dir();
 		$expected   = trailingslashit( $upload_dir['basedir'] ) . 'wp-personal-data-exports/';
@@ -18,8 +18,8 @@ class Tests_Functions_wpPrivacyExportsDir extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59710
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59710' )]
 	public function test_wp_privacy_exports_dir_filtered() {
 		add_filter( 'wp_privacy_exports_dir', array( $this, 'filter_wp_privacy_exports_dir' ) );
 

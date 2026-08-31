@@ -5,22 +5,22 @@
  *
  * @since 5.8.0
  *
- * @group functions
  *
- * @covers ::_wp_to_kebab_case
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_to_kebab_case' )]
 class Tests_Functions_wpToKebabCase extends WP_UnitTestCase {
 
 	/**
 	 * Tests _wp_to_kebab_case().
 	 *
-	 * @dataProvider data_wp_to_kebab_case
 	 *
-	 * @ticket 53397
 	 *
 	 * @param string $test_value Test value.
 	 * @param string $expected   Expected return value.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_to_kebab_case' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '53397' )]
 	public function test_wp_to_kebab_case( $test_value, $expected ) {
 		$this->assertSame( $expected, _wp_to_kebab_case( $test_value ) );
 	}
@@ -33,7 +33,7 @@ class Tests_Functions_wpToKebabCase extends WP_UnitTestCase {
 	 *     @type string $expected   Expected return value.
 	 * }
 	 */
-	public function data_wp_to_kebab_case() {
+	public static function data_wp_to_kebab_case() {
 		return array(
 			array( 'white', 'white' ),
 			array( 'white+black', 'white-black' ),

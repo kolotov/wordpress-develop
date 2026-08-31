@@ -3,15 +3,15 @@
 /**
  * Tests for the _mce_set_direction() function.
  *
- * @group functions
  *
- * @covers ::_mce_set_direction
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_mce_set_direction' )]
 class Tests_Functions_MceSetDirection extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 60219
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60219' )]
 	public function test__mce_set_direction() {
 		global $wp_locale;
 

@@ -8,18 +8,18 @@
 require_once __DIR__ . '/base.php';
 
 /**
- * @group admin
- * @group plugins
  *
- * @covers WP_Plugin_Dependencies::get_dependents
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependents' )]
 class Tests_Admin_WPPluginDependencies_GetDependents extends WP_PluginDependencies_UnitTestCase {
 
 	/**
 	 * Tests that a plugin with no dependents will return an empty array.
 	 *
-	 * @ticket 22316
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_return_an_empty_array_when_a_plugin_has_no_dependents() {
 		self::$instance::initialize();
 		$this->assertSame(
@@ -31,8 +31,8 @@ class Tests_Admin_WPPluginDependencies_GetDependents extends WP_PluginDependenci
 	/**
 	 * Tests that a plugin with dependents will return an array of dependents.
 	 *
-	 * @ticket 22316
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_return_an_array_of_dependents_when_a_plugin_has_dependents() {
 		$this->set_property_value(
 			'dependencies',

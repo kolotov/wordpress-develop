@@ -3,11 +3,11 @@
 /**
  * Tests _unzip_file_ziparchive().
  *
- * @group file
- * @group filesystem
  *
- * @covers ::_unzip_file_ziparchive
  */
+#[\PHPUnit\Framework\Attributes\Group( 'file' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_unzip_file_ziparchive' )]
 class Tests_Filesystem_UnzipFileZiparchive extends WP_UnitTestCase {
 
 	/**
@@ -33,8 +33,8 @@ class Tests_Filesystem_UnzipFileZiparchive extends WP_UnitTestCase {
 	/**
 	 * Tests that _unzip_file_ziparchive() applies "pre_unzip_file" filters.
 	 *
-	 * @ticket 37719
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37719' )]
 	public function test_should_apply_pre_unzip_file_filters() {
 		if ( ! class_exists( 'ZipArchive' ) ) {
 			$this->markTestSkipped( 'This test requires the ZipArchive class.' );
@@ -63,8 +63,8 @@ class Tests_Filesystem_UnzipFileZiparchive extends WP_UnitTestCase {
 	/**
 	 * Tests that _unzip_file_ziparchive() applies "unzip_file" filters.
 	 *
-	 * @ticket 37719
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37719' )]
 	public function test_should_apply_unzip_file_filters() {
 		if ( ! class_exists( 'ZipArchive' ) ) {
 			$this->markTestSkipped( 'This test requires the ZipArchive class.' );

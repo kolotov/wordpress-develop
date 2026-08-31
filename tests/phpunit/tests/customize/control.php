@@ -6,8 +6,8 @@
  *
  * @todo This is missing dedicated tests for all but one of the methods.
  *
- * @group customize
  */
+#[\PHPUnit\Framework\Attributes\Group( 'customize' )]
 class Test_WP_Customize_Control extends WP_UnitTestCase {
 
 	/**
@@ -115,8 +115,8 @@ class Test_WP_Customize_Control extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38164' )]
 	public function test_dropdown_pages() {
 		do_action( 'customize_register', $this->wp_customize );
 

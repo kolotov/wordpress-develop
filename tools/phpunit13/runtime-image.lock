@@ -1,0 +1,7 @@
+{
+  "provider_reference": "29cd8d60ae8d4d3e6c0ef33be23ef66f7b118ba6",
+  "runtime_image": "ghcr.io/kolotov/wp-phpunit-runtime@sha256:e53d880eaf6c79609a44d10f3bb9f423f9ffb871d64e0fd37dfe1aaad79cea4b",
+  "mariadb_image": "docker.io/library/mariadb@sha256:dd9b303aed4f4890ed09f766d8ca9ddfd176c0c6f6267feff53b3192ec65a979",
+  "memcached_image": "docker.io/library/memcached@sha256:c29847751abb41f4c268c84fb3087fee05d4edcbda44409ccb5086e26148e8a7",
+  "runtime_contract": 1
+}

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group meta
  */
+#[\PHPUnit\Framework\Attributes\Group( 'meta' )]
 class Tests_Meta extends WP_UnitTestCase {
 	protected $updated_mids = array();
 
@@ -86,8 +86,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 11683
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11683' )]
 	public function test_update_metadata_hooks_for_multiple_updated_rows() {
 		add_metadata( 'post', 1, 'test_key', 'value_1' );
 		add_metadata( 'post', 1, 'test_key', 'value_2' );
@@ -121,8 +121,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22746
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22746' )]
 	public function test_metadata_exists_with_filter() {
 		// Let's see if it returns the correct value when adding a filter.
 		add_filter( 'get_user_metadata', '__return_zero' );
@@ -132,8 +132,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18158
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18158' )]
 	public function test_user_metadata_not_exists() {
 		$u = get_users(
 			array(
@@ -232,8 +232,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16814' )]
 	public function test_meta_type_cast() {
 		$post_id1 = self::factory()->post->create();
 		add_post_meta( $post_id1, 'num_as_longtext', 123 );
@@ -322,8 +322,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28315
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28315' )]
 	public function test_non_numeric_object_id() {
 		$this->assertFalse( add_metadata( 'user', array( 1 ), 'meta_key', 'meta_value' ) );
 		$this->assertFalse( update_metadata( 'user', array( 1 ), 'meta_key', 'meta_new_value' ) );
@@ -333,8 +333,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28315
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28315' )]
 	public function test_non_numeric_meta_id() {
 		$this->assertFalse( get_metadata_by_mid( 'user', array( 1 ) ) );
 		$this->assertFalse( update_metadata_by_mid( 'user', array( 1 ), 'meta_new_value' ) );
@@ -342,8 +342,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37746
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37746' )]
 	public function test_negative_meta_id() {
 		$negative_mid = self::$meta_id * -1;
 
@@ -354,8 +354,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37746
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37746' )]
 	public function test_floating_meta_id() {
 		$floating_mid = self::$meta_id + 0.1337;
 
@@ -366,8 +366,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37746
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37746' )]
 	public function test_string_point_zero_meta_id() {
 		$meta_id = add_metadata( 'user', self::$author->ID, 'meta_key', 'meta_value_2' );
 
@@ -375,14 +375,14 @@ class Tests_Meta extends WP_UnitTestCase {
 
 		// phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- intentional implicit casting check
 		$this->assertTrue( floor( $string_mid ) == $string_mid );
-		$this->assertNotFalse( get_metadata_by_mid( 'user', $string_mid ) );
-		$this->assertNotFalse( update_metadata_by_mid( 'user', $string_mid, 'meta_new_value_2' ) );
-		$this->assertNotFalse( delete_metadata_by_mid( 'user', $string_mid ) );
+		$this->assertInstanceOf( stdClass::class, get_metadata_by_mid( 'user', $string_mid ) );
+		$this->assertTrue( update_metadata_by_mid( 'user', $string_mid, 'meta_new_value_2' ) );
+		$this->assertTrue( delete_metadata_by_mid( 'user', $string_mid ) );
 	}
 
 	/**
-	 * @ticket 15030
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15030' )]
 	public function test_get_metadata_with_empty_key_array_value() {
 		$data  = array( 1, 2 );
 		$value = serialize( $data );
@@ -393,8 +393,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 15030
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15030' )]
 	public function test_get_metadata_with_empty_key_object_value() {
 		$data      = new stdClass();
 		$data->foo = 'bar';
@@ -406,8 +406,8 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 15030
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15030' )]
 	public function test_get_metadata_with_empty_key_nested_array_value() {
 		$data  = array(
 			array( 1, 2 ),
@@ -421,13 +421,13 @@ class Tests_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_get_metadata_with_non_existent_object_id
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_metadata_with_non_existent_object_id' )]
 	public function test_get_metadata_with_non_existent_object_id( $expected, $args ) {
 		$this->assertSame( $expected, get_metadata( 'user', ...$args ) );
 	}
 
-	public function data_get_metadata_with_non_existent_object_id() {
+	public static function data_get_metadata_with_non_existent_object_id() {
 		return array(
 			'should return empty array for default `$meta_key` and `$single` values' => array(
 				'expected' => array(),

@@ -3,11 +3,11 @@
 /**
  * Tests for wp_get_attachment_metadata().
  *
- * @group post
- * @group media
  *
- * @covers ::wp_get_attachment_metadata
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_attachment_metadata' )]
 class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 
 	/**
@@ -26,12 +26,12 @@ class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 	 * callers such as wp-admin/post.php read the metadata that way in order to modify it and
 	 * pass it back to wp_update_attachment_metadata().
 	 *
-	 * @ticket 65748
 	 *
-	 * @dataProvider data_non_array_stored_metadata_values
 	 *
 	 * @param mixed $metadata Value to store as `_wp_attachment_metadata`.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_non_array_stored_metadata_values' )]
 	public function test_should_return_false_when_the_stored_metadata_is_not_an_array( $metadata ) {
 		$attachment_id = $this->create_attachment();
 
@@ -49,8 +49,8 @@ class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 	 * blur that distinction and pollute the stored metadata for any caller that reads
 	 * the metadata, modifies it, and passes it back to wp_update_attachment_metadata().
 	 *
-	 * @ticket 65748
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
 	public function test_should_not_add_a_sizes_key_when_the_metadata_has_none() {
 		$metadata = array(
 			'bitrate'    => 128000,
@@ -66,8 +66,8 @@ class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 	/**
 	 * Ensure a usable `sizes` array is passed through untouched.
 	 *
-	 * @ticket 65748
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
 	public function test_should_preserve_a_usable_sizes_array() {
 		$metadata = array(
 			'file'  => '2026/08/image.jpg',
@@ -93,12 +93,12 @@ class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 	 * is a fatal error for a scalar. Guarding the value here means every caller can rely on
 	 * `sizes` being an array whenever the key is present.
 	 *
-	 * @ticket 65748
 	 *
-	 * @dataProvider data_non_array_sizes_values
 	 *
 	 * @param mixed $sizes Value to store under the `sizes` key.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_non_array_sizes_values' )]
 	public function test_should_replace_a_non_array_sizes_value_with_an_empty_array( $sizes ) {
 		$attachment_id = $this->create_attachment(
 			array(
@@ -121,12 +121,12 @@ class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 	 * wp-admin/post.php read the metadata this way in order to modify and re-save it. Normalizing
 	 * the value here would write the normalization back into the database.
 	 *
-	 * @ticket 65748
 	 *
-	 * @dataProvider data_non_array_sizes_values
 	 *
 	 * @param mixed $sizes Value to store under the `sizes` key.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_non_array_sizes_values' )]
 	public function test_should_not_replace_a_non_array_sizes_value_when_unfiltered( $sizes ) {
 		$metadata = array(
 			'file'  => '2026/08/image.jpg',
@@ -144,12 +144,12 @@ class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 	 * The function documents a return of `array|false`, so a filter returning something else
 	 * should surface as a failure rather than being handed to callers that expect an array.
 	 *
-	 * @ticket 65748
 	 *
-	 * @dataProvider data_non_array_filter_return_values
 	 *
 	 * @param mixed $value Value for the filter to return.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_non_array_filter_return_values' )]
 	public function test_should_return_false_when_the_filter_returns_a_non_array( $value ) {
 		$attachment_id = $this->create_attachment( array( 'file' => '2026/08/image.jpg' ) );
 
@@ -166,8 +166,8 @@ class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 	/**
 	 * Ensure the `sizes` value is normalized after the filter has run, not before.
 	 *
-	 * @ticket 65748
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
 	public function test_should_normalize_a_sizes_value_introduced_by_the_filter() {
 		// Stored without a `sizes` key, so the key can only come from the filter.
 		$attachment_id = $this->create_attachment( array( 'file' => '2026/08/image.jpg' ) );
@@ -208,7 +208,7 @@ class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 	 *
 	 * @return array<non-empty-string, array{ 0: mixed }>
 	 */
-	public function data_non_array_stored_metadata_values(): array {
+	public static function data_non_array_stored_metadata_values(): array {
 		return array(
 			'string'  => array( 'not-an-array' ),
 			'integer' => array( 1 ),
@@ -222,7 +222,7 @@ class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 	 *
 	 * @return array<non-empty-string, array{ 0: mixed }>
 	 */
-	public function data_non_array_sizes_values(): array {
+	public static function data_non_array_sizes_values(): array {
 		return array(
 			'null'          => array( null ),
 			'empty string'  => array( '' ),
@@ -237,7 +237,7 @@ class Tests_Post_WpGetAttachmentMetadata extends WP_UnitTestCase {
 	 *
 	 * @return array<non-empty-string, array{ 0: mixed }>
 	 */
-	public function data_non_array_filter_return_values(): array {
+	public static function data_non_array_filter_return_values(): array {
 		return array(
 			'null'          => array( null ),
 			'empty string'  => array( '' ),

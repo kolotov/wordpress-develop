@@ -3,11 +3,11 @@
 /**
  * Test wp_get_inline_script_tag() and wp_print_inline_script_tag().
  *
- * @group dependencies
- * @group scripts
- * @covers ::wp_get_inline_script_tag
- * @covers ::wp_print_inline_script_tag
  */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_inline_script_tag' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_print_inline_script_tag' )]
 class Tests_Dependencies_wpInlineScriptTag extends WP_UnitTestCase {
 
 	private $original_theme_features = array();
@@ -98,8 +98,8 @@ JS;
 	/**
 	 * Test the behavior of generated script tag attributes passed different values and types of values.
 	 *
-	 * @ticket 64500
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64500' )]
 	public function test_script_tag_attribute_value_types() {
 		$expected = <<<'HTML'
 <script
@@ -140,8 +140,8 @@ HTML;
 	 * HTML will ignore case-insensitive repeated attributes. Ensure that the handling of input
 	 * attributes aligns with expectations.
 	 *
-	 * @ticket 64500
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64500' )]
 	public function test_script_tag_repeat_attributes() {
 		$expected = <<<'HTML'
 <script test="test-a">
@@ -168,10 +168,10 @@ HTML;
 	/**
 	 * Test failure conditions setting inline script tag contents.
 	 *
-	 * @ticket 64500
 	 *
 	 * @expectedIncorrectUsage WP_HTML_Tag_Processor::set_modifiable_text
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64500' )]
 	public function test_script_tag_dangerous_unescapeable_contents() {
 		/*
 		 * </script> cannot be printed inside a script tag

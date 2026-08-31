@@ -3,9 +3,9 @@
 /**
  * Test the output of post template tags, etc.
  *
- * @group post
- * @group formatting
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 class Tests_Post_Output extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -179,10 +179,10 @@ EOF;
 	/**
 	 * Ensure the_content handles a More block on a singular page.
 	 *
-	 * @ticket 46471
 	 *
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46471' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_the_content_should_handle_more_block_on_singular() {
 		$post_content = <<<EOF
 <!-- wp:paragraph -->
@@ -228,10 +228,10 @@ EOF;
 	/**
 	 * Ensure the_content handles a More block when using the noteaser text tag on a singular page.
 	 *
-	 * @ticket 46471
 	 *
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46471' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_the_content_should_handle_more_block_when_noteaser_on_singular() {
 		$post_content = <<<EOF
 <!-- wp:paragraph -->
@@ -272,10 +272,10 @@ EOF;
 	 * Ensure the_content displays the teaser part with a read more link
 	 * for a More block on a non-singular page.
 	 *
-	 * @ticket 46471
 	 *
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46471' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_the_content_should_handle_more_block_when_non_singular() {
 		$post_content = <<<EOF
 <!-- wp:paragraph -->
@@ -317,10 +317,10 @@ EOF;
 	 * Ensure the_content displays the teaser part with a read more link for a More block
 	 * when using the noteaser text tag on a non-singular page.
 	 *
-	 * @ticket 46471
 	 *
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46471' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_the_content_should_handle_more_block_when_noteaser_on_non_singular() {
 		$post_content = <<<EOF
 <!-- wp:paragraph -->

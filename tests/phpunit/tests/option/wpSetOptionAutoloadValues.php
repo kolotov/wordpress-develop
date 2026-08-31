@@ -2,10 +2,10 @@
 /**
  * Test wp_set_option_autoload_values().
  *
- * @group option
  *
- * @covers ::wp_set_option_autoload_values
  */
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_set_option_autoload_values' )]
 class Tests_Option_WpSetOptionAutoloadValues extends WP_UnitTestCase {
 
 	/**
@@ -13,8 +13,8 @@ class Tests_Option_WpSetOptionAutoloadValues extends WP_UnitTestCase {
 	 *
 	 * The values 'yes' and 'no' are only supported for backward compatibility.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_option_autoload_values_all_yes_partial_update() {
 		global $wpdb;
 
@@ -46,8 +46,8 @@ class Tests_Option_WpSetOptionAutoloadValues extends WP_UnitTestCase {
 	 *
 	 * The values 'yes' and 'no' are only supported for backward compatibility.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_option_autoload_values_all_no_partial_update() {
 		global $wpdb;
 
@@ -76,8 +76,8 @@ class Tests_Option_WpSetOptionAutoloadValues extends WP_UnitTestCase {
 	 *
 	 * The values 'yes' and 'no' are only supported for backward compatibility.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_option_autoload_values_all_yes_no_update() {
 		global $wpdb;
 
@@ -106,8 +106,8 @@ class Tests_Option_WpSetOptionAutoloadValues extends WP_UnitTestCase {
 	 *
 	 * The test also covers one option that is entirely missing.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_option_autoload_values_mixed_partial_update() {
 		global $wpdb;
 
@@ -142,8 +142,8 @@ class Tests_Option_WpSetOptionAutoloadValues extends WP_UnitTestCase {
 	 *
 	 * In this case, the 'alloptions' cache should not be cleared, but only its options set to 'no' should be deleted.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_option_autoload_values_mixed_only_update_no() {
 		global $wpdb;
 
@@ -177,8 +177,8 @@ class Tests_Option_WpSetOptionAutoloadValues extends WP_UnitTestCase {
 	/**
 	 * Tests setting options' autoload with a simulated SQL query failure.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_option_autoload_values_with_sql_query_failure() {
 		global $wpdb;
 
@@ -211,8 +211,8 @@ class Tests_Option_WpSetOptionAutoloadValues extends WP_UnitTestCase {
 	/**
 	 * Tests setting options' autoload with now encouraged boolean values.
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_option_autoload_values_with_bool() {
 		global $wpdb;
 
@@ -236,8 +236,8 @@ class Tests_Option_WpSetOptionAutoloadValues extends WP_UnitTestCase {
 	/**
 	 * Tests calling the function with an empty array (i.e. do nothing).
 	 *
-	 * @ticket 58964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58964' )]
 	public function test_wp_set_option_autoload_values_with_empty_array() {
 		$num_queries = get_num_queries();
 		$this->assertSame( array(), wp_set_option_autoload_values( array() ), 'Function produced unexpected result' );

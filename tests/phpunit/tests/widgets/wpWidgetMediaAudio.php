@@ -9,8 +9,8 @@
 /**
  * Test wp-includes/widgets/class-wp-widget-media-audio.php
  *
- * @group widgets
  */
+#[\PHPUnit\Framework\Attributes\Group( 'widgets' )]
 class Tests_Widgets_wpWidgetMediaAudio extends WP_UnitTestCase {
 
 	/**
@@ -29,8 +29,8 @@ class Tests_Widgets_wpWidgetMediaAudio extends WP_UnitTestCase {
 	/**
 	 * Test get_instance_schema method.
 	 *
-	 * @covers WP_Widget_Media_Audio::get_instance_schema
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Audio', 'get_instance_schema' )]
 	public function test_get_instance_schema() {
 		$wp_widget_audio = new WP_Widget_Media_Audio();
 		$schema          = $wp_widget_audio->get_instance_schema();
@@ -53,10 +53,10 @@ class Tests_Widgets_wpWidgetMediaAudio extends WP_UnitTestCase {
 	/**
 	 * Test get_instance_schema filtering.
 	 *
-	 * @covers WP_Widget_Media_Audio::get_instance_schema
 	 *
-	 * @ticket 45029
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45029' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Audio', 'get_instance_schema' )]
 	public function test_get_instance_schema_filtering() {
 		$wp_widget_audio = new WP_Widget_Media_Audio();
 		$schema          = $wp_widget_audio->get_instance_schema();
@@ -85,8 +85,8 @@ class Tests_Widgets_wpWidgetMediaAudio extends WP_UnitTestCase {
 	/**
 	 * Test constructor.
 	 *
-	 * @covers WP_Widget_Media_Audio::__construct
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Audio', '__construct' )]
 	public function test_constructor() {
 		$widget = new WP_Widget_Media_Audio();
 
@@ -114,8 +114,8 @@ class Tests_Widgets_wpWidgetMediaAudio extends WP_UnitTestCase {
 	/**
 	 * Test get_instance_schema method.
 	 *
-	 * @covers WP_Widget_Media_Audio::update
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Audio', 'update' )]
 	public function test_update() {
 		$widget   = new WP_Widget_Media_Audio();
 		$instance = array();
@@ -214,8 +214,8 @@ class Tests_Widgets_wpWidgetMediaAudio extends WP_UnitTestCase {
 	/**
 	 * Test render_media method.
 	 *
-	 * @covers WP_Widget_Media_Audio::render_media
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Audio', 'render_media' )]
 	public function test_render_media() {
 		$test_audio_file = __FILE__ . '../../data/uploads/small-audio.mp3';
 		$widget          = new WP_Widget_Media_Audio();
@@ -280,8 +280,8 @@ class Tests_Widgets_wpWidgetMediaAudio extends WP_UnitTestCase {
 	 *
 	 * @global WP_Scripts $wp_scripts
 	 * @global WP_Styles $wp_styles
-	 * @covers WP_Widget_Media_Audio::enqueue_preview_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Audio', 'enqueue_preview_scripts' )]
 	public function test_enqueue_preview_scripts() {
 		global $wp_scripts, $wp_styles;
 		$wp_scripts = null;
@@ -300,8 +300,8 @@ class Tests_Widgets_wpWidgetMediaAudio extends WP_UnitTestCase {
 	/**
 	 * Test enqueue_admin_scripts method.
 	 *
-	 * @covers WP_Widget_Media_Audio::enqueue_admin_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Audio', 'enqueue_admin_scripts' )]
 	public function test_enqueue_admin_scripts() {
 		set_current_screen( 'widgets.php' );
 		$widget = new WP_Widget_Media_Audio();
@@ -313,8 +313,8 @@ class Tests_Widgets_wpWidgetMediaAudio extends WP_UnitTestCase {
 	/**
 	 * Test render_control_template_scripts method.
 	 *
-	 * @covers WP_Widget_Media_Audio::render_control_template_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Audio', 'render_control_template_scripts' )]
 	public function test_render_control_template_scripts() {
 		$widget = new WP_Widget_Media_Audio();
 

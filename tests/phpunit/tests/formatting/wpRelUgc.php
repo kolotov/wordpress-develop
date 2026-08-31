@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wp_rel_ugc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_rel_ugc' )]
 class Tests_Formatting_wpRelUgc extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 48022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48022' )]
 	public function test_add_ugc() {
 		$content  = '<p>This is some cool <a href="/">Code</a></p>';
 		$expected = '<p>This is some cool <a href="/" rel="nofollow ugc">Code</a></p>';
@@ -17,8 +17,8 @@ class Tests_Formatting_wpRelUgc extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48022' )]
 	public function test_convert_ugc() {
 		$content  = '<p>This is some cool <a href="/" rel="weird">Code</a></p>';
 		$expected = '<p>This is some cool <a href="/" rel="weird nofollow ugc">Code</a></p>';
@@ -26,14 +26,14 @@ class Tests_Formatting_wpRelUgc extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48022
-	 * @dataProvider data_wp_rel_ugc
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48022' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_rel_ugc' )]
 	public function test_wp_rel_ugc( $input, $output, $expect_deprecation = false ) {
 		$this->assertEqualHTML( $output, stripslashes( wp_rel_ugc( $input ) ) );
 	}
 
-	public function data_wp_rel_ugc() {
+	public static function data_wp_rel_ugc() {
 		$home_url_http  = set_url_scheme( home_url(), 'http' );
 		$home_url_https = set_url_scheme( home_url(), 'https' );
 

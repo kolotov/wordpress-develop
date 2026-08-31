@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wp_html_excerpt
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_html_excerpt' )]
 class Tests_Formatting_wpHtmlExcerpt extends WP_UnitTestCase {
 	public function test_simple() {
 		$this->assertSame( 'Baba', wp_html_excerpt( 'Baba told me not to come', 4 ) );

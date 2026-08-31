@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @group general
- * @group template
- * @ticket 42438
- * @covers ::wp_preload_resources
  */
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '42438' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_preload_resources' )]
 class Tests_General_wpPreloadResources extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_preload_resources
 	 *
-	 * @ticket 42438
 	 */
-	public function test_preload_resources( $expected, $preload_resources ) {
-		$callback = static function () use ( $preload_resources ) {
-			return $preload_resources;
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_preload_resources' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '42438' )]
+	public function test_preload_resources( $expected, $urls ) {
+		$callback = static function () use ( $urls ) {
+			return $urls;
 		};
 
 		add_filter( 'wp_preload_resources', $callback, 10 );
@@ -30,7 +30,7 @@ class Tests_General_wpPreloadResources extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_preload_resources() {
+	public static function data_preload_resources() {
 		return array(
 			'basic_preload'          => array(
 				'expected' => "<link rel='preload' href='https://example.com/style.css' as='style' />\n",
@@ -248,8 +248,8 @@ class Tests_General_wpPreloadResources extends WP_UnitTestCase {
 				),
 			),
 			'fetchpriority'          => array(
-				'expected'  => "<link rel='preload' href='https://example.com/image.jpg' as='image' fetchpriority='high' />\n",
-				'resources' => array(
+				'expected' => "<link rel='preload' href='https://example.com/image.jpg' as='image' fetchpriority='high' />\n",
+				'urls'     => array(
 					array(
 						'href'          => 'https://example.com/image.jpg',
 						'as'            => 'image',

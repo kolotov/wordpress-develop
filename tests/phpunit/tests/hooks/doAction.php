@@ -3,9 +3,9 @@
 /**
  * Test the do_action method of WP_Hook
  *
- * @group hooks
- * @covers WP_Hook::do_action
  */
+#[\PHPUnit\Framework\Attributes\Group( 'hooks' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Hook::class, 'do_action' )]
 class Tests_Hooks_DoAction extends WP_UnitTestCase {
 	private $events        = array();
 	private $action_output = '';
@@ -86,10 +86,7 @@ class Tests_Hooks_DoAction extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60193
 	 *
-	 * @dataProvider data_priority_callback_order_with_integers
-	 * @dataProvider data_priority_callback_order_with_unhappy_path_nonintegers
 	 *
 	 * @param array $priorities {
 	 *     Indexed array of the priorities for the MockAction callbacks.
@@ -100,19 +97,50 @@ class Tests_Hooks_DoAction extends WP_UnitTestCase {
 	 * @param array  $expected_call_order  An array of callback names in expected call order.
 	 * @param string $expected_deprecation Optional. Deprecation message. Default ''.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60193' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_priority_callback_order_with_integers' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_priority_callback_order_with_unhappy_path_nonintegers' )]
 	public function test_priority_callback_order( $priorities, $expected_call_order, $expected_deprecation = '' ) {
-		$mock      = new MockAction();
-		$hook      = new WP_Hook();
-		$hook_name = __FUNCTION__;
+		$mock         = new MockAction();
+		$hook         = new WP_Hook();
+		$hook_name    = __FUNCTION__;
+		$deprecations = array();
 
-		if ( $expected_deprecation && PHP_VERSION_ID >= 80100 ) {
-			$this->expectDeprecation();
-			$this->expectDeprecationMessage( $expected_deprecation );
+		if ( $expected_deprecation ) {
+			set_error_handler(
+				static function ( int $severity, string $message ) use ( &$deprecations ): bool {
+					$deprecations[] = compact( 'severity', 'message' );
+					return true;
+				},
+				E_DEPRECATED
+			);
 		}
 
-		$hook->add_filter( $hook_name, array( $mock, 'action' ), $priorities[0], 1 );
-		$hook->add_filter( $hook_name, array( $mock, 'action2' ), $priorities[1], 1 );
-		$hook->do_action( array( '' ) );
+		try {
+			$hook->add_filter( $hook_name, array( $mock, 'action' ), $priorities[0], 1 );
+			$hook->add_filter( $hook_name, array( $mock, 'action2' ), $priorities[1], 1 );
+			$hook->do_action( array( '' ) );
+		} finally {
+			if ( $expected_deprecation ) {
+				restore_error_handler();
+			}
+		}
+
+		if ( $expected_deprecation ) {
+			$this->assertSame(
+				array(
+					array(
+						'severity' => E_DEPRECATED,
+						'message'  => $expected_deprecation,
+					),
+					array(
+						'severity' => E_DEPRECATED,
+						'message'  => $expected_deprecation,
+					),
+				),
+				$deprecations
+			);
+		}
 
 		$this->assertSame( 2, $mock->get_call_count(), 'The number of call counts does not match' );
 
@@ -125,7 +153,7 @@ class Tests_Hooks_DoAction extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_priority_callback_order_with_integers() {
+	public static function data_priority_callback_order_with_integers() {
 		return array(
 			'int DESC' => array(
 				'priorities'          => array( 10, 9 ),
@@ -143,7 +171,7 @@ class Tests_Hooks_DoAction extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_priority_callback_order_with_unhappy_path_nonintegers() {
+	public static function data_priority_callback_order_with_unhappy_path_nonintegers() {
 		return array(
 			// Numbers as strings and floats.
 			'int as string DESC'               => array(

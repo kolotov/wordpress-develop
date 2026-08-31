@@ -1,10 +1,7 @@
 <?php
 
-/**
- * @group admin
- *
- * @covers ::wp_check_php_version
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_check_php_version' )]
 class Tests_Admin_Includes_Misc_WpCheckPhpVersion_Test extends WP_UnitTestCase {
 
 	/**
@@ -16,9 +13,7 @@ class Tests_Admin_Includes_Misc_WpCheckPhpVersion_Test extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 * @ticket 65203
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65203' )]
 	public function test_wp_check_php_version_returns_false_on_api_failure() {
 		add_filter( 'pre_http_request', array( $this, 'mock_api_failure' ), 10, 3 );
 
@@ -29,9 +24,7 @@ class Tests_Admin_Includes_Misc_WpCheckPhpVersion_Test extends WP_UnitTestCase {
 		$this->assertFalse( $result, 'wp_check_php_version() should return false on API failure.' );
 	}
 
-	/**
-	 * @ticket 65203
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65203' )]
 	public function test_wp_check_php_version_successful_response() {
 		add_filter( 'pre_http_request', array( $this, 'mock_api_success' ), 10, 3 );
 
@@ -46,9 +39,7 @@ class Tests_Admin_Includes_Misc_WpCheckPhpVersion_Test extends WP_UnitTestCase {
 		$this->assertTrue( $result['is_secure'] );
 	}
 
-	/**
-	 * @ticket 65203
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65203' )]
 	public function test_wp_check_php_version_caches_result_in_transient() {
 		add_filter( 'pre_http_request', array( $this, 'mock_api_success' ), 10, 3 );
 
@@ -63,9 +54,7 @@ class Tests_Admin_Includes_Misc_WpCheckPhpVersion_Test extends WP_UnitTestCase {
 		$this->assertSame( '8.2', $cached['recommended_version'] );
 	}
 
-	/**
-	 * @ticket 65203
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65203' )]
 	public function test_wp_check_php_version_uses_cached_result() {
 		$key    = md5( PHP_VERSION );
 		$cached = array(
@@ -87,11 +76,8 @@ class Tests_Admin_Includes_Misc_WpCheckPhpVersion_Test extends WP_UnitTestCase {
 		$this->assertSame( '8.3', $result['recommended_version'], 'wp_check_php_version() should use the cached result if available.' );
 	}
 
-	/**
-	 * @ticket 65203
-	 *
-	 * @requires PHP >= 8.0
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65203' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhp( '>= 8.0.0' )]
 	public function test_wp_is_php_version_acceptable_filter() {
 		add_filter( 'pre_http_request', array( $this, 'mock_api_success' ), 10, 3 );
 		add_filter( 'wp_is_php_version_acceptable', '__return_false' );
@@ -104,11 +90,8 @@ class Tests_Admin_Includes_Misc_WpCheckPhpVersion_Test extends WP_UnitTestCase {
 		$this->assertFalse( $result['is_acceptable'], 'The wp_is_php_version_acceptable filter should be respected.' );
 	}
 
-	/**
-	 * @ticket 65203
-	 *
-	 * @requires PHP < 8.0
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65203' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhp( '< 8.0.0' )]
 	public function test_wp_check_php_version_future_minimum_logic() {
 		add_filter( 'pre_http_request', array( $this, 'mock_api_success' ), 10, 3 );
 

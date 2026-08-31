@@ -3,11 +3,11 @@
 /**
  * Tests for the REST run controller for abilities endpoint.
  *
- * @covers WP_REST_Abilities_V1_Run_Controller
  *
- * @group abilities-api
- * @group restapi
  */
+#[\PHPUnit\Framework\Attributes\Group( 'abilities-api' )]
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Abilities_V1_Run_Controller::class )]
 class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 
 	/**
@@ -410,8 +410,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test executing a regular ability with POST.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_execute_regular_ability_post(): void {
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/calculator/run' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -435,8 +435,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test executing a read-only ability with GET.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_execute_readonly_ability_get(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/test/user-info/run' );
 		$request->set_query_params(
@@ -457,8 +457,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test executing a destructive ability with GET.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_execute_destructive_ability_delete(): void {
 		$request = new WP_REST_Request( 'DELETE', '/wp-abilities/v1/abilities/test/delete-user/run' );
 		$request->set_query_params(
@@ -478,8 +478,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test HTTP method validation for regular abilities.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_regular_ability_requires_post(): void {
 		$this->register_test_ability(
 			'test/open-tool',
@@ -509,8 +509,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test HTTP method validation for read-only abilities.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_readonly_ability_requires_get(): void {
 		// Try POST on a read-only ability (should fail).
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/user-info/run' );
@@ -528,8 +528,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test HTTP method validation for destructive abilities.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_destructive_ability_requires_delete(): void {
 		// Try POST on a destructive ability (should fail).
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/delete-user/run' );
@@ -549,8 +549,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 * Note: When output validation fails in WP_Ability::execute(), it returns null,
 	 * which causes the REST controller to return 'ability_invalid_output'.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_output_validation(): void {
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/invalid-output/run' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -569,8 +569,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test permission check for execution.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_execution_permission_denied(): void {
 		wp_set_current_user( self::$no_permission_user_id );
 
@@ -598,8 +598,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test contextual permission check.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_contextual_permission_check(): void {
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/restricted/run' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -636,8 +636,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test handling an ability that does not show in REST.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_do_not_show_in_rest(): void {
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/not-show-in-rest/run' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -653,8 +653,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test running an ability exposed in REST via the `public` meta flag.
 	 *
-	 * @ticket 65568
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65568' )]
 	public function test_run_public_meta_ability_is_executable(): void {
 		$this->register_test_ability(
 			'test/public-ability',
@@ -682,8 +682,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test handling of null is a valid return value.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_null_return_handling(): void {
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/null-return/run' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -698,8 +698,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test handling of WP_Error return from ability.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_wp_error_return_handling(): void {
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/error-return/run' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -715,8 +715,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test non-existent ability returns 404.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_execute_non_existent_ability(): void {
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/non/existent/run' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -731,8 +731,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test schema retrieval for run endpoint.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_run_endpoint_schema(): void {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp-abilities/v1/abilities/test/calculator/run' );
 		$response = $this->server->dispatch( $request );
@@ -750,8 +750,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test that invalid JSON in POST body is handled correctly.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_invalid_json_in_post_body(): void {
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/calculator/run' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -767,8 +767,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test GET request with complex nested input array.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_request_with_nested_input_array(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/test/query-params/run' );
 		$request->set_query_params(
@@ -795,8 +795,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test GET request with non-array input parameter.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_request_with_non_array_input(): void {
 		$request = new WP_REST_Request( 'GET', '/wp-abilities/v1/abilities/test/query-params/run' );
 		$request->set_query_params(
@@ -813,8 +813,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test POST request with non-array input in JSON body.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_post_request_with_non_array_input(): void {
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/calculator/run' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -834,8 +834,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test ability with invalid output that fails validation.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_output_validation_failure_returns_error(): void {
 		// Register ability with strict output schema.
 		$this->register_test_ability(
@@ -883,8 +883,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test ability with invalid input that fails validation.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_input_validation_failure_returns_error(): void {
 		// Register ability with strict input schema.
 		$this->register_test_ability(
@@ -932,8 +932,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Tests that a normalization filter error defaults to a 400 REST response.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_normalize_input_filter_error_defaults_to_bad_request_status(): void {
 		$filter = static function ( $input ) {
 			return new WP_Error( 'normalize_rejected', 'Rejected input.' );
@@ -967,8 +967,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Tests that a normalization filter error with custom status keeps that status.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_normalize_input_filter_error_preserves_custom_status(): void {
 		$filter = static function ( $input ) {
 			return new WP_Error(
@@ -1006,8 +1006,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Tests that a validation filter error defaults to a 400 REST response.
 	 *
-	 * @ticket 64311
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64311' )]
 	public function test_validate_input_filter_error_defaults_to_bad_request_status(): void {
 		$filter = static function () {
 			return new WP_Error( 'validate_rejected', 'Rejected input.' );
@@ -1041,8 +1041,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Tests that a validation filter error with custom status keeps that status.
 	 *
-	 * @ticket 64311
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64311' )]
 	public function test_validate_input_filter_error_preserves_custom_status(): void {
 		$filter = static function () {
 			return new WP_Error(
@@ -1080,8 +1080,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test ability without annotations defaults to POST method.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_ability_without_annotations_defaults_to_post_method(): void {
 		// Register ability without annotations.
 		$this->register_test_ability(
@@ -1116,8 +1116,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test edge case with empty input for GET method.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_empty_input_handling_get_method(): void {
 		$this->register_test_ability(
 			'test/read-only-empty',
@@ -1148,8 +1148,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test edge case with empty input for GET method, and normalized input using schema.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_empty_input_handling_get_method_with_normalized_input(): void {
 		$this->register_test_ability(
 			'test/read-only-empty-array',
@@ -1184,8 +1184,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test edge case with empty input for POST method.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_empty_input_handling_post_method(): void {
 		$this->register_test_ability(
 			'test/regular-empty',
@@ -1218,7 +1218,7 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{0: string}>
 	 */
-	public function data_malformed_json_provider(): array {
+	public static function data_malformed_json_provider(): array {
 		return array(
 			'Missing value'              => array( '{"input": }' ),
 			'Trailing comma in array'    => array( '{"input": [1, 2, }' ),
@@ -1234,12 +1234,12 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test malformed JSON in POST body.
 	 *
-	 * @ticket 64098
 	 *
-	 * @dataProvider data_malformed_json_provider
 	 *
 	 * @param string $json Malformed JSON to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_malformed_json_provider' )]
 	public function test_malformed_json_post_body( string $json ): void {
 		$request = new WP_REST_Request( 'POST', '/wp-abilities/v1/abilities/test/calculator/run' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -1254,8 +1254,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test input with various PHP types as strings.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_php_type_strings_in_input(): void {
 		// Register ability that accepts any input
 		$this->register_test_ability(
@@ -1303,8 +1303,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test input with mixed encoding.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_mixed_encoding_in_input(): void {
 		// Register ability that accepts any input
 		$this->register_test_ability(
@@ -1356,7 +1356,7 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{0: string}>
 	 */
-	public function data_invalid_http_methods_provider(): array {
+	public static function data_invalid_http_methods_provider(): array {
 		return array(
 			'PATCH'  => array( 'PATCH' ),
 			'PUT'    => array( 'PUT' ),
@@ -1368,12 +1368,12 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test request with invalid HTTP methods.
 	 *
-	 * @ticket 64098
 	 *
-	 * @dataProvider data_invalid_http_methods_provider
 	 *
 	 * @param string $method HTTP method to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_http_methods_provider' )]
 	public function test_invalid_http_methods( string $method ): void {
 		// Register an ability with no permission requirements for this test
 		$this->register_test_ability(
@@ -1405,8 +1405,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Test OPTIONS method handling.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_options_method_handling(): void {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp-abilities/v1/abilities/test/calculator/run' );
 		$response = $this->server->dispatch( $request );
@@ -1480,7 +1480,7 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 * @return array<string, array{0: array, 1: mixed, 2: mixed}> Schema, raw input, and the
 	 *                                                            expected coerced value.
 	 */
-	public function data_input_is_coerced(): array {
+	public static function data_input_is_coerced(): array {
 		$object_schema = array(
 			'type'       => 'object',
 			'properties' => array(
@@ -1659,14 +1659,14 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 * comma-separated list as a single string, so the whole input must arrive natively typed,
 	 * whether it is a field nested in an object or a top-level scalar or array.
 	 *
-	 * @ticket 65594
 	 *
-	 * @dataProvider data_input_is_coerced
 	 *
 	 * @param array $schema   Ability input schema.
 	 * @param mixed $input    Raw input as delivered over a GET query string.
 	 * @param mixed $expected Expected input value after coercion.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65594' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_input_is_coerced' )]
 	public function test_get_input_is_coerced( array $schema, $input, $expected ): void {
 		$this->register_reflecting_ability( 'test/coerced-input', $schema );
 
@@ -1680,7 +1680,7 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{0: array, 1: array}> Schema and the invalid raw input.
 	 */
-	public function data_invalid_input_returns_400(): array {
+	public static function data_invalid_input_returns_400(): array {
 		$schema = array(
 			'type'                 => 'object',
 			'properties'           => array(
@@ -1713,13 +1713,13 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 * input that already validates. Invalid input therefore still returns the authoritative
 	 * `ability_invalid_input` (400) from validation.
 	 *
-	 * @ticket 65594
 	 *
-	 * @dataProvider data_invalid_input_returns_400
 	 *
 	 * @param array $schema Ability input schema.
 	 * @param array $input  Invalid raw input that must not be coerced.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65594' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_input_returns_400' )]
 	public function test_invalid_input_returns_400( array $schema, array $input ): void {
 		$this->register_reflecting_ability( 'test/strict-typed-input', $schema );
 
@@ -1735,8 +1735,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 * Coercion gates on `validate_input()`, not the raw schema, so a `wp_ability_validate_input`
 	 * filter that accepts input the schema rejects makes that input coerced too.
 	 *
-	 * @ticket 65594
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65594' )]
 	public function test_validate_input_filter_override_still_coerces(): void {
 		$this->register_reflecting_ability(
 			'test/filtered-typed-input',
@@ -1772,8 +1772,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 * JSON delivers native types, so coercion is a near no-op for POST. Applying it uniformly
 	 * keeps GET and POST consistent without altering already-typed values.
 	 *
-	 * @ticket 65594
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65594' )]
 	public function test_post_typed_input_is_unchanged(): void {
 		// An empty annotations array registers a POST (non-read-only) ability.
 		$this->register_reflecting_ability(
@@ -1815,8 +1815,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	/**
 	 * Tests that an ability without an input schema is unaffected by coercion.
 	 *
-	 * @ticket 65594
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65594' )]
 	public function test_input_without_schema_passes_through(): void {
 		$this->register_test_ability(
 			'test/no-input-schema',
@@ -1848,8 +1848,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 * during the permission check sees the coerced integer, not the raw "10" string the GET query
 	 * string delivered. The gate runs first, so the first recorded type is the one it acted on.
 	 *
-	 * @ticket 65594
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65594' )]
 	public function test_permission_callback_receives_typed_input(): void {
 		$seen        = new stdClass();
 		$seen->types = array();
@@ -1895,8 +1895,8 @@ class Tests_REST_API_WpRestAbilitiesV1RunController extends WP_UnitTestCase {
 	 * coerced without producing a `uniqueItems` error. The raw input is kept instead, so
 	 * validation still accepts it and no `WP_Error` reaches the ability.
 	 *
-	 * @ticket 65594
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65594' )]
 	public function test_nested_sanitize_error_falls_back_to_raw_input(): void {
 		$this->register_reflecting_ability(
 			'test/unique-items-input',

@@ -7,18 +7,17 @@
  *
  * @since 6.7.0
  *
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlProcessorComments extends WP_UnitTestCase {
 	/**
 	 * Ensures that different types of comments are processed correctly.
 	 *
-	 * @ticket 61530
 	 *
-	 * @dataProvider data_comments
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61530' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_comments' )]
 	public function test_comment_processing( $html, $expected_comment_type, $expected_modifiable_text, $expected_tag = null ) {
 		$processor = WP_HTML_Processor::create_fragment( $html );
 		$processor->next_token();
@@ -52,10 +51,10 @@ class Tests_HtmlApi_WpHtmlProcessorComments extends WP_UnitTestCase {
 	/**
 	 * Ensures that different types of comments are processed correctly.
 	 *
-	 * @ticket 61530
 	 *
-	 * @dataProvider data_funky_comments
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61530' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_funky_comments' )]
 	public function test_funky_comment( $html, $expected_modifiable_text ) {
 		$processor = WP_HTML_Processor::create_fragment( $html );
 		$processor->next_token();

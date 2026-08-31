@@ -3,10 +3,10 @@
 /**
  * Tests for the wp_scheduled_delete() function.
  *
- * @group functions
  *
- * @covers ::wp_scheduled_delete
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_scheduled_delete' )]
 class Tests_Functions_wpScheduledDelete extends WP_UnitTestCase {
 
 	protected static $comment_id;
@@ -29,8 +29,8 @@ class Tests_Functions_wpScheduledDelete extends WP_UnitTestCase {
 	/**
 	 * Tests that old trashed posts/pages are deleted.
 	 *
-	 * @ticket 59938
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59938' )]
 	public function test_wp_scheduled_delete() {
 		self::$page_id = self::factory()->post->create(
 			array(
@@ -53,8 +53,8 @@ class Tests_Functions_wpScheduledDelete extends WP_UnitTestCase {
 	 *
 	 * Ensures that the trash meta status is removed.
 	 *
-	 * @ticket 59938
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59938' )]
 	public function test_wp_scheduled_delete_status_not_trash() {
 		self::$page_id = self::factory()->post->create(
 			array(
@@ -78,8 +78,8 @@ class Tests_Functions_wpScheduledDelete extends WP_UnitTestCase {
 	/**
 	 * Tests that old trashed posts/pages are not deleted if not old enough.
 	 *
-	 * @ticket 59938
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59938' )]
 	public function test_wp_scheduled_delete_page_not_old_enough() {
 		self::$page_id = self::factory()->post->create(
 			array(
@@ -102,8 +102,8 @@ class Tests_Functions_wpScheduledDelete extends WP_UnitTestCase {
 	/**
 	 * Tests that old trashed comments are deleted.
 	 *
-	 * @ticket 59938
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59938' )]
 	public function test_wp_scheduled_delete_comment() {
 		self::$comment_id = self::factory()->comment->create(
 			array(
@@ -125,8 +125,8 @@ class Tests_Functions_wpScheduledDelete extends WP_UnitTestCase {
 	 *
 	 * Ensures that the trash meta status is removed.
 	 *
-	 * @ticket 59938
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59938' )]
 	public function test_wp_scheduled_delete_comment_status_not_trash() {
 		self::$comment_id = self::factory()->comment->create(
 			array(
@@ -149,8 +149,8 @@ class Tests_Functions_wpScheduledDelete extends WP_UnitTestCase {
 	/**
 	 * Tests that old trashed comments are not deleted if not old enough.
 	 *
-	 * @ticket 59938
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59938' )]
 	public function test_wp_scheduled_delete_comment_not_old_enough() {
 		self::$comment_id = self::factory()->comment->create(
 			array(

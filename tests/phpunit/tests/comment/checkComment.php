@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::check_comment
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'check_comment' )]
 class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	public function test_should_return_true_when_comment_previously_approved_is_disabled() {
 		$author       = 'BobtheBuilder';
@@ -86,8 +86,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57207
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57207' )]
 	public function test_should_return_false_when_content_with_non_latin_words_matches_moderation_keys() {
 		update_option( 'comment_previously_approved', 0 );
 
@@ -153,8 +153,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28603
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28603' )]
 	public function test_should_return_true_when_comment_previously_approved_is_enabled_and_user_has_previously_approved_comments_with_different_email() {
 		$subscriber_id = self::factory()->user->create(
 			array(
@@ -185,8 +185,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28603
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28603' )]
 	public function test_should_return_false_when_comment_previously_approved_is_enabled_and_user_does_not_have_a_previously_approved_comment_with_any_email() {
 		$subscriber_id = self::factory()->user->create(
 			array(
@@ -207,8 +207,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
 	public function test_should_return_true_for_a_pingback_from_this_site() {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -224,8 +224,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	 * they trusted, anyone could POST a trackback naming a local post as its source
 	 * and have arbitrary content approved without moderation.
 	 *
-	 * @ticket 65016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
 	public function test_should_return_false_for_a_trackback_claiming_a_local_source() {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -235,12 +235,12 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65016
 	 *
-	 * @dataProvider data_ping_types
 	 *
 	 * @param string $comment_type The comment type.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ping_types' )]
 	public function test_should_return_false_for_a_ping_from_another_site( $comment_type ) {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -250,12 +250,12 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	/**
 	 * A URL is only local when its host matches, not when it merely contains the home URL.
 	 *
-	 * @ticket 65016
 	 *
-	 * @dataProvider data_ping_types
 	 *
 	 * @param string $comment_type The comment type.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ping_types' )]
 	public function test_should_return_false_for_a_ping_from_a_url_spoofing_this_site( $comment_type ) {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -268,8 +268,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	/**
 	 * Manually approving every comment must not be bypassed by a self-pingback.
 	 *
-	 * @ticket 65016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
 	public function test_should_return_false_for_a_pingback_from_this_site_when_comment_moderation_is_enabled() {
 		update_option( 'comment_moderation', '1' );
 
@@ -281,8 +281,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	/**
 	 * The source post must be published, not a draft that happens to resolve.
 	 *
-	 * @ticket 65016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
 	public function test_should_return_false_for_a_pingback_from_an_unpublished_post_on_this_site() {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -295,8 +295,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	/**
 	 * Only pings are exempt. A regular comment linking to a local post is still moderated.
 	 *
-	 * @ticket 65016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
 	public function test_should_return_false_for_a_comment_whose_author_url_is_a_post_on_this_site() {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -308,8 +308,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	/**
 	 * Test auto approvals can be turned off via the `wp_auto_approve_ping` filter.
 	 *
-	 * @ticket 65016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
 	public function test_auto_approve_pingback_should_be_able_to_hold_a_pingback_from_this_site() {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -323,8 +323,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	/**
 	 * Test auto approvals can be turned on via the `wp_auto_approve_ping` filter.
 	 *
-	 * @ticket 65016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
 	public function test_auto_approve_pingback_should_be_able_to_approve_a_pingback_from_another_site() {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -336,9 +336,9 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	/**
 	 * Ensure pingbacks from Multisite sub-sites are not auto approved.
 	 *
-	 * @ticket 65016
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_auto_approve_pingback_should_not_approve_from_a_different_ms_site() {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -354,8 +354,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	/**
 	 * Ensure the `wp_auto_approve_ping` filter receives the post ID for same site pings.
 	 *
-	 * @ticket 65016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
 	public function test_auto_approve_pingback_should_receive_the_source_post_id() {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -381,8 +381,8 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	/**
 	 * Ensure the `wp_auto_approve_ping` filter does not receive a post ID for off-site pings.
 	 *
-	 * @ticket 65016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
 	public function test_auto_approve_pingback_should_receive_the_post_id_zero_for_off_site_pings() {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -410,7 +410,7 @@ class Tests_Comment_CheckComment extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_ping_types() {
+	public static function data_ping_types() {
 		return array(
 			'pingback'  => array( 'pingback' ),
 			'trackback' => array( 'trackback' ),

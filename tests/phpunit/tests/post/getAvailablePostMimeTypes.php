@@ -2,12 +2,15 @@
 /**
  * Unit tests covering post mime types.
  *
- * @ticket 59195
  *
- * @group post
  *
- * @covers ::get_available_post_mime_types
  */
+
+#[\PHPUnit\Framework\Attributes\Ticket( '59195' )]
+
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_available_post_mime_types' )]
 
 class Tests_Post_GetAvailablePostMimeTypes extends WP_UnitTestCase {
 

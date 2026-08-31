@@ -3,8 +3,8 @@
 /**
  * Test functions that fetch stuff from the theme directory
  *
- * @group themes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'themes' )]
 class Tests_Theme_ThemeDir extends WP_UnitTestCase {
 
 	/**
@@ -277,8 +277,8 @@ class Tests_Theme_ThemeDir extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28662
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28662' )]
 	public function test_theme_dir_slashes() {
 		$size = count( $GLOBALS['wp_theme_directories'] );
 

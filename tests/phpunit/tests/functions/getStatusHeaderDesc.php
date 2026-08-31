@@ -5,18 +5,18 @@
  *
  * @since 5.3.0
  *
- * @group functions
  *
- * @covers ::get_status_header_desc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_status_header_desc' )]
 class Tests_Functions_GetStatusHeaderDesc extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_get_status_header_desc
 	 *
 	 * @param int    $code     HTTP status code.
 	 * @param string $expected Status description.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_status_header_desc' )]
 	public function test_get_status_header_desc( $code, $expected ) {
 		$this->assertSame( $expected, get_status_header_desc( $code ) );
 	}
@@ -26,7 +26,7 @@ class Tests_Functions_GetStatusHeaderDesc extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_status_header_desc() {
+	public static function data_get_status_header_desc() {
 		return array(
 			array( 200, 'OK' ),
 			array( 301, 'Moved Permanently' ),
@@ -46,8 +46,8 @@ class Tests_Functions_GetStatusHeaderDesc extends WP_UnitTestCase {
 	 * Tests that the HTTP response codes stored in the `$wp_header_to_desc` global
 	 * match the constants in the WP_Http class.
 	 *
-	 * @ticket 35426
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35426' )]
 	public function test_http_response_code_constants() {
 		global $wp_header_to_desc;
 

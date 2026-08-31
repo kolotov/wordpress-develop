@@ -8,17 +8,19 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 /**
  * Testing Add Meta AJAX functionality.
  *
- * @group ajax
  *
- * @covers ::wp_ajax_add_meta
  */
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_add_meta' )]
 class Tests_Ajax_wpAjaxAddMeta extends WP_Ajax_UnitTestCase {
 
 	/**
-	 * @ticket 43559
-	 *
-	 * @covers ::add_post_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43559' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_post_meta' )]
 	public function test_wp_ajax_add_meta_allows_empty_values_on_adding() {
 		$post = self::factory()->post->create();
 
@@ -43,10 +45,9 @@ class Tests_Ajax_wpAjaxAddMeta extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43559
-	 *
-	 * @covers ::update_metadata_by_mid
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43559' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_metadata_by_mid' )]
 	public function test_wp_ajax_add_meta_allows_empty_values_on_updating() {
 		$post = self::factory()->post->create();
 

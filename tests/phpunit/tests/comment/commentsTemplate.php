@@ -3,10 +3,10 @@
 /**
  * Testing items that are only testable by grabbing the markup of `comments_template()` from the output buffer.
  *
- * @group comment
  *
- * @covers ::comments_template
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'comments_template' )]
 class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 
 	/**
@@ -18,8 +18,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_asc_when_default_comments_page_is_newest() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -52,8 +52,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_desc_when_default_comments_page_is_newest() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -86,8 +86,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_asc_when_default_comments_page_is_oldest() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -120,8 +120,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_desc_when_default_comments_page_is_oldest() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -154,8 +154,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_asc_when_default_comments_page_is_newest_on_subsequent_pages() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -225,8 +225,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_desc_when_default_comments_page_is_newest_on_subsequent_pages() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -296,8 +296,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_asc_when_default_comments_page_is_oldest_on_subsequent_pages() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -353,8 +353,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
 	public function test_should_respect_comment_order_desc_when_default_comments_page_is_oldest_on_subsequent_pages() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -410,10 +410,10 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
-	 * @ticket 34073
-	 * @ticket 29462
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '34073' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '29462' )]
 	public function test_last_page_of_comments_should_be_full_when_default_comment_page_is_newest() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -462,10 +462,10 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
-	 * @ticket 34073
-	 * @ticket 29462
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '34073' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '29462' )]
 	public function test_first_page_of_comments_should_have_remainder_when_default_comments_page_is_newest() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -514,8 +514,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34073
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34073' )]
 	public function test_comment_permalinks_should_be_correct_when_using_default_display_callback_with_default_comment_page_oldest() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -599,8 +599,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34073
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34073' )]
 	public function test_comment_permalinks_should_be_correct_when_using_default_display_callback_with_default_comment_page_newest() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -721,8 +721,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35068
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35068' )]
 	public function test_query_offset_should_not_include_unapproved_comments() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -775,8 +775,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35068
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35068' )]
 	public function test_query_offset_should_include_unapproved_comments() {
 		$comment_author_email = 'foo@example.com';
 
@@ -857,8 +857,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43857
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43857' )]
 	public function test_comments_list_should_include_just_posted_unapproved_comment() {
 		$now     = time();
 		$p       = self::factory()->post->create();
@@ -893,8 +893,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35378
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35378' )]
 	public function test_hierarchy_should_be_ignored_when_threading_is_disabled() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -938,8 +938,8 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35419
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35419' )]
 	public function test_pagination_calculation_should_ignore_comment_hierarchy_when_threading_is_disabled() {
 		$now       = time();
 		$p         = self::factory()->post->create();
@@ -987,13 +987,13 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38074
-	 * @dataProvider data_comments_template_top_level_query_args
 	 *
 	 * @param array $expected             Array of expected values.
 	 * @param array $query_args           Args for the 'comments_template_query_args' filter.
 	 * @param array $top_level_query_args Args for the 'comments_template_top_level_query_args' filter.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38074' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_comments_template_top_level_query_args' )]
 	public function test_comments_template_top_level_query_args( $expected, $query_args, $top_level_query_args ) {
 		$now         = time();
 		$offset      = 0;
@@ -1048,7 +1048,7 @@ class Tests_Comment_CommentsTemplate extends WP_UnitTestCase {
 		$this->assertEquals( $expected['offset'], $offset );
 	}
 
-	public function data_comments_template_top_level_query_args() {
+	public static function data_comments_template_top_level_query_args() {
 		return array(
 			array(
 				array(

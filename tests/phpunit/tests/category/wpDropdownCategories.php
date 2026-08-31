@@ -1,14 +1,14 @@
 <?php
 /**
- * @group taxonomy
- * @group category
  *
- * @covers ::wp_dropdown_categories
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\Group( 'category' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_dropdown_categories' )]
 class Tests_Category_WpDropdownCategories extends WP_UnitTestCase {
 	/**
-	 * @ticket 30306
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30306' )]
 	public function test_wp_dropdown_categories_value_field_should_default_to_term_id() {
 		// Create a test category.
 		$cat_id = self::factory()->category->create(
@@ -31,8 +31,8 @@ class Tests_Category_WpDropdownCategories extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30306
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30306' )]
 	public function test_wp_dropdown_categories_value_field_term_id() {
 		// Create a test category.
 		$cat_id = self::factory()->category->create(
@@ -56,8 +56,8 @@ class Tests_Category_WpDropdownCategories extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30306
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30306' )]
 	public function test_wp_dropdown_categories_value_field_slug() {
 		// Create a test category.
 		$cat_id = self::factory()->category->create(
@@ -81,8 +81,8 @@ class Tests_Category_WpDropdownCategories extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30306
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30306' )]
 	public function test_wp_dropdown_categories_value_field_should_fall_back_on_term_id_when_an_invalid_value_is_provided() {
 		// Create a test category.
 		$cat_id = self::factory()->category->create(
@@ -106,8 +106,8 @@ class Tests_Category_WpDropdownCategories extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32330
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32330' )]
 	public function test_wp_dropdown_categories_selected_should_respect_custom_value_field() {
 		$c1 = self::factory()->category->create(
 			array(
@@ -136,8 +136,8 @@ class Tests_Category_WpDropdownCategories extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33452
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33452' )]
 	public function test_wp_dropdown_categories_show_option_all_should_be_selected_if_no_selected_value_is_explicitly_passed_and_value_field_does_not_have_string_values() {
 		$cats = self::factory()->category->create_many( 3 );
 
@@ -159,8 +159,8 @@ class Tests_Category_WpDropdownCategories extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33452
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33452' )]
 	public function test_wp_dropdown_categories_show_option_all_should_be_selected_if_selected_value_of_0_string_is_explicitly_passed_and_value_field_does_not_have_string_values() {
 		$cats = self::factory()->category->create_many( 3 );
 
@@ -183,8 +183,8 @@ class Tests_Category_WpDropdownCategories extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31909
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31909' )]
 	public function test_required_true_should_add_required_attribute() {
 		// Create a test category.
 		$cat_id = self::factory()->category->create(
@@ -208,8 +208,8 @@ class Tests_Category_WpDropdownCategories extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31909
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31909' )]
 	public function test_required_false_should_omit_required_attribute() {
 		// Create a test category.
 		$cat_id = self::factory()->category->create(
@@ -233,8 +233,8 @@ class Tests_Category_WpDropdownCategories extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31909
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31909' )]
 	public function test_required_should_default_to_false() {
 		// Create a test category.
 		$cat_id = self::factory()->category->create(

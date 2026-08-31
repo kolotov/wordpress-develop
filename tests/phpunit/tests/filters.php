@@ -3,8 +3,8 @@
 /**
  * Test apply_filters() and related functions
  *
- * @group hooks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'hooks' )]
 class Tests_Filters extends WP_UnitTestCase {
 
 	public function test_simple_filter() {
@@ -26,8 +26,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::remove_filter
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'remove_filter' )]
 	public function test_remove_filter() {
 		$a         = new MockAction();
 		$hook_name = __FUNCTION__;
@@ -50,9 +50,9 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64186
-	 * @covers ::has_filter
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64186' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'has_filter' )]
 	public function test_has_filter() {
 		$hook_name = __FUNCTION__;
 		$callback  = __FUNCTION__ . '_func';
@@ -141,12 +141,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60193
 	 *
-	 * @dataProvider data_priority_callback_order_with_integers
-	 * @dataProvider data_priority_callback_order_with_unhappy_path_nonintegers
 	 *
-	 * @covers ::apply_filters
 	 *
 	 * @param array $priorities {
 	 *     Indexed array of the priorities for the MockAction callbacks.
@@ -157,18 +153,50 @@ class Tests_Filters extends WP_UnitTestCase {
 	 * @param array  $expected_call_order  An array of callback names in expected call order.
 	 * @param string $expected_deprecation Optional. Deprecation message. Default ''.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60193' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_priority_callback_order_with_integers' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_priority_callback_order_with_unhappy_path_nonintegers' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'apply_filters' )]
 	public function test_priority_callback_order( $priorities, $expected_call_order, $expected_deprecation = '' ) {
-		$mock      = new MockAction();
-		$hook_name = __FUNCTION__;
+		$mock         = new MockAction();
+		$hook_name    = __FUNCTION__;
+		$deprecations = array();
 
-		if ( $expected_deprecation && PHP_VERSION_ID >= 80100 ) {
-			$this->expectDeprecation();
-			$this->expectDeprecationMessage( $expected_deprecation );
+		if ( $expected_deprecation ) {
+			set_error_handler(
+				static function ( int $severity, string $message ) use ( &$deprecations ): bool {
+					$deprecations[] = compact( 'severity', 'message' );
+					return true;
+				},
+				E_DEPRECATED
+			);
 		}
 
-		add_filter( $hook_name, array( $mock, 'filter' ), $priorities[0] );
-		add_filter( $hook_name, array( $mock, 'filter2' ), $priorities[1] );
-		apply_filters( $hook_name, __FUNCTION__ . '_val' );
+		try {
+			add_filter( $hook_name, array( $mock, 'filter' ), $priorities[0] );
+			add_filter( $hook_name, array( $mock, 'filter2' ), $priorities[1] );
+			apply_filters( $hook_name, __FUNCTION__ . '_val' );
+		} finally {
+			if ( $expected_deprecation ) {
+				restore_error_handler();
+			}
+		}
+
+		if ( $expected_deprecation ) {
+			$this->assertSame(
+				array(
+					array(
+						'severity' => E_DEPRECATED,
+						'message'  => $expected_deprecation,
+					),
+					array(
+						'severity' => E_DEPRECATED,
+						'message'  => $expected_deprecation,
+					),
+				),
+				$deprecations
+			);
+		}
 
 		$this->assertSame( 2, $mock->get_call_count(), 'The number of call counts does not match' );
 
@@ -181,7 +209,7 @@ class Tests_Filters extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_priority_callback_order_with_integers() {
+	public static function data_priority_callback_order_with_integers() {
 		return array(
 			'int DESC' => array(
 				'priorities'          => array( 10, 9 ),
@@ -199,7 +227,7 @@ class Tests_Filters extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_priority_callback_order_with_unhappy_path_nonintegers() {
+	public static function data_priority_callback_order_with_unhappy_path_nonintegers() {
 		return array(
 			// Numbers as strings and floats.
 			'int as string DESC'               => array(
@@ -270,8 +298,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::did_filter
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'did_filter' )]
 	public function test_did_filter() {
 		$hook_name1 = 'filter1';
 		$hook_name2 = 'filter2';
@@ -341,8 +369,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20920
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20920' )]
 	public function test_remove_all_filters_should_respect_the_priority_argument() {
 		$a         = new MockAction();
 		$hook_name = __FUNCTION__;
@@ -359,8 +387,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53218
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53218' )]
 	public function test_filter_with_ref_value() {
 		$obj       = new stdClass();
 		$ref       = &$obj;
@@ -381,8 +409,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53218
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53218' )]
 	public function test_filter_with_ref_argument() {
 		$obj       = new stdClass();
 		$ref       = &$obj;
@@ -402,8 +430,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 9886
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '9886' )]
 	public function test_filter_ref_array() {
 		$obj       = new stdClass();
 		$a         = new MockAction();
@@ -421,8 +449,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 12723
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12723' )]
 	public function test_filter_ref_array_result() {
 		$obj       = new stdClass();
 		$a         = new MockAction();
@@ -450,8 +478,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29070
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29070' )]
 	public function test_has_filter_after_remove_all_filters() {
 		$a         = new MockAction();
 		$hook_name = __FUNCTION__;
@@ -475,9 +503,9 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 10441
 	 * @expectedDeprecated tests_apply_filters_deprecated
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10441' )]
 	public function test_apply_filters_deprecated() {
 		$p = 'Foo';
 
@@ -494,9 +522,9 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 10441
 	 * @expectedDeprecated tests_apply_filters_deprecated
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10441' )]
 	public function test_apply_filters_deprecated_with_multiple_params() {
 		$p1 = 'Foo1';
 		$p2 = 'Foo2';
@@ -519,8 +547,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 10441
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10441' )]
 	public function test_apply_filters_deprecated_without_filter() {
 		$val = 'Foobar';
 
@@ -530,8 +558,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	private $current_priority;
 
 	/**
-	 * @ticket 39007
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39007' )]
 	public function test_current_priority() {
 		add_action( 'test_current_priority', array( $this, 'current_priority_action' ), 99 );
 		do_action( 'test_current_priority' );
@@ -547,8 +575,8 @@ class Tests_Filters extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39007
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39007' )]
 	public function test_other_priority() {
 		add_action( 'test_current_priority', array( $this, 'other_priority_action' ), 99 );
 		do_action( 'test_current_priority' );

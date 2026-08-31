@@ -7,10 +7,9 @@
  *
  * @since 6.4.0
  *
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	/*******************************************************************
 	 * RULES FOR "IN BODY" MODE
@@ -20,14 +19,15 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 * Verifies that tags in the container group, including the ARTICLE element,
 	 * close out an open P element if one exists.
 	 *
-	 * @covers WP_HTML_Processor::step_in_body
 	 *
-	 * @ticket 59914
 	 *
-	 * @dataProvider data_article_container_group
 	 *
 	 * @param string $tag_name Name of tag in group under test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59914' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_article_container_group' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	public function test_in_body_article_group_closes_open_p_element( $tag_name ) {
 		$processor = WP_HTML_Processor::create_fragment( "<p><p><p><p><{$tag_name} target>" );
 
@@ -52,14 +52,15 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 * Verifies that tags in the container group, including the ARTICLE element,
 	 * nest inside each other despite being invalid in most cases.
 	 *
-	 * @covers WP_HTML_Processor::step_in_body
 	 *
-	 * @ticket 59914
 	 *
-	 * @dataProvider data_article_container_group
 	 *
 	 * @param string $tag_name Name of tag in group under test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59914' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_article_container_group' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	public function test_in_body_article_group_can_nest_inside_itself( $tag_name ) {
 		$processor = WP_HTML_Processor::create_fragment( "<div><{$tag_name}><{$tag_name}></{$tag_name}><{$tag_name}><span><{$tag_name} target>" );
 
@@ -119,8 +120,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 * Verifies that when encountering an end tag for which there is no corresponding
 	 * element in scope, that it skips the tag entirely.
 	 *
-	 * @ticket 58961
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58961' )]
 	public function test_in_body_skips_unexpected_button_closer() {
 		$processor = WP_HTML_Processor::create_fragment( '<div>Test</button></div>' );
 
@@ -143,8 +144,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	/**
 	 * Verifies insertion of a BUTTON element when no existing BUTTON is already in scope.
 	 *
-	 * @ticket 58961
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58961' )]
 	public function test_in_body_button_with_no_button_in_scope() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><p>Click the button <button one>here</button>!</p></div><button two>not here</button>' );
 
@@ -166,10 +167,10 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 * Verifies that when inserting a BUTTON element, when a BUTTON is already in scope,
 	 * that the open button is closed with all other elements inside of it.
 	 *
-	 * @ticket 58961
 	 *
 	 * @since 6.4.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58961' )]
 	public function test_in_body_button_with_button_in_scope_as_parent() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><p>Click the button <button one>almost<button two>here</button>!</p></div><button three>not here</button>' );
 
@@ -199,10 +200,10 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 * that the open button is closed with all other elements inside of it, even if the
 	 * BUTTON in scope is not a direct parent of the new BUTTON element.
 	 *
-	 * @ticket 58961
 	 *
 	 * @since 6.4.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58961' )]
 	public function test_in_body_button_with_button_in_scope_as_ancestor() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><button one><p>Click the button <span><button two>here</button>!</span></p></div><button three>not here</button>' );
 
@@ -230,8 +231,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	/**
 	 * Verifies that HR closes an open p tag
 	 *
-	 * @ticket 60283
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60283' )]
 	public function test_in_body_hr_element_closes_open_p_tag() {
 		$processor = WP_HTML_Processor::create_fragment( '<p><hr>' );
 
@@ -246,12 +247,12 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	/**
 	 * Verifies that H1 through H6 elements close an open P element.
 	 *
-	 * @ticket 60215
 	 *
-	 * @dataProvider data_heading_elements
 	 *
 	 * @param string $tag_name Name of H1 - H6 element under test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_heading_elements' )]
 	public function test_in_body_heading_element_closes_open_p_tag( $tag_name ) {
 		$processor = WP_HTML_Processor::create_fragment(
 			"<p>Open<{$tag_name}>Closed P</{$tag_name}><img></p>"
@@ -291,13 +292,13 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	/**
 	 * Verifies that H1 through H6 elements close an open H1 through H6 element.
 	 *
-	 * @ticket 60215
 	 *
-	 * @dataProvider data_heading_combinations
 	 *
 	 * @param string $first_heading  H1 - H6 element appearing (unclosed) before the second.
 	 * @param string $second_heading H1 - H6 element appearing after the first.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_heading_combinations' )]
 	public function test_in_body_heading_element_closes_other_heading_elements( $first_heading, $second_heading ) {
 		$processor = WP_HTML_Processor::create_fragment(
 			"<div><{$first_heading} first> then <{$second_heading} second> and end </{$second_heading}><img></{$first_heading}></div>"
@@ -351,12 +352,13 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 * that the HTML processor ignores the end tag if there's a special
 	 * element on the stack of open elements before the matching opening.
 	 *
-	 * @covers WP_HTML_Processor::step_in_body
 	 *
-	 * @ticket 58907
 	 *
 	 * @since 6.4.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58907' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	public function test_in_body_any_other_end_tag_with_unclosed_special_element() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><span><p></span><div>' );
 
@@ -374,12 +376,13 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 * that the HTML processor closes appropriate elements on the stack of
 	 * open elements up to the matching opening.
 	 *
-	 * @covers WP_HTML_Processor::step_in_body
 	 *
-	 * @ticket 58907
 	 *
 	 * @since 6.4.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58907' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	public function test_in_body_any_other_end_tag_with_unclosed_non_special_element() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><span><code></span><div>' );
 
@@ -413,10 +416,11 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 * >   i.e. act as if this was a "br" start tag token with no attributes, rather than the end
 	 * >   tag token that it actually is.
 	 *
-	 * @covers WP_HTML_Processor::step_in_body
 	 *
-	 * @ticket 60283
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60283' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	public function test_br_end_tag_unsupported() {
 		$processor = WP_HTML_Processor::create_fragment( '</br id="an-opener" html>' );
 
@@ -432,8 +436,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	/**
 	 * Ensure that form elements in tables (but not cells) are immediately popped off the stack.
 	 *
-	 * @ticket 61576
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_table_form_element_immediately_popped() {
 		$processor = WP_HTML_Processor::create_fragment( '<table><form><!--comment-->' );
 

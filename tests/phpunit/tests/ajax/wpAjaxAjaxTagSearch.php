@@ -12,10 +12,10 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  * @subpackage UnitTests
  * @since 3.4.0
  *
- * @group ajax
  *
- * @covers ::wp_ajax_ajax_tag_search
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_ajax_tag_search' )]
 class Tests_Ajax_wpAjaxAjaxTagSearch extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -162,8 +162,8 @@ class Tests_Ajax_wpAjaxAjaxTagSearch extends WP_Ajax_UnitTestCase {
 	/**
 	 * Test the ajax_term_search_results filter
 	 *
-	 * @ticket 55606
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55606' )]
 	public function test_ajax_term_search_results_filter() {
 
 		// Become an administrator.

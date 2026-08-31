@@ -1,8 +1,6 @@
 <?php
 
-/**
- * @group admin
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 	protected static $contributor_id;
 	protected static $author_ids;
@@ -129,8 +127,8 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 	/**
 	 * edit_post() should convert an existing auto-draft to a draft.
 	 *
-	 * @ticket 25272
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25272' )]
 	public function test_edit_post_auto_draft() {
 		wp_set_current_user( self::$editor_id );
 		$post = self::factory()->post->create_and_get( array( 'post_status' => 'auto-draft' ) );
@@ -145,9 +143,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( 'draft', get_post( $post->ID )->post_status );
 	}
 
-	/**
-	 * @ticket 30615
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30615' )]
 	public function test_edit_post_should_parse_tax_input_by_name_rather_than_slug_for_nonhierarchical_taxonomies() {
 		wp_set_current_user( self::$editor_id );
 
@@ -185,9 +181,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertContains( 'baz', wp_list_pluck( $found, 'name' ) );
 	}
 
-	/**
-	 * @ticket 30615
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30615' )]
 	public function test_edit_post_should_not_create_terms_for_an_empty_tag_input_field() {
 		wp_set_current_user( self::$editor_id );
 
@@ -214,9 +208,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertEmpty( $found );
 	}
 
-	/**
-	 * @ticket 27792
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27792' )]
 	public function test_bulk_edit_posts_stomping() {
 		wp_set_current_user( self::$admin_id );
 
@@ -262,8 +254,8 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 	 * The bulk_edit_posts() function should preserve the post format
 	 * when it's unchanged.
 	 *
-	 * @ticket 44914
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44914' )]
 	public function test_bulk_edit_posts_should_preserve_post_format_when_unchanged() {
 		wp_set_current_user( self::$admin_id );
 
@@ -293,9 +285,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertFalse( get_post_format( $post_ids[2] ) );
 	}
 
-	/**
-	 * @ticket 31635
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31635' )]
 	public function test_bulk_edit_posts_should_publish_scheduled_post() {
 		wp_set_current_user( self::$admin_id );
 
@@ -323,9 +313,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( 'publish', get_post_status( $post ) );
 		$this->assertLessThanOrEqual( gmdate( 'Y-m-d H:i:s' ), get_post_time( 'Y-m-d H:i:s', false, $post ) );
 	}
-	/**
-	 * @ticket 31635
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31635' )]
 	public function test_bulk_edit_posts_should_publish_draft_immediately() {
 		wp_set_current_user( self::$admin_id );
 
@@ -359,9 +347,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertLessThanOrEqual( gmdate( 'Y-m-d H:i:s' ), get_post_time( 'Y-m-d H:i:s', false, $post ) );
 	}
 
-	/**
-	 * @ticket 41396
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41396' )]
 	public function test_bulk_edit_posts_should_set_post_format_before_wp_update_post_runs() {
 		wp_set_current_user( self::$admin_id );
 
@@ -384,9 +370,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 * @ticket 11302
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11302' )]
 	public function test_bulk_edit_if_categories_unchanged() {
 		wp_set_current_user( self::$admin_id );
 
@@ -419,9 +403,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( $terms3, $updated_terms3, 'Post 3 should have terms 1 and 3.' );
 	}
 
-	/**
-	 * @ticket 11302
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11302' )]
 	public function test_bulk_edit_if_some_categories_added() {
 		wp_set_current_user( self::$admin_id );
 
@@ -462,9 +444,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( array( $term1, $term3, $term4 ), $updated_terms3, 'Post should have terms 1, 3, and 4.' );
 	}
 
-	/**
-	 * @ticket 11302
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11302' )]
 	public function test_bulk_edit_if_some_categories_removed() {
 		wp_set_current_user( self::$admin_id );
 
@@ -512,10 +492,10 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 	/**
 	 * Tests that `bulk_edit_posts()` fires the 'bulk_edit_posts' action.
 	 *
-	 * @ticket 28112
 	 *
-	 * @covers ::bulk_edit_posts
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28112' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'bulk_edit_posts' )]
 	public function test_bulk_edit_posts_should_fire_bulk_edit_posts_action() {
 		wp_set_current_user( self::$admin_id );
 
@@ -537,10 +517,10 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 	/**
 	 * Tests that get_default_post_to_edit() calls wp_die() if wp_insert_post() returns a WP_Error.
 	 *
-	 * @ticket 37441
 	 *
-	 * @covers ::get_default_post_to_edit
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37441' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_default_post_to_edit' )]
 	public function test_get_default_post_to_edit_with_wp_insert_post_error() {
 		add_filter( 'wp_insert_post_empty_content', '__return_true' );
 
@@ -551,10 +531,10 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 	/**
 	 * Tests that default post title is present when a CPT has title support, and is empty otherwise.
 	 *
-	 * @ticket 45516
 	 *
-	 * @covers ::get_default_post_to_edit
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45516' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_default_post_to_edit' )]
 	public function test_get_default_post_to_edit_with_and_without_title_support() {
 		register_post_type(
 			'yes_title',
@@ -580,9 +560,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( '', get_post( $default_no_title_post_id )->post_title, 'Expected post_title to be an empty string.' );
 	}
 
-	/**
-	 * @ticket 38293
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38293' )]
 	public function test_user_cant_delete_protected_meta() {
 		$protected_meta_key = '_test_meta_data_that_is_protected';
 
@@ -614,9 +592,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		delete_metadata_by_mid( 'post', $meta_id );
 	}
 
-	/**
-	 * @ticket 30910
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30910' )]
 	public function test_get_sample_permalink_should_return_pretty_permalink_for_posts_with_post_status_future() {
 		$permalink_structure = '%postname%';
 		$this->set_permalink_structure( "/$permalink_structure/" );
@@ -636,10 +612,8 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( $expected, $found[0] );
 	}
 
-	/**
-	 * @ticket 30910
-	 * @ticket 18306
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30910' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '18306' )]
 	public function test_get_sample_permalink_html_should_use_default_permalink_for_view_post_link_when_pretty_permalinks_are_disabled() {
 		wp_set_current_user( self::$admin_id );
 
@@ -657,10 +631,8 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertStringContainsString( '>' . get_option( 'home' ) . '/?p=' . $p . '<', $found );
 	}
 
-	/**
-	 * @ticket 30910
-	 * @ticket 18306
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30910' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '18306' )]
 	public function test_get_sample_permalink_html_should_use_pretty_permalink_for_view_post_link_when_pretty_permalinks_are_enabled() {
 		$this->set_permalink_structure( '/%postname%/' );
 
@@ -681,9 +653,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertStringContainsString( '>' . urldecode( $post->post_name ) . '<', $found );
 	}
 
-	/**
-	 * @ticket 35980
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35980' )]
 	public function test_get_sample_permalink_html_should_use_pretty_permalink_for_view_attachment_link_when_pretty_permalinks_are_enabled() {
 		$this->set_permalink_structure( '/%postname%/' );
 
@@ -706,10 +676,8 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertStringContainsString( '>' . urldecode( get_permalink( $post ) ) . '<', $found );
 	}
 
-	/**
-	 * @ticket 32954
-	 * @ticket 18306
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32954' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '18306' )]
 	public function test_get_sample_permalink_html_should_use_correct_permalink_for_view_post_link_when_changing_slug() {
 		$this->set_permalink_structure( '/%postname%/' );
 
@@ -764,10 +732,8 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertStringContainsString( '>new_slug-صورة<', $found, $message );
 	}
 
-	/**
-	 * @ticket 30910
-	 * @ticket 18306
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30910' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '18306' )]
 	public function test_get_sample_permalink_html_should_use_preview_links_for_draft_and_pending_posts_with_no_post_name() {
 		$this->set_permalink_structure( '/%postname%/' );
 
@@ -787,9 +753,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'href="' . esc_url( get_preview_post_link( $post ) ), $found );
 	}
 
-	/**
-	 * @ticket 5305
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5305' )]
 	public function test_get_sample_permalink_should_avoid_slugs_that_would_create_clashes_with_year_archives() {
 		$this->set_permalink_structure( '/%postname%/' );
 
@@ -803,9 +767,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( '2015-2', $found[1] );
 	}
 
-	/**
-	 * @ticket 5305
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5305' )]
 	public function test_get_sample_permalink_should_allow_yearlike_slugs_if_permastruct_does_not_cause_an_archive_conflict() {
 		$this->set_permalink_structure( '/%year%/%postname%/' );
 
@@ -819,9 +781,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( '2015', $found[1] );
 	}
 
-	/**
-	 * @ticket 5305
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5305' )]
 	public function test_get_sample_permalink_should_avoid_slugs_that_would_create_clashes_with_month_archives() {
 		$this->set_permalink_structure( '/%year%/%postname%/' );
 
@@ -835,9 +795,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( '11-2', $found[1] );
 	}
 
-	/**
-	 * @ticket 5305
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5305' )]
 	public function test_get_sample_permalink_should_ignore_potential_month_conflicts_for_invalid_monthnum() {
 		$this->set_permalink_structure( '/%year%/%postname%/' );
 
@@ -851,9 +809,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( '13', $found[1] );
 	}
 
-	/**
-	 * @ticket 5305
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5305' )]
 	public function test_get_sample_permalink_should_avoid_slugs_that_would_create_clashes_with_day_archives() {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%postname%/' );
 
@@ -867,9 +823,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( '30-2', $found[1] );
 	}
 
-	/**
-	 * @ticket 5305
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5305' )]
 	public function test_get_sample_permalink_should_iterate_slug_suffix_when_a_date_conflict_is_found() {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%postname%/' );
 
@@ -889,9 +843,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( '30-3', $found[1] );
 	}
 
-	/**
-	 * @ticket 5305
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5305' )]
 	public function test_get_sample_permalink_should_ignore_potential_day_conflicts_for_invalid_day() {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%postname%/' );
 
@@ -905,9 +857,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( '32', $found[1] );
 	}
 
-	/**
-	 * @ticket 5305
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5305' )]
 	public function test_get_sample_permalink_should_allow_daylike_slugs_if_permastruct_does_not_cause_an_archive_conflict() {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
 
@@ -921,9 +871,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( '30', $found[1] );
 	}
 
-	/**
-	 * @ticket 35368
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35368' )]
 	public function test_get_sample_permalink_should_respect_hierarchy_of_draft_pages() {
 		$this->set_permalink_structure( '/%postname%/' );
 
@@ -951,10 +899,10 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 	/**
 	 * Tests that get_sample_permalink() preserves the original WP_Post properties.
 	 *
-	 * @ticket 54736
 	 *
-	 * @covers ::get_sample_permalink
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54736' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_sample_permalink' )]
 	public function test_get_sample_permalink_should_preserve_the_original_post_properties() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -978,9 +926,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertEquals( $post_original, $post, 'get_sample_permalink() modifies the post object.' );
 	}
 
-	/**
-	 * @ticket 59283
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59283' )]
 	public function test_get_sample_permalink_should_return_pretty_permalink_for_posts_with_post_status_auto_draft() {
 		$permalink_structure = '%postname%';
 		$this->set_permalink_structure( "/$permalink_structure/" );
@@ -1033,9 +979,7 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		$this->assertSame( $p, post_exists( $title, $content ) );
 	}
 
-	/**
-	 * @ticket 35246
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35246' )]
 	public function test_post_exists_should_match_content_with_no_title() {
 		$title   = '';
 		$content = 'Foo Bar Baz';
@@ -1144,11 +1088,8 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 43559
-	 *
-	 * @covers ::add_meta
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43559' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_meta' )]
 	public function test_add_meta_allows_empty_values() {
 		$p = self::factory()->post->create();
 
@@ -1166,18 +1107,9 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 	/**
 	 * Test the post type support in post_exists().
 	 *
-	 * @ticket 37406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37406' )]
 	public function test_post_exists_should_support_post_type() {
-		if ( PHP_VERSION_ID >= 80100 ) {
-			/*
-			 * For the time being, ignoring PHP 8.1 "null to non-nullable" deprecations coming in
-			 * via hooked in filter functions until a more structural solution to the
-			 * "missing input validation" conundrum has been architected and implemented.
-			 */
-			$this->expectDeprecation();
-			$this->expectDeprecationMessageMatches( '`Passing null to parameter \#[0-9]+ \(\$[^\)]+\) of type [^ ]+ is deprecated`' );
-		}
 
 		$title     = 'Foo Bar';
 		$post_type = 'page';
@@ -1187,25 +1119,15 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 				'post_type'  => $post_type,
 			)
 		);
-		$this->assertSame( $post_id, post_exists( $title, null, null, $post_type ) );
+		$this->assertSame( $post_id, post_exists( $title, '', '', $post_type ) );
 	}
 
 	/**
 	 * Test that post_exists() doesn't find an existing page as a post.
 	 *
-	 * @ticket 37406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37406' )]
 	public function test_post_exists_should_not_match_a_page_for_post() {
-		if ( PHP_VERSION_ID >= 80100 ) {
-			/*
-			 * For the time being, ignoring PHP 8.1 "null to non-nullable" deprecations coming in
-			 * via hooked in filter functions until a more structural solution to the
-			 * "missing input validation" conundrum has been architected and implemented.
-			 */
-			$this->expectDeprecation();
-			$this->expectDeprecationMessageMatches( '`Passing null to parameter \#[0-9]+ \(\$[^\)]+\) of type [^ ]+ is deprecated`' );
-		}
-
 		$title     = 'Foo Bar';
 		$post_type = 'page';
 		$post_id   = self::factory()->post->create(
@@ -1214,25 +1136,15 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 				'post_type'  => $post_type,
 			)
 		);
-		$this->assertSame( 0, post_exists( $title, null, null, 'post' ) );
+		$this->assertSame( 0, post_exists( $title, '', '', 'post' ) );
 	}
 
 	/**
 	 * Test the status support in post_exists()
 	 *
-	 * @ticket 34012
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34012' )]
 	public function test_post_exists_should_support_post_status() {
-		if ( PHP_VERSION_ID >= 80100 ) {
-			/*
-			 * For the time being, ignoring PHP 8.1 "null to non-nullable" deprecations coming in
-			 * via hooked in filter functions until a more structural solution to the
-			 * "missing input validation" conundrum has been architected and implemented.
-			 */
-			$this->expectDeprecation();
-			$this->expectDeprecationMessageMatches( '`Passing null to parameter \#[0-9]+ \(\$[^\)]+\) of type [^ ]+ is deprecated`' );
-		}
-
 		$title       = 'Foo Bar';
 		$post_type   = 'post';
 		$post_status = 'publish';
@@ -1243,26 +1155,16 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 				'post_status' => $post_status,
 			)
 		);
-		$this->assertSame( $post_id, post_exists( $title, null, null, null, $post_status ) );
+		$this->assertSame( $post_id, post_exists( $title, '', '', '', $post_status ) );
 	}
 
 
 	/**
 	 * Test the type and status query in post_exists()
 	 *
-	 * @ticket 34012
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34012' )]
 	public function test_post_exists_should_support_post_type_status_combined() {
-		if ( PHP_VERSION_ID >= 80100 ) {
-			/*
-			 * For the time being, ignoring PHP 8.1 "null to non-nullable" deprecations coming in
-			 * via hooked in filter functions until a more structural solution to the
-			 * "missing input validation" conundrum has been architected and implemented.
-			 */
-			$this->expectDeprecation();
-			$this->expectDeprecationMessageMatches( '`Passing null to parameter \#[0-9]+ \(\$[^\)]+\) of type [^ ]+ is deprecated`' );
-		}
-
 		$title       = 'Foo Bar';
 		$post_type   = 'post';
 		$post_status = 'publish';
@@ -1273,25 +1175,15 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 				'post_status' => $post_status,
 			)
 		);
-		$this->assertSame( $post_id, post_exists( $title, null, null, $post_type, $post_status ) );
+		$this->assertSame( $post_id, post_exists( $title, '', '', $post_type, $post_status ) );
 	}
 
 	/**
 	 * Test that post_exists() doesn't find an existing draft post when looking for publish
 	 *
-	 * @ticket 34012
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34012' )]
 	public function test_post_exists_should_only_match_correct_post_status() {
-		if ( PHP_VERSION_ID >= 80100 ) {
-			/*
-			 * For the time being, ignoring PHP 8.1 "null to non-nullable" deprecations coming in
-			 * via hooked in filter functions until a more structural solution to the
-			 * "missing input validation" conundrum has been architected and implemented.
-			 */
-			$this->expectDeprecation();
-			$this->expectDeprecationMessageMatches( '`Passing null to parameter \#[0-9]+ \(\$[^\)]+\) of type [^ ]+ is deprecated`' );
-		}
-
 		$title       = 'Foo Bar';
 		$post_type   = 'post';
 		$post_status = 'draft';
@@ -1302,25 +1194,15 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 				'post_status' => $post_status,
 			)
 		);
-		$this->assertSame( 0, post_exists( $title, null, null, null, 'publish' ) );
+		$this->assertSame( 0, post_exists( $title, '', '', '', 'publish' ) );
 	}
 
 	/**
 	 * Test the status support in post_exists()
 	 *
-	 * @ticket 34012
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34012' )]
 	public function test_post_exists_should_not_match_invalid_post_type_and_status_combined() {
-		if ( PHP_VERSION_ID >= 80100 ) {
-			/*
-			 * For the time being, ignoring PHP 8.1 "null to non-nullable" deprecations coming in
-			 * via hooked in filter functions until a more structural solution to the
-			 * "missing input validation" conundrum has been architected and implemented.
-			 */
-			$this->expectDeprecation();
-			$this->expectDeprecationMessageMatches( '`Passing null to parameter \#[0-9]+ \(\$[^\)]+\) of type [^ ]+ is deprecated`' );
-		}
-
 		$title       = 'Foo Bar';
 		$post_type   = 'post';
 		$post_status = 'publish';
@@ -1332,8 +1214,8 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 			)
 		);
 
-		$this->assertSame( 0, post_exists( $title, null, null, $post_type, 'draft' ) );
-		$this->assertSame( 0, post_exists( $title, null, null, 'wp_tests', $post_status ) );
+		$this->assertSame( 0, post_exists( $title, '', '', $post_type, 'draft' ) );
+		$this->assertSame( 0, post_exists( $title, '', '', 'wp_tests', $post_status ) );
 	}
 
 	/**

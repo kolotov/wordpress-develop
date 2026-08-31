@@ -1,9 +1,9 @@
 <?php
 /**
- * @group block-supports
  *
- * @covers ::wp_render_dimensions_support
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_dimensions_support' )]
 class Tests_Block_Supports_WpRenderDimensionsSupport extends WP_UnitTestCase {
 	/**
 	 * @var string|null
@@ -64,11 +64,8 @@ class Tests_Block_Supports_WpRenderDimensionsSupport extends WP_UnitTestCase {
 	/**
 	 * Tests that dimensions block support works as expected.
 	 *
-	 * @ticket 60365
 	 *
-	 * @covers ::wp_render_dimensions_support
 	 *
-	 * @dataProvider data_dimensions_block_support
 	 *
 	 * @param string $theme_name          The theme to switch to.
 	 * @param string $block_name          The test block name to register.
@@ -77,6 +74,8 @@ class Tests_Block_Supports_WpRenderDimensionsSupport extends WP_UnitTestCase {
 	 * @param string $expected_wrapper    Expected markup for the block wrapper.
 	 * @param string $wrapper             Existing markup for the block wrapper.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60365' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_dimensions_block_support' )]
 	public function test_dimensions_block_support( $theme_name, $block_name, $dimensions_settings, $dimensions_style, $expected_wrapper, $wrapper ) {
 		switch_theme( $theme_name );
 		$this->test_block_name = $block_name;
@@ -119,7 +118,7 @@ class Tests_Block_Supports_WpRenderDimensionsSupport extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_dimensions_block_support() {
+	public static function data_dimensions_block_support() {
 		return array(
 			'aspect ratio style is applied, with min-height and height unset' => array(
 				'theme_name'          => 'block-theme-child-with-fluid-typography',
@@ -175,10 +174,9 @@ class Tests_Block_Supports_WpRenderDimensionsSupport extends WP_UnitTestCase {
 	/**
 	 * Tests that fallback height styles are not added for the default aspect ratio.
 	 *
-	 * @ticket 65239
 	 *
-	 * @covers ::wp_render_dimensions_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65239' )]
 	public function test_default_aspect_ratio_does_not_unset_height_styles() {
 		$this->test_block_name = 'test/default-aspect-ratio-does-not-unset-height-styles';
 		register_block_type(

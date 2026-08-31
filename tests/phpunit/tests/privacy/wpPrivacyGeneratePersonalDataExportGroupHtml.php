@@ -6,16 +6,16 @@
  * @subpackage UnitTests
  * @since 5.2.0
  *
- * @group privacy
- * @covers ::wp_privacy_generate_personal_data_export_group_html
  */
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_privacy_generate_personal_data_export_group_html' )]
 class Tests_Privacy_wpPrivacyGeneratePersonalDataExportGroupHtml extends WP_UnitTestCase {
 
 	/**
 	 * Test when a single data item is passed.
 	 *
-	 * @ticket 44044
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44044' )]
 	public function test_group_html_generation_single_data_item() {
 		$data = array(
 			'group_label' => 'Test Data Group',
@@ -43,9 +43,9 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportGroupHtml extends WP_Unit
 	/**
 	 * Test when a multiple data items are passed.
 	 *
-	 * @ticket 44044
-	 * @ticket 46895
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44044' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '46895' )]
 	public function test_group_html_generation_multiple_data_items() {
 		$data = array(
 			'group_label' => 'Test Data Group',
@@ -89,8 +89,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportGroupHtml extends WP_Unit
 	/**
 	 * Values that appear to be links should be wrapped in `<a>` tags.
 	 *
-	 * @ticket 44044
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44044' )]
 	public function test_links_become_anchors() {
 		$data = array(
 			'group_label' => 'Test Data Group',
@@ -122,8 +122,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportGroupHtml extends WP_Unit
 	/**
 	 * HTML in group labels should be escaped.
 	 *
-	 * @ticket 44044
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44044' )]
 	public function test_group_labels_escaped() {
 		$data = array(
 			'group_label' => '<div>Escape HTML in group labels</div>',
@@ -138,8 +138,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportGroupHtml extends WP_Unit
 	/**
 	 * Test that the exported data should contain allowed HTML.
 	 *
-	 * @ticket 44044
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44044' )]
 	public function test_allowed_html_not_stripped() {
 		$data = array(
 			'group_label' => 'Test Data Group',
@@ -165,8 +165,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportGroupHtml extends WP_Unit
 	/**
 	 * Test that the exported data should not contain disallowed HTML.
 	 *
-	 * @ticket 44044
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44044' )]
 	public function test_disallowed_html_is_stripped() {
 		$data = array(
 			'group_label' => 'Test Data Group',
@@ -196,8 +196,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportGroupHtml extends WP_Unit
 	/**
 	 * Test group count is displayed for multiple items.
 	 *
-	 * @ticket 46895
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46895' )]
 	public function test_group_html_generation_should_display_group_count_when_multiple_items() {
 		$data = array(
 			'group_label' => 'Test Data Group',
@@ -227,8 +227,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportGroupHtml extends WP_Unit
 	/**
 	 * Test group count is not displayed for a single item.
 	 *
-	 * @ticket 46895
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46895' )]
 	public function test_group_html_generation_should_not_display_group_count_when_single_item() {
 		$data = array(
 			'group_label' => 'Test Data Group',

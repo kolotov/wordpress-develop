@@ -3,23 +3,23 @@
 /**
  * Tests for `wp_get_admin_notice()`.
  *
- * @group functions
  *
- * @covers ::wp_get_admin_notice
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_admin_notice' )]
 class Tests_Functions_WpGetAdminNotice extends WP_UnitTestCase {
 
 	/**
 	 * Tests that `wp_get_admin_notice()` returns the expected admin notice markup.
 	 *
-	 * @ticket 57791
 	 *
-	 * @dataProvider data_should_return_admin_notice
 	 *
 	 * @param string $message  The message.
 	 * @param array  $args     Arguments for the admin notice.
 	 * @param string $expected The expected admin notice markup.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57791' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_return_admin_notice' )]
 	public function test_should_return_admin_notice( $message, $args, $expected ) {
 		$this->assertSame( $expected, wp_get_admin_notice( $message, $args ) );
 	}
@@ -29,7 +29,7 @@ class Tests_Functions_WpGetAdminNotice extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_return_admin_notice() {
+	public static function data_should_return_admin_notice() {
 		return array(
 			'defaults'                                  => array(
 				'message'  => 'A notice with defaults.',
@@ -280,10 +280,10 @@ class Tests_Functions_WpGetAdminNotice extends WP_UnitTestCase {
 	 * Tests that `wp_get_admin_notice()` throws a `_doing_it_wrong()` when
 	 * a 'type' containing spaces is passed.
 	 *
-	 * @ticket 57791
 	 *
 	 * @expectedIncorrectUsage wp_get_admin_notice
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57791' )]
 	public function test_should_throw_doing_it_wrong_with_a_type_containing_spaces() {
 		$this->assertSame(
 			'<div class="notice notice-first second third fourth"><p>A type containing spaces.</p></div>',
@@ -297,12 +297,12 @@ class Tests_Functions_WpGetAdminNotice extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_get_admin_notice()` applies filters.
 	 *
-	 * @ticket 57791
 	 *
-	 * @dataProvider data_should_apply_filters
 	 *
 	 * @param string $hook_name The name of the filter hook.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57791' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_apply_filters' )]
 	public function test_should_apply_filters( $hook_name ) {
 		$filter = new MockAction();
 		add_filter( $hook_name, array( $filter, 'filter' ) );
@@ -317,7 +317,7 @@ class Tests_Functions_WpGetAdminNotice extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_apply_filters() {
+	public static function data_should_apply_filters() {
 		return array(
 			'wp_admin_notice_args'   => array( 'hook_name' => 'wp_admin_notice_args' ),
 			'wp_admin_notice_markup' => array( 'hook_name' => 'wp_admin_notice_markup' ),

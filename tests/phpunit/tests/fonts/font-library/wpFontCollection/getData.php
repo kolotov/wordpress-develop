@@ -5,22 +5,22 @@
  * @package WordPress
  * @subpackage Font Library
  *
- * @group fonts
- * @group font-library
  *
- * @covers WP_Font_Collection::get_data
  */
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'font-library' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Font_Collection::class, 'get_data' )]
 class Tests_Fonts_WpFontCollection_GetData extends WP_UnitTestCase {
 
 	private static $mock_collection_data;
 
 	/**
-	 * @dataProvider data_create_font_collection
 	 *
 	 * @param string $slug          Font collection slug.
 	 * @param array  $config        Font collection config.
 	 * @param array  $expected_data Expected collection data.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_create_font_collection' )]
 	public function test_should_get_data_from_config_array( $slug, $config, $expected_data ) {
 		$collection = new WP_Font_Collection( $slug, $config );
 		$data       = $collection->get_data();
@@ -30,12 +30,12 @@ class Tests_Fonts_WpFontCollection_GetData extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_create_font_collection
 	 *
 	 * @param string $slug          Font collection slug.
 	 * @param array  $config        Font collection config.
 	 * @param array  $expected_data Expected collection data.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_create_font_collection' )]
 	public function test_should_get_data_from_json_file( $slug, $config, $expected_data ) {
 		$mock_file = wp_tempnam( 'my-collection-data-' );
 		file_put_contents( $mock_file, wp_json_encode( $config ) );
@@ -54,12 +54,12 @@ class Tests_Fonts_WpFontCollection_GetData extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_create_font_collection
 	 *
 	 * @param string $slug          Font collection slug.
 	 * @param array  $config        Font collection config.
 	 * @param array  $expected_data Expected collection data.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_create_font_collection' )]
 	public function test_should_get_data_from_json_url( $slug, $config, $expected_data ) {
 		add_filter( 'pre_http_request', array( $this, 'mock_request' ), 10, 3 );
 
@@ -86,7 +86,7 @@ class Tests_Fonts_WpFontCollection_GetData extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_create_font_collection() {
+	public static function data_create_font_collection() {
 		return array(
 			'font collection with required data' => array(
 				'slug'          => 'my-collection',
@@ -202,10 +202,10 @@ class Tests_Fonts_WpFontCollection_GetData extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_should_error_when_missing_properties
 	 *
 	 * @param array $config Font collection config.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_error_when_missing_properties' )]
 	public function test_should_error_when_missing_properties( $config ) {
 		$this->setExpectedIncorrectUsage( 'WP_Font_Collection::sanitize_and_validate_data' );
 
@@ -225,7 +225,7 @@ class Tests_Fonts_WpFontCollection_GetData extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_should_error_when_missing_properties() {
+	public static function data_should_error_when_missing_properties() {
 		return array(
 			'missing name'          => array(
 				'config' => array(

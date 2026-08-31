@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @group formatting
- * @group functions
  *
- * @covers ::wp_allowed_protocols
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_allowed_protocols' )]
 class Tests_Functions_AllowedProtocols extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 19354
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19354' )]
 	public function test_data_is_not_an_allowed_protocol() {
 		$this->assertNotContains( 'data', wp_allowed_protocols() );
 	}
@@ -24,12 +24,12 @@ class Tests_Functions_AllowedProtocols extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @depends test_allowed_protocol_has_an_example
-	 * @dataProvider data_example_urls
 	 *
 	 * @param string $protocol The scheme.
 	 * @param string $url      Example URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_allowed_protocol_has_an_example' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_example_urls' )]
 	public function test_allowed_protocols( $protocol, $url ) {
 		$this->assertSame( $url, esc_url( $url, $protocol ) );
 		$this->assertSame( $url, esc_url( $url, wp_allowed_protocols() ) );
@@ -42,7 +42,7 @@ class Tests_Functions_AllowedProtocols extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_example_urls() {
+	public static function data_example_urls() {
 		return array(
 			array( 'http', 'http://example.com' ),                                 // RFC7230
 			array( 'https', 'https://example.com' ),                               // RFC7230

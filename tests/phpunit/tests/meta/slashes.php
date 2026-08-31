@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group meta
- * @group slashes
- * @ticket 21767
  */
+#[\PHPUnit\Framework\Attributes\Group( 'meta' )]
+#[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '21767' )]
 class Tests_Meta_Slashes extends WP_UnitTestCase {
 
 	/*

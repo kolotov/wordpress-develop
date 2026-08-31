@@ -2,11 +2,11 @@
 /**
  * Test feed_links_extra().
  *
- * @group general
- * @group template
  *
- * @covers ::feed_links_extra
  */
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'feed_links_extra' )]
 class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	/**
 	 * Author ID.
@@ -162,9 +162,7 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54713
 	 *
-	 * @dataProvider data_feed_links_extra
 	 *
 	 * @param string $title The expected title.
 	 * @param string $type  The name of the test class property containing the object ID.
@@ -181,6 +179,8 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	 *        @type string $posttypetitle The title of the post type feed.
 	 * }
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_feed_links_extra' )]
 	public function test_feed_links_extra( $title, $type, array $args = array() ) {
 		$permalink = $this->helper_get_the_permalink( $type );
 		$this->go_to( $permalink );
@@ -427,8 +427,8 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54713
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
 	public function test_feed_links_extra_should_respect_comments_open() {
 		add_filter( 'comments_open', '__return_true' );
 		add_filter( 'pings_open', '__return_false' );
@@ -442,8 +442,8 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54713
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
 	public function test_feed_links_extra_should_respect_pings_open() {
 		add_filter( 'pings_open', '__return_true' );
 		add_filter( 'comments_open', '__return_false' );
@@ -457,8 +457,8 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54713
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
 	public function test_feed_links_extra_should_respect_post_comment_count() {
 		add_filter( 'pings_open', '__return_false' );
 		add_filter( 'comments_open', '__return_false' );
@@ -472,8 +472,8 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54713
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
 	public function test_feed_links_extra_should_return_empty_when_comments_and_pings_are_closed_and_post_has_no_comments() {
 		add_filter( 'comments_open', '__return_false' );
 		add_filter( 'pings_open', '__return_false' );
@@ -483,8 +483,8 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54713
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
 	public function test_feed_links_extra_should_respect_feed_type() {
 		add_filter(
 			'default_feed',
@@ -509,8 +509,8 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54703
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54703' )]
 	public function test_feed_links_extra_should_output_nothing_when_show_comments_feed_filter_returns_false() {
 		add_filter( 'feed_links_show_comments_feed', '__return_false' );
 
@@ -519,13 +519,19 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54703
 	 *
-	 * @dataProvider data_feed_links_extra_should_output_nothing_when_post_comments_feed_link_is_falsy
 	 *
 	 * @param string $callback The callback to use for the 'post_comments_feed_link' filter.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54703' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_feed_links_extra_should_output_nothing_when_post_comments_feed_link_is_falsy' )]
 	public function test_feed_links_extra_should_output_nothing_when_post_comments_feed_link_is_falsy( $callback ) {
+		if ( is_array( $callback ) && isset( $callback['test_case_method'] ) ) {
+			$callback = 'cb_return_zero_float' === $callback['test_case_method']
+				? array( $this, 'cb_return_zero_float' )
+				: array( $this, 'cb_return_zero_string' );
+		}
+
 		add_filter( 'post_comments_feed_link', $callback );
 
 		$this->go_to( get_the_permalink( self::$post_with_comment_id ) );
@@ -537,13 +543,13 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_feed_links_extra_should_output_nothing_when_post_comments_feed_link_is_falsy() {
+	public static function data_feed_links_extra_should_output_nothing_when_post_comments_feed_link_is_falsy() {
 		return array(
 			'empty string' => array( 'callback' => '__return_empty_string' ),
 			'empty array'  => array( 'callback' => '__return_empty_array' ),
 			'zero int'     => array( 'callback' => '__return_zero' ),
-			'zero float'   => array( 'callback' => array( $this, 'cb_return_zero_float' ) ),
-			'zero string'  => array( 'callback' => array( $this, 'cb_return_zero_string' ) ),
+			'zero float'   => array( 'callback' => array( 'test_case_method' => 'cb_return_zero_float' ) ),
+			'zero string'  => array( 'callback' => array( 'test_case_method' => 'cb_return_zero_string' ) ),
 			'null'         => array( 'callback' => '__return_null' ),
 			'false'        => array( 'callback' => '__return_false' ),
 		);
@@ -568,8 +574,8 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54703
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54703' )]
 	public function test_feed_links_extra_should_output_the_comments_feed_link_when_show_comments_feed_filter_returns_true() {
 		add_filter( 'feed_links_show_comments_feed', '__return_true' );
 
@@ -578,13 +584,13 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55904
 	 *
-	 * @dataProvider data_feed_links_extra_should_output_nothing_when_filters_return_false
 	 *
 	 * @param string $type   The name of the test class property containing the object ID.
 	 * @param string $filter The name of the filter to set to false.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55904' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_feed_links_extra_should_output_nothing_when_filters_return_false' )]
 	public function test_feed_links_extra_should_output_nothing_when_filters_return_false( $type, $filter ) {
 		$permalink = $this->helper_get_the_permalink( $type );
 		$this->go_to( $permalink );
@@ -633,8 +639,8 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63263' )]
 	public function test_feed_links_extra_should_work_fail_if_global_post_empty() {
 		$post_id = self::factory()->post->create();
 		$this->go_to( get_permalink( $post_id ) );

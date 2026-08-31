@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group ms-required
- * @group multisite
  *
- * @covers ::is_email_address_unsafe
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'is_email_address_unsafe' )]
 class Tests_Multisite_IsEmailAddressUnsafe extends WP_UnitTestCase {
 
 	public function test_string_domain_list_should_be_split_on_line_breaks() {
@@ -15,26 +15,26 @@ class Tests_Multisite_IsEmailAddressUnsafe extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_unsafe
-	 * @ticket 25046
-	 * @ticket 21570
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25046' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '21570' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unsafe' )]
 	public function test_unsafe_emails( $banned, $email ) {
 		update_site_option( 'banned_email_domains', $banned );
 		$this->assertTrue( is_email_address_unsafe( $email ) );
 	}
 
 	/**
-	 * @dataProvider data_safe
-	 * @ticket 25046
-	 * @ticket 21570
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25046' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '21570' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_safe' )]
 	public function test_safe_emails( $banned, $email ) {
 		update_site_option( 'banned_email_domains', $banned );
 		$this->assertFalse( is_email_address_unsafe( $email ) );
 	}
 
-	public function data_unsafe() {
+	public static function data_unsafe() {
 		return array(
 			// 25046
 			'case_insensitive_1' => array(
@@ -78,7 +78,7 @@ class Tests_Multisite_IsEmailAddressUnsafe extends WP_UnitTestCase {
 		);
 	}
 
-	public function data_safe() {
+	public static function data_safe() {
 		return array(
 			// 25046
 			array(

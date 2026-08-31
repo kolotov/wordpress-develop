@@ -6,12 +6,15 @@
  * @subpackage REST_API
  * @since 6.0.0
  *
- * @ticket 55505
  *
- * @covers WP_REST_Block_Patterns_Controller
  *
- * @group restapi
+
  */
+#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Block_Patterns_Controller::class )]
 class Tests_REST_WpRestBlockPatternsController extends WP_Test_REST_Controller_Testcase {
 
 	/**
@@ -128,8 +131,9 @@ class Tests_REST_WpRestBlockPatternsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * @group external-http
+
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
 
@@ -195,11 +199,12 @@ class Tests_REST_WpRestBlockPatternsController extends WP_Test_REST_Controller_T
 	 *
 	 * @since 6.2.0
 	 *
-	 * @ticket 57532
-	 * @group external-http
+
 	 *
-	 * @covers WP_REST_Block_Patterns_Controller::get_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57532' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Block_Patterns_Controller', 'get_items' )]
 	public function test_get_items_migrate_pattern_categories() {
 		wp_set_current_user( self::$admin_id );
 
@@ -237,50 +242,50 @@ class Tests_REST_WpRestBlockPatternsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_context_param() {
 		// Controller does not use get_context_param().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_item() {
 		// Controller does not implement get_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_create_item() {
 		// Controller does not implement create_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_update_item() {
 		// Controller does not implement update_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_delete_item() {
 		// Controller does not implement delete_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_prepare_item() {
 		// Controller does not implement prepare_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_item_schema() {
 		// Controller does not implement get_item_schema().
 	}

@@ -3,11 +3,11 @@
 /**
  * Tests for wp_get_plugin_action_button().
  *
- * @group plugins
- * @group admin
  *
- * @covers ::wp_get_plugin_action_button
  */
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_plugin_action_button' )]
 class Admin_Includes_Plugin_Install_WpGetPluginActionButton_Test extends WP_UnitTestCase {
 
 	/**
@@ -72,8 +72,8 @@ class Admin_Includes_Plugin_Install_WpGetPluginActionButton_Test extends WP_Unit
 	/**
 	 * Tests that an empty string is returned when the user does not have the correct capabilities.
 	 *
-	 * @ticket 61400
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61400' )]
 	public function test_should_return_empty_string_without_proper_capabilities() {
 		wp_set_current_user( self::$user_id );
 
@@ -92,14 +92,14 @@ class Admin_Includes_Plugin_Install_WpGetPluginActionButton_Test extends WP_Unit
 	 * Tests that an empty string is not returned when the user
 	 * has the correct capabilities on single site.
 	 *
-	 * @ticket 61400
 	 *
-	 * @group ms-excluded
 	 *
-	 * @dataProvider data_capabilities
 	 *
 	 * @param string $capability The name of the capability.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61400' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_capabilities' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_should_not_return_empty_string_with_proper_capabilities_single_site( $capability ) {
 		self::$role->add_cap( $capability );
 
@@ -123,7 +123,7 @@ class Admin_Includes_Plugin_Install_WpGetPluginActionButton_Test extends WP_Unit
 	 *
 	 * @return array[]
 	 */
-	public function data_capabilities() {
+	public static function data_capabilities() {
 		return self::text_array_to_dataprovider( array( 'install_plugins', 'update_plugins' ) );
 	}
 
@@ -131,10 +131,10 @@ class Admin_Includes_Plugin_Install_WpGetPluginActionButton_Test extends WP_Unit
 	 * Tests that an empty string is not returned when the user
 	 * has the correct capabilities on multisite.
 	 *
-	 * @ticket 61400
 	 *
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61400' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_should_not_return_empty_string_with_proper_capabilities_multisite() {
 		wp_set_current_user( self::$user_id );
 

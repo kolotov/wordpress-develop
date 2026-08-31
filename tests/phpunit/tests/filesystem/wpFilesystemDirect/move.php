@@ -8,20 +8,20 @@
 require_once __DIR__ . '/base.php';
 
 /**
- * @group admin
- * @group filesystem
- * @group filesystem-direct
  *
- * @covers WP_Filesystem_Direct::move
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem-direct' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Filesystem_Direct::class, 'move' )]
 class Tests_Filesystem_WpFilesystemDirect_Move extends WP_Filesystem_Direct_UnitTestCase {
 
 	/**
 	 * Tests that `WP_Filesystem_Direct::copy()` overwrites an existing
 	 * destination when overwriting is enabled.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_overwrite_an_existing_file_when_overwriting_is_enabled() {
 		$source      = self::$file_structure['visible_file']['path'];
 		$destination = self::$file_structure['test_dir']['path'] . 'a_file_that_exists.dest';
@@ -36,8 +36,8 @@ class Tests_Filesystem_WpFilesystemDirect_Move extends WP_Filesystem_Direct_Unit
 	 * Tests that `WP_Filesystem_Direct::move()` does not overwrite
 	 * an existing destination when overwriting is disabled.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_not_overwrite_an_existing_file_when_overwriting_is_disabled() {
 		$source      = self::$file_structure['visible_file']['path'];
 		$destination = self::$file_structure['subfile']['path'];
@@ -49,8 +49,8 @@ class Tests_Filesystem_WpFilesystemDirect_Move extends WP_Filesystem_Direct_Unit
 	/**
 	 * Tests that `WP_Filesystem_Direct::move()` moves directories.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_move_directories() {
 		$source      = self::$file_structure['test_dir']['path'];
 		$destination = untrailingslashit( self::$file_structure['test_dir']['path'] ) . '-dest';
@@ -73,8 +73,8 @@ class Tests_Filesystem_WpFilesystemDirect_Move extends WP_Filesystem_Direct_Unit
 	 * Tests that `WP_Filesystem_Direct::move()` returns false for an
 	 * invalid destination.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_return_false_for_invalid_destination() {
 		$source      = self::$file_structure['test_dir']['path'];
 		$destination = 'http://example.org';
@@ -86,16 +86,15 @@ class Tests_Filesystem_WpFilesystemDirect_Move extends WP_Filesystem_Direct_Unit
 	 * Tests that `WP_Filesystem_Direct::move()` returns false for an
 	 * invalid destination.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_return_false_when_overwriting_is_enabled_the_destination_exists_but_cannot_be_deleted() {
 		global $wp_filesystem;
 		$wpfilesystem_backup = $wp_filesystem;
 
 		// Force failure conditions.
 		$filesystem_mock = $this->getMockBuilder( 'WP_Filesystem_Direct' )
-								// Note: setMethods() is deprecated in PHPUnit 9, but still supported.
-								->setMethods( array( 'exists', 'delete' ) )
+								->onlyMethods( array( 'exists', 'delete' ) )
 								->setConstructorArgs( array( null ) )
 								->getMock();
 
@@ -119,8 +118,8 @@ class Tests_Filesystem_WpFilesystemDirect_Move extends WP_Filesystem_Direct_Unit
 	 * Tests that `WP_Filesystem_Direct::move()` falls back to a single
 	 * file copy when the source and destination do not exist.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_fall_back_to_single_file_copy_when_source_and_destination_do_not_exist() {
 		global $wp_filesystem;
 
@@ -130,8 +129,7 @@ class Tests_Filesystem_WpFilesystemDirect_Move extends WP_Filesystem_Direct_Unit
 		// Set up mock filesystem.
 		$filesystem_mock = $this->getMockBuilder( 'WP_Filesystem_Direct' )
 								->setConstructorArgs( array( null ) )
-								// Note: setMethods() is deprecated in PHPUnit 9, but still supported.
-								->setMethods( array( 'exists', 'delete', 'is_file', 'copy' ) )
+								->onlyMethods( array( 'exists', 'delete', 'is_file', 'copy' ) )
 								->getMock();
 
 		$filesystem_mock->expects( $this->exactly( 2 ) )->method( 'exists' )->willReturn( array( true, true ) );

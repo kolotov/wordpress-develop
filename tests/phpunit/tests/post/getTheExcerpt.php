@@ -1,31 +1,31 @@
 <?php
 
 /**
- * @group post
- * @group formatting
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 27246
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27246' )]
 	public function test_the_excerpt_invalid_post() {
 		$this->assertSame( '', get_echo( 'the_excerpt' ) );
 		$this->assertSame( '', get_the_excerpt() );
 	}
 
 	/**
-	 * @ticket 27246
 	 * @expectedDeprecated get_the_excerpt
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27246' )]
 	public function test_the_excerpt_deprecated() {
 		$this->assertSame( '', get_the_excerpt( true ) );
 		$this->assertSame( '', get_the_excerpt( false ) );
 	}
 
 	/**
-	 * @ticket 27246
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27246' )]
 	public function test_the_excerpt() {
 		$GLOBALS['post'] = self::factory()->post->create_and_get( array( 'post_excerpt' => 'Post excerpt' ) );
 		$this->assertSame( "<p>Post excerpt</p>\n", get_echo( 'the_excerpt' ) );
@@ -33,9 +33,9 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27246
-	 * @ticket 35486
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27246' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '35486' )]
 	public function test_the_excerpt_password_protected_post() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -50,8 +50,8 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27246
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27246' )]
 	public function test_the_excerpt_specific_post() {
 		$GLOBALS['post'] = self::factory()->post->create_and_get( array( 'post_excerpt' => 'Foo' ) );
 		$post_id         = self::factory()->post->create( array( 'post_excerpt' => 'Bar' ) );
@@ -59,8 +59,8 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_should_fall_back_on_post_content_if_excerpt_is_empty_and_post_is_inferred_from_context() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -84,8 +84,8 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_should_fall_back_on_post_content_if_excerpt_is_empty_and_post_is_provided() {
 		$GLOBALS['post'] = self::factory()->post->create_and_get(
 			array(
@@ -97,8 +97,8 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_should_respect_post_parameter_in_the_loop() {
 		$p1 = self::factory()->post->create_and_get( array( 'post_excerpt' => 'Foo' ) );
 		$p2 = self::factory()->post->create_and_get( array( 'post_excerpt' => 'Bar' ) );
@@ -117,8 +117,8 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_should_respect_post_parameter_in_the_loop_when_falling_back_on_post_content() {
 		$p1 = self::factory()->post->create_and_get(
 			array(
@@ -147,8 +147,8 @@ class Tests_Post_GetTheExcerpt extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53604
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53604' )]
 	public function test_inner_blocks_excerpt() {
 		$content_1 = '<!-- wp:group -->
 <div class="wp-block-group"><!-- wp:columns -->

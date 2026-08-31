@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 
 	public function test_invalid_username_password() {
@@ -111,8 +111,8 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24916
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24916' )]
 	public function test_capable_reassign_author_to_self() {
 		$contributor_id = $this->make_user_by_role( 'contributor' );
 		$editor_id      = $this->make_user_by_role( 'editor' );
@@ -133,8 +133,8 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_post_thumbnail() {
 		add_theme_support( 'post-thumbnails' );
 
@@ -346,8 +346,8 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22220
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22220' )]
 	public function test_loss_of_categories_on_edit() {
 		$editor_id = $this->make_user_by_role( 'editor' );
 
@@ -377,8 +377,8 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26686
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26686' )]
 	public function test_clear_categories_on_edit() {
 		$editor_id = $this->make_user_by_role( 'editor' );
 
@@ -404,8 +404,8 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23219
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23219' )]
 	public function test_add_enclosure_if_new() {
 		// Sample enclosure data.
 		$enclosure = array(
@@ -465,8 +465,8 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35874
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35874' )]
 	public function test_draft_not_prematurely_published() {
 		$editor_id = $this->make_user_by_role( 'editor' );
 
@@ -501,8 +501,8 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45322
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45322' )]
 	public function test_draft_not_assigned_published_date() {
 		$editor_id = $this->make_user_by_role( 'editor' );
 

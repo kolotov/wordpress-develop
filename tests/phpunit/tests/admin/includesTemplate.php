@@ -1,7 +1,5 @@
 <?php
-/**
- * @group admin
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 	/**
 	 * Editor user ID.
@@ -14,10 +12,8 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 		self::$editor_id = $factory->user->create( array( 'role' => 'editor' ) );
 	}
 
-	/**
-	 * @ticket 51137
-	 * @dataProvider data_wp_terms_checklist_with_selected_cats
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51137' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_terms_checklist_with_selected_cats' )]
 	public function test_wp_terms_checklist_with_selected_cats( $term_id ) {
 		$output = wp_terms_checklist(
 			0,
@@ -30,10 +26,8 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 		$this->assertStringContainsString( "checked='checked'", $output );
 	}
 
-	/**
-	 * @ticket 51137
-	 * @dataProvider data_wp_terms_checklist_with_selected_cats
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51137' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_terms_checklist_with_selected_cats' )]
 	public function test_wp_terms_checklist_with_popular_cats( $term_id ) {
 		$output = wp_terms_checklist(
 			0,
@@ -46,18 +40,15 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'class="popular-category"', $output );
 	}
 
-	public function data_wp_terms_checklist_with_selected_cats() {
+	public static function data_wp_terms_checklist_with_selected_cats() {
 		return array(
 			array( '1' ),
 			array( 1 ),
 		);
 	}
 
-	/**
-	 * @ticket 49701
-	 *
-	 * @covers ::get_inline_data
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49701' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_inline_data' )]
 	public function test_get_inline_data_contains_term_if_show_ui_is_false_but_show_on_quick_edit_is_true_for_hierarchical_taxonomy() {
 		// Create a post with a term from a hierarchical taxonomy.
 		register_taxonomy(
@@ -79,11 +70,8 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 		$this->expectOutputRegex( '/<div class="post_category" id="wptests_tax_1_' . $post->ID . '">' . $term['term_id'] . '<\/div>/' );
 	}
 
-	/**
-	 * @ticket 49701
-	 *
-	 * @covers ::get_inline_data
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49701' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_inline_data' )]
 	public function test_get_inline_data_contains_term_if_show_ui_is_false_but_show_on_quick_edit_is_true_for_nonhierarchical_taxonomy() {
 		// Create a post with a term from a non-hierarchical taxonomy.
 		register_taxonomy(
@@ -129,9 +117,7 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 		$this->assertFalse( $wp_meta_boxes[ $current_screen ]['advanced']['default']['testbox1'] );
 	}
 
-	/**
-	 * @ticket 15000
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15000' )]
 	public function test_add_meta_box_on_multiple_screens() {
 		global $wp_meta_boxes;
 
@@ -143,9 +129,7 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 		$this->assertArrayHasKey( 'testbox1', $wp_meta_boxes['attachment']['advanced']['default'] );
 	}
 
-	/**
-	 * @ticket 15000
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15000' )]
 	public function test_remove_meta_box_from_multiple_screens() {
 		global $wp_meta_boxes;
 
@@ -167,9 +151,7 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 		$this->assertFalse( $wp_meta_boxes['attachment']['advanced']['default']['testbox1'] );
 	}
 
-	/**
-	 * @ticket 50019
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50019' )]
 	public function test_add_meta_box_with_previously_removed_box_and_sorted_priority() {
 		global $wp_meta_boxes;
 
@@ -186,10 +168,8 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 		$this->assertFalse( $wp_meta_boxes[ $current_screen ]['advanced']['default']['testbox1'] );
 	}
 
-	/**
-	 * @ticket 17851
-	 * @covers ::add_settings_section
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17851' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_settings_section' )]
 	public function test_add_settings_section() {
 		add_settings_section( 'test-section', 'Section title', '__return_false', 'test-page' );
 
@@ -214,18 +194,18 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 17851
 	 *
 	 * @param array  $extra_args                   Extra arguments to pass to function `add_settings_section()`.
 	 * @param array  $expected_section_data        Expected set of section data.
 	 * @param string $expected_before_section_html Expected HTML markup to be rendered before the settings section.
 	 * @param string $expected_after_section_html  Expected HTML markup to be rendered after the settings section.
 	 *
-	 * @covers ::add_settings_section
-	 * @covers ::do_settings_sections
 	 *
-	 * @dataProvider data_extra_args_for_add_settings_section
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17851' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_extra_args_for_add_settings_section' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_settings_section' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'do_settings_sections' )]
 	public function test_add_settings_section_with_extra_args( $extra_args, $expected_section_data, $expected_before_section_html, $expected_after_section_html ) {
 		add_settings_section( 'test-section', 'Section title', '__return_false', 'test-page', $extra_args );
 		add_settings_field( 'test-field', 'Field title', '__return_false', 'test-page', 'test-section' );
@@ -251,18 +231,18 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62746
 	 *
 	 * @param array  $extra_args                   Extra arguments to pass to function `add_settings_section()`.
 	 * @param array  $expected_section_data        Expected set of section data.
 	 * @param string $expected_before_section_html Expected HTML markup to be rendered before the settings section.
 	 * @param string $expected_after_section_html  Expected HTML markup to be rendered after the settings section.
 	 *
-	 * @covers ::add_settings_section
-	 * @covers ::do_settings_sections
 	 *
-	 * @dataProvider data_extra_args_for_add_settings_section
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62746' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_extra_args_for_add_settings_section' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_settings_section' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'do_settings_sections' )]
 	public function test_add_settings_section_without_any_fields( $extra_args, $expected_section_data, $expected_before_section_html, $expected_after_section_html ) {
 		add_settings_section( 'test-section', 'Section title', '__return_false', 'test-page', $extra_args );
 
@@ -279,7 +259,7 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_extra_args_for_add_settings_section() {
+	public static function data_extra_args_for_add_settings_section() {
 		return array(
 			'class placeholder section_class present' => array(
 				array(
@@ -386,10 +366,10 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 	/**
 	 * Test calling get_settings_errors() with variations on where it gets errors from.
 	 *
-	 * @ticket 42498
-	 * @covers ::get_settings_errors
 	 * @global array $wp_settings_errors
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42498' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_settings_errors' )]
 	public function test_get_settings_errors_sources() {
 		global $wp_settings_errors;
 
@@ -426,11 +406,11 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44941
-	 * @covers ::settings_errors
 	 * @global array $wp_settings_errors
-	 * @dataProvider data_settings_errors_css_classes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44941' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_settings_errors_css_classes' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'settings_errors' )]
 	public function test_settings_errors_css_classes( $type, $expected ) {
 		global $wp_settings_errors;
 
@@ -448,7 +428,7 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'notice-notice-', $output );
 	}
 
-	public function data_settings_errors_css_classes() {
+	public static function data_settings_errors_css_classes() {
 		return array(
 			array( 'error', 'notice-error' ),
 			array( 'success', 'notice-success' ),
@@ -460,9 +440,7 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 42791
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42791' )]
 	public function test_wp_add_dashboard_widget() {
 		global $wp_meta_boxes;
 
@@ -502,10 +480,10 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 	 * doesn't exist) and that result is passed to get_post_states()
 	 * without being checked first.
 	 *
-	 * @ticket 58932
 	 *
-	 * @covers ::get_post_states
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58932' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_post_states' )]
 	public function test_get_post_states_with_null_returns_empty_array() {
 		$result = get_post_states( null );
 		$this->assertSame( array(), $result, 'get_post_states() should return an empty array when WP_Post is not supplied.' );
@@ -515,15 +493,15 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 	 * Tests that get_submit_button() expands the type shorthands into their
 	 * `button-*` classes.
 	 *
-	 * @ticket 64892
 	 *
-	 * @covers ::get_submit_button
 	 *
-	 * @dataProvider data_get_submit_button_shorthand
 	 *
 	 * @param string|array $type     The type argument passed to get_submit_button().
 	 * @param string       $expected The expected class attribute value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64892' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_submit_button_shorthand' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_submit_button' )]
 	public function test_get_submit_button_expands_type_shorthands( $type, $expected ) {
 		$button = get_submit_button( 'Save', $type, 'submit', false );
 
@@ -535,7 +513,7 @@ class Tests_Admin_IncludesTemplate extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_submit_button_shorthand() {
+	public static function data_get_submit_button_shorthand() {
 		return array(
 			'primary shorthand'            => array( 'primary', 'button button-primary' ),
 			'small shorthand'              => array( 'small', 'button button-small' ),

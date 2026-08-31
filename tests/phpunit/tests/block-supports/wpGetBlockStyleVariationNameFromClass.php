@@ -1,23 +1,22 @@
 <?php
 
 /**
- * @group block-supports
  *
- * @covers ::wp_get_block_style_variation_name_from_class
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_block_style_variation_name_from_class' )]
 class Tests_Block_Supports_WpGetBlockStyleVariationNameFromClass extends WP_UnitTestCase {
 	/**
 	 * Tests variation names are extracted correctly from a CSS class string.
 	 *
-	 * @ticket 61312
 	 *
-	 * @covers ::wp_get_block_style_variation_name_from_class
 	 *
-	 * @dataProvider data_block_style_variation_name_extraction
 	 *
 	 * @param string     $class_string CSS class string.
 	 * @param array|null $expected     Expected variation names.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61312' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_block_style_variation_name_extraction' )]
 	public function test_block_style_variation_name_extraction( $class_string, $expected ) {
 		$actual = wp_get_block_style_variation_name_from_class( $class_string );
 
@@ -33,7 +32,7 @@ class Tests_Block_Supports_WpGetBlockStyleVariationNameFromClass extends WP_Unit
 	 *
 	 * @return array
 	 */
-	public function data_block_style_variation_name_extraction() {
+	public static function data_block_style_variation_name_extraction() {
 		return array(
 			// @ticket 61312
 			'missing class string' => array(

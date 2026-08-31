@@ -3,8 +3,8 @@
 /**
  * Tests get_theme_starter_content().
  *
- * @group themes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'themes' )]
 class Tests_Theme_GetThemeStarterContent extends WP_UnitTestCase {
 
 	/**

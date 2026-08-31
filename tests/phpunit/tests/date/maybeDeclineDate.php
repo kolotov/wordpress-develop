@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @group date
- * @group datetime
- * @group i18n
- * @group functions
  *
- * @covers ::wp_maybe_decline_date
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_maybe_decline_date' )]
 class Tests_Date_MaybeDeclineDate extends WP_UnitTestCase {
 
 	/**
@@ -39,12 +39,12 @@ class Tests_Date_MaybeDeclineDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36790
-	 * @ticket 37411
-	 * @ticket 48606
-	 * @ticket 48934
-	 * @dataProvider data_wp_maybe_decline_date
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36790' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '37411' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '48606' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '48934' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_maybe_decline_date' )]
 	public function test_wp_maybe_decline_date( $test_locale, $format, $input, $output ) {
 		global $locale, $wp_locale;
 
@@ -71,7 +71,7 @@ class Tests_Date_MaybeDeclineDate extends WP_UnitTestCase {
 		return $translation;
 	}
 
-	public function data_wp_maybe_decline_date() {
+	public static function data_wp_maybe_decline_date() {
 		return array(
 			array( 'ru_RU', 'j F', '21 Июнь', '21 июня' ),
 			array( 'ru_RU', 'j F Y', '1 Январь 2016', '1 января 2016' ),

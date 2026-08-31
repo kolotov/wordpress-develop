@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group sitemaps
  */
+#[\PHPUnit\Framework\Attributes\Group( 'sitemaps' )]
 class Tests_Sitemaps_wpSitemapsIndex extends WP_UnitTestCase {
 
 	public function test_get_sitemap_list() {
@@ -24,8 +24,8 @@ class Tests_Sitemaps_wpSitemapsIndex extends WP_UnitTestCase {
 	/**
 	 * Test that a sitemap index won't contain more than 50000 sitemaps.
 	 *
-	 * @ticket 50666
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50666' )]
 	public function test_get_sitemap_list_limit() {
 		$registry = new WP_Sitemaps_Registry();
 

@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @group date
- * @group datetime
- * @group post
  *
- * @covers ::get_the_modified_date
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_modified_date' )]
 class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 
 	/**
 	 * Test get_the_modified_time with post_id parameter.
 	 *
-	 * @ticket 37059
 	 *
 	 * @since 4.6.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37059' )]
 	public function test_get_the_modified_date_with_post_id() {
 		$details  = array(
 			'post_date'     => '2016-01-21 15:34:36',
@@ -31,10 +31,10 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 	/**
 	 * Test get_the_modified_date
 	 *
-	 * @ticket 37059
 	 *
 	 * @since 4.6.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37059' )]
 	public function test_get_the_modified_date_default() {
 		$details = array(
 			'post_date'     => '2016-01-21 15:34:36',
@@ -54,10 +54,10 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 	/**
 	 * Test get_the_modified_date failures are filtered
 	 *
-	 * @ticket 37059
 	 *
 	 * @since 4.6.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37059' )]
 	public function test_get_the_modified_date_failures_are_filtered() {
 		// Remove global post object.
 		$GLOBALS['post'] = null;
@@ -81,8 +81,8 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51184
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_the_modified_date_returns_false_with_null_or_non_existing_post() {
 		$this->assertFalse( get_the_modified_date() );
 		$this->assertFalse( get_the_modified_date( 'F j, Y h:i:s' ) );
@@ -91,8 +91,8 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51184
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_the_modified_date_returns_correct_time_with_empty_format() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2020-08-31 23:14:00' ) );
 
@@ -103,10 +103,10 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 	/**
 	 * Test get_the_modified_time with post_id parameter.
 	 *
-	 * @ticket 37059
 	 *
 	 * @since 4.6.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37059' )]
 	public function test_get_the_modified_time_with_post_id() {
 		$details  = array(
 			'post_date'     => '2016-01-21 15:34:36',
@@ -122,10 +122,10 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 	/**
 	 * Test get_the_modified_time
 	 *
-	 * @ticket 37059
 	 *
 	 * @since 4.6.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37059' )]
 	public function test_get_the_modified_time_default() {
 		$details = array(
 			'post_date'     => '2016-01-21 15:34:36',
@@ -145,10 +145,10 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 	/**
 	 * Test get_the_modified_time failures are filtered
 	 *
-	 * @ticket 37059
 	 *
 	 * @since 4.6.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37059' )]
 	public function test_get_the_modified_time_failures_are_filtered() {
 		// Remove global post object.
 		$GLOBALS['post'] = null;
@@ -172,8 +172,8 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51184
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_the_modified_time_returns_false_with_null_or_non_existing_post() {
 		$this->assertFalse( get_the_modified_time() );
 		$this->assertFalse( get_the_modified_time( 'h:i:s' ) );
@@ -182,8 +182,8 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51184
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_the_modified_time_returns_correct_time_with_empty_format() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2020-08-31 23:14:00' ) );
 

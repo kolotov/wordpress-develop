@@ -2,8 +2,8 @@
 /**
  * test wp-includes/template.php
  *
- * @group themes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'themes' )]
 class Tests_Template extends WP_UnitTestCase {
 
 	protected $hierarchy = array();
@@ -356,9 +356,9 @@ class Tests_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44005
-	 * @group privacy
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44005' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
 	public function test_privacy_template_hierarchy() {
 		update_option( 'wp_page_for_privacy_policy', self::$page_for_privacy_policy->ID );
 
@@ -375,8 +375,8 @@ class Tests_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18375
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_single_template_hierarchy_for_post() {
 		$this->assertTemplateHierarchy(
 			get_permalink( self::$post ),
@@ -412,8 +412,8 @@ class Tests_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18375
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_single_template_hierarchy_for_custom_post_type_with_template() {
 		$cpt = self::factory()->post->create_and_get(
 			array(
@@ -461,8 +461,8 @@ class Tests_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18375
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_attachment_template_hierarchy_with_template() {
 		$attachment = self::factory()->attachment->create_and_get(
 			array(
@@ -526,10 +526,10 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that `locate_template()` uses the current theme even after switching the theme.
 	 *
-	 * @ticket 18298
 	 *
-	 * @covers ::locate_template
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18298' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'locate_template' )]
 	public function test_locate_template_uses_current_theme() {
 		$themes = wp_get_themes();
 
@@ -564,13 +564,13 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_start_template_enhancement_output_buffer() does not start a buffer in a block theme when no filters are present.
 	 *
-	 * @ticket 43258
-	 * @ticket 64099
 	 *
-	 * @covers ::wp_should_output_buffer_template_for_enhancement
-	 * @covers ::wp_start_template_enhancement_output_buffer
-	 * @covers ::wp_load_classic_theme_block_styles_on_demand
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43258' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64099' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_should_output_buffer_template_for_enhancement' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_start_template_enhancement_output_buffer' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_classic_theme_block_styles_on_demand' )]
 	public function test_wp_start_template_enhancement_output_buffer_without_filters_and_no_override_in_block_theme(): void {
 		switch_theme( 'block-theme' );
 		wp_load_classic_theme_block_styles_on_demand();
@@ -585,13 +585,13 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_start_template_enhancement_output_buffer() does start a buffer in classic theme.
 	 *
-	 * @ticket 43258
-	 * @ticket 64099
 	 *
-	 * @covers ::wp_should_output_buffer_template_for_enhancement
-	 * @covers ::wp_start_template_enhancement_output_buffer
-	 * @covers ::wp_load_classic_theme_block_styles_on_demand
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43258' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64099' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_should_output_buffer_template_for_enhancement' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_start_template_enhancement_output_buffer' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_classic_theme_block_styles_on_demand' )]
 	public function test_wp_start_template_enhancement_output_buffer_in_classic_theme(): void {
 		switch_theme( 'default' );
 		wp_load_classic_theme_block_styles_on_demand();
@@ -607,10 +607,10 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_start_template_enhancement_output_buffer() does start a buffer when no filters are present but there is an override.
 	 *
-	 * @ticket 43258
-	 * @covers ::wp_should_output_buffer_template_for_enhancement
-	 * @covers ::wp_start_template_enhancement_output_buffer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43258' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_should_output_buffer_template_for_enhancement' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_start_template_enhancement_output_buffer' )]
 	public function test_wp_start_template_enhancement_output_buffer_begins_without_filters_but_overridden(): void {
 		$level = ob_get_level();
 		add_filter( 'wp_should_output_buffer_template_for_enhancement', '__return_true' );
@@ -624,11 +624,11 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_start_template_enhancement_output_buffer() does not start a buffer even when there are filters present due to override.
 	 *
-	 * @ticket 43258
 	 *
-	 * @covers ::wp_should_output_buffer_template_for_enhancement
-	 * @covers ::wp_start_template_enhancement_output_buffer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43258' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_should_output_buffer_template_for_enhancement' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_start_template_enhancement_output_buffer' )]
 	public function test_wp_start_template_enhancement_output_buffer_begins_with_filters_but_blocked(): void {
 		add_filter(
 			'wp_template_enhancement_output_buffer',
@@ -648,12 +648,12 @@ class Tests_Template extends WP_UnitTestCase {
 	 * Tests that wp_start_template_enhancement_output_buffer() starts the expected output buffer and that the expected hooks fire for
 	 * an HTML document and that the response is not incrementally flushable.
 	 *
-	 * @ticket 43258
-	 * @ticket 64126
 	 *
-	 * @covers ::wp_start_template_enhancement_output_buffer
-	 * @covers ::wp_finalize_template_enhancement_output_buffer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43258' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64126' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_start_template_enhancement_output_buffer' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_finalize_template_enhancement_output_buffer' )]
 	public function test_wp_start_template_enhancement_output_buffer_for_html(): void {
 		// Start a wrapper output buffer so that we can flush the inner buffer.
 		ob_start();
@@ -765,12 +765,12 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_start_template_enhancement_output_buffer() starts the expected output buffer but ending with cleaning prevents any processing.
 	 *
-	 * @ticket 43258
-	 * @ticket 64126
 	 *
-	 * @covers ::wp_start_template_enhancement_output_buffer
-	 * @covers ::wp_finalize_template_enhancement_output_buffer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43258' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64126' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_start_template_enhancement_output_buffer' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_finalize_template_enhancement_output_buffer' )]
 	public function test_wp_start_template_enhancement_output_buffer_ended_cleaned(): void {
 		// Start a wrapper output buffer so that we can flush the inner buffer.
 		ob_start();
@@ -847,12 +847,12 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_start_template_enhancement_output_buffer() starts the expected output buffer and cleaning allows the template to be replaced.
 	 *
-	 * @ticket 43258
-	 * @ticket 64126
 	 *
-	 * @covers ::wp_start_template_enhancement_output_buffer
-	 * @covers ::wp_finalize_template_enhancement_output_buffer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43258' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64126' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_start_template_enhancement_output_buffer' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_finalize_template_enhancement_output_buffer' )]
 	public function test_wp_start_template_enhancement_output_buffer_cleaned_and_replaced(): void {
 		// Start a wrapper output buffer so that we can flush the inner buffer.
 		ob_start();
@@ -937,12 +937,12 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_start_template_enhancement_output_buffer() starts the expected output buffer and that the output buffer is not processed.
 	 *
-	 * @ticket 43258
-	 * @ticket 64126
 	 *
-	 * @covers ::wp_start_template_enhancement_output_buffer
-	 * @covers ::wp_finalize_template_enhancement_output_buffer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43258' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64126' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_start_template_enhancement_output_buffer' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_finalize_template_enhancement_output_buffer' )]
 	public function test_wp_start_template_enhancement_output_buffer_for_json(): void {
 		// Start a wrapper output buffer so that we can flush the inner buffer.
 		ob_start();
@@ -1011,7 +1011,7 @@ class Tests_Template extends WP_UnitTestCase {
 	 *             expected_displayed_errors: string[],
 	 *         }>
 	 */
-	public function data_provider_to_test_wp_finalize_template_enhancement_output_buffer_with_errors_while_processing(): array {
+	public static function data_provider_to_test_wp_finalize_template_enhancement_output_buffer_with_errors_while_processing(): array {
 		$log_and_display_all = array(
 			'error_reporting' => E_ALL,
 			'display_errors'  => true,
@@ -1254,13 +1254,13 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that errors are handled as expected when errors are emitted when filtering wp_template_enhancement_output_buffer or doing the wp_finalize_template_enhancement_output_buffer action.
 	 *
-	 * @ticket 43258
-	 * @ticket 64108
 	 *
-	 * @covers ::wp_finalize_template_enhancement_output_buffer
 	 *
-	 * @dataProvider data_provider_to_test_wp_finalize_template_enhancement_output_buffer_with_errors_while_processing
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43258' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64108' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_to_test_wp_finalize_template_enhancement_output_buffer_with_errors_while_processing' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_finalize_template_enhancement_output_buffer' )]
 	public function test_wp_finalize_template_enhancement_output_buffer_with_errors_while_processing( array $ini_config_options, ?Closure $emit_filter_errors, ?Closure $emit_action_errors, bool $expected_processed, array $expected_error_log, array $expected_displayed_errors ): void {
 		// Start a wrapper output buffer so that we can flush the inner buffer.
 		ob_start();
@@ -1383,9 +1383,9 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_load_classic_theme_block_styles_on_demand() does not add hooks for block themes.
 	 *
-	 * @ticket 64099
-	 * @covers ::wp_load_classic_theme_block_styles_on_demand
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64099' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_classic_theme_block_styles_on_demand' )]
 	public function test_wp_load_classic_theme_block_styles_on_demand_in_block_theme(): void {
 		switch_theme( 'block-theme' );
 
@@ -1401,7 +1401,7 @@ class Tests_Template extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{theme: string, set_up: Closure|null, expected_on_demand: bool, expected_buffer_started: bool}>
 	 */
-	public function data_wp_load_classic_theme_block_styles_on_demand(): array {
+	public static function data_wp_load_classic_theme_block_styles_on_demand(): array {
 		return array(
 			'block_theme'                              => array(
 				'theme'                   => 'block-theme',
@@ -1450,13 +1450,13 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_load_classic_theme_block_styles_on_demand() adds the expected hooks (or not).
 	 *
-	 * @ticket 64099
-	 * @ticket 64150
 	 *
-	 * @covers ::wp_load_classic_theme_block_styles_on_demand
 	 *
-	 * @dataProvider data_wp_load_classic_theme_block_styles_on_demand
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64099' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64150' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_load_classic_theme_block_styles_on_demand' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_classic_theme_block_styles_on_demand' )]
 	public function test_wp_load_classic_theme_block_styles_on_demand( string $theme, ?Closure $set_up, bool $expected_load_separate, bool $expected_on_demand, bool $expected_buffer_started ) {
 		$this->assertFalse( wp_should_load_separate_core_block_assets(), 'Expected wp_should_load_separate_core_block_assets() to return false initially.' );
 		$this->assertFalse( wp_should_load_block_assets_on_demand(), 'Expected wp_should_load_block_assets_on_demand() to return true' );
@@ -1483,10 +1483,10 @@ class Tests_Template extends WP_UnitTestCase {
 	 *     content: string,
 	 *     inline_size_limit: int,
 	 *     expected_styles: array{ HEAD: string[], BODY: string[] },
-	 *     assert?: Closure( string, string ): void,
+	 *     assert?: Closure( Tests_Template, string, string ): void,
 	 * }>
 	 */
-	public function data_wp_hoist_late_printed_styles(): array {
+	public static function data_wp_hoist_late_printed_styles(): array {
 		$blocks_content = '<!-- wp:separator --><hr class="wp-block-separator has-alpha-channel-opacity"/><!-- /wp:separator --><!-- wp:third-party/test --><div>This is only a test!</div><!-- /wp:third-party/test -->';
 
 		$early_common_styles = array(
@@ -1690,7 +1690,7 @@ class Tests_Template extends WP_UnitTestCase {
 					),
 					'BODY' => array(),
 				),
-				'assert'            => function ( string $buffer, string $filtered_buffer ) {
+				'assert'            => static function ( self $test_case, string $buffer, string $filtered_buffer ) {
 					$block_separator_core_style_span = null;
 					$block_separator_custom_style_span = null;
 					$processor = new class( $filtered_buffer ) extends WP_HTML_Tag_Processor {
@@ -1715,9 +1715,9 @@ class Tests_Template extends WP_UnitTestCase {
 						}
 					}
 
-					$this->assertInstanceOf( WP_HTML_Span::class, $block_separator_core_style_span, 'Expected the block separator core style to be present.' );
-					$this->assertInstanceOf( WP_HTML_Span::class, $block_separator_custom_style_span, 'Expected the block separator custom style to be present.' );
-					$this->assertGreaterThan( $block_separator_core_style_span->start, $block_separator_custom_style_span->start, 'Expected the block separator custom style to appear after the block separator stylesheet.' );
+					$test_case->assertInstanceOf( WP_HTML_Span::class, $block_separator_core_style_span, 'Expected the block separator core style to be present.' );
+					$test_case->assertInstanceOf( WP_HTML_Span::class, $block_separator_custom_style_span, 'Expected the block separator custom style to be present.' );
+					$test_case->assertGreaterThan( $block_separator_core_style_span->start, $block_separator_custom_style_span->start, 'Expected the block separator custom style to appear after the block separator stylesheet.' );
 				},
 			),
 
@@ -1751,14 +1751,14 @@ class Tests_Template extends WP_UnitTestCase {
 					),
 					'BODY' => array(),
 				),
-				'assert'            => function ( string $buffer, string $filtered_buffer ) {
+				'assert'            => static function ( self $test_case, string $buffer, string $filtered_buffer ) {
 					$block_separator_inline_style_start_tag = '<style id="wp-block-separator-inline-css">';
 					$block_separator_custom_style           = '.wp-block-separator{ outline:solid 1px lime; }';
-					$this->assertStringContainsString( $block_separator_inline_style_start_tag, $filtered_buffer );
-					$this->assertStringContainsString( $block_separator_custom_style, $filtered_buffer );
+					$test_case->assertStringContainsString( $block_separator_inline_style_start_tag, $filtered_buffer );
+					$test_case->assertStringContainsString( $block_separator_custom_style, $filtered_buffer );
 					$block_separator_inline_style_position = strpos( $filtered_buffer, $block_separator_inline_style_start_tag );
 					$block_separator_custom_style_position = strpos( $filtered_buffer, $block_separator_custom_style );
-					$this->assertTrue( $block_separator_custom_style_position > $block_separator_inline_style_position, 'Expected the block separator custom style to appear after the block separator stylesheet.' );
+					$test_case->assertTrue( $block_separator_custom_style_position > $block_separator_inline_style_position, 'Expected the block separator custom style to appear after the block separator stylesheet.' );
 				},
 			),
 
@@ -1950,15 +1950,15 @@ class Tests_Template extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_hoist_late_printed_styles() adds a placeholder for delayed CSS, then removes it and adds all CSS to the head including late enqueued styles.
 	 *
-	 * @ticket 64099
-	 * @ticket 64354
-	 * @covers ::wp_load_classic_theme_block_styles_on_demand
-	 * @covers ::wp_hoist_late_printed_styles
 	 *
-	 * @dataProvider data_wp_hoist_late_printed_styles
 	 *
 	 * @phpstan-param array{ HEAD: string[], BODY: string[] } $expected_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64099' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64354' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_hoist_late_printed_styles' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_classic_theme_block_styles_on_demand' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_hoist_late_printed_styles' )]
 	public function test_wp_hoist_late_printed_styles( ?Closure $set_up, string $content, int $inline_size_limit, array $expected_styles, ?Closure $assert = null ): void {
 		// `_print_emoji_detection_script()` assumes `wp-includes/js/wp-emoji-loader.js` is present:
 		self::touch( ABSPATH . WPINC . '/js/wp-emoji-loader.js' );
@@ -2120,7 +2120,7 @@ class Tests_Template extends WP_UnitTestCase {
 		);
 
 		if ( $assert ) {
-			$assert( $buffer, $filtered_buffer );
+			$assert( $this, $buffer, $filtered_buffer );
 		}
 	}
 

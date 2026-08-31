@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group formatting
- * @group emoji
  *
- * @covers ::convert_smilies
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\Group( 'emoji' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'convert_smilies' )]
 class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -18,8 +18,8 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 * Basic validation test to confirm that smilies are converted to image
 	 * when use_smilies = 1 and not when use_smilies = 0.
 	 *
-	 * @dataProvider data_convert_standard_smilies
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_convert_standard_smilies' )]
 	public function test_convert_standard_smilies( $input, $converted ) {
 		$this->assertSame( $converted, convert_smilies( $input ) );
 
@@ -39,7 +39,7 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_convert_standard_smilies() {
+	public static function data_convert_standard_smilies() {
 		$includes_path = includes_url( 'images/smilies/' );
 
 		return array(
@@ -73,8 +73,8 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	/**
 	 * Tests that custom smilies are converted to images when use_smilies = 1.
 	 *
-	 * @dataProvider data_convert_custom_smilies
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_convert_custom_smilies' )]
 	public function test_convert_custom_smilies( $input, $converted ) {
 		global $wpsmiliestrans;
 
@@ -109,7 +109,7 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_convert_custom_smilies() {
+	public static function data_convert_custom_smilies() {
 		$includes_path = includes_url( 'images/smilies/' );
 
 		return array(
@@ -132,9 +132,9 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 * Tests that conversion of smilies is ignored in pre-determined tags:
 	 * pre, code, script, style.
 	 *
-	 * @ticket 16448
-	 * @dataProvider data_ignore_smilies_in_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16448' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ignore_smilies_in_tags' )]
 	public function test_ignore_smilies_in_tags( $element ) {
 		$includes_path = includes_url( 'images/smilies/' );
 
@@ -153,7 +153,7 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_ignore_smilies_in_tags() {
+	public static function data_ignore_smilies_in_tags() {
 		return array(
 			array( 'pre' ),
 			array( 'code' ),
@@ -167,9 +167,9 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 * Tests that combinations of smilies separated by a single space
 	 * are converted correctly.
 	 *
-	 * @ticket 20124
-	 * @dataProvider data_smilies_combinations
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20124' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_smilies_combinations' )]
 	public function test_smilies_combinations( $input, $converted ) {
 		$this->assertSame( $converted, convert_smilies( $input ) );
 
@@ -189,7 +189,7 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_smilies_combinations() {
+	public static function data_smilies_combinations() {
 		$includes_path = includes_url( 'images/smilies/' );
 
 		return array(
@@ -224,9 +224,9 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 * Tests that smilies are converted for single smilie in
 	 * the $wpsmiliestrans global array.
 	 *
-	 * @ticket 25303
-	 * @dataProvider data_single_smilies_in_wpsmiliestrans
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25303' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_single_smilies_in_wpsmiliestrans' )]
 	public function test_single_smilies_in_wpsmiliestrans( $input, $converted ) {
 		global $wpsmiliestrans;
 
@@ -258,7 +258,7 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_single_smilies_in_wpsmiliestrans() {
+	public static function data_single_smilies_in_wpsmiliestrans() {
 		$includes_path = includes_url( 'images/smilies/' );
 
 		return array(
@@ -284,9 +284,9 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 * Further tests that spaces aren't randomly deleted
 	 * or added when replacing the text with an image.
 	 *
-	 * @ticket 22692
-	 * @dataProvider data_spaces_around_smilies
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22692' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_spaces_around_smilies' )]
 	public function test_spaces_around_smilies( $input, $converted ) {
 		$this->assertSame( $converted, convert_smilies( $input ) );
 	}
@@ -301,7 +301,7 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_spaces_around_smilies() {
+	public static function data_spaces_around_smilies() {
 		$nbsp = "\xC2\xA0";
 
 		return array(
@@ -323,8 +323,8 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	/**
 	 * Test to ensure smilies can be removed with a filter
 	 *
-	 * @ticket 35905
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35905' )]
 	public function test_smilies_filter_removes_smilies() {
 		add_filter( 'smilies', array( $this, '_filter_remove_smilies' ) );
 		smilies_init();
@@ -338,8 +338,8 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	/**
 	 * Test to ensure smilies can be added with a filter
 	 *
-	 * @ticket 35905
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35905' )]
 	public function test_smilies_filter_adds_smilies() {
 		add_filter( 'smilies', array( $this, '_filter_add_smilies' ) );
 		smilies_init();
@@ -367,8 +367,8 @@ class Tests_Formatting_ConvertSmilies extends WP_UnitTestCase {
 	 * Tests that the function does not throw a fatal error from count()
 	 * when preg_split() fails on large input.
 	 *
-	 * @ticket 51019
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51019' )]
 	public function test_smilies_with_large_text_input() {
 		$text = '<p><img alt="" src="data:image/png;base64,' . str_repeat( 'iVBORw0KGgoAAAAN', 65536 ) . '="></p> :)';
 		$this->assertStringContainsString( "\xf0\x9f\x99\x82", convert_smilies( $text ) );

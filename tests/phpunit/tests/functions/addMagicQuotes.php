@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @group formatting
- * @group functions
  *
- * @covers ::add_magic_quotes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'add_magic_quotes' )]
 class Tests_Functions_AddMagicQuotes extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 48605
 	 *
-	 * @dataProvider data_add_magic_quotes
 	 *
 	 * @param array $test_array Test value.
 	 * @param array $expected   Expected return value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48605' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_add_magic_quotes' )]
 	public function test_add_magic_quotes( $test_array, $expected ) {
 		$this->assertSame( $expected, add_magic_quotes( $test_array ) );
 	}
@@ -28,7 +28,7 @@ class Tests_Functions_AddMagicQuotes extends WP_UnitTestCase {
 	 *     @type array $expected   Expected return value.
 	 * }
 	 */
-	public function data_add_magic_quotes() {
+	public static function data_add_magic_quotes() {
 		return array(
 			array(
 				array(

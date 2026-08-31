@@ -9,8 +9,8 @@
 /**
  * Test wp-includes/widgets/class-wp-widget-media-gallery.php
  *
- * @group widgets
  */
+#[\PHPUnit\Framework\Attributes\Group( 'widgets' )]
 class Tests_Widgets_wpWidgetMediaGallery extends WP_UnitTestCase {
 
 	/**
@@ -29,8 +29,8 @@ class Tests_Widgets_wpWidgetMediaGallery extends WP_UnitTestCase {
 	/**
 	 * Test get_instance_schema method.
 	 *
-	 * @covers WP_Widget_Media_Gallery::get_instance_schema
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Gallery', 'get_instance_schema' )]
 	public function test_get_instance_schema() {
 		$widget = new WP_Widget_Media_Gallery();
 		$schema = $widget->get_instance_schema();
@@ -51,9 +51,9 @@ class Tests_Widgets_wpWidgetMediaGallery extends WP_UnitTestCase {
 	/**
 	 * Test update() method.
 	 *
-	 * @covers WP_Widget_Media_Gallery::render_media
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Gallery', 'render_media' )]
 	public function test_render_media() {
 		$widget = new WP_Widget_Media_Gallery();
 
@@ -90,8 +90,8 @@ class Tests_Widgets_wpWidgetMediaGallery extends WP_UnitTestCase {
 	/**
 	 * Test enqueue_admin_scripts() method.
 	 *
-	 * @covers WP_Widget_Media_Gallery::enqueue_admin_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Gallery', 'enqueue_admin_scripts' )]
 	public function test_enqueue_admin_scripts() {
 		set_current_screen( 'widgets.php' );
 		$widget = new WP_Widget_Media_Gallery();
@@ -109,8 +109,8 @@ class Tests_Widgets_wpWidgetMediaGallery extends WP_UnitTestCase {
 	/**
 	 * Test update() method.
 	 *
-	 * @covers WP_Widget_Media_Gallery::update
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Gallery', 'update' )]
 	public function test_update() {
 		$widget   = new WP_Widget_Media_Gallery();
 		$schema   = $widget->get_instance_schema();
@@ -190,8 +190,8 @@ class Tests_Widgets_wpWidgetMediaGallery extends WP_UnitTestCase {
 	/**
 	 * Test render_control_template_scripts() method.
 	 *
-	 * @covers WP_Widget_Media_Gallery::render_control_template_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Media_Gallery', 'render_control_template_scripts' )]
 	public function test_render_control_template_scripts() {
 		$widget = new WP_Widget_Media_Gallery();
 

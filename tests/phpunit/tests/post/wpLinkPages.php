@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group post
- * @group template
  *
- * @covers ::wp_link_pages
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_link_pages' )]
 class Tests_Post_wpLinkPages extends WP_UnitTestCase {
 
 	public function test_wp_link_pages() {

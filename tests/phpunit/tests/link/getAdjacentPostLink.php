@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group link
- * @covers ::get_adjacent_post_link
- * @covers ::get_next_post_link
- * @covers ::get_previous_post_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_adjacent_post_link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_next_post_link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_previous_post_link' )]
 class Tests_Link_GetAdjacentPostLink extends WP_UnitTestCase {
 
 	protected $post_ids;

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group post
- * @covers ::get_post_class
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_class' )]
 class Tests_Post_GetPostClass extends WP_UnitTestCase {
 	protected $post_id;
 
@@ -45,8 +45,8 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22271
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22271' )]
 	public function test_with_custom_classes_and_no_post() {
 		$this->assertSame( array(), get_post_class( '', null ) );
 		$this->assertSame( array( 'foo' ), get_post_class( 'foo', null ) );
@@ -54,8 +54,8 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30883
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_category_slugs() {
 		$cat_id1 = self::factory()->category->create( array( 'name' => 'Первая рубрика' ) );
 		$cat_id2 = self::factory()->category->create( array( 'name' => 'Вторая рубрика' ) );
@@ -70,8 +70,8 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30883
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_tag_slugs() {
 		$tag_id1 = self::factory()->tag->create( array( 'name' => 'Первая метка' ) );
 		$tag_id2 = self::factory()->tag->create( array( 'name' => 'Вторая метка' ) );
@@ -86,8 +86,8 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30883
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_term_slugs() {
 		register_taxonomy( 'wptests_tax', 'post' );
 		$term_id1 = self::factory()->term->create(
@@ -118,8 +118,8 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group cache
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 	public function test_taxonomy_classes_hit_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );
 		wp_set_post_terms( $this->post_id, array( 'foo', 'bar' ), 'wptests_tax' );
@@ -137,8 +137,8 @@ class Tests_Post_GetPostClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64247
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64247' )]
 	public function test_list_return_value_when_duplicate_classes() {
 
 		// Filter 'post_class' to add a duplicate which should be removed by `array_unique()`.

@@ -1,7 +1,6 @@
 <?php
-/**
- * @group themes
- */
+#[\PHPUnit\Framework\Attributes\Group( 'themes' )]
+
 class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 
 	public static $post;
@@ -9,6 +8,10 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 	protected static $header_video_id;
 
 	private $customize_manager = null;
+
+	private $wp_customize_existed;
+
+	private $initial_wp_customize;
 
 	public static function wpSetUpBeforeClass( WP_UnitTest_Factory $factory ) {
 		self::$post = self::factory()->post->create(
@@ -25,15 +28,21 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 		parent::set_up();
 
 		require_once ABSPATH . WPINC . '/class-wp-customize-manager.php';
-		$GLOBALS['wp_customize'] = new WP_Customize_Manager();
-		$this->customize_manager = $GLOBALS['wp_customize'];
+		$this->wp_customize_existed = array_key_exists( 'wp_customize', $GLOBALS );
+		$this->initial_wp_customize = $GLOBALS['wp_customize'] ?? null;
+		$GLOBALS['wp_customize']    = new WP_Customize_Manager();
+		$this->customize_manager    = $GLOBALS['wp_customize'];
 
 		wp_dequeue_script( 'wp-custom-header' );
 	}
 
 	public function tear_down() {
 		$this->customize_manager = null;
-		unset( $GLOBALS['wp_customize'] );
+		if ( $this->wp_customize_existed ) {
+			$GLOBALS['wp_customize'] = $this->initial_wp_customize;
+		} else {
+			unset( $GLOBALS['wp_customize'] );
+		}
 
 		remove_theme_support( 'custom-header' );
 		remove_theme_mod( 'header_image' );
@@ -86,15 +95,15 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 	/**
 	 * Tests the "get_header_image" filter.
 	 *
-	 * @ticket 56180
 	 *
-	 * @covers ::get_header_image
 	 *
-	 * @dataProvider data_filter_header_image
 	 *
 	 * @param mixed  $header_image The header image.
 	 * @param string $expected     The expected return value from get_header_image().
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56180' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_filter_header_image' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_header_image' )]
 	public function test_filter_header_image( $header_image, $expected ) {
 		add_filter(
 			'get_header_image',
@@ -111,7 +120,7 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_filter_header_image() {
+	public static function data_filter_header_image() {
 		return array(
 			'an image url'         => array(
 				'header_image' => 'http://example.org/image.png',
@@ -151,9 +160,7 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 		$this->assertStringContainsString( sprintf( 'src="%s"', $default ), $html );
 	}
 
-	/**
-	 * @ticket 38633
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38633' )]
 	public function test_get_header_image_tag_with_registered_default_image_and_remove_header_theme_mod() {
 		$default = 'http://localhost/default-header.jpg';
 		$this->add_theme_support( array( 'default-image' => $default ) );
@@ -177,8 +184,8 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 	/**
 	 * Tests default values of performance attributes for "get_header_image_tag".
 	 *
-	 * @ticket 58680
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58680' )]
 	public function test_get_header_image_tag_with_default_performance_attributes() {
 		$this->add_theme_support(
 			array(
@@ -206,8 +213,8 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 	/**
 	 * Tests custom values of performance attributes for "get_header_image_tag".
 	 *
-	 * @ticket 58680
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58680' )]
 	public function test_get_header_image_tag_with_custom_performance_attributes() {
 		$this->add_theme_support(
 			array(
@@ -230,8 +237,8 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 	/**
 	 * Tests custom lazy loading for "get_header_image_tag".
 	 *
-	 * @ticket 58680
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58680' )]
 	public function test_get_header_image_tag_with_custom_lazy_loading() {
 		$this->add_theme_support(
 			array(
@@ -382,9 +389,7 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 		$this->assertTrue( wp_script_is( 'wp-custom-header', 'enqueued' ) );
 	}
 
-	/**
-	 * @ticket 38738
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38738' )]
 	public function test_video_header_callback_front_page_from_front_page() {
 		$this->add_theme_support(
 			array(
@@ -399,9 +404,7 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 		$this->assertTrue( $result );
 	}
 
-	/**
-	 * @ticket 38738
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38738' )]
 	public function test_video_header_callback_front_page_from_elsewhere() {
 		$this->add_theme_support(
 			array(
@@ -416,9 +419,7 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 		$this->assertFalse( $result );
 	}
 
-	/**
-	 * @ticket 38738
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38738' )]
 	public function test_video_header_callback_globally_from_front_page() {
 		$this->add_theme_support(
 			array(
@@ -434,9 +435,7 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 		$this->assertTrue( $result );
 	}
 
-	/**
-	 * @ticket 38738
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38738' )]
 	public function test_video_header_callback_globally_from_elsewhere() {
 		$this->add_theme_support(
 			array(
@@ -452,9 +451,7 @@ class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 		$this->assertTrue( $result );
 	}
 
-	/**
-	 * @ticket 38738
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38738' )]
 	public function test_video_header_callback_globally_with_negative_filter() {
 		$this->add_theme_support(
 			array(

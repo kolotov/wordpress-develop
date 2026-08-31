@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @group error-protection
  */
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Recovery_Mode_Cookie_Service::class, 'validate_cookie' )]
+#[\PHPUnit\Framework\Attributes\Group( 'error-protection' )]
 class Tests_Error_Protection_wpRecoveryModeCookieService extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Cookie_Service::validate_cookie
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
 	public function test_validate_cookie_returns_wp_error_if_invalid_format() {
 
 		$service = new WP_Recovery_Mode_Cookie_Service();
@@ -28,10 +28,9 @@ class Tests_Error_Protection_wpRecoveryModeCookieService extends WP_UnitTestCase
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Cookie_Service::validate_cookie
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
 	public function test_validate_cookie_returns_wp_error_if_expired() {
 		$service    = new WP_Recovery_Mode_Cookie_Service();
 		$reflection = new ReflectionMethod( $service, 'recovery_mode_hash' );
@@ -49,10 +48,9 @@ class Tests_Error_Protection_wpRecoveryModeCookieService extends WP_UnitTestCase
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Cookie_Service::validate_cookie
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
 	public function test_validate_cookie_returns_wp_error_if_signature_mismatch() {
 		$service    = new WP_Recovery_Mode_Cookie_Service();
 		$reflection = new ReflectionMethod( $service, 'generate_cookie' );
@@ -69,10 +67,9 @@ class Tests_Error_Protection_wpRecoveryModeCookieService extends WP_UnitTestCase
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Cookie_Service::validate_cookie
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
 	public function test_validate_cookie_returns_wp_error_if_created_at_is_invalid_format() {
 		$service    = new WP_Recovery_Mode_Cookie_Service();
 		$reflection = new ReflectionMethod( $service, 'recovery_mode_hash' );
@@ -90,10 +87,9 @@ class Tests_Error_Protection_wpRecoveryModeCookieService extends WP_UnitTestCase
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Cookie_Service::validate_cookie
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
 	public function test_validate_cookie_returns_true_for_valid_cookie() {
 
 		$service    = new WP_Recovery_Mode_Cookie_Service();

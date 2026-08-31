@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wp_parse_str
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_parse_str' )]
 class Tests_Formatting_wpParseStr extends WP_UnitTestCase {
 
 	/**
@@ -13,11 +13,11 @@ class Tests_Formatting_wpParseStr extends WP_UnitTestCase {
 	 * Note: While the function under test does not contain any significant logic,
 	 * these tests document the behavior and safeguard PHP cross-version compatibility.
 	 *
-	 * @dataProvider data_wp_parse_str
 	 *
 	 * @param mixed $input    Value to parse.
 	 * @param array $expected Expected function output.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_parse_str' )]
 	public function test_wp_parse_str( $input, $expected ) {
 		wp_parse_str( $input, $output );
 		$this->assertSame( $expected, $output );
@@ -28,7 +28,7 @@ class Tests_Formatting_wpParseStr extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_parse_str() {
+	public static function data_wp_parse_str() {
 		return array(
 			'null'              => array(
 				'input'    => null,
@@ -88,11 +88,11 @@ class Tests_Formatting_wpParseStr extends WP_UnitTestCase {
 	 * Tests that the result array only contains the result of the string parsing
 	 * when provided with different types of input for the `$output` parameter.
 	 *
-	 * @dataProvider data_wp_parse_str_result_array_is_always_overwritten
 	 *
 	 * @param array|null $output   Value for the `$output` parameter.
 	 * @param array      $expected Expected function output.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_parse_str_result_array_is_always_overwritten' )]
 	public function test_wp_parse_str_result_array_is_always_overwritten( $output, $expected ) {
 		wp_parse_str( 'key=25&thing=text', $output );
 		$this->assertSame( $expected, $output );
@@ -103,7 +103,7 @@ class Tests_Formatting_wpParseStr extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_parse_str_result_array_is_always_overwritten() {
+	public static function data_wp_parse_str_result_array_is_always_overwritten() {
 		// Standard value for expected output.
 		$expected = array(
 			'key'   => '25',

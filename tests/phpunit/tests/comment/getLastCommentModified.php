@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group comment
- * @ticket 38027
  *
- * @covers ::get_lastcommentmodified
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '38027' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_lastcommentmodified' )]
 class Tests_Comment_GetLastCommentModified extends WP_UnitTestCase {
 	public function test_no_comments() {
 		$this->assertFalse( get_lastcommentmodified() );

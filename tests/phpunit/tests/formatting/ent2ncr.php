@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::ent2ncr
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'ent2ncr' )]
 class Tests_Formatting_Ent2ncr extends WP_UnitTestCase {
 	/**
-	 * @dataProvider data_entities
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_entities' )]
 	public function test_converts_named_entities_to_numeric_character_references( $entity, $ncr ) {
 		$entity = '&' . $entity . ';';
 		$ncr    = '&#' . $ncr . ';';
@@ -19,7 +19,7 @@ class Tests_Formatting_Ent2ncr extends WP_UnitTestCase {
 	 * Get test data from files, one test per line.
 	 * Comments start with "###".
 	 */
-	public function data_entities() {
+	public static function data_entities() {
 		$entities      = file( DIR_TESTDATA . '/formatting/entities.txt' );
 		$data_provided = array();
 		foreach ( $entities as $line ) {

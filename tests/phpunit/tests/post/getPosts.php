@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group post
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Post_GetPosts extends WP_UnitTestCase {
 	public function test_offset_should_be_null_by_default() {
 		$p1 = self::factory()->post->create(
@@ -80,8 +80,8 @@ class Tests_Post_GetPosts extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34060
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34060' )]
 	public function test_paged_should_not_be_overridden_by_default_offset() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -167,8 +167,8 @@ class Tests_Post_GetPosts extends WP_UnitTestCase {
 	/**
 	 * Verifies that get_posts() accepts a query string for the `$args` parameter.
 	 *
-	 * @ticket 64813
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64813' )]
 	public function test_should_accept_query_string_args(): void {
 		self::factory()->post->create();
 		$second_post_id = self::factory()->post->create();

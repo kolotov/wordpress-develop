@@ -112,7 +112,7 @@ abstract class WP_UnitTestCase_Base extends PHPUnit_Adapter_TestCase {
 
 		$this->factory = static::factory();
 
-		if ( ! self::$ignore_files ) {
+		if ( null === self::$ignore_files ) {
 			self::$ignore_files = $this->scan_user_uploads();
 		}
 
@@ -584,16 +584,7 @@ abstract class WP_UnitTestCase_Base extends PHPUnit_Adapter_TestCase {
 	 * @since 3.7.0
 	 */
 	public function expectDeprecated() {
-		if ( method_exists( $this, 'getAnnotations' ) ) {
-			// PHPUnit < 9.5.0.
-			$annotations = $this->getAnnotations();
-		} else {
-			// PHPUnit >= 9.5.0.
-			$annotations = \PHPUnit\Util\Test::parseTestMethodAnnotations(
-				static::class,
-				$this->getName( false )
-			);
-		}
+		$annotations = $this->get_wordpress_annotations();
 
 		foreach ( array( 'class', 'method' ) as $depth ) {
 			if ( ! empty( $annotations[ $depth ]['expectedDeprecated'] ) ) {
@@ -624,6 +615,43 @@ abstract class WP_UnitTestCase_Base extends PHPUnit_Adapter_TestCase {
 		add_action( 'deprecated_file_trigger_error', '__return_false' );
 		add_action( 'deprecated_hook_trigger_error', '__return_false' );
 		add_action( 'doing_it_wrong_trigger_error', '__return_false' );
+	}
+
+	/**
+	 * Reads WordPress-specific expectation tags without PHPUnit internal APIs.
+	 *
+	 * @return array{class: array<string, string[]>, method: array<string, string[]>}
+	 */
+	private function get_wordpress_annotations(): array {
+		$reflection = new ReflectionClass( static::class );
+		$method     = $reflection->getMethod( $this->name() );
+
+		return array(
+			'class'  => $this->parse_wordpress_annotations( $reflection->getDocComment() ? $reflection->getDocComment() : '' ),
+			'method' => $this->parse_wordpress_annotations( $method->getDocComment() ? $method->getDocComment() : '' ),
+		);
+	}
+
+	/**
+	 * Parses custom WordPress expectation tags from a DocBlock.
+	 *
+	 * @param string $doc_comment DocBlock to parse.
+	 * @return array<string, string[]>
+	 */
+	private function parse_wordpress_annotations( string $doc_comment ): array {
+		$annotations = array();
+		preg_match_all(
+			'/^[\t ]*\*[\t ]+@(expectedDeprecated|expectedIncorrectUsage)[\t ]+([^\r\n*]+)/m',
+			$doc_comment,
+			$matches,
+			PREG_SET_ORDER
+		);
+
+		foreach ( $matches as $match ) {
+			$annotations[ $match[1] ][] = trim( $match[2] );
+		}
+
+		return $annotations;
 	}
 
 	/**
@@ -722,26 +750,63 @@ abstract class WP_UnitTestCase_Base extends PHPUnit_Adapter_TestCase {
 	}
 
 	/**
-	 * Redundant PHPUnit 6+ compatibility shim. DO NOT USE!
+	 * Runs a callback and asserts that it triggers the expected user deprecation.
 	 *
-	 * This method is only left in place for backward compatibility reasons.
-	 *
-	 * @since 4.8.0
-	 * @deprecated 5.9.0 Use the PHPUnit native expectException*() methods directly.
-	 *
-	 * @param mixed      $exception
-	 * @param string     $message
-	 * @param int|string $code
+	 * @param string   $expected Expected fragment of the deprecation message.
+	 * @param callable $callback Callback expected to trigger the deprecation.
 	 */
-	public function setExpectedException( $exception, $message = '', $code = null ) {
-		$this->expectException( $exception );
+	protected function assertExpectedUserDeprecation( string $expected, callable $callback ): void {
+		$deprecations = array();
 
-		if ( '' !== $message ) {
-			$this->expectExceptionMessage( $message );
+		set_error_handler(
+			static function ( int $severity, string $message ) use ( &$deprecations ): bool {
+				if ( E_USER_DEPRECATED !== $severity ) {
+					return false;
+				}
+
+				$deprecations[] = $message;
+				return true;
+			}
+		);
+
+		try {
+			$callback();
+		} finally {
+			restore_error_handler();
 		}
 
-		if ( null !== $code ) {
-			$this->expectExceptionCode( $code );
+		$this->assertNotEmpty( $deprecations, 'Failed to capture an expected user deprecation.' );
+		$this->assertStringContainsString( $expected, implode( "\n", $deprecations ) );
+	}
+
+	/**
+	 * Executes a callback while capturing native PHP deprecations and asserts
+	 * that every captured message matches the expected regular expression.
+	 */
+	protected function assertExpectedPhpDeprecations( string $pattern, callable $callback ): void {
+		$deprecations = array();
+
+		set_error_handler(
+			static function ( int $severity, string $message ) use ( &$deprecations ): bool {
+				if ( E_DEPRECATED !== $severity ) {
+					return false;
+				}
+
+				$deprecations[] = $message;
+				return true;
+			}
+		);
+
+		try {
+			$callback();
+		} finally {
+			restore_error_handler();
+		}
+
+		$this->assertNotEmpty( $deprecations, 'Failed to capture an expected native PHP deprecation.' );
+
+		foreach ( $deprecations as $deprecation ) {
+			$this->assertMatchesRegularExpression( $pattern, $deprecation );
 		}
 	}
 
@@ -1382,21 +1447,6 @@ abstract class WP_UnitTestCase_Base extends PHPUnit_Adapter_TestCase {
 	}
 
 	/**
-	 * Allows tests to be skipped on single or multisite installs by using @group annotations.
-	 *
-	 * This is a custom extension of the PHPUnit requirements handling.
-	 *
-	 * @since 3.5.0
-	 * @deprecated 5.9.0 This method has not been functional since PHPUnit 7.0.
-	 */
-	protected function checkRequirements() {
-		// For PHPUnit 5/6, as we're overloading a public PHPUnit native method in those versions.
-		if ( is_callable( 'PHPUnit\Framework\TestCase', 'checkRequirements' ) ) {
-			parent::checkRequirements();
-		}
-	}
-
-	/**
 	 * Skips the current test if there is an open Trac ticket associated with it.
 	 *
 	 * @since 3.5.0
@@ -1449,22 +1499,6 @@ abstract class WP_UnitTestCase_Base extends PHPUnit_Adapter_TestCase {
 	 */
 	public static function forceTicket( $ticket ) {
 		self::$forced_tickets[] = $ticket;
-	}
-
-	/**
-	 * Custom preparations for the PHPUnit process isolation template.
-	 *
-	 * When restoring global state between tests, PHPUnit defines all the constants that were already defined, and then
-	 * includes included files. This does not work with WordPress, as the included files define the constants.
-	 *
-	 * This method defines the constants after including files.
-	 *
-	 * @param Text_Template $template The template to prepare.
-	 */
-	public function prepareTemplate( Text_Template $template ) {
-		$template->setVar( array( 'constants' => '' ) );
-		$template->setVar( array( 'wp_constants' => PHPUnit_Util_GlobalState::getConstantsAsString() ) );
-		parent::prepareTemplate( $template );
 	}
 
 	/**
@@ -1576,8 +1610,8 @@ abstract class WP_UnitTestCase_Base extends PHPUnit_Adapter_TestCase {
 	 * @return string[] List of file paths.
 	 */
 	public function scan_user_uploads() {
-		static $files = array();
-		if ( ! empty( $files ) ) {
+		static $files = null;
+		if ( null !== $files ) {
 			return $files;
 		}
 

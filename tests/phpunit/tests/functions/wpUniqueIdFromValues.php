@@ -7,9 +7,9 @@
  *
  * @since 6.8.0
  *
- * @group functions.php
- * @covers ::wp_unique_id_from_values
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions.php' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_unique_id_from_values' )]
 class Tests_Functions_WpUniqueIdFromValues extends WP_UnitTestCase {
 
 	/**
@@ -22,12 +22,12 @@ class Tests_Functions_WpUniqueIdFromValues extends WP_UnitTestCase {
 	/**
 	 * Test that the function returns consistent ids for the passed params.
 	 *
-	 * @ticket 62985
 	 *
-	 * @dataProvider data_wp_unique_id_from_values
 	 *
 	 * @since 6.8.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62985' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_unique_id_from_values' )]
 	public function test_wp_unique_id_from_values( $data ) {
 		// Generate IDs.
 		$unique_id_original = wp_unique_id_from_values( $data );
@@ -44,12 +44,12 @@ class Tests_Functions_WpUniqueIdFromValues extends WP_UnitTestCase {
 	/**
 	 * Test that different input data generates distinct IDs.
 	 *
-	 * @ticket 62985
 	 *
-	 * @dataProvider data_wp_unique_id_from_values
 	 *
 	 * @since 6.8.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62985' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_unique_id_from_values' )]
 	public function test_wp_unique_id_from_values_uniqueness( $data ) {
 		// Generate IDs.
 		$unique_id_original = wp_unique_id_from_values( $data );
@@ -73,7 +73,7 @@ class Tests_Functions_WpUniqueIdFromValues extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_unique_id_from_values() {
+	public static function data_wp_unique_id_from_values() {
 		return array(
 			'string'          => array( array( 'value' => 'text' ) ),
 			'integer'         => array( array( 'value' => 123 ) ),
@@ -111,12 +111,12 @@ class Tests_Functions_WpUniqueIdFromValues extends WP_UnitTestCase {
 	/**
 	 * Test that passing an empty array is not allowed.
 	 *
-	 * @ticket 62985
 	 *
 	 * @expectedIncorrectUsage wp_unique_id_from_values
 	 *
 	 * @since 6.8.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62985' )]
 	public function test_wp_unique_id_from_values_empty_array() {
 		wp_unique_id_from_values( array(), $this->prefix );
 	}
@@ -124,12 +124,12 @@ class Tests_Functions_WpUniqueIdFromValues extends WP_UnitTestCase {
 	/**
 	 * Test that passing non-array data throws an error.
 	 *
-	 * @ticket 62985
 	 *
-	 * @dataProvider data_wp_unique_id_from_values_invalid_data
 	 *
 	 * @since 6.8.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62985' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_unique_id_from_values_invalid_data' )]
 	public function test_wp_unique_id_from_values_invalid_data( $data ) {
 		$this->expectException( TypeError::class );
 
@@ -141,7 +141,7 @@ class Tests_Functions_WpUniqueIdFromValues extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_unique_id_from_values_invalid_data() {
+	public static function data_wp_unique_id_from_values_invalid_data() {
 		return array(
 			'string'  => array( 'text' ),
 			'integer' => array( 123 ),

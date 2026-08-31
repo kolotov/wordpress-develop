@@ -3,10 +3,10 @@
 /**
  * Tests specific to `avoid_blog_page_permalink_collision()` in multisite.
  *
- * @group ms-required
- * @group multisite
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Multisite_AvoidBlogPagePermalinkCollision extends WP_UnitTestCase {
 
 	protected static $site_id;
@@ -53,14 +53,18 @@ class Tests_Multisite_AvoidBlogPagePermalinkCollision extends WP_UnitTestCase {
 	}
 
 	public function test_avoid_blog_page_permalink_collision_renames_post_name() {
+		if ( is_subdomain_install() ) {
+			$this->markTestSkipped( 'Blog/page permalink path collisions only apply to subdirectory configurations.' );
+		}
+
 		$this->assertNotSame( self::$post_and_blog_path, self::$root_page->post_name );
 	}
 
 	/**
 	 * Ensure `avoid_blog_page_permalink_collision()` doesn't rename child pages' post_name.
 	 *
-	 * @ticket 51147
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51147' )]
 	public function test_avoid_blog_page_permalink_collision_doesnt_rename_child_pages() {
 		$this->assertSame( self::$post_and_blog_path, self::$child_page->post_name );
 	}

@@ -2,10 +2,10 @@
 /**
  * Test wp_strip_all_tags()
  *
- * @group formatting
  *
- * @covers ::wp_strip_all_tags
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_strip_all_tags' )]
 class Tests_Formatting_wpStripAllTags extends WP_UnitTestCase {
 
 	public function test_wp_strip_all_tags() {
@@ -35,8 +35,8 @@ class Tests_Formatting_wpStripAllTags extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_strip_all_tags()` returns an empty string when null is passed.
 	 *
-	 * @ticket 56434
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56434' )]
 	public function test_wp_strip_all_tags_should_return_empty_string_for_a_null_arg() {
 		$this->assertSame( '', wp_strip_all_tags( null ) );
 	}
@@ -45,17 +45,38 @@ class Tests_Formatting_wpStripAllTags extends WP_UnitTestCase {
 	 * Tests that `wp_strip_all_tags()` triggers a warning and returns
 	 * an empty string when passed a non-string argument.
 	 *
-	 * @ticket 56434
 	 *
-	 * @dataProvider data_wp_strip_all_tags_should_return_empty_string_and_trigger_an_error_for_non_string_arg
 	 *
 	 * @param mixed $non_string A non-string value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56434' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_strip_all_tags_should_return_empty_string_and_trigger_an_error_for_non_string_arg' )]
 	public function test_wp_strip_all_tags_should_return_empty_string_and_trigger_an_error_for_non_string_arg( $non_string ) {
-		$type = gettype( $non_string );
-		$this->expectError();
-		$this->expectErrorMessage( "Warning: wp_strip_all_tags expects parameter #1 (\$text) to be a string, $type given." );
-		$this->assertSame( '', wp_strip_all_tags( $non_string ) );
+		$errors = array();
+		set_error_handler(
+			static function ( int $severity, string $message ) use ( &$errors ): bool {
+				$errors[] = compact( 'severity', 'message' );
+				return true;
+			},
+			E_USER_WARNING
+		);
+
+		try {
+			$actual = wp_strip_all_tags( $non_string );
+		} finally {
+			restore_error_handler();
+		}
+
+		$this->assertSame( '', $actual );
+		$this->assertSame(
+			array(
+				array(
+					'severity' => E_USER_WARNING,
+					'message'  => sprintf( 'Warning: wp_strip_all_tags expects parameter #1 ($text) to be a string, %s given.', gettype( $non_string ) ),
+				),
+			),
+			$errors
+		);
 	}
 
 	/**
@@ -63,7 +84,7 @@ class Tests_Formatting_wpStripAllTags extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_strip_all_tags_should_return_empty_string_and_trigger_an_error_for_non_string_arg() {
+	public static function data_wp_strip_all_tags_should_return_empty_string_and_trigger_an_error_for_non_string_arg() {
 		return array(
 			'an empty array'     => array( 'non_string' => array() ),
 			'a non-empty array'  => array( 'non_string' => array( 'a string' ) ),
@@ -75,12 +96,12 @@ class Tests_Formatting_wpStripAllTags extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_strip_all_tags()` casts scalar values to string.
 	 *
-	 * @ticket 56434
 	 *
-	 * @dataProvider data_wp_strip_all_tags_should_cast_scalar_values_to_string
 	 *
 	 * @param mixed $text A scalar value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56434' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_strip_all_tags_should_cast_scalar_values_to_string' )]
 	public function test_wp_strip_all_tags_should_cast_scalar_values_to_string( $text ) {
 		$this->assertSame( (string) $text, wp_strip_all_tags( $text ) );
 	}
@@ -90,7 +111,7 @@ class Tests_Formatting_wpStripAllTags extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_strip_all_tags_should_cast_scalar_values_to_string() {
+	public static function data_wp_strip_all_tags_should_cast_scalar_values_to_string() {
 		return array(
 			'(int) 0'      => array( 'text' => 0 ),
 			'(int) 1'      => array( 'text' => 1 ),

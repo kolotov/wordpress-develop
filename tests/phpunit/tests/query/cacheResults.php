@@ -1,9 +1,12 @@
 <?php
 
 /**
- * @group query
- * @covers WP_Query::get_posts
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Query::class, 'get_posts' )]
 class Test_Query_CacheResults extends WP_UnitTestCase {
 	/**
 	 * Page IDs.
@@ -76,12 +79,12 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	/**
 	 * Ensure cache keys are generated without WPDB placeholders.
 	 *
-	 * @ticket 56802
 	 *
-	 * @covers WP_Query::generate_cache_key
 	 *
-	 * @dataProvider data_query_cache
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56802' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_cache' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_generate_cache_key( $args ) {
 		global $wpdb;
 		$query1 = new WP_Query();
@@ -115,12 +118,12 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	/**
 	 * Ensure cache keys tests include WPDB placeholder in SQL Query.
 	 *
-	 * @ticket 56802
 	 *
-	 * @covers WP_Query::generate_cache_key
 	 *
-	 * @depends test_generate_cache_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56802' )]
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_generate_cache_key' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_sql_placeholder_cache_key_tested() {
 		$this->assertTrue( self::$sql_placeholder_cache_key_tested, 'Cache key containing WPDB placeholder in SQL query was not tested.' );
 	}
@@ -131,12 +134,12 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	 * This test mainly covers the search query which generates the `search_orderby_title`
 	 * query_var in WP_Query.
 	 *
-	 * @ticket 56802
 	 *
-	 * @covers WP_Query::generate_cache_key
 	 *
-	 * @depends test_generate_cache_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56802' )]
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_generate_cache_key' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_wp_query_placeholder_cache_key_tested() {
 		$this->assertTrue( self::$wp_query_placeholder_cache_key_tested, 'Cache key containing WPDB placeholder in WP_Query arguments was not tested.' );
 	}
@@ -144,10 +147,10 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	/**
 	 * Ensure cache keys are generated without WPDB placeholders.
 	 *
-	 * @ticket 56802
 	 *
-	 * @covers WP_Query::generate_cache_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56802' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_generate_cache_key_placeholder() {
 		global $wpdb;
 		$query1 = new WP_Query();
@@ -176,9 +179,9 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Query::generate_cache_key
-	 * @ticket 59442
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59442' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_generate_cache_key_unregister_post_type() {
 		global $wpdb;
 		register_post_type(
@@ -207,10 +210,10 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59516
 	 *
-	 * @covers WP_Query::generate_cache_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59516' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_post_in_order_by_clauses_are_not_normalized() {
 		global $wpdb;
 
@@ -258,10 +261,10 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59516
 	 *
-	 * @covers WP_Query::generate_cache_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59516' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_post_parent_in_order_by_clauses_are_not_normalized() {
 		global $wpdb;
 
@@ -324,10 +327,10 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59516
 	 *
-	 * @covers WP_Query::generate_cache_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59516' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_post_name_in_order_by_clauses_are_not_normalized() {
 		global $wpdb;
 		$post_names = array( 'doctor-dillamond', 'elphaba', 'glinda', 'the-wizard-of-oz' );
@@ -385,13 +388,13 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59442
-	 * @ticket 59516
 	 *
-	 * @covers WP_Query::generate_cache_key
 	 *
-	 * @dataProvider data_query_cache_duplicate
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59442' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59516' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_cache_duplicate' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_generate_cache_key_normalize( $query_vars1, $query_vars2 ) {
 		global $wpdb;
 
@@ -423,9 +426,9 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_query_cache
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_cache' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache( $args ) {
 		$query1 = new WP_Query();
 		$posts1 = $query1->query( $args );
@@ -472,7 +475,7 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_query_cache_duplicate() {
+	public static function data_query_cache_duplicate() {
 		return array(
 			'post type empty'                              => array(
 				'query_vars1' => array( 'post_type' => '' ),
@@ -599,136 +602,136 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 				'query_vars2' => array( 'post_name__in' => array( 'elphaba', 'glinda', 'elphaba', 'glinda', 'the-wizard-of-oz', 'doctor-dillamond' ) ),
 			),
 			'cat different order (array)'                  => array(
-				'query_vars_1' => array( 'cat' => array( '1', '2' ) ),
-				'query_vars_2' => array( 'cat' => array( '2', '1' ) ),
+				'query_vars1' => array( 'cat' => array( '1', '2' ) ),
+				'query_vars2' => array( 'cat' => array( '2', '1' ) ),
 			),
 			'cat different order (string)'                 => array(
-				'query_vars_1' => array( 'cat' => '2,1' ),
-				'query_vars_2' => array( 'cat' => '1,2' ),
+				'query_vars1' => array( 'cat' => '2,1' ),
+				'query_vars2' => array( 'cat' => '1,2' ),
 			),
 			'cat queries int vs string'                    => array(
-				'query_vars_1' => array( 'cat' => '2' ),
-				'query_vars_2' => array( 'cat' => 2 ),
+				'query_vars1' => array( 'cat' => '2' ),
+				'query_vars2' => array( 'cat' => 2 ),
 			),
 			'category__in queries different order (array)' => array(
-				'query_vars_1' => array( 'category__in' => array( '1', '2' ) ),
-				'query_vars_2' => array( 'category__in' => array( '2', '1' ) ),
+				'query_vars1' => array( 'category__in' => array( '1', '2' ) ),
+				'query_vars2' => array( 'category__in' => array( '2', '1' ) ),
 			),
 			'category__in queries with non-unique array'   => array(
-				'query_vars_1' => array( 'category__in' => array( '1', '1' ) ),
-				'query_vars_2' => array( 'category__in' => array( '1' ) ),
+				'query_vars1' => array( 'category__in' => array( '1', '1' ) ),
+				'query_vars2' => array( 'category__in' => array( '1' ) ),
 			),
 			'category__in queries string vs array (array)' => array(
-				'query_vars_1' => array( 'category__in' => array( '1' ) ),
-				'query_vars_2' => array( 'category__in' => array( 1 ) ),
+				'query_vars1' => array( 'category__in' => array( '1' ) ),
+				'query_vars2' => array( 'category__in' => array( 1 ) ),
 			),
 			'category__not_in different order (array)'     => array(
-				'query_vars_1' => array( 'category__not_in' => array( '1', '2' ) ),
-				'query_vars_2' => array( 'category__not_in' => array( '2', '1' ) ),
+				'query_vars1' => array( 'category__not_in' => array( '1', '2' ) ),
+				'query_vars2' => array( 'category__not_in' => array( '2', '1' ) ),
 			),
 			'category__not_in with non-unique array'       => array(
-				'query_vars_1' => array( 'category__not_in' => array( '1', '1' ) ),
-				'query_vars_2' => array( 'category__not_in' => array( '1' ) ),
+				'query_vars1' => array( 'category__not_in' => array( '1', '1' ) ),
+				'query_vars2' => array( 'category__not_in' => array( '1' ) ),
 			),
 			'category__not_in queries string vs array (array)' => array(
-				'query_vars_1' => array( 'category__not_in' => array( '1' ) ),
-				'query_vars_2' => array( 'category__not_in' => array( 1 ) ),
+				'query_vars1' => array( 'category__not_in' => array( '1' ) ),
+				'query_vars2' => array( 'category__not_in' => array( 1 ) ),
 			),
 			'category__and queries width different order (array)' => array(
-				'query_vars_1' => array( 'category__and' => array( '1', '2' ) ),
-				'query_vars_2' => array( 'category__and' => array( '2', '1' ) ),
+				'query_vars1' => array( 'category__and' => array( '1', '2' ) ),
+				'query_vars2' => array( 'category__and' => array( '2', '1' ) ),
 			),
 			'category__and with non-unique array'          => array(
-				'query_vars_1' => array( 'category__and' => array( '1', '1', '2' ) ),
-				'query_vars_2' => array( 'category__and' => array( '1', '2' ) ),
+				'query_vars1' => array( 'category__and' => array( '1', '1', '2' ) ),
+				'query_vars2' => array( 'category__and' => array( '1', '2' ) ),
 			),
 			'category__and queries string vs array (array)' => array(
-				'query_vars_1' => array( 'category__and' => array( '1', '2' ) ),
-				'query_vars_2' => array( 'category__and' => array( 1, 2 ) ),
+				'query_vars1' => array( 'category__and' => array( '1', '2' ) ),
+				'query_vars2' => array( 'category__and' => array( 1, 2 ) ),
 			),
 			'author queries different order (string)'      => array(
-				'query_vars_1' => array( 'author' => '1,2' ),
-				'query_vars_2' => array( 'author' => '2,1' ),
+				'query_vars1' => array( 'author' => '1,2' ),
+				'query_vars2' => array( 'author' => '2,1' ),
 			),
 			'author with non-unique string'                => array(
-				'query_vars_1' => array( 'author' => '1,1' ),
-				'query_vars_2' => array( 'author' => '1' ),
+				'query_vars1' => array( 'author' => '1,1' ),
+				'query_vars2' => array( 'author' => '1' ),
 			),
 			'author queries int vs string (string)'        => array(
-				'query_vars_1' => array( 'author' => 1 ),
-				'query_vars_2' => array( 'author' => '1' ),
+				'query_vars1' => array( 'author' => 1 ),
+				'query_vars2' => array( 'author' => '1' ),
 			),
 			'author queries int vs string (array)'         => array(
-				'query_vars_1' => array( 'author' => array( 1 ) ),
-				'query_vars_2' => array( 'author' => array( '1' ) ),
+				'query_vars1' => array( 'author' => array( 1 ) ),
+				'query_vars2' => array( 'author' => array( '1' ) ),
 			),
 			'author__in different order'                   => array(
-				'query_vars_1' => array( 'author__in' => array( 1, 2 ) ),
-				'query_vars_2' => array( 'author__in' => array( 2, 1 ) ),
+				'query_vars1' => array( 'author__in' => array( 1, 2 ) ),
+				'query_vars2' => array( 'author__in' => array( 2, 1 ) ),
 			),
 			'author__in with non-unique array'             => array(
-				'query_vars_1' => array( 'author__in' => array( 1, 1, 2 ) ),
-				'query_vars_2' => array( 'author__in' => array( 1, 2 ) ),
+				'query_vars1' => array( 'author__in' => array( 1, 1, 2 ) ),
+				'query_vars2' => array( 'author__in' => array( 1, 2 ) ),
 			),
 			'author__in queries int vs string (array)'     => array(
-				'query_vars_1' => array( 'author__in' => array( 1 ) ),
-				'query_vars_2' => array( 'author__in' => array( '1' ) ),
+				'query_vars1' => array( 'author__in' => array( 1 ) ),
+				'query_vars2' => array( 'author__in' => array( '1' ) ),
 			),
 			'author__not_in different order (array)'       => array(
-				'query_vars_1' => array( 'author__not_in' => array( 1, 2 ) ),
-				'query_vars_2' => array( 'author__not_in' => array( 2, 1 ) ),
+				'query_vars1' => array( 'author__not_in' => array( 1, 2 ) ),
+				'query_vars2' => array( 'author__not_in' => array( 2, 1 ) ),
 			),
 			'author__not_in queries int vs string (array)' => array(
-				'query_vars_1' => array( 'author__not_in' => array( 1 ) ),
-				'query_vars_2' => array( 'author__not_in' => array( '1' ) ),
+				'query_vars1' => array( 'author__not_in' => array( 1 ) ),
+				'query_vars2' => array( 'author__not_in' => array( '1' ) ),
 			),
 			'tag_slug__in order'                           => array(
-				'query_vars_1' => array( 'tag_slug__in' => array( 'foo', 'bar' ) ),
-				'query_vars_2' => array( 'tag_slug__in' => array( 'bar', 'foo' ) ),
+				'query_vars1' => array( 'tag_slug__in' => array( 'foo', 'bar' ) ),
+				'query_vars2' => array( 'tag_slug__in' => array( 'bar', 'foo' ) ),
 			),
 			'tag_slug__in non-unique vs unique'            => array(
-				'query_vars_1' => array( 'tag_slug__in' => array( 'foo', 'bar', 'bar' ) ),
-				'query_vars_2' => array( 'tag_slug__in' => array( 'foo', 'bar' ) ),
+				'query_vars1' => array( 'tag_slug__in' => array( 'foo', 'bar', 'bar' ) ),
+				'query_vars2' => array( 'tag_slug__in' => array( 'foo', 'bar' ) ),
 			),
 			'tag_slug__and order'                          => array(
-				'query_vars_1' => array( 'tag_slug__and' => array( 'foo', 'bar' ) ),
-				'query_vars_2' => array( 'tag_slug__and' => array( 'bar', 'foo' ) ),
+				'query_vars1' => array( 'tag_slug__and' => array( 'foo', 'bar' ) ),
+				'query_vars2' => array( 'tag_slug__and' => array( 'bar', 'foo' ) ),
 			),
 			'tag_slug__and non-unique'                     => array(
-				'query_vars_1' => array( 'tag_slug__and' => array( 'foo', 'bar', 'foo' ) ),
-				'query_vars_2' => array( 'tag_slug__and' => array( 'bar', 'foo' ) ),
+				'query_vars1' => array( 'tag_slug__and' => array( 'foo', 'bar', 'foo' ) ),
+				'query_vars2' => array( 'tag_slug__and' => array( 'bar', 'foo' ) ),
 			),
 			'tag__in queries different order (array)'      => array(
-				'query_vars_1' => array( 'tag__in' => array( 1, 2 ) ),
-				'query_vars_2' => array( 'tag__in' => array( 2, 1 ) ),
+				'query_vars1' => array( 'tag__in' => array( 1, 2 ) ),
+				'query_vars2' => array( 'tag__in' => array( 2, 1 ) ),
 			),
 			'tag__in queries non-unique array'             => array(
-				'query_vars_1' => array( 'tag__in' => array( 1, 2, 1 ) ),
-				'query_vars_2' => array( 'tag__in' => array( 2, 1 ) ),
+				'query_vars1' => array( 'tag__in' => array( 1, 2, 1 ) ),
+				'query_vars2' => array( 'tag__in' => array( 2, 1 ) ),
 			),
 			'tag__in queries int vs string'                => array(
-				'query_vars_1' => array( 'tag__in' => array( 2, 1 ) ),
-				'query_vars_2' => array( 'tag__in' => array( '2', '1' ) ),
+				'query_vars1' => array( 'tag__in' => array( 2, 1 ) ),
+				'query_vars2' => array( 'tag__in' => array( '2', '1' ) ),
 			),
 			'tag__and queries different order (array)'     => array(
-				'query_vars_1' => array( 'tag__and' => array( 1, 2 ) ),
-				'query_vars_2' => array( 'tag__and' => array( 2, 1 ) ),
+				'query_vars1' => array( 'tag__and' => array( 1, 2 ) ),
+				'query_vars2' => array( 'tag__and' => array( 2, 1 ) ),
 			),
 			'tag__and queries non-unique array'            => array(
-				'query_vars_1' => array( 'tag__and' => array( 1, 2, 2 ) ),
-				'query_vars_2' => array( 'tag__and' => array( 2, 1 ) ),
+				'query_vars1' => array( 'tag__and' => array( 1, 2, 2 ) ),
+				'query_vars2' => array( 'tag__and' => array( 2, 1 ) ),
 			),
 			'tag__not_in queries different order (array)'  => array(
-				'query_vars_1' => array( 'tag__not_in' => array( 1, 2 ) ),
-				'query_vars_2' => array( 'tag__not_in' => array( 2, 1 ) ),
+				'query_vars1' => array( 'tag__not_in' => array( 1, 2 ) ),
+				'query_vars2' => array( 'tag__not_in' => array( 2, 1 ) ),
 			),
 			'tag__not_in queries non-unique array'         => array(
-				'query_vars_1' => array( 'tag__not_in' => array( 1, 2, 2 ) ),
-				'query_vars_2' => array( 'tag__not_in' => array( 1, 2 ) ),
+				'query_vars1' => array( 'tag__not_in' => array( 1, 2, 2 ) ),
+				'query_vars2' => array( 'tag__not_in' => array( 1, 2 ) ),
 			),
 			'tag__not_in queries int vs string (array)'    => array(
-				'query_vars_1' => array( 'tag__not_in' => array( '1' ) ),
-				'query_vars_2' => array( 'tag__not_in' => array( 1 ) ),
+				'query_vars1' => array( 'tag__not_in' => array( '1' ) ),
+				'query_vars2' => array( 'tag__not_in' => array( 1 ) ),
 			),
 			'cache parameters'                             => array(
 				'query_vars1' => array(
@@ -750,7 +753,7 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	 *
 	 * @return array[] Test parameters.
 	 */
-	public function data_query_cache() {
+	public static function data_query_cache() {
 		return array(
 			'cache true'                                  => array(
 				'args' => array(
@@ -938,8 +941,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_seeded_random_queries_only_cache_post_objects() {
 		$args   = array(
 			'cache_results' => true,
@@ -959,8 +962,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_unseeded_random_queries_only_cache_post_objects() {
 		$args   = array(
 			'cache_results' => true,
@@ -980,8 +983,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_filter_request() {
 		$args   = array(
 			'cache_results' => true,
@@ -1002,8 +1005,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_no_caching() {
 		$args   = array(
 			'cache_results' => true,
@@ -1027,8 +1030,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_new_post() {
 		$args   = array(
 			'cache_results' => true,
@@ -1048,8 +1051,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_main_query_sticky_posts_change() {
 		add_action( 'parse_query', array( $this, 'set_cache_results' ) );
 		update_option( 'posts_per_page', 5 );
@@ -1079,8 +1082,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_main_query_in_query_sticky_posts_change() {
 		add_action( 'parse_query', array( $this, 'set_cache_results' ) );
 		update_option( 'posts_per_page', 5 );
@@ -1109,8 +1112,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_sticky_posts_change() {
 		add_action( 'parse_query', array( $this, 'set_cache_results' ) );
 
@@ -1154,8 +1157,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_in_query_sticky_posts_change() {
 		add_action( 'parse_query', array( $this, 'set_cache_results' ) );
 
@@ -1202,8 +1205,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_different_args() {
 		$args   = array(
 			'cache_results' => true,
@@ -1231,8 +1234,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_different_fields() {
 		$args   = array(
 			'cache_results' => true,
@@ -1268,8 +1271,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 
 
 	/**
-	 * @ticket 59188
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_query_cache_unprimed_parents() {
 		$args   = array(
 			'cache_results' => true,
@@ -1300,8 +1303,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59188
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_query_cache_update_parent() {
 		$page_id = self::factory()->post->create(
 			array(
@@ -1339,8 +1342,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59188
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_query_cache_delete_parent() {
 		$parent_page_id = self::factory()->post->create(
 			array(
@@ -1378,8 +1381,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_logged_in() {
 		$user_id = self::$author_id;
 
@@ -1407,8 +1410,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_logged_in_password() {
 		$user_id = self::$author_id;
 		self::factory()->post->create(
@@ -1436,8 +1439,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_new_comment() {
 		$args   = array(
 			'cache_results' => true,
@@ -1459,8 +1462,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_main_comments_feed_includes_attachment_comments() {
 		$attachment_id = self::factory()->post->create( array( 'post_type' => 'attachment' ) );
 		$comment_id    = self::factory()->comment->create(
@@ -1489,8 +1492,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_delete_comment() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$posts[0] ) );
 		$args       = array(
@@ -1512,8 +1515,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_update_post() {
 		$p1 = self::$posts[0];
 
@@ -1541,8 +1544,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_new_meta() {
 		$p1 = self::$posts[1]; // Post 0 already has a color meta value.
 
@@ -1569,8 +1572,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_update_meta() {
 		// Posts[0] already has a color meta value set to #000000.
 		$p1 = self::$posts[0];
@@ -1601,8 +1604,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_delete_attachment() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -1632,8 +1635,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_delete_meta() {
 		// Post 0 already has a color meta value.
 		$p1 = self::$posts[1];
@@ -1663,8 +1666,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_new_term() {
 		// Post 0 already has the category foo.
 		$p1 = self::$posts[1];
@@ -1694,8 +1697,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_delete_term() {
 		// Post 0 already has the category foo.
 		$p1 = self::$posts[1];
@@ -1731,8 +1734,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58599
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58599' )]
 	public function test_query_posts_fields_request() {
 		global $wpdb;
 
@@ -1768,9 +1771,9 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58599
-	 * @dataProvider data_query_filter_posts_results
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58599' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_filter_posts_results' )]
 	public function test_query_filter_posts_results( $filter ) {
 		global $wpdb;
 
@@ -1802,7 +1805,7 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		return array( get_post( self::$posts[0] ) );
 	}
 
-	public function data_query_filter_posts_results() {
+	public static function data_query_filter_posts_results() {
 		return array(
 			array( 'posts_results' ),
 			array( 'the_posts' ),
@@ -1810,8 +1813,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_should_exclude_post_with_excluded_term() {
 		$term_id = self::$t1;
 		// Post 0 has the term applied.
@@ -1839,8 +1842,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_should_exclude_post_when_excluded_term_is_added_after_caching() {
 		$term_id = self::$t1;
 		// Post 1 does not have the term applied.
@@ -1869,8 +1872,8 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_should_not_exclude_post_when_excluded_term_is_removed_after_caching() {
 		$term_id = self::$t1;
 		// Post 0 has the term applied.
@@ -1900,9 +1903,9 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22176
-	 * @dataProvider data_query_cache_with_empty_result_set
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_cache_with_empty_result_set' )]
 	public function test_query_cache_with_empty_result_set( $fields_q1, $fields_q2 ) {
 		_delete_all_posts();
 
@@ -1925,7 +1928,7 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries(), 'Second query is not cached.' );
 	}
 
-	public function data_query_cache_with_empty_result_set() {
+	public static function data_query_cache_with_empty_result_set() {
 		return array(
 			array( '', '' ),
 			array( '', 'ids' ),
@@ -1945,15 +1948,15 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	 * Ensure starting the loop warms the author cache.
 	 *
 	 * @since 6.1.1
-	 * @ticket 56948
-	 * @ticket 56992
 	 *
-	 * @covers WP_Query::the_post
 	 *
-	 * @dataProvider data_author_cache_warmed_by_the_loop
 	 *
 	 * @param string $fields Query fields.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56948' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56992' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_author_cache_warmed_by_the_loop' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'the_post' )]
 	public function test_author_cache_warmed_by_the_loop( $fields ) {
 		// Update post author for the parent post.
 		self::factory()->post->update_object( self::$pages[0], array( 'post_author' => self::$author_id ) );
@@ -1998,7 +2001,7 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_author_cache_warmed_by_the_loop() {
+	public static function data_author_cache_warmed_by_the_loop() {
 		return array(
 			'fields: empty'      => array( '' ),
 			'fields: all'        => array( 'all' ),
@@ -2012,9 +2015,9 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	 *
 	 * @since 6.2.0
 	 *
-	 * @ticket 57163
-	 * @ticket 22176
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_get_post_meta_lazy_loads_all_term_meta_data() {
 		$query = new WP_Query();
 

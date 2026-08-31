@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group user
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_wpSetCurrentUser extends WP_UnitTestCase {
 	protected static $user_id;
 	protected static $user_id2;
@@ -45,8 +45,8 @@ class Tests_User_wpSetCurrentUser extends WP_UnitTestCase {
 	/**
 	 * Test that you can set the current user by the name parameter when the current user is 0.
 	 *
-	 * @ticket 20845
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20845' )]
 	public function test_should_set_by_name_if_id_is_null() {
 		wp_set_current_user( 0 );
 		$this->assertSame( 0, get_current_user_id() );
@@ -61,10 +61,10 @@ class Tests_User_wpSetCurrentUser extends WP_UnitTestCase {
 	/**
 	 * Ensure user switching doesn't occur for the same user, even if type is non-int.
 	 *
-	 * @ticket 64628
 	 *
-	 * @dataProvider data_should_not_switch_to_same_user_type_equivalency
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64628' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_switch_to_same_user_type_equivalency' )]
 	public function test_should_not_switch_to_same_user_type_equivalency( string $type_function ) {
 		wp_set_current_user( self::$user_id );
 		$this->assertSame( self::$user_id, get_current_user_id(), "Current user's ID should match the ID of the user switched to." );
@@ -81,7 +81,7 @@ class Tests_User_wpSetCurrentUser extends WP_UnitTestCase {
 	 *
 	 * @return array[] Data provider.
 	 */
-	public function data_should_not_switch_to_same_user_type_equivalency(): array {
+	public static function data_should_not_switch_to_same_user_type_equivalency(): array {
 		return array(
 			'integer' => array( 'type_function' => 'intval' ),
 			'string'  => array( 'type_function' => 'strval' ),

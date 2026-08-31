@@ -1,11 +1,12 @@
 <?php
 
 /**
- * @group admin
- * @group user
  *
- * @covers WP_Users_List_Table
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Users_List_Table::class )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Users_List_Table::class, 'get_views' )]
 class Tests_Admin_wpUsersListTable extends WP_UnitTestCase {
 	/**
 	 * @var WP_Users_List_Table
@@ -18,10 +19,9 @@ class Tests_Admin_wpUsersListTable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42066
 	 *
-	 * @covers WP_Users_List_Table::get_views
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42066' )]
 	public function test_get_views_should_return_views_by_default() {
 		$expected = array(
 			'all'           => '<a href="users.php" class="current" aria-current="page">All <span class="count">(1)</span></a>',

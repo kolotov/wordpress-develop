@@ -1,16 +1,16 @@
 <?php
 /**
- * @group formatting
  *
- * @covers ::normalize_whitespace
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'normalize_whitespace' )]
 class Tests_Formatting_NormalizeWhitespace extends WP_UnitTestCase {
 
 	/**
 	 * Tests the normalize_whitespace() function.
 	 *
-	 * @dataProvider data_normalize_whitespace
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_normalize_whitespace' )]
 	public function test_normalize_whitespace( $input, $expected ) {
 		$this->assertSame( $expected, normalize_whitespace( $input ) );
 	}
@@ -25,7 +25,7 @@ class Tests_Formatting_NormalizeWhitespace extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_normalize_whitespace() {
+	public static function data_normalize_whitespace() {
 		return array(
 			array(
 				'		',

@@ -1,22 +1,22 @@
 <?php
 
 /**
- * @group taxonomy
  *
- * @covers ::sanitize_term
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_term' )]
 class Tests_Term_SanitizeTerm extends WP_UnitTestCase {
 
 	/**
 	 * Tests sanitize_term() inputs and outputs.
 	 *
-	 * @ticket 64238
-	 * @dataProvider data_sanitize_term
 	 *
 	 * @param Closure(): (object|array<string, mixed>) $input_callback       Callback to get the term data.
 	 * @param string                                   $context              Context in which to sanitize the term.
 	 * @param string                                   $expected_description Expected sanitized description.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64238' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_term' )]
 	public function test_sanitize_term( Closure $input_callback, string $context, string $expected_description ): void {
 		$input    = $input_callback();
 		$taxonomy = 'category';
@@ -47,7 +47,7 @@ class Tests_Term_SanitizeTerm extends WP_UnitTestCase {
 	 *     expected_description: string,
 	 * }>
 	 */
-	public function data_sanitize_term(): array {
+	public static function data_sanitize_term(): array {
 		$description = 'Test <script>console.log("Hello")</script> Description';
 
 		return array(

@@ -7,9 +7,9 @@
  *
  * @since 7.1.0
  *
- * @group blocks
- * @covers ::get_block_wrapper_attributes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_block_wrapper_attributes' )]
 class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 
 	/**
@@ -29,8 +29,8 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 	/**
 	 * The string '0' is preserved for block support attributes.
 	 *
-	 * @ticket 64452
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_preserves_string_zero_values(): void {
 		WP_Block_Supports::init();
 		register_block_type(
@@ -55,8 +55,8 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64452
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_preserves_string_zero_values_from_extra_attributes(): void {
 		WP_Block_Supports::init();
 		register_block_type( 'core/example' );
@@ -75,8 +75,8 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64452
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_preserves_numeric_values(): void {
 		WP_Block_Supports::init();
 		register_block_type(
@@ -101,8 +101,8 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64452
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_preserves_numeric_values_from_extra_attributes(): void {
 		WP_Block_Supports::init();
 		register_block_type( 'core/example' );
@@ -120,8 +120,8 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64452
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_excludes_non_scalar_values(): void {
 		WP_Block_Supports::init();
 		register_block_type(
@@ -146,8 +146,8 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64452
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_excludes_non_scalar_values_from_extra_attributes(): void {
 		WP_Block_Supports::init();
 		register_block_type( 'core/example' );

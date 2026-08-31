@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group post
- * @covers ::post_password_required
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'post_password_required' )]
 class Tests_Post_PostPasswordRequired extends WP_UnitTestCase {
 	/**
 	 * @var PasswordHash

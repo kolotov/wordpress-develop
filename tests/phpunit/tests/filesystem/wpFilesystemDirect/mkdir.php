@@ -8,12 +8,12 @@
 require_once __DIR__ . '/base.php';
 
 /**
- * @group admin
- * @group filesystem
- * @group filesystem-direct
  *
- * @covers WP_Filesystem_Direct::mkdir
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem-direct' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Filesystem_Direct::class, 'mkdir' )]
 class Tests_Filesystem_WpFilesystemDirect_Mkdir extends WP_Filesystem_Direct_UnitTestCase {
 
 	/**
@@ -26,15 +26,15 @@ class Tests_Filesystem_WpFilesystemDirect_Mkdir extends WP_Filesystem_Direct_Uni
 	 * "Serialization of 'Closure' is not allowed." when running in a
 	 * separate process.
 	 *
-	 * @ticket 57774
 	 *
-	 * @dataProvider data_should_create_directory
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 *
 	 * @param mixed $path The path to create.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_create_directory' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 	public function test_should_create_directory( $path ) {
 		define( 'FS_CHMOD_DIR', 0755 );
 
@@ -53,7 +53,7 @@ class Tests_Filesystem_WpFilesystemDirect_Mkdir extends WP_Filesystem_Direct_Uni
 	 *
 	 * @return array[]
 	 */
-	public function data_should_create_directory() {
+	public static function data_should_create_directory() {
 		return array(
 			'no trailing slash' => array(
 				'path' => 'TEST_DIR/directory-to-create',
@@ -74,15 +74,15 @@ class Tests_Filesystem_WpFilesystemDirect_Mkdir extends WP_Filesystem_Direct_Uni
 	 * "Serialization of 'Closure' is not allowed." when running in a
 	 * separate process.
 	 *
-	 * @ticket 57774
 	 *
-	 * @dataProvider data_should_not_create_directory
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 *
 	 * @param mixed $path     The path to create.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_create_directory' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 	public function test_should_not_create_directory( $path ) {
 		define( 'FS_CHMOD_DIR', 0755 );
 
@@ -101,7 +101,7 @@ class Tests_Filesystem_WpFilesystemDirect_Mkdir extends WP_Filesystem_Direct_Uni
 	 *
 	 * @return array[]
 	 */
-	public function data_should_not_create_directory() {
+	public static function data_should_not_create_directory() {
 		return array(
 			'empty path'         => array(
 				'path' => '',
@@ -115,8 +115,8 @@ class Tests_Filesystem_WpFilesystemDirect_Mkdir extends WP_Filesystem_Direct_Uni
 	/**
 	 * Tests that `WP_Filesystem_Direct::mkdir()` sets chmod.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_set_chmod() {
 		$path = self::$file_structure['test_dir']['path'] . 'directory-to-create';
 
@@ -143,11 +143,11 @@ class Tests_Filesystem_WpFilesystemDirect_Mkdir extends WP_Filesystem_Direct_Uni
 	 * "Serialization of 'Closure' is not allowed." when running in a
 	 * separate process.
 	 *
-	 * @ticket 57774
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 	public function test_should_set_owner() {
 		define( 'FS_CHMOD_DIR', 0755 );
 
@@ -180,11 +180,11 @@ class Tests_Filesystem_WpFilesystemDirect_Mkdir extends WP_Filesystem_Direct_Uni
 	 * "Serialization of 'Closure' is not allowed." when running in a
 	 * separate process.
 	 *
-	 * @ticket 57774
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 	public function test_should_set_group() {
 		define( 'FS_CHMOD_DIR', 0755 );
 

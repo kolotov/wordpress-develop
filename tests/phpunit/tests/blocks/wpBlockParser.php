@@ -6,10 +6,10 @@
  * @subpackage Blocks
  * @since 5.0.0
  *
- * @group blocks
  *
- * @coversDefaultClass WP_Block_Parser
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Block_Parser::class, 'parse' )]
 class Tests_Blocks_wpBlockParser extends WP_UnitTestCase {
 	/**
 	 * The location of the fixtures to test with.
@@ -20,11 +20,10 @@ class Tests_Blocks_wpBlockParser extends WP_UnitTestCase {
 	protected static $fixtures_dir;
 
 	/**
-	 * @dataProvider data_parsing_test_filenames
-	 * @ticket 45109
 	 *
-	 * @covers ::parse
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_parsing_test_filenames' )]
 	public function test_default_parser_output( $html_filename, $parsed_json_filename ) {
 		$html_path        = self::$fixtures_dir . '/' . $html_filename;
 		$parsed_json_path = self::$fixtures_dir . '/' . $parsed_json_filename;
@@ -49,9 +48,8 @@ class Tests_Blocks_wpBlockParser extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45109
 	 */
-	public function data_parsing_test_filenames() {
+	public static function data_parsing_test_filenames() {
 		self::$fixtures_dir = DIR_TESTDATA . '/blocks/fixtures';
 
 		$fixture_filenames = array_merge(
@@ -62,14 +60,14 @@ class Tests_Blocks_wpBlockParser extends WP_UnitTestCase {
 		$fixture_filenames = array_values(
 			array_unique(
 				array_map(
-					array( $this, 'clean_fixture_filename' ),
+					array( self::class, 'clean_fixture_filename' ),
 					$fixture_filenames
 				)
 			)
 		);
 
 		return array_map(
-			array( $this, 'pass_parser_fixture_filenames' ),
+			array( self::class, 'pass_parser_fixture_filenames' ),
 			$fixture_filenames
 		);
 	}
@@ -82,7 +80,7 @@ class Tests_Blocks_wpBlockParser extends WP_UnitTestCase {
 	 * @param string $filename The filename to clean.
 	 * @return string The cleaned fixture name.
 	 */
-	protected function clean_fixture_filename( $filename ) {
+	protected static function clean_fixture_filename( $filename ) {
 		$filename = wp_basename( $filename );
 		$filename = preg_replace( '/\..+$/', '', $filename );
 		return $filename;
@@ -96,7 +94,7 @@ class Tests_Blocks_wpBlockParser extends WP_UnitTestCase {
 	 * @param string $filename The cleaned fixture name.
 	 * @return array The input and expected output filenames for that fixture.
 	 */
-	protected function pass_parser_fixture_filenames( $filename ) {
+	protected static function pass_parser_fixture_filenames( $filename ) {
 		return array(
 			"$filename.html",
 			"$filename.parsed.json",

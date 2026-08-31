@@ -3,9 +3,9 @@
 /**
  * Tests for the parent comment selector on the Edit Comment screen.
  *
- * @group admin
- * @group comment
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 class Admin_EditFormComment_Test extends WP_UnitTestCase {
 
 	/**
@@ -73,9 +73,7 @@ class Admin_EditFormComment_Test extends WP_UnitTestCase {
 		return $matches[0];
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_list_valid_parents_and_exclude_invalid_ones() {
 		$top_id     = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 		$reply_id   = self::factory()->comment->create(
@@ -122,9 +120,7 @@ class Admin_EditFormComment_Test extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( "value='{$pending_id}'", $dropdown, 'A pending comment should not be listed for an approved comment.' );
 	}
 
-	/**
-	 * @ticket 65688
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65688' )]
 	public function test_should_list_pending_parent_for_pending_comment() {
 		$parent_id  = self::factory()->comment->create(
 			array(
@@ -144,9 +140,7 @@ class Admin_EditFormComment_Test extends WP_UnitTestCase {
 		$this->assertStringContainsString( "value='{$parent_id}'", $dropdown, 'A pending comment should be listed for another pending comment.' );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_not_render_parent_selector_when_comment_threading_is_disabled() {
 		update_option( 'thread_comments', 0 );
 
@@ -158,9 +152,7 @@ class Admin_EditFormComment_Test extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'name="comment_parent"', $output, 'The parent selector should not be rendered.' );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_account_for_replies_when_excluding_deep_parents() {
 		update_option( 'thread_comments_depth', 3 );
 
@@ -185,9 +177,7 @@ class Admin_EditFormComment_Test extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( "value='{$mid_id}'", $dropdown, 'A parent whose depth plus the replies would exceed the maximum should not be listed.' );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_list_current_parent_even_when_it_is_not_a_valid_option() {
 		$spam_parent_id = self::factory()->comment->create(
 			array(

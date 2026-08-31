@@ -2,18 +2,18 @@
 /**
  * Some simple test cases for KSES post content filtering
  *
- * @group formatting
- * @group kses
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\Group( 'kses' )]
 class Tests_Kses extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_wp_filter_post_kses_address
-	 * @ticket 20210
 	 *
 	 * @param string $content  Test string for kses.
 	 * @param string $expected Expected result after passing through kses.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20210' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_filter_post_kses_address' )]
 	public function test_wp_filter_post_kses_address( $content, $expected ) {
 		global $allowedposttags;
 
@@ -28,7 +28,7 @@ class Tests_Kses extends WP_UnitTestCase {
 	 *     @type string $expected Expected result after passing through kses.
 	 * }
 	 */
-	public function data_wp_filter_post_kses_address() {
+	public static function data_wp_filter_post_kses_address() {
 		$attributes = array(
 			'class' => 'classname',
 			'id'    => 'id',
@@ -56,12 +56,12 @@ class Tests_Kses extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_wp_filter_post_kses_a
-	 * @ticket 20210
 	 *
 	 * @param string $content  Test string for kses.
 	 * @param string $expected Expected result after passing through kses.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20210' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_filter_post_kses_a' )]
 	public function test_wp_filter_post_kses_a( $content, $expected ) {
 		global $allowedposttags;
 
@@ -76,7 +76,7 @@ class Tests_Kses extends WP_UnitTestCase {
 	 *     @type string $expected Expected result after passing through kses.
 	 * }
 	 */
-	public function data_wp_filter_post_kses_a() {
+	public static function data_wp_filter_post_kses_a() {
 		$attributes = array(
 			'class'    => 'classname',
 			'id'       => 'id',
@@ -111,14 +111,14 @@ class Tests_Kses extends WP_UnitTestCase {
 	/**
 	 * Test video tag.
 	 *
-	 * @ticket 50167
-	 * @ticket 29826
-	 * @dataProvider data_wp_kses_video
 	 *
 	 * @param string $source   Source HTML.
 	 * @param string $context  Context to use for parsing source.
 	 * @param string $expected Expected output following KSES parsing.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50167' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '29826' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_kses_video' )]
 	public function test_wp_kses_video( $source, $context, $expected ) {
 		$this->assertEqualHTML( $expected, wp_kses( $source, $context ) );
 	}
@@ -132,7 +132,7 @@ class Tests_Kses extends WP_UnitTestCase {
 	 *     @type string $expected Expected output following KSES parsing.
 	 * }
 	 */
-	public function data_wp_kses_video() {
+	public static function data_wp_kses_video() {
 		return array(
 			// Set 0: Valid post object params in post context.
 			array(
@@ -162,12 +162,12 @@ class Tests_Kses extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_wp_filter_post_kses_abbr
-	 * @ticket 20210
 	 *
 	 * @param string $content  Test string for kses.
 	 * @param string $expected Expected result after passing through kses.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20210' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_filter_post_kses_abbr' )]
 	public function test_wp_filter_post_kses_abbr( $content, $expected ) {
 		global $allowedposttags;
 
@@ -182,7 +182,7 @@ class Tests_Kses extends WP_UnitTestCase {
 	 *     @type string $expected Expected result after passing through kses.
 	 * }
 	 */
-	public function data_wp_filter_post_kses_abbr() {
+	public static function data_wp_filter_post_kses_abbr() {
 		$attributes = array(
 			'class' => 'classname',
 			'id'    => 'id',
@@ -480,8 +480,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 20210
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20210' )]
 	public function test_wp_kses_allowed_html() {
 		global $allowedposttags, $allowedtags, $allowedentitynames;
 
@@ -539,10 +539,10 @@ EOF;
 	/**
 	 * Tests that the comment content context allows only the mention span beyond the defaults.
 	 *
-	 * @ticket 65622
 	 *
-	 * @covers ::_wp_kses_allow_note_mention_span
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65622' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_allow_note_mention_span' )]
 	public function test_wp_kses_allowed_html_pre_comment_content_allows_only_the_mention_span() {
 		global $allowedtags;
 
@@ -565,11 +565,11 @@ EOF;
 	/**
 	 * Tests that a note mention survives content sanitization of a `note` comment.
 	 *
-	 * @ticket 65622
 	 *
-	 * @covers ::_wp_kses_allow_note_mention_span
-	 * @covers ::_wp_kses_sanitize_note_mention_classes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65622' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_allow_note_mention_span' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_sanitize_note_mention_classes' )]
 	public function test_note_mention_markup_survives_note_content_sanitization() {
 		add_filter( 'pre_comment_content', 'wp_filter_kses' );
 
@@ -588,11 +588,11 @@ EOF;
 	 * mention markup is inert, so uniform sanitization avoids stateful
 	 * arming and disarming of kses filters around each note write.
 	 *
-	 * @ticket 65622
 	 *
-	 * @covers ::_wp_kses_allow_note_mention_span
-	 * @covers ::_wp_kses_sanitize_note_mention_classes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65622' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_allow_note_mention_span' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_sanitize_note_mention_classes' )]
 	public function test_note_mention_markup_survives_regular_comment_content_sanitization() {
 		add_filter( 'pre_comment_content', 'wp_filter_kses' );
 		$content  = 'Hello <span class="wp-note-mention user-2">@admin</span>!';
@@ -604,10 +604,10 @@ EOF;
 	/**
 	 * Tests that span classes are reduced to the two mention tokens.
 	 *
-	 * @ticket 65622
 	 *
-	 * @covers ::_wp_kses_sanitize_note_mention_classes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65622' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_sanitize_note_mention_classes' )]
 	public function test_note_mention_span_classes_are_reduced_to_the_mention_tokens() {
 		add_filter( 'pre_comment_content', 'wp_filter_kses' );
 		$content  = 'Hello <span class="wp-note-mention user-2 is-destructive components-button">@admin</span>!';
@@ -626,10 +626,10 @@ EOF;
 	 * kses preserves tag-name casing, so the class reduction must match `SPAN`
 	 * case-insensitively rather than bail on a `<span` substring check.
 	 *
-	 * @ticket 65622
 	 *
-	 * @covers ::_wp_kses_sanitize_note_mention_classes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65622' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_sanitize_note_mention_classes' )]
 	public function test_note_mention_class_tokens_are_reduced_on_uppercase_span_tags() {
 		add_filter( 'pre_comment_content', 'wp_filter_kses' );
 		$content  = 'Hello <SPAN class="wp-note-mention user-2 is-destructive">@admin</SPAN>!';
@@ -646,10 +646,10 @@ EOF;
 	/**
 	 * Tests that the class attribute is removed when no mention tokens remain.
 	 *
-	 * @ticket 65622
 	 *
-	 * @covers ::_wp_kses_sanitize_note_mention_classes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65622' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_sanitize_note_mention_classes' )]
 	public function test_note_mention_class_attribute_removed_when_no_tokens_remain() {
 		add_filter( 'pre_comment_content', 'wp_filter_kses' );
 		$content  = 'Hello <span class="is-destructive user-0 user-x wp-note-mention-foo">there</span>!';
@@ -668,10 +668,10 @@ EOF;
 	/**
 	 * Tests that only the `class` attribute is allowed on mention spans.
 	 *
-	 * @ticket 65622
 	 *
-	 * @covers ::_wp_kses_allow_note_mention_span
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65622' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_allow_note_mention_span' )]
 	public function test_note_mention_allows_only_class_on_mention_spans() {
 		add_filter( 'pre_comment_content', 'wp_filter_kses' );
 		$content  = 'Hello <span class="wp-note-mention user-2" data-user-id="2" onclick="alert(1)" style="color:red" id="mention">@admin</span>!';
@@ -687,10 +687,10 @@ EOF;
 	/**
 	 * Tests that `class` is still stripped from links in comment content.
 	 *
-	 * @ticket 65622
 	 *
-	 * @covers ::_wp_kses_allow_note_mention_span
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65622' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_allow_note_mention_span' )]
 	public function test_class_is_still_stripped_from_links_in_comment_content() {
 		add_filter( 'pre_comment_content', 'wp_filter_kses' );
 
@@ -716,10 +716,10 @@ EOF;
 	 * (or not at all), where arbitrary classes are permitted; the mention
 	 * class reduction must not narrow what they can post.
 	 *
-	 * @ticket 65622
 	 *
-	 * @covers ::_wp_kses_sanitize_note_mention_classes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65622' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_kses_sanitize_note_mention_classes' )]
 	public function test_note_mention_class_reduction_skipped_when_restrictive_kses_is_inactive() {
 		// kses_init() hooks wp_filter_kses by default in the test
 		// environment, so detach it to simulate the unfiltered_html setup.
@@ -836,11 +836,11 @@ EOF;
 	}
 
 	/**
-	 * @ticket 26290
-	 * @ticket 63630
 	 *
-	 * @dataProvider data_normalize_entities
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26290' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63630' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_normalize_entities' )]
 	public function test_wp_kses_normalize_entities( string $input, string $expected ) {
 		$this->assertEqualHTML( $expected, wp_kses_normalize_entities( $input ) );
 	}
@@ -848,16 +848,16 @@ EOF;
 	/**
 	 * Test removal of invalid binary data for HTML.
 	 *
-	 * @ticket 28506
-	 * @dataProvider data_ctrl_removal
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28506' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ctrl_removal' )]
 	public function test_ctrl_removal( $content, $expected ) {
 		global $allowedposttags;
 
 		return $this->assertEqualHTML( $expected, wp_kses( $content, $allowedposttags ) );
 	}
 
-	public function data_ctrl_removal() {
+	public static function data_ctrl_removal() {
 		return array(
 			array(
 				"\x00\x01\x02\x03\x04\x05\x06\x07\x08\x0B\x0C\x0E\x0F\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\X1C\x1D\x1E\x1F",
@@ -885,16 +885,16 @@ EOF;
 	/**
 	 * Test removal of '\0' strings.
 	 *
-	 * @ticket 28699
-	 * @dataProvider data_slash_zero_removal
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28699' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_slash_zero_removal' )]
 	public function test_slash_zero_removal( $content, $expected ) {
 		global $allowedposttags;
 
 		return $this->assertEqualHTML( $expected, wp_kses( $content, $allowedposttags ) );
 	}
 
-	public function data_slash_zero_removal() {
+	public static function data_slash_zero_removal() {
 		return array(
 			array(
 				'This \\0 should be no big deal.',
@@ -938,13 +938,13 @@ EOF;
 	/**
 	 * Test new function wp_kses_hair_parse().
 	 *
-	 * @dataProvider data_hair_parse
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_hair_parse' )]
 	public function test_hair_parse( $input, $output ) {
 		return $this->assertSame( $output, wp_kses_hair_parse( $input ) );
 	}
 
-	public function data_hair_parse() {
+	public static function data_hair_parse() {
 		return array(
 			array(
 				'title="hello" href="#" id="my_id" ',
@@ -1004,13 +1004,13 @@ EOF;
 	/**
 	 * Test new function wp_kses_attr_parse().
 	 *
-	 * @dataProvider data_attr_parse
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attr_parse' )]
 	public function test_attr_parse( $input, $output ) {
 		return $this->assertSame( $output, wp_kses_attr_parse( $input ) );
 	}
 
-	public function data_attr_parse() {
+	public static function data_attr_parse() {
 		return array(
 			array(
 				'<a title="hello" href="#" id="my_id" >',
@@ -1062,13 +1062,13 @@ EOF;
 	/**
 	 * Test new function wp_kses_one_attr().
 	 *
-	 * @dataProvider data_one_attr
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_one_attr' )]
 	public function test_one_attr( $element, $input, $output ) {
 		return $this->assertSame( $output, wp_kses_one_attr( $input, $element ) );
 	}
 
-	public function data_one_attr() {
+	public static function data_one_attr() {
 		return array(
 			array(
 				'a',
@@ -1139,8 +1139,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 34063
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34063' )]
 	public function test_bdo_tag_allowed() {
 		global $allowedposttags;
 
@@ -1150,8 +1150,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 54698
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54698' )]
 	public function test_ruby_tag_allowed() {
 		global $allowedposttags;
 
@@ -1161,8 +1161,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35079
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35079' )]
 	public function test_ol_reversed_attribute_allowed() {
 		global $allowedposttags;
 
@@ -1172,8 +1172,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 40680
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40680' )]
 	public function test_wp_kses_attr_no_attributes_allowed_with_empty_array() {
 		$element   = 'foo';
 		$attribute = 'title="foo" class="bar"';
@@ -1182,8 +1182,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 40680
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40680' )]
 	public function test_wp_kses_attr_no_attributes_allowed_with_true() {
 		$element   = 'foo';
 		$attribute = 'title="foo" class="bar"';
@@ -1192,8 +1192,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 40680
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40680' )]
 	public function test_wp_kses_attr_single_attribute_is_allowed() {
 		$element   = 'foo';
 		$attribute = 'title="foo" class="bar"';
@@ -1202,8 +1202,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 43312
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43312' )]
 	public function test_wp_kses_attr_no_attributes_allowed_with_false() {
 		$element   = 'foo';
 		$attribute = 'title="foo" class="bar"';
@@ -1214,23 +1214,23 @@ EOF;
 	/**
 	 * Testing the safecss_filter_attr() function.
 	 *
-	 * @ticket 37248
-	 * @ticket 42729
-	 * @ticket 48376
-	 * @ticket 55966
-	 * @ticket 56122
-	 * @ticket 58551
-	 * @ticket 60132
-	 * @ticket 64414
-	 * @ticket 65457
-	 * @ticket 64974
-	 * @ticket 65832
 	 *
-	 * @dataProvider data_safecss_filter_attr
 	 *
 	 * @param string $css      A string of CSS rules.
 	 * @param string $expected Expected string of CSS rules.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37248' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '42729' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '48376' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55966' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56122' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58551' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60132' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65457' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64974' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65832' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_safecss_filter_attr' )]
 	public function test_safecss_filter_attr( $css, $expected ) {
 		$this->assertSame( $expected, safecss_filter_attr( $css ) );
 	}
@@ -1245,7 +1245,7 @@ EOF;
 	 *     }
 	 * }
 	 */
-	public function data_safecss_filter_attr() {
+	public static function data_safecss_filter_attr() {
 		return array(
 			// Empty input, empty output.
 			array(
@@ -1888,8 +1888,8 @@ EOF;
 	/**
 	 * Data attributes are globally accepted.
 	 *
-	 * @ticket 33121
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33121' )]
 	public function test_wp_kses_attr_data_attribute_is_allowed() {
 		$test     = '<div data-foo="foo" data-bar="bar" datainvalid="gone" data-two-hyphens="remains">Pens and pencils</div>';
 		$expected = '<div data-foo="foo" data-bar="bar" data-two-hyphens="remains">Pens and pencils</div>';
@@ -1900,8 +1900,8 @@ EOF;
 	/**
 	 * Data attributes with leading, trailing, and double "-" are globally accepted.
 	 *
-	 * @ticket 61052
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61052' )]
 	public function test_wp_kses_attr_data_attribute_hypens_allowed() {
 		$test     = '<div data--leading="remains" data-trailing-="remains" data-middle--double="remains">Pens and pencils</div>';
 		$expected = '<div data--leading="remains" data-trailing-="remains" data-middle--double="remains">Pens and pencils</div>';
@@ -1912,8 +1912,8 @@ EOF;
 	/**
 	 * Ensure wildcard attributes block unprefixed wildcard uses.
 	 *
-	 * @ticket 33121
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33121' )]
 	public function test_wildcard_requires_hyphen_after_prefix() {
 		$allowed_html = array(
 			'div' => array(
@@ -1933,8 +1933,8 @@ EOF;
 	/**
 	 * Ensure wildcard allows two hyphen.
 	 *
-	 * @ticket 33121
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33121' )]
 	public function test_wildcard_allows_two_hyphens() {
 		$allowed_html = array(
 			'div' => array(
@@ -1953,10 +1953,10 @@ EOF;
 	/**
 	 * Ensure wildcard attributes only support valid prefixes.
 	 *
-	 * @dataProvider data_wildcard_attribute_prefixes
 	 *
-	 * @ticket 33121
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33121' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wildcard_attribute_prefixes' )]
 	public function test_wildcard_attribute_prefixes( $wildcard_attribute, $expected ) {
 		$allowed_html = array(
 			'div' => array(
@@ -1978,7 +1978,7 @@ EOF;
 	 *               [0] The prefix being tested.
 	 *               [1] The outcome of `wp_kses_attr_check` for the prefix.
 	 */
-	public function data_wildcard_attribute_prefixes() {
+	public static function data_wildcard_attribute_prefixes() {
 		return array(
 			// Ends correctly.
 			array( 'data-*', true ),
@@ -1995,13 +1995,13 @@ EOF;
 	/**
 	 * Tests that style attribute values are decoded before CSS filtering.
 	 *
-	 * @ticket 65270
 	 *
-	 * @dataProvider data_wp_kses_style_attr_decodes_entities_before_css_filtering
 	 *
 	 * @param string $content  A string of HTML to test.
 	 * @param string $expected Expected result after passing through KSES.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65270' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_kses_style_attr_decodes_entities_before_css_filtering' )]
 	public function test_wp_kses_style_attr_decodes_entities_before_css_filtering( $content, $expected ) {
 		$allowed_html = array(
 			'div' => array(
@@ -2017,7 +2017,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_kses_style_attr_decodes_entities_before_css_filtering() {
+	public static function data_wp_kses_style_attr_decodes_entities_before_css_filtering() {
 		return array(
 			'background image URL with single quotes' => array(
 				'<div style="background-image: url(\'https://localhost/image.jpg\');"></div>',
@@ -2041,15 +2041,15 @@ EOF;
 	/**
 	 * Test URL sanitization in the style tag.
 	 *
-	 * @dataProvider data_kses_style_attr_with_url
 	 *
-	 * @ticket 45067
-	 * @ticket 46197
-	 * @ticket 46498
 	 *
 	 * @param $input string The style attribute saved in the editor.
 	 * @param $expected string The sanitized style attribute.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45067' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '46197' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '46498' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_kses_style_attr_with_url' )]
 	public function test_kses_style_attr_with_url( $input, $expected ) {
 		$actual = safecss_filter_attr( $input );
 
@@ -2061,7 +2061,7 @@ EOF;
 	 *
 	 * @return array Nested array of input, expected pairs.
 	 */
-	public function data_kses_style_attr_with_url() {
+	public static function data_kses_style_attr_with_url() {
 		return array(
 			/*
 			 * Valid use cases.
@@ -2190,13 +2190,13 @@ EOF;
 	/**
 	 * Testing the safecss_filter_attr() function with the safecss_filter_attr_allow_css filter.
 	 *
-	 * @ticket 37134
 	 *
-	 * @dataProvider data_safecss_filter_attr_filtered
 	 *
 	 * @param string $css      A string of CSS rules.
 	 * @param string $expected Expected string of CSS rules.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37134' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_safecss_filter_attr_filtered' )]
 	public function test_safecss_filter_attr_filtered( $css, $expected ) {
 		add_filter( 'safecss_filter_attr_allow_css', '__return_true' );
 		$this->assertSame( $expected, safecss_filter_attr( $css ) );
@@ -2213,7 +2213,7 @@ EOF;
 	 *     }
 	 * }
 	 */
-	public function data_safecss_filter_attr_filtered() {
+	public static function data_safecss_filter_attr_filtered() {
 		return array(
 
 			// A single attribute name, with a single value.
@@ -2262,8 +2262,8 @@ EOF;
 	/**
 	 * Test filtering a standard img tag.
 	 *
-	 * @ticket 50731
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50731' )]
 	public function test_wp_kses_img_tag_standard_attributes() {
 		$html = array(
 			'<img',
@@ -2284,8 +2284,8 @@ EOF;
 	/**
 	 * Test filtering a standard main tag.
 	 *
-	 * @ticket 53156
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53156' )]
 	public function test_wp_kses_main_tag_standard_attributes() {
 		$test = array(
 			'<main',
@@ -2302,8 +2302,8 @@ EOF;
 	/**
 	 * Tests that the autofocus attribute is allowed on dialog elements and removed from other focusable elements.
 	 *
-	 * @ticket 65491
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65491' )]
 	public function test_wp_kses_dialog_autofocus_attribute() {
 		$html     = '<dialog open autofocus>Content</dialog><button type="button" autofocus>Button</button><textarea autofocus>Some content</textarea><div tabindex="0" autofocus>Some content</div>';
 		$expected = '<dialog open autofocus>Content</dialog><button type="button">Button</button><textarea>Some content</textarea><div tabindex="0">Some content</div>';
@@ -2314,8 +2314,8 @@ EOF;
 	/**
 	 * Test that Invoker Commands API attributes are preserved on buttons in post content.
 	 *
-	 * @ticket 64576
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64576' )]
 	public function test_wp_kses_button_invoker_command_attributes() {
 		$html = '<button type="button" commandfor="my-popover" command="toggle-popover">Toggle</button><div id="my-popover" popover>Content</div>';
 
@@ -2325,13 +2325,13 @@ EOF;
 	/**
 	 * Test that object tags are allowed under limited circumstances.
 	 *
-	 * @ticket 54261
 	 *
-	 * @dataProvider data_wp_kses_object_tag_allowed
 	 *
 	 * @param string $html     A string of HTML to test.
 	 * @param string $expected The expected result from KSES.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54261' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_kses_object_tag_allowed' )]
 	public function test_wp_kses_object_tag_allowed( $html, $expected ) {
 		$this->assertEqualHTML( $expected, wp_kses_post( $html ) );
 	}
@@ -2339,7 +2339,7 @@ EOF;
 	/**
 	 * Data provider for test_wp_kses_object_tag_allowed().
 	 */
-	public function data_wp_kses_object_tag_allowed() {
+	public static function data_wp_kses_object_tag_allowed() {
 		return array(
 			'valid value for type'                    => array(
 				'<object type="application/pdf" data="https://' . WP_TESTS_DOMAIN . '/foo.pdf" />',
@@ -2435,13 +2435,13 @@ EOF;
 	/**
 	 * Test that object tags are allowed when there is a port number in the URL.
 	 *
-	 * @ticket 54261
 	 *
-	 * @dataProvider data_wp_kses_object_data_url_with_port_number_allowed
 	 *
 	 * @param string $html     A string of HTML to test.
 	 * @param string $expected The expected result from KSES.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54261' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_kses_object_data_url_with_port_number_allowed' )]
 	public function test_wp_kses_object_data_url_with_port_number_allowed( $html, $expected ) {
 		add_filter( 'upload_dir', array( $this, 'wp_kses_upload_dir_filter' ), 10, 2 );
 		$this->assertEqualHTML( $expected, wp_kses_post( $html ) );
@@ -2450,7 +2450,7 @@ EOF;
 	/**
 	 * Data provider for test_wp_kses_object_data_url_with_port_number_allowed().
 	 */
-	public function data_wp_kses_object_data_url_with_port_number_allowed() {
+	public static function data_wp_kses_object_data_url_with_port_number_allowed() {
 		return array(
 			'url with port number'                   => array(
 				'<object type="application/pdf" data="https://example.org:8888/cat/foo.pdf" />',
@@ -2494,8 +2494,8 @@ EOF;
 	 * Test that object tags will continue to function if they've been added using the
 	 * 'wp_kses_allowed_html' filter.
 	 *
-	 * @ticket 54261
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54261' )]
 	public function test_wp_kses_object_added_in_html_filter() {
 		$html = <<<HTML
 <object type="application/pdf" data="https://wordpress.org/foo.pdf" />
@@ -2532,14 +2532,14 @@ HTML;
 	/**
 	 * Ensures that `wp_kses()` preserves various kinds of HTML comments, both valid and invalid.
 	 *
-	 * @ticket 61009
 	 *
-	 * @dataProvider data_html_containing_various_kinds_of_html_comments
 	 *
 	 * @param string $html_comment    HTML containing a comment; must not be a valid comment
 	 *                                but must be syntax which a browser interprets as a comment.
 	 * @param string $expected_output How `wp_kses()` ought to transform the comment.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61009' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_html_containing_various_kinds_of_html_comments' )]
 	public function test_wp_kses_preserves_html_comments( $html_comment, $expected_output ) {
 		$this->assertEqualHTML(
 			$expected_output,
@@ -2565,14 +2565,14 @@ HTML;
 	/**
 	 * Test that attributes with a list of allowed values are filtered correctly.
 	 *
-	 * @ticket 54261
 	 *
-	 * @dataProvider data_wp_kses_allowed_values_list
 	 *
 	 * @param string $content      A string of HTML to test.
 	 * @param string $expected     The expected result from KSES.
 	 * @param array  $allowed_html The allowed HTML to pass to KSES.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54261' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_kses_allowed_values_list' )]
 	public function test_wp_kses_allowed_values_list( $content, $expected, $allowed_html ) {
 		$this->assertEqualHTML( $expected, wp_kses( $content, $allowed_html ) );
 	}
@@ -2580,7 +2580,7 @@ HTML;
 	/**
 	 * Data provider for test_wp_kses_allowed_values_list().
 	 */
-	public function data_wp_kses_allowed_values_list() {
+	public static function data_wp_kses_allowed_values_list() {
 		$data = array(
 			'valid dir attribute value'             => array(
 				'<p dir="ltr">foo</p>',
@@ -2623,14 +2623,14 @@ HTML;
 	/**
 	 * Test that attributes with the required flag are handled correctly.
 	 *
-	 * @ticket 54261
 	 *
-	 * @dataProvider data_wp_kses_required_attribute
 	 *
 	 * @param string $content      A string of HTML to test.
 	 * @param string $expected     The expected result from KSES.
 	 * @param array  $allowed_html The allowed HTML to pass to KSES.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54261' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_kses_required_attribute' )]
 	public function test_wp_kses_required_attribute( $content, $expected, $allowed_html ) {
 		$this->assertEqualHTML( $expected, wp_kses( $content, $allowed_html ) );
 	}
@@ -2638,7 +2638,7 @@ HTML;
 	/**
 	 * Data provider for test_wp_kses_required_attribute().
 	 */
-	public function data_wp_kses_required_attribute() {
+	public static function data_wp_kses_required_attribute() {
 		$data = array(
 			'valid dir attribute value'             => array(
 				'<p dir="ltr">foo</p>', // Test HTML.
@@ -2742,14 +2742,14 @@ HTML;
 	/**
 	 * Test that XML named entities are encoded correctly.
 	 *
-	 * @dataProvider data_wp_kses_xml_named_entities
 	 *
-	 * @ticket 54060
-	 * @covers ::wp_kses_xml_named_entities
 	 *
 	 * @param array  $input    The input to wp_kses_xml_named_entities().
 	 * @param string $expected The expected output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54060' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_kses_xml_named_entities' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_kses_xml_named_entities' )]
 	public function test_wp_kses_xml_named_entities( $input, $expected ) {
 		$this->assertSame( $expected, wp_kses_xml_named_entities( $input ) );
 	}
@@ -2759,7 +2759,7 @@ HTML;
 	 *
 	 * @return array Nested array of input, expected pairs.
 	 */
-	public function data_wp_kses_xml_named_entities() {
+	public static function data_wp_kses_xml_named_entities() {
 		return array(
 			// Empty string value testing.
 			'empty string'       => array(
@@ -2813,12 +2813,12 @@ HTML;
 	/**
 	 * Test that KSES globals are defined.
 	 *
-	 * @dataProvider data_kses_globals_are_defined
 	 *
-	 * @ticket 54060
 	 *
 	 * @param string $global_name The name of the global variable.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54060' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_kses_globals_are_defined' )]
 	public function test_kses_globals_are_defined( $global_name ) {
 		$this->assertArrayHasKey( $global_name, $GLOBALS );
 	}
@@ -2828,7 +2828,7 @@ HTML;
 	 *
 	 * @return array
 	 */
-	public function data_kses_globals_are_defined() {
+	public static function data_kses_globals_are_defined() {
 		$required_kses_globals = array(
 			'allowedposttags',
 			'allowedtags',
@@ -2836,20 +2836,20 @@ HTML;
 			'allowedxmlentitynames',
 		);
 
-		return $this->text_array_to_dataprovider( $required_kses_globals );
+		return self::text_array_to_dataprovider( $required_kses_globals );
 	}
 
 	/**
 	 * Tests that the target attribute is preserved in various contexts.
 	 *
-	 * @dataProvider data_target_attribute_preserved_in_descriptions
 	 *
-	 * @ticket 12056
 	 *
 	 * @param string $context  The context to test ('user_description' or 'pre_term_description').
 	 * @param string $input    The input HTML string.
 	 * @param string $expected The expected output HTML string.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12056' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_target_attribute_preserved_in_descriptions' )]
 	public function test_target_attribute_preserved_in_context( $context, $input, $expected ) {
 		$allowed = wp_kses_allowed_html( $context );
 		$this->assertTrue( isset( $allowed['a']['target'] ), "Target attribute not allowed in {$context}" );
@@ -2861,7 +2861,7 @@ HTML;
 	 *
 	 * @return array
 	 */
-	public function data_target_attribute_preserved_in_descriptions() {
+	public static function data_target_attribute_preserved_in_descriptions() {
 		return array(
 			array(
 				'user_description',
@@ -2879,13 +2879,13 @@ HTML;
 	/**
 	 * Tests that specific attributes are preserved in various contexts.
 	 *
-	 * @dataProvider data_allowed_attributes_in_descriptions
 	 *
-	 * @ticket 12056
 	 *
 	 * @param string $context    The context to test ('user_description' or 'pre_term_description').
 	 * @param array  $attributes List of attributes to check for.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12056' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_allowed_attributes_in_descriptions' )]
 	public function test_specific_attributes_preserved_in_context( $context, $attributes ) {
 		$allowed = wp_kses_allowed_html( $context );
 		foreach ( $attributes as $attribute ) {
@@ -2898,7 +2898,7 @@ HTML;
 	 *
 	 * @return array
 	 */
-	public function data_allowed_attributes_in_descriptions() {
+	public static function data_allowed_attributes_in_descriptions() {
 		return array(
 			array(
 				'user_description',

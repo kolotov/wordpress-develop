@@ -3,9 +3,9 @@
 /**
  * Tests for _wp_register_default_connector_settings().
  *
- * @group connectors
- * @covers ::_wp_register_default_connector_settings
  */
+#[\PHPUnit\Framework\Attributes\Group( 'connectors' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_register_default_connector_settings' )]
 class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCase {
 
 	const CONNECTOR_ID             = 'wp_test_non_ai_connector';
@@ -45,8 +45,8 @@ class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCas
 	}
 
 	/**
-	 * @ticket 65099
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65099' )]
 	public function test_non_ai_connector_skipped_when_is_active_returns_false(): void {
 		WP_Connector_Registry::get_instance()->register(
 			self::CONNECTOR_ID,
@@ -73,8 +73,8 @@ class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCas
 	}
 
 	/**
-	 * @ticket 65099
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65099' )]
 	public function test_non_ai_connector_registers_setting_when_is_active_returns_true(): void {
 		WP_Connector_Registry::get_instance()->register(
 			self::CONNECTOR_ID,
@@ -101,8 +101,8 @@ class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCas
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_application_password_connector_registers_credentials_setting(): void {
 		WP_Connector_Registry::get_instance()->register(
 			self::CONNECTOR_ID,
@@ -136,8 +136,8 @@ class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCas
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_application_password_connector_skips_already_registered_setting(): void {
 		register_setting(
 			'connectors',
@@ -184,8 +184,8 @@ class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCas
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_already_registered_setting_skips_before_is_active_callback(): void {
 		$is_active_called = false;
 

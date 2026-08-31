@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group taxonomy
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Term_SplitSharedTerm extends WP_UnitTestCase {
 	protected $terms = array();
 
@@ -77,8 +77,8 @@ class Tests_Term_SplitSharedTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 5809
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5809' )]
 	public function test_should_create_new_term_ids() {
 		$t1_term = get_term_by( 'term_taxonomy_id', $this->terms['t1']['term_taxonomy_id'], 'wptests_tax' );
 		$t2_term = get_term_by( 'term_taxonomy_id', $this->terms['t2']['term_taxonomy_id'], 'wptests_tax_2' );
@@ -90,8 +90,8 @@ class Tests_Term_SplitSharedTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 5809
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5809' )]
 	public function test_should_retain_child_terms_when_using_get_terms_parent() {
 		$children = get_terms(
 			'wptests_tax_2',
@@ -105,8 +105,8 @@ class Tests_Term_SplitSharedTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 5809
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5809' )]
 	public function test_should_retain_child_terms_when_using_get_terms_child_of() {
 		$children = get_terms(
 			'wptests_tax_2',
@@ -120,8 +120,8 @@ class Tests_Term_SplitSharedTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30335
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30335' )]
 	public function test_should_rebuild_split_term_taxonomy_hierarchy() {
 		global $wpdb;
 
@@ -162,8 +162,8 @@ class Tests_Term_SplitSharedTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30335
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30335' )]
 	public function test_should_update_default_category_on_term_split() {
 		global $wpdb;
 		$t1 = wp_insert_term( 'Foo Default', 'category' );
@@ -192,8 +192,8 @@ class Tests_Term_SplitSharedTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30335
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30335' )]
 	public function test_should_update_menus_on_term_split() {
 		global $wpdb;
 
@@ -223,17 +223,17 @@ class Tests_Term_SplitSharedTerm extends WP_UnitTestCase {
 				'menu-item-status'    => 'publish',
 			)
 		);
-		$this->assertEquals( $t1['term_id'], get_post_meta( $cat_menu_item, '_menu_item_object_id', true ) );
+		$this->assertSame( (string) $t1['term_id'], get_post_meta( $cat_menu_item, '_menu_item_object_id', true ) );
 
 		$new_term_id = _split_shared_term( $t1['term_id'], $t1['term_taxonomy_id'] );
 		$this->assertNotEquals( $new_term_id, $t1['term_id'] );
-		$this->assertEquals( $new_term_id, get_post_meta( $cat_menu_item, '_menu_item_object_id', true ) );
+		$this->assertSame( (string) $new_term_id, get_post_meta( $cat_menu_item, '_menu_item_object_id', true ) );
 	}
 
 	/**
-	 * @ticket 33187
-	 * @group menu
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33187' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'menu' )]
 	public function test_nav_menu_locations_should_be_updated_on_split() {
 		global $wpdb;
 
@@ -261,9 +261,9 @@ class Tests_Term_SplitSharedTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33187
-	 * @group menu
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33187' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'menu' )]
 	public function test_nav_menu_term_should_retain_menu_items_on_split() {
 		global $wpdb;
 

@@ -7,19 +7,24 @@
  *
  * @since 6.5.0
  *
- * @group interactivity-api
  *
- * @coversDefaultClass WP_Interactivity_API_Directives_Processor
  */
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'interactivity-api' )]
 class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_UnitTestCase {
 	/**
 	 * Tests the `get_content_between_balanced_template_tags` method on template
 	 * tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::get_content_between_balanced_template_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'get_content_between_balanced_template_tags' )]
 	public function test_get_content_between_balanced_template_tags_standard_tags() {
 		$content = '<template>Text</template>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -38,10 +43,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `get_content_between_balanced_template_tags` method on an empty
 	 * tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::get_content_between_balanced_template_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'get_content_between_balanced_template_tags' )]
 	public function test_get_content_between_balanced_template_tags_empty_tag() {
 		$content = '<template></template>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -53,10 +58,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `get_content_between_balanced_template_tags` method with
 	 * non-template tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::get_content_between_balanced_template_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'get_content_between_balanced_template_tags' )]
 	public function test_get_content_between_balanced_template_tags_self_closing_tag() {
 		$content = '<img src="example.jpg">';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -73,10 +78,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `get_content_between_balanced_template_tags` method with nested
 	 * template tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::get_content_between_balanced_template_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'get_content_between_balanced_template_tags' )]
 	public function test_get_content_between_balanced_template_tags_nested_tags() {
 		$content = '<template><span>Content</span><strong>More Content</strong></template>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -93,10 +98,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `get_content_between_balanced_template_tags` method when no tags
 	 * are present.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::get_content_between_balanced_template_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'get_content_between_balanced_template_tags' )]
 	public function test_get_content_between_balanced_template_tags_no_tags() {
 		$content = 'Just a string with no tags.';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -107,10 +112,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	/**
 	 * Tests the `get_content_between_balanced_template_tags` method with unbalanced tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::get_content_between_balanced_template_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'get_content_between_balanced_template_tags' )]
 	public function test_get_content_between_balanced_template_tags_with_unbalanced_tags() {
 		$content = '<template>Missing closing template';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -138,10 +143,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `get_content_between_balanced_template_tags` method when called
 	 * on a closer tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::get_content_between_balanced_template_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'get_content_between_balanced_template_tags' )]
 	public function test_get_content_between_balanced_template_tags_on_closing_tag() {
 		$content = '<template>Text</template>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -154,10 +159,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `get_content_between_balanced_template_tags` method positions the
 	 * cursor on the closer tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::get_content_between_balanced_template_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'get_content_between_balanced_template_tags' )]
 	public function test_get_content_between_balanced_template_tags_positions_cursor_on_closer_tag() {
 		$content = '<template>Text</template><div>More text</div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -172,10 +177,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	/**
 	 * Tests the `set_content_between_balanced_tags` method on standard tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::set_content_between_balanced_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'set_content_between_balanced_tags' )]
 	public function test_set_content_between_balanced_tags_standard_tags() {
 		$content = '<div>Text</div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -200,10 +205,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `set_content_between_balanced_tags` method when called on a
 	 * closing tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::set_content_between_balanced_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'set_content_between_balanced_tags' )]
 	public function test_set_content_between_balanced_tags_on_closing_tag() {
 		$content = '<div>Text</div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -218,10 +223,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `set_content_between_balanced_tags` method on multiple calls to
 	 * the same tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::set_content_between_balanced_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'set_content_between_balanced_tags' )]
 	public function test_set_content_between_balanced_tags_multiple_calls_in_same_tag() {
 		$content = '<div>Text</div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -238,10 +243,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `set_content_between_balanced_tags` method on combinations with
 	 * set_attribute calls.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::set_content_between_balanced_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'set_content_between_balanced_tags' )]
 	public function test_set_content_between_balanced_tags_with_set_attribute() {
 		$content = '<div>Text</div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -264,10 +269,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `set_content_between_balanced_tags` method where the existing
 	 * content includes tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::set_content_between_balanced_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'set_content_between_balanced_tags' )]
 	public function test_set_content_between_balanced_tags_with_existing_tags() {
 		$content = '<div><span>Text</span></div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -281,10 +286,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `set_content_between_balanced_tags` method where the new content
 	 * includes tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::set_content_between_balanced_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'set_content_between_balanced_tags' )]
 	public function test_set_content_between_balanced_tags_with_new_tags() {
 		$content     = '<div>Text</div>';
 		$new_content = '<span>New text</span><a href="#">Link</a>';
@@ -297,10 +302,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	/**
 	 * Tests the `set_content_between_balanced_tags` method with an empty string.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::set_content_between_balanced_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'set_content_between_balanced_tags' )]
 	public function test_set_content_between_balanced_tags_empty() {
 		$content = '<div>Text</div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -320,10 +325,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	/**
 	 * Tests the `set_content_between_balanced_tags` method on self-closing tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::set_content_between_balanced_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'set_content_between_balanced_tags' )]
 	public function test_set_content_between_balanced_tags_self_closing_tag() {
 		$content = '<img src="example.jpg">';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -336,10 +341,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	/**
 	 * Tests the `set_content_between_balanced_tags` method on a non-existent tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::set_content_between_balanced_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'set_content_between_balanced_tags' )]
 	public function test_set_content_between_balanced_tags_non_existent_tag() {
 		$content = 'Just a string with no tags.';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -352,10 +357,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	/**
 	 * Tests the `set_content_between_balanced_tags` method with unbalanced tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::set_content_between_balanced_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'set_content_between_balanced_tags' )]
 	public function test_set_content_between_balanced_tags_with_unbalanced_tags() {
 		$new_content = 'New text';
 
@@ -392,10 +397,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	/**
 	 * Tests the `has_and_visits_its_closer_tag` method.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::has_and_visits_its_closer_tag
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'has_and_visits_its_closer_tag' )]
 	public function test_has_and_visits_its_closer_tag() {
 		$void_tags = array( 'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr' );
 		foreach ( $void_tags as $tag_name ) {
@@ -444,10 +449,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `append_content_after_template_tag_closer` method with a simple
 	 * text.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::append_content_after_template_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'append_content_after_template_tag_closer' )]
 	public function test_append_content_after_template_tag_closer_simple_text() {
 		$content_1 = '<template>Text</template>';
 		$content_2 = 'New text';
@@ -464,10 +469,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `append_content_after_template_tag_closer` method with simple
 	 * tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::append_content_after_template_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'append_content_after_template_tag_closer' )]
 	public function test_append_content_after_template_tag_closer_simple_tags() {
 		$content_1 = '<template>Text</template>';
 		$content_2 = '<template class="content-2">New text</template>';
@@ -492,10 +497,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `append_content_after_template_tag_closer` method in the middle
 	 * of two tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::append_content_after_template_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'append_content_after_template_tag_closer' )]
 	public function test_append_content_after_template_tag_closer_in_the_middle_of_tags() {
 		$content_1 = '<template>Text</template>';
 		$content_2 = 'New text';
@@ -525,10 +530,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `append_content_after_template_tag_closer` method doesn't modify
 	 * the content when called on an opener tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::append_content_after_template_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'append_content_after_template_tag_closer' )]
 	public function test_append_content_after_template_tag_closer_on_opener_tag() {
 		$content = '<template>Text</template>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -542,10 +547,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `append_content_after_template_tag_closer` method on multiple
 	 * calls to the same tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::append_content_after_template_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'append_content_after_template_tag_closer' )]
 	public function test_append_content_after_template_tag_closer_multiple_calls_in_same_tag() {
 		$content_1 = '<template class="content-1">Text</template>';
 		$content_2 = '<template class="content-2">New text</template>';
@@ -574,10 +579,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `append_content_after_template_tag_closer` method on
 	 * set_attribute calls.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::append_content_after_template_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'append_content_after_template_tag_closer' )]
 	public function test_append_content_after_template_tag_closer_with_set_attribute() {
 		$content_1 = '<template>Text</template>';
 		$content_2 = '<template>New text</template>';
@@ -595,10 +600,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `append_content_after_template_tag_closer` method where the
 	 * existing content includes tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::append_content_after_template_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'append_content_after_template_tag_closer' )]
 	public function test_append_content_after_template_tag_closer_with_existing_tags() {
 		$content_1 = '<template><span>Text</span></template>';
 		$content_2 = '<template class="content-2-template-1"><template class="content-2-template-2">New text</template></template>';
@@ -628,10 +633,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `append_content_after_template_tag_closer` method fails with an
 	 * empty string.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::append_content_after_template_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'append_content_after_template_tag_closer' )]
 	public function test_append_content_after_template_tag_closer_empty() {
 		$content = '<template class="content">Text</template>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -648,10 +653,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `append_content_after_template_tag_closer` method on a
 	 * non-existent tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::append_content_after_template_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'append_content_after_template_tag_closer' )]
 	public function test_append_content_after_template_tag_closer_non_existent_tag() {
 		$content_1 = 'Just a string with no tags.';
 		$content_2 = '<div>New text</div>';
@@ -666,10 +671,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests the `append_content_after_template_tag_closer` method on non-template
 	 * tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::append_content_after_template_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'append_content_after_template_tag_closer' )]
 	public function test_append_content_after_template_tag_closer_non_template_tags() {
 		$content_1 = '<div>Text</div>';
 		$content_2 = '<div>New text</div>';
@@ -685,10 +690,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests that the `next_balanced_tag_closer_tag` method finds a closing tag
 	 * for a standard tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::next_balanced_tag_closer_tag
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'next_balanced_tag_closer_tag' )]
 	public function test_next_balanced_tag_closer_tag_standard_tags() {
 		$content = '<div>Text</div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -702,10 +707,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests that the `next_balanced_tag_closer_tag` method returns false for a
 	 * self-closing tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::next_balanced_tag_closer_tag
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'next_balanced_tag_closer_tag' )]
 	public function test_next_balanced_tag_closer_tag_void_tag() {
 		$content = '<img src="image.jpg" />';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -722,10 +727,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests that the `next_balanced_tag_closer_tag` method correctly handles
 	 * nested tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::next_balanced_tag_closer_tag
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'next_balanced_tag_closer_tag' )]
 	public function test_next_balanced_tag_closer_tag_nested_tags() {
 		$content = '<div><span>Nested content</span></div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -747,10 +752,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests that the `next_balanced_tag_closer_tag` method returns false when no
 	 * matching closing tag is found.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::next_balanced_tag_closer_tag
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'next_balanced_tag_closer_tag' )]
 	public function test_next_balanced_tag_closer_tag_no_matching_closing_tag() {
 		$content = '<div>No closing tag here';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -766,10 +771,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Test that the `next_balanced_tag_closer_tag` method returns false when
 	 * returned on a closing tag.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::next_balanced_tag_closer_tag
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'next_balanced_tag_closer_tag' )]
 	public function test_next_balanced_tag_closer_tag_on_closing_tag() {
 		$content = '<div>Closing tag after this</div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -783,10 +788,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests that skip_to_tag_closer skips to the next tag,
 	 * independent of the content.
 	 *
-	 * @ticket 60517
 	 *
-	 * @covers ::skip_to_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60517' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'skip_to_tag_closer' )]
 	public function test_skip_to_tag_closer() {
 		$content = '<div><span>Not closed</div>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -800,10 +805,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests that skip_to_tag_closer does not skip to the
 	 * next tag if there is no closing tag.
 	 *
-	 * @ticket 60517
 	 *
-	 * @covers ::skip_to_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60517' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'skip_to_tag_closer' )]
 	public function test_skip_to_tag_closer_bails_not_closed() {
 		$content = '<div>Not closed parent';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );
@@ -815,10 +820,10 @@ class Tests_Interactivity_API_WpInteractivityAPIDirectivesProcessor extends WP_U
 	 * Tests that skip_to_tag_closer does not skip to the next
 	 * tag if the closing tag is different from the current tag.
 	 *
-	 * @ticket 60517
 	 *
-	 * @covers ::skip_to_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60517' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API_Directives_Processor', 'skip_to_tag_closer' )]
 	public function test_skip_to_tag_closer_bails_different_tags() {
 		$content = '<div></span>';
 		$p       = new WP_Interactivity_API_Directives_Processor( $content );

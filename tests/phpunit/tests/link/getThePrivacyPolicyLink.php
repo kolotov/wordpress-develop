@@ -6,10 +6,10 @@
  * @subpackage UnitTests
  * @since 4.9.6
  *
- * @group link
- * @group privacy
- * @covers ::get_the_privacy_policy_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_privacy_policy_link' )]
 class Tests_Link_GetThePrivacyPolicyLink extends WP_UnitTestCase {
 	/**
 	 * The ID of the Privacy Policy page.
@@ -56,11 +56,15 @@ class Tests_Link_GetThePrivacyPolicyLink extends WP_UnitTestCase {
 			)
 		);
 
-		// `esc_url()` is added for consistency with `get_the_privacy_policy_link()`.
-		self::$privacy_policy_url = esc_url( get_permalink( self::$privacy_policy_page_id ) );
-
 		self::$before = '<span class="privacy-policy-link-wrapper">';
 		self::$after  = '</span>';
+	}
+
+	public function set_up() {
+		parent::set_up();
+
+		// Calculate this after the base test case has reset the permalink structure.
+		self::$privacy_policy_url = esc_url( get_permalink( self::$privacy_policy_page_id ) );
 	}
 
 	/**
@@ -106,8 +110,8 @@ class Tests_Link_GetThePrivacyPolicyLink extends WP_UnitTestCase {
 	 * The function should return an empty string when there is an empty page title
 	 * for the privacy policy.
 	 *
-	 * @ticket 44192
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44192' )]
 	public function test_function_should_return_empty_string_when_privacy_page_title_empty() {
 		$nameless_page_id = self::factory()->post->create(
 			array(
@@ -158,8 +162,8 @@ class Tests_Link_GetThePrivacyPolicyLink extends WP_UnitTestCase {
 	/**
 	 * Tests that `get_the_privacy_policy_link()` adds `rel="privacy-policy"`.
 	 *
-	 * @ticket 56345
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56345' )]
 	public function test_get_the_privacy_policy_link_should_add_rel_privacy_policy() {
 		update_option( 'wp_page_for_privacy_policy', self::$privacy_policy_page_id );
 

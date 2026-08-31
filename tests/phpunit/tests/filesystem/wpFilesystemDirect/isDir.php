@@ -8,20 +8,20 @@
 require_once __DIR__ . '/base.php';
 
 /**
- * @group admin
- * @group filesystem
- * @group filesystem-direct
  *
- * @covers WP_Filesystem_Direct::is_dir
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem-direct' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Filesystem_Direct::class, 'is_dir' )]
 class Tests_Filesystem_WpFilesystemDirect_IsDir extends WP_Filesystem_Direct_UnitTestCase {
 
 	/**
 	 * Tests that `WP_Filesystem_Direct::is_directory()` determines that
 	 * a path is a directory.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_determine_that_a_path_is_a_directory() {
 		$this->assertTrue( self::$filesystem->is_dir( self::$file_structure['test_dir']['path'] ) );
 	}
@@ -30,12 +30,12 @@ class Tests_Filesystem_WpFilesystemDirect_IsDir extends WP_Filesystem_Direct_Uni
 	 * Tests that `WP_Filesystem_Direct::is_directory()` determines that
 	 * a path is not a directory.
 	 *
-	 * @ticket 57774
 	 *
-	 * @dataProvider data_should_determine_that_a_path_is_not_a_directory
 	 *
 	 * @param string $path The path to check.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_determine_that_a_path_is_not_a_directory' )]
 	public function test_should_determine_that_a_path_is_not_a_directory( $path ) {
 		$this->assertFalse( self::$filesystem->is_dir( self::$file_structure['test_dir']['path'] . $path ) );
 	}
@@ -45,7 +45,7 @@ class Tests_Filesystem_WpFilesystemDirect_IsDir extends WP_Filesystem_Direct_Uni
 	 *
 	 * @return array[]
 	 */
-	public function data_should_determine_that_a_path_is_not_a_directory() {
+	public static function data_should_determine_that_a_path_is_not_a_directory() {
 		return array(
 			'a file that exists'              => array(
 				'path' => 'a_file_that_exists.txt',

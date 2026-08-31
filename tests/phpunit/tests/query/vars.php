@@ -3,14 +3,14 @@
 /**
  * Tests to make sure query vars are as expected.
  *
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Query_Vars extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 35115
-	 * @ticket 51154
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35115' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '51154' )]
 	public function testPublicQueryVarsAreAsExpected() {
 		global $wp;
 

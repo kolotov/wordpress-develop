@@ -2,17 +2,17 @@
 /**
  * Test wp_prime_option_caches().
  *
- * @group option
  *
- * @covers ::wp_prime_option_caches
  */
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_prime_option_caches' )]
 class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 
 	/**
 	 * Tests that wp_prime_option_caches() primes multiple options.
 	 *
-	 * @ticket 58962
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58962' )]
 	public function test_wp_prime_option_caches() {
 		// Create some options to prime.
 		$options_to_prime = array(
@@ -68,8 +68,8 @@ class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_prime_option_caches() handles a mix of primed and unprimed options.
 	 *
-	 * @ticket 58962
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58962' )]
 	public function test_wp_prime_option_caches_handles_a_mix_of_primed_and_unprimed_options() {
 		global $wpdb;
 		// Create some options to prime.
@@ -127,9 +127,9 @@ class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Tests wp_prime_option_caches() with options that do not exist in the database.
 	 *
-	 * @ticket 58962
-	 * @ticket 59738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58962' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59738' )]
 	public function test_wp_prime_option_caches_with_nonexistent_options() {
 		// Create some options to prime.
 		$options_to_prime = array(
@@ -183,9 +183,9 @@ class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Tests wp_prime_option_caches() with an empty array.
 	 *
-	 * @ticket 58962
-	 * @ticket 59738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58962' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59738' )]
 	public function test_wp_prime_option_caches_with_empty_array() {
 		$alloptions = wp_load_alloptions();
 		$notoptions = wp_cache_get( 'notoptions', 'options' );
@@ -207,9 +207,9 @@ class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_prime_option_caches() handles an empty "notoptions" cache.
 	 *
-	 * @ticket 58962
-	 * @ticket 59738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58962' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59738' )]
 	public function test_wp_prime_option_caches_handles_empty_notoptions_cache() {
 		wp_cache_delete( 'notoptions', 'options' );
 
@@ -240,12 +240,12 @@ class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Test options primed by the wp_prime_option_caches() function are identical to those primed by get_option().
 	 *
-	 * @ticket 59738
 	 *
-	 * @dataProvider data_option_types
 	 *
 	 * @param mixed $option_value An option value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59738' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_option_types' )]
 	public function test_get_option_should_return_identical_value_when_pre_primed_by_wp_prime_option_caches( $option_value ) {
 		// As this includes a test setting the value to `(bool) false`, update_option() can not be used so add_option() is used instead.
 		add_option( 'type_of_option', $option_value, '', false );
@@ -277,12 +277,12 @@ class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_prime_option_caches() shapes the cache in the same fashion as get_option()
 	 *
-	 * @ticket 59738
 	 *
-	 * @dataProvider data_option_types
 	 *
 	 * @param mixed $option_value An option value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59738' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_option_types' )]
 	public function test_wp_prime_option_caches_cache_should_be_identical_to_get_option_cache( $option_value ) {
 		// As this includes a test setting the value to `(bool) false`, update_option() can not be used so add_option() is used instead.
 		add_option( 'type_of_option', $option_value, '', false );
@@ -309,12 +309,12 @@ class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_prime_option_caches() doesn't trigger DB queries on already primed options.
 	 *
-	 * @ticket 59738
 	 *
-	 * @dataProvider data_option_types
 	 *
 	 * @param mixed $option_value An option value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59738' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_option_types' )]
 	public function test_wp_prime_option_caches_does_not_trigger_db_queries_repriming_options( $option_value ) {
 		// As this includes a test setting the value to `(bool) false`, update_option() can not be used so add_option() is used instead.
 		add_option( 'double_primed_option', $option_value, '', false );
@@ -331,7 +331,7 @@ class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 
 		// Check that options are only in the 'options' cache group.
 		foreach ( $options_to_prime as $option ) {
-			$this->assertNotFalse(
+			$this->assertIsString(
 				wp_cache_get( $option, 'options' ),
 				"$option was not primed in the 'options' cache group."
 			);
@@ -361,12 +361,12 @@ class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_prime_option_caches() doesn't trigger DB queries for items primed in alloptions.
 	 *
-	 * @ticket 59738
 	 *
-	 * @dataProvider data_option_types
 	 *
 	 * @param mixed $option_value An option value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59738' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_option_types' )]
 	public function test_wp_prime_option_caches_does_not_trigger_db_queries_for_alloptions( $option_value ) {
 		// As this includes a test setting the value to `(bool) false`, update_option() can not be used so add_option() is used instead.
 		add_option( 'option_in_alloptions', $option_value, '', true );
@@ -427,7 +427,7 @@ class Tests_Option_WpPrimeOptionCaches extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_option_types() {
+	public static function data_option_types() {
 		return array(
 			'null'                              => array( null ),
 			'(bool) false'                      => array( false ),

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group  link
- * @covers ::edit_term_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'edit_term_link' )]
 class Tests_Link_EditTermLink extends WP_UnitTestCase {
 
 	private static $terms;
@@ -55,14 +55,14 @@ class Tests_Link_EditTermLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_edit_term_link
 	 *
-	 * @ticket 50225
 	 *
 	 * @param string $taxonomy Taxonomy being tested.
 	 * @param bool   $use_id   Whether to pass term ID or term object to `edit_term_link()`.
 	 * @param string $expected Expected part of admin URL for the edit link.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_edit_term_link' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50225' )]
 	public function test_edit_term_link_should_return_the_link_for_permitted_user( $taxonomy, $use_id, $expected ) {
 		$term = $this->get_term( $taxonomy, $use_id );
 
@@ -74,14 +74,14 @@ class Tests_Link_EditTermLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_edit_term_link
 	 *
-	 * @ticket 50225
 	 *
 	 * @param string $taxonomy Taxonomy being tested.
 	 * @param bool   $use_id   Whether to pass term ID or term object to `edit_term_link()`.
 	 */
-	public function test_edit_term_link_should_return_null_for_denied_user( $taxonomy, $use_id ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_edit_term_link' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50225' )]
+	public function test_edit_term_link_should_return_null_for_denied_user( $taxonomy, $use_id, $expected ) {
 		wp_set_current_user( self::$user_ids['subscriber'] );
 		$term = $this->get_term( $taxonomy, $use_id );
 
@@ -89,14 +89,14 @@ class Tests_Link_EditTermLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_edit_term_link
 	 *
-	 * @ticket 50225
 	 *
 	 * @param string $taxonomy Taxonomy being tested.
 	 * @param bool   $use_id   Whether to pass term ID or term object to `edit_term_link()`.
 	 */
-	public function test_edit_term_link_filter_should_receive_term_id( $taxonomy, $use_id ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_edit_term_link' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50225' )]
+	public function test_edit_term_link_filter_should_receive_term_id( $taxonomy, $use_id, $expected ) {
 		$term = $this->get_term( $taxonomy, $use_id );
 
 		add_filter(
@@ -116,7 +116,7 @@ class Tests_Link_EditTermLink extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_edit_term_link() {
+	public static function data_edit_term_link() {
 		return array(
 			'category passing term_id'              => array(
 				'taxonomy' => 'category',

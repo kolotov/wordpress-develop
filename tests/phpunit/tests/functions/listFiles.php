@@ -3,10 +3,10 @@
 /**
  * Test list_files().
  *
- * @group functions
  *
- * @covers ::list_files
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'list_files' )]
 class Tests_Functions_ListFiles extends WP_UnitTestCase {
 
 	public function test_list_files_returns_a_list_of_files() {
@@ -24,15 +24,15 @@ class Tests_Functions_ListFiles extends WP_UnitTestCase {
 	/**
 	 * Tests that list_files() optionally includes hidden files.
 	 *
-	 * @ticket 53659
 	 *
-	 * @dataProvider data_list_files_should_optionally_include_hidden_files
 	 *
 	 * @param string   $filename       The name of the hidden file.
 	 * @param bool     $include_hidden Whether to include hidden ("." prefixed) files.
 	 * @param string[] $exclusions     List of folders and files to skip.
 	 * @param bool     $expected       Whether the file should be included in the results.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53659' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_list_files_should_optionally_include_hidden_files' )]
 	public function test_list_files_should_optionally_include_hidden_files( $filename, $include_hidden, $exclusions, $expected ) {
 		$test_dir    = get_temp_dir() . 'test-list-files/';
 		$hidden_file = $test_dir . $filename;
@@ -57,7 +57,7 @@ class Tests_Functions_ListFiles extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_list_files_should_optionally_include_hidden_files() {
+	public static function data_list_files_should_optionally_include_hidden_files() {
 		return array(
 			'$include_hidden = false and no exclusions' => array(
 				'filename'       => '.hidden_file',

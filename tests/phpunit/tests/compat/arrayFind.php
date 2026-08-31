@@ -1,30 +1,30 @@
 <?php
 
 /**
- * @group compat
  *
- * @covers ::array_find
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'array_find' )]
 class Tests_Compat_arrayFind extends WP_UnitTestCase {
 
 	/**
 	 * Test that array_find() is always available (either from PHP or WP).
 	 *
-	 * @ticket 62558
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62558' )]
 	public function test_array_find_availability() {
 		$this->assertTrue( function_exists( 'array_find' ) );
 	}
 
 	/**
-	 * @dataProvider data_array_find
 	 *
-	 * @ticket 62558
 	 *
 	 * @param mixed $expected The expected value.
 	 * @param array $arr      The array.
 	 * @param callable $callback The needle.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_array_find' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62558' )]
 	public function test_array_find( $expected, array $arr, callable $callback ) {
 		$this->assertSame( $expected, array_find( $arr, $callback ) );
 	}
@@ -34,7 +34,7 @@ class Tests_Compat_arrayFind extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_array_find(): array {
+	public static function data_array_find(): array {
 		return array(
 			'empty array'          => array(
 				'expected' => null,

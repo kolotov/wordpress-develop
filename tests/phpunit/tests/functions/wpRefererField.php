@@ -5,15 +5,15 @@
  *
  * @since 6.1.0
  *
- * @group functions
  *
- * @covers ::wp_referer_field
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_referer_field' )]
 class Tests_Functions_wpRefererField extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 55578
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55578' )]
 	public function test_wp_referer_field() {
 		$_SERVER['REQUEST_URI'] = '/test/';
 
@@ -22,8 +22,8 @@ class Tests_Functions_wpRefererField extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55578
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55578' )]
 	public function test_wp_referer_field_return() {
 		$_SERVER['REQUEST_URI'] = '/test/';
 
@@ -33,12 +33,12 @@ class Tests_Functions_wpRefererField extends WP_UnitTestCase {
 	/**
 	 * Tests that the display argument is respected.
 	 *
-	 * @ticket 54106
 	 *
-	 * @dataProvider data_wp_referer_field_should_respect_display_arg
 	 *
 	 * @param mixed $display Whether to echo or return the referer field.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54106' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_referer_field_should_respect_display_arg' )]
 	public function test_wp_referer_field_should_respect_display_arg( $display ) {
 		$actual = $display ? get_echo( 'wp_referer_field' ) : wp_referer_field( false );
 
@@ -50,7 +50,7 @@ class Tests_Functions_wpRefererField extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_referer_field_should_respect_display_arg() {
+	public static function data_wp_referer_field_should_respect_display_arg() {
 		return array(
 			'true'         => array( true ),
 			'(int) 1'      => array( 1 ),
@@ -63,8 +63,8 @@ class Tests_Functions_wpRefererField extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54106
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54106' )]
 	public function test_wp_referer_field_with_referer() {
 		$old_request_uri        = $_SERVER['REQUEST_URI'];
 		$_SERVER['REQUEST_URI'] = 'edit.php?_wp_http_referer=edit.php';

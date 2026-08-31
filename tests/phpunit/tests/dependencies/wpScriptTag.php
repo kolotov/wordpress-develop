@@ -3,9 +3,11 @@
 /**
  * Test wp_get_script_tag() and wp_print_script_tag().
  *
- * @group dependencies
- * @group scripts
  */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
+
+
 class Tests_Dependencies_wpScriptTag extends WP_UnitTestCase {
 
 	public function get_script_tag_type_set() {
@@ -22,9 +24,7 @@ class Tests_Dependencies_wpScriptTag extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @covers ::wp_get_script_tag
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_script_tag' )]
 	public function test_get_script_tag_type_not_set() {
 		$this->assertEqualHTML(
 			'<script src="https://localhost/PATH/FILE.js" nomodule></script>' . "\n",
@@ -38,9 +38,7 @@ class Tests_Dependencies_wpScriptTag extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @covers ::wp_print_script_tag
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_print_script_tag' )]
 	public function test_print_script_tag_prints_get_script_tag() {
 		add_filter(
 			'wp_script_attributes',
@@ -70,8 +68,8 @@ class Tests_Dependencies_wpScriptTag extends WP_UnitTestCase {
 	/**
 	 * Test the behavior of generated script tag attributes passed different values and types of values.
 	 *
-	 * @ticket 64500
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64500' )]
 	public function test_script_tag_attribute_value_types() {
 		$expected = <<<'HTML'
 <script
@@ -109,8 +107,8 @@ HTML;
 	 * HTML will ignore case-insensitive repeated attributes. Ensure that the handling of input
 	 * attributes aligns with expectations.
 	 *
-	 * @ticket 64500
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64500' )]
 	public function test_script_tag_repeat_attributes() {
 		$expected = <<<'HTML'
 <script test="test-a"></script>

@@ -1,16 +1,20 @@
 <?php
 
 /**
- * @group error-protection
  */
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'error-protection' )]
 class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::generate_recovery_mode_token
-	 * @covers WP_Recovery_Mode_Key_Service::generate_and_store_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'generate_recovery_mode_token' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'generate_and_store_recovery_mode_key' )]
 	public function test_generate_and_store_recovery_mode_key_returns_recovery_key() {
 		$service = new WP_Recovery_Mode_Key_Service();
 		$token   = $service->generate_recovery_mode_token();
@@ -20,10 +24,10 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::validate_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'validate_recovery_mode_key' )]
 	public function test_validate_recovery_mode_key_returns_wp_error_if_no_key_set() {
 		$service = new WP_Recovery_Mode_Key_Service();
 		$error   = $service->validate_recovery_mode_key( '', 'abcd', HOUR_IN_SECONDS );
@@ -33,10 +37,10 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::validate_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'validate_recovery_mode_key' )]
 	public function test_validate_recovery_mode_key_returns_wp_error_if_data_missing() {
 		update_option( 'recovery_keys', 'gibberish' );
 
@@ -48,10 +52,10 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::validate_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'validate_recovery_mode_key' )]
 	public function test_validate_recovery_mode_key_returns_wp_error_if_bad() {
 		update_option( 'recovery_keys', array( 'token' => 'gibberish' ) );
 
@@ -64,10 +68,10 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::validate_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'validate_recovery_mode_key' )]
 	public function test_validate_recovery_mode_key_returns_wp_error_if_stored_format_is_invalid() {
 
 		$token = wp_generate_password( 22, false );
@@ -81,10 +85,10 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::validate_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'validate_recovery_mode_key' )]
 	public function test_validate_recovery_mode_key_returns_wp_error_if_empty_key() {
 		$service = new WP_Recovery_Mode_Key_Service();
 		$token   = $service->generate_recovery_mode_token();
@@ -96,10 +100,10 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::validate_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'validate_recovery_mode_key' )]
 	public function test_validate_recovery_mode_key_returns_wp_error_if_hash_mismatch() {
 		$service = new WP_Recovery_Mode_Key_Service();
 		$token   = $service->generate_recovery_mode_token();
@@ -111,10 +115,10 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::validate_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'validate_recovery_mode_key' )]
 	public function test_validate_recovery_mode_key_returns_wp_error_if_expired() {
 		$service = new WP_Recovery_Mode_Key_Service();
 		$token   = $service->generate_recovery_mode_token();
@@ -131,10 +135,10 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46130
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::validate_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46130' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'validate_recovery_mode_key' )]
 	public function test_validate_recovery_mode_key_returns_true_for_valid_key() {
 		$service = new WP_Recovery_Mode_Key_Service();
 		$token   = $service->generate_recovery_mode_token();
@@ -143,10 +147,10 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46595
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::validate_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46595' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'validate_recovery_mode_key' )]
 	public function test_validate_recovery_mode_key_returns_error_if_token_used_more_than_once() {
 		$service = new WP_Recovery_Mode_Key_Service();
 		$token   = $service->generate_recovery_mode_token();
@@ -162,12 +166,12 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46595
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::generate_recovery_mode_token
-	 * @covers WP_Recovery_Mode_Key_Service::generate_and_store_recovery_mode_key
-	 * @covers WP_Recovery_Mode_Key_Service::validate_recovery_mode_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46595' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'generate_recovery_mode_token' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'generate_and_store_recovery_mode_key' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'validate_recovery_mode_key' )]
 	public function test_validate_recovery_mode_key_returns_error_if_token_used_more_than_once_more_than_key_stored() {
 		$service = new WP_Recovery_Mode_Key_Service();
 
@@ -188,10 +192,10 @@ class Tests_Error_Protection_wpRecoveryModeKeyService extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46595
 	 *
-	 * @covers WP_Recovery_Mode_Key_Service::clean_expired_keys
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46595' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Recovery_Mode_Key_Service', 'clean_expired_keys' )]
 	public function test_clean_expired_keys() {
 		$service = new WP_Recovery_Mode_Key_Service();
 		$token   = $service->generate_recovery_mode_token();

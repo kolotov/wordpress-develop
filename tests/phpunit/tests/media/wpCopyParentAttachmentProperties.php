@@ -3,9 +3,9 @@
 /**
  * Tests for the `wp_copy_parent_attachment_properties()` function.
  *
- * @group media
- * @covers ::wp_copy_parent_attachment_properties
  */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_copy_parent_attachment_properties' )]
 class Tests_Media_wpCopyParentAttachmentProperties extends WP_UnitTestCase {
 
 	public function tear_down() {

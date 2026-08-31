@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::wp_update_comment_count_now
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_update_comment_count_now' )]
 class Tests_Comment_wpUpdateCommentCountNow extends WP_UnitTestCase {
 
 	public function test_invalid_post_bails_early() {
@@ -47,8 +47,8 @@ class Tests_Comment_wpUpdateCommentCountNow extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64325
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64325' )]
 	public function test_only_approved_regular_comments_are_counted() {
 		$post_id = self::factory()->post->create();
 

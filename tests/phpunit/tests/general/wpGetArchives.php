@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group general
- * @group template
- * @covers ::wp_get_archives
  */
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_archives' )]
 class Tests_General_wpGetArchives extends WP_UnitTestCase {
 	public function set_up() {
 		parent::set_up();
@@ -13,8 +13,8 @@ class Tests_General_wpGetArchives extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23206
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23206' )]
 	public function test_get_archives_cache() {
 		self::factory()->post->create_many( 3, array( 'post_type' => 'post' ) );
 		wp_cache_delete( 'last_changed', 'posts' );

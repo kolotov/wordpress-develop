@@ -4,8 +4,8 @@
  *
  * See tests/post/query.php for tests that involve post queries.
  *
- * @group meta
  */
+#[\PHPUnit\Framework\Attributes\Group( 'meta' )]
 class Tests_Meta_Query extends WP_UnitTestCase {
 
 	public function test_empty_meta_query_param() {
@@ -58,8 +58,8 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 	/**
 	 * Test all key only meta queries use the same INNER JOIN when using relation=OR
 	 *
-	 * @ticket 19729
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19729' )]
 	public function test_single_inner_join_for_keys_only() {
 
 		global $wpdb;
@@ -222,8 +222,8 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23033
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23033' )]
 	public function test_get_cast_for_type() {
 		$query = new WP_Meta_Query();
 		$this->assertSame( 'BINARY', $query->get_cast_for_type( 'BINARY' ) );
@@ -501,8 +501,8 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22096
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22096' )]
 	public function test_empty_value_sql() {
 		global $wpdb;
 
@@ -532,8 +532,8 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22967
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22967' )]
 	public function test_null_value_sql() {
 		global $wpdb;
 
@@ -740,8 +740,8 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 	/**
 	 * Verifies only that meta_type_key is passed. See query/metaQuery.php for more complete tests.
 	 *
-	 * @ticket 43446
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43446' )]
 	public function test_meta_type_key_should_be_passed_to_meta_query() {
 		$posts = self::factory()->post->create_many( 3 );
 
@@ -930,8 +930,8 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32592' )]
 	public function test_has_or_relation_should_return_false() {
 		$q = new WP_Meta_Query(
 			array(
@@ -958,8 +958,8 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32592' )]
 	public function test_has_or_relation_should_return_true_for_top_level_or() {
 		$q = new WP_Meta_Query(
 			array(
@@ -986,8 +986,8 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32592' )]
 	public function test_has_or_relation_should_return_true_for_nested_or() {
 		$q = new WP_Meta_Query(
 			array(

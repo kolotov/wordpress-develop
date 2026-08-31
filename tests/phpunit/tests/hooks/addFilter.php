@@ -3,9 +3,9 @@
 /**
  * Test the add_filter method of WP_Hook
  *
- * @group hooks
- * @covers WP_Hook::add_filter
  */
+#[\PHPUnit\Framework\Attributes\Group( 'hooks' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Hook::class, 'add_filter' )]
 class Tests_Hooks_AddFilter extends WP_UnitTestCase {
 
 	public $hook;

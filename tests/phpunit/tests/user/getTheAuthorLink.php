@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group author
- * @group user
  *
- * @covers ::get_the_author_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'author' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_author_link' )]
 class Tests_User_GetTheAuthorLink extends WP_UnitTestCase {
 	protected static $author_id = 0;
 	protected static $post_id   = 0;
@@ -39,10 +39,9 @@ class Tests_User_GetTheAuthorLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51859
 	 *
-	 * @covers ::get_the_author_link
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51859' )]
 	public function test_get_the_author_link() {
 		$author_url          = get_the_author_meta( 'url' );
 		$author_display_name = get_the_author();
@@ -54,10 +53,9 @@ class Tests_User_GetTheAuthorLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51859
 	 *
-	 * @covers ::get_the_author_link
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51859' )]
 	public function test_filtered_get_the_author_link() {
 		$filter = new MockAction();
 

@@ -3,10 +3,17 @@
 /**
  * Tests for the abilities registry functionality.
  *
- * @covers WP_Abilities_Registry
  *
- * @group abilities-api
  */
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'abilities-api' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Abilities_Registry::class )]
 class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 
 	public static $test_ability_name = 'test/add-numbers';
@@ -97,12 +104,12 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability name without a namespace.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
 	public function test_register_invalid_name_without_namespace() {
 		$result = $this->registry->register( 'without-namespace', self::$test_ability_args );
 		$this->assertNull( $result );
@@ -111,12 +118,12 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability name with invalid characters.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
 	public function test_register_invalid_characters_in_name() {
 		$result = $this->registry->register( 'still/_doing_it_wrong', array() );
 		$this->assertNull( $result );
@@ -125,12 +132,12 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability name with uppercase characters.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
 	public function test_register_invalid_uppercase_characters_in_name() {
 		$result = $this->registry->register( 'Test/AddNumbers', self::$test_ability_args );
 		$this->assertNull( $result );
@@ -139,13 +146,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration without a label.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_invalid_missing_label() {
 		// Remove the label from the args.
 		unset( self::$test_ability_args['label'] );
@@ -157,13 +164,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration with invalid label type.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_invalid_label_type() {
 		self::$test_ability_args['label'] = false;
 
@@ -174,13 +181,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration without a description.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_invalid_missing_description() {
 		// Remove the description from the args.
 		unset( self::$test_ability_args['description'] );
@@ -192,13 +199,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration with invalid description type.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_invalid_description_type() {
 		self::$test_ability_args['description'] = false;
 
@@ -209,10 +216,10 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests registering an ability with non-existent category.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_ability_nonexistent_category(): void {
 		$args = array_merge(
 			self::$test_ability_args,
@@ -227,13 +234,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration without an execute callback.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_invalid_missing_execute_callback() {
 		// Remove the execute_callback from the args.
 		unset( self::$test_ability_args['execute_callback'] );
@@ -245,13 +252,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration if the execute callback is not a callable.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_incorrect_execute_callback_type() {
 		self::$test_ability_args['execute_callback'] = 'not-a-callback';
 
@@ -262,11 +269,11 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should allow ability registration with custom ability_class that overrides do_execute.
 	 *
-	 * @ticket 64407
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64407' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_with_custom_ability_class_without_execute_callback() {
 		// Remove execute_callback and permission_callback since the custom class provides its own implementation.
 		unset( self::$test_ability_args['execute_callback'] );
@@ -292,13 +299,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration without an execute callback.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_invalid_missing_permission_callback() {
 		// Remove the permission_callback from the args.
 		unset( self::$test_ability_args['permission_callback'] );
@@ -310,13 +317,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration if the permission callback is not a callable.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_incorrect_permission_callback_type() {
 		self::$test_ability_args['permission_callback'] = 'not-a-callback';
 
@@ -327,13 +334,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration if the input schema is not an array.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_incorrect_input_schema_type() {
 		self::$test_ability_args['input_schema'] = 'not-an-array';
 
@@ -344,13 +351,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration if the output schema is not an array.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_incorrect_output_schema_type() {
 		self::$test_ability_args['output_schema'] = 'not-an-array';
 
@@ -361,13 +368,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration with invalid `annotations` type.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_invalid_annotations_type() {
 		self::$test_ability_args['meta']['annotations'] = false;
 
@@ -378,13 +385,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration with invalid meta type.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_invalid_meta_type() {
 		self::$test_ability_args['meta'] = false;
 
@@ -395,13 +402,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration with invalid show in REST type.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_invalid_show_in_rest_type() {
 		self::$test_ability_args['meta']['show_in_rest'] = 5;
 
@@ -412,13 +419,13 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject ability registration with invalid public type.
 	 *
-	 * @ticket 65568
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Ability::prepare_properties
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65568' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_register_invalid_public_type() {
 		self::$test_ability_args['meta']['public'] = 5;
 
@@ -429,12 +436,12 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject registration for already registered ability.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
 	public function test_register_incorrect_already_registered_ability() {
 		$this->registry->register( self::$test_ability_name, self::$test_ability_args );
 
@@ -446,26 +453,34 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should successfully register a new ability.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
 	public function test_register_new_ability() {
-		$result = $this->registry->register( self::$test_ability_name, self::$test_ability_args );
+		$result   = $this->registry->register( self::$test_ability_name, self::$test_ability_args );
+		$expected = new WP_Ability( self::$test_ability_name, self::$test_ability_args );
 
-		$this->assertEquals(
-			new WP_Ability( self::$test_ability_name, self::$test_ability_args ),
-			$result
-		);
+		$this->assertSame( self::$test_ability_name, $result->get_name() );
+		$this->assertSame( self::$test_ability_args['label'], $result->get_label() );
+		$this->assertSame( self::$test_ability_args['description'], $result->get_description() );
+		$this->assertSame( self::$test_ability_args['category'], $result->get_category() );
+		$this->assertSame( self::$test_ability_args['input_schema'], $result->get_input_schema() );
+		$this->assertSame( self::$test_ability_args['output_schema'], $result->get_output_schema() );
+		$this->assertSame( $expected->get_meta(), $result->get_meta() );
+
+		$reflection = new ReflectionObject( $result );
+		$this->assertSame( self::$test_ability_args['execute_callback'], $reflection->getProperty( 'execute_callback' )->getValue( $result ) );
+		$this->assertSame( self::$test_ability_args['permission_callback'], $reflection->getProperty( 'permission_callback' )->getValue( $result ) );
 	}
 
 	/**
 	 * Should return false for ability that's not registered.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::is_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'is_registered' )]
 	public function test_is_registered_for_unknown_ability() {
 		$result = $this->registry->is_registered( 'test/unknown' );
 		$this->assertFalse( $result );
@@ -474,11 +489,11 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should return true if ability is registered.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Abilities_Registry::is_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'is_registered' )]
 	public function test_is_registered_for_known_ability() {
 		$this->registry->register( 'test/one', self::$test_ability_args );
 		$this->registry->register( 'test/two', self::$test_ability_args );
@@ -491,12 +506,12 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should not find ability that's not registered.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::get_registered
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'get_registered' )]
 	public function test_get_registered_rejects_unknown_ability_name() {
 		$ability = $this->registry->get_registered( 'test/unknown' );
 		$this->assertNull( $ability );
@@ -505,11 +520,11 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should find registered ability by name.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Abilities_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'get_registered' )]
 	public function test_get_registered_for_known_ability() {
 		$this->registry->register( 'test/one', self::$test_ability_args );
 		$this->registry->register( 'test/two', self::$test_ability_args );
@@ -522,12 +537,12 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Unregistering should fail if an ability is not registered.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::unregister
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'unregister' )]
 	public function test_unregister_not_registered_ability() {
 		$result = $this->registry->unregister( 'test/unregistered' );
 		$this->assertNull( $result );
@@ -536,11 +551,11 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should unregister ability by name.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Abilities_Registry::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'unregister' )]
 	public function test_unregister_for_known_ability() {
 		$this->registry->register( 'test/one', self::$test_ability_args );
 		$this->registry->register( 'test/two', self::$test_ability_args );
@@ -555,11 +570,11 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Should retrieve all registered abilities.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Abilities_Registry::register
-	 * @covers WP_Abilities_Registry::get_all_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Abilities_Registry', 'get_all_registered' )]
 	public function test_get_all_registered() {
 		$ability_one_name = 'test/one';
 		$this->registry->register( $ability_one_name, self::$test_ability_args );
@@ -580,8 +595,8 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Test register_ability_args filter modifies the args before ability instantiation.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_ability_args_filter_modifies_args() {
 		$was_filter_callback_fired = false;
 
@@ -622,10 +637,10 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Test register_ability_args filter can block ability registration by returning invalid args.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_ability_args_filter_blocks_registration() {
 		// Define the filter.
 		add_filter(
@@ -648,10 +663,10 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Test register_ability_args filter can block an invalid ability class from being used.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Abilities_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_ability_args_filter_blocks_invalid_ability_class() {
 		// Define the filter.
 		add_filter(
@@ -673,8 +688,8 @@ class Tests_Abilities_API_WpAbilitiesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests register_ability_args filter is only applied to the specific ability being registered.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_ability_args_filter_only_applies_to_specific_ability() {
 		add_filter(
 			'wp_register_ability_args',

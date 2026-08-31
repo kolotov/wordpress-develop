@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group link
- * @covers ::get_pagenum_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_pagenum_link' )]
 class Tests_Link_GetPagenumLink extends WP_UnitTestCase {
 
 	/**
@@ -38,8 +38,8 @@ class Tests_Link_GetPagenumLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8847' )]
 	public function test_get_pagenum_link_case_insensitivity() {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
 
@@ -66,16 +66,16 @@ class Tests_Link_GetPagenumLink extends WP_UnitTestCase {
 	/**
 	 * Tests that a trailing slash is not added to the link.
 	 *
-	 * @ticket 2877
 	 *
-	 * @dataProvider data_get_pagenum_link_plain_permalinks
-	 * @dataProvider data_get_pagenum_link
 	 *
 	 * @param string $permalink_structure The structure to use for permalinks.
 	 * @param string $request_uri         The value for `$_SERVER['REQUEST_URI']`.
 	 * @param int    $pagenum             The page number to get the link for.
 	 * @param string $expected            The expected relative URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '2877' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_pagenum_link_plain_permalinks' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_pagenum_link' )]
 	public function test_get_pagenum_link_should_not_add_trailing_slash( $permalink_structure, $request_uri, $pagenum, $expected ) {
 		$this->set_permalink_structure( $permalink_structure );
 		$_SERVER['REQUEST_URI'] = $request_uri;
@@ -89,7 +89,7 @@ class Tests_Link_GetPagenumLink extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_pagenum_link_plain_permalinks() {
+	public static function data_get_pagenum_link_plain_permalinks() {
 		return array(
 			'page 1 and plain permalinks' => array(
 				'permalink_structure' => '',
@@ -110,15 +110,15 @@ class Tests_Link_GetPagenumLink extends WP_UnitTestCase {
 	 * Tests that a trailing slash is added to the link when a trailing slash
 	 * exists in the permalink structure.
 	 *
-	 * @ticket 2877
 	 *
-	 * @dataProvider data_get_pagenum_link
 	 *
 	 * @param string $permalink_structure The structure to use for permalinks.
 	 * @param string $request_uri         The value for `$_SERVER['REQUEST_URI']`.
 	 * @param int    $pagenum             The page number to get the link for.
 	 * @param string $expected            The expected relative URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '2877' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_pagenum_link' )]
 	public function test_get_pagenum_link_should_add_trailing_slash( $permalink_structure, $request_uri, $pagenum, $expected ) {
 		// Ensure the permalink structure has a trailing slash.
 		$permalink_structure = trailingslashit( $permalink_structure );
@@ -144,7 +144,7 @@ class Tests_Link_GetPagenumLink extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_pagenum_link() {
+	public static function data_get_pagenum_link() {
 		return array(
 			'page 1 and index.php'                  => array(
 				'permalink_structure' => '/index.php/%year%/%monthnum%/%day%/%postname%',

@@ -8,20 +8,20 @@
 require_once __DIR__ . '/base.php';
 
 /**
- * @group admin
- * @group filesystem
- * @group filesystem-direct
  *
- * @covers WP_Filesystem_Direct::put_contents
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem-direct' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Filesystem_Direct::class, 'put_contents' )]
 class Tests_Filesystem_WpFilesystemDirect_PutContents extends WP_Filesystem_Direct_UnitTestCase {
 
 	/**
 	 * Tests that `WP_Filesystem_Direct::put_contents()`
 	 * returns false for a directory.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_return_false_for_a_directory() {
 		$this->assertFalse( self::$filesystem->put_contents( self::$file_structure['test_dir']['path'], 'New content.' ) );
 	}
@@ -30,8 +30,8 @@ class Tests_Filesystem_WpFilesystemDirect_PutContents extends WP_Filesystem_Dire
 	 * Tests that `WP_Filesystem_Direct::put_contents()` inserts
 	 * content into the provided file.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_insert_contents_into_file() {
 		$file   = self::$file_structure['test_dir']['path'] . 'file-to-create.txt';
 		$actual = self::$filesystem->put_contents( $file, 'New content.', 0644 );

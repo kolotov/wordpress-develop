@@ -1,10 +1,11 @@
 <?php
 
 /**
- * @group sitemaps
  *
- * @coversDefaultClass WP_Sitemaps_Users
  */
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'sitemaps' )]
 class Tests_Sitemaps_wpSitemapsUsers extends WP_UnitTestCase {
 
 	/**
@@ -35,8 +36,8 @@ class Tests_Sitemaps_wpSitemapsUsers extends WP_UnitTestCase {
 	 * Test getting a URL list for a users sitemap page via
 	 * WP_Sitemaps_Users::get_url_list().
 	 *
-	 * @covers ::get_url_list
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Sitemaps_Users', 'get_url_list' )]
 	public function test_get_url_list_users() {
 		// Set up the user to an editor to assign posts to other users.
 		wp_set_current_user( self::$editor_id );
@@ -61,9 +62,9 @@ class Tests_Sitemaps_wpSitemapsUsers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_url_list
-	 * @covers ::get_users_query_args
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Sitemaps_Users', 'get_url_list' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Sitemaps_Users', 'get_users_query_args' )]
 	public function test_get_url_list_skips_users_with_only_attachments_and_pages() {
 		// Set up the user to an editor to assign posts to other users.
 		wp_set_current_user( self::$editor_id );

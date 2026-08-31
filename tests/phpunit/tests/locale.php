@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group l10n
- * @group i18n
  */
+#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
+#[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
 class Tests_Locale extends WP_UnitTestCase {
 	/**
 	 * @var WP_Locale
@@ -16,12 +16,12 @@ class Tests_Locale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57427
 	 *
-	 * @dataProvider data_property_initializes_to_array
 	 *
 	 * @param string $name Property name to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57427' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_property_initializes_to_array' )]
 	public function test_property_initializes_to_array( $name ) {
 		$this->assertIsArray( $this->locale->$name, "WP_Locale::{$name} property should be an array" );
 
@@ -35,7 +35,7 @@ class Tests_Locale extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_property_initializes_to_array() {
+	public static function data_property_initializes_to_array() {
 		return array(
 			'weekday'         => array( 'weekday' ),
 			'weekday_initial' => array( 'weekday_initial' ),
@@ -49,8 +49,8 @@ class Tests_Locale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Locale::get_weekday
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Locale', 'get_weekday' )]
 	public function test_get_weekday() {
 		$this->assertSame( __( 'Sunday' ), $this->locale->get_weekday( 0 ) );
 		$this->assertSame( __( 'Monday' ), $this->locale->get_weekday( 1 ) );
@@ -62,21 +62,38 @@ class Tests_Locale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Locale::get_weekday
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Locale', 'get_weekday' )]
 	public function test_get_weekday_undefined_index() {
-		if ( PHP_VERSION_ID >= 80000 ) {
-			$this->expectWarning();
-		} else {
-			$this->expectNotice();
+		$errors = array();
+		set_error_handler(
+			static function ( int $severity, string $message ) use ( &$errors ): bool {
+				$errors[] = compact( 'severity', 'message' );
+				return true;
+			},
+			E_WARNING
+		);
+
+		try {
+			$this->locale->get_weekday( 7 );
+		} finally {
+			restore_error_handler();
 		}
 
-		$this->locale->get_weekday( 7 );
+		$this->assertSame(
+			array(
+				array(
+					'severity' => E_WARNING,
+					'message'  => 'Undefined array key 7',
+				),
+			),
+			$errors
+		);
 	}
 
 	/**
-	 * @covers WP_Locale::get_weekday_initial
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Locale', 'get_weekday_initial' )]
 	public function test_get_weekday_initial() {
 		$this->assertSame( __( 'S' ), $this->locale->get_weekday_initial( __( 'Sunday' ) ) );
 		$this->assertSame( __( 'M' ), $this->locale->get_weekday_initial( __( 'Monday' ) ) );
@@ -88,8 +105,8 @@ class Tests_Locale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Locale::get_weekday_abbrev
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Locale', 'get_weekday_abbrev' )]
 	public function test_get_weekday_abbrev() {
 		$this->assertSame( __( 'Sun' ), $this->locale->get_weekday_abbrev( __( 'Sunday' ) ) );
 		$this->assertSame( __( 'Mon' ), $this->locale->get_weekday_abbrev( __( 'Monday' ) ) );
@@ -101,8 +118,8 @@ class Tests_Locale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Locale::get_month
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Locale', 'get_month' )]
 	public function test_get_month() {
 		$this->assertSame( __( 'January' ), $this->locale->get_month( 1 ) );
 		$this->assertSame( __( 'February' ), $this->locale->get_month( 2 ) );
@@ -119,8 +136,8 @@ class Tests_Locale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Locale::get_month
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Locale', 'get_month' )]
 	public function test_get_month_leading_zero() {
 		$this->assertSame( __( 'January' ), $this->locale->get_month( '01' ) );
 		$this->assertSame( __( 'February' ), $this->locale->get_month( '02' ) );
@@ -134,8 +151,8 @@ class Tests_Locale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Locale::get_month_abbrev
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Locale', 'get_month_abbrev' )]
 	public function test_get_month_abbrev() {
 		$this->assertSame( __( 'Jan' ), $this->locale->get_month_abbrev( __( 'January' ) ) );
 		$this->assertSame( __( 'Feb' ), $this->locale->get_month_abbrev( __( 'February' ) ) );
@@ -152,8 +169,8 @@ class Tests_Locale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Locale::get_meridiem
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Locale', 'get_meridiem' )]
 	public function test_get_meridiem() {
 		$this->assertSame( __( 'am' ), $this->locale->get_meridiem( 'am' ) );
 		$this->assertSame( __( 'AM' ), $this->locale->get_meridiem( 'AM' ) );
@@ -162,8 +179,8 @@ class Tests_Locale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Locale::is_rtl
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Locale', 'is_rtl' )]
 	public function test_is_rtl() {
 		$this->assertFalse( $this->locale->is_rtl() );
 		$this->locale->text_direction = 'foo';
@@ -178,15 +195,15 @@ class Tests_Locale extends WP_UnitTestCase {
 	 * Tests that `WP_Locale::get_word_count_type()` returns
 	 * the appropriate value.
 	 *
-	 * @ticket 56698
 	 *
-	 * @covers WP_Locale::get_word_count_type
 	 *
-	 * @dataProvider data_get_word_count_type
 	 *
 	 * @param string $word_count_type The word count type.
 	 * @param string $expected        The expected return value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56698' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_word_count_type' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Locale', 'get_word_count_type' )]
 	public function test_get_word_count_type( $word_count_type, $expected ) {
 		if ( is_string( $word_count_type ) ) {
 			$this->locale->word_count_type = $word_count_type;
@@ -201,7 +218,7 @@ class Tests_Locale extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_word_count_type() {
+	public static function data_get_word_count_type() {
 		return array(
 			'default'                   => array(
 				'word_count_type' => null,

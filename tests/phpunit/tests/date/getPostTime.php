@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @group date
- * @group datetime
- * @group post
  *
- * @covers ::get_post_time
- * @covers ::get_post_modified_time
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_time' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_modified_time' )]
 class Tests_Date_GetPostTime extends WP_UnitTestCase {
 
 	/**
@@ -21,8 +21,8 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28310
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_post_time_returns_correct_time_with_post_id() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2014-03-01 16:35:00' ) );
 
@@ -30,8 +30,8 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28310
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_post_time_returns_false_with_null_or_non_existing_post() {
 		$this->assertFalse( get_post_time() );
 		$this->assertFalse( get_post_time( 'h:i:s' ) );
@@ -40,8 +40,8 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28310
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_post_modified_time_returns_correct_time_with_post_id() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2014-03-01 16:35:00' ) );
 
@@ -49,8 +49,8 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28310
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_post_modified_time_returns_false_with_null_or_non_existing_post() {
 		$this->assertFalse( get_post_modified_time() );
 		$this->assertFalse( get_post_modified_time( 'h:i:s' ) );
@@ -59,8 +59,8 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25002
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25002' )]
 	public function test_should_return_wp_timestamp() {
 		$timezone = 'Europe/Helsinki';
 		update_option( 'timezone_string', $timezone );
@@ -88,8 +88,8 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25002
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25002' )]
 	public function test_should_return_time() {
 		$timezone = 'Europe/Helsinki';
 		update_option( 'timezone_string', $timezone );
@@ -116,8 +116,8 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48384
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48384' )]
 	public function test_should_keep_utc_time_on_timezone_change() {
 		$timezone = 'UTC';
 		update_option( 'timezone_string', $timezone );

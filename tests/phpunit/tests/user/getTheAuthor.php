@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group author
- * @group user
  *
- * @covers ::get_the_author
  */
+#[\PHPUnit\Framework\Attributes\Group( 'author' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_author' )]
 class Tests_User_GetTheAuthor extends WP_UnitTestCase {
 	protected static $author_id = 0;
 	protected static $post_id   = 0;
@@ -47,8 +47,8 @@ class Tests_User_GetTheAuthor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58157
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58157' )]
 	public function test_get_the_author_should_return_empty_string_if_authordata_is_not_set() {
 		unset( $GLOBALS['authordata'] );
 

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group comment
- * @group privacy
  *
- * @covers ::wp_comments_personal_data_eraser
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_comments_personal_data_eraser' )]
 class Tests_Comment_wpCommentsPersonalDataEraser extends WP_UnitTestCase {
 
 	protected static $post_id;
@@ -17,8 +17,8 @@ class Tests_Comment_wpCommentsPersonalDataEraser extends WP_UnitTestCase {
 	/**
 	 * The `wp_comments_personal_data_eraser()` function should erase user's comments.
 	 *
-	 * @ticket 43442
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43442' )]
 	public function test_wp_comments_personal_data_eraser() {
 
 		$user_id = self::factory()->user->create();
@@ -72,8 +72,8 @@ class Tests_Comment_wpCommentsPersonalDataEraser extends WP_UnitTestCase {
 	/**
 	 * Testing the `wp_comments_personal_data_eraser()` function's output on an empty first page.
 	 *
-	 * @ticket 43442
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43442' )]
 	public function test_wp_comments_personal_data_eraser_empty_first_page_output() {
 
 		$actual   = wp_comments_personal_data_eraser( 'nocommentsfound@local.host' );
@@ -90,8 +90,8 @@ class Tests_Comment_wpCommentsPersonalDataEraser extends WP_UnitTestCase {
 	/**
 	 * Testing the `wp_comments_personal_data_eraser()` function's output, for the non-empty first page.
 	 *
-	 * @ticket 43442
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43442' )]
 	public function test_wp_comments_personal_data_eraser_non_empty_first_page_output() {
 
 		$args = array(
@@ -120,8 +120,8 @@ class Tests_Comment_wpCommentsPersonalDataEraser extends WP_UnitTestCase {
 	/**
 	 * Testing the `wp_comments_personal_data_eraser()` function's output, for an empty second page.
 	 *
-	 * @ticket 43442
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43442' )]
 	public function test_wp_comments_personal_data_eraser_empty_second_page_output() {
 
 		$args = array(
@@ -150,8 +150,8 @@ class Tests_Comment_wpCommentsPersonalDataEraser extends WP_UnitTestCase {
 	/**
 	 * Testing the `wp_anonymize_comment` filter, to prevent comment anonymization.
 	 *
-	 * @ticket 43442
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43442' )]
 	public function test_wp_anonymize_comment_filter_to_prevent_comment_anonymization() {
 
 		$args       = array(
@@ -185,8 +185,8 @@ class Tests_Comment_wpCommentsPersonalDataEraser extends WP_UnitTestCase {
 	/**
 	 * Testing the `wp_anonymize_comment` filter, to prevent comment anonymization, with a custom message.
 	 *
-	 * @ticket 43442
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43442' )]
 	public function test_wp_anonymize_comment_filter_to_prevent_comment_anonymization_with_custom_message() {
 
 		$args       = array(
@@ -233,8 +233,8 @@ class Tests_Comment_wpCommentsPersonalDataEraser extends WP_UnitTestCase {
 	/**
 	 * Testing that `wp_comments_personal_data_eraser()` orders comments by ID.
 	 *
-	 * @ticket 57700
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57700' )]
 	public function test_wp_comments_personal_data_eraser_orders_comments_by_id() {
 
 		$args = array(

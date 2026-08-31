@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group pomo
  */
+#[\PHPUnit\Framework\Attributes\Group( 'pomo' )]
 class Tests_POMO_NOOPTranslations extends WP_UnitTestCase {
 
 	/**

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group sitemaps
  */
+#[\PHPUnit\Framework\Attributes\Group( 'sitemaps' )]
 class Tests_Sitemaps_wpSitemapsTaxonomies extends WP_UnitTestCase {
 
 	/**

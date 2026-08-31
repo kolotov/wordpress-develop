@@ -7,21 +7,18 @@
 
 require_once __DIR__ . '/base.php';
 
-/**
- * @group admin
- * @group plugins
- *
- * @covers WP_Plugin_Dependencies::get_dependency_filepath
- * @covers WP_Plugin_Dependencies::get_dependency_filepaths
- * @covers WP_Plugin_Dependencies::get_plugin_dirnames
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependency_filepath' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependency_filepaths' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_plugin_dirnames' )]
 class Tests_Admin_WPPluginDependencies_GetDependencyFilepath extends WP_PluginDependencies_UnitTestCase {
 
 	/**
 	 * Tests that false is returned if Plugin Dependencies has not been initialized.
 	 *
-	 * @ticket 60457
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60457' )]
 	public function test_should_return_false_before_initialization() {
 		// Ensure Plugin Dependencies has not been initialized.
 		$this->assertFalse(
@@ -44,14 +41,14 @@ class Tests_Admin_WPPluginDependencies_GetDependencyFilepath extends WP_PluginDe
 	/**
 	 * Tests that the expected dependency filepaths are retrieved for installed dependencies.
 	 *
-	 * @ticket 22316
 	 *
-	 * @dataProvider data_get_dependency_filepath
 	 *
 	 * @param string[]     $dependency_slug The dependency slug.
 	 * @param string[]     $plugins         An array of plugin paths.
 	 * @param string|false $expected       The expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_dependency_filepath' )]
 	public function test_should_return_filepaths_for_installed_dependencies( $dependency_slug, $plugins, $expected ) {
 		$this->set_property_value( 'plugins', $plugins );
 		$this->assertNull( $this->get_property_value( 'dependency_filepaths' ) );
@@ -69,7 +66,7 @@ class Tests_Admin_WPPluginDependencies_GetDependencyFilepath extends WP_PluginDe
 	 *
 	 * @return array[]
 	 */
-	public function data_get_dependency_filepath() {
+	public static function data_get_dependency_filepath() {
 		return array(
 			'no plugins'                      => array(
 				'dependency_slug' => 'dependency',
@@ -85,28 +82,28 @@ class Tests_Admin_WPPluginDependencies_GetDependencyFilepath extends WP_PluginDe
 				'expected'        => false,
 			),
 			'a plugin that ends with slug/'   => array(
-				'dependency_slugs' => 'dependency',
-				'plugins'          => array(
+				'dependency_slug' => 'dependency',
+				'plugins'         => array(
 					'addon-for-dependency/dependency.php' => array( 'RequiresPlugins' => '' ),
 					'dependent/dependent.php'             => array( 'RequiresPlugins' => 'dependency' ),
 				),
-				'expected'         => false,
+				'expected'        => false,
 			),
 			'a plugin that does not exist'    => array(
-				'dependency_slugs' => 'dependency2',
-				'plugins'          => array(
+				'dependency_slug' => 'dependency2',
+				'plugins'         => array(
 					'dependency/dependency.php' => array( 'RequiresPlugins' => '' ),
 					'dependent/dependent.php'   => array( 'RequiresPlugins' => 'dependency2' ),
 				),
-				'expected'         => false,
+				'expected'        => false,
 			),
 			'a plugin that exists'            => array(
-				'dependency_slugs' => 'dependency',
-				'plugins'          => array(
+				'dependency_slug' => 'dependency',
+				'plugins'         => array(
 					'dependency/dependency.php' => array( 'RequiresPlugins' => '' ),
 					'dependent/dependent.php'   => array( 'RequiresPlugins' => 'dependency' ),
 				),
-				'expected'         => 'dependency/dependency.php',
+				'expected'        => 'dependency/dependency.php',
 			),
 		);
 	}
@@ -114,8 +111,8 @@ class Tests_Admin_WPPluginDependencies_GetDependencyFilepath extends WP_PluginDe
 	/**
 	 * Tests that an existing value for dependency filepaths is returned.
 	 *
-	 * @ticket 22316
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_return_existing_value_for_dependency_filepaths() {
 		$expected = 'dependency/dependency.php';
 
@@ -150,8 +147,8 @@ class Tests_Admin_WPPluginDependencies_GetDependencyFilepath extends WP_PluginDe
 	 * Tests that an empty array is returned when
 	 * no plugin directory names are stored.
 	 *
-	 * @ticket 22316
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_return_empty_array_for_no_plugin_dirnames() {
 		$this->set_property_value( 'dependency_slugs', array() );
 		$this->assertFalse( self::$instance::get_dependency_filepath( 'dependency' ) );

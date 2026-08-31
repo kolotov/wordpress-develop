@@ -27,6 +27,7 @@ jobs:
     permissions:
       issues: write
       pull-requests: write
+    # The upstream Playground PR shortcut targets WordPress/wordpress-develop and is disabled in this fork.
     if: >
       github.repository == 'WordPress/wordpress-develop' &&
       github.event.workflow_run.event == 'pull_request' &&
@@ -114,7 +115,7 @@ jobs:
             - All changes will be lost when refreshing the page.
             - A fresh instance is created each time the link below is clicked.
             - Every time this pull request is updated, a new ZIP file containing all changes is created. If changes are not reflected in the Playground instance,
-            it's possible that the most recent build failed, or has not completed. Check the [list of workflow runs to be sure](https://github.com/WordPress/wordpress-develop/actions/workflows/test-build-processes.yml).
+            it's possible that the most recent build failed, or has not completed. Check the [list of workflow runs to be sure](https://github.com/kolotov/wordpress-develop/actions/workflows/test-build-processes.yml).
 
             For more details about these limitations and more, check out the [Limitations page](https://wordpress.github.io/wordpress-playground/limitations/) in the WordPress Playground documentation.
 
@@ -130,6 +131,7 @@ jobs:
     permissions:
       issues: write
       pull-requests: write
+    # Trac ticket reminder automation is upstream-specific and disabled in this fork.
     if: ${{ github.repository == 'WordPress/wordpress-develop' && github.event_name == 'pull_request_target' && ! github.event.pull_request.draft && github.event.pull_request.state == 'open' }}
     steps:
       - name: Check for Trac ticket and manage comment

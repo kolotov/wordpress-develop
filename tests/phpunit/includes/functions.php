@@ -7,15 +7,7 @@ require_once __DIR__ . '/class-basic-object.php';
  * @return double The version number.
  */
 function tests_get_phpunit_version() {
-	if ( class_exists( 'PHPUnit\Runner\Version' ) ) {
-		$version = PHPUnit\Runner\Version::id();
-	} elseif ( class_exists( 'PHPUnit_Runner_Version' ) ) {
-		$version = PHPUnit_Runner_Version::id();
-	} else {
-		$version = 0;
-	}
-
-	return $version;
+	return PHPUnit\Runner\Version::id();
 }
 
 /**
@@ -300,6 +292,92 @@ function _wp_die_handler_exit( $message, $title, $args ) {
  */
 function _set_default_permalink_structure_for_tests() {
 	update_option( 'permalink_structure', '/%year%/%monthnum%/%day%/%postname%/' );
+}
+
+/**
+ * Recursively copies the shared test data directory for a ParaTest worker.
+ *
+ * @param string $source      Source directory.
+ * @param string $destination Destination directory.
+ */
+function wp_tests_copy_directory( string $source, string $destination ): void {
+	if ( ! is_dir( $destination ) && ! mkdir( $destination, 0777, true ) && ! is_dir( $destination ) ) {
+		throw new RuntimeException( 'Could not create ParaTest data directory: ' . $destination );
+	}
+
+	$iterator = new RecursiveIteratorIterator(
+		new RecursiveDirectoryIterator( $source, FilesystemIterator::SKIP_DOTS ),
+		RecursiveIteratorIterator::SELF_FIRST,
+	);
+
+	foreach ( $iterator as $item ) {
+		$target = $destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
+		if ( $item->isDir() ) {
+			if ( ! is_dir( $target ) && ! mkdir( $target, 0777, true ) && ! is_dir( $target ) ) {
+				throw new RuntimeException( 'Could not create ParaTest data directory: ' . $target );
+			}
+			continue;
+		}
+
+		if ( ! copy( $item->getPathname(), $target ) ) {
+			throw new RuntimeException( 'Could not copy ParaTest test data file: ' . $item->getPathname() );
+		}
+	}
+}
+
+/**
+ * Recursively removes a directory created for a ParaTest worker.
+ *
+ * @param string $directory Directory to remove.
+ */
+function wp_tests_remove_directory( string $directory ): void {
+	if ( ! is_dir( $directory ) ) {
+		return;
+	}
+
+	$iterator = new RecursiveIteratorIterator(
+		new RecursiveDirectoryIterator( $directory, FilesystemIterator::SKIP_DOTS ),
+		RecursiveIteratorIterator::CHILD_FIRST,
+	);
+
+	foreach ( $iterator as $item ) {
+		if ( $item->isDir() ) {
+			rmdir( $item->getPathname() );
+		} else {
+			unlink( $item->getPathname() );
+		}
+	}
+
+	rmdir( $directory );
+}
+
+/**
+ * Gives each ParaTest worker an isolated uploads directory.
+ *
+ * @param array $uploads Upload directory data.
+ * @return array The altered upload directory data.
+ */
+function _wp_tests_paratest_upload_dir( $uploads ) {
+	static $initialized_workers = array();
+
+	$token = getenv( 'UNIQUE_TEST_TOKEN' );
+	if ( false === $token || '' === $token ) {
+		$token = getenv( 'TEST_TOKEN' );
+	}
+	if ( false === $token || '' === $token ) {
+		return $uploads;
+	}
+
+	$worker              = '.paratest-' . preg_replace( '/[^0-9A-Za-z_]/', '_', $token );
+	$uploads['basedir'] .= '/' . $worker;
+	$uploads['path']     = $uploads['basedir'] . $uploads['subdir'];
+
+	if ( ! isset( $initialized_workers[ $worker ] ) ) {
+		wp_tests_remove_directory( $uploads['basedir'] );
+		$initialized_workers[ $worker ] = true;
+	}
+
+	return $uploads;
 }
 
 /**

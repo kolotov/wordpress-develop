@@ -3,20 +3,20 @@
 /**
  * Tests for the sanitize_hex_color_no_hash() function.
  *
- * @group formatting
  *
- * @covers ::sanitize_hex_color_no_hash
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_hex_color_no_hash' )]
 class Tests_Formatting_SanitizeHexColorNoHash extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 60271
 	 *
-	 * @dataProvider data_sanitize_hex_color_no_hash
 	 *
 	 * @param string $color    Color.
 	 * @param string $expected Expected.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60271' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_hex_color_no_hash' )]
 	public function test_sanitize_hex_color_no_hash( $color, $expected ) {
 		$this->assertSame( $expected, sanitize_hex_color_no_hash( $color ) );
 	}
@@ -26,7 +26,7 @@ class Tests_Formatting_SanitizeHexColorNoHash extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_sanitize_hex_color_no_hash() {
+	public static function data_sanitize_hex_color_no_hash() {
 		return array(
 			'$maybe_alpha = false, 3 digit'               => array(
 				'color'    => '#123',

@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @group sitemaps
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'sitemaps' )]
 class Tests_Sitemaps_wpSitemapsRegistry extends WP_UnitTestCase {
 
 	public function test_add_provider() {
@@ -36,14 +37,14 @@ class Tests_Sitemaps_wpSitemapsRegistry extends WP_UnitTestCase {
 	 * Tests that `WP_Sitemaps_Registry::get_provider()` returns `null` when
 	 * the `$name` argument is not a string.
 	 *
-	 * @ticket 56336
 	 *
-	 * @covers WP_Sitemaps_Registry::get_provider
 	 *
-	 * @dataProvider data_get_provider_should_return_null_with_non_string_name
 	 *
 	 * @param mixed $name The non-string name.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56336' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_provider_should_return_null_with_non_string_name' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Sitemaps_Registry', 'get_provider' )]
 	public function test_get_provider_should_return_null_with_non_string_name( $name ) {
 		$registry = new WP_Sitemaps_Registry();
 		$this->assertNull( $registry->get_provider( $name ) );
@@ -54,7 +55,7 @@ class Tests_Sitemaps_wpSitemapsRegistry extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_get_provider_should_return_null_with_non_string_name() {
+	public static function data_get_provider_should_return_null_with_non_string_name() {
 		return array(
 			'array'        => array( array() ),
 			'object'       => array( new stdClass() ),

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group l10n
- * @group i18n
  *
- * @covers ::translate_settings_using_i18n_schema
  */
+#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
+#[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'translate_settings_using_i18n_schema' )]
 class Tests_L10n_TranslateSettingsUsingI18nSchema extends WP_UnitTestCase {
 	/**
 	 * Returns Polish locale string.
@@ -17,8 +17,8 @@ class Tests_L10n_TranslateSettingsUsingI18nSchema extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53238
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53238' )]
 	public function test_translate_settings_using_i18n_schema() {
 		$textdomain = 'notice';
 

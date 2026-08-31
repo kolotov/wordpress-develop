@@ -1,7 +1,9 @@
 <?php
 /**
- * @group comment
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+
+
 class Tests_Comment_Template extends WP_UnitTestCase {
 	/**
 	 * Shared post ID.
@@ -20,8 +22,8 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_comments_number
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments_number' )]
 	public function test_get_comments_number() {
 		$post_id = self::$post_id;
 
@@ -36,8 +38,8 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_comments_number
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments_number' )]
 	public function test_get_comments_number_without_arg() {
 		$post_id   = self::$post_id;
 		$permalink = get_permalink( $post_id );
@@ -52,10 +54,10 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48772
 	 *
-	 * @covers ::get_comments_number_text
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48772' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments_number_text' )]
 	public function test_get_comments_number_text_with_post_id() {
 		$post_id = self::$post_id;
 		self::factory()->comment->create_post_comments( $post_id, 6 );
@@ -72,10 +74,10 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 13651
 	 *
-	 * @covers ::get_comments_number_text
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '13651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments_number_text' )]
 	public function test_get_comments_number_text_declension_with_default_args() {
 		$post_id   = self::$post_id;
 		$permalink = get_permalink( $post_id );
@@ -95,11 +97,11 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 13651
-	 * @dataProvider data_get_comments_number_text_declension
 	 *
-	 * @covers ::get_comments_number_text
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '13651' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_comments_number_text_declension' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comments_number_text' )]
 	public function test_get_comments_number_text_declension_with_custom_args( $number, $input, $output ) {
 		$post_id   = self::$post_id;
 		$permalink = get_permalink( $post_id );
@@ -133,7 +135,7 @@ class Tests_Comment_Template extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_get_comments_number_text_declension() {
+	public static function data_get_comments_number_text_declension() {
 		return array(
 			array(
 				2,

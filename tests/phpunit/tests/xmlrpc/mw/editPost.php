@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_mw_editPost extends WP_XMLRPC_UnitTestCase {
 
 	public function test_invalid_username_password() {
@@ -111,8 +111,8 @@ class Tests_XMLRPC_mw_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24916
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24916' )]
 	public function test_capable_reassign_author_to_self() {
 		$contributor_id = $this->make_user_by_role( 'contributor' );
 		$editor_id      = $this->make_user_by_role( 'editor' );
@@ -133,8 +133,8 @@ class Tests_XMLRPC_mw_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_post_thumbnail() {
 		add_theme_support( 'post-thumbnails' );
 
@@ -231,8 +231,8 @@ class Tests_XMLRPC_mw_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20662
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20662' )]
 	public function test_make_post_sticky() {
 		$author_id = $this->make_user_by_role( 'editor' );
 
@@ -266,8 +266,8 @@ class Tests_XMLRPC_mw_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16980
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16980' )]
 	public function test_empty_not_null() {
 		$editor_id = $this->make_user_by_role( 'editor' );
 
@@ -298,8 +298,8 @@ class Tests_XMLRPC_mw_editPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35874
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35874' )]
 	public function test_draft_not_prematurely_published() {
 		$editor_id = $this->make_user_by_role( 'editor' );
 

@@ -6,11 +6,11 @@
  * These tests filter `pre_get_space_used` so that we can ignore the local
  * environment. Tests for `get_space_used()` are handled elsewhere.
  *
- * @group ms-required
- * @group multisite
  *
- * @covers ::is_upload_space_available
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'is_upload_space_available' )]
 class Tests_Multisite_IsUploadSpaceAvailable extends WP_UnitTestCase {
 
 	public function set_up() {

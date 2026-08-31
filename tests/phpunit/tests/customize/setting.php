@@ -3,8 +3,8 @@
 /**
  * Tests for the WP_Customize_Setting class.
  *
- * @group customize
  */
+#[\PHPUnit\Framework\Attributes\Group( 'customize' )]
 class Tests_WP_Customize_Setting extends WP_UnitTestCase {
 
 	/**
@@ -487,8 +487,8 @@ class Tests_WP_Customize_Setting extends WP_UnitTestCase {
 	/**
 	 * Test specific fix for setting's default value not applying on preview window
 	 *
-	 * @ticket 30988
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30988' )]
 	public function test_non_posted_setting_applying_default_value_in_preview() {
 		$type    = 'option';
 		$name    = 'unset_option_without_post_value';
@@ -564,8 +564,8 @@ class Tests_WP_Customize_Setting extends WP_UnitTestCase {
 	 *
 	 * This is applicable to both single and multisite. This doesn't do switch_to_blog()
 	 *
-	 * @ticket 31428
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31428' )]
 	public function test_is_current_blog_previewed() {
 		wp_set_current_user( self::$admin_id );
 		$type       = 'option';
@@ -584,10 +584,10 @@ class Tests_WP_Customize_Setting extends WP_UnitTestCase {
 	/**
 	 * Ensure that previewing a setting is disabled when the current blog is switched.
 	 *
-	 * @ticket 31428
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31428' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_previewing_with_switch_to_blog() {
 		wp_set_current_user( self::$admin_id );
 		$type       = 'option';
@@ -608,8 +608,8 @@ class Tests_WP_Customize_Setting extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33499
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33499' )]
 	public function test_option_autoloading() {
 		global $wpdb;
 		wp_set_current_user( self::$admin_id );
@@ -756,8 +756,8 @@ class Tests_WP_Customize_Setting extends WP_UnitTestCase {
 	/**
 	 * Ensure that WP_Customize_Setting::value() can return a previewed value for aggregated multidimensionals.
 	 *
-	 * @ticket 37294
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37294' )]
 	public function test_multidimensional_value_when_previewed() {
 		wp_set_current_user( self::$admin_id );
 		WP_Customize_Setting::reset_aggregated_multidimensionals();

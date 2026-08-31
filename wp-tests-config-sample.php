@@ -59,7 +59,13 @@ define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
 define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
 define( 'NONCE_SALT',       'put your unique phrase here' );
 
-$table_prefix = 'wptests_';   // Only numbers, letters, and underscores please!
+$paratest_token = getenv( 'UNIQUE_TEST_TOKEN' );
+if ( false === $paratest_token || '' === $paratest_token ) {
+	$paratest_token = getenv( 'TEST_TOKEN' );
+}
+$table_prefix = false === $paratest_token || '' === $paratest_token
+	? 'wptests_'
+	: 'wptests_' . preg_replace( '/[^0-9A-Za-z_]/', '_', $paratest_token ) . '_';
 
 define( 'WP_TESTS_DOMAIN', 'example.org' );
 define( 'WP_TESTS_EMAIL', 'admin@example.org' );

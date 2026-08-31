@@ -7,10 +7,10 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 /**
  * Testing Ajax handler for installing, updating, and deleting themes.
  *
- * @group ajax
  *
- * @covers ::wp_ajax_update_theme
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_update_theme' )]
 class Tests_Ajax_wpAjaxUpdateTheme extends WP_Ajax_UnitTestCase {
 	private $orig_theme_dir;
 	private $theme_root;
@@ -104,8 +104,8 @@ class Tests_Ajax_wpAjaxUpdateTheme extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_update_theme() {
 		$this->_setRole( 'administrator' );
 
@@ -144,8 +144,8 @@ class Tests_Ajax_wpAjaxUpdateTheme extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_uppercase_theme_slug() {
 		$this->_setRole( 'administrator' );
 

@@ -4,10 +4,10 @@
  *
  * @since 6.3.0
  *
- * @group link
  *
- * @covers ::get_edit_post_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_edit_post_link' )]
 class Tests_Link_GetEditPostLink extends WP_UnitTestCase {
 	/**
 	 * The name of the theme to use for the test.
@@ -69,8 +69,8 @@ class Tests_Link_GetEditPostLink extends WP_UnitTestCase {
 	/**
 	 * Tests getting the edit post link for a template post type.
 	 *
-	 * @ticket 57709
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57709' )]
 	public function test_get_edit_post_link_for_wp_template_post_type() {
 		$template_post = self::factory()->post->create_and_get(
 			array(
@@ -100,8 +100,8 @@ class Tests_Link_GetEditPostLink extends WP_UnitTestCase {
 	/**
 	 * Tests getting the edit post link for a template part post type.
 	 *
-	 * @ticket 57709
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57709' )]
 	public function test_get_edit_post_link_for_wp_template_part_post_type() {
 		$template_part_post = self::factory()->post->create_and_get(
 			array(
@@ -135,8 +135,8 @@ class Tests_Link_GetEditPostLink extends WP_UnitTestCase {
 	/**
 	 * Tests getting the edit post link for a wp_navigation post type.
 	 *
-	 * @ticket 58589
 	 * */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58589' )]
 	public function test_get_edit_post_link_for_wp_navigation_post_type() {
 		$navigation_post = self::factory()->post->create_and_get(
 			array(

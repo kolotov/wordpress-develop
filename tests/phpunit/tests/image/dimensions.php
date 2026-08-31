@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group image
- * @group media
- * @group upload
  */
+#[\PHPUnit\Framework\Attributes\Group( 'image' )]
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\Group( 'upload' )]
 class Tests_Image_Dimensions extends WP_UnitTestCase {
 	public function test_400x400_no_crop() {
 		// Landscape: resize 640x480 to fit 400x400: 400x300.
@@ -154,8 +154,8 @@ class Tests_Image_Dimensions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 19393
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19393' )]
 	public function test_crop_anchors() {
 		// Landscape: crop 640x480 to fit 400x500: 400x400 taken from a 480x480 crop.
 		// src_x = 0 (left), src_y = 0 (top).

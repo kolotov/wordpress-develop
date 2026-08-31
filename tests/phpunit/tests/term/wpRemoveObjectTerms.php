@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group taxonomy
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Term_WpRemoveObjectTerms extends WP_UnitTestCase {
 	/**
-	 * @ticket 34338
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34338' )]
 	public function test_removal_should_delete_object_relationship_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );
 		$p = self::factory()->post->create();

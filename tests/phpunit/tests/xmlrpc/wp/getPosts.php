@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getPosts extends WP_XMLRPC_UnitTestCase {
 
 	public function test_invalid_username_password() {
@@ -12,8 +12,8 @@ class Tests_XMLRPC_wp_getPosts extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20991' )]
 	public function test_incapable_user() {
 		$this->make_user_by_role( 'subscriber' );
 
@@ -149,8 +149,8 @@ class Tests_XMLRPC_wp_getPosts extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21623
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21623' )]
 	public function test_search() {
 		$this->make_user_by_role( 'editor' );
 

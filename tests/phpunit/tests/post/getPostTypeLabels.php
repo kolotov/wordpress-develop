@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_GetPostTypeLabels extends WP_UnitTestCase {
 	public function test_returns_an_object() {
 		$this->assertIsObject(
@@ -116,8 +116,8 @@ class Tests_Post_GetPostTypeLabels extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33543
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33543' )]
 	public function test_should_fall_back_on_defaults_when_filtered_labels_do_not_contain_the_keys() {
 		add_filter( 'post_type_labels_foo', array( $this, 'filter_post_type_labels' ) );
 		register_post_type( 'foo' );

@@ -3,14 +3,14 @@
 /**
  * Tests for disabling pings in non-production environments.
  *
- * @group comment
- * @covers ::wp_should_disable_pings_for_environment
- * @covers ::wp_maybe_disable_outgoing_pings_for_environment
- * @covers ::wp_maybe_disable_trackback_for_environment
- * @covers ::wp_maybe_disable_xmlrpc_pingback_for_environment
  *
- * @ticket 64837
  */
+#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_should_disable_pings_for_environment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_maybe_disable_outgoing_pings_for_environment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_maybe_disable_trackback_for_environment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_maybe_disable_xmlrpc_pingback_for_environment' )]
 class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 
 	/**
@@ -35,40 +35,40 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_should_disable_returns_true_for_local() {
 		putenv( 'WP_ENVIRONMENT_TYPE=local' );
 		$this->assertTrue( wp_should_disable_pings_for_environment() );
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_should_disable_returns_true_for_development() {
 		putenv( 'WP_ENVIRONMENT_TYPE=development' );
 		$this->assertTrue( wp_should_disable_pings_for_environment() );
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_should_disable_returns_true_for_staging() {
 		putenv( 'WP_ENVIRONMENT_TYPE=staging' );
 		$this->assertTrue( wp_should_disable_pings_for_environment() );
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_should_disable_returns_false_for_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=production' );
 		$this->assertFalse( wp_should_disable_pings_for_environment() );
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_filter_can_enable_pings_in_non_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=local' );
 		add_filter( 'wp_should_disable_pings_for_environment', '__return_false' );
@@ -77,8 +77,8 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_filter_can_disable_pings_in_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=production' );
 		add_filter( 'wp_should_disable_pings_for_environment', '__return_true' );
@@ -87,8 +87,8 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_filter_receives_environment_type() {
 		putenv( 'WP_ENVIRONMENT_TYPE=staging' );
 
@@ -109,8 +109,8 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_outgoing_pingbacks_removed_in_non_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=development' );
 
@@ -124,8 +124,8 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_outgoing_trackbacks_removed_in_non_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=development' );
 
@@ -137,8 +137,8 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_outgoing_generic_ping_removed_in_non_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=development' );
 
@@ -150,8 +150,8 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_enclosures_not_removed_in_non_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=development' );
 
@@ -163,8 +163,8 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_outgoing_pings_preserved_in_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=production' );
 
@@ -180,15 +180,15 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_trackback_hook_is_registered() {
 		$this->assertTrue( has_action( 'pre_trackback_post', 'wp_maybe_disable_trackback_for_environment', 10 ) );
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_pings_open_unaffected_by_environment() {
 		putenv( 'WP_ENVIRONMENT_TYPE=local' );
 
@@ -200,8 +200,8 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_xmlrpc_pingback_removed_in_non_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=development' );
 
@@ -217,8 +217,8 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_xmlrpc_pingback_preserved_in_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=production' );
 
@@ -233,8 +233,8 @@ class Tests_Comment_DisablePingsForEnvironment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64837
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64837' )]
 	public function test_xmlrpc_other_methods_preserved_in_non_production() {
 		putenv( 'WP_ENVIRONMENT_TYPE=development' );
 

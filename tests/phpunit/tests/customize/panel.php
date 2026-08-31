@@ -3,8 +3,8 @@
 /**
  * Tests for the WP_Customize_Panel class.
  *
- * @group customize
  */
+#[\PHPUnit\Framework\Attributes\Group( 'customize' )]
 class Tests_WP_Customize_Panel extends WP_UnitTestCase {
 
 	/**

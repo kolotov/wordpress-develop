@@ -11,12 +11,12 @@
  * @subpackage UnitTests
  * @since 7.1.0
  *
- * @group privacy
- * @group cron
- * @covers ::wp_schedule_personal_data_cleanup_requests
- * @covers ::wp_privacy_personal_data_cleanup_requests
- * @covers ::_wp_personal_data_cleanup_requests
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_schedule_personal_data_cleanup_requests' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_privacy_personal_data_cleanup_requests' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_personal_data_cleanup_requests' )]
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\Group( 'cron' )]
 class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 
 	/**
@@ -100,8 +100,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	/**
 	 * Should register a cron event when none exists.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_schedule_registers_cron_event_when_not_already_scheduled(): void {
 		$this->assertFalse(
 			wp_next_scheduled( 'wp_privacy_personal_data_cleanup_requests' ),
@@ -119,8 +119,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	/**
 	 * The cron event should use the daily recurrence.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_schedule_uses_daily_recurrence(): void {
 		wp_schedule_personal_data_cleanup_requests();
 
@@ -134,8 +134,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	/**
 	 * Calling the function twice must not create a duplicate cron event.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_schedule_does_not_create_duplicate_event(): void {
 		wp_schedule_personal_data_cleanup_requests();
 		$first_timestamp = wp_next_scheduled( 'wp_privacy_personal_data_cleanup_requests' );
@@ -158,8 +158,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	/**
 	 * Should return early and schedule nothing during WordPress installation.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_schedule_does_nothing_during_installation(): void {
 		$prior = wp_installing();
 		wp_installing( true );
@@ -181,8 +181,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	/**
 	 * Expired request-pending posts should be changed to request-failed.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_expired_pending_request_is_marked_failed(): void {
 		$id = wp_create_user_request( $this->unique_email(), 'export_personal_data' );
 		$this->assertIsInt( $id );
@@ -208,8 +208,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	 * wp_generate_user_request_key(), and the cleanup routine blanks it when
 	 * marking a request as failed.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_expired_request_confirmation_key_is_cleared(): void {
 		$id = wp_create_user_request( $this->unique_email(), 'export_personal_data' );
 		$this->assertIsInt( $id );
@@ -238,8 +238,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	/**
 	 * Multiple expired requests should all be cleaned up in a single pass.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_multiple_expired_requests_are_all_marked_failed(): void {
 		$ids = array();
 		for ( $i = 0; $i < 3; $i++ ) {
@@ -264,8 +264,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	 * A request whose modification time is within the expiry window should
 	 * remain request-pending.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_unexpired_pending_request_remains_pending(): void {
 		$id = wp_create_user_request( $this->unique_email(), 'export_personal_data' );
 		$this->assertIsInt( $id );
@@ -283,8 +283,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	 * Only request-pending posts should be targeted; request-confirmed posts
 	 * must not be affected even when they are older than the expiry threshold.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_confirmed_requests_are_not_affected(): void {
 		$id = wp_create_user_request( $this->unique_email(), 'export_personal_data', array(), 'confirmed' );
 		$this->assertIsInt( $id );
@@ -304,8 +304,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	 * A request that is 2 days old should remain pending when the filter extends
 	 * the expiry to 3 days.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_expiry_duration_is_filterable(): void {
 		$id = wp_create_user_request( $this->unique_email(), 'export_personal_data' );
 		$this->assertIsInt( $id );
@@ -340,8 +340,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	 * The fix changes the column to 'post_modified' (local time) so both sides
 	 * of the comparison are in the same timezone.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_unexpired_request_not_expired_on_utcplus_site(): void {
 		$offset_hours = 5; // UTC+5
 		update_option( 'gmt_offset', $offset_hours );
@@ -378,8 +378,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	 * the opposite direction — requests would linger longer than intended before
 	 * being cleaned up. With the fix, the threshold is always applied consistently.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_expired_request_is_marked_failed_on_utcminus_site(): void {
 		$offset_hours = -5; // UTC-5
 		update_option( 'gmt_offset', $offset_hours );
@@ -408,8 +408,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	 * The cron callback should invoke the underlying cleanup routine and move
 	 * expired requests to request-failed.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_cron_callback_cleans_up_expired_requests(): void {
 		$id = wp_create_user_request( $this->unique_email(), 'export_personal_data' );
 		$this->assertIsInt( $id );
@@ -427,8 +427,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	/**
 	 * The cron callback must not affect unexpired requests.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_cron_callback_does_not_affect_unexpired_requests(): void {
 		$id = wp_create_user_request( $this->unique_email(), 'export_personal_data' );
 		$this->assertIsInt( $id );
@@ -449,8 +449,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	/**
 	 * The scheduler and the cron callback should be registered by default.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_default_hooks_are_registered(): void {
 		$this->assertSame(
 			10,
@@ -469,8 +469,8 @@ class Tests_Privacy_WpPersonalDataCleanupRequests extends WP_UnitTestCase {
 	 * Firing the cron action, as WP-Cron does, should run the cleanup end to end
 	 * via the callback registered in default-filters.php.
 	 *
-	 * @ticket 44498
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44498' )]
 	public function test_cron_action_triggers_cleanup(): void {
 		$id = wp_create_user_request( $this->unique_email(), 'export_personal_data' );
 		$this->assertIsInt( $id );

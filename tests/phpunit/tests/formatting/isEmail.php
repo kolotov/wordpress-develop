@@ -2,20 +2,20 @@
 /**
  * Tests for the is_email() function.
  *
- * @group formatting
  *
- * @covers ::is_email
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'is_email' )]
 class Tests_Formatting_IsEmail extends WP_UnitTestCase {
 	/**
 	 * Ensures that valid emails are returned unchanged.
 	 *
-	 * @ticket 31992
 	 *
-	 * @dataProvider data_valid_email_provider
 	 *
 	 * @param string $email Valid email address.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31992' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_email_provider' )]
 	public function test_returns_the_email_address_if_it_is_valid( $email ) {
 		$this->assertSame(
 			$email,
@@ -49,12 +49,12 @@ class Tests_Formatting_IsEmail extends WP_UnitTestCase {
 	/**
 	 * Ensures that unrecognized email addresses are rejected.
 	 *
-	 * @ticket 31992
 	 *
-	 * @dataProvider data_invalid_email_provider
 	 *
 	 * @param string $email Invalid or unrecognized-to-WordPress email address.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31992' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_email_provider' )]
 	public function test_returns_false_if_given_an_invalid_email_address( $email ) {
 		$this->assertFalse(
 			is_email( $email ),

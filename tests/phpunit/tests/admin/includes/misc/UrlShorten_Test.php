@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group admin
  *
- * @covers ::url_shorten
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'url_shorten' )]
 class Tests_Admin_Includes_Misc_UrlShorten_Test extends WP_UnitTestCase {
 
 	public function test_url_shorten() {

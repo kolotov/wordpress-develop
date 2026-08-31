@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group user
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_UpdateUserCaches extends WP_UnitTestCase {
 	public function test_should_store_entire_database_row_in_users_bucket() {
 		global $wpdb;
@@ -52,8 +52,8 @@ class Tests_User_UpdateUserCaches extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24635
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24635' )]
 	public function test_should_store_raw_data_in_users_bucket_when_passed_a_wp_user_object() {
 		global $wpdb;
 

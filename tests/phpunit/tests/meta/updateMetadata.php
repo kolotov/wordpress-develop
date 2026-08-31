@@ -1,13 +1,16 @@
 <?php
 
 /**
- * @group meta
- * @covers ::update_metadata
  */
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'meta' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'update_metadata' )]
 class Tests_Meta_UpdateMetadata extends WP_UnitTestCase {
 	/**
-	 * @ticket 35795
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35795' )]
 	public function test_slashed_key_for_new_metadata() {
 		update_metadata( 'post', 123, wp_slash( 'foo\foo' ), 'bar' );
 
@@ -16,8 +19,8 @@ class Tests_Meta_UpdateMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35795
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35795' )]
 	public function test_slashed_key_for_existing_metadata() {
 		global $wpdb;
 
@@ -29,14 +32,14 @@ class Tests_Meta_UpdateMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54316
 	 *
-	 * @group user
 	 *
-	 * @covers ::clean_user_cache
 	 *
 	 * @global wpdb $wpdb WordPress database abstraction object.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54316' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'clean_user_cache' )]
 	public function test_clear_user_metadata_caches() {
 		global $wpdb;
 
@@ -68,14 +71,14 @@ class Tests_Meta_UpdateMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54316
 	 *
-	 * @group user
 	 *
-	 * @covers ::clean_user_cache
 	 *
 	 * @global wpdb $wpdb WordPress database abstraction object.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54316' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'clean_user_cache' )]
 	public function test_clear_post_metadata_caches() {
 		global $wpdb;
 

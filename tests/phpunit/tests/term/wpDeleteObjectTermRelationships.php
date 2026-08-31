@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group taxonomy
- * @covers ::wp_delete_object_term_relationships
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_delete_object_term_relationships' )]
 class Tests_Term_WpDeleteObjectTermRelationships extends WP_UnitTestCase {
 	public function test_single_taxonomy() {
 		register_taxonomy( 'wptests_tax1', 'post' );
@@ -55,8 +55,8 @@ class Tests_Term_WpDeleteObjectTermRelationships extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64406' )]
 	public function test_delete_when_error() {
 		$taxonomy_name = 'wptests_tax';
 		register_taxonomy( $taxonomy_name, 'post' );

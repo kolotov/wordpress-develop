@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::zeroise
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'zeroise' )]
 class Tests_Formatting_Zeroise extends WP_UnitTestCase {
 	public function test_pads_with_leading_zeroes() {
 		$this->assertSame( '00005', zeroise( 5, 5 ) );

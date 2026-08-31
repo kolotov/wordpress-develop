@@ -2,9 +2,9 @@
 /**
  * Tests for _wp_connectors_resolve_ai_provider_logo_url().
  *
- * @group connectors
- * @covers ::_wp_connectors_resolve_ai_provider_logo_url
  */
+#[\PHPUnit\Framework\Attributes\Group( 'connectors' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_connectors_resolve_ai_provider_logo_url' )]
 class Tests_Connectors_WpConnectorsResolveAiProviderLogoUrl extends WP_UnitTestCase {
 
 	/**
@@ -54,15 +54,15 @@ class Tests_Connectors_WpConnectorsResolveAiProviderLogoUrl extends WP_UnitTestC
 	}
 
 	/**
-	 * @ticket 64791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_returns_null_when_path_is_empty() {
 		$this->assertNull( _wp_connectors_resolve_ai_provider_logo_url( '' ) );
 	}
 
 	/**
-	 * @ticket 64791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_resolves_plugin_dir_path_to_url() {
 		$logo_path = WP_PLUGIN_DIR . '/my-plugin/logo.svg';
 		$this->create_file( $logo_path );
@@ -73,8 +73,8 @@ class Tests_Connectors_WpConnectorsResolveAiProviderLogoUrl extends WP_UnitTestC
 	}
 
 	/**
-	 * @ticket 64791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_resolves_mu_plugin_dir_path_to_url() {
 		$logo_path = WPMU_PLUGIN_DIR . '/my-mu-plugin/logo.svg';
 		$this->create_file( $logo_path );
@@ -85,8 +85,8 @@ class Tests_Connectors_WpConnectorsResolveAiProviderLogoUrl extends WP_UnitTestC
 	}
 
 	/**
-	 * @ticket 64791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_returns_null_when_file_does_not_exist() {
 		$this->assertNull(
 			_wp_connectors_resolve_ai_provider_logo_url( WP_PLUGIN_DIR . '/nonexistent/logo.svg' )
@@ -94,9 +94,9 @@ class Tests_Connectors_WpConnectorsResolveAiProviderLogoUrl extends WP_UnitTestC
 	}
 
 	/**
-	 * @ticket 64791
 	 * @expectedIncorrectUsage _wp_connectors_resolve_ai_provider_logo_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_returns_null_and_triggers_doing_it_wrong_for_path_outside_plugin_dirs() {
 		$tmp_file = tempnam( sys_get_temp_dir(), 'logo_' );
 		file_put_contents( $tmp_file, '<svg></svg>' );

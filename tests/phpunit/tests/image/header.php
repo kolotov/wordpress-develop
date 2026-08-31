@@ -2,9 +2,9 @@
 require_once ABSPATH . 'wp-admin/includes/class-custom-image-header.php';
 
 /**
- * @group image
- * @group header
  */
+#[\PHPUnit\Framework\Attributes\Group( 'image' )]
+#[\PHPUnit\Framework\Attributes\Group( 'header' )]
 class Tests_Image_Header extends WP_UnitTestCase {
 	public $custom_image_header;
 
@@ -118,8 +118,12 @@ class Tests_Image_Header extends WP_UnitTestCase {
 			)
 		);
 
-		$cropped = 'foo-cropped.png';
-		$object  = wp_copy_parent_attachment_properties( $cropped, $id, 'custom-header' );
+		$source  = DIR_TESTDATA . '/images/test-image.jpg';
+		$upload  = wp_upload_bits( 'foo-cropped.jpg', null, file_get_contents( $source ) );
+		$cropped = $upload['file'];
+
+		$this->assertEmpty( $upload['error'], 'The cropped image fixture could not be created.' );
+		$object = wp_copy_parent_attachment_properties( $cropped, $id, 'custom-header' );
 
 		$cropped_id = $this->custom_image_header->insert_attachment( $object, $cropped );
 
@@ -128,8 +132,8 @@ class Tests_Image_Header extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21819
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21819' )]
 	public function test_check_get_previous_crop() {
 		$id = wp_insert_attachment(
 			array(
@@ -141,8 +145,13 @@ class Tests_Image_Header extends WP_UnitTestCase {
 		);
 
 		// Create initial crop object.
-		$cropped_1 = 'foo-cropped-1.png';
-		$object    = wp_copy_parent_attachment_properties( $cropped_1, $id, 'custom-header' );
+		$source    = DIR_TESTDATA . '/images/test-image.png';
+		$image     = file_get_contents( $source );
+		$upload_1  = wp_upload_bits( 'foo-cropped-1.png', null, $image );
+		$cropped_1 = $upload_1['file'];
+
+		$this->assertEmpty( $upload_1['error'], 'The initial crop fixture could not be created.' );
+		$object = wp_copy_parent_attachment_properties( $cropped_1, $id, 'custom-header' );
 
 		// Ensure no previous crop exists.
 		$previous = $this->custom_image_header->get_previous_crop( $object );
@@ -155,8 +164,11 @@ class Tests_Image_Header extends WP_UnitTestCase {
 		update_post_meta( $cropped_1_id, '_wp_attachment_is_custom_header', get_stylesheet() );
 
 		// Create second crop.
-		$cropped_2 = 'foo-cropped-2.png';
-		$object    = wp_copy_parent_attachment_properties( $cropped_2, $id );
+		$upload_2  = wp_upload_bits( 'foo-cropped-2.png', null, $image );
+		$cropped_2 = $upload_2['file'];
+
+		$this->assertEmpty( $upload_2['error'], 'The second crop fixture could not be created.' );
+		$object = wp_copy_parent_attachment_properties( $cropped_2, $id );
 
 		// Test that a previous crop is found.
 		$previous = $this->custom_image_header->get_previous_crop( $object );

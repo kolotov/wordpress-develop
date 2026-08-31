@@ -3,8 +3,10 @@
 /**
  * Tests for the WP_Customize_Widgets class.
  *
- * @group customize
  */
+#[\PHPUnit\Framework\Attributes\Group( 'customize' )]
+
+
 class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 
 	/**
@@ -149,8 +151,8 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 	 *
 	 * @see WP_Customize_Widgets::customize_register()
 	 * @see WP_Customize_Widgets::preview_sidebars_widgets()
-	 * @ticket 36660
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36660' )]
 	public function test_customize_register_with_deleted_sidebars() {
 		$sidebar_id = 'sidebar-1';
 		delete_option( 'sidebars_widgets' );
@@ -162,10 +164,10 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 	/**
 	 * Tests the label and description controls when registering sidebars with Customizer.
 	 *
-	 * @ticket       53487
-	 * @dataProvider data_customize_register_control_label_and_description
-	 * @covers       WP_Customize_Widgets::customize_register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53487' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_customize_register_control_label_and_description' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Widgets', 'customize_register' )]
 	public function test_customize_register_control_label_and_description( $sidebars, $use_classic_widgets, $expected ) {
 		if ( $use_classic_widgets ) {
 			add_filter( 'use_widgets_block_editor', '__return_false' );
@@ -190,7 +192,7 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 		$this->assertSame( $expected['description'], $description );
 	}
 
-	public function data_customize_register_control_label_and_description() {
+	public static function data_customize_register_control_label_and_description() {
 		return array(
 			'with widgets block editor' => array(
 				'sidebars'            => array(
@@ -300,9 +302,9 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 	/**
 	 * Test WP_Customize_Widgets::register_settings() with selective refresh enabled.
 	 *
-	 * @ticket 30988
-	 * @ticket 36389
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30988' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '36389' )]
 	public function test_register_settings() {
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
@@ -353,8 +355,8 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 	/**
 	 * Test registering settings without selective refresh enabled.
 	 *
-	 * @ticket 36389
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36389' )]
 	public function test_register_settings_without_selective_refresh() {
 		remove_theme_support( 'customize-selective-refresh-widgets' );
 		$this->test_register_settings();
@@ -363,8 +365,8 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 	/**
 	 * Test registering settings with selective refresh enabled at a late after_setup_theme action.
 	 *
-	 * @ticket 36389
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36389' )]
 	public function test_register_settings_with_late_theme_support_added() {
 		remove_theme_support( 'customize-selective-refresh-widgets' );
 		add_action( 'after_setup_theme', array( $this, 'add_customize_selective_refresh_theme_support' ), 100 );
@@ -499,8 +501,8 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 	 * There should be a 'raw_instance' key when the block editor is enabled and
 	 * the widget supports them via `show_instance_in_rest`.
 	 *
-	 * @ticket 53489
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53489' )]
 	public function test_sanitize_widget_instance_raw_instance() {
 		remove_action( 'widgets_init', array( $this, 'remove_widgets_block_editor' ) );
 		$this->do_customize_boot_actions();
@@ -526,8 +528,8 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 	 * but the widget does not support them because `show_instance_in_rest` on
 	 * the widget is set to false.
 	 *
-	 * @ticket 53489
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53489' )]
 	public function test_sanitize_widget_instance_with_no_show_instance_in_rest() {
 		global $wp_widget_factory;
 
@@ -557,8 +559,8 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 	 * Empty instances, seen when inserting a new widget, should be left alone
 	 * when sanitized.
 	 *
-	 * @ticket 53479
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53479' )]
 	public function test_sanitize_widget_instance_empty_instance() {
 		$this->do_customize_boot_actions();
 		$this->assertSame( $this->manager->widgets->sanitize_widget_instance( array() ), array() );
@@ -655,9 +657,9 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34738
 	 * @see WP_Customize_Widgets::call_widget_update()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34738' )]
 	public function test_call_widget_update() {
 
 		$widget_number = 2;
@@ -878,10 +880,10 @@ class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 	 * This test verifies that the fix for accessing panel title works correctly
 	 * when no sidebars are registered or the widgets panel doesn't exist.
 	 *
-	 * @ticket 63151
 	 *
-	 * @covers WP_Customize_Widgets::output_widget_control_templates
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63151' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Widgets', 'output_widget_control_templates' )]
 	public function test_output_widget_control_templates_without_sidebars() {
 		global $wp_registered_sidebars;
 

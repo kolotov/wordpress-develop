@@ -6,8 +6,16 @@
  * @subpackage Blocks
  * @since 5.0.0
  *
- * @group blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+
+
+
+
+
+
+
+
 class Tests_Blocks_Register extends WP_UnitTestCase {
 
 	/**
@@ -109,8 +117,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45109
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_register_affects_main_registry() {
 		$name     = 'tests/static';
 		$settings = array(
@@ -124,8 +132,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45109
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_unregister_affects_main_registry() {
 		$name     = 'tests/static';
 		$settings = array(
@@ -140,8 +148,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_does_not_remove_block_asset_path_prefix() {
 		$result = remove_block_asset_path_prefix( 'script-handle' );
 
@@ -149,8 +157,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_removes_block_asset_path_prefix() {
 		$result = remove_block_asset_path_prefix( 'file:block.js' );
 
@@ -158,8 +166,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54797
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54797' )]
 	public function test_removes_block_asset_path_prefix_and_current_directory() {
 		$result = remove_block_asset_path_prefix( 'file:./block.js' );
 
@@ -167,9 +175,9 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_generate_block_asset_handle() {
 		$block_name = 'tests/my-block';
 
@@ -214,8 +222,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50328
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50328' )]
 	public function test_generate_block_asset_handle_core_block() {
 		$block_name = 'core/paragraph';
 
@@ -242,8 +250,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_generate_block_asset_handle_core_block_module() {
 		$block_name = 'core/paragraph';
 
@@ -288,8 +296,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_field_not_found_register_block_script_handle() {
 		$result = register_block_script_handle( array(), 'script' );
 
@@ -297,8 +305,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_empty_string_value_do_not_register_block_script_handle() {
 		$metadata = array( 'script' => '' );
 		$result   = register_block_script_handle( $metadata, 'script' );
@@ -321,8 +329,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_field_not_found_register_block_script_module_id() {
 		$result = register_block_script_module_id( array(), 'viewScriptModule' );
 
@@ -330,8 +338,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_empty_string_value_do_not_register_block_script_module_id() {
 		$metadata = array( 'viewScriptModule' => '' );
 		$result   = register_block_script_module_id( $metadata, 'viewScriptModule' );
@@ -340,8 +348,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_empty_array_value_do_not_register_block_script_module_id() {
 		$metadata = array( 'viewScriptModule' => array() );
 		$result   = register_block_script_module_id( $metadata, 'viewScriptModule' );
@@ -350,8 +358,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_wrong_array_index_do_not_register_block_script_module_id() {
 		$metadata = array( 'viewScriptModule' => array( 'test-module_id' ) );
 		$result   = register_block_script_module_id( $metadata, 'script', 1 );
@@ -360,8 +368,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_missing_asset_file_register_block_script_module_id() {
 		$metadata = array(
 			'file'             => __FILE__,
@@ -374,8 +382,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_handle_passed_register_block_script_module_id() {
 		$metadata = array(
 			'viewScriptModule' => 'test-script-module-id',
@@ -386,8 +394,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_handles_passed_register_block_script_module_ids() {
 		$metadata = array(
 			'viewScriptModule' => array( 'test-id', 'test-id-other' ),
@@ -401,8 +409,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_success_register_block_script_module_id() {
 		$metadata = array(
 			'file'             => DIR_TESTDATA . '/blocks/notice/block.json',
@@ -433,10 +441,10 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 * Tests that blocks with supports.interactivity have the
 	 * `data-wp-router-options` directive.
 	 *
-	 * @ticket 64122
 	 *
-	 * @covers ::register_block_script_module_id
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64122' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_script_module_id' )]
 	public function test_register_block_script_module_id_with_interactivity_true() {
 		$metadata = array(
 			'file'             => DIR_TESTDATA . '/blocks/notice/block.json',
@@ -531,8 +539,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_handle_passed_register_block_script_handle() {
 		$metadata = array(
 			'script' => 'test-script-handle',
@@ -555,9 +563,9 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
-	 * @ticket 60460
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60460' )]
 	public function test_missing_asset_file_register_block_script_handle_with_default_settings() {
 		$metadata = array(
 			'file'   => __FILE__,
@@ -570,8 +578,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_success_register_block_script_handle() {
 		$metadata = array(
 			'file'   => DIR_TESTDATA . '/blocks/notice/block.json',
@@ -599,8 +607,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60485
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60485' )]
 	public function test_success_register_block_script_handle_with_custom_handle_name() {
 		$custom_script_handle = 'tests-my-shared-script';
 		$metadata             = array(
@@ -618,8 +626,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60485
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60485' )]
 	public function test_reuse_registered_block_script_handle_with_custom_handle_name() {
 		$custom_script_handle = 'tests-my-shared-script';
 		$custom_script_src    = 'https://example.com/foo.js';
@@ -644,8 +652,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55513
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55513' )]
 	public function test_success_register_block_script_handle_in_theme() {
 		switch_theme( 'block-theme' );
 
@@ -661,8 +669,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_field_not_found_register_block_style_handle() {
 		$result = register_block_style_handle( array(), 'style' );
 
@@ -670,8 +678,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_empty_string_value_do_not_register_block_style_handle() {
 		$metadata = array( 'style' => '' );
 		$result   = register_block_style_handle( $metadata, 'style' );
@@ -694,14 +702,14 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58605
 	 *
-	 * @dataProvider data_register_block_style_handle_uses_correct_core_stylesheet
 	 *
 	 * @param string      $block_json_path Path to the `block.json` file, relative to ABSPATH.
 	 * @param string      $style_field     Either 'style' or 'editorStyle'.
 	 * @param string|bool $expected_path   Expected path of registered stylesheet, relative to ABSPATH.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58605' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_block_style_handle_uses_correct_core_stylesheet' )]
 	public function test_register_block_style_handle_uses_correct_core_stylesheet( $block_json_path, $style_field, $expected_path ) {
 		$metadata_file = ABSPATH . $block_json_path;
 		$metadata      = wp_json_file_decode( $metadata_file, array( 'associative' => true ) );
@@ -738,7 +746,7 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		}
 	}
 
-	public function data_register_block_style_handle_uses_correct_core_stylesheet() {
+	public static function data_register_block_style_handle_uses_correct_core_stylesheet() {
 		return array(
 			'block with style'           => array(
 				WPINC . '/blocks/archives/block.json',
@@ -764,8 +772,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_handle_passed_register_block_style_handle() {
 		$metadata = array(
 			'name'  => 'test-block',
@@ -790,9 +798,9 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50263
-	 * @ticket 50328
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50328' )]
 	public function test_success_register_block_style_handle() {
 		$metadata = array(
 			'file'      => DIR_TESTDATA . '/blocks/notice/block.json',
@@ -841,11 +849,11 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	/**
 	 * Tests that register_block_style_handle() loads RTL stylesheets when an RTL locale is set.
 	 *
-	 * @ticket 56325
-	 * @ticket 56797
 	 *
-	 * @covers ::register_block_style_handle
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56325' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56797' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_style_handle' )]
 	public function test_register_block_style_handle_should_load_rtl_stylesheets_for_rtl_text_direction() {
 		global $wp_locale;
 
@@ -891,8 +899,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56664
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56664' )]
 	public function test_register_nonexistent_stylesheet() {
 		$metadata = array(
 			'file'  => DIR_TESTDATA . '/blocks/notice/block.json',
@@ -906,8 +914,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55513
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55513' )]
 	public function test_success_register_block_style_handle_in_theme() {
 		switch_theme( 'block-theme' );
 
@@ -924,10 +932,10 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58528
 	 *
-	 * @covers ::register_block_style_handle
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58528' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_style_handle' )]
 	public function test_success_register_block_style_handle_exists() {
 		$expected_style_handle = 'block-theme-example-block-editor-style';
 		wp_register_style( $expected_style_handle, false );
@@ -947,8 +955,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 * Tests that the function returns false when the `block.json` is not found
 	 * in the WordPress core.
 	 *
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_metadata_not_found_in_wordpress_core() {
 		$result = register_block_type_from_metadata( 'unknown' );
 
@@ -959,8 +967,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 * Tests that the function returns false when the `block.json` is not found
 	 * in the current directory.
 	 *
-	 * @ticket 50263
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_metadata_not_found_in_the_current_directory() {
 		$result = register_block_type_from_metadata( __DIR__ );
 
@@ -970,10 +978,10 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	/**
 	 * Tests registering a block using arguments instead of a block.json file.
 	 *
-	 * @ticket 56865
 	 *
-	 * @covers ::register_block_type_from_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56865' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type_from_metadata' )]
 	public function test_register_block_type_from_metadata_with_arguments() {
 		$result = register_block_type_from_metadata(
 			'',
@@ -1009,10 +1017,10 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	/**
 	 * Tests that defined $args can properly override the block.json file.
 	 *
-	 * @ticket 56865
 	 *
-	 * @covers ::register_block_type_from_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56865' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type_from_metadata' )]
 	public function test_block_registers_with_args_override() {
 		$result = register_block_type_from_metadata(
 			DIR_TESTDATA . '/blocks/notice',
@@ -1044,15 +1052,15 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 * Tests that when the `name` is missing, `register_block_type_from_metadata()`
 	 * will return `false`.
 	 *
-	 * @ticket 56865
 	 *
-	 * @covers ::register_block_type_from_metadata
 	 *
-	 * @dataProvider data_register_block_registers_with_args_override_returns_false_when_name_is_missing
 	 *
 	 * @param string $file The metadata file.
 	 * @param array  $args Array of block type arguments.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56865' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_block_registers_with_args_override_returns_false_when_name_is_missing' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type_from_metadata' )]
 	public function test_block_registers_with_args_override_returns_false_when_name_is_missing( $file, $args ) {
 		$this->assertFalse( register_block_type_from_metadata( $file, $args ) );
 	}
@@ -1062,7 +1070,7 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_register_block_registers_with_args_override_returns_false_when_name_is_missing() {
+	public static function data_register_block_registers_with_args_override_returns_false_when_name_is_missing() {
 		return array(
 			'no block.json file and no name argument' => array(
 				'file' => '', // No block.json file.
@@ -1090,10 +1098,10 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	/**
 	 * Tests registering a block with variations from a PHP file.
 	 *
-	 * @ticket 61280
 	 *
-	 * @covers ::register_block_type_from_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61280' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type_from_metadata' )]
 	public function test_register_block_type_from_metadata_with_variations_php_file() {
 		$filter_metadata_registration = static function ( $metadata ) {
 			$metadata['variations'] = 'file:./variations.php';
@@ -1122,12 +1130,12 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 * Tests that the function returns the registered block when the `block.json`
 	 * is found in the fixtures directory.
 	 *
-	 * @ticket 50263
-	 * @ticket 50328
-	 * @ticket 57585
-	 * @ticket 59797
-	 * @ticket 60233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50328' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '57585' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59797' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_block_registers_with_metadata_fixture() {
 		$result = register_block_type_from_metadata(
 			DIR_TESTDATA . '/blocks/notice'
@@ -1278,8 +1286,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53233' )]
 	public function test_block_register_block_type_proxy_for_metadata() {
 		$result = register_block_type(
 			DIR_TESTDATA . '/blocks/notice'
@@ -1295,17 +1303,17 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 * As 'editor_script' is now a deprecated property, this should also set
 	 * the value for the 'editor_script_handles' property.
 	 *
-	 * @ticket 56707
 	 *
-	 * @covers ::register_block_type
-	 * @covers WP_Block_Type::__set
-	 * @covers WP_Block_Type::__get
 	 *
-	 * @dataProvider data_register_block_type_accepts_editor_script_array
 	 *
 	 * @param array $editor_script The editor script array to register.
 	 * @param array $expected      The expected registered editor script.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56707' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_block_type_accepts_editor_script_array' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type', '__set' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type', '__get' )]
 	public function test_register_block_type_accepts_editor_script_array( $editor_script, $expected ) {
 		$settings = array( 'editor_script' => $editor_script );
 		register_block_type( 'tests/static', $settings );
@@ -1334,7 +1342,7 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_register_block_type_accepts_editor_script_array() {
+	public static function data_register_block_type_accepts_editor_script_array() {
 		return array(
 			'an empty array'      => array(
 				'editor_script' => array(),
@@ -1359,19 +1367,19 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 * As 'editor_script' is now a deprecated property, this should also set
 	 * the value for the 'editor_script_handles' property.
 	 *
-	 * @ticket 56707
 	 *
-	 * @covers ::register_block_type
-	 * @covers WP_Block_Type::__set
-	 * @covers WP_Block_Type::__get
 	 *
-	 * @dataProvider data_register_block_type_throws_doing_it_wrong
 	 *
 	 * @expectedIncorrectUsage WP_Block_Type::__set
 	 *
 	 * @param array $editor_script The editor script array to register.
 	 * @param array $expected      The expected registered editor script.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56707' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_block_type_throws_doing_it_wrong' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type', '__set' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type', '__get' )]
 	public function test_register_block_type_throws_doing_it_wrong( $editor_script, $expected ) {
 		$settings = array( 'editor_script' => $editor_script );
 		register_block_type( 'tests/static', $settings );
@@ -1400,7 +1408,7 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_register_block_type_throws_doing_it_wrong() {
+	public static function data_register_block_type_throws_doing_it_wrong() {
 		return array(
 			'a non-string array'     => array(
 				'editor_script' => array( null, false, true, -1, 0, 1, -1.0, 0.0, 1.0, INF, NAN, new stdClass() ),
@@ -1418,8 +1426,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52301
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52301' )]
 	public function test_block_registers_with_metadata_i18n_support() {
 		add_filter( 'locale', array( $this, 'filter_set_locale_to_polish' ) );
 		load_textdomain( 'notice', WP_LANG_DIR . '/plugins/notice-pl_PL.mo' );
@@ -1464,8 +1472,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45109
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_get_dynamic_block_names() {
 		register_block_type( 'tests/static', array() );
 		register_block_type( 'tests/dynamic', array( 'render_callback' => array( $this, 'render_stub' ) ) );
@@ -1477,8 +1485,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45109
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_has_blocks() {
 		// Test with passing post ID.
 		$this->assertTrue( has_blocks( self::$post_id ) );
@@ -1503,10 +1511,10 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	/**
 	 * Tests that `has_blocks()` returns `false` with an invalid post.
 	 *
-	 * @ticket 55705
 	 *
-	 * @covers ::has_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55705' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'has_blocks' )]
 	public function test_has_blocks_with_invalid_post() {
 		$a_post = (object) array(
 			'ID'     => 55705,
@@ -1516,8 +1524,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49615
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49615' )]
 	public function test_filter_block_registration() {
 		$filter_registration = static function ( $args, $name ) {
 			$args['attributes'] = array( $name => array( 'type' => 'boolean' ) );
@@ -1534,8 +1542,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52138
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52138' )]
 	public function test_filter_block_registration_metadata() {
 		$filter_metadata_registration = static function ( $metadata ) {
 			$metadata['apiVersion'] = 3;
@@ -1552,8 +1560,8 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52138
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52138' )]
 	public function test_filter_block_registration_metadata_settings() {
 		$filter_metadata_registration = static function ( $settings, $metadata ) {
 			$settings['api_version'] = $metadata['apiVersion'] + 1;
@@ -1573,15 +1581,15 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 * Test case to validate `_doing_it_wrong()` when block style name attribute
 	 * contains one or more spaces.
 	 *
-	 * @dataProvider data_register_block_style_name_contains_spaces
 	 *
-	 * @ticket 54296
 	 *
-	 * @covers ::register_block_style
 	 *
 	 * @expectedIncorrectUsage WP_Block_Styles_Registry::register
 	 * @param array $block_styles Array of block styles to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_block_style_name_contains_spaces' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '54296' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_style' )]
 	public function test_register_block_style_name_contains_spaces( array $block_styles ) {
 		register_block_style( 'core/query', $block_styles );
 	}
@@ -1591,7 +1599,7 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_register_block_style_name_contains_spaces() {
+	public static function data_register_block_style_name_contains_spaces() {
 		return array(
 			'multiple spaces' => array(
 				array(
@@ -1612,10 +1620,10 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	 * Test case to validate no `_doing_it_wrong()` happens when there is
 	 * no empty space.
 	 *
-	 * @ticket 54296
 	 *
-	 * @covers ::register_block_style
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54296' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_style' )]
 	public function test_register_block_style_name_without_spaces() {
 		$block_styles = array(
 			'name'  => 'style-class-1',
@@ -1627,12 +1635,12 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59346
 	 *
-	 * @covers ::register_block_type
 	 *
 	 * @expectedIncorrectUsage register_block_type_from_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59346' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type' )]
 	public function test_register_block_hooks_targeting_itself() {
 		$block_type = register_block_type(
 			DIR_TESTDATA . '/blocks/hooked-block-error'
@@ -1645,10 +1653,10 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63027
 	 *
-	 * @covers ::register_block_type_from_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63027' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type_from_metadata' )]
 	public function test_register_block_type_from_metadata_with_windows_path() {
 		$windows_like_path = str_replace( '/', '\\', DIR_TESTDATA ) . '\\blocks\\notice';
 

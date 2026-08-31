@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 
 	public function test_invalid_username_password() {
@@ -146,8 +146,8 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_post_thumbnail() {
 		add_theme_support( 'post-thumbnails' );
 
@@ -345,8 +345,8 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28601
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_invalid_post_date_does_not_fatal() {
 		$this->make_user_by_role( 'author' );
 		$date_string  = 'invalid_date';
@@ -362,8 +362,8 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28601
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_invalid_post_date_gmt_does_not_fatal() {
 		$this->make_user_by_role( 'author' );
 		$date_string  = 'invalid_date';
@@ -379,8 +379,8 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28601
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_valid_string_post_date() {
 		$this->make_user_by_role( 'author' );
 		$date_string  = '1984-01-11 05:00:00';
@@ -396,8 +396,8 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28601
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_valid_string_post_date_gmt() {
 		$this->make_user_by_role( 'author' );
 		$date_string  = '1984-01-11 05:00:00';
@@ -413,8 +413,8 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28601
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_valid_IXR_post_date() {
 		$this->make_user_by_role( 'author' );
 		$date_string  = '1984-01-11 05:00:00';
@@ -430,8 +430,8 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28601
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_valid_IXR_post_date_gmt() {
 		$this->make_user_by_role( 'author' );
 		$date_string  = '1984-01-11 05:00:00';

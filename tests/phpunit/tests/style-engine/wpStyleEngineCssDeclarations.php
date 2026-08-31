@@ -6,22 +6,31 @@
  * @subpackage StyleEngine
  * @since 6.1.0
  *
- * @group style-engine
+
  */
 
 /**
  * Tests registering, storing and generating CSS declarations.
  *
- * @coversDefaultClass WP_Style_Engine_CSS_Declarations
  */
+#[\PHPUnit\Framework\Attributes\Group( 'style-engine' )]
+
+
+
+
+
+
+
+
+
 class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests setting declarations on instantiation.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', '__construct' )]
 	public function test_should_set_declarations_on_instantiation() {
 		$input_declarations = array(
 			'margin-top' => '10px',
@@ -35,11 +44,11 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests that declarations are added.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::add_declarations
-	 * @covers ::add_declaration
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'add_declarations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'add_declaration' )]
 	public function test_should_add_declarations() {
 		$input_declarations = array(
 			'padding' => '20px',
@@ -54,11 +63,11 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests that new declarations are added to existing declarations.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::add_declarations
-	 * @covers ::add_declaration
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'add_declarations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'add_declaration' )]
 	public function test_should_add_new_declarations_to_existing() {
 		$input_declarations = array(
 			'border-width'     => '1%',
@@ -76,10 +85,10 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests that properties are sanitized before storing.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::sanitize_property
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'sanitize_property' )]
 	public function test_should_sanitize_properties() {
 		$input_declarations = array(
 			'^--wp--style--sleepy-potato$' => '40px',
@@ -99,11 +108,11 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Test that values with HTML tags are escaped, and CSS properties are run through safecss_filter_attr().
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_declarations_string
-	 * @covers ::filter_declaration
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'get_declarations_string' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'filter_declaration' )]
 	public function test_should_strip_html_tags_and_remove_unsafe_css_properties() {
 		$input_declarations         = array(
 			'font-size'    => '<red/>',
@@ -135,11 +144,11 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests that calc, clamp, min, max, and minmax CSS functions are allowed.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_declarations_string
-	 * @covers ::filter_declaration
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'get_declarations_string' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'filter_declaration' )]
 	public function test_should_allow_css_functions_and_strip_unsafe_css_values() {
 		$input_declarations                        = array(
 			'background'       => 'var(--wp--preset--color--primary, 10px)', // Simple var().
@@ -175,11 +184,11 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests that important declarations are added after CSS sanitization.
 	 *
-	 * @covers ::get_declarations_string
-	 * @covers ::filter_declaration
 	 *
-	 * @ticket 65561
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65561' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'get_declarations_string' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'filter_declaration' )]
 	public function test_should_add_important_after_sanitizing_declarations() {
 		$css_declarations = new WP_Style_Engine_CSS_Declarations();
 		$css_declarations->add_declaration(
@@ -199,12 +208,12 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests that declaration options are stored and cleared with their declarations.
 	 *
-	 * @covers ::add_declaration
-	 * @covers ::remove_declaration
-	 * @covers ::get_declaration_options
 	 *
-	 * @ticket 65561
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65561' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'add_declaration' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'remove_declaration' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'get_declaration_options' )]
 	public function test_should_store_declaration_options_by_property() {
 		$css_declarations = new WP_Style_Engine_CSS_Declarations();
 		$css_declarations->add_declaration(
@@ -241,16 +250,16 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests that CSS declarations are compiled into a CSS declarations block string.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_declarations_string
 	 *
-	 * @dataProvider data_should_compile_css_declarations_to_css_declarations_string
 	 *
 	 * @param string $expected        The expected declarations block string.
 	 * @param bool   $should_prettify Optional. Whether to pretty the string. Default false.
 	 * @param int    $indent_count    Optional. The number of tab indents. Default false.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_compile_css_declarations_to_css_declarations_string' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'get_declarations_string' )]
 	public function test_should_compile_css_declarations_to_css_declarations_string( $expected, $should_prettify = false, $indent_count = 0 ) {
 		$input_declarations = array(
 			'color'                  => 'red',
@@ -270,7 +279,7 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_should_compile_css_declarations_to_css_declarations_string() {
+	public static function data_should_compile_css_declarations_to_css_declarations_string() {
 		return array(
 			'unprettified, no indent'  => array(
 				'expected' => 'color:red;border-top-left-radius:99px;text-decoration:underline;',
@@ -300,10 +309,10 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests removing a single declaration.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::remove_declaration
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'remove_declaration' )]
 	public function test_should_remove_single_declaration() {
 		$input_declarations = array(
 			'color'       => 'tomato',
@@ -330,10 +339,10 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests that multiple declarations are removed.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::remove_declarations
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'remove_declarations' )]
 	public function test_should_remove_multiple_declarations() {
 		$input_declarations = array(
 			'color'       => 'cucumber',
@@ -360,10 +369,10 @@ class Tests_Style_Engine_wpStyleEngineCSSDeclarations extends WP_UnitTestCase {
 	/**
 	 * Tests that non-string values are rejected without causing fatal errors.
 	 *
-	 * @ticket 64545
 	 *
-	 * @covers ::add_declaration
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64545' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Declarations', 'add_declaration' )]
 	public function test_should_reject_non_string_values() {
 		$css_declarations = new WP_Style_Engine_CSS_Declarations();
 

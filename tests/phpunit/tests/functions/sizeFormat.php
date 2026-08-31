@@ -3,14 +3,14 @@
 /**
  * Tests for size_format()
  *
- * @ticket 22405
- * @ticket 36635
- * @ticket 40875
  *
- * @group functions
  *
- * @covers ::size_format
  */
+#[\PHPUnit\Framework\Attributes\Ticket( '22405' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '36635' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '40875' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'size_format' )]
 class Tests_Functions_SizeFormat extends WP_UnitTestCase {
 
 	/**
@@ -18,7 +18,7 @@ class Tests_Functions_SizeFormat extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_size_format() {
+	public static function data_size_format() {
 		return array(
 			// Invalid values.
 			array( array(), 0, false ),
@@ -78,12 +78,12 @@ class Tests_Functions_SizeFormat extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_size_format
 	 *
 	 * @param $bytes
 	 * @param $decimals
 	 * @param $expected
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_size_format' )]
 	public function test_size_format( $bytes, $decimals, $expected ) {
 		$this->assertSame( $expected, size_format( $bytes, $decimals ) );
 	}

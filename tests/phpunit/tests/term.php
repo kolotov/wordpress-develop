@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group taxonomy
- * @group category
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\Group( 'category' )]
 class Tests_Term extends WP_UnitTestCase {
 	protected $taxonomy        = 'category';
 	protected static $post_ids = array();
@@ -13,8 +13,8 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29911
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29911' )]
 	public function test_wp_delete_term_should_invalidate_cache_for_child_terms() {
 		register_taxonomy(
 			'wptests_tax',
@@ -48,8 +48,8 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 5381
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5381' )]
 	public function test_is_term_type() {
 		// Insert a term.
 		$term = 'term_new';
@@ -66,8 +66,8 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 15919
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15919' )]
 	public function test_wp_count_terms() {
 		$count = wp_count_terms(
 			array(
@@ -80,8 +80,8 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36399
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36399' )]
 	public function test_wp_count_terms_legacy_interoperability() {
 		self::factory()->tag->create_many( 5 );
 
@@ -98,8 +98,8 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 15475
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '15475' )]
 	public function test_wp_add_remove_object_terms() {
 		$posts = self::$post_ids;
 		$tags  = self::factory()->tag->create_many( 5 );
@@ -171,8 +171,8 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16550
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16550' )]
 	public function test_wp_set_post_categories() {
 		$post_id = self::$post_ids[0];
 		$post    = get_post( $post_id );
@@ -210,8 +210,8 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43516
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43516' )]
 	public function test_wp_set_post_categories_sets_default_category_for_custom_post_types() {
 		add_filter( 'default_category_post_types', array( $this, 'filter_default_category_post_types' ) );
 
@@ -239,8 +239,8 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25852
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25852' )]
 	public function test_sanitize_term_field() {
 		$term = wp_insert_term( 'foo', $this->taxonomy );
 
@@ -251,11 +251,11 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53152
-	 * @dataProvider data_wp_set_term_objects_finds_term_name_with_special_characters
 	 *
 	 * @param string $name  A term name containing special characters.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53152' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_set_term_objects_finds_term_name_with_special_characters' )]
 	public function test_wp_set_term_objects_finds_term_name_with_special_characters( $name ) {
 		$post_id  = self::$post_ids[0];
 		$expected = wp_set_object_terms( $post_id, $name, 'category', false );
@@ -268,7 +268,7 @@ class Tests_Term extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_set_term_objects_finds_term_name_with_special_characters() {
+	public static function data_wp_set_term_objects_finds_term_name_with_special_characters() {
 		return array(
 			'ampersand'               => array( 'name' => 'Foo & Bar' ),
 			'ndash and mdash'         => array( 'name' => 'Foo – Bar' ),
@@ -296,8 +296,8 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 19205
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19205' )]
 	public function test_orphan_category() {
 		$cat_id1 = self::factory()->category->create();
 
@@ -308,11 +308,11 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58329
 	 *
-	 * @covers ::get_term
 	 *
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58329' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_term' )]
 	public function test_get_term_sanitize_once() {
 		$cat_id1 = self::factory()->category->create();
 		$_term   = get_term( $cat_id1, '', OBJECT, 'edit' );
@@ -327,14 +327,14 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58329
 	 *
-	 * @covers ::get_term
 	 *
-	 * @dataProvider data_get_term_filter
 	 *
 	 * @param string $filter How to sanitize term fields.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58329' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_term_filter' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_term' )]
 	public function test_get_term_should_set_term_filter_property_to_filter_argument( $filter ) {
 		$cat_id1 = self::factory()->category->create();
 
@@ -344,14 +344,14 @@ class Tests_Term extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58329
 	 *
-	 * @covers ::get_term
 	 *
-	 * @dataProvider data_get_term_filter
 	 *
 	 * @param string $filter How to sanitize term fields.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58329' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_term_filter' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_term' )]
 	public function test_get_term_filtered( $filter ) {
 		$cat_id1 = self::factory()->category->create();
 		$cat     = self::factory()->category->create_and_get();
@@ -373,7 +373,7 @@ class Tests_Term extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_term_filter() {
+	public static function data_get_term_filter() {
 		return self::text_array_to_dataprovider( array( 'edit', 'db', 'display', 'attribute', 'js', 'rss', 'raw' ) );
 	}
 }

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group date
- * @group datetime
- * @group feed
  *
- * @covers ::get_feed_build_date
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'feed' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_feed_build_date' )]
 class Tests_Date_GetFeedBuildDate extends WP_UnitTestCase {
 
 	public function tear_down() {
@@ -20,8 +20,8 @@ class Tests_Date_GetFeedBuildDate extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48675
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48675' )]
 	public function test_should_return_correct_feed_build_date() {
 		global $wp_query;
 
@@ -43,8 +43,8 @@ class Tests_Date_GetFeedBuildDate extends WP_UnitTestCase {
 	/**
 	 * Test that get_feed_build_date() works with invalid post dates.
 	 *
-	 * @ticket 48957
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48957' )]
 	public function test_should_fall_back_to_last_post_modified() {
 		global $wp_query;
 

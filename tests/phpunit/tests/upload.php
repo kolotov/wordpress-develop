@@ -1,8 +1,8 @@
 <?php
 /**
- * @group upload
- * @group media
  */
+#[\PHPUnit\Framework\Attributes\Group( 'upload' )]
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
 class Tests_Upload extends WP_UnitTestCase {
 
 	public $siteurl;
@@ -21,11 +21,19 @@ class Tests_Upload extends WP_UnitTestCase {
 
 	public function test_upload_dir_default() {
 		// wp_upload_dir() with default parameters.
-		$info   = wp_upload_dir();
-		$subdir = date_format( date_create( 'now' ), '/Y/m' );
+		$info          = wp_upload_dir();
+		$subdir        = date_format( date_create( 'now' ), '/Y/m' );
+		$expected_path = ABSPATH . 'wp-content/uploads';
+		$test_token    = getenv( 'UNIQUE_TEST_TOKEN' );
+		if ( false === $test_token || '' === $test_token ) {
+			$test_token = getenv( 'TEST_TOKEN' );
+		}
+		if ( false !== $test_token && '' !== $test_token ) {
+			$expected_path .= '/.paratest-' . preg_replace( '/[^0-9A-Za-z_]/', '_', $test_token );
+		}
 
 		$this->assertSame( get_option( 'siteurl' ) . '/wp-content/uploads' . $subdir, $info['url'] );
-		$this->assertSame( ABSPATH . 'wp-content/uploads' . $subdir, $info['path'] );
+		$this->assertSame( $expected_path . $subdir, $info['path'] );
 		$this->assertSame( $subdir, $info['subdir'] );
 		$this->assertFalse( $info['error'] );
 	}
@@ -43,8 +51,8 @@ class Tests_Upload extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 5953
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5953' )]
 	public function test_upload_dir_absolute() {
 		$path = get_temp_dir() . 'wp-unit-test';
 

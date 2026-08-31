@@ -6,9 +6,14 @@
  * This exercises both query.php and class-wp-query.php: query vars are fed through
  * WP_Query, then the effects on the wp_query object are tested.
  *
- * @group query
- * @group sitemaps
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\Group( 'sitemaps' )]
+
+
+
+
+
 class Tests_Query_IsSitemap extends WP_UnitTestCase {
 
 	/**
@@ -34,10 +39,10 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	/**
 	 * The property defaults to false on a freshly initialized query.
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers WP_Query::is_sitemap
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'is_sitemap' )]
 	public function test_is_sitemap_defaults_to_false(): void {
 		$query = new WP_Query();
 
@@ -48,11 +53,11 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	/**
 	 * The property gets reset when initialized.
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers WP_Query::init
-	 * @covers WP_Query::init_query_flags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'init' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'init_query_flags' )]
 	public function test_is_sitemap_gets_reset_to_false(): void {
 		$query = new WP_Query();
 
@@ -64,11 +69,11 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	/**
 	 * The flag is set when the "sitemap" query var is present (sitemap index route).
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers WP_Query::parse_query
-	 * @covers WP_Query::is_sitemap
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'parse_query' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'is_sitemap' )]
 	public function test_is_sitemap_true_for_sitemap_index(): void {
 		$query = new WP_Query( array( 'sitemap' => 'index' ) );
 
@@ -79,11 +84,11 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	/**
 	 * The flag is set for a sitemap subtype route (e.g. wp-sitemap-posts-post-1.xml).
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers WP_Query::parse_query
-	 * @covers WP_Query::is_sitemap
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'parse_query' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'is_sitemap' )]
 	public function test_is_sitemap_true_for_sitemap_subtype(): void {
 		$query = new WP_Query(
 			array(
@@ -99,10 +104,10 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	/**
 	 * An empty "sitemap" query var must not set the flag.
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers WP_Query::parse_query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'parse_query' )]
 	public function test_is_sitemap_false_for_empty_sitemap_var(): void {
 		$query = new WP_Query( array( 'sitemap' => '' ) );
 
@@ -113,10 +118,10 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	 * The sitemap stylesheet route uses the "sitemap-stylesheet" query var, which must
 	 * not flag the query as a sitemap.
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers WP_Query::parse_query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'parse_query' )]
 	public function test_is_sitemap_false_for_stylesheet_route(): void {
 		$query = new WP_Query( array( 'sitemap-stylesheet' => 'sitemap' ) );
 
@@ -126,10 +131,10 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	/**
 	 * is_robots takes precedence over is_sitemap in the parse_query branch.
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers WP_Query::parse_query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'parse_query' )]
 	public function test_robots_takes_precedence_over_sitemap(): void {
 		$query = new WP_Query(
 			array(
@@ -145,10 +150,10 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	/**
 	 * A regular query is never flagged as a sitemap.
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers WP_Query::is_sitemap
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'is_sitemap' )]
 	public function test_is_sitemap_false_for_regular_query(): void {
 		$post_id = self::factory()->post->create();
 
@@ -163,10 +168,10 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	 * This is the practical motivation for the conditional tag: distinguishing a
 	 * sitemap request from the home page (see #51542).
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers WP_Query::parse_query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'parse_query' )]
 	public function test_sitemap_query_is_not_home(): void {
 		$query = new WP_Query( array( 'sitemap' => 'index' ) );
 
@@ -178,10 +183,10 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	/**
 	 * The global is_sitemap() conditional tag reflects the main query.
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers ::is_sitemap
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_sitemap' )]
 	public function test_global_is_sitemap_reflects_main_query(): void {
 		// Prevent WP_Sitemaps from rendering and calling exit during go_to().
 		remove_action( 'template_redirect', array( wp_sitemaps_get_server(), 'render_sitemaps' ) );
@@ -197,10 +202,10 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	/**
 	 * The global is_sitemap() conditional tag is false for a non-sitemap request.
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers ::is_sitemap
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_sitemap' )]
 	public function test_global_is_sitemap_false_on_home(): void {
 		$this->go_to( home_url( '/' ) );
 
@@ -212,12 +217,12 @@ class Tests_Query_IsSitemap extends WP_UnitTestCase {
 	 * The global is_sitemap() returns false and triggers a notice when the query
 	 * has not yet run.
 	 *
-	 * @ticket 51543
 	 *
-	 * @covers ::is_sitemap
 	 *
 	 * @expectedIncorrectUsage is_sitemap
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51543' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_sitemap' )]
 	public function test_global_is_sitemap_before_query_is_run(): void {
 		$wp_query_temp = $GLOBALS['wp_query'];
 		unset( $GLOBALS['wp_query'] );

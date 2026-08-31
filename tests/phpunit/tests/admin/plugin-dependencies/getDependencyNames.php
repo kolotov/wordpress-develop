@@ -7,15 +7,12 @@
 
 require_once __DIR__ . '/base.php';
 
-/**
- * @group admin
- * @group plugins
- *
- * @covers WP_Plugin_Dependencies::get_dependency_names
- * @covers WP_Plugin_Dependencies::get_dependency_api_data
- * @covers WP_Plugin_Dependencies::get_dependencies
- * @covers WP_Plugin_Dependencies::get_dependency_filepaths
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependency_names' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependency_api_data' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependencies' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependency_filepaths' )]
 class Tests_Admin_WPPluginDependencies_GetDependencyNames extends WP_PluginDependencies_UnitTestCase {
 
 	/**
@@ -48,10 +45,10 @@ class Tests_Admin_WPPluginDependencies_GetDependencyNames extends WP_PluginDepen
 	/**
 	 * Tests that dependency names are retrieved.
 	 *
-	 * @ticket 22316
 	 *
 	 * @global string $pagenow The filename of the current screen.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_get_dependency_names() {
 		global $pagenow;
 
@@ -107,10 +104,10 @@ class Tests_Admin_WPPluginDependencies_GetDependencyNames extends WP_PluginDepen
 	/**
 	 * Tests that dependency slugs are used if their name is not available.
 	 *
-	 * @ticket 22316
 	 *
 	 * @global string $pagenow The filename of the current screen.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_use_dependency_name_from_file() {
 		global $pagenow;
 
@@ -167,10 +164,10 @@ class Tests_Admin_WPPluginDependencies_GetDependencyNames extends WP_PluginDepen
 	/**
 	 * Tests that dependency slugs are used if their name is not available.
 	 *
-	 * @ticket 22316
 	 *
 	 * @global string $pagenow The filename of the current screen.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_use_dependency_slugs() {
 		global $pagenow;
 
@@ -209,10 +206,10 @@ class Tests_Admin_WPPluginDependencies_GetDependencyNames extends WP_PluginDepen
 	/**
 	 * Tests that `$dependency_api_data` is set when it's not already available.
 	 *
-	 * @ticket 22316
 	 *
 	 * @global string $pagenow The filename of the current screen.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_set_dependency_data_when_not_already_available() {
 		global $pagenow;
 

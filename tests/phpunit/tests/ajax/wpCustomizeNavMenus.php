@@ -6,8 +6,13 @@
  * @subpackage UnitTests
  * @since 4.3.0
  *
- * @group ajax
  */
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
 class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -103,13 +108,13 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	/**
 	 * Testing capabilities check for ajax_load_available_items method
 	 *
-	 * @dataProvider data_ajax_load_available_items_cap_check
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_load_available_items
 	 *
 	 * @param string $role              The role we're checking caps against.
 	 * @param array  $expected_results  Expected results.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ajax_load_available_items_cap_check' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'ajax_load_available_items' )]
 	public function test_ajax_load_available_items_cap_check( $role, $expected_results ) {
 
 		if ( 'administrator' !== $role ) {
@@ -151,7 +156,7 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_ajax_load_available_items_cap_check() {
+	public static function data_ajax_load_available_items_cap_check() {
 		return array(
 			array(
 				'subscriber',
@@ -182,13 +187,13 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	/**
 	 * Testing the error messaging for ajax_load_available_items
 	 *
-	 * @dataProvider data_ajax_load_available_items_error_messages
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_load_available_items
 	 *
 	 * @param array $post_args POST args.
 	 * @param mixed $expected_results Expected results.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ajax_load_available_items_error_messages' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'ajax_load_available_items' )]
 	public function test_ajax_load_available_items_error_messages( $post_args, $expected_results ) {
 
 		$_POST = array_merge(
@@ -223,7 +228,7 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_ajax_load_available_items_error_messages() {
+	public static function data_ajax_load_available_items_error_messages() {
 		return array(
 			// Testing empty obj_type and type.
 			array(
@@ -294,13 +299,13 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	/**
 	 * Testing the success status.
 	 *
-	 * @dataProvider data_ajax_load_available_items_success_status
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_load_available_items
 	 *
 	 * @param array $post_args       POST args.
 	 * @param array $success_status  Success status.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ajax_load_available_items_success_status' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'ajax_load_available_items' )]
 	public function test_ajax_load_available_items_success_status( $post_args, $success_status ) {
 
 		$_POST = array_merge(
@@ -334,7 +339,7 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_ajax_load_available_items_success_status() {
+	public static function data_ajax_load_available_items_success_status() {
 		return array(
 			array(
 				array(
@@ -386,12 +391,11 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	/**
 	 * Testing the array structure for a single item
 	 *
-	 * @dataProvider data_ajax_load_available_items_structure
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_load_available_items
 	 *
 	 * @param array $post_args POST args.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ajax_load_available_items_structure' )]
 	public function test2_ajax_load_available_items_structure( $post_args ) {
 		do_action( 'customize_register', $this->wp_customize );
 
@@ -470,7 +474,7 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_ajax_load_available_items_structure() {
+	public static function data_ajax_load_available_items_structure() {
 		return array(
 			array(
 				array(
@@ -496,14 +500,14 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	/**
 	 * Testing the error messages for ajax_search_available_items
 	 *
-	 * @dataProvider data_ajax_search_available_items_caps_check
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_search_available_items
-	 * @covers WP_Customize_Nav_Menus::search_available_items_query
 	 *
 	 * @param string $role             Role.
 	 * @param array  $expected_results Expected results.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ajax_search_available_items_caps_check' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'ajax_search_available_items' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'search_available_items_query' )]
 	public function test_ajax_search_available_items_caps_check( $role, $expected_results ) {
 
 		if ( 'administrator' !== $role ) {
@@ -547,7 +551,7 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_ajax_search_available_items_caps_check() {
+	public static function data_ajax_search_available_items_caps_check() {
 		return array(
 			array(
 				'subscriber',
@@ -578,14 +582,14 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	/**
 	 * Testing the results of various searches
 	 *
-	 * @dataProvider data_ajax_search_available_items_results
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_search_available_items
-	 * @covers WP_Customize_Nav_Menus::search_available_items_query
 	 *
 	 * @param array $post_args        POST args.
 	 * @param array $expected_results Expected results.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ajax_search_available_items_results' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'ajax_search_available_items' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'search_available_items_query' )]
 	public function test_ajax_search_available_items_results( $post_args, $expected_results ) {
 		do_action( 'customize_register', $this->wp_customize );
 
@@ -642,7 +646,7 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_ajax_search_available_items_results() {
+	public static function data_ajax_search_available_items_results() {
 		return array(
 			array(
 				array(),
@@ -677,9 +681,9 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	/**
 	 * Testing successful ajax_insert_auto_draft_post() call.
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_insert_auto_draft_post
-	 * @covers WP_Customize_Nav_Menus::insert_auto_draft_post
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'ajax_insert_auto_draft_post' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'insert_auto_draft_post' )]
 	public function test_ajax_insert_auto_draft_post_success() {
 		$_POST                = wp_slash(
 			array(
@@ -708,8 +712,8 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	/**
 	 * Testing unsuccessful ajax_insert_auto_draft_post() call.
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_insert_auto_draft_post
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'ajax_insert_auto_draft_post' )]
 	public function test_ajax_insert_auto_draft_failures() {
 		// No nonce.
 		$_POST                = array();

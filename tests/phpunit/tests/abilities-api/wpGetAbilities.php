@@ -3,10 +3,10 @@
 /**
  * Tests for the filtering support added to wp_get_abilities().
  *
- * @covers wp_get_abilities
  *
- * @group abilities-api
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_abilities' )]
+#[\PHPUnit\Framework\Attributes\Group( 'abilities-api' )]
 class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 
 	/**
@@ -122,8 +122,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests filtering by a single category string.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_single_category(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -148,8 +148,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	 * The declarative filters accept a single slug. Anything other than a string is ignored,
 	 * matching how the `namespace` and `meta` args guard their own types.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_non_string_category_is_ignored(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -173,8 +173,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that filtering by a non-existent category returns an empty array.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_nonexistent_category_returns_empty(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -192,8 +192,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests filtering by namespace prefix.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_namespace(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -215,8 +215,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that a namespace with a trailing slash produces the same result as one without.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_namespace_trailing_slash_is_normalized(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -239,8 +239,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that a non-matching namespace returns an empty array.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_nonexistent_namespace_returns_empty(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -258,8 +258,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests filtering by a single meta key/value pair.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_meta_single_key(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -287,8 +287,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that multiple meta conditions use AND logic.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_meta_multiple_keys_uses_and_logic(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -333,8 +333,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests filtering by nested meta arrays.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_nested_meta(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -362,8 +362,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that an ability without the required meta key is excluded.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_filter_by_missing_meta_key_excludes_ability(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -387,8 +387,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that item_include_callback can include or exclude abilities per item.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_item_include_callback_filters_per_item(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -416,8 +416,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that item_include_callback returning false for all abilities yields an empty result.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_item_include_callback_returning_false_yields_empty_result(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -437,8 +437,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that item_include_callback receives a WP_Ability instance.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_item_include_callback_receives_ability_instance(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -466,8 +466,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_abilities_item_include filter can exclude an ability.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_wp_get_abilities_item_include_filter_can_exclude_ability(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -496,8 +496,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_abilities_item_include filter receives the ability and original args.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_wp_get_abilities_item_include_filter_receives_ability_and_args(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -535,8 +535,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that result_callback receives the full array of matched abilities.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_result_callback_receives_matched_abilities(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -562,8 +562,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that result_callback can reshape the result array.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_result_callback_can_reshape_result(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -589,8 +589,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_abilities_result filter can reshape the final result.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_wp_get_abilities_result_filter_can_reshape_result(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -611,8 +611,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_abilities_result filter receives the matched abilities and original args.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_wp_get_abilities_result_filter_receives_abilities_and_args(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -653,8 +653,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	 * The most common call path (no args) is also the path security and visibility
 	 * plugins most need to participate in, so the filter must run there.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_wp_get_abilities_item_include_filter_fires_with_no_args(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -680,8 +680,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	 * Tests that the wp_get_abilities_result filter fires when wp_get_abilities()
 	 * is called with no arguments.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_wp_get_abilities_result_filter_fires_with_no_args(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -721,8 +721,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that category and meta filters are combined with AND logic between them.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_combined_category_and_meta_filters(): void {
 		$this->simulate_wp_abilities_init();
 
@@ -769,8 +769,8 @@ class Tests_Abilities_API_WpGetAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that namespace and item_include_callback filters are applied together.
 	 *
-	 * @ticket 64990
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64990' )]
 	public function test_combined_namespace_and_item_include_callback_filters(): void {
 		$this->simulate_wp_abilities_init();
 

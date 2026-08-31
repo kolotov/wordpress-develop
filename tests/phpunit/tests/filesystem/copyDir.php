@@ -3,11 +3,11 @@
 /**
  * Tests copy_dir().
  *
- * @group file
- * @group filesystem
  *
- * @covers ::copy_dir
  */
+#[\PHPUnit\Framework\Attributes\Group( 'file' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'copy_dir' )]
 class Tests_Filesystem_CopyDir extends WP_UnitTestCase {
 
 	/**
@@ -56,8 +56,8 @@ class Tests_Filesystem_CopyDir extends WP_UnitTestCase {
 	/**
 	 * Tests that the destination is created if it does not already exist.
 	 *
-	 * @ticket 41855
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41855' )]
 	public function test_should_create_destination_it_if_does_not_exist() {
 		global $wp_filesystem;
 

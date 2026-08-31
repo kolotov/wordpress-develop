@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group pluggable
- * @group auth
  */
+#[\PHPUnit\Framework\Attributes\Group( 'pluggable' )]
+#[\PHPUnit\Framework\Attributes\Group( 'auth' )]
 class Tests_Auth extends WP_UnitTestCase {
 	// Class User values assigned to constants.
 	const USER_EMAIL = 'test@password.com';
@@ -109,8 +109,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_auth_cookie_generated_with_phpass_hash_remains_valid() {
 		self::set_user_password_with_phpass( 'password', self::$user_id );
 
@@ -120,8 +120,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_auth_cookie_generated_with_plain_bcrypt_hash_remains_valid() {
 		self::set_user_password_with_plain_bcrypt( 'password', self::$user_id );
 
@@ -131,9 +131,9 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23494
-	 * @dataProvider data_passwords_for_trimming
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23494' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_passwords_for_trimming' )]
 	public function test_password_trimming( $password_to_test ) {
 		wp_set_password( $password_to_test, $this->user->ID );
 		$authed_user = wp_authenticate( $this->user->user_login, $password_to_test );
@@ -143,7 +143,7 @@ class Tests_Auth extends WP_UnitTestCase {
 		$this->assertSame( $this->user->ID, $authed_user->ID );
 	}
 
-	public function data_passwords_for_trimming() {
+	public static function data_passwords_for_trimming() {
 		return array(
 			'no spaces'                => array( 'a password with no trailing or leading spaces' ),
 			'trailing space'           => array( 'a password with trailing spaces ' ),
@@ -157,11 +157,11 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Tests hooking into wp_set_password().
 	 *
-	 * @ticket 57436
-	 * @ticket 61541
 	 *
-	 * @covers ::wp_set_password
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57436' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_set_password' )]
 	public function test_wp_set_password_action() {
 		$action = new MockAction();
 
@@ -182,14 +182,14 @@ class Tests_Auth extends WP_UnitTestCase {
 	 * This is similar to test_password_trimming but tests the "lower level"
 	 * wp_hash_password function
 	 *
-	 * @ticket 24973
-	 * @dataProvider data_passwords_with_whitespace
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24973' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_passwords_with_whitespace' )]
 	public function test_wp_hash_password_trimming( $password_with_whitespace, $expected_password ) {
 		$this->assertTrue( wp_check_password( $expected_password, wp_hash_password( $password_with_whitespace ) ) );
 	}
 
-	public function data_passwords_with_whitespace() {
+	public static function data_passwords_with_whitespace() {
 		return array(
 			'leading whitespace'  => array( ' pass with leading whitespace', 'pass with leading whitespace' ),
 			'trailing whitespace' => array( 'pass with trailing whitespace ', 'pass with trailing whitespace' ),
@@ -200,8 +200,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_check_password_supports_phpass_hash() {
 		$password = 'password';
 		$hash     = self::$wp_hasher->HashPassword( $password );
@@ -217,8 +217,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	 *
 	 * Notably the bcrypt cost was increased in PHP 8.4: https://wiki.php.net/rfc/bcrypt_cost_2023 .
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_check_password_supports_hash_with_increased_bcrypt_cost() {
 		$password = 'password';
 
@@ -240,8 +240,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	 *
 	 * A reduction of the cost is unlikely to occur but is fully supported.
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_check_password_supports_hash_with_reduced_bcrypt_cost() {
 		$password = 'password';
 
@@ -256,8 +256,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_check_password_supports_wp_hash_with_default_bcrypt_cost() {
 		$password = 'password';
 
@@ -269,8 +269,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_check_password_supports_plain_bcrypt_hash_with_default_bcrypt_cost() {
 		$password = 'password';
 
@@ -284,8 +284,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Ensure wp_check_password() is compatible with Argon2i hashes.
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_check_password_supports_argon2i_hash() {
 		if ( ! defined( 'PASSWORD_ARGON2I' ) ) {
 			$this->markTestSkipped( 'Argon2i is not supported.' );
@@ -300,10 +300,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Ensure wp_check_password() is compatible with Argon2id hashes.
 	 *
-	 * @requires PHP >= 7.3
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\RequiresPhp( '>= 7.3.0' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_check_password_supports_argon2id_hash() {
 		if ( ! defined( 'PASSWORD_ARGON2ID' ) ) {
 			$this->markTestSkipped( 'Argon2id is not supported.' );
@@ -316,8 +316,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_check_password_supports_md5_hash() {
 		$password = 'password';
 		$hash     = md5( $password );
@@ -326,8 +326,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_check_password_does_not_support_plain_text() {
 		$password = 'password';
 		$hash     = $password;
@@ -336,11 +336,11 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 *
-	 * @dataProvider data_empty_values
 	 * @param mixed $value
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_empty_values' )]
 	public function test_wp_check_password_does_not_support_empty_hash( $value ) {
 		$password = 'password';
 		$hash     = $value;
@@ -349,11 +349,11 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 *
-	 * @dataProvider data_empty_values
 	 * @param mixed $value
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_empty_values' )]
 	public function test_wp_check_password_does_not_support_empty_password( $value ) {
 		$password = $value;
 		$hash     = $value;
@@ -361,7 +361,7 @@ class Tests_Auth extends WP_UnitTestCase {
 		$this->assertSame( 1, did_filter( 'check_password' ) );
 	}
 
-	public function data_empty_values() {
+	public static function data_empty_values() {
 		return array(
 			// String zero:
 			array( '0' ),
@@ -377,23 +377,23 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29217
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29217' )]
 	public function test_wp_verify_nonce_with_empty_arg() {
 		$this->assertFalse( wp_verify_nonce( '' ) );
 		$this->assertFalse( wp_verify_nonce( null ) );
 	}
 
 	/**
-	 * @ticket 29542
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29542' )]
 	public function test_wp_verify_nonce_with_integer_arg() {
 		$this->assertFalse( wp_verify_nonce( 1 ) );
 	}
 
 	/**
-	 * @ticket 24030
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24030' )]
 	public function test_wp_nonce_verify_failed() {
 		$nonce = substr( md5( uniqid() ), 0, 10 );
 		$count = did_action( $this->nonce_failure_hook );
@@ -404,8 +404,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24030
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24030' )]
 	public function test_wp_nonce_verify_success() {
 		$nonce = wp_create_nonce( 'nonce_test_action' );
 		$count = did_action( $this->nonce_failure_hook );
@@ -416,8 +416,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36361
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36361' )]
 	public function test_check_admin_referer_with_no_action_triggers_doing_it_wrong() {
 		$this->setExpectedIncorrectUsage( 'check_admin_referer' );
 
@@ -439,8 +439,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36361
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36361' )]
 	public function test_check_ajax_referer_with_no_action_triggers_doing_it_wrong() {
 		$this->setExpectedIncorrectUsage( 'check_ajax_referer' );
 
@@ -453,8 +453,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_password_is_hashed_with_bcrypt() {
 		$password = 'password';
 
@@ -473,7 +473,7 @@ class Tests_Auth extends WP_UnitTestCase {
 		$this->assertSame( self::$user_id, $user->ID );
 	}
 
-	public function data_passwords(): array {
+	public static function data_passwords(): array {
 		return array(
 			array( 'a' ),
 			array( 'password' ),
@@ -484,9 +484,9 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Ensure the hash of the user password remains less than 64 characters in length to account for the old users table schema.
 	 *
-	 * @ticket 21022
-	 * @dataProvider data_passwords
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_passwords' )]
 	public function test_user_password_against_old_users_table_schema( string $password ) {
 		// Mimic the schema of the users table prior to WordPress 4.4.
 		add_filter( 'wp_pre_insert_user_data', array( $this, 'mimic_users_schema_prior_to_44' ) );
@@ -514,8 +514,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Ensure the hash of the user activation key remains less than 60 characters in length to account for the old users table schema.
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_user_activation_key_against_old_users_table_schema() {
 		// Mimic the schema of the users table prior to WordPress 4.4.
 		add_filter( 'wp_pre_insert_user_data', array( $this, 'mimic_users_schema_prior_to_44' ) );
@@ -567,8 +567,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_invalid_password_at_bcrypt_length_limit_is_rejected() {
 		$limit = str_repeat( 'a', self::$bcrypt_length_limit );
 
@@ -582,8 +582,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_invalid_password_beyond_bcrypt_length_limit_is_rejected() {
 		$limit = str_repeat( 'a', self::$bcrypt_length_limit + 1 );
 
@@ -597,8 +597,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_valid_password_at_bcrypt_length_limit_is_accepted() {
 		$limit = str_repeat( 'a', self::$bcrypt_length_limit );
 
@@ -615,8 +615,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_valid_password_beyond_bcrypt_length_limit_is_accepted() {
 		$limit = str_repeat( 'a', self::$bcrypt_length_limit + 1 );
 
@@ -637,8 +637,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	 *
 	 * This ensures that a truncated password is not accepted by WordPress.
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_long_truncated_password_is_rejected() {
 		$at_limit     = str_repeat( 'a', self::$bcrypt_length_limit );
 		$beyond_limit = str_repeat( 'a', self::$bcrypt_length_limit + 1 );
@@ -655,8 +655,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_setting_password_beyond_bcrypt_length_limit_is_rejected() {
 		$beyond_limit = str_repeat( 'a', self::$password_length_limit + 1 );
 
@@ -742,9 +742,9 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_empty_values
 	 * @param mixed $value
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_empty_values' )]
 	public function test_empty_password_is_rejected_by_bcrypt( $value ) {
 		// Set the user password.
 		wp_set_password( 'password', self::$user_id );
@@ -754,9 +754,9 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_empty_values
 	 * @param mixed $value
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_empty_values' )]
 	public function test_empty_password_is_rejected_by_phpass( $value ) {
 		// Set the user password with the old phpass algorithm.
 		self::set_user_password_with_phpass( 'password', self::$user_id );
@@ -790,8 +790,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45746
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45746' )]
 	public function test_user_activation_key_is_saved() {
 		$user = get_userdata( $this->user->ID );
 		$key  = get_password_reset_key( $user );
@@ -804,8 +804,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32429
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32429' )]
 	public function test_user_activation_key_is_checked() {
 		global $wpdb;
 
@@ -842,8 +842,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32429
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32429' )]
 	public function test_expired_user_activation_key_is_rejected() {
 		global $wpdb;
 
@@ -866,8 +866,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32429
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32429' )]
 	public function test_empty_user_activation_key_fails_key_check() {
 		// An empty user_activation_key should not allow any key to be accepted.
 		$check = check_password_reset_key( 'key', $this->user->user_login );
@@ -879,8 +879,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32429
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32429' )]
 	public function test_legacy_user_activation_key_is_rejected() {
 		global $wpdb;
 
@@ -910,8 +910,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_phpass_user_activation_key_is_allowed() {
 		global $wpdb;
 
@@ -942,8 +942,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_expired_phpass_user_activation_key_is_rejected() {
 		global $wpdb;
 
@@ -973,8 +973,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_user_request_key_handling() {
 		$request_id = wp_create_user_request( 'test@example.com', 'remove_personal_data' );
 		$key        = wp_generate_user_request_key( $request_id );
@@ -996,8 +996,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_phpass_user_request_key_is_allowed() {
 		// A legacy user request key is one hashed using phpass between WordPress 4.3 and 6.8.0.
 
@@ -1028,8 +1028,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	 *
 	 * Notably the bcrypt cost was increased in PHP 8.4: https://wiki.php.net/rfc/bcrypt_cost_2023 .
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function check_password_needs_rehashing() {
 		$password = 'password';
 
@@ -1056,9 +1056,9 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32429
-	 * @ticket 24783
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32429' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '24783' )]
 	public function test_plaintext_user_activation_key_is_rejected() {
 		global $wpdb;
 
@@ -1088,10 +1088,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Ensure that `user_activation_key` is cleared after a successful login.
 	 *
-	 * @ticket 58901
 	 *
-	 * @covers ::wp_signon
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58901' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_signon' )]
 	public function test_user_activation_key_after_successful_login() {
 		global $wpdb;
 
@@ -1114,8 +1114,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_phpass_application_password_is_accepted() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 		add_filter( 'wp_is_application_passwords_available', '__return_true' );
@@ -1135,9 +1135,9 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
-	 * @ticket 63203
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63203' )]
 	public function test_plain_bcrypt_application_password_is_accepted() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 		add_filter( 'wp_is_application_passwords_available', '__return_true' );
@@ -1158,10 +1158,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_usernames
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_usernames' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_phpass_password_is_rehashed_after_successful_user_password_authentication( $username_or_email ) {
 		$password = 'password';
 
@@ -1194,10 +1194,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_usernames
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_usernames' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_md5_password_is_rehashed_after_successful_user_password_authentication( $username_or_email ) {
 		$password = 'password';
 
@@ -1230,10 +1230,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_usernames
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_usernames' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_bcrypt_password_is_rehashed_with_new_cost_after_successful_user_password_authentication( $username_or_email ) {
 		$password = 'password';
 
@@ -1278,7 +1278,7 @@ class Tests_Auth extends WP_UnitTestCase {
 		return $options;
 	}
 
-	public function data_usernames() {
+	public static function data_usernames() {
 		return array(
 			array(
 				self::USER_LOGIN,
@@ -1290,8 +1290,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_password_rehashing_requirement_can_be_filtered() {
 		$filter_count_before = did_filter( 'password_needs_rehash' );
 
@@ -1301,8 +1301,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_password_hashing_algorithm_can_be_filtered() {
 		$password = 'password';
 
@@ -1317,8 +1317,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_password_hashing_options_can_be_filtered() {
 		$password = 'password';
 
@@ -1345,8 +1345,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_password_checks_support_wp_hasher_fallback() {
 		global $wp_hasher;
 
@@ -1375,16 +1375,16 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Ensure users can log in using both their username and their email address.
 	 *
-	 * @ticket 9568
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '9568' )]
 	public function test_log_in_using_email() {
 		$this->assertInstanceOf( 'WP_User', wp_authenticate( self::USER_EMAIL, self::USER_PASS ) );
 		$this->assertInstanceOf( 'WP_User', wp_authenticate( self::USER_LOGIN, self::USER_PASS ) );
 	}
 
 	/**
-	 * @ticket 60700
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60700' )]
 	public function test_authenticate_filter() {
 		add_filter( 'authenticate', '__return_null', 20 );
 		$this->assertInstanceOf( 'WP_Error', wp_authenticate( self::USER_LOGIN, self::USER_PASS ) );
@@ -1393,120 +1393,120 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_username_password_with_wp_user_object() {
 		$result = wp_authenticate_username_password( self::$_user, '', '' );
 		$this->assertSame( $result->ID, self::$user_id );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_username_password_with_login_and_password() {
 		$result = wp_authenticate_username_password( null, self::USER_LOGIN, self::USER_PASS );
 		$this->assertSame( self::$user_id, $result->ID );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_username_password_with_null_password() {
 		$result = wp_authenticate_username_password( null, self::USER_LOGIN, null );
 		$this->assertInstanceOf( 'WP_Error', $result );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_username_password_with_null_login() {
 		$result = wp_authenticate_username_password( null, null, self::USER_PASS );
 		$this->assertInstanceOf( 'WP_Error', $result );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_username_password_with_invalid_login() {
 		$result = wp_authenticate_username_password( null, 'invalidlogin', self::USER_PASS );
 		$this->assertInstanceOf( 'WP_Error', $result );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_username_password_with_invalid_password() {
 		$result = wp_authenticate_username_password( null, self::USER_LOGIN, 'invalidpassword' );
 		$this->assertInstanceOf( 'WP_Error', $result );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_email_password_with_wp_user_object() {
 		$result = wp_authenticate_email_password( self::$_user, '', '' );
 		$this->assertSame( self::$user_id, $result->ID );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_email_password_with_login_and_password() {
 		$result = wp_authenticate_email_password( null, self::USER_EMAIL, self::USER_PASS );
 		$this->assertSame( self::$user_id, $result->ID );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_email_password_with_null_password() {
 		$result = wp_authenticate_email_password( null, self::USER_EMAIL, null );
 		$this->assertInstanceOf( 'WP_Error', $result );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_email_password_with_null_email() {
 		$result = wp_authenticate_email_password( null, null, self::USER_PASS );
 		$this->assertInstanceOf( 'WP_Error', $result );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_email_password_with_invalid_email() {
 		$result = wp_authenticate_email_password( null, 'invalid@example.com', self::USER_PASS );
 		$this->assertInstanceOf( 'WP_Error', $result );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_email_password_with_invalid_password() {
 		$result = wp_authenticate_email_password( null, self::USER_EMAIL, 'invalidpassword' );
 		$this->assertInstanceOf( 'WP_Error', $result );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_cookie_with_wp_user_object() {
 		$result = wp_authenticate_cookie( $this->user, null, null );
 		$this->assertSame( self::$user_id, $result->ID );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_cookie_with_null_params() {
 		$result = wp_authenticate_cookie( null, null, null );
 		$this->assertNull( $result );
 	}
 
 	/**
-	 * @ticket 36476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36476' )]
 	public function test_wp_authenticate_cookie_with_invalid_cookie() {
 		$_COOKIE[ AUTH_COOKIE ]        = 'invalid_cookie';
 		$_COOKIE[ SECURE_AUTH_COOKIE ] = 'secure_invalid_cookie';
@@ -1516,8 +1516,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38744
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38744' )]
 	public function test_wp_signon_using_email_with_an_apostrophe() {
 		$user_args = array(
 			'user_email' => "mail\'@example.com",
@@ -1538,8 +1538,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	 * `Deprecated: preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated`.
 	 * `Deprecated: trim(): Passing null to parameter #1 ($string) of type string is deprecated`.
 	 *
-	 * @ticket 56850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56850' )]
 	public function test_wp_signon_does_not_throw_deprecation_notices_with_default_parameters() {
 		$error = wp_signon();
 		$this->assertWPError( $error, 'The result should be an instance of WP_Error.' );
@@ -1557,8 +1557,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	 * `Warning: wp_strip_all_tags() expects parameter #1 ($text) to be a string, array given`.
 	 * `TypeError: trim(): Argument #1 ($string) must be of type string, array given`.
 	 *
-	 * @ticket 62794
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62794' )]
 	public function test_wp_signon_does_not_throw_fatal_errors_with_array_parameters() {
 		$_POST['log'] = array( 'example' );
 		$_POST['pwd'] = array( 'example' );
@@ -1574,10 +1574,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * HTTP Auth headers are used to determine the current user.
 	 *
-	 * @ticket 42790
 	 *
-	 * @covers ::wp_validate_application_password
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_validate_application_password' )]
 	public function test_application_password_authentication() {
 		$user_id = self::$_user->ID;
 
@@ -1610,11 +1610,11 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
-	 * @ticket 63203
 	 *
-	 * @covers WP_Application_Passwords::create_new_application_password
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63203' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Application_Passwords', 'create_new_application_password' )]
 	public function test_application_password_is_hashed_with_fast_hash() {
 		// Create a new app-only password.
 		list( , $item ) = WP_Application_Passwords::create_new_application_password( self::$user_id, array( 'name' => 'phpunit' ) );
@@ -1623,8 +1623,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_respects_existing_user() {
 		$user = wp_authenticate_application_password( self::$_user, self::$_user->user_login, 'password' );
 		$this->assertNotWPError( $user );
@@ -1632,8 +1632,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_is_rejected_if_not_api_request() {
 		add_filter( 'application_password_is_api_request', '__return_false' );
 
@@ -1643,8 +1643,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_invalid_username() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 
@@ -1654,8 +1654,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_invalid_email() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 
@@ -1665,8 +1665,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_not_allowed() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 		add_filter( 'wp_is_application_passwords_available', '__return_false' );
@@ -1677,8 +1677,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_not_allowed_for_user() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 		add_filter( 'wp_is_application_passwords_available', '__return_true' );
@@ -1690,8 +1690,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_incorrect_password() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 		add_filter( 'wp_is_application_passwords_available', '__return_true' );
@@ -1702,8 +1702,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_custom_errors() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 		add_filter( 'wp_is_application_passwords_available', '__return_true' );
@@ -1723,8 +1723,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_by_username() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 		add_filter( 'wp_is_application_passwords_available', '__return_true' );
@@ -1738,8 +1738,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_by_email() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 		add_filter( 'wp_is_application_passwords_available', '__return_true' );
@@ -1753,8 +1753,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42790
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
 	public function test_authenticate_application_password_chunked() {
 		add_filter( 'application_password_is_api_request', '__return_true' );
 		add_filter( 'wp_is_application_passwords_available', '__return_true' );
@@ -1768,8 +1768,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51939
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51939' )]
 	public function test_authenticate_application_password_returns_null_if_not_in_use() {
 		delete_site_option( 'using_application_passwords' );
 
@@ -1779,10 +1779,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52003
 	 *
-	 * @covers ::wp_validate_application_password
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52003' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_validate_application_password' )]
 	public function test_application_passwords_does_not_attempt_auth_if_missing_password() {
 		WP_Application_Passwords::create_new_application_password( self::$user_id, array( 'name' => 'phpunit' ) );
 
@@ -1796,9 +1796,9 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53386
-	 * @dataProvider data_application_passwords_can_use_capability_checks_to_determine_feature_availability
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53386' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_application_passwords_can_use_capability_checks_to_determine_feature_availability' )]
 	public function test_application_passwords_can_use_capability_checks_to_determine_feature_availability( $role, $authenticated ) {
 		$user = self::factory()->user->create_and_get( array( 'role' => $role ) );
 
@@ -1829,8 +1829,8 @@ class Tests_Auth extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52529
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52529' )]
 	public function test_reset_password_with_apostrophe_in_email() {
 		$user_args = array(
 			'user_email' => "jo'hn@example.com",
@@ -1850,17 +1850,15 @@ class Tests_Auth extends WP_UnitTestCase {
 		$this->assertSame( $user_id, $check->ID );
 	}
 
-	public function data_application_passwords_can_use_capability_checks_to_determine_feature_availability() {
+	public static function data_application_passwords_can_use_capability_checks_to_determine_feature_availability() {
 		return array(
 			'allowed'     => array( 'editor', true ),
 			'not allowed' => array( 'subscriber', false ),
 		);
 	}
 
-	/*
-	 * @ticket 57512
-	 * @covers ::wp_populate_basic_auth_from_authorization_header
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57512' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_populate_basic_auth_from_authorization_header' )]
 	public function tests_basic_http_authentication_with_username_and_password() {
 		// Header passed as "username:password".
 		$_SERVER['HTTP_AUTHORIZATION'] = 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=';
@@ -1871,10 +1869,8 @@ class Tests_Auth extends WP_UnitTestCase {
 		$this->assertSame( $_SERVER['PHP_AUTH_PW'], 'password' );
 	}
 
-	/*
-	 * @ticket 57512
-	 * @covers ::wp_populate_basic_auth_from_authorization_header
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57512' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_populate_basic_auth_from_authorization_header' )]
 	public function tests_basic_http_authentication_with_username_only() {
 		// Malformed header passed as "username" with no password.
 		$_SERVER['HTTP_AUTHORIZATION'] = 'Basic dXNlcm5hbWU=';
@@ -1885,10 +1881,8 @@ class Tests_Auth extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 'PHP_AUTH_PW', $_SERVER );
 	}
 
-	/*
-	 * @ticket 57512
-	 * @covers ::wp_populate_basic_auth_from_authorization_header
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57512' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_populate_basic_auth_from_authorization_header' )]
 	public function tests_basic_http_authentication_with_colon_in_password() {
 		// Header passed as "username:pass:word" where password contains colon.
 		$_SERVER['HTTP_AUTHORIZATION'] = 'Basic dXNlcm5hbWU6cGFzczp3b3Jk';
@@ -1902,10 +1896,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Test the tests
 	 *
-	 * @covers Tests_Auth::set_user_password_with_phpass
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_set_user_password_with_phpass() {
 		// Set the user password with the old phpass algorithm.
 		self::set_user_password_with_phpass( 'password', self::$user_id );
@@ -1933,10 +1927,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Test the tests
 	 *
-	 * @covers Tests_Auth::set_user_password_with_md5
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_set_user_password_with_md5() {
 		$password = 'password';
 
@@ -1966,10 +1960,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Test the tests
 	 *
-	 * @covers Tests_Auth::set_user_password_with_plain_bcrypt
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_set_user_password_with_plain_bcrypt() {
 		// Set the user password with plain bcrypt.
 		self::set_user_password_with_plain_bcrypt( 'password', self::$user_id );
@@ -1997,11 +1991,11 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Test the tests
 	 *
-	 * @covers Tests_Auth::set_application_password_with_plain_bcrypt
 	 *
-	 * @ticket 21022
-	 * @ticket 63203
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63203' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_set_application_password_with_plain_bcrypt() {
 		// Set an application password with the plain_bcrypt algorithm.
 		$uuid = self::set_application_password_with_plain_bcrypt( 'password', self::$user_id );
@@ -2028,10 +2022,10 @@ class Tests_Auth extends WP_UnitTestCase {
 	/**
 	 * Test the tests
 	 *
-	 * @covers Tests_Auth::set_application_password_with_phpass
 	 *
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_set_application_password_with_phpass() {
 		// Set an application password with the old phpass algorithm.
 		$uuid = self::set_application_password_with_phpass( 'password', self::$user_id );

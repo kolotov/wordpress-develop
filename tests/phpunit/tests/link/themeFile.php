@@ -1,7 +1,11 @@
 <?php
 /**
- * @group link
  */
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
 class Tests_Link_ThemeFile extends WP_UnitTestCase {
 
 	public static function wpSetUpBeforeClass( WP_UnitTest_Factory $factory ) {
@@ -42,13 +46,13 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18302
 	 *
-	 * @dataProvider data_theme_files
 	 *
-	 * @covers ::get_theme_file_uri
-	 * @covers ::get_parent_theme_file_uri
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_file_uri' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_parent_theme_file_uri' )]
 	public function test_theme_file_uri_with_parent_theme( $file, $expected_theme, $existence ) {
 		switch_theme( 'theme-file-parent' );
 
@@ -58,13 +62,13 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18302
 	 *
-	 * @dataProvider data_theme_files
 	 *
-	 * @covers ::get_theme_file_uri
-	 * @covers ::get_parent_theme_file_uri
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_file_uri' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_parent_theme_file_uri' )]
 	public function test_theme_file_uri_with_child_theme( $file, $expected_theme, $existence ) {
 		switch_theme( 'theme-file-child' );
 
@@ -76,13 +80,13 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18302
 	 *
-	 * @dataProvider data_theme_files
 	 *
-	 * @covers ::get_theme_file_path
-	 * @covers ::get_parent_theme_file_path
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_file_path' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_parent_theme_file_path' )]
 	public function test_theme_file_path_with_parent_theme( $file, $expected_theme, $existence ) {
 		switch_theme( 'theme-file-parent' );
 
@@ -92,13 +96,13 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18302
 	 *
-	 * @dataProvider data_theme_files
 	 *
-	 * @covers ::get_theme_file_path
-	 * @covers ::get_parent_theme_file_path
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_file_path' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_parent_theme_file_path' )]
 	public function test_theme_file_path_with_child_theme( $file, $expected_theme, $existence ) {
 		switch_theme( 'theme-file-child' );
 
@@ -112,10 +116,10 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 	/**
 	 * Test the tests.
 	 *
-	 * @ticket 18302
 	 *
-	 * @dataProvider data_theme_files
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
 	public function test_theme_file_existence( $file, $expected_theme, $existence ) {
 
 		if ( in_array( 'theme-file-child', $existence, true ) ) {
@@ -132,13 +136,13 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18302
 	 *
-	 * @dataProvider data_theme_files
 	 *
-	 * @covers ::get_theme_file_uri
-	 * @covers ::get_parent_theme_file_uri
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_file_uri' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_parent_theme_file_uri' )]
 	public function test_theme_file_uri_returns_valid_uri( $file, $expected_theme, $existence ) {
 		$uri        = get_theme_file_uri( $file );
 		$parent_uri = get_parent_theme_file_uri( $file );
@@ -147,7 +151,7 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 		$this->assertSame( sanitize_url( $parent_uri ), $parent_uri );
 	}
 
-	public function data_theme_files() {
+	public static function data_theme_files() {
 		$parent = 'theme-file-parent';
 		$child  = 'theme-file-child';
 

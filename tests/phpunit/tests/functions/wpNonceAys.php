@@ -5,15 +5,15 @@
  *
  * @since 5.9.0
  *
- * @group functions
  *
- * @covers ::wp_nonce_ays
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_nonce_ays' )]
 class Tests_Functions_wpNonceAys extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 53882
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53882' )]
 	public function test_wp_nonce_ays() {
 		$this->expectException( 'WPDieException' );
 		$this->expectExceptionMessage( 'The link you followed has expired.' );
@@ -23,8 +23,8 @@ class Tests_Functions_wpNonceAys extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53882
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53882' )]
 	public function test_wp_nonce_ays_log_out() {
 		$this->expectException( 'WPDieException' );
 		$this->expectExceptionMessageMatches( '#You are attempting to log out of Test Blog</p><p>Do you really want to <a href="http://' . WP_TESTS_DOMAIN . '/wp-login\.php\?action=logout&amp;_wpnonce=.{10}">log out</a>\?#m' );

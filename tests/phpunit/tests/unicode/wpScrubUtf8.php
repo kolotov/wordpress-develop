@@ -4,22 +4,22 @@
  * Unit tests covering WordPress’ UTF-8 handling.
  *
  * @package WordPress
- * @group unicode
  *
- * @covers ::wp_scrub_utf8
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_scrub_utf8' )]
+#[\PHPUnit\Framework\Attributes\Group( 'unicode' )]
 class Tests_Unicode_WpScrubUtf8 extends WP_UnitTestCase {
 
 	/**
 	 * Verifies that WordPress can properly detect valid UTF-8 while replacing invalid byte sequences.
 	 *
-	 * @ticket 63837
 	 *
-	 * @dataProvider data_utf8_test_data
 	 *
 	 * @param string      $bytes    Bytes as a PHP string.
 	 * @param string|null $scrubbed Expected checked value, if string isn’t valid UTF-8.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63837' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_utf8_test_data' )]
 	public function test_properly_scrubs_utf8( string $bytes, ?string $scrubbed = null ) {
 		if ( null === $scrubbed ) {
 			$this->assertSame(
@@ -40,13 +40,13 @@ class Tests_Unicode_WpScrubUtf8 extends WP_UnitTestCase {
 	 * Verifies that WordPress’ fallback code can properly detect valid UTF-8
 	 * while replacing invalid byte sequences.
 	 *
-	 * @ticket 63837
 	 *
-	 * @dataProvider data_utf8_test_data
 	 *
 	 * @param string      $bytes    Bytes as a PHP string.
 	 * @param string|null $scrubbed Expected checked value, if string isn’t valid UTF-8.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63837' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_utf8_test_data' )]
 	public function test_fallback_properly_scrubs_utf8( string $bytes, ?string $scrubbed = null ) {
 		if ( null === $scrubbed ) {
 			$this->assertSame(

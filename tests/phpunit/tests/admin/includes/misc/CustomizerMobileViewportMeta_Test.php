@@ -1,22 +1,22 @@
 <?php
 
 /**
- * @group admin
  *
- * @covers ::_customizer_mobile_viewport_meta
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_customizer_mobile_viewport_meta' )]
 class Tests_Admin_Includes_Misc_CustomizerMobileViewportMeta_Test extends WP_UnitTestCase {
 
 	/**
 	 * Tests _customizer_mobile_viewport_meta().
 	 *
-	 * @dataProvider data_customizer_mobile_viewport_meta
 	 *
-	 * @ticket 65186
 	 *
 	 * @param string $viewport_meta Original viewport meta.
 	 * @param string $expected      Expected viewport meta.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65186' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_customizer_mobile_viewport_meta' )]
 	public function test_customizer_mobile_viewport_meta( $viewport_meta, $expected ) {
 		$this->assertSame( $expected, _customizer_mobile_viewport_meta( $viewport_meta ) );
 	}
@@ -29,7 +29,7 @@ class Tests_Admin_Includes_Misc_CustomizerMobileViewportMeta_Test extends WP_Uni
 	 *     expected:      string,
 	 * }>
 	 */
-	public function data_customizer_mobile_viewport_meta(): array {
+	public static function data_customizer_mobile_viewport_meta(): array {
 		return array(
 			'default'                       => array(
 				'viewport_meta' => 'width=device-width,initial-scale=1.0',

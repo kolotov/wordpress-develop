@@ -3,10 +3,10 @@
 /**
  * Tests for the wp_schedule_delete_old_privacy_export_files() function.
  *
- * @group functions
  *
- * @covers ::wp_schedule_delete_old_privacy_export_files
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_schedule_delete_old_privacy_export_files' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 class Tests_Functions_wpScheduleDeleteOldPrivacyExportFiles extends WP_UnitTestCase {
 
 	/**
@@ -26,8 +26,8 @@ class Tests_Functions_wpScheduleDeleteOldPrivacyExportFiles extends WP_UnitTestC
 	/**
 	 * check that a schedule is set
 	 *
-	 * @ticket 59707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59707' )]
 	public function test_wp_schedule_delete_old_privacy_export_files() {
 
 		$this->assertFalse( wp_next_scheduled( 'wp_privacy_delete_old_export_files' ), 'no export should be scheduled' );
@@ -38,8 +38,8 @@ class Tests_Functions_wpScheduleDeleteOldPrivacyExportFiles extends WP_UnitTestC
 	/**
 	 * check that no schedule is set when WP is in installing mode
 	 *
-	 * @ticket 59707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59707' )]
 	public function test_wp_schedule_delete_old_privacy_export_files_is_installing() {
 		$this->assertFalse( wp_next_scheduled( 'wp_privacy_delete_old_export_files' ), 'no export should be scheduled' );
 
@@ -57,8 +57,8 @@ class Tests_Functions_wpScheduleDeleteOldPrivacyExportFiles extends WP_UnitTestC
 	/**
 	 * Check that calling the function when already scheduled does not create a duplicate.
 	 *
-	 * @ticket 59707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59707' )]
 	public function test_wp_schedule_delete_old_privacy_export_files_already_scheduled() {
 		// Schedule ahead of time() so that a duplicate would land on a different timestamp.
 		wp_schedule_event( strtotime( '+1 hour' ), 'hourly', 'wp_privacy_delete_old_export_files' );

@@ -8,12 +8,15 @@ wp-tests-config.php
 
 # Files and folders related to build/test tools
 .phpunit.result.cache
+/.phpunit.cache/
+/.phpunit.cache-multisite/
 /phpunit.xml
 /.phpcs.xml
 /phpcs.xml
 .cache/*
 /tests/phpunit/data/plugins/wordpress-importer
 /tests/phpunit/data/.trac-ticket-cache*
+/tests/phpunit/data-paratest-*/
 /tests/qunit/compiled.html
 /tests/performance/**/*.test.results.json
 /src/.wp-tests-version
@@ -26,7 +29,6 @@ wp-tests-config.php
 /phpstan.neon
 /*.tsbuildinfo
 /jsdoc
-/composer.lock
 /vendor
 /src/wp-admin/css/*.min.css
 /src/wp-admin/css/*-rtl.css

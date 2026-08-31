@@ -1,9 +1,10 @@
 <?php
 
 /**
- * @group query
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+
 class Tests_Post_Query extends WP_UnitTestCase {
 
 	/**
@@ -25,8 +26,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group taxonomy
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 	public function test_category__and_var() {
 		$q = new WP_Query();
 
@@ -66,9 +67,9 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28099
-	 * @group taxonomy
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28099' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 	public function test_empty_category__in() {
 		$cat_id  = self::factory()->category->create();
 		$post_id = self::factory()->post->create();
@@ -96,8 +97,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22448
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22448' )]
 	public function test_the_posts_filter() {
 		// Create posts and clear their caches.
 		$post_ids = self::factory()->post->create_many( 4 );
@@ -194,8 +195,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38034
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38034' )]
 	public function test_orderby_post__in_array() {
 		$posts = self::factory()->post->create_many( 4 );
 
@@ -212,8 +213,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38034
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38034' )]
 	public function test_orderby_post__in_array_with_implied_order() {
 		$posts = self::factory()->post->create_many( 4 );
 
@@ -291,8 +292,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36515
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36515' )]
 	public function test_post_name__in_ordering() {
 		$post_id1 = self::factory()->post->create(
 			array(
@@ -348,8 +349,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 17065
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17065' )]
 	public function test_orderby_array() {
 		global $wpdb;
 
@@ -384,8 +385,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 17065
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17065' )]
 	public function test_order() {
 		global $wpdb;
 
@@ -424,8 +425,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29629
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29629' )]
 	public function test_orderby() {
 		// 'rand' is a valid value.
 		$q = new WP_Query( array( 'orderby' => 'rand' ) );
@@ -459,8 +460,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35692
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35692' )]
 	public function test_orderby_rand_with_seed() {
 		$q = new WP_Query(
 			array(
@@ -472,8 +473,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35692
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35692' )]
 	public function test_orderby_rand_should_ignore_invalid_seed() {
 		$q = new WP_Query(
 			array(
@@ -485,8 +486,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35692
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35692' )]
 	public function test_orderby_rand_with_seed_should_be_case_insensitive() {
 		$q = new WP_Query(
 			array(
@@ -500,8 +501,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	/**
 	 * Tests the post_name__in attribute of WP_Query.
 	 *
-	 * @ticket 33065
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33065' )]
 	public function test_post_name__in() {
 		$q = new WP_Query();
 
@@ -552,8 +553,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36687
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36687' )]
 	public function test_posts_pre_query_filter_should_bypass_database_query() {
 		add_filter( 'posts_pre_query', array( __CLASS__, 'filter_posts_pre_query' ) );
 
@@ -576,8 +577,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36687
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36687' )]
 	public function test_posts_pre_query_filter_should_respect_set_found_posts() {
 		global $wpdb;
 
@@ -611,8 +612,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36687
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36687' )]
 	public function test_set_found_posts_fields_ids() {
 		register_post_type( 'wptests_pt' );
 
@@ -635,8 +636,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36687
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36687' )]
 	public function test_set_found_posts_fields_idparent() {
 		register_post_type( 'wptests_pt' );
 
@@ -658,8 +659,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36687
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36687' )]
 	public function test_set_found_posts_fields_split_the_query() {
 		register_post_type( 'wptests_pt' );
 
@@ -684,8 +685,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36687
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36687' )]
 	public function test_set_found_posts_fields_not_split_the_query() {
 		register_post_type( 'wptests_pt' );
 
@@ -711,10 +712,10 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42860
 	 *
-	 * @dataProvider data_set_found_posts_not_posts_as_an_array
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42860' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_set_found_posts_not_posts_as_an_array' )]
 	public function test_set_found_posts_not_posts_as_an_array( $posts, $expected ) {
 		$q = new WP_Query(
 			array(
@@ -734,7 +735,7 @@ class Tests_Post_Query extends WP_UnitTestCase {
 		$this->assertSame( $expected, $q->found_posts );
 	}
 
-	public function data_set_found_posts_not_posts_as_an_array() {
+	public static function data_set_found_posts_not_posts_as_an_array() {
 		// Count return 0 for null, but 1 for other data you may not expect.
 		return array(
 			array( null, 0 ),
@@ -745,8 +746,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42469
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42469' )]
 	public function test_found_posts_should_be_integer_not_string() {
 		$post_id = self::factory()->post->create();
 
@@ -760,8 +761,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42469
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42469' )]
 	public function test_found_posts_should_be_integer_even_if_found_posts_filter_returns_string_value() {
 		$post_id = self::factory()->post->create();
 
@@ -779,8 +780,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47719
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47719' )]
 	public function test_post__in_should_return_no_posts_when_0() {
 		self::factory()->post->create_many( 4 );
 
@@ -796,9 +797,9 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57296
-	 * @covers WP_Query::get_posts
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57296' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'get_posts' )]
 	public function test_split_the_query_object_cache() {
 		$filter = new MockAction();
 		add_filter( 'split_the_query', array( $filter, 'filter' ) );
@@ -813,8 +814,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56841' )]
 	public function test_query_does_not_have_leading_whitespace() {
 		add_filter( 'split_the_query', '__return_false' );
 
@@ -830,8 +831,8 @@ class Tests_Post_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56841' )]
 	public function test_query_does_not_have_leading_whitespace_split_the_query() {
 		add_filter( 'split_the_query', '__return_true' );
 

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @group menu
  */
+#[\PHPUnit\Framework\Attributes\Group( 'menu' )]
 class Tests_Menu_WpAjaxMenuQuickSearch extends WP_UnitTestCase {
 
 	/**
 	 * Test search returns results for pages.
 	 *
-	 * @ticket 27042
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27042' )]
 	public function test_search_returns_results_for_pages() {
 		require_once ABSPATH . 'wp-admin/includes/nav-menu.php';
 
@@ -45,8 +45,8 @@ class Tests_Menu_WpAjaxMenuQuickSearch extends WP_UnitTestCase {
 	/**
 	 * Test that search only returns results for posts with term in title.
 	 *
-	 * @ticket 48655
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48655' )]
 	public function test_search_only_returns_results_for_posts_with_term_in_title() {
 		require_once ABSPATH . 'wp-admin/includes/nav-menu.php';
 
@@ -84,8 +84,8 @@ class Tests_Menu_WpAjaxMenuQuickSearch extends WP_UnitTestCase {
 	/**
 	 * Test that search only returns results for published posts.
 	 *
-	 * @ticket 33742
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33742' )]
 	public function test_search_returns_results_for_published_posts() {
 		require_once ABSPATH . 'wp-admin/includes/nav-menu.php';
 
@@ -140,8 +140,8 @@ class Tests_Menu_WpAjaxMenuQuickSearch extends WP_UnitTestCase {
 	/**
 	 * Test that search displays terms that are not assigned to any posts.
 	 *
-	 * @ticket 45298
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45298' )]
 	public function test_search_should_return_unassigned_term_items() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -166,8 +166,8 @@ class Tests_Menu_WpAjaxMenuQuickSearch extends WP_UnitTestCase {
 	/**
 	 * Test that search displays results for post types with numeric slugs
 	 *
-	 * @ticket 63633
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63633' )]
 	public function test_search_returns_post_types_with_numeric_slugs() {
 		register_post_type( 'wptests_123' );
 

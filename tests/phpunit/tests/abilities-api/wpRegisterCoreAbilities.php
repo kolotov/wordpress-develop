@@ -5,11 +5,11 @@ declare( strict_types=1 );
 /**
  * Tests for the core abilities shipped with the Abilities API.
  *
- * @covers wp_register_core_ability_categories
- * @covers wp_register_core_abilities
  *
- * @group abilities-api
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_register_core_ability_categories' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_register_core_abilities' )]
+#[\PHPUnit\Framework\Attributes\Group( 'abilities-api' )]
 class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 
 	/**
@@ -55,8 +55,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 
 	/**
 	 * Tests that the `core/get-site-info` ability is registered with the expected schema.
-	 * @ticket 64146
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64146' )]
 	public function test_core_get_site_info_ability_is_registered(): void {
 		$ability = wp_get_ability( 'core/get-site-info' );
 
@@ -87,8 +87,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 
 	/**
 	 * Tests executing the `core/get-site-info` ability returns all fields by default.
-	 * @ticket 64146
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64146' )]
 	public function test_core_get_site_info_executes(): void {
 		// Requires manage_options.
 		$admin_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
@@ -121,8 +121,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 
 	/**
 	 * Tests `core/get-site-info` language field returns the site locale, not the current user's locale.
-	 * @ticket 64977
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64977' )]
 	public function test_core_get_site_info_language_uses_site_locale(): void {
 		$admin_id = self::factory()->user->create(
 			array(
@@ -147,8 +147,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 
 	/**
 	 * Tests that executing the current user info ability requires authentication.
-	 * @ticket 64146
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64146' )]
 	public function test_core_get_current_user_info_requires_authentication(): void {
 		$ability = wp_get_ability( 'core/get-user-info' );
 
@@ -161,8 +161,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 
 	/**
 	 * Tests executing the current user info ability as an authenticated user.
-	 * @ticket 64146
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64146' )]
 	public function test_core_get_current_user_info_returns_user_data(): void {
 		$user_id = self::factory()->user->create(
 			array(
@@ -198,8 +198,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 
 	/**
 	 * Tests that the `core/get-user-info` ability is registered with the expected schema.
-	 * @ticket 65234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65234' )]
 	public function test_core_get_user_info_ability_is_registered(): void {
 		$ability = wp_get_ability( 'core/get-user-info' );
 
@@ -229,8 +229,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 
 	/**
 	 * Tests that the `core/get-user-info` ability filters its output by the `fields` input parameter.
-	 * @ticket 65234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65234' )]
 	public function test_core_get_user_info_filters_fields(): void {
 		$user_id = self::factory()->user->create(
 			array(
@@ -262,8 +262,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 
 	/**
 	 * Tests that the `core/get-user-info` ability rejects unknown field names via schema validation.
-	 * @ticket 65234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65234' )]
 	public function test_core_get_user_info_rejects_invalid_fields(): void {
 		$user_id = self::factory()->user->create( array( 'role' => 'subscriber' ) );
 		wp_set_current_user( $user_id );
@@ -282,8 +282,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 
 	/**
 	 * Tests executing the environment info ability.
-	 * @ticket 64146
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64146' )]
 	public function test_core_get_environment_info_executes(): void {
 		// Requires manage_options.
 		$admin_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
@@ -304,8 +304,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that the `core/get-environment-info` ability is registered with the expected schema.
 	 *
-	 * @ticket 65355
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65355' )]
 	public function test_core_get_environment_info_ability_is_registered(): void {
 		$ability = wp_get_ability( 'core/get-environment-info' );
 
@@ -336,8 +336,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that the `core/get-environment-info` ability filters its output by the `fields` input parameter.
 	 *
-	 * @ticket 65355
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65355' )]
 	public function test_core_get_environment_info_filters_fields(): void {
 		$admin_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
 		wp_set_current_user( $admin_id );
@@ -361,8 +361,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 	/**
 	 * Tests that the `core/get-environment-info` ability rejects unknown field names via schema validation.
 	 *
-	 * @ticket 65355
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65355' )]
 	public function test_core_get_environment_info_rejects_invalid_fields(): void {
 		$admin_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
 		wp_set_current_user( $admin_id );
@@ -385,8 +385,8 @@ class Tests_Abilities_API_WpRegisterCoreAbilities extends WP_UnitTestCase {
 	 * This prevents regressions where invalid keywords like 'examples' are used
 	 * in schema properties (not valid in JSON Schema draft-04 used by WordPress).
 	 *
-	 * @ticket 64384
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64384' )]
 	public function test_core_abilities_schemas_use_only_valid_keywords(): void {
 		$allowed_keywords = wp_get_json_schema_allowed_keywords( 'draft-04' );
 

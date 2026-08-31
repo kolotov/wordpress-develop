@@ -1,8 +1,8 @@
 <?php
 /**
- * @group link
- * @covers ::get_preview_post_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_preview_post_link' )]
 class Tests_Link_GetPreviewPostLink extends WP_UnitTestCase {
 
 	public function test_get_preview_post_link() {

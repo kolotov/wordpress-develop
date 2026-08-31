@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post_wpAfterInsertPost extends WP_UnitTestCase {
 
 	/**
@@ -120,8 +120,8 @@ class Tests_Post_wpAfterInsertPost extends WP_UnitTestCase {
 	/**
 	 * Ensure before post is correct when updating a post object.
 	 *
-	 * @ticket 45114
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45114' )]
 	public function test_update_via_wp_update_post() {
 		$post               = get_post( self::$post_id, ARRAY_A );
 		$post['post_title'] = 'new title';
@@ -134,8 +134,8 @@ class Tests_Post_wpAfterInsertPost extends WP_UnitTestCase {
 	/**
 	 * Ensure before post is correct when publishing a post object.
 	 *
-	 * @ticket 45114
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45114' )]
 	public function test_update_via_wp_publish_post() {
 		wp_publish_post( self::$post_id );
 
@@ -146,8 +146,8 @@ class Tests_Post_wpAfterInsertPost extends WP_UnitTestCase {
 	/**
 	 * Ensure before post is correct when inserting a new post.
 	 *
-	 * @ticket 45114
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45114' )]
 	public function test_new_post_via_wp_insert_post() {
 		wp_insert_post(
 			array(
@@ -164,8 +164,8 @@ class Tests_Post_wpAfterInsertPost extends WP_UnitTestCase {
 	/**
 	 * Ensure before post is correct when updating post via REST API.
 	 *
-	 * @ticket 45114
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45114' )]
 	public function test_update_via_rest_controller() {
 		wp_set_current_user( self::$admin_id );
 		$post_id = self::$post_id;
@@ -182,8 +182,8 @@ class Tests_Post_wpAfterInsertPost extends WP_UnitTestCase {
 	/**
 	 * Ensure before post is correct when creating post via REST API.
 	 *
-	 * @ticket 45114
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45114' )]
 	public function test_new_post_via_rest_controller() {
 		wp_set_current_user( self::$admin_id );
 
@@ -204,8 +204,8 @@ class Tests_Post_wpAfterInsertPost extends WP_UnitTestCase {
 	/**
 	 * Ensure before post is correct when updating post via REST API.
 	 *
-	 * @ticket 45114
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45114' )]
 	public function test_update_attachment_via_rest_controller() {
 		wp_set_current_user( self::$admin_id );
 		$attachment_id = self::$attachment_id;

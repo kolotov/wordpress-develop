@@ -7,9 +7,9 @@
  */
 
 /**
- * @group speculative-loading
- * @covers ::wp_print_speculation_rules
  */
+#[\PHPUnit\Framework\Attributes\Group( 'speculative-loading' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_print_speculation_rules' )]
 class Tests_Speculative_Loading_wpPrintSpeculationRules extends WP_UnitTestCase {
 
 	private $original_wp_theme_features = array();
@@ -27,8 +27,8 @@ class Tests_Speculative_Loading_wpPrintSpeculationRules extends WP_UnitTestCase 
 	/**
 	 * Tests that the hook for printing speculation rules is set up.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_hook() {
 		$this->assertSame( 10, has_action( 'wp_footer', 'wp_print_speculation_rules' ) );
 	}
@@ -36,8 +36,8 @@ class Tests_Speculative_Loading_wpPrintSpeculationRules extends WP_UnitTestCase 
 	/**
 	 * Tests speculation rules script output with HTML5 support.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_print_speculation_rules_with_html5_support() {
 		add_theme_support( 'html5', array( 'script' ) );
 
@@ -63,8 +63,8 @@ class Tests_Speculative_Loading_wpPrintSpeculationRules extends WP_UnitTestCase 
 	/**
 	 * Tests speculation rules script output without HTML5 support.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_print_speculation_rules_without_html5_support() {
 		remove_theme_support( 'html5' );
 

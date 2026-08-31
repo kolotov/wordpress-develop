@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::wp_allow_comment
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_allow_comment' )]
 class Tests_Comment_WpAllowComment extends WP_UnitTestCase {
 	protected static $post_id;
 	protected static $comment_id;
@@ -73,13 +73,13 @@ class Tests_Comment_WpAllowComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65016
 	 *
-	 * @dataProvider data_should_approve_a_pingback_only_when_it_comes_from_this_site
 	 *
 	 * @param bool $is_self_ping Whether the pingback should come from this site.
 	 * @param int  $expected     The expected approval status.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_approve_a_pingback_only_when_it_comes_from_this_site' )]
 	public function test_should_approve_a_pingback_only_when_it_comes_from_this_site( $is_self_ping, $expected ) {
 		update_option( 'comment_previously_approved', '1' );
 
@@ -108,7 +108,7 @@ class Tests_Comment_WpAllowComment extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_approve_a_pingback_only_when_it_comes_from_this_site() {
+	public static function data_should_approve_a_pingback_only_when_it_comes_from_this_site() {
 		return array(
 			'a pingback from this site'    => array( true, 1 ),
 			'a pingback from another site' => array( false, 0 ),

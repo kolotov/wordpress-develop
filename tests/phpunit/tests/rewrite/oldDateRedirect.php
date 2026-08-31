@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group rewrite
- * @covers wp_old_slug_redirect
  */
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_old_slug_redirect' )]
 class Tests_Rewrite_OldDateRedirect extends WP_UnitTestCase {
 	protected $old_date_redirect_url;
 
@@ -88,8 +88,8 @@ class Tests_Rewrite_OldDateRedirect extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36723
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36723' )]
 	public function test_old_date_slug_redirect_cache() {
 		$old_permalink = user_trailingslashit( get_permalink( self::$post_id ) );
 
@@ -117,8 +117,8 @@ class Tests_Rewrite_OldDateRedirect extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36723
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36723' )]
 	public function test_old_date_redirect_cache_invalidation() {
 		$old_permalink = user_trailingslashit( get_permalink( self::$post_id ) );
 

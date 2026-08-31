@@ -7,11 +7,11 @@
  *
  * @since 6.4.0
  *
- * @group fonts
- * @group fontface
  *
- * @covers wp_print_font_faces
  */
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'fontface' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_print_font_faces' )]
 class Tests_Fonts_WpPrintFontFaces extends WP_Font_Face_UnitTestCase {
 	const FONTS_THEME = 'fonts-block-theme';
 
@@ -29,11 +29,11 @@ class Tests_Fonts_WpPrintFontFaces extends WP_Font_Face_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_should_print_given_fonts
 	 *
 	 * @param array  $fonts    Fonts to process.
 	 * @param string $expected Expected CSS.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_print_given_fonts' )]
 	public function test_should_print_given_fonts( array $fonts, $expected ) {
 		$expected_output = $this->get_expected_styles_output( $expected );
 

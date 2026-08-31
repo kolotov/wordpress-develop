@@ -3,15 +3,15 @@
 /**
  * Tests for the behavior of `wp_verify_fast_hash()`.
  *
- * @group functions
  *
- * @covers ::wp_verify_fast_hash
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_verify_fast_hash' )]
 class Tests_Functions_wpVerifyFastHash extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_verify_fast_hash_verifies_hash() {
 		$password = 'password';
 
@@ -21,8 +21,8 @@ class Tests_Functions_wpVerifyFastHash extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_verify_fast_hash_fails_unprefixed_hash() {
 		$password = 'password';
 
@@ -32,8 +32,8 @@ class Tests_Functions_wpVerifyFastHash extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_verify_fast_hash_fails_partial_hash() {
 		$password = 'password';
 
@@ -43,8 +43,8 @@ class Tests_Functions_wpVerifyFastHash extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21022
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_verify_fast_hash_verifies_phpass_hash() {
 		require_once ABSPATH . WPINC . '/class-phpass.php';
 

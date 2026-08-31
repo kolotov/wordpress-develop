@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group compat
- * @group security-153
  *
- * @covers ::mb_strlen
- * @covers ::_mb_strlen
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\Group( 'security-153' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'mb_strlen' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_mb_strlen' )]
 class Tests_Compat_mbStrlen extends WP_UnitTestCase {
 
 	/**
@@ -21,8 +21,8 @@ class Tests_Compat_mbStrlen extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_utf8_strings
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_utf8_strings' )]
 	public function test_mb_strlen( $input_string ) {
 		$this->assertSame(
 			mb_strlen( $input_string, 'UTF-8' ),
@@ -31,8 +31,8 @@ class Tests_Compat_mbStrlen extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_utf8_strings
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_utf8_strings' )]
 	public function test_mb_strlen_via_regex( $input_string ) {
 		$this->assertSame(
 			mb_strlen( $input_string, 'UTF-8' ),
@@ -41,8 +41,8 @@ class Tests_Compat_mbStrlen extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_utf8_strings
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_utf8_strings' )]
 	public function test_8bit_mb_strlen( $input_string ) {
 		$this->assertSame(
 			mb_strlen( $input_string, '8bit' ),
@@ -55,7 +55,7 @@ class Tests_Compat_mbStrlen extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_utf8_strings() {
+	public static function data_utf8_strings() {
 		return array(
 			array( 'баба' ),
 			array( 'баб' ),

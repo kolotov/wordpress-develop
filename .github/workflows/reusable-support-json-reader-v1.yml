@@ -14,7 +14,7 @@ on:
       repository:
         description: 'The repository to read support JSON files from.'
         type: string
-        default: 'WordPress/wordpress-develop'
+        default: 'kolotov/wordpress-develop'
     outputs:
       major-wp-version:
         description: "The major WordPress version based on the version provided in wp-version"

@@ -1,10 +1,11 @@
 <?php
 
 /**
- * @group admin
  *
- * @covers WP_Post_Comments_List_Table
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Post_Comments_List_Table::class )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Comments_List_Table::class, 'get_views' )]
 class Tests_Admin_wpPostCommentsListTable extends WP_UnitTestCase {
 
 	/**
@@ -18,10 +19,9 @@ class Tests_Admin_wpPostCommentsListTable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42066
 	 *
-	 * @covers WP_Post_Comments_List_Table::get_views
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42066' )]
 	public function test_get_views_should_return_views_by_default() {
 		$this->table->prepare_items();
 

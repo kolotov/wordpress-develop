@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group admin
  *
- * @covers ::wp_heartbeat_set_suspension
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_heartbeat_set_suspension' )]
 class Tests_Admin_Includes_Misc_WpHeartbeatSetSuspension_Test extends WP_UnitTestCase {
 
 	/**
@@ -33,13 +33,13 @@ class Tests_Admin_Includes_Misc_WpHeartbeatSetSuspension_Test extends WP_UnitTes
 	/**
 	 * Tests that wp_heartbeat_set_suspension() disables suspension on post screens.
 	 *
-	 * @dataProvider data_wp_heartbeat_set_suspension
 	 *
-	 * @ticket 65200
 	 *
 	 * @param string $pagenow_value The value for the $pagenow global.
 	 * @param string $expected      The expected value of 'suspension' in settings.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65200' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_heartbeat_set_suspension' )]
 	public function test_wp_heartbeat_set_suspension( $pagenow_value, $expected ) {
 		global $pagenow;
 
@@ -59,7 +59,7 @@ class Tests_Admin_Includes_Misc_WpHeartbeatSetSuspension_Test extends WP_UnitTes
 	 *     expected:      string,
 	 * }>
 	 */
-	public function data_wp_heartbeat_set_suspension(): array {
+	public static function data_wp_heartbeat_set_suspension(): array {
 		return array(
 			'post.php'     => array(
 				'pagenow_value' => 'post.php',

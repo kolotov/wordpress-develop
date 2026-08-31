@@ -3,12 +3,13 @@
 /**
  * test wp-includes/theme.php
  *
- * @group themes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'themes' )]
 class Tests_Theme extends WP_UnitTestCase {
-	protected $theme_slug     = 'twentyeleven';
-	protected $theme_name     = 'Twenty Eleven';
-	protected $default_themes = array(
+	protected $theme_slug = 'twentyeleven';
+	protected $theme_name = 'Twenty Eleven';
+
+	private const DEFAULT_THEMES = array(
 		'twentyten',
 		'twentyeleven',
 		'twentytwelve',
@@ -26,12 +27,16 @@ class Tests_Theme extends WP_UnitTestCase {
 		'twentytwentyfive',
 	);
 
+	protected $default_themes = self::DEFAULT_THEMES;
+
 	/**
 	 * Original theme directory.
 	 *
 	 * @var string[]
 	 */
 	private $orig_theme_dir;
+	private $original_template;
+	private $original_stylesheet;
 
 	public function set_up() {
 		global $wp_theme_directories;
@@ -39,8 +44,10 @@ class Tests_Theme extends WP_UnitTestCase {
 		parent::set_up();
 
 		// Sets up the `wp-content/themes/` directory to ensure consistency when running tests.
-		$this->orig_theme_dir = $wp_theme_directories;
-		$wp_theme_directories = array( WP_CONTENT_DIR . '/themes', realpath( DIR_TESTDATA . '/themedir1' ) );
+		$this->orig_theme_dir      = $wp_theme_directories;
+		$this->original_template   = get_option( 'template' );
+		$this->original_stylesheet = get_option( 'stylesheet' );
+		$wp_theme_directories      = array( WP_CONTENT_DIR . '/themes', realpath( DIR_TESTDATA . '/themedir1' ) );
 
 		add_filter( 'extra_theme_headers', array( $this, 'theme_data_extra_headers' ) );
 		wp_clean_themes_cache();
@@ -51,6 +58,8 @@ class Tests_Theme extends WP_UnitTestCase {
 		global $wp_theme_directories;
 
 		$wp_theme_directories = $this->orig_theme_dir;
+		update_option( 'template', $this->original_template );
+		update_option( 'stylesheet', $this->original_stylesheet );
 
 		remove_filter( 'extra_theme_headers', array( $this, 'theme_data_extra_headers' ) );
 		wp_clean_themes_cache();
@@ -211,8 +220,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Make sure we update the default theme list to include the latest default theme.
 	 *
-	 * @ticket 29925
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29925' )]
 	public function test_default_theme_in_default_theme_list() {
 		$latest_default_theme = WP_Theme::get_core_default_theme();
 		if ( ! $latest_default_theme->exists() || 'twenty' !== substr( $latest_default_theme->get_stylesheet(), 0, 6 ) ) {
@@ -224,10 +233,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests the default themes list in the test suite matches the runtime default themes.
 	 *
-	 * @ticket 62103
 	 *
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62103' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_default_default_theme_list_match_in_test_suite_and_at_runtime() {
 		// Use a reflection to make WP_THEME::$default_themes accessible.
 		$reflection = new ReflectionClass( 'WP_Theme' );
@@ -249,10 +258,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Test the default theme in WP_Theme matches the WP_DEFAULT_THEME constant.
 	 *
-	 * @ticket 62103
 	 *
-	 * @covers WP_Theme::get_core_default_theme
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62103' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Theme', 'get_core_default_theme' )]
 	public function test_default_theme_matches_constant() {
 		$latest_default_theme = WP_Theme::get_core_default_theme();
 
@@ -272,13 +281,13 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Ensure that the default themes are included in the new bundled files.
 	 *
-	 * @ticket 62103
 	 *
-	 * @coversNothing
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62103' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 	public function test_default_themes_are_included_in_new_files() {
 		require_once ABSPATH . 'wp-admin/includes/update-core.php';
 		global $_new_bundled_files;
@@ -312,10 +321,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48566
 	 *
-	 * @dataProvider data_provider_default_themes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48566' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_default_themes' )]
 	public function test_year_in_readme( $theme ) {
 		// This test is designed to only run on trunk.
 		$this->skipOnAutomatedBranches();
@@ -341,9 +350,9 @@ class Tests_Theme extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ theme: string }>
 	 */
-	public function data_provider_default_themes(): array {
+	public static function data_provider_default_themes(): array {
 		$data = array();
-		foreach ( $this->default_themes as $default_theme ) {
+		foreach ( self::DEFAULT_THEMES as $default_theme ) {
 			$data[ $default_theme ] = array( 'theme' => $default_theme );
 		}
 		return $data;
@@ -352,10 +361,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that the version number in style.css, readme.txt, and package.json all match.
 	 *
-	 * @ticket 63012
 	 *
-	 * @dataProvider data_provider_default_themes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63012' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_default_themes' )]
 	public function test_version_consistency_in_package_json( string $theme ) {
 		$wp_theme = wp_get_theme( $theme );
 
@@ -404,9 +413,9 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20897
 	 * @expectedDeprecated get_theme_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20897' )]
 	public function test_extra_theme_headers() {
 		$wp_theme = wp_get_theme( $this->theme_slug );
 		$this->assertNotEmpty( $wp_theme->get( 'License' ) );
@@ -533,7 +542,7 @@ class Tests_Theme extends WP_UnitTestCase {
 
 		$theme = wp_get_theme();
 		$this->assertSame( $style, (string) $theme );
-		$this->assertNotFalse( $theme->errors() );
+		$this->assertWPError( $theme->errors() );
 		$this->assertFalse( $theme->exists() );
 
 		// These return the bogus name - perhaps not ideal behavior?
@@ -544,8 +553,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Test _wp_keep_alive_customize_changeset_dependent_auto_drafts.
 	 *
-	 * @covers ::_wp_keep_alive_customize_changeset_dependent_auto_drafts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_keep_alive_customize_changeset_dependent_auto_drafts' )]
 	public function test_wp_keep_alive_customize_changeset_dependent_auto_drafts() {
 		$nav_created_post_ids = self::factory()->post->create_many(
 			2,
@@ -609,8 +618,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49406' )]
 	public function test_register_theme_support_defaults() {
 		$registered = register_theme_feature( 'test-feature' );
 		$this->assertTrue( $registered );
@@ -625,8 +634,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49406' )]
 	public function test_register_theme_support_explicit() {
 		$args = array(
 			'type'         => 'array',
@@ -651,8 +660,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49406' )]
 	public function test_register_theme_support_upgrades_show_in_rest() {
 		register_theme_feature( 'test-feature', array( 'show_in_rest' => true ) );
 
@@ -671,8 +680,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49406' )]
 	public function test_register_theme_support_fills_schema() {
 		register_theme_feature(
 			'test-feature',
@@ -705,8 +714,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49406' )]
 	public function test_register_theme_support_does_not_add_boolean_type_if_non_bool_default() {
 		register_theme_feature(
 			'test-feature',
@@ -728,8 +737,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49406' )]
 	public function test_register_theme_support_defaults_additional_properties_to_false() {
 		register_theme_feature(
 			'test-feature',
@@ -755,8 +764,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49406' )]
 	public function test_register_theme_support_with_additional_properties() {
 		register_theme_feature(
 			'test-feature',
@@ -783,8 +792,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49406
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49406' )]
 	public function test_register_theme_support_defaults_additional_properties_to_false_in_array() {
 		register_theme_feature(
 			'test-feature',
@@ -813,13 +822,13 @@ class Tests_Theme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49406
 	 *
-	 * @dataProvider data_register_theme_support_validation
 	 *
 	 * @param string $error_code The error code expected.
 	 * @param array  $args       The args to register.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49406' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_theme_support_validation' )]
 	public function test_register_theme_support_validation( $error_code, $args ) {
 		$registered = register_theme_feature( 'test-feature', $args );
 
@@ -827,7 +836,7 @@ class Tests_Theme extends WP_UnitTestCase {
 		$this->assertSame( $error_code, $registered->get_error_code() );
 	}
 
-	public function data_register_theme_support_validation() {
+	public static function data_register_theme_support_validation() {
 		return array(
 			array(
 				'invalid_type',
@@ -898,13 +907,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that block themes support a feature by default.
 	 *
-	 * @ticket 54597
-	 * @ticket 54731
-	 * @ticket 59732
 	 *
-	 * @dataProvider data_block_theme_has_default_support
 	 *
-	 * @covers ::_add_default_theme_supports
 	 *
 	 * @param array $support {
 	 *     The feature to check.
@@ -913,6 +917,11 @@ class Tests_Theme extends WP_UnitTestCase {
 	 *     @type string $sub_feature Optional. The sub-feature to check.
 	 * }
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54597' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '54731' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59732' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_block_theme_has_default_support' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_add_default_theme_supports' )]
 	public function test_block_theme_has_default_support( $support ) {
 		$this->helper_requires_block_theme();
 
@@ -942,7 +951,7 @@ class Tests_Theme extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_block_theme_has_default_support() {
+	public static function data_block_theme_has_default_support() {
 		return array(
 			'post-thumbnails'      => array(
 				'support' => array(
@@ -1012,12 +1021,12 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that block themes load separate core block assets by default.
 	 *
-	 * @ticket 54597
-	 * @ticket 59732
 	 *
-	 * @covers ::_add_default_theme_supports
-	 * @covers ::wp_should_load_separate_core_block_assets
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54597' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59732' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_add_default_theme_supports' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_should_load_separate_core_block_assets' )]
 	public function test_block_theme_should_load_separate_core_block_assets_by_default() {
 		$this->helper_requires_block_theme();
 
@@ -1039,11 +1048,11 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that block themes load block assets on demand by default.
 	 *
-	 * @ticket 61965
 	 *
-	 * @covers ::_add_default_theme_supports
-	 * @covers ::wp_should_load_block_assets_on_demand
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61965' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_add_default_theme_supports' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_should_load_block_assets_on_demand' )]
 	public function test_block_theme_should_load_block_assets_on_demand_by_default() {
 		$this->helper_requires_block_theme();
 
@@ -1066,11 +1075,11 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that block themes load block assets on demand by default even when loading separate core block assets is disabled.
 	 *
-	 * @ticket 61965
 	 *
-	 * @covers ::_add_default_theme_supports
-	 * @covers ::wp_should_load_block_assets_on_demand
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61965' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_add_default_theme_supports' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_should_load_block_assets_on_demand' )]
 	public function test_block_theme_should_load_block_assets_on_demand_by_default_even_with_separate_core_block_assets_disabled() {
 		$this->helper_requires_block_theme();
 
@@ -1083,8 +1092,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that a theme in the custom test data theme directory is recognized.
 	 *
-	 * @ticket 18298
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18298' )]
 	public function test_theme_in_custom_theme_dir_is_valid() {
 		switch_theme( 'block-theme' );
 		$this->assertTrue( wp_get_theme()->exists() );
@@ -1093,10 +1102,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that `is_child_theme()` returns true for child theme.
 	 *
-	 * @ticket 18298
 	 *
-	 * @covers ::is_child_theme
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18298' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_child_theme' )]
 	public function test_is_child_theme_true() {
 		switch_theme( 'block-theme-child' );
 		$this->assertTrue( is_child_theme() );
@@ -1105,10 +1114,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that `is_child_theme()` returns false for parent theme.
 	 *
-	 * @ticket 18298
 	 *
-	 * @covers ::is_child_theme
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18298' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_child_theme' )]
 	public function test_is_child_theme_false() {
 		switch_theme( 'block-theme' );
 		$this->assertFalse( is_child_theme() );
@@ -1117,10 +1126,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that the child theme directory is correctly detected.
 	 *
-	 * @ticket 18298
 	 *
-	 * @covers ::get_stylesheet_directory
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18298' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_stylesheet_directory' )]
 	public function test_get_stylesheet_directory() {
 		switch_theme( 'block-theme-child' );
 		$this->assertSamePathIgnoringDirectorySeparators( realpath( DIR_TESTDATA ) . '/themedir1/block-theme-child', get_stylesheet_directory() );
@@ -1129,10 +1138,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that the parent theme directory is correctly detected.
 	 *
-	 * @ticket 18298
 	 *
-	 * @covers ::get_template_directory
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18298' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_template_directory' )]
 	public function test_get_template_directory() {
 		switch_theme( 'block-theme-child' );
 		$this->assertSamePathIgnoringDirectorySeparators( realpath( DIR_TESTDATA ) . '/themedir1/block-theme', get_template_directory() );
@@ -1141,16 +1150,16 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that get_stylesheet_directory() behaves correctly with filters.
 	 *
-	 * @ticket 18298
-	 * @dataProvider data_get_stylesheet_directory_with_filter
 	 *
-	 * @covers ::get_stylesheet_directory
 	 *
 	 * @param string   $theme     Theme slug / directory name.
 	 * @param string   $hook_name Filter hook name.
 	 * @param callable $callback  Filter callback.
 	 * @param string   $expected  Expected stylesheet directory with the filter active.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18298' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_stylesheet_directory_with_filter' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_stylesheet_directory' )]
 	public function test_get_stylesheet_directory_with_filter( $theme, $hook_name, $callback, $expected ) {
 		switch_theme( $theme );
 
@@ -1168,7 +1177,7 @@ class Tests_Theme extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_stylesheet_directory_with_filter() {
+	public static function data_get_stylesheet_directory_with_filter() {
 		return array(
 			'with stylesheet_directory filter' => array(
 				'block-theme',
@@ -1201,16 +1210,16 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that get_template_directory() behaves correctly with filters.
 	 *
-	 * @ticket 18298
-	 * @dataProvider data_get_template_directory_with_filter
 	 *
-	 * @covers ::get_template_directory
 	 *
 	 * @param string   $theme     Theme slug / directory name.
 	 * @param string   $hook_name Filter hook name.
 	 * @param callable $callback  Filter callback.
 	 * @param string   $expected  Expected template directory with the filter active.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18298' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_template_directory_with_filter' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_template_directory' )]
 	public function test_get_template_directory_with_filter( $theme, $hook_name, $callback, $expected ) {
 		switch_theme( $theme );
 
@@ -1228,7 +1237,7 @@ class Tests_Theme extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_template_directory_with_filter() {
+	public static function data_get_template_directory_with_filter() {
 		return array(
 			'with template_directory filter' => array(
 				'block-theme',
@@ -1261,11 +1270,11 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests whether a switched site retrieves the correct stylesheet directory.
 	 *
-	 * @ticket 59677
-	 * @group ms-required
 	 *
-	 * @covers ::get_stylesheet_directory
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59677' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_stylesheet_directory' )]
 	public function test_get_stylesheet_directory_with_switched_site() {
 		$blog_id = self::factory()->blog->create();
 
@@ -1284,11 +1293,11 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests whether a switched site retrieves the correct template directory.
 	 *
-	 * @ticket 59677
-	 * @group ms-required
 	 *
-	 * @covers ::get_template_directory
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59677' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_template_directory' )]
 	public function test_get_template_directory_with_switched_site() {
 		$blog_id = self::factory()->blog->create();
 
@@ -1307,11 +1316,11 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests whether a restored site retrieves the correct stylesheet directory.
 	 *
-	 * @ticket 59677
-	 * @group ms-required
 	 *
-	 * @covers ::get_stylesheet_directory
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59677' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_stylesheet_directory' )]
 	public function test_get_stylesheet_directory_with_restored_site() {
 		$blog_id = self::factory()->blog->create();
 
@@ -1332,11 +1341,11 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests whether a restored site retrieves the correct template directory.
 	 *
-	 * @ticket 59677
-	 * @group ms-required
 	 *
-	 * @covers ::get_template_directory
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59677' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_template_directory' )]
 	public function test_get_template_directory_with_restored_site() {
 		$blog_id = self::factory()->blog->create();
 
@@ -1381,10 +1390,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Make sure filters added after the initial call are fired.
 	 *
-	 * @ticket 59847
 	 *
-	 * @covers ::get_stylesheet_directory
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_stylesheet_directory' )]
 	public function test_get_stylesheet_directory_filters_apply() {
 		// Call the function prior to the filter being added.
 		get_stylesheet_directory();
@@ -1405,10 +1414,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Make sure filters added after the initial call are fired.
 	 *
-	 * @ticket 59847
 	 *
-	 * @covers ::get_template_directory
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_template_directory' )]
 	public function test_get_template_directory_filters_apply() {
 		// Call the function prior to the filter being added.
 		get_template_directory();
@@ -1429,10 +1438,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Make sure get_stylesheet_directory uses the correct path when the root theme dir changes.
 	 *
-	 * @ticket 59847
 	 *
-	 * @covers ::get_stylesheet_directory
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_stylesheet_directory' )]
 	public function test_get_stylesheet_directory_uses_registered_theme_dir() {
 		$old_theme = wp_get_theme();
 
@@ -1464,10 +1473,10 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Make sure get_template_directory uses the correct path when the root theme dir changes.
 	 *
-	 * @ticket 59847
 	 *
-	 * @covers ::get_template_directory
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_template_directory' )]
 	public function test_get_template_directory_uses_registered_theme_dir() {
 		$old_theme = wp_get_theme();
 
@@ -1507,12 +1516,12 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Tests that switch_to_blog() uses the original template path.
 	 *
-	 * @ticket 60290
 	 *
-	 * @group ms-required
 	 *
-	 * @covers ::locate_template
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60290' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'locate_template' )]
 	public function test_switch_to_blog_uses_original_template_path() {
 		$old_theme     = wp_get_theme();
 		$template_path = locate_template( 'index.php' );
@@ -1533,8 +1542,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Verify the validate_theme_requirements theme responds as expected for twentyten.
 	 *
-	 * @ticket 54381
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54381' )]
 	public function test_validate_theme_requirements_filter_default() {
 		// Default expectation since twentyten has the least strict requirements.
 		$this->assertTrue( validate_theme_requirements( 'twentyten' ) );
@@ -1543,8 +1552,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Verify that a filtered failure of validate_theme_requirements returns WP_Error
 	 *
-	 * @ticket 54381
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54381' )]
 	public function test_validate_theme_requirements_filter_error() {
 		// Adds an extra requirement that always fails.
 		add_filter(
@@ -1560,8 +1569,8 @@ class Tests_Theme extends WP_UnitTestCase {
 	/**
 	 * Verify that the theme is passed through to the validate_theme_requirements filter by selectively erroring.
 	 *
-	 * @ticket 54381
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54381' )]
 	public function test_validate_theme_requirements_filter_selective_failure() {
 		// Adds an extra requirement only for a particular theme.
 		add_filter(

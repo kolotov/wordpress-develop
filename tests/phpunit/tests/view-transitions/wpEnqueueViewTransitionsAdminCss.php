@@ -7,9 +7,9 @@
  */
 
 /**
- * @group view-transitions
- * @covers ::wp_enqueue_view_transitions_admin_css
  */
+#[\PHPUnit\Framework\Attributes\Group( 'view-transitions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_enqueue_view_transitions_admin_css' )]
 class Tests_View_Transitions_wpEnqueueViewTransitionsAdminCss extends WP_UnitTestCase {
 
 	private ?WP_Styles $original_wp_styles = null;
@@ -31,8 +31,8 @@ class Tests_View_Transitions_wpEnqueueViewTransitionsAdminCss extends WP_UnitTes
 	/**
 	 * Tests that the hook for enqueuing admin view transitions CSS is set up.
 	 *
-	 * @ticket 64470
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64470' )]
 	public function test_hook() {
 		$this->assertSame( 10, has_action( 'admin_enqueue_scripts', 'wp_enqueue_view_transitions_admin_css' ) );
 	}
@@ -40,10 +40,10 @@ class Tests_View_Transitions_wpEnqueueViewTransitionsAdminCss extends WP_UnitTes
 	/**
 	 * Tests that the admin view transitions style handle includes the inline CSS.
 	 *
-	 * @ticket 64470
 	 *
-	 * @covers ::wp_get_view_transitions_admin_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64470' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_view_transitions_admin_css' )]
 	public function test_inline_css_included() {
 		$after_data = wp_styles()->get_data( 'wp-view-transitions-admin', 'after' );
 		$this->assertIsArray( $after_data, 'Expected `after` data to be an array.' );
@@ -55,8 +55,8 @@ class Tests_View_Transitions_wpEnqueueViewTransitionsAdminCss extends WP_UnitTes
 	/**
 	 * Tests enqueuing admin view transitions CSS.
 	 *
-	 * @ticket 64470
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64470' )]
 	public function test_wp_enqueue_view_transitions_admin_css() {
 		$this->assertFalse( wp_style_is( 'wp-view-transitions-admin' ) );
 

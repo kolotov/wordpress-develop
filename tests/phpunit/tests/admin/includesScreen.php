@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group admin
- * @group adminScreen
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'adminScreen' )]
 class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
 	public $core_screens = array(
 		'index.php'                            => array(
@@ -329,8 +329,8 @@ class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 19828
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19828' )]
 	public function test_help_tabs_priority() {
 		$tab_1      = 'tab1';
 		$tab_1_args = array(
@@ -425,8 +425,8 @@ class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25799
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25799' )]
 	public function test_options() {
 		$option      = __FUNCTION__;
 		$option_args = array(
@@ -452,8 +452,8 @@ class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62562
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62562' )]
 	public function test_get_current_screen_type() {
 		global $current_screen;
 
@@ -524,7 +524,7 @@ class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
 	/**
 	 * Data provider for testing is_block_editor.
 	 */
-	public function data_is_block_editor() {
+	public static function data_is_block_editor() {
 		return array(
 			array(
 				// Edit post: Post type supports `show_in_rest`, no filters.
@@ -600,8 +600,6 @@ class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
 	/**
 	 * When editing a post type with `show_in_rest` support, the is_block_editor should indicate support.
 	 *
-	 * @ticket 46195
-	 * @dataProvider data_is_block_editor
 	 *
 	 * @param string $hook Admin hook.
 	 * @param array  $filter {
@@ -612,6 +610,8 @@ class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
 	 * }
 	 * @param bool   $expected The expected `is_block_editor` value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46195' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_block_editor' )]
 	public function test_is_block_editor( $hook, $filter, $expected ) {
 		if ( ! empty( $filter['name'] ) && ! empty( $filter['function'] ) ) {
 			add_filter( $filter['name'], $filter['function'] );

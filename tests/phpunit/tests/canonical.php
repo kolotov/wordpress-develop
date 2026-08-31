@@ -4,10 +4,10 @@
  *
  * In the process of doing so, it also tests WP, WP_Rewrite and WP_Query, A fail here may show a bug in any one of these areas.
  *
- * @group canonical
- * @group rewrite
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'canonical' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Canonical extends WP_Canonical_UnitTestCase {
 
 	public static $private_cpt_post;
@@ -52,8 +52,8 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_canonical
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_canonical' )]
 	public function test_canonical( $test_url, $expected, $ticket = 0, $expected_doing_it_wrong = array() ) {
 
 		if ( false !== strpos( $test_url, '%d' ) ) {
@@ -68,7 +68,7 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 		$this->assertCanonical( $test_url, $expected, $ticket, $expected_doing_it_wrong );
 	}
 
-	public function data_canonical() {
+	public static function data_canonical() {
 		/*
 		 * Data format:
 		 * [0]: Test URL.
@@ -268,8 +268,8 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16557
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16557' )]
 	public function test_do_redirect_guess_404_permalink() {
 		// Test disable do_redirect_guess_404_permalink().
 		add_filter( 'do_redirect_guess_404_permalink', '__return_false' );
@@ -278,8 +278,8 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16557
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16557' )]
 	public function test_pre_redirect_guess_404_permalink() {
 		// Test short-circuit filter.
 		add_filter(
@@ -293,8 +293,8 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16557
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16557' )]
 	public function test_strict_redirect_guess_404_permalink() {
 		$post = self::factory()->post->create(
 			array(
@@ -315,11 +315,11 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	/**
 	 * Ensure public posts with custom public statuses are guessed.
 	 *
-	 * @ticket 47911
-	 * @dataProvider data_redirect_guess_404_permalink_with_custom_statuses
 	 *
-	 * @covers ::redirect_guess_404_permalink
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47911' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_redirect_guess_404_permalink_with_custom_statuses' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'redirect_guess_404_permalink' )]
 	public function test_redirect_guess_404_permalink_with_custom_statuses( $status_args, $redirects ) {
 		register_post_status( 'custom', $status_args );
 
@@ -345,7 +345,7 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	 *    bool  Whether the 404 link is expected to redirect
 	 * }
 	 */
-	public function data_redirect_guess_404_permalink_with_custom_statuses() {
+	public static function data_redirect_guess_404_permalink_with_custom_statuses() {
 		return array(
 			'public status'                      => array(
 				'status_args' => array( 'public' => true ),
@@ -376,11 +376,11 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	/**
 	 * Ensure multiple post types do not throw a notice.
 	 *
-	 * @ticket 43056
-	 * @ticket 59795
 	 *
-	 * @dataProvider data_redirect_guess_404_permalink_post_types
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43056' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59795' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_redirect_guess_404_permalink_post_types' )]
 	public function test_redirect_guess_404_permalink_post_types( $original_url, $expected ) {
 		$this->assertCanonical( $original_url, $expected );
 	}
@@ -395,7 +395,7 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_redirect_guess_404_permalink_post_types() {
+	public static function data_redirect_guess_404_permalink_post_types() {
 		return array(
 			'single string formatted post type'    => array(
 				'original_url' => '/?name=sample-pag&post_type=page',
@@ -417,8 +417,8 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43745
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43745' )]
 	public function test_utf8_query_keys_canonical() {
 		$p = self::factory()->post->create(
 			array(
@@ -440,8 +440,8 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	/**
 	 * Ensure NOT EXISTS queries do not trigger not-countable or undefined array key errors.
 	 *
-	 * @ticket 55955
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55955' )]
 	public function test_feed_canonical_with_not_exists_query() {
 		// Set a NOT EXISTS tax_query on the global query.
 		$global_query        = $GLOBALS['wp_query'];
@@ -468,11 +468,11 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	/**
 	 * Test canonical redirects for attachment pages when the option is disabled.
 	 *
-	 * @ticket 57913
-	 * @ticket 59866
 	 *
-	 * @dataProvider data_canonical_attachment_page_redirect_with_option_disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57913' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59866' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_canonical_attachment_page_redirect_with_option_disabled' )]
 	public function test_canonical_attachment_page_redirect_with_option_disabled( $expected, $user = null, $parent_post_status = '' ) {
 		update_option( 'wp_attachment_pages_enabled', 0 );
 
@@ -514,7 +514,7 @@ class Tests_Canonical extends WP_Canonical_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_canonical_attachment_page_redirect_with_option_disabled() {
+	public static function data_canonical_attachment_page_redirect_with_option_disabled() {
 		return array(
 			'logged out user, no parent'      => array(
 				'%%attachment_url%%',

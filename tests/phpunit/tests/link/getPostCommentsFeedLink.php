@@ -1,8 +1,8 @@
 <?php
 /**
- * @group link
- * @covers ::get_post_comments_feed_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_comments_feed_link' )]
 class Tests_Link_GetPostCommentsFeedLink extends WP_UnitTestCase {
 
 	public function test_post_link() {
@@ -140,8 +140,8 @@ class Tests_Link_GetPostCommentsFeedLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52814' )]
 	public function test_nonexistent_page() {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
 

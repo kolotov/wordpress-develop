@@ -1,13 +1,5 @@
 <?php
 /**
- * @group dependencies
- * @group scripts
- * @covers ::wp_enqueue_script
- * @covers ::wp_register_script
- * @covers ::wp_print_scripts
- * @covers ::wp_script_add_data
- * @covers ::wp_add_inline_script
- * @covers ::wp_set_script_translations
  *
  * @phpstan-type ScriptArgs array{
  *     in_footer?: bool,
@@ -23,6 +15,42 @@
  *     4?: ScriptArgs,
  * }
  */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_enqueue_script' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_register_script' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_print_scripts' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_script_add_data' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_add_inline_script' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_set_script_translations' )]
 class Tests_Dependencies_Scripts extends WP_UnitTestCase {
 
 	/**
@@ -122,18 +150,18 @@ JS;
 	/**
 	 * Tests that scripts trigger _doing_it_wrong for unrecognized keys in the $args array.
 	 *
-	 * @ticket 63486
 	 *
-	 * @covers ::wp_register_script
-	 * @covers ::wp_enqueue_script
-	 * @covers ::_wp_scripts_add_args_data
 	 *
-	 * @dataProvider data_unrecognized_keys_in_args
 	 *
 	 * @param string $function_name Function name to call.
 	 * @param array  $args          Arguments to pass to the function.
 	 * @param string $expected_msg  Expected error message substring.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unrecognized_keys_in_args' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_scripts_add_args_data' )]
 	public function test_unrecognized_keys_in_args( string $function_name, array $args, string $expected_msg ) {
 		$this->setExpectedIncorrectUsage( $function_name );
 
@@ -150,7 +178,7 @@ JS;
 	 *
 	 * @return array<string, array{function_name: string, args: array, expected_msg: string}>
 	 */
-	public function data_unrecognized_keys_in_args(): array {
+	public static function data_unrecognized_keys_in_args(): array {
 		return array(
 			'register_script' => array(
 				'function_name' => 'wp_register_script',
@@ -189,9 +217,9 @@ JS;
 	/**
 	 * Test versioning
 	 *
-	 * @ticket 11315
-	 * @ticket 64372
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11315' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64372' )]
 	public function test_wp_enqueue_script() {
 		global $wp_version;
 
@@ -223,7 +251,7 @@ JS;
 	 *
 	 * @return array[] Delayed strategies.
 	 */
-	public function data_provider_delayed_strategies() {
+	public static function data_provider_delayed_strategies() {
 		return array(
 			'defer' => array( 'defer' ),
 			'async' => array( 'async' ),
@@ -236,17 +264,17 @@ JS;
 	 * If the main script with delayed loading strategy has an `after` inline script,
 	 * the inline script should not be affected.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_inline_script_tag
-	 * @covers ::wp_add_inline_script
-	 * @covers ::wp_enqueue_script
 	 *
-	 * @dataProvider data_provider_delayed_strategies
 	 *
 	 * @param string $strategy Strategy.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_delayed_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_inline_script_tag' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_add_inline_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_after_inline_script_with_delayed_main_script( $strategy ) {
 		wp_enqueue_script( 'ms-isa-1', 'http://example.org/ms-isa-1.js', array(), null, compact( 'strategy' ) );
 		wp_add_inline_script( 'ms-isa-1', 'console.log(\'after one\');', 'after' );
@@ -264,13 +292,13 @@ JS;
 	/**
 	 * Tests that inline scripts in the `after` position, attached to a blocking main script, are rendered as javascript.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_inline_script_tag
-	 * @covers ::wp_add_inline_script
-	 * @covers ::wp_enqueue_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_inline_script_tag' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_add_inline_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_after_inline_script_with_blocking_main_script() {
 		wp_enqueue_script( 'ms-insa-3', 'http://example.org/ms-insa-3.js', array(), null );
 		wp_add_inline_script( 'ms-insa-3', 'console.log(\'after one\');', 'after' );
@@ -291,17 +319,17 @@ JS;
 	 * Tests that inline scripts in the `before` position, attached to a delayed inline main script, results in all
 	 * dependents being delayed.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_inline_script_tag
-	 * @covers ::wp_add_inline_script
-	 * @covers ::wp_enqueue_script
 	 *
-	 * @dataProvider data_provider_delayed_strategies
 	 *
 	 * @param string $strategy
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_delayed_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_inline_script_tag' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_add_inline_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_before_inline_scripts_with_delayed_main_script( $strategy ) {
 		wp_enqueue_script( 'ds-i1-1', 'http://example.org/ds-i1-1.js', array(), null, compact( 'strategy' ) );
 		wp_add_inline_script( 'ds-i1-1', 'console.log(\'before first\');', 'before' );
@@ -334,13 +362,13 @@ JS;
 	/**
 	 * Tests that scripts registered with an async strategy print with the async attribute.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_eligible_loading_strategy
-	 * @covers WP_Scripts::filter_eligible_strategies
-	 * @covers ::wp_enqueue_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_eligible_loading_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'filter_eligible_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_loading_strategy_with_valid_async_registration() {
 		// No dependents, No dependencies then async.
 		wp_enqueue_script( 'main-script-a1', '/main-script-a1.js', array(), null, array( 'strategy' => 'async' ) );
@@ -352,17 +380,17 @@ JS;
 	/**
 	 * Tests that dependents of a blocking dependency script are free to contain any strategy.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_eligible_loading_strategy
-	 * @covers WP_Scripts::filter_eligible_strategies
-	 * @covers ::wp_enqueue_script
 	 *
-	 * @dataProvider data_provider_delayed_strategies
 	 *
 	 * @param string $strategy Strategy.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_delayed_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_eligible_loading_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'filter_eligible_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_delayed_dependent_with_blocking_dependency( $strategy ) {
 		wp_enqueue_script( 'dependency-script-a2', '/dependency-script-a2.js', array(), null );
 		wp_enqueue_script( 'main-script-a2', '/main-script-a2.js', array( 'dependency-script-a2' ), null, compact( 'strategy' ) );
@@ -375,16 +403,16 @@ JS;
 	/**
 	 * Tests that blocking dependents force delayed dependencies to become blocking.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_eligible_loading_strategy
-	 * @covers WP_Scripts::filter_eligible_strategies
-	 * @covers ::wp_enqueue_script
 	 *
-	 * @dataProvider data_provider_delayed_strategies
 	 * @param string $strategy Strategy.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_delayed_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_eligible_loading_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'filter_eligible_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_blocking_dependent_with_delayed_dependency( $strategy ) {
 		wp_enqueue_script( 'main-script-a3', '/main-script-a3.js', array(), null, compact( 'strategy' ) );
 		wp_enqueue_script( 'dependent-script-a3', '/dependent-script-a3.js', array( 'main-script-a3' ), null );
@@ -400,16 +428,16 @@ JS;
 	/**
 	 * Tests that only enqueued dependents effect the eligible loading strategy.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_eligible_loading_strategy
-	 * @covers WP_Scripts::filter_eligible_strategies
-	 * @covers ::wp_enqueue_script
 	 *
-	 * @dataProvider data_provider_delayed_strategies
 	 * @param string $strategy Strategy.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_delayed_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_eligible_loading_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'filter_eligible_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_delayed_dependent_with_blocking_dependency_not_enqueued( $strategy ) {
 		wp_enqueue_script( 'main-script-a4', '/main-script-a4.js', array(), null, compact( 'strategy' ) );
 		// This dependent is registered but not enqueued, so it should not factor into the eligible loading strategy.
@@ -424,7 +452,7 @@ JS;
 	 *
 	 * @return array
 	 */
-	public function get_data_to_filter_eligible_strategies() {
+	public static function get_data_to_filter_eligible_strategies() {
 		return array(
 			'no_dependents'                       => array(
 				'set_up'   => static function () {
@@ -551,15 +579,15 @@ JS;
 	/**
 	 * Tests that the filter_eligible_strategies method works as expected and returns the correct value.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::filter_eligible_strategies
 	 *
-	 * @dataProvider get_data_to_filter_eligible_strategies
 	 *
 	 * @param callable $set_up   Set up.
 	 * @param string[] $expected Expected return value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'get_data_to_filter_eligible_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'filter_eligible_strategies' )]
 	public function test_filter_eligible_strategies( $set_up, $expected ) {
 		$handle = $set_up();
 
@@ -579,7 +607,7 @@ JS;
 	 * @param string[] $deps      Dependencies for the script.
 	 * @param bool     $in_footer Whether to print the script in the footer.
 	 */
-	protected function register_test_script( $handle, $strategy, $deps = array(), $in_footer = false ) {
+	protected static function register_test_script( $handle, $strategy, $deps = array(), $in_footer = false ) {
 		wp_register_script(
 			$handle,
 			add_query_arg(
@@ -604,8 +632,8 @@ JS;
 	 * @param string[] $deps      Dependencies for the script.
 	 * @param bool     $in_footer Whether to print the script in the footer.
 	 */
-	protected function enqueue_test_script( $handle, $strategy, $deps = array(), $in_footer = false ) {
-		$this->register_test_script( $handle, $strategy, $deps, $in_footer );
+	protected static function enqueue_test_script( $handle, $strategy, $deps = array(), $in_footer = false ) {
+		self::register_test_script( $handle, $strategy, $deps, $in_footer );
 		wp_enqueue_script( $handle );
 	}
 
@@ -615,7 +643,7 @@ JS;
 	 * @param string $handle   Dependency handle to enqueue.
 	 * @param string $position Position.
 	 */
-	protected function add_test_inline_script( $handle, $position ) {
+	protected static function add_test_inline_script( $handle, $position ) {
 		wp_add_inline_script( $handle, sprintf( 'scriptEventLog.push( %s )', wp_json_encode( "{$handle}: {$position} inline" ) ), $position );
 	}
 
@@ -624,7 +652,7 @@ JS;
 	 *
 	 * @return array[]
 	 */
-	public function data_provider_to_test_various_strategy_dependency_chains() {
+	public static function data_provider_to_test_various_strategy_dependency_chains() {
 		$wp_tests_domain = WP_TESTS_DOMAIN;
 
 		return array(
@@ -632,11 +660,11 @@ JS;
 				'set_up'          => function () {
 					$handle1 = 'blocking-not-async-without-dependency';
 					$handle2 = 'async-with-blocking-dependency';
-					$this->enqueue_test_script( $handle1, 'blocking', array() );
-					$this->enqueue_test_script( $handle2, 'async', array( $handle1 ) );
+					self::enqueue_test_script( $handle1, 'blocking', array() );
+					self::enqueue_test_script( $handle2, 'async', array( $handle1 ) );
 					foreach ( array( $handle1, $handle2 ) as $handle ) {
-						$this->add_test_inline_script( $handle, 'before' );
-						$this->add_test_inline_script( $handle, 'after' );
+						self::add_test_inline_script( $handle, 'before' );
+						self::add_test_inline_script( $handle, 'after' );
 					}
 				},
 				'expected_markup' => <<<HTML
@@ -672,12 +700,12 @@ HTML
 					$handle1 = 'async-no-dependency';
 					$handle2 = 'async-one-async-dependency';
 					$handle3 = 'async-two-async-dependencies';
-					$this->enqueue_test_script( $handle1, 'async', array() );
-					$this->enqueue_test_script( $handle2, 'async', array( $handle1 ) );
-					$this->enqueue_test_script( $handle3, 'async', array( $handle1, $handle2 ) );
+					self::enqueue_test_script( $handle1, 'async', array() );
+					self::enqueue_test_script( $handle2, 'async', array( $handle1 ) );
+					self::enqueue_test_script( $handle3, 'async', array( $handle1, $handle2 ) );
 					foreach ( array( $handle1, $handle2, $handle3 ) as $handle ) {
-						$this->add_test_inline_script( $handle, 'before' );
-						$this->add_test_inline_script( $handle, 'after' );
+						self::add_test_inline_script( $handle, 'before' );
+						self::add_test_inline_script( $handle, 'after' );
 					}
 				},
 				'expected_markup' => <<<HTML
@@ -715,11 +743,11 @@ HTML
 				'set_up'          => function () {
 					$handle1 = 'async-with-blocking-dependent';
 					$handle2 = 'blocking-dependent-of-async';
-					$this->enqueue_test_script( $handle1, 'async', array() );
-					$this->enqueue_test_script( $handle2, 'blocking', array( $handle1 ) );
+					self::enqueue_test_script( $handle1, 'async', array() );
+					self::enqueue_test_script( $handle2, 'blocking', array( $handle1 ) );
 					foreach ( array( $handle1, $handle2 ) as $handle ) {
-						$this->add_test_inline_script( $handle, 'before' );
-						$this->add_test_inline_script( $handle, 'after' );
+						self::add_test_inline_script( $handle, 'before' );
+						self::add_test_inline_script( $handle, 'after' );
 					}
 				},
 				'expected_markup' => <<<HTML
@@ -748,11 +776,11 @@ HTML
 				'set_up'          => function () {
 					$handle1 = 'async-with-defer-dependent';
 					$handle2 = 'defer-dependent-of-async';
-					$this->enqueue_test_script( $handle1, 'async', array() );
-					$this->enqueue_test_script( $handle2, 'defer', array( $handle1 ) );
+					self::enqueue_test_script( $handle1, 'async', array() );
+					self::enqueue_test_script( $handle2, 'defer', array( $handle1 ) );
 					foreach ( array( $handle1, $handle2 ) as $handle ) {
-						$this->add_test_inline_script( $handle, 'before' );
-						$this->add_test_inline_script( $handle, 'after' );
+						self::add_test_inline_script( $handle, 'before' );
+						self::add_test_inline_script( $handle, 'after' );
 					}
 				},
 				'expected_markup' => <<<HTML
@@ -783,13 +811,13 @@ HTML
 					$handle2 = 'defer-dependent-of-blocking-bundle-of-none';
 
 					wp_register_script( $handle1, false, array(), null );
-					$this->add_test_inline_script( $handle1, 'before' );
-					$this->add_test_inline_script( $handle1, 'after' );
+					self::add_test_inline_script( $handle1, 'before' );
+					self::add_test_inline_script( $handle1, 'after' );
 
 					// Note: the before script for this will be blocking because the dependency is blocking.
-					$this->enqueue_test_script( $handle2, 'defer', array( $handle1 ) );
-					$this->add_test_inline_script( $handle2, 'before' );
-					$this->add_test_inline_script( $handle2, 'after' );
+					self::enqueue_test_script( $handle2, 'defer', array( $handle1 ) );
+					self::add_test_inline_script( $handle2, 'before' );
+					self::add_test_inline_script( $handle2, 'after' );
 				},
 				'expected_markup' => <<<HTML
 <script id="blocking-bundle-of-none-js-before">
@@ -820,13 +848,13 @@ HTML
 					$handle4 = 'defer-dependent-of-blocking-bundle-of-two';
 
 					wp_register_script( $handle1, false, array( $handle2, $handle3 ), null );
-					$this->enqueue_test_script( $handle2, 'blocking' );
-					$this->enqueue_test_script( $handle3, 'blocking' );
-					$this->enqueue_test_script( $handle4, 'defer', array( $handle1 ) );
+					self::enqueue_test_script( $handle2, 'blocking' );
+					self::enqueue_test_script( $handle3, 'blocking' );
+					self::enqueue_test_script( $handle4, 'defer', array( $handle1 ) );
 
 					foreach ( array( $handle2, $handle3, $handle4 ) as $handle ) {
-						$this->add_test_inline_script( $handle, 'before' );
-						$this->add_test_inline_script( $handle, 'after' );
+						self::add_test_inline_script( $handle, 'before' );
+						self::add_test_inline_script( $handle, 'after' );
 					}
 				},
 				'expected_markup' => <<<HTML
@@ -868,13 +896,13 @@ HTML
 					// The eligible loading strategy for this will be forced to be blocking when rendered since $src = false.
 					wp_register_script( $handle1, false, array(), null );
 					wp_scripts()->registered[ $handle1 ]->extra['strategy'] = 'defer'; // Bypass wp_script_add_data() which should no-op with _doing_it_wrong() because of $src=false.
-					$this->add_test_inline_script( $handle1, 'before' );
-					$this->add_test_inline_script( $handle1, 'after' );
+					self::add_test_inline_script( $handle1, 'before' );
+					self::add_test_inline_script( $handle1, 'after' );
 
 					// Note: the before script for this will be blocking because the dependency is blocking.
-					$this->enqueue_test_script( $handle2, 'defer', array( $handle1 ) );
-					$this->add_test_inline_script( $handle2, 'before' );
-					$this->add_test_inline_script( $handle2, 'after' );
+					self::enqueue_test_script( $handle2, 'defer', array( $handle1 ) );
+					self::add_test_inline_script( $handle2, 'before' );
+					self::add_test_inline_script( $handle2, 'after' );
 				},
 				'expected_markup' => <<<HTML
 <script id="defer-bundle-of-none-js-before">
@@ -902,13 +930,13 @@ HTML
 					$handle1 = 'blocking-dependency-with-defer-following-dependency';
 					$handle2 = 'defer-dependency-with-blocking-preceding-dependency';
 					$handle3 = 'defer-dependent-of-blocking-and-defer-dependencies';
-					$this->enqueue_test_script( $handle1, 'blocking', array() );
-					$this->enqueue_test_script( $handle2, 'defer', array() );
-					$this->enqueue_test_script( $handle3, 'defer', array( $handle1, $handle2 ) );
+					self::enqueue_test_script( $handle1, 'blocking', array() );
+					self::enqueue_test_script( $handle2, 'defer', array() );
+					self::enqueue_test_script( $handle3, 'defer', array( $handle1, $handle2 ) );
 
 					foreach ( array( $handle1, $handle2, $handle3 ) as $dep ) {
-						$this->add_test_inline_script( $dep, 'before' );
-						$this->add_test_inline_script( $dep, 'after' );
+						self::add_test_inline_script( $dep, 'before' );
+						self::add_test_inline_script( $dep, 'after' );
 					}
 				},
 				'expected_markup' => <<<HTML
@@ -947,13 +975,13 @@ HTML
 					$handle1 = 'defer-dependency-with-blocking-following-dependency';
 					$handle2 = 'blocking-dependency-with-defer-preceding-dependency';
 					$handle3 = 'defer-dependent-of-defer-and-blocking-dependencies';
-					$this->enqueue_test_script( $handle1, 'defer', array() );
-					$this->enqueue_test_script( $handle2, 'blocking', array() );
-					$this->enqueue_test_script( $handle3, 'defer', array( $handle1, $handle2 ) );
+					self::enqueue_test_script( $handle1, 'defer', array() );
+					self::enqueue_test_script( $handle2, 'blocking', array() );
+					self::enqueue_test_script( $handle3, 'defer', array( $handle1, $handle2 ) );
 
 					foreach ( array( $handle1, $handle2, $handle3 ) as $dep ) {
-						$this->add_test_inline_script( $dep, 'before' );
-						$this->add_test_inline_script( $dep, 'after' );
+						self::add_test_inline_script( $dep, 'before' );
+						self::add_test_inline_script( $dep, 'after' );
 					}
 				},
 				'expected_markup' => <<<HTML
@@ -991,11 +1019,11 @@ HTML
 				'set_up'          => function () {
 					$handle1 = 'defer-with-async-dependent';
 					$handle2 = 'async-dependent-of-defer';
-					$this->enqueue_test_script( $handle1, 'defer', array() );
-					$this->enqueue_test_script( $handle2, 'async', array( $handle1 ) );
+					self::enqueue_test_script( $handle1, 'defer', array() );
+					self::enqueue_test_script( $handle2, 'async', array( $handle1 ) );
 					foreach ( array( $handle1, $handle2 ) as $handle ) {
-						$this->add_test_inline_script( $handle, 'before' );
-						$this->add_test_inline_script( $handle, 'after' );
+						self::add_test_inline_script( $handle, 'before' );
+						self::add_test_inline_script( $handle, 'after' );
 					}
 				},
 				'expected_markup' => <<<HTML
@@ -1024,8 +1052,8 @@ HTML
 				'set_up'          => function () {
 					// Note this should NOT result in no delayed-inline-script-loader script being added.
 					$handle = 'defer-with-before-inline';
-					$this->enqueue_test_script( $handle, 'defer', array() );
-					$this->add_test_inline_script( $handle, 'before' );
+					self::enqueue_test_script( $handle, 'defer', array() );
+					self::add_test_inline_script( $handle, 'before' );
 				},
 				'expected_markup' => <<<HTML
 <script id="defer-with-before-inline-js-before">
@@ -1040,8 +1068,8 @@ HTML
 				'set_up'          => function () {
 					// Note this SHOULD result in delayed-inline-script-loader script being added.
 					$handle = 'defer-with-after-inline';
-					$this->enqueue_test_script( $handle, 'defer', array() );
-					$this->add_test_inline_script( $handle, 'after' );
+					self::enqueue_test_script( $handle, 'defer', array() );
+					self::add_test_inline_script( $handle, 'after' );
 				},
 				'expected_markup' => <<<HTML
 <script src='https://example.com/external.js?script_event_log=defer-with-after-inline:%20script' id='defer-with-after-inline-js' data-wp-strategy='defer'></script>
@@ -1076,16 +1104,16 @@ HTML
 
 					// The outer alias contains a blocking member, as well as a nested alias that contains defer scripts.
 					wp_register_script( $outer_alias_handle, false, array( $inner_alias_handle, 'outer-bundle-leaf-member' ), null );
-					$this->register_test_script( 'outer-bundle-leaf-member', 'blocking', array() );
+					self::register_test_script( 'outer-bundle-leaf-member', 'blocking', array() );
 
 					// Inner alias only contains delay scripts.
 					wp_register_script( $inner_alias_handle, false, array( 'inner-bundle-member-one', 'inner-bundle-member-two' ), null );
-					$this->register_test_script( 'inner-bundle-member-one', 'defer', array() );
-					$this->register_test_script( 'inner-bundle-member-two', 'defer', array() );
+					self::register_test_script( 'inner-bundle-member-one', 'defer', array() );
+					self::register_test_script( 'inner-bundle-member-two', 'defer', array() );
 
-					$this->enqueue_test_script( 'defer-dependent-of-nested-aliases', 'defer', array( $outer_alias_handle ) );
-					$this->add_test_inline_script( 'defer-dependent-of-nested-aliases', 'before' );
-					$this->add_test_inline_script( 'defer-dependent-of-nested-aliases', 'after' );
+					self::enqueue_test_script( 'defer-dependent-of-nested-aliases', 'defer', array( $outer_alias_handle ) );
+					self::add_test_inline_script( 'defer-dependent-of-nested-aliases', 'before' );
+					self::add_test_inline_script( 'defer-dependent-of-nested-aliases', 'after' );
 				},
 				'expected_markup' => <<<HTML
 <script src='https://example.com/external.js?script_event_log=inner-bundle-member-one:%20script' id='inner-bundle-member-one-js' data-wp-strategy='defer'></script>
@@ -1111,10 +1139,10 @@ HTML
 					$async_handle2 = 'async2';
 
 					wp_register_script( $alias_handle, false, array( $async_handle1, $async_handle2 ), null );
-					$this->register_test_script( $async_handle1, 'async', array() );
-					$this->register_test_script( $async_handle2, 'async', array() );
+					self::register_test_script( $async_handle1, 'async', array() );
+					self::register_test_script( $async_handle2, 'async', array() );
 
-					$this->enqueue_test_script( 'defer-dependent-of-async-aliases', 'defer', array( $alias_handle ) );
+					self::enqueue_test_script( 'defer-dependent-of-async-aliases', 'defer', array( $alias_handle ) );
 				},
 				'expected_markup' => <<<HTML
 <script src='https://example.com/external.js?script_event_log=async1:%20script' id='async1-js' defer data-wp-strategy='async'></script>
@@ -1129,16 +1157,16 @@ HTML
 	/**
 	 * Tests that various loading strategy dependency chains function as expected.
 	 *
-	 * @covers ::wp_enqueue_script()
-	 * @covers ::wp_add_inline_script()
-	 * @covers ::wp_print_scripts()
-	 * @covers WP_Scripts::get_inline_script_tag
 	 *
-	 * @dataProvider data_provider_to_test_various_strategy_dependency_chains
 	 *
 	 * @param callable $set_up          Set up.
 	 * @param string   $expected_markup Expected markup.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_to_test_various_strategy_dependency_chains' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_add_inline_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_print_scripts' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_inline_script_tag' )]
 	public function test_various_strategy_dependency_chains( $set_up, $expected_markup ) {
 		$set_up();
 		$actual_markup = get_echo( 'wp_print_scripts' );
@@ -1148,12 +1176,12 @@ HTML
 	/**
 	 * Tests that defer is the final strategy when registering a script using defer, that has no dependents/dependencies.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_eligible_loading_strategy
-	 * @covers ::wp_enqueue_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_eligible_loading_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_loading_strategy_with_defer_having_no_dependents_nor_dependencies() {
 		wp_enqueue_script( 'main-script-d1', 'http://example.com/main-script-d1.js', array(), null, array( 'strategy' => 'defer' ) );
 		$output   = get_echo( 'wp_print_scripts' );
@@ -1164,12 +1192,12 @@ HTML
 	/**
 	 * Tests that a script registered with defer remains deferred when all dependencies are either deferred or blocking.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_eligible_loading_strategy
-	 * @covers ::wp_enqueue_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_eligible_loading_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_loading_strategy_with_defer_dependent_and_varied_dependencies() {
 		wp_enqueue_script( 'dependency-script-d2-1', 'http://example.com/dependency-script-d2-1.js', array(), null, array( 'strategy' => 'defer' ) );
 		wp_enqueue_script( 'dependency-script-d2-2', 'http://example.com/dependency-script-d2-2.js', array(), null );
@@ -1183,12 +1211,12 @@ HTML
 	/**
 	 * Tests that scripts registered with defer remain deferred when all dependents are also deferred.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_eligible_loading_strategy
-	 * @covers ::wp_enqueue_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_eligible_loading_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_loading_strategy_with_all_defer_dependencies() {
 		wp_enqueue_script( 'main-script-d3', 'http://example.com/main-script-d3.js', array(), null, array( 'strategy' => 'defer' ) );
 		wp_enqueue_script( 'dependent-script-d3-1', 'http://example.com/dependent-script-d3-1.js', array( 'main-script-d3' ), null, array( 'strategy' => 'defer' ) );
@@ -1204,14 +1232,14 @@ HTML
 	 *
 	 * Also tests that fetchpriority attributes are added as expected.
 	 *
-	 * @ticket 12009
-	 * @ticket 61734
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_eligible_loading_strategy
-	 * @covers ::wp_register_script
-	 * @covers ::wp_enqueue_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_eligible_loading_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_defer_with_async_dependent() {
 		// case with one async dependent.
 		wp_register_script( 'main-script-d4', '/main-script-d4.js', array(), null, array( 'strategy' => 'defer' ) );
@@ -1260,7 +1288,7 @@ HTML
 	 *
 	 * @return array<string, array{fetchpriority: string}>
 	 */
-	public function data_provider_fetchpriority_values(): array {
+	public static function data_provider_fetchpriority_values(): array {
 		return array(
 			'auto' => array( 'fetchpriority' => 'auto' ),
 			'low'  => array( 'fetchpriority' => 'low' ),
@@ -1271,16 +1299,16 @@ HTML
 	/**
 	 * Tests that valid fetchpriority values are correctly added to script data.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers ::wp_register_script
-	 * @covers WP_Scripts::add_data
-	 * @covers ::wp_script_add_data
 	 *
-	 * @dataProvider data_provider_fetchpriority_values
 	 *
 	 * @param string $fetchpriority The fetchpriority value to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_fetchpriority_values' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'add_data' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_script_add_data' )]
 	public function test_fetchpriority_values( string $fetchpriority ) {
 		wp_register_script( 'test-script', '/test-script.js', array(), null, array( 'fetchpriority' => $fetchpriority ) );
 		$this->assertArrayHasKey( 'fetchpriority', wp_scripts()->registered['test-script']->extra );
@@ -1295,11 +1323,11 @@ HTML
 	/**
 	 * Tests that an empty fetchpriority is treated the same as auto.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers ::wp_register_script
-	 * @covers WP_Scripts::add_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'add_data' )]
 	public function test_empty_fetchpriority_value() {
 		wp_register_script( 'unset', '/joke.js', array(), null, array( 'fetchpriority' => 'low' ) );
 		$this->assertSame( 'low', wp_scripts()->registered['unset']->extra['fetchpriority'] );
@@ -1310,13 +1338,13 @@ HTML
 	/**
 	 * Tests that an invalid fetchpriority causes a _doing_it_wrong() warning.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers ::wp_register_script
-	 * @covers WP_Scripts::add_data
 	 *
 	 * @expectedIncorrectUsage WP_Scripts::add_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'add_data' )]
 	public function test_invalid_fetchpriority_value() {
 		wp_register_script( 'joke', '/joke.js', array(), null, array( 'fetchpriority' => 'silly' ) );
 		$this->assertArrayNotHasKey( 'fetchpriority', wp_scripts()->registered['joke']->extra );
@@ -1327,13 +1355,13 @@ HTML
 	/**
 	 * Tests that an invalid fetchpriority causes a _doing_it_wrong() warning.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers ::wp_register_script
-	 * @covers WP_Scripts::add_data
 	 *
 	 * @expectedIncorrectUsage WP_Scripts::add_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'add_data' )]
 	public function test_invalid_fetchpriority_value_type() {
 		wp_register_script( 'bad', '/bad.js' );
 		$this->assertFalse( wp_script_add_data( 'bad', 'fetchpriority', array( 'THIS IS SO WRONG!!!' ) ) );
@@ -1345,13 +1373,13 @@ HTML
 	/**
 	 * Tests that adding fetchpriority causes a _doing_it_wrong() warning on a script alias.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers ::wp_register_script
-	 * @covers WP_Scripts::add_data
 	 *
 	 * @expectedIncorrectUsage WP_Scripts::add_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'add_data' )]
 	public function test_invalid_fetchpriority_on_alias() {
 		wp_register_script( 'alias', false, array(), null, array( 'fetchpriority' => 'low' ) );
 		$this->assertArrayNotHasKey( 'fetchpriority', wp_scripts()->registered['alias']->extra );
@@ -1360,17 +1388,17 @@ HTML
 	/**
 	 * Tests validation of module_dependencies in WP_Scripts::add_data().
 	 *
-	 * @ticket 61500
 	 *
-	 * @covers WP_Scripts::add_data
 	 *
-	 * @dataProvider data_add_data_module_dependencies_validation
 	 *
 	 * @param mixed      $data     Data to add.
 	 * @param string     $message  Expected error message.
 	 * @param bool       $expected Expected return value.
 	 * @param array|null $stored   Expected stored value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61500' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_add_data_module_dependencies_validation' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'add_data' )]
 	public function test_add_data_module_dependencies_validation( $data, string $message, bool $expected, ?array $stored ) {
 		wp_register_script( 'test-script', '/test.js' );
 
@@ -1392,7 +1420,7 @@ HTML
 	 *
 	 * @return array<string, array{data: mixed, message: string, expected: bool, stored: array<string|array<string, string>>|null}>
 	 */
-	public function data_add_data_module_dependencies_validation(): array {
+	public static function data_add_data_module_dependencies_validation(): array {
 		return array(
 			'non-array' => array(
 				'data'     => 'not-an-array',
@@ -1413,13 +1441,8 @@ HTML
 	 * Tests that registering a script with `module_dependencies` triggers `_doing_it_wrong`
 	 * when the script is not printed in the footer and does not use the `defer` strategy.
 	 *
-	 * @ticket 65165
 	 *
-	 * @covers ::wp_register_script
-	 * @covers ::wp_enqueue_script
-	 * @covers ::_wp_scripts_add_args_data
 	 *
-	 * @dataProvider data_module_dependencies_require_footer_or_defer
 	 *
 	 * @param callable-string $function_name Function name to call.
 	 * @param array           $args          Arguments to pass to the function.
@@ -1427,6 +1450,11 @@ HTML
 	 *
 	 * @phpstan-param WpEnqueueScriptArgs $args
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65165' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_module_dependencies_require_footer_or_defer' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_scripts_add_args_data' )]
 	public function test_module_dependencies_require_footer_or_defer( string $function_name, array $args, bool $should_warn ): void {
 		if ( $should_warn ) {
 			$this->setExpectedIncorrectUsage( $function_name );
@@ -1468,7 +1496,7 @@ HTML
 	 *     should_warn: bool,
 	 * }>
 	 */
-	public function data_module_dependencies_require_footer_or_defer(): array {
+	public static function data_module_dependencies_require_footer_or_defer(): array {
 		$base_args = array(
 			'/script.js',
 			array(),
@@ -1631,7 +1659,7 @@ HTML
 	 *
 	 * @return array<string, array{enqueues: string[], expected: string}>
 	 */
-	public function data_provider_to_test_fetchpriority_bumping(): array {
+	public static function data_provider_to_test_fetchpriority_bumping(): array {
 		return array(
 			'enqueue_bajo' => array(
 				'enqueues' => array( 'bajo' ),
@@ -1656,14 +1684,14 @@ HTML
 	/**
 	 * Tests a higher fetchpriority on a dependent script module causes the fetchpriority of a dependency script module to be bumped.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers WP_Scripts::get_dependents
-	 * @covers WP_Scripts::get_highest_fetchpriority_with_dependents
-	 * @covers WP_Scripts::do_item
 	 *
-	 * @dataProvider data_provider_to_test_fetchpriority_bumping
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_to_test_fetchpriority_bumping' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_dependents' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_highest_fetchpriority_with_dependents' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
 	public function test_fetchpriority_bumping( array $enqueues, string $expected ) {
 		wp_register_script( 'bajo', '/bajo.js', array(), null, array( 'fetchpriority' => 'low' ) );
 		wp_register_script( 'auto', '/auto.js', array( 'bajo' ), null, array( 'fetchpriority' => 'auto' ) );
@@ -1680,13 +1708,13 @@ HTML
 	/**
 	 * Tests bumping fetchpriority with complex dependency graph.
 	 *
-	 * @ticket 61734
 	 * @link https://github.com/WordPress/wordpress-develop/pull/9770#issuecomment-3280065818
 	 *
-	 * @covers WP_Scripts::get_dependents
-	 * @covers WP_Scripts::get_highest_fetchpriority_with_dependents
-	 * @covers WP_Scripts::do_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_dependents' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_highest_fetchpriority_with_dependents' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
 	public function test_fetchpriority_bumping_a_to_z() {
 		wp_register_script( 'a', '/a.js', array( 'b' ), null, array( 'fetchpriority' => 'low' ) );
 		wp_register_script( 'b', '/b.js', array( 'c' ), null, array( 'fetchpriority' => 'auto' ) );
@@ -1719,10 +1747,10 @@ HTML;
 	/**
 	 * Tests that `WP_Scripts::get_highest_fetchpriority_with_dependents()` correctly reuses cached results.
 	 *
-	 * @ticket 64194
 	 *
-	 * @covers WP_Scripts::get_highest_fetchpriority_with_dependents
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64194' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_highest_fetchpriority_with_dependents' )]
 	public function test_highest_fetchpriority_with_dependents_uses_cached_result() {
 		$wp_scripts = new WP_Scripts();
 		$wp_scripts->add( 'd', 'https://example.com/d.js' );
@@ -1754,11 +1782,11 @@ HTML;
 	/**
 	 * Tests expected priority is used when a dependent is registered but not enqueued.
 	 *
-	 * @ticket 64429
 	 *
-	 * @covers WP_Scripts::print_scripts
-	 * @covers WP_Scripts::get_highest_fetchpriority_with_dependents
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64429' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'print_scripts' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_highest_fetchpriority_with_dependents' )]
 	public function test_priority_of_dependency_for_non_enqueued_dependent() {
 		$wp_scripts = wp_scripts();
 		wp_default_scripts( $wp_scripts );
@@ -1778,14 +1806,14 @@ HTML;
 	/**
 	 * Tests that printing a script without enqueueing has the same output as when it is enqueued.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::do_items
-	 * @covers ::wp_default_scripts
 	 *
-	 * @dataProvider data_provider_enqueue_or_not_to_enqueue
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_enqueue_or_not_to_enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_items' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_scripts' )]
 	public function test_printing_default_script_comment_reply_enqueued_or_not_enqueued( bool $enqueue ) {
 		$wp_scripts = wp_scripts();
 		wp_default_scripts( $wp_scripts );
@@ -1831,13 +1859,13 @@ HTML;
 	/**
 	 * Tests that scripts registered as defer become blocking when their dependents chain are all blocking.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_eligible_loading_strategy
-	 * @covers WP_Scripts::filter_eligible_strategies
-	 * @covers ::wp_enqueue_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_eligible_loading_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'filter_eligible_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_loading_strategy_with_invalid_defer_registration() {
 		// Main script is defer and all dependent are not defer. Then main script will have blocking(or no) strategy.
 		wp_enqueue_script( 'main-script-d4', '/main-script-d4.js', array(), null, array( 'strategy' => 'defer' ) );
@@ -1853,13 +1881,13 @@ HTML;
 	/**
 	 * Tests that scripts registered as default/blocking remain as such when they have no dependencies.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers WP_Scripts::get_eligible_loading_strategy
-	 * @covers WP_Scripts::filter_eligible_strategies
-	 * @covers ::wp_enqueue_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_eligible_loading_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'filter_eligible_strategies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_loading_strategy_with_valid_blocking_registration() {
 		wp_enqueue_script( 'main-script-b1', '/main-script-b1.js', array(), null );
 		$output   = get_echo( 'wp_print_scripts' );
@@ -1876,10 +1904,10 @@ HTML;
 	/**
 	 * Tests that `WP_Scripts::filter_eligible_strategies()` correctly reuses cached results.
 	 *
-	 * @ticket 64194
 	 *
-	 * @covers WP_Scripts::filter_eligible_strategies
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64194' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'filter_eligible_strategies' )]
 	public function test_filter_eligible_strategies_uses_cached_result() {
 		$wp_scripts = new WP_Scripts();
 		$wp_scripts->add( 'd', 'https://example.com/d.js' );
@@ -1911,12 +1939,12 @@ HTML;
 	/**
 	 * Tests that scripts registered for the head do indeed end up there.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers ::wp_enqueue_script
-	 * @covers ::wp_register_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
 	public function test_scripts_targeting_head() {
 		wp_register_script( 'header-old', '/header-old.js', array(), null, false );
 		wp_register_script( 'header-new', '/header-new.js', array( 'header-old' ), null, array( 'in_footer' => false ) );
@@ -1938,12 +1966,12 @@ HTML;
 	/**
 	 * Test that scripts registered for the footer do indeed end up there.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers ::wp_enqueue_script
-	 * @covers ::wp_register_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
 	public function test_scripts_targeting_footer() {
 		wp_register_script( 'footer-old', '/footer-old.js', array(), null, true );
 		wp_register_script( 'footer-new', '/footer-new.js', array( 'footer-old' ), null, array( 'in_footer' => true ) );
@@ -1967,7 +1995,7 @@ HTML;
 	 *
 	 * @return array[]
 	 */
-	public function get_data_for_test_setting_in_footer_and_strategy() {
+	public static function get_data_for_test_setting_in_footer_and_strategy() {
 		return array(
 			// Passing in_footer and strategy via args array.
 			'async_footer_in_args_array'    => array(
@@ -2042,23 +2070,23 @@ HTML;
 	/**
 	 * Tests that scripts print in the correct group (head/footer) when using in_footer and assigning a strategy.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers ::wp_register_script
-	 * @covers ::wp_enqueue_script
-	 * @covers ::wp_script_add_data
 	 *
-	 * @dataProvider get_data_for_test_setting_in_footer_and_strategy
 	 *
 	 * @param callable     $set_up            Set up.
-	 * @param int|false    $expected_group    Expected group.
-	 * @param string|false $expected_strategy Expected strategy.
+	 * @param int|false    $group    Expected group.
+	 * @param string|false $strategy Expected strategy.
 	 */
-	public function test_setting_in_footer_and_strategy( $set_up, $expected_group, $expected_strategy ) {
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'get_data_for_test_setting_in_footer_and_strategy' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_script_add_data' )]
+	public function test_setting_in_footer_and_strategy( $set_up, $group, $strategy ) {
 		$handle = 'foo';
 		$set_up( $handle );
-		$this->assertSame( $expected_group, wp_scripts()->get_data( $handle, 'group' ) );
-		$this->assertSame( $expected_strategy, wp_scripts()->get_data( $handle, 'strategy' ) );
+		$this->assertSame( $group, wp_scripts()->get_data( $handle, 'group' ) );
+		$this->assertSame( $strategy, wp_scripts()->get_data( $handle, 'strategy' ) );
 	}
 
 	/**
@@ -2066,14 +2094,14 @@ HTML;
 	 *
 	 * For an invalid strategy defined during script registration, default to a blocking strategy.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::add_data
-	 * @covers ::wp_register_script
-	 * @covers ::wp_enqueue_script
 	 *
 	 * @expectedIncorrectUsage WP_Scripts::add_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'add_data' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_script_strategy_doing_it_wrong_via_register() {
 		wp_register_script( 'invalid-strategy', '/defaults.js', array(), null, array( 'strategy' => 'random-strategy' ) );
 		wp_enqueue_script( 'invalid-strategy' );
@@ -2089,15 +2117,15 @@ HTML;
 	 *
 	 * For an invalid strategy defined during script registration, default to a blocking strategy.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::add_data
-	 * @covers ::wp_script_add_data
-	 * @covers ::wp_register_script
-	 * @covers ::wp_enqueue_script
 	 *
 	 * @expectedIncorrectUsage WP_Scripts::add_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'add_data' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_script_add_data' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_script_strategy_doing_it_wrong_via_add_data() {
 		wp_register_script( 'invalid-strategy', '/defaults.js', array(), null );
 		wp_script_add_data( 'invalid-strategy', 'strategy', 'random-strategy' );
@@ -2114,13 +2142,13 @@ HTML;
 	 *
 	 * For an invalid strategy defined during script registration, default to a blocking strategy.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::add_data
-	 * @covers ::wp_enqueue_script
 	 *
 	 * @expectedIncorrectUsage WP_Scripts::add_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'add_data' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
 	public function test_script_strategy_doing_it_wrong_via_enqueue() {
 		wp_enqueue_script( 'invalid-strategy', '/defaults.js', array(), null, array( 'strategy' => 'random-strategy' ) );
 
@@ -2133,12 +2161,12 @@ HTML;
 	/**
 	 * Tests that scripts registered with a deferred strategy are not included in the script concat loading query.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers ::wp_enqueue_script
-	 * @covers ::wp_register_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
 	public function test_concatenate_with_defer_strategy() {
 		global $wp_scripts, $concatenate_scripts, $wp_version;
 
@@ -2164,12 +2192,12 @@ HTML;
 	/**
 	 * Test script concatenation with `async` main script.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers ::wp_enqueue_script
-	 * @covers ::wp_register_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
 	public function test_concatenate_with_async_strategy() {
 		global $wp_scripts, $concatenate_scripts, $wp_version;
 
@@ -2196,12 +2224,12 @@ HTML;
 	 * Tests that script concatenation remains correct when a main script is registered as deferred after other blocking
 	 * scripts are registered.
 	 *
-	 * @ticket 12009
 	 *
-	 * @covers WP_Scripts::do_item
-	 * @covers ::wp_enqueue_script
-	 * @covers ::wp_register_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12009' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script' )]
 	public function test_concatenate_with_blocking_script_before_and_after_script_with_defer_strategy() {
 		global $wp_scripts, $concatenate_scripts, $wp_version;
 
@@ -2230,10 +2258,10 @@ HTML;
 	/**
 	 * Test the different protocol references in wp_enqueue_script
 	 *
-	 * @ticket 16560
 	 *
 	 * @global WP_Scripts $wp_scripts
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16560' )]
 	public function test_protocols() {
 		// Init.
 		global $wp_scripts, $wp_version;
@@ -2299,8 +2327,8 @@ HTML;
 	/**
 	 * Testing `wp_script_add_data` with the data key.
 	 *
-	 * @ticket 16024
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16024' )]
 	public function test_wp_script_add_data_with_data_key() {
 		// Enqueue and add data.
 		wp_enqueue_script( 'test-only-data', 'example.com', array(), null );
@@ -2322,8 +2350,8 @@ HTML;
 	 *
 	 * @since 6.9.0 Conditional comments should now return an empty string.
 	 *
-	 * @ticket 16024
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16024' )]
 	public function test_wp_script_add_data_with_conditional_key() {
 		// Enqueue and add conditional comments.
 		wp_enqueue_script( 'test-only-conditional', 'example.com', array(), null );
@@ -2335,8 +2363,8 @@ HTML;
 	/**
 	 * Testing `wp_script_add_data` with an invalid key.
 	 *
-	 * @ticket 16024
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16024' )]
 	public function test_wp_script_add_data_with_invalid_key() {
 		// Enqueue and add an invalid key.
 		wp_enqueue_script( 'test-invalid', 'example.com', array(), null );
@@ -2353,16 +2381,14 @@ HTML;
 	/**
 	 * Testing 'wp_register_script' return boolean success/failure value.
 	 *
-	 * @ticket 31126
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31126' )]
 	public function test_wp_register_script() {
 		$this->assertTrue( wp_register_script( 'duplicate-handler', 'http://example.com' ) );
 		$this->assertFalse( wp_register_script( 'duplicate-handler', 'http://example.com' ) );
 	}
 
-	/**
-	 * @ticket 35229
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35229' )]
 	public function test_wp_register_script_with_handle_without_source() {
 		$expected  = "<script src='http://example.com?ver=1' id='handle-one-js'></script>\n";
 		$expected .= "<script src='http://example.com?ver=2' id='handle-two-js'></script>\n";
@@ -2376,9 +2402,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 35643
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35643' )]
 	public function test_wp_enqueue_script_footer_alias() {
 		wp_register_script( 'foo', false, array( 'bar', 'baz' ), '1.0', true );
 		wp_register_script( 'bar', home_url( 'bar.js' ), array(), '1.0', true );
@@ -2397,12 +2421,12 @@ HTML;
 	/**
 	 * Test mismatch of groups in dependencies outputs all scripts in right order.
 	 *
-	 * @ticket 35873
 	 *
-	 * @covers WP_Dependencies::add
-	 * @covers WP_Dependencies::enqueue
-	 * @covers WP_Dependencies::do_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35873' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Dependencies', 'add' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Dependencies', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Dependencies', 'do_items' )]
 	public function test_group_mismatch_in_deps() {
 		$scripts = new WP_Scripts();
 		$scripts->add( 'one', 'one', array(), 'v1', 1 );
@@ -2444,9 +2468,7 @@ HTML;
 		$this->assertContains( 'four', $scripts->done );
 	}
 
-	/**
-	 * @ticket 35873
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35873' )]
 	public function test_wp_register_script_with_dependencies_in_head_and_footer() {
 		wp_register_script( 'parent', '/parent.js', array( 'child-head' ), null, true );            // In footer.
 		wp_register_script( 'child-head', '/child-head.js', array( 'child-footer' ), null, false ); // In head.
@@ -2465,9 +2487,7 @@ HTML;
 		$this->assertEqualHTML( $expected_footer, $footer, '<body>', 'Expected same footer markup.' );
 	}
 
-	/**
-	 * @ticket 35956
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35956' )]
 	public function test_wp_register_script_with_dependencies_in_head_and_footer_in_reversed_order() {
 		wp_register_script( 'child-head', '/child-head.js', array(), null, false );                      // In head.
 		wp_register_script( 'child-footer', '/child-footer.js', array(), null, true );                   // In footer.
@@ -2486,9 +2506,7 @@ HTML;
 		$this->assertEqualHTML( $expected_footer, $footer, '<body>', 'Expected same footer markup.' );
 	}
 
-	/**
-	 * @ticket 35956
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35956' )]
 	public function test_wp_register_script_with_dependencies_in_head_and_footer_in_reversed_order_and_two_parent_scripts() {
 		wp_register_script( 'grandchild-head', '/grandchild-head.js', array(), null, false );             // In head.
 		wp_register_script( 'child-head', '/child-head.js', array(), null, false );                       // In head.
@@ -2517,26 +2535,20 @@ HTML;
 		$this->assertEqualHTML( $expected_footer, $footer, '<body>', 'Expected same footer markup.' );
 	}
 
-	/**
-	 * @ticket 14853
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
 	public function test_wp_add_inline_script_returns_bool() {
 		$this->assertFalse( wp_add_inline_script( 'test-example', 'console.log("before");', 'before' ) );
 		wp_enqueue_script( 'test-example', 'example.com', array(), null );
 		$this->assertTrue( wp_add_inline_script( 'test-example', 'console.log("before");', 'before' ) );
 	}
 
-	/**
-	 * @ticket 14853
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
 	public function test_wp_add_inline_script_unknown_handle() {
 		$this->assertFalse( wp_add_inline_script( 'test-invalid', 'console.log("before");', 'before' ) );
 		$this->assertSame( '', get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 14853
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
 	public function test_wp_add_inline_script_before() {
 		wp_enqueue_script( 'test-example', 'example.com', array(), null );
 		wp_add_inline_script( 'test-example', 'console.log("before");', 'before' );
@@ -2553,9 +2565,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 14853
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
 	public function test_wp_add_inline_script_after() {
 		wp_enqueue_script( 'test-example', 'example.com', array(), null );
 		wp_add_inline_script( 'test-example', 'console.log("after");' );
@@ -2572,9 +2582,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 14853
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
 	public function test_wp_add_inline_script_before_and_after() {
 		wp_enqueue_script( 'test-example', 'example.com', array(), null );
 		wp_add_inline_script( 'test-example', 'console.log("before");', 'before' );
@@ -2587,9 +2595,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 44551
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44551' )]
 	public function test_wp_add_inline_script_before_for_handle_without_source() {
 		wp_register_script( 'test-example', '' );
 		wp_enqueue_script( 'test-example' );
@@ -2600,9 +2606,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 44551
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44551' )]
 	public function test_wp_add_inline_script_after_for_handle_without_source() {
 		wp_register_script( 'test-example', '' );
 		wp_enqueue_script( 'test-example' );
@@ -2613,9 +2617,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 44551
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44551' )]
 	public function test_wp_add_inline_script_before_and_after_for_handle_without_source() {
 		wp_register_script( 'test-example', '' );
 		wp_enqueue_script( 'test-example' );
@@ -2628,9 +2630,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 14853
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
 	public function test_wp_add_inline_script_multiple() {
 		wp_enqueue_script( 'test-example', 'example.com', array(), null );
 		wp_add_inline_script( 'test-example', 'console.log("before");', 'before' );
@@ -2645,9 +2645,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 14853
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
 	public function test_wp_add_inline_script_localized_data_is_added_first() {
 		wp_enqueue_script( 'test-example', 'example.com', array(), null );
 		wp_localize_script( 'test-example', 'testExample', array( 'foo' => 'bar' ) );
@@ -2662,9 +2660,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 14853
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
 	public function test_wp_add_inline_script_before_with_concat() {
 		global $wp_scripts, $wp_version;
 
@@ -2687,9 +2683,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 14853
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
 	public function test_wp_add_inline_script_before_with_concat2() {
 		global $wp_scripts, $wp_version;
 
@@ -2710,9 +2704,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 14853
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
 	public function test_wp_add_inline_script_after_with_concat() {
 		global $wp_scripts, $wp_version;
 
@@ -2740,9 +2732,9 @@ HTML;
 	/**
 	 * @expectedDeprecated WP_Dependencies->add_data()
 	 *
-	 * @ticket 14853
-	 * @ticket 63821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14853' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63821' )]
 	public function test_wp_add_inline_script_after_and_before_with_concat_and_conditional() {
 		global $wp_scripts;
 
@@ -2764,9 +2756,7 @@ HTML;
 		$this->assertTrue( $wp_scripts->do_concat );
 	}
 
-	/**
-	 * @ticket 36392
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36392' )]
 	public function test_wp_add_inline_script_after_with_concat_and_core_dependency() {
 		global $wp_scripts, $wp_version;
 
@@ -2791,9 +2781,9 @@ HTML;
 	/**
 	 * @expectedDeprecated WP_Dependencies->add_data()
 	 *
-	 * @ticket 36392
-	 * @ticket 63821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36392' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63821' )]
 	public function test_wp_add_inline_script_after_with_concat_and_conditional_and_core_dependency() {
 		global $wp_scripts;
 		wp_default_scripts( $wp_scripts );
@@ -2812,9 +2802,7 @@ HTML;
 		$this->assertEqualHTML( $expected, $print_scripts );
 	}
 
-	/**
-	 * @ticket 36392
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36392' )]
 	public function test_wp_add_inline_script_before_with_concat_and_core_dependency() {
 		global $wp_scripts, $wp_version;
 
@@ -2837,9 +2825,7 @@ HTML;
 		$this->assertEqualHTML( $expected, $print_scripts );
 	}
 
-	/**
-	 * @ticket 36392
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36392' )]
 	public function test_wp_add_inline_script_before_after_concat_with_core_dependency() {
 		global $wp_scripts, $wp_version;
 
@@ -2867,12 +2853,14 @@ HTML;
 		wp_enqueue_script( 'test-example2', 'http://example2.com', array( 'wp-a11y' ), null );
 		wp_add_inline_script( 'test-example2', 'console.log("after");', 'after' );
 
-		// Effectively ignore the output until retrieving it later via `getActualOutput()`.
-		$this->expectOutputRegex( '`.`' );
-
-		wp_print_scripts();
-		_print_scripts();
-		$print_scripts = $this->getActualOutput();
+		ob_start();
+		try {
+			wp_print_scripts();
+			_print_scripts();
+			$print_scripts = ob_get_contents();
+		} finally {
+			ob_end_clean();
+		}
 
 		/*
 		 * We've replaced wp-a11y.js with @wordpress/a11y package (see #45066),
@@ -2889,9 +2877,7 @@ HTML;
 		$this->assertEqualHTML( $expected, $print_scripts );
 	}
 
-	/**
-	 * @ticket 36392
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36392' )]
 	public function test_wp_add_inline_script_customize_dependency() {
 		global $wp_scripts;
 
@@ -2905,12 +2891,14 @@ HTML;
 		wp_enqueue_script( $handle, '/customize-dependency.js', array( 'customize-controls' ), null );
 		wp_add_inline_script( $handle, 'tryCustomizeDependency()' );
 
-		// Effectively ignore the output until retrieving it later via `getActualOutput()`.
-		$this->expectOutputRegex( '`.`' );
-
-		wp_print_scripts();
-		_print_scripts();
-		$print_scripts = $this->getActualOutput();
+		ob_start();
+		try {
+			wp_print_scripts();
+			_print_scripts();
+			$print_scripts = ob_get_contents();
+		} finally {
+			ob_end_clean();
+		}
 
 		$expected = "<script src='/customize-dependency.js' id='customize-dependency-js'></script>";
 		$this->assertEqualHTMLScriptTagById( $expected, $print_scripts );
@@ -2922,9 +2910,7 @@ HTML;
 		$this->assertEqualHTMLScriptTagById( $expected, $print_scripts );
 	}
 
-	/**
-	 * @ticket 36392
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36392' )]
 	public function test_wp_add_inline_script_after_for_core_scripts_with_concat_is_limited_and_falls_back_to_no_concat() {
 		global $wp_scripts, $wp_version;
 
@@ -2946,9 +2932,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 36392
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36392' )]
 	public function test_wp_add_inline_script_before_third_core_script_prints_two_concat_scripts() {
 		global $wp_scripts, $wp_version;
 
@@ -2974,7 +2958,7 @@ HTML;
 	 *
 	 * @return array[]
 	 */
-	public function data_provider_to_test_get_inline_script() {
+	public static function data_provider_to_test_get_inline_script() {
 		return array(
 			'before-blocking' => array(
 				'position'       => 'before',
@@ -3020,13 +3004,9 @@ HTML;
 	/**
 	 * Test getting inline scripts.
 	 *
-	 * @covers WP_Scripts::get_inline_script_data
-	 * @covers WP_Scripts::get_inline_script_tag
-	 * @covers WP_Scripts::print_inline_script
 	 *
 	 * @expectedDeprecated WP_Scripts::print_inline_script
 	 *
-	 * @dataProvider data_provider_to_test_get_inline_script
 	 *
 	 * @param string   $position       Position.
 	 * @param string[] $inline_scripts Inline scripts.
@@ -3034,6 +3014,10 @@ HTML;
 	 * @param string   $expected_data  Expected data.
 	 * @param string   $expected_tag   Expected tag.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_to_test_get_inline_script' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_inline_script_data' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'get_inline_script_tag' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'print_inline_script' )]
 	public function test_get_inline_script( $position, $inline_scripts, $delayed, $expected_data, $expected_tag ) {
 		global $wp_scripts;
 
@@ -3074,9 +3058,7 @@ HTML;
 		$this->assertEquals( $expected_data, $output );
 	}
 
-	/**
-	 * @ticket 45103
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45103' )]
 	public function test_wp_set_script_translations() {
 		wp_register_script( 'wp-i18n', '/wp-includes/js/dist/wp-i18n.js', array(), null );
 		wp_enqueue_script( 'test-example', '/wp-includes/js/script.js', array(), null );
@@ -3101,9 +3083,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 63944
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63944' )]
 	public function test_wp_set_script_translations_uses_registered_domainpath_for_plugin() {
 		global $wp_textdomain_registry;
 
@@ -3134,11 +3114,11 @@ HTML;
 	}
 
 	/**
-	 * @ticket 63944
 	 *
 	 * Ensure human-readable script translation filenames are found when a
 	 * textdomain has a custom DomainPath registered and no explicit $path is passed.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63944' )]
 	public function test_wp_set_script_translations_prefers_human_readable_filename_in_registered_domainpath() {
 		global $wp_textdomain_registry;
 
@@ -3168,9 +3148,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 45103
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45103' )]
 	public function test_wp_set_script_translations_for_plugin() {
 		wp_register_script( 'wp-i18n', '/wp-includes/js/dist/wp-i18n.js', array(), null );
 		wp_enqueue_script( 'plugin-example', '/wp-content/plugins/my-plugin/js/script.js', array(), null );
@@ -3195,9 +3173,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 45103
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45103' )]
 	public function test_wp_set_script_translations_for_theme() {
 		wp_register_script( 'wp-i18n', '/wp-includes/js/dist/wp-i18n.js', array(), null );
 		wp_enqueue_script( 'theme-example', '/wp-content/themes/my-theme/js/script.js', array(), null );
@@ -3222,9 +3198,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 45103
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45103' )]
 	public function test_wp_set_script_translations_with_handle_file() {
 		wp_register_script( 'wp-i18n', '/wp-includes/js/dist/wp-i18n.js', array(), null );
 		wp_enqueue_script( 'script-handle', '/wp-admin/js/script.js', array(), null );
@@ -3249,9 +3223,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 45103
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45103' )]
 	public function test_wp_set_script_translations_i18n_dependency() {
 		global $wp_scripts;
 
@@ -3264,10 +3236,8 @@ HTML;
 		$this->assertContains( 'wp-i18n', $script->deps );
 	}
 
-	/**
-	 * @ticket 45103
-	 * @ticket 55250
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45103' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55250' )]
 	public function test_wp_set_script_translations_when_translation_file_does_not_exist() {
 		wp_register_script( 'wp-i18n', '/wp-includes/js/dist/wp-i18n.js', array(), null );
 		wp_enqueue_script( 'test-example', '/wp-admin/js/script.js', array(), null );
@@ -3279,9 +3249,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 45103
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45103' )]
 	public function test_wp_set_script_translations_after_register() {
 		wp_register_script( 'wp-i18n', '/wp-includes/js/dist/wp-i18n.js', array(), null );
 		wp_register_script( 'test-example', '/wp-includes/js/script.js', array(), null );
@@ -3308,9 +3276,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_scripts' ) );
 	}
 
-	/**
-	 * @ticket 45103
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45103' )]
 	public function test_wp_set_script_translations_dependency() {
 		wp_register_script( 'wp-i18n', '/wp-includes/js/dist/wp-i18n.js', array(), null );
 		wp_register_script( 'test-dependency', '/wp-includes/js/script.js', array(), null );
@@ -3341,10 +3307,10 @@ HTML;
 	/**
 	 * Testing `wp_enqueue_code_editor` with file path.
 	 *
-	 * @ticket 41871
 	 *
-	 * @covers ::wp_enqueue_code_editor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41871' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_code_editor' )]
 	public function test_wp_enqueue_code_editor_when_php_file_will_be_passed() {
 		$real_file              = WP_PLUGIN_DIR . '/hello.php';
 		$wp_enqueue_code_editor = wp_enqueue_code_editor( array( 'file' => $real_file ) );
@@ -3429,10 +3395,10 @@ HTML;
 	/**
 	 * Testing `wp_enqueue_code_editor` with `compact`.
 	 *
-	 * @ticket 41871
 	 *
-	 * @covers ::wp_enqueue_code_editor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41871' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_code_editor' )]
 	public function test_wp_enqueue_code_editor_when_generated_array_by_compact_will_be_passed() {
 		$file                   = '';
 		$wp_enqueue_code_editor = wp_enqueue_code_editor( compact( 'file' ) );
@@ -3513,10 +3479,10 @@ HTML;
 	/**
 	 * Testing `wp_enqueue_code_editor` with `array_merge`.
 	 *
-	 * @ticket 41871
 	 *
-	 * @covers ::wp_enqueue_code_editor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41871' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_code_editor' )]
 	public function test_wp_enqueue_code_editor_when_generated_array_by_array_merge_will_be_passed() {
 		$wp_enqueue_code_editor = wp_enqueue_code_editor(
 			array_merge(
@@ -3611,10 +3577,10 @@ HTML;
 	/**
 	 * Testing `wp_enqueue_code_editor` with `array`.
 	 *
-	 * @ticket 41871
 	 *
-	 * @covers ::wp_enqueue_code_editor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41871' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_code_editor' )]
 	public function test_wp_enqueue_code_editor_when_simple_array_will_be_passed() {
 		$wp_enqueue_code_editor = wp_enqueue_code_editor(
 			array(
@@ -3704,15 +3670,15 @@ HTML;
 	}
 
 	/**
-	 * @ticket 52534
 	 *
-	 * @covers ::wp_localize_script
 	 *
-	 * @dataProvider data_wp_localize_script_data_formats
 	 *
 	 * @param mixed  $l10n_data Localization data passed to wp_localize_script().
 	 * @param string $expected  Expected transformation of localization data.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52534' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_localize_script_data_formats' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_localize_script' )]
 	public function test_wp_localize_script_data_formats( $l10n_data, $expected ) {
 		if ( ! is_array( $l10n_data ) ) {
 			$this->setExpectedIncorrectUsage( 'WP_Scripts::localize' );
@@ -3737,7 +3703,7 @@ HTML;
 	 *     @type string $expected  Expected transformation of localization data.
 	 * }
 	 */
-	public function data_wp_localize_script_data_formats() {
+	public static function data_wp_localize_script_data_formats() {
 		return array(
 			// Officially supported formats.
 			array( array( 'array value, no key' ), '["array value, no key"]' ),
@@ -3758,11 +3724,8 @@ HTML;
 		);
 	}
 
-	/**
-	 * @ticket 55628
-	 *
-	 * @covers ::wp_set_script_translations
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55628' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_set_script_translations' )]
 	public function test_wp_external_wp_i18n_print_order() {
 		global $wp_scripts, $wp_version;
 
@@ -3795,8 +3758,8 @@ HTML;
 	/**
 	 * Ensure tinymce scripts aren't loading async.
 	 *
-	 * @ticket 58648
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58648' )]
 	public function test_printing_tinymce_scripts() {
 		global $wp_scripts;
 
@@ -3812,10 +3775,10 @@ HTML;
 	 * Make sure scripts with a loading strategy that are printed
 	 * without being enqueued are handled properly.
 	 *
-	 * @ticket 58648
 	 *
-	 * @dataProvider data_provider_delayed_strategies
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58648' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_delayed_strategies' )]
 	public function test_printing_non_enqueued_scripts( $strategy ) {
 		wp_register_script( 'test-script', 'test-script.js', array(), false, array( 'strategy' => $strategy ) );
 
@@ -3828,9 +3791,7 @@ HTML;
 	 * Test that a script is moved to the footer if it is made non-deferrable, was in the header and
 	 * all scripts that depend on it are in the footer.
 	 *
-	 * @ticket 58599
 	 *
-	 * @dataProvider data_provider_script_move_to_footer
 	 *
 	 * @param callable $set_up             Test setup.
 	 * @param string   $expected_header    Expected output for header.
@@ -3838,6 +3799,8 @@ HTML;
 	 * @param string[] $expected_in_footer Handles expected to be in the footer.
 	 * @param array    $expected_groups    Expected groups.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58599' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_script_move_to_footer' )]
 	public function test_wp_scripts_move_to_footer( $set_up, $expected_header, $expected_footer, $expected_in_footer, $expected_groups ) {
 		$set_up();
 
@@ -3865,12 +3828,12 @@ HTML;
 	/**
 	 * Test that get_script_polyfill() returns the correct polyfill.
 	 *
-	 * @ticket 60348
 	 *
-	 * @covers ::wp_get_script_polyfill
 	 *
 	 * @global WP_Scripts $wp_scripts WP_Scripts instance.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60348' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_script_polyfill' )]
 	public function test_wp_get_script_polyfill() {
 		global $wp_scripts;
 		$script_name = 'tmp-polyfill-foo';
@@ -3897,7 +3860,7 @@ HTML;
 	 *
 	 * @return array[]
 	 */
-	public function data_provider_script_move_to_footer() {
+	public static function data_provider_script_move_to_footer() {
 		return array(
 			'footer-blocking-dependent-of-defer-head-script' => array(
 				'set_up'             => static function () {
@@ -4138,17 +4101,17 @@ HTML;
 	 * wp_default_packages_vendor() are registered with the correct version
 	 * number from package.json.
 	 *
-	 * @ticket 61855
-	 * @ticket 60048
 	 *
-	 * @covers ::wp_default_scripts
-	 * @covers ::wp_default_packages_vendor
 	 *
-	 * @dataProvider data_vendor_script_versions_registered_manually
 	 *
 	 * @param string $script Script name as defined in package.json.
 	 * @param string $handle Optional. Handle to check for. Defaults to the script name.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61855' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60048' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_vendor_script_versions_registered_manually' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_scripts' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_packages_vendor' )]
 	public function test_vendor_script_versions_registered_manually( $script, $handle = null ) {
 		global $wp_scripts;
 		wp_default_packages_vendor( $wp_scripts );
@@ -4186,7 +4149,7 @@ HTML;
 	 *
 	 * @return array[]
 	 */
-	public function data_vendor_script_versions_registered_manually() {
+	public static function data_vendor_script_versions_registered_manually() {
 		return array(
 			'backbone'                         => array( 'backbone' ),
 			'clipboard'                        => array( 'clipboard' ),
@@ -4225,8 +4188,8 @@ HTML;
 	 *
 	 * This is a test the tests to ensure the data provider includes all the scripts in package.json.
 	 *
-	 * @ticket 61855
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61855' )]
 	public function test_vendor_script_data_provider_includes_all_packages() {
 		$package_json_dependencies  = array_keys( $this->_scripts_from_package_json() );
 		$data_provider_dependencies = $this->data_vendor_script_versions_registered_manually();
@@ -4279,9 +4242,7 @@ HTML;
 		return $data['dependencies'];
 	}
 
-	/**
-	 * @ticket 63887
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63887' )]
 	public function test_source_url_encoding() {
 		$handle = '# test/</script> #';
 
@@ -4311,12 +4272,12 @@ HTML;
 	}
 
 	/**
-	 * @ticket 63887
 	 *
 	 * @global WP_Scripts $wp_scripts
 	 * @global bool $concatenate_scripts
 	 * @global string $wp_version
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63887' )]
 	public function test_source_url_with_concat() {
 		global $wp_scripts, $concatenate_scripts, $wp_version;
 
@@ -4348,9 +4309,9 @@ HTML;
 	/**
 	 * Ensure that `::print_translations()` does not include the sourceURL comment when `$display` is false.
 	 *
-	 * @ticket 63887
-	 * @covers ::print_translations
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63887' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'print_translations' )]
 	public function test_print_translations_no_display_no_sourceurl() {
 		global $wp_scripts;
 
@@ -4365,9 +4326,9 @@ HTML;
 	/**
 	 * Tests that WP_Scripts emits a _doing_it_wrong() notice for missing dependencies.
 	 *
-	 * @ticket 64229
-	 * @covers WP_Dependencies::all_deps
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64229' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Dependencies', 'all_deps' )]
 	public function test_wp_scripts_doing_it_wrong_for_missing_dependencies() {
 		$expected_incorrect_usage = 'WP_Scripts::add';
 		$this->setExpectedIncorrectUsage( $expected_incorrect_usage );
@@ -4394,15 +4355,15 @@ HTML;
 	/**
 	 * Test query string on handle when enqueuing script directly.
 	 *
-	 * @ticket 64372
 	 *
-	 * @covers WP_Scripts::do_item
 	 *
-	 * @dataProvider data_varying_versions_handle_args
 	 *
 	 * @param mixed  $version               Version to pass when enqueuing.
 	 * @param string $expected_query_string Expected query string portion of the script src URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_varying_versions_handle_args' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
 	public function test_varying_versions_added_to_handle_args_enqueued_scripts( $version, $expected_query_string ) {
 		wp_enqueue_script( 'test-script?qs1=q1&qs2=q2', '/test-script.js', array(), $version );
 		$markup = get_echo( 'wp_print_scripts' );
@@ -4414,15 +4375,15 @@ HTML;
 	/**
 	 * Test query string on handle when registering then enqueuing script.
 	 *
-	 * @ticket 64372
 	 *
-	 * @covers WP_Scripts::do_item
 	 *
-	 * @dataProvider data_varying_versions_handle_args
 	 *
 	 * @param mixed  $version               Version to pass when enqueuing.
 	 * @param string $expected_query_string Expected query string portion of the script src URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_varying_versions_handle_args' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_item' )]
 	public function test_varying_versions_added_to_handle_args_registered_then_enqueued_scripts( $version, $expected_query_string ) {
 		wp_register_script( 'test-script', '/test-script.js', array(), $version );
 		wp_enqueue_script( 'test-script?qs1=q1&qs2=q2' );
@@ -4435,15 +4396,15 @@ HTML;
 	/**
 	 * Tests that duplicate query vars and fragments are preserved in scripts.
 	 *
-	 * @ticket 64372
 	 *
-	 * @dataProvider data_duplicate_query_vars_and_fragments_preserved_in_scripts
 	 *
 	 * @param string           $src          The script's source URL.
 	 * @param string|bool|null $ver          The script's version.
 	 * @param string           $expected_url The expected URL.
 	 * @param string           $handle       Optional. The script's registered handle. Default 'test-script'.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_duplicate_query_vars_and_fragments_preserved_in_scripts' )]
 	public function test_duplicate_query_vars_and_fragments_preserved_in_scripts( string $src, $ver, string $expected_url, string $handle = 'test-script' ): void {
 		wp_enqueue_script( $handle, $src, array(), $ver );
 		$output    = get_echo( 'wp_print_scripts' );
@@ -4458,7 +4419,7 @@ HTML;
 	 *
 	 * @return array<string, array{src: string, ver: string|bool|null, expected_url: string, handle?: string}> Data provider.
 	 */
-	public function data_duplicate_query_vars_and_fragments_preserved_in_scripts(): array {
+	public static function data_duplicate_query_vars_and_fragments_preserved_in_scripts(): array {
 		$ver = get_bloginfo( 'version' );
 
 		return array(
@@ -4504,7 +4465,7 @@ HTML;
 	 *
 	 * @return array[] Data provider.
 	 */
-	public function data_varying_versions_handle_args() {
+	public static function data_varying_versions_handle_args() {
 		$default_version = get_bloginfo( 'version' );
 
 		return array(

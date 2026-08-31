@@ -1,16 +1,14 @@
 <?php
 
 /**
- * @group l10n
- * @group i18n
  *
- * @covers ::wp_dropdown_languages
  */
+#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
+#[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_dropdown_languages' )]
 class Tests_L10n_wpDropdownLanguages extends WP_UnitTestCase {
 
-	/**
-	 * @ticket 35294
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35294' )]
 	public function test_wp_dropdown_languages() {
 		$args   = array(
 			'id'           => 'foo',
@@ -30,9 +28,7 @@ class Tests_L10n_wpDropdownLanguages extends WP_UnitTestCase {
 		$this->assertStringContainsString( '<option value="ja_JP" lang="ja">日本語</option>', $actual );
 	}
 
-	/**
-	 * @ticket 38632
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38632' )]
 	public function test_wp_dropdown_languages_site_default() {
 		$args   = array(
 			'id'                       => 'foo',
@@ -54,9 +50,7 @@ class Tests_L10n_wpDropdownLanguages extends WP_UnitTestCase {
 		$this->assertStringContainsString( '<option value="ja_JP" lang="ja">日本語</option>', $actual );
 	}
 
-	/**
-	 * @ticket 44494
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44494' )]
 	public function test_wp_dropdown_languages_exclude_en_us() {
 		$args   = array(
 			'id'                => 'foo',
@@ -72,9 +66,7 @@ class Tests_L10n_wpDropdownLanguages extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( '<option value="" lang="en" data-installed="1">English (United States)</option>', $actual );
 	}
 
-	/**
-	 * @ticket 38632
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38632' )]
 	public function test_wp_dropdown_languages_en_US_selected() {
 		$args   = array(
 			'id'           => 'foo',

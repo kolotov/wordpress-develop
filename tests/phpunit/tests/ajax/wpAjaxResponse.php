@@ -6,10 +6,10 @@
  * @subpackage UnitTests
  * @since 3.5.0
  *
- * @group ajax
  *
- * @covers WP_Ajax_Response::send
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Ajax_Response::class, 'send' )]
 class Tests_Ajax_wpAjaxResponse extends WP_UnitTestCase {
 
 	/**
@@ -66,15 +66,12 @@ class Tests_Ajax_wpAjaxResponse extends WP_UnitTestCase {
 	 * Test that charset in header matches blog_charset
 	 * Note:  headers_list doesn't work properly in CLI mode, fall back on
 	 * xdebug_get_headers if it's available
-	 * Needs a separate process to get around the headers/output from the
-	 * bootstrapper
-	 *
-	 * @ticket 19448
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 * @group xdebug
-	 * @requires function xdebug_get_headers
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19448' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
+	#[\PHPUnit\Framework\Attributes\Group( 'xdebug' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'xdebug_get_headers' )]
 	public function test_response_charset_in_header() {
 
 		// Generate an Ajax response.
@@ -92,8 +89,8 @@ class Tests_Ajax_wpAjaxResponse extends WP_UnitTestCase {
 	/**
 	 * Test that charset in the xml tag matches blog_charset
 	 *
-	 * @ticket 19448
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19448' )]
 	public function test_response_charset_in_xml() {
 
 		// Generate an Ajax response.

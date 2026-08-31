@@ -5,19 +5,19 @@
  * @package WordPress
  * @subpackage Font Library
  *
- * @group fonts
- * @group font-library
  *
- * @covers WP_Font_Utils::sanitize_font_family
  */
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'font-library' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Font_Utils::class, 'sanitize_font_family' )]
 class Tests_Fonts_WpFontUtils_SanitizeFontFamily extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_should_sanitize_font_family
 	 *
 	 * @param string $font_family Font family to test.
 	 * @param string $expected    Expected family.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_sanitize_font_family' )]
 	public function test_should_sanitize_font_family( $font_family, $expected ) {
 		$this->assertSame(
 			$expected,
@@ -32,7 +32,7 @@ class Tests_Fonts_WpFontUtils_SanitizeFontFamily extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_should_sanitize_font_family() {
+	public static function data_should_sanitize_font_family() {
 		return array(
 			'data_families_with_spaces_and_numbers' => array(
 				'font_family' => 'Arial, Rock 3D , Open Sans,serif',

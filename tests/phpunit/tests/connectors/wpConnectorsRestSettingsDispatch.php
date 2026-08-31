@@ -1,10 +1,9 @@
 <?php
 /**
  * Tests for _wp_connectors_rest_settings_dispatch().
- *
- * @group connectors
- * @covers ::_wp_connectors_rest_settings_dispatch
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_connectors_rest_settings_dispatch' )]
+#[\PHPUnit\Framework\Attributes\Group( 'connectors' )]
 class Tests_Connectors_WpConnectorsRestSettingsDispatch extends WP_UnitTestCase {
 
 	const CONNECTOR_ID             = 'wp_test_application_password_connector';
@@ -42,8 +41,8 @@ class Tests_Connectors_WpConnectorsRestSettingsDispatch extends WP_UnitTestCase 
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_masks_application_password_but_not_username(): void {
 		$application_password = 'abcd efgh ijkl mnop 1234';
 		$response             = new WP_REST_Response(

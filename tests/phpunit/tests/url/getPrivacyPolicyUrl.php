@@ -6,11 +6,11 @@
  * @subpackage UnitTests
  * @since 4.9.6
  *
- * @group url
- * @group privacy
  *
- * @covers ::get_privacy_policy_url
  */
+#[\PHPUnit\Framework\Attributes\Group( 'url' )]
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_privacy_policy_url' )]
 class Tests_Url_GetPrivacyPolicyUrl extends WP_UnitTestCase {
 	/**
 	 * The ID of the Privacy Policy page.

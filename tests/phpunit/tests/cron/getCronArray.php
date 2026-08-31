@@ -3,9 +3,9 @@
 /**
  * Test the `_get_cron_array()` function.
  *
- * @group cron
- * @covers ::_get_cron_array
  */
+#[\PHPUnit\Framework\Attributes\Group( 'cron' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_get_cron_array' )]
 class Tests_Cron_getCronArray extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -23,8 +23,8 @@ class Tests_Cron_getCronArray extends WP_UnitTestCase {
 	/**
 	 * Tests the output validation for the `_get_cron_array()` function when the option is unset.
 	 *
-	 * @ticket 53940
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53940' )]
 	public function test_get_cron_array_output_validation_with_no_option() {
 		delete_option( 'cron' );
 
@@ -36,13 +36,13 @@ class Tests_Cron_getCronArray extends WP_UnitTestCase {
 	/**
 	 * Tests the output validation for the `_get_cron_array()` function.
 	 *
-	 * @ticket 53940
 	 *
-	 * @dataProvider data_get_cron_array_output_validation
 	 *
 	 * @param mixed $input    Cron "array".
 	 * @param int   $expected Expected array entry count of the cron option after update.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53940' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_cron_array_output_validation' )]
 	public function test_get_cron_array_output_validation( $input, $expected ) {
 		update_option( 'cron', $input );
 
@@ -56,7 +56,7 @@ class Tests_Cron_getCronArray extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_get_cron_array_output_validation() {
+	public static function data_get_cron_array_output_validation() {
 		return array(
 			'stdClass'    => array(
 				'input'    => new stdClass(),

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group date
- * @group datetime
  *
- * @covers ::current_time
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'current_time' )]
 class Tests_Date_CurrentTime extends WP_UnitTestCase {
 
 	/**
@@ -20,8 +20,8 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34378
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34378' )]
 	public function test_current_time_with_date_format_string() {
 		update_option( 'gmt_offset', 6 );
 
@@ -34,8 +34,8 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34378
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34378' )]
 	public function test_current_time_with_mysql_format() {
 		update_option( 'gmt_offset', 6 );
 
@@ -48,8 +48,8 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34378
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34378' )]
 	public function test_current_time_with_timestamp() {
 		update_option( 'gmt_offset', 6 );
 
@@ -63,8 +63,8 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37440
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37440' )]
 	public function test_should_work_with_changed_timezone() {
 		$format          = 'Y-m-d H:i:s';
 		$timezone_string = 'America/Regina';
@@ -90,13 +90,13 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40653
-	 * @ticket 57998
 	 *
-	 * @dataProvider data_timezones
 	 *
 	 * @param string $timezone The timezone to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40653' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '57998' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_timezones' )]
 	public function test_should_return_wp_timestamp( $timezone ) {
 		update_option( 'timezone_string', $timezone );
 
@@ -120,13 +120,13 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40653
-	 * @ticket 57998
 	 *
-	 * @dataProvider data_timezones
 	 *
 	 * @param string $timezone The timezone to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40653' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '57998' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_timezones' )]
 	public function test_should_return_correct_local_time( $timezone ) {
 		update_option( 'timezone_string', $timezone );
 
@@ -145,7 +145,7 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_timezones() {
+	public static function data_timezones() {
 		return array(
 			array( 'Europe/Helsinki' ),
 			array( 'Indian/Antananarivo' ),
@@ -156,8 +156,8 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	/**
 	 * Ensures that deprecated timezone strings are handled correctly.
 	 *
-	 * @ticket 56468
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56468' )]
 	public function test_should_work_with_deprecated_timezone() {
 		$format          = 'Y-m-d H:i';
 		$timezone_string = 'America/Buenos_Aires'; // This timezone was deprecated pre-PHP 5.6.
@@ -185,8 +185,8 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	/**
 	 * Ensures an empty offset does not cause a type error.
 	 *
-	 * @ticket 57998
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57998' )]
 	public function test_empty_offset_does_not_cause_a_type_error() {
 		// Ensure `wp_timezone_override_offset()` doesn't override offset.
 		update_option( 'timezone_string', '' );
@@ -201,13 +201,13 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	/**
 	 * Ensures the offset applied in current_time() is correct.
 	 *
-	 * @ticket 57998
 	 *
-	 * @dataProvider data_partial_hour_timezones_with_timestamp
 	 *
 	 * @param float $partial_hour Partial hour GMT offset to test.
 	 */
-	public function test_partial_hour_timezones_with_timestamp( $partial_hour ) {
+	#[\PHPUnit\Framework\Attributes\Ticket( '57998' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_partial_hour_timezones_with_timestamp' )]
+	public function test_partial_hour_timezones_with_timestamp( $partial_hour, $timezone ) {
 		// Ensure `wp_timezone_override_offset()` doesn't override offset.
 		update_option( 'timezone_string', '' );
 		update_option( 'gmt_offset', $partial_hour );
@@ -223,13 +223,13 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	 *
 	 * Ensures the offsets match the stated timezones in the data provider.
 	 *
-	 * @ticket 57998
 	 *
-	 * @dataProvider data_partial_hour_timezones_with_timestamp
 	 *
 	 * @param float $partial_hour     Partial hour GMT offset to test.
 	 * @param string $timezone_string Timezone string to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57998' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_partial_hour_timezones_with_timestamp' )]
 	public function test_partial_hour_timezones_match_datetime_offset( $partial_hour, $timezone_string ) {
 		$timezone   = new DateTimeZone( $timezone_string );
 		$datetime   = new DateTime( 'now', $timezone );
@@ -255,7 +255,7 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_partial_hour_timezones_with_timestamp() {
+	public static function data_partial_hour_timezones_with_timestamp() {
 		return array(
 			'+12:45' => array( 12.75, 'Pacific/Chatham' ), // New Zealand, Chatham Islands.
 			'+9:30'  => array( 9.5, 'Australia/Darwin' ), // Australian Northern Territory.

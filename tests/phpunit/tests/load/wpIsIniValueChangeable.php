@@ -3,22 +3,22 @@
 /**
  * Tests for wp_is_ini_value_changeable().
  *
- * @group load
  *
- * @covers ::wp_is_ini_value_changeable
  */
+#[\PHPUnit\Framework\Attributes\Group( 'load' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_is_ini_value_changeable' )]
 class Tests_Load_wpIsIniValueChangeable extends WP_UnitTestCase {
 
 	/**
 	 * Tests the determining of the changeability of a PHP ini value.
 	 *
-	 * @ticket 32075
 	 *
-	 * @dataProvider data_wp_is_ini_value_changeable
 	 *
 	 * @param string $setting  The setting passed to wp_is_ini_value_changeable().
 	 * @param bool   $expected The expected output of wp_convert_hr_to_bytes().
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32075' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_is_ini_value_changeable' )]
 	public function test_wp_is_ini_value_changeable( $setting, $expected ) {
 		$this->assertSame( $expected, wp_is_ini_value_changeable( $setting ) );
 	}
@@ -33,7 +33,7 @@ class Tests_Load_wpIsIniValueChangeable extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_wp_is_ini_value_changeable() {
+	public static function data_wp_is_ini_value_changeable() {
 		$array = array(
 			array( 'memory_limit', true ), // PHP_INI_ALL.
 			array( 'log_errors', true ), // PHP_INI_ALL.

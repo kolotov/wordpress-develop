@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group http
- * @covers ::wp_get_http_headers
  */
+#[\PHPUnit\Framework\Attributes\Group( 'http' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_http_headers' )]
 class Tests_HTTP_wpGetHttpHeaders extends WP_UnitTestCase {
 
 	/**
@@ -27,8 +27,8 @@ class Tests_HTTP_wpGetHttpHeaders extends WP_UnitTestCase {
 	/**
 	 * Test with an invalid URL
 	 *
-	 * @group external-http
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test_wp_get_http_headers_invalid_url() {
 		$result = wp_get_http_headers( 'not_an_url' );
 		$this->assertFalse( $result );
@@ -37,8 +37,8 @@ class Tests_HTTP_wpGetHttpHeaders extends WP_UnitTestCase {
 	/**
 	 * Test to see if the deprecated argument is working
 	 *
-	 * @group external-http
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test_wp_get_http_headers_deprecated_argument() {
 		$this->setExpectedDeprecated( 'wp_get_http_headers' );
 

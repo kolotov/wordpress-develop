@@ -1,10 +1,12 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::convert_invalid_entities
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'convert_invalid_entities' )]
 class Tests_Formatting_ConvertInvalidEntities extends WP_UnitTestCase {
 	public function test_replaces_windows1252_entities_with_unicode_ones() {
 		$input  = '&#130;&#131;&#132;&#133;&#134;&#135;&#136;&#137;&#138;&#139;&#140;&#145;&#146;&#147;&#148;&#149;&#150;&#151;&#152;&#153;&#154;&#155;&#156;&#159;';
@@ -13,17 +15,15 @@ class Tests_Formatting_ConvertInvalidEntities extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20503' )]
 	public function test_replaces_latin_letter_z_with_caron() {
 		$input  = '&#142;&#158;';
 		$output = '&#381;&#382;';
 		$this->assertSame( $output, convert_invalid_entities( $input ) );
 	}
 
-	/**
-	 * @covers ::convert_chars
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'convert_chars' )]
 	public function test_escapes_lone_ampersands() {
 		$this->assertSame( 'at&#038;t', convert_chars( 'at&t' ) );
 	}

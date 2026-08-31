@@ -7,9 +7,9 @@
  */
 
 /**
- * @group speculative-loading
- * @covers ::wp_get_speculation_rules_default_configuration
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_speculation_rules_default_configuration' )]
+#[\PHPUnit\Framework\Attributes\Group( 'speculative-loading' )]
 class Tests_Speculative_Loading_wpGetSpeculationRulesDefaultConfiguration extends WP_UnitTestCase {
 
 	/**
@@ -42,8 +42,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesDefaultConfiguration extend
 	/**
 	 * Tests that WordPress Core defaults to a conservative prefetch.
 	 *
-	 * @ticket 65624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65624' )]
 	public function test_core_defaults(): void {
 		$this->assertSame(
 			array(
@@ -57,13 +57,13 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesDefaultConfiguration extend
 	/**
 	 * Tests that the defaults can be overridden by environment variables.
 	 *
-	 * @ticket 65624
-	 * @dataProvider data_environment_variables
 	 *
 	 * @param string|null           $mode      Value for the mode environment variable, or null to leave it unset.
 	 * @param string|null           $eagerness Value for the eagerness environment variable, or null to leave it unset.
 	 * @param array<string, string> $expected  Expected default configuration.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65624' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_environment_variables' )]
 	public function test_environment_variables( ?string $mode, ?string $eagerness, array $expected ): void {
 		if ( null !== $mode ) {
 			putenv( "WP_SPECULATIVE_LOADING_DEFAULT_MODE={$mode}" );
@@ -197,11 +197,11 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesDefaultConfiguration extend
 	/**
 	 * Tests that the defaults can be overridden by constants.
 	 *
-	 * @ticket 65624
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65624' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 	public function test_constants(): void {
 		define( 'WP_SPECULATIVE_LOADING_DEFAULT_MODE', 'prerender' );
 		define( 'WP_SPECULATIVE_LOADING_DEFAULT_EAGERNESS', 'moderate' );
@@ -218,11 +218,11 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesDefaultConfiguration extend
 	/**
 	 * Tests that a constant takes precedence over an environment variable.
 	 *
-	 * @ticket 65624
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65624' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 	public function test_constant_overrides_environment_variable(): void {
 		putenv( 'WP_SPECULATIVE_LOADING_DEFAULT_EAGERNESS=eager' );
 		define( 'WP_SPECULATIVE_LOADING_DEFAULT_EAGERNESS', 'moderate' );
@@ -235,11 +235,11 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesDefaultConfiguration extend
 	/**
 	 * Tests that an invalid constant falls back to the Core default rather than to the environment variable.
 	 *
-	 * @ticket 65624
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65624' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 	public function test_invalid_constant_falls_back_to_core_default(): void {
 		putenv( 'WP_SPECULATIVE_LOADING_DEFAULT_EAGERNESS=eager' );
 		define( 'WP_SPECULATIVE_LOADING_DEFAULT_EAGERNESS', 'invalid' );

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group post
- * @group media
- * @group upload
  *
- * @covers ::wp_get_attachment_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\Group( 'upload' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_attachment_link' )]
 class Tests_Post_WpGetAttachmentLink extends WP_UnitTestCase {
 
 	/**
@@ -29,13 +29,13 @@ class Tests_Post_WpGetAttachmentLink extends WP_UnitTestCase {
 	 * Tests that wp_get_attachment_link() applies the
 	 * wp_get_attachment_link_attributes filter.
 	 *
-	 * @ticket 41574
 	 *
-	 * @dataProvider data_should_apply_attributes_filter
 	 *
 	 * @param array  $attributes Attributes to return from the callback.
 	 * @param string $expected   The substring expected to be in the attachment link.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41574' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_apply_attributes_filter' )]
 	public function test_should_apply_attributes_filter( $attributes, $expected ) {
 		$expected = str_replace( 'ATTACHMENT_ID', self::$attachment, $expected );
 
@@ -57,7 +57,7 @@ class Tests_Post_WpGetAttachmentLink extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_apply_attributes_filter() {
+	public static function data_should_apply_attributes_filter() {
 		return array(
 			'no new attributes'                         => array(
 				'attributes' => array(),

@@ -7,14 +7,14 @@
  * No need to do a full repeat of all of the post tests again since
  * the query SQL is the same for both just with a different column.
  *
- * @ticket 18694
  *
- * @group comment
- * @group date
- * @group datequery
  *
- * @covers ::get_comments
  */
+#[\PHPUnit\Framework\Attributes\Ticket( '18694' )]
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datequery' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comments' )]
 class Tests_Comment_DateQuery extends WP_UnitTestCase {
 
 	public $posts = array();

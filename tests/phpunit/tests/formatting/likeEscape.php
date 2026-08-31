@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::like_escape
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Formatting_LikeEscape extends WP_UnitTestCase {
 	/**
-	 * @ticket 10041
 	 * @expectedDeprecated like_escape
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10041' )]
 	public function test_like_escape() {
 
 		$inputs   = array(

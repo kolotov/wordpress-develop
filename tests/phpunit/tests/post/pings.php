@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group post
- * @group ping
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ping' )]
 class Tests_Post_Pings extends WP_UnitTestCase {
 
 	public function test_returns_to_ping_sites_from_post_id() {

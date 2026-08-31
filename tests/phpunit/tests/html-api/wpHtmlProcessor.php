@@ -7,10 +7,9 @@
  *
  * @since 6.4.0
  *
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensure that the HTML Processor's public constructor function warns a developer to call
@@ -27,32 +26,35 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * at using the static methods. In the absence of the optional parameter it instructs
 	 * the callee that it should be using those static methods instead.
 	 *
-	 * @ticket 58517
 	 *
-	 * @covers WP_HTML_Processor::__construct
 	 * @expectedIncorrectUsage WP_HTML_Processor::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', '__construct' )]
 	public function test_warns_that_the_static_creator_methods_should_be_called_instead_of_the_public_constructor() {
 		new WP_HTML_Processor( '<p>Light roast.</p>' );
 	}
 
 	/**
-	 * @ticket 63854
 	 *
-	 * @covers ::create_fragment
 	 * @expectedIncorrectUsage WP_HTML_Processor::create_fragment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63854' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'create_fragment' )]
 	public function test_create_fragment_validates_html_parameter() {
 		$processor = WP_HTML_Processor::create_fragment( null );
 		$this->assertNull( $processor );
 	}
 
 	/**
-	 * @ticket 63854
 	 *
-	 * @covers ::create_full_parser
 	 * @expectedIncorrectUsage WP_HTML_Processor::create_full_parser
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63854' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'create_full_parser' )]
 	public function test_create_full_parser_validates_html_parameter() {
 		$processor = WP_HTML_Processor::create_full_parser( null );
 		$this->assertNull( $processor );
@@ -63,10 +65,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * should no longer report a tag. It should report `null` because there
 	 * is no tag matched or open.
 	 *
-	 * @ticket 59167
 	 *
-	 * @covers WP_HTML_Processor::get_tag
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59167' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'get_tag' )]
 	public function test_get_tag_is_null_once_document_is_finished() {
 		$processor = WP_HTML_Processor::create_fragment( '<div class="test">Test</div>' );
 		$processor->next_tag();
@@ -92,10 +95,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *     // ...is equivalent to this normative HTML.
 	 *     <img><svg><image/></svg>
 	 *
-	 * @ticket 61576
 	 *
-	 * @covers WP_HTML_Processor::get_tag
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'get_tag' )]
 	public function test_get_tag_replaces_image_with_namespace_awareness() {
 		$processor = WP_HTML_Processor::create_fragment( '<image/><svg><image/></svg>' );
 
@@ -138,11 +142,13 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * an earlier location before the parent UL, then it should not report that it's still
 	 * inside an open LI element.
 	 *
-	 * @ticket 58517
 	 *
-	 * @covers WP_HTML_Processor::next_tag
-	 * @covers WP_HTML_Processor::seek
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
+
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'next_tag' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'seek' )]
 	public function test_clear_to_navigate_after_seeking() {
 		$processor = WP_HTML_Processor::create_fragment( '<div one><strong></strong></div><p><strong two></strong></p>' );
 
@@ -188,10 +194,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * Ensures that support is added for reconstructing active formatting elements
 	 * before the HTML Processor handles situations with unclosed formats requiring it.
 	 *
-	 * @ticket 58517
 	 *
-	 * @covers WP_HTML_Processor::reconstruct_active_formatting_elements
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'reconstruct_active_formatting_elements' )]
 	public function test_fails_to_reconstruct_formatting_elements() {
 		$processor = WP_HTML_Processor::create_fragment( '<p><em>One<p><em>Two<p><em>Three<p><em>Four' );
 
@@ -202,15 +209,17 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensure non-nesting tags do not nest.
 	 *
-	 * @ticket 60283
 	 *
-	 * @covers WP_HTML_Processor::step_in_body
-	 * @covers WP_HTML_Processor::is_void
 	 *
-	 * @dataProvider data_void_tags_not_ignored_in_body
 	 *
 	 * @param string $tag_name Name of void tag under test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60283' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_void_tags_not_ignored_in_body' )]
+
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'is_void' )]
 	public function test_cannot_nest_void_tags( $tag_name ) {
 		$processor = WP_HTML_Processor::create_fragment( "<{$tag_name}><div>" );
 
@@ -254,8 +263,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensure reporting that normal non-void HTML elements expect a closer.
 	 *
-	 * @ticket 61257
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61257' )]
 	public function test_expects_closer_regular_tags() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><p><b><em>' );
 
@@ -278,13 +287,13 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensure reporting that non-tag HTML nodes expect a closer.
 	 *
-	 * @ticket 61257
 	 *
-	 * @dataProvider data_self_contained_node_tokens
 	 *
 	 * @param string $self_contained_token String starting with HTML token that doesn't expect a closer,
 	 *                                     e.g. an HTML comment, text node, void tag, or special element.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61257' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_self_contained_node_tokens' )]
 	public function test_expects_closer_expects_no_closer_for_self_contained_tokens( $self_contained_token ) {
 		$processor   = WP_HTML_Processor::create_fragment( $self_contained_token );
 		$found_token = $processor->next_token();
@@ -349,12 +358,12 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensure non-nesting tags do not nest when processing tokens.
 	 *
-	 * @ticket 60382
 	 *
-	 * @dataProvider data_void_tags_not_ignored_in_body
 	 *
 	 * @param string $tag_name Name of void tag under test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60382' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_void_tags_not_ignored_in_body' )]
 	public function test_cannot_nest_void_tags_next_token( $tag_name ) {
 		$processor = WP_HTML_Processor::create_fragment( "<{$tag_name}><div>" );
 
@@ -424,13 +433,13 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that the HTML Processor properly reports the depth of a given element.
 	 *
-	 * @ticket 61255
 	 *
-	 * @dataProvider data_html_with_target_element_and_depth_in_body
 	 *
 	 * @param string $html_with_target_element HTML containing element with `target` class.
 	 * @param int    $depth_at_element         Depth into document at target node.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61255' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_html_with_target_element_and_depth_in_body' )]
 	public function test_reports_proper_element_depth_in_body( $html_with_target_element, $depth_at_element ) {
 		$processor = WP_HTML_Processor::create_fragment( $html_with_target_element );
 
@@ -462,13 +471,13 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that the HTML Processor properly reports the depth of a given non-element.
 	 *
-	 * @ticket 61255
 	 *
-	 * @dataProvider data_html_with_target_element_and_depth_of_next_node_in_body
 	 *
 	 * @param string $html_with_target_element HTML containing element with `target` class.
 	 * @param int    $depth_after_element      Depth into document immediately after target node.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61255' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_html_with_target_element_and_depth_of_next_node_in_body' )]
 	public function test_reports_proper_non_element_depth_in_body( $html_with_target_element, $depth_after_element ) {
 		$processor = WP_HTML_Processor::create_fragment( $html_with_target_element );
 
@@ -510,8 +519,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that elements which are unopened at the end of a document are implicitly closed.
 	 *
-	 * @ticket 61576
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_closes_unclosed_elements() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><p><span>' );
 
@@ -551,8 +560,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that subclasses can be created from ::create_fragment method.
 	 *
-	 * @ticket 61374
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61374' )]
 	public function test_subclass_create_fragment_creates_subclass() {
 		$processor = WP_HTML_Processor::create_fragment( '' );
 		$this->assertInstanceOf( WP_HTML_Processor::class, $processor, '::create_fragment did not return class instance.' );
@@ -571,8 +580,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * Ensures that self-closing elements in foreign content properly report
 	 * that they expect no closer.
 	 *
-	 * @ticket 61576
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_expects_closer_foreign_content_self_closing() {
 		$processor = WP_HTML_Processor::create_fragment( '<svg /><math>' );
 
@@ -588,8 +597,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures a slash-only unquoted attribute value does not close foreign content.
 	 *
-	 * @ticket 65372
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
 	public function test_unquoted_slash_attribute_does_not_self_close_foreign_content(): void {
 		$processor = WP_HTML_Processor::create_fragment( '<math><mi a=/>math:mi is not self-closing, it has [a="/"] attribute.' );
 
@@ -614,10 +623,10 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * For example, `<svg><input>text` creates an `svg:input` that contains a text node.
 	 * This input should not be treated as a void tag and _should_ expect a close tag.
 	 *
-	 * @dataProvider data_void_tags
 	 *
-	 * @ticket 62363
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_void_tags' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62363' )]
 	public function test_expects_closer_foreign_content_not_void( string $void_tag ) {
 		$processor = WP_HTML_Processor::create_fragment( "<svg><{$void_tag}>" );
 
@@ -636,8 +645,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that self-closing foreign SCRIPT elements are properly found.
 	 *
-	 * @ticket 61576
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_foreign_content_script_self_closing() {
 		$processor = WP_HTML_Processor::create_fragment( '<svg><script />' );
 		$this->assertTrue( $processor->next_tag( 'script' ) );
@@ -656,8 +665,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * The test is included here because it may show up as unsupported markup and be skipped by
 	 * the Web Platform Tests suite.
 	 *
-	 * @ticket 61576
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_template_tag_closes_html_template_element() {
 		$processor = WP_HTML_Processor::create_fragment( '<template><svg><template><foreignObject><div></template><div>' );
 
@@ -670,8 +679,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures foreign TEMPLATE elements do not satisfy HTML template handling.
 	 *
-	 * @ticket 65372
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
 	public function test_unmatched_template_closer_after_mathml_template_is_ignored() {
 		$processor = WP_HTML_Processor::create_fragment( '<math><template><mi><c></template>here' );
 
@@ -690,10 +699,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that the tag processor is case sensitive when removing CSS classes in no-quirks mode.
 	 *
-	 * @ticket 61531
 	 *
-	 * @covers ::remove_class
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'remove_class' )]
 	public function test_remove_class_no_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<!DOCTYPE html><span class="UPPER">' );
 		$processor->next_tag( 'SPAN' );
@@ -707,10 +717,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that the tag processor is case sensitive when adding CSS classes in no-quirks mode.
 	 *
-	 * @ticket 61531
 	 *
-	 * @covers ::add_class
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'add_class' )]
 	public function test_add_class_no_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<!DOCTYPE html><span class="UPPER">' );
 		$processor->next_tag( 'SPAN' );
@@ -724,10 +735,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that the tag processor is case sensitive when checking has CSS classes in no-quirks mode.
 	 *
-	 * @ticket 61531
 	 *
-	 * @covers ::has_class
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'has_class' )]
 	public function test_has_class_no_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<!DOCTYPE html><span class="UPPER">' );
 		$processor->next_tag( 'SPAN' );
@@ -738,10 +750,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that the tag processor lists unique CSS class names in no-quirks mode.
 	 *
-	 * @ticket 61531
 	 *
-	 * @covers ::class_list
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'class_list' )]
 	public function test_class_list_no_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser(
 			/*
@@ -766,10 +779,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that the tag processor is case insensitive when removing CSS classes in quirks mode.
 	 *
-	 * @ticket 61531
 	 *
-	 * @covers ::remove_class
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'remove_class' )]
 	public function test_remove_class_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<span class="uPPER">' );
 		$processor->next_tag( 'SPAN' );
@@ -780,10 +794,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that the tag processor is case insensitive when adding CSS classes in quirks mode.
 	 *
-	 * @ticket 61531
 	 *
-	 * @covers ::add_class
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'add_class' )]
 	public function test_add_class_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<span class="UPPER">' );
 		$processor->next_tag( 'SPAN' );
@@ -798,10 +813,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that the tag processor is case sensitive when checking has CSS classes in quirks mode.
 	 *
-	 * @ticket 61531
 	 *
-	 * @covers ::has_class
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'has_class' )]
 	public function test_has_class_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<span class="UPPER">' );
 		$processor->next_tag( 'SPAN' );
@@ -812,10 +828,11 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that the tag processor lists unique CSS class names in quirks mode.
 	 *
-	 * @ticket 61531
 	 *
-	 * @covers ::class_list
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
+
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'class_list' )]
 	public function test_class_list_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser(
 			/*
@@ -842,8 +859,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * Ensures that the processor correctly adjusts the namespace
 	 * for elements inside HTML integration points.
 	 *
-	 * @ticket 61576
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_adjusts_for_html_integration_points_in_svg() {
 		$processor = WP_HTML_Processor::create_full_parser(
 			'<svg><foreignobject><image /><svg /><image />'
@@ -900,8 +917,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * Ensures that the processor correctly adjusts the namespace
 	 * for elements inside MathML integration points.
 	 *
-	 * @ticket 61576
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_adjusts_for_mathml_integration_points() {
 		$processor = WP_HTML_Processor::create_fragment(
 			'<mo><image /></mo><math><image /><mo><image /></mo></math>'
@@ -962,8 +979,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * Form tag closers have complicated conditions. There was a bug where the processor
 	 * would not stop correctly on a FORM tag closer token. Ensure this token is reachable.
 	 *
-	 * @ticket 61576
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_ensure_form_tag_closer_token_is_reachable() {
 		$processor = WP_HTML_Processor::create_fragment( '<form></form>' );
 
@@ -980,7 +997,7 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_html_processor_with_extended_next_token() {
+	public static function data_html_processor_with_extended_next_token() {
 		return array(
 			'single_instance_per_tag'   => array(
 				'html'                  => '
@@ -1096,9 +1113,9 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensures that subclasses to WP_HTML_Processor can do bookkeeping by extending the next_token() method.
 	 *
-	 * @ticket 62269
-	 * @dataProvider data_html_processor_with_extended_next_token
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62269' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_html_processor_with_extended_next_token' )]
 	public function test_ensure_next_token_method_extensibility( $html, $expected_token_counts ) {
 		require_once DIR_TESTDATA . '/html-api/token-counting-html-processor.php';
 
@@ -1113,8 +1130,8 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensure that lowercased tag_name query matches tags case-insensitively.
 	 *
-	 * @ticket 62427
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62427' )]
 	public function test_next_tag_lowercase_tag_name() {
 		// The upper case <DIV> is irrelevant but illustrates the case-insensitivity.
 		$processor = WP_HTML_Processor::create_fragment( '<section><DIV>' );
@@ -1128,10 +1145,10 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	/**
 	 * Ensure that the processor does not throw errors in cases of extreme HTML nesting.
 	 *
-	 * @ticket 64394
 	 *
 	 * @expectedIncorrectUsage WP_HTML_Tag_Processor::set_bookmark
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64394' )]
 	public function test_deep_nesting_fails_process_without_error() {
 		$html      = str_repeat( '<i>', WP_HTML_Processor::MAX_BOOKMARKS * 2 );
 		$processor = WP_HTML_Processor::create_fragment( $html );
@@ -1148,10 +1165,10 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64394
 	 *
 	 * @expectedIncorrectUsage WP_HTML_Tag_Processor::set_bookmark
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64394' )]
 	public function test_deep_nesting_fails_processing_virtual_tokens_without_error() {
 		/*
 		 * This test has some variability depending on how the virtual tokens align.
@@ -1207,10 +1224,10 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64394
 	 *
 	 * @expectedIncorrectUsage WP_HTML_Tag_Processor::set_bookmark
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64394' )]
 	public function test_prevents_unbounded_bookmarking() {
 		$processor = WP_HTML_Processor::create_full_parser( '<!DOCTYPE html><html>' );
 		$processor->next_tag();

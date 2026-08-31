@@ -1,11 +1,14 @@
 <?php
 
 /**
- * @group formatting
- * @ticket 46133
  *
- * @covers ::excerpt_remove_blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '46133' )]
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'excerpt_remove_blocks' )]
 class Tests_Formatting_ExcerptRemoveBlocks extends WP_UnitTestCase {
 
 	public static $post_id;
@@ -91,8 +94,8 @@ class Tests_Formatting_ExcerptRemoveBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests excerpt_remove_blocks().
 	 *
-	 * @ticket 46133
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46133' )]
 	public function test_excerpt_remove_blocks() {
 		// Simple dynamic block..
 		$content = '<!-- wp:core/block /-->';
@@ -116,10 +119,10 @@ class Tests_Formatting_ExcerptRemoveBlocks extends WP_UnitTestCase {
 	 * This infinite loop can be avoided by stripping dynamic blocks before
 	 * `the_content` gets applied, just like shortcodes.
 	 *
-	 * @ticket 46133
 	 *
-	 * @covers ::do_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46133' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'do_blocks' )]
 	public function test_excerpt_infinite_loop() {
 		$query = new WP_Query(
 			array(
@@ -134,8 +137,8 @@ class Tests_Formatting_ExcerptRemoveBlocks extends WP_UnitTestCase {
 	 * Tests that a top-level block hidden via the visibility block support
 	 * is removed from the excerpt.
 	 *
-	 * @ticket 65456
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65456' )]
 	public function test_excerpt_remove_blocks_skips_hidden_block() {
 		$content = '<!-- wp:paragraph {"metadata":{"blockVisibility":false}} -->
 <p>hidden</p>
@@ -152,10 +155,10 @@ class Tests_Formatting_ExcerptRemoveBlocks extends WP_UnitTestCase {
 	 * Tests that a hidden wrapper block (group/columns/column) is removed
 	 * from the excerpt, including its inner blocks.
 	 *
-	 * @ticket 65456
 	 *
-	 * @covers ::_excerpt_render_inner_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65456' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_excerpt_render_inner_blocks' )]
 	public function test_excerpt_remove_blocks_skips_hidden_wrapper_block() {
 		$content = '<!-- wp:group {"metadata":{"blockVisibility":false}} -->
 <div class="wp-block-group">
@@ -173,10 +176,10 @@ class Tests_Formatting_ExcerptRemoveBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests that a hidden block nested inside a visible wrapper is removed.
 	 *
-	 * @ticket 65456
 	 *
-	 * @covers ::_excerpt_render_inner_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65456' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_excerpt_render_inner_blocks' )]
 	public function test_excerpt_remove_blocks_skips_hidden_inner_block() {
 		$content = '<!-- wp:group -->
 <div class="wp-block-group">
@@ -196,8 +199,8 @@ class Tests_Formatting_ExcerptRemoveBlocks extends WP_UnitTestCase {
 	 * excerpt. Viewport visibility only affects the rendered display via CSS,
 	 * so it must not strip the block's text from the excerpt.
 	 *
-	 * @ticket 65456
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65456' )]
 	public function test_excerpt_remove_blocks_keeps_viewport_hidden_block() {
 		$content = '<!-- wp:paragraph {"metadata":{"blockVisibility":{"viewport":{"desktop":false}}}} -->
 <p>Hello World</p>

@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @group taxonomy
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+
 class Tests_Term_Query extends WP_UnitTestCase {
 
 	/**
@@ -26,8 +27,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37545
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37545' )]
 	public function test_taxonomy_should_accept_single_taxonomy_as_string() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 		register_taxonomy( 'wptests_tax_2', 'post' );
@@ -47,8 +48,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57645
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57645' )]
 	public function test_lazy_load_term_meta() {
 		$filter = new MockAction();
 		add_filter( 'update_term_metadata_cache', array( $filter, 'filter' ), 10, 2 );
@@ -105,8 +106,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37074
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37074' )]
 	public function test_term_taxonomy_id_single() {
 		global $wpdb;
 
@@ -133,8 +134,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37074
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37074' )]
 	public function test_term_taxonomy_id_array() {
 		global $wpdb;
 
@@ -167,8 +168,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37151
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37151' )]
 	public function test_order_by_meta_value_num() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -193,8 +194,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37378
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37378' )]
 	public function test_order_by_keyword_should_not_be_duplicated_when_filtered() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -217,8 +218,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37198
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	public function test_order_by_term_order_should_fall_back_on_term_id_when_relationship_table_is_not_being_joined() {
 		register_taxonomy( 'wptests_tax', 'post' );
 		$terms = self::factory()->term->create_many( 2, array( 'taxonomy' => 'wptests_tax' ) );
@@ -237,8 +238,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37591
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37591' )]
 	public function test_terms_is_set() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 
@@ -264,9 +265,9 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23261
-	 * @ticket 37904
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23261' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '37904' )]
 	public function test_orderby_include_with_comma_separated_list() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 
@@ -286,8 +287,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37198
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	public function test_object_ids_single() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 
@@ -308,8 +309,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37198
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	public function test_object_ids_array() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 
@@ -330,8 +331,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37198
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	public function test_duplicates_should_be_removed_for_fields_all() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 		$posts = self::factory()->post->create_many( 2 );
@@ -354,8 +355,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37198
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
 	public function test_duplicates_should_not_be_removed_for_fields_all_with_object_id() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 		$posts = self::factory()->post->create_many( 2 );
@@ -380,8 +381,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44221
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44221' )]
 	public function test_all_with_object_id_should_return_term_objects() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 		$posts = self::factory()->post->create_many( 2 );
@@ -415,9 +416,9 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37198
-	 * @group cache
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37198' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 	public function test_object_ids_cache_should_be_invalidated_by_term_relationship_change() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 
@@ -452,9 +453,9 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38295
-	 * @group cache
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38295' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 	public function test_count_query_should_be_cached() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 
@@ -468,7 +469,7 @@ class Tests_Term_Query extends WP_UnitTestCase {
 			)
 		);
 		$count = $query->get_terms();
-		$this->assertEquals( 2, $count );
+		$this->assertSame( '2', $count );
 
 		$num_queries = get_num_queries();
 
@@ -480,14 +481,14 @@ class Tests_Term_Query extends WP_UnitTestCase {
 			)
 		);
 		$count = $query->get_terms();
-		$this->assertEquals( 2, $count );
+		$this->assertSame( '2', $count );
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
 	/**
-	 * @ticket 38295
-	 * @group cache
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38295' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 	public function test_count_query_cache_should_be_invalidated_with_incrementor_bump() {
 		register_taxonomy( 'wptests_tax_1', 'post' );
 
@@ -501,7 +502,7 @@ class Tests_Term_Query extends WP_UnitTestCase {
 			)
 		);
 		$count = $query->get_terms();
-		$this->assertEquals( 2, $count );
+		$this->assertSame( '2', $count );
 
 		wp_delete_term( $terms[0], 'wptests_tax_1' );
 
@@ -513,12 +514,12 @@ class Tests_Term_Query extends WP_UnitTestCase {
 			)
 		);
 		$count = $query->get_terms();
-		$this->assertEquals( 1, $count );
+		$this->assertSame( '1', $count );
 	}
 
 	/**
-	 * @ticket 40496
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40496' )]
 	public function test_get_the_terms_should_respect_taxonomy_orderby() {
 		register_taxonomy(
 			'wptests_tax',
@@ -547,8 +548,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40496
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40496' )]
 	public function test_wp_get_object_terms_should_respect_taxonomy_orderby() {
 		register_taxonomy(
 			'wptests_tax',
@@ -577,8 +578,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41293
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41293' )]
 	public function test_should_allow_same_args_with_the_get_terms() {
 		register_post_type( 'wptests_pt' );
 		register_taxonomy( 'wptests_tax', 'wptests_pt' );
@@ -651,8 +652,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	/**
 	 * The query method should return zero for field as count and parent set.
 	 *
-	 * @ticket 42327
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42327' )]
 	public function test_query_should_return_zero_for_field_count_and_parent_set() {
 		$post_id = self::factory()->post->create();
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -676,8 +677,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	/**
 	 * The query method should return zero for field as count and child_of set.
 	 *
-	 * @ticket 42327
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42327' )]
 	public function test_query_should_return_zero_for_field_as_count_and_child_of_set() {
 		$post_id = self::factory()->post->create();
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -701,9 +702,9 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	/**
 	 * If fields have filtered, cached results should work.
 	 *
-	 * @ticket 58116
-	 * @group cache
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58116' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 	public function test_query_filter_fields() {
 		$post_id = self::factory()->post->create();
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -758,9 +759,9 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	/**
 	 * If fields have filtered, cached results should work.
 	 *
-	 * @ticket 58116
-	 * @group cache
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58116' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 	public function test_query_filter_select_fields() {
 		$post_id = self::factory()->post->create();
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -801,8 +802,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	/**
 	 * The terms property should be an empty array for fields not as count and parent set.
 	 *
-	 * @ticket 42327
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42327' )]
 	public function test_terms_property_should_be_empty_array_for_field_not_as_count_and_parent_set() {
 		$post_id = self::factory()->post->create();
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -824,8 +825,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42691
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42691' )]
 	public function test_null_term_object_should_be_discarded() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -859,8 +860,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	 * The warning that we should not see:
 	 * `Warning: Attempt to read property "count" on null`.
 	 *
-	 * @ticket 63877
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63877' )]
 	public function test_null_child_term_should_not_throw_warning() {
 		register_taxonomy(
 			'wptests_tax',
@@ -908,8 +909,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42691
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42691' )]
 	public function test_error_term_object_should_be_discarded() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -945,8 +946,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41246
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41246' )]
 	public function test_terms_pre_query_filter_should_bypass_database_query() {
 		add_filter( 'terms_pre_query', array( __CLASS__, 'filter_terms_pre_query' ), 10, 2 );
 
@@ -973,8 +974,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37728
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37728' )]
 	public function test_hide_empty_should_include_empty_parents_of_nonempty_children() {
 		register_taxonomy(
 			'wptests_tax',
@@ -1013,8 +1014,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37728
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37728' )]
 	public function test_hide_empty_should_include_empty_parents_of_nonempty_children_when_category_is_unspecified() {
 		register_taxonomy(
 			'wptests_tax',
@@ -1052,8 +1053,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47719
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47719' )]
 	public function test_include_should_return_no_terms_when_0() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -1074,11 +1075,11 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	/**
 	 * Ensure cache keys are generated without WPDB placeholders.
 	 *
-	 * @ticket 57298
 	 *
-	 * @covers       WP_Term_Query::generate_cache_key
-	 * @dataProvider data_query_cache
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57298' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_cache' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Term_Query', 'generate_cache_key' )]
 	public function test_generate_cache_key_placeholder( $args ) {
 		global $wpdb;
 		$query1 = new WP_Term_Query();
@@ -1106,7 +1107,7 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	 *
 	 * @return array[] Test parameters.
 	 */
-	public function data_query_cache() {
+	public static function data_query_cache() {
 		return array(
 			'empty query'                => array(
 				'args' => array(),
@@ -1194,8 +1195,8 @@ class Tests_Term_Query extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56841
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56841' )]
 	public function test_query_does_not_have_leading_whitespace() {
 		$q = new WP_Term_Query(
 			array(

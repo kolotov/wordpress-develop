@@ -6,9 +6,15 @@
  * @subpackage Blocks
  * @since 6.5.0
  *
- * @group blocks
- * @group block-bindings
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\Group( 'block-bindings' )]
+
+
+
+
+
+
 class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 
 	public static $test_source_name       = 'test/source';
@@ -53,14 +59,30 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Asserts that a registered source retains its public configuration and behavior.
+	 *
+	 * @param string                   $expected_name Expected source name.
+	 * @param WP_Block_Bindings_Source $source        Registered source.
+	 */
+	private function assert_test_source( $expected_name, $source ) {
+		$this->assertSame( $expected_name, $source->name );
+		$this->assertSame( 'Test source', $source->label );
+		$this->assertSame( array( 'sourceContext' ), $source->uses_context );
+
+		$callback_property = new ReflectionProperty( WP_Block_Bindings_Source::class, 'get_value_callback' );
+		$this->assertSame( self::$test_source_properties['get_value_callback'], $callback_property->getValue( $source ) );
+		$this->assertSame( 'test-value', $source->get_value( array(), null, '' ) );
+	}
+
+	/**
 	 * Should reject numbers as block binding source name.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Bindings_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
 	public function test_register_invalid_non_string_names() {
 		$result = $this->registry->register( 1, self::$test_source_properties );
 		$this->assertFalse( $result );
@@ -69,12 +91,12 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject block binding source name without a namespace.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Bindings_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
 	public function test_register_invalid_names_without_namespace() {
 		$result = $this->registry->register( 'post-meta', self::$test_source_properties );
 		$this->assertFalse( $result );
@@ -83,12 +105,12 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject block binding source name with invalid characters.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Bindings_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
 	public function test_register_invalid_characters() {
 		$result = $this->registry->register( 'still/_doing_it_wrong', array() );
 		$this->assertFalse( $result );
@@ -97,12 +119,12 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject block binding source name with uppercase characters.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Bindings_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
 	public function test_register_invalid_uppercase_characters() {
 		$result = $this->registry->register( 'Core/PostMeta', self::$test_source_properties );
 		$this->assertFalse( $result );
@@ -111,12 +133,12 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject block bindings registration without a label.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Bindings_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
 	public function test_register_invalid_missing_label() {
 
 		// Remove the label from the properties.
@@ -129,12 +151,12 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject block bindings registration without a get_value_callback.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Bindings_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
 	public function test_register_invalid_missing_get_value_callback() {
 
 		// Remove the get_value_callback from the properties.
@@ -147,12 +169,12 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject block bindings registration if `get_value_callback` is not a callable.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Bindings_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
 	public function test_register_invalid_incorrect_callback_type() {
 
 		self::$test_source_properties['get_value_callback'] = 'not-a-callback';
@@ -164,12 +186,12 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject block bindings registration if `uses_context` is not an array.
 	 *
-	 * @ticket 60525
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Bindings_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60525' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
 	public function test_register_invalid_string_uses_context() {
 
 		self::$test_source_properties['uses_context'] = 'not-an-array';
@@ -181,38 +203,32 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should accept valid block binding source.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
-	 * @covers WP_Block_Bindings_Source::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Source', '__construct' )]
 	public function test_register_block_binding_source() {
 		$result = $this->registry->register( self::$test_source_name, self::$test_source_properties );
-		$this->assertEquals(
-			new WP_Block_Bindings_Source(
-				self::$test_source_name,
-				self::$test_source_properties
-			),
-			$result
-		);
+		$this->assertInstanceOf( WP_Block_Bindings_Source::class, $result );
 		$this->assertSame( 'test/source', $result->name );
 		$this->assertSame( 'Test source', $result->label );
 		$this->assertSame(
 			'test-value',
 			$result->get_value( array(), null, '' )
 		);
-		$this->assertEquals( array( 'sourceContext' ), $result->uses_context );
+		$this->assertSame( array( 'sourceContext' ), $result->uses_context );
 	}
 
 	/**
 	 * Unregistering should fail if a block binding source is not registered.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::unregister
 	 *
 	 * @expectedIncorrectUsage WP_Block_Bindings_Registry::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'unregister' )]
 	public function test_unregister_not_registered_block() {
 		$result = $this->registry->unregister( 'test/unregistered' );
 		$this->assertFalse( $result );
@@ -221,34 +237,29 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should unregister existing block binding source.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
-	 * @covers WP_Block_Bindings_Registry::unregister
-	 * @covers WP_Block_Bindings_Source::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'unregister' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Source', '__construct' )]
 	public function test_unregister_block_source() {
 		$this->registry->register( self::$test_source_name, self::$test_source_properties );
 
 		$result = $this->registry->unregister( self::$test_source_name );
-		$this->assertEquals(
-			new WP_Block_Bindings_Source(
-				self::$test_source_name,
-				self::$test_source_properties
-			),
-			$result
-		);
+		$this->assertInstanceOf( WP_Block_Bindings_Source::class, $result );
+		$this->assert_test_source( self::$test_source_name, $result );
 	}
 
 	/**
 	 * Should find all registered sources.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
-	 * @covers WP_Block_Bindings_Registry::get_all_registered
-	 * @covers WP_Block_Bindings_Source::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'get_all_registered' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Source', '__construct' )]
 	public function test_get_all_registered() {
 		$source_one_name       = 'test/source-one';
 		$source_one_properties = self::$test_source_properties;
@@ -262,24 +273,21 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 		$source_three_properties = self::$test_source_properties;
 		$this->registry->register( $source_three_name, $source_three_properties );
 
-		$expected = array(
-			$source_one_name   => new WP_Block_Bindings_Source( $source_one_name, $source_one_properties ),
-			$source_two_name   => new WP_Block_Bindings_Source( $source_two_name, $source_two_properties ),
-			$source_three_name => new WP_Block_Bindings_Source( $source_three_name, $source_three_properties ),
-		);
-
 		$registered = $this->registry->get_all_registered();
-		$this->assertEquals( $expected, $registered );
+		$this->assertSame( array( $source_one_name, $source_two_name, $source_three_name ), array_keys( $registered ) );
+		foreach ( $registered as $source_name => $source ) {
+			$this->assert_test_source( $source_name, $source );
+		}
 	}
 
 	/**
 	 * Should not find source that's not registered.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
-	 * @covers WP_Block_Bindings_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'get_registered' )]
 	public function test_get_registered_rejects_unknown_source_name() {
 		$this->registry->register( self::$test_source_name, self::$test_source_properties );
 
@@ -290,12 +298,12 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should find registered block binding source by name.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
-	 * @covers WP_Block_Bindings_Registry::get_registered
-	 * @covers WP_Block_Bindings_Source::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'get_registered' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Source', '__construct' )]
 	public function test_get_registered() {
 		$source_one_name       = 'test/source-one';
 		$source_one_properties = self::$test_source_properties;
@@ -309,22 +317,18 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 		$source_three_properties = self::$test_source_properties;
 		$this->registry->register( $source_three_name, $source_three_properties );
 
-		$expected = new WP_Block_Bindings_Source( $source_two_name, $source_two_properties );
-		$result   = $this->registry->get_registered( 'test/source-two' );
-
-		$this->assertEquals(
-			$expected,
-			$result
-		);
+		$result = $this->registry->get_registered( 'test/source-two' );
+		$this->assertInstanceOf( WP_Block_Bindings_Source::class, $result );
+		$this->assert_test_source( $source_two_name, $result );
 	}
 
 	/**
 	 * Should return false for source that's not registered.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::is_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'is_registered' )]
 	public function test_is_registered_for_unknown_source() {
 		$result = $this->registry->is_registered( 'test/one' );
 		$this->assertFalse( $result );
@@ -333,11 +337,11 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should return true if source is registered.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers WP_Block_Bindings_Registry::register
-	 * @covers WP_Block_Bindings_Registry::is_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'is_registered' )]
 	public function test_is_registered_for_known_source() {
 		$this->registry->register( self::$test_source_name, self::$test_source_properties );
 
@@ -348,10 +352,10 @@ class Tests_Blocks_wpBlockBindingsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should return false when checking registration with a null source name.
 	 *
-	 * @ticket 63957
 	 *
-	 * @covers WP_Block_Bindings_Registry::is_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63957' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Registry', 'is_registered' )]
 	public function test_is_registered_with_null_source_name() {
 		$result = $this->registry->is_registered( null );
 		$this->assertFalse( $result );

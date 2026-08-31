@@ -3,22 +3,22 @@
 /**
  * Test wp_fuzzy_number_match().
  *
- * @group functions
  *
- * @covers ::wp_fuzzy_number_match
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_fuzzy_number_match' )]
 class Tests_Functions_wpFuzzyNumberMatch extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_wp_fuzzy_number_match
 	 *
-	 * @ticket 54239
 	 *
 	 * @param int|float $expected  The expected value.
 	 * @param int|float $actual    The actual number.
 	 * @param int|float $precision The allowed variation.
 	 * @param bool      $result    Whether the numbers match within the specified precision.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_fuzzy_number_match' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '54239' )]
 	public function test_wp_fuzzy_number_match( $expected, $actual, $precision, $result ) {
 		$this->assertSame( $result, wp_fuzzy_number_match( $expected, $actual, $precision ) );
 	}
@@ -33,7 +33,7 @@ class Tests_Functions_wpFuzzyNumberMatch extends WP_UnitTestCase {
 	 *     @type bool      $result    Whether the numbers match within the specified precision.
 	 * }
 	 */
-	public function data_wp_fuzzy_number_match() {
+	public static function data_wp_fuzzy_number_match() {
 		return array(
 			'expected 1 int, actual 1 int'                => array(
 				'expected'  => 1,

@@ -3,25 +3,25 @@
 /**
  * Tests for the wp_filesize() function.
  *
- * @group functions
  *
- * @covers ::wp_filesize
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_filesize' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 class Tests_Functions_wpFilesize extends WP_UnitTestCase {
 
 	const TEST_FILE = DIR_TESTDATA . '/images/test-image-upside-down.jpg';
 
 	/**
-	 * @ticket 49412
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49412' )]
 	public function test_wp_filesize(): void {
 		$this->assertSame( filesize( self::TEST_FILE ), wp_filesize( self::TEST_FILE ) );
 	}
 
 	/**
-	 * @ticket 49412
-	 * @ticket 65670
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49412' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65670' )]
 	public function test_wp_filesize_filters(): void {
 		add_filter( 'wp_filesize', static fn () => 999 );
 		$this->assertSame( 999, wp_filesize( self::TEST_FILE ) );
@@ -40,15 +40,15 @@ class Tests_Functions_wpFilesize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49412
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49412' )]
 	public function test_wp_filesize_with_nonexistent_file(): void {
 		$this->assertSame( 0, wp_filesize( 'nonexistent/file.jpg' ) );
 	}
 
 	/**
-	 * @ticket 65670
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65670' )]
 	public function test_wp_filesize_pre_wp_filesize_filter_null(): void {
 		add_filter( 'pre_wp_filesize', '__return_null' );
 
@@ -56,12 +56,11 @@ class Tests_Functions_wpFilesize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65670
-	 *
-	 * @dataProvider data_wp_filesize_pre_wp_filesize_filter_negative
 	 *
 	 * @param float|int|string $value Negative value returned by the filter.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65670' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_filesize_pre_wp_filesize_filter_negative' )]
 	public function test_wp_filesize_pre_wp_filesize_filter_negative( $value ): void {
 		add_filter( 'pre_wp_filesize', static fn () => $value );
 
@@ -73,7 +72,7 @@ class Tests_Functions_wpFilesize extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ 0: float|int|string }>
 	 */
-	public function data_wp_filesize_pre_wp_filesize_filter_negative(): array {
+	public static function data_wp_filesize_pre_wp_filesize_filter_negative(): array {
 		return array(
 			'negative int'            => array( -1 ),
 			'negative numeric string' => array( '-1' ),
@@ -82,12 +81,11 @@ class Tests_Functions_wpFilesize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65670
-	 *
-	 * @dataProvider data_wp_filesize_filter_invalid_value
 	 *
 	 * @param mixed $value
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65670' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_filesize_filter_invalid_value' )]
 	public function test_wp_filesize_wp_filesize_filter_invalid_value( $value ): void {
 		add_filter( 'wp_filesize', static fn () => $value );
 		$this->assertSame( 0, wp_filesize( self::TEST_FILE ) );
@@ -98,7 +96,7 @@ class Tests_Functions_wpFilesize extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ 0: mixed }>
 	 */
-	public function data_wp_filesize_filter_invalid_value(): array {
+	public static function data_wp_filesize_filter_invalid_value(): array {
 		return array(
 			'negative' => array( -1 ),
 			'null'     => array( null ),

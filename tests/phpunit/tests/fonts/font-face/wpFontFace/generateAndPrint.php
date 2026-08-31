@@ -7,11 +7,11 @@
  *
  * @since 6.4.0
  *
- * @group fonts
- * @group fontface
  *
- * @covers WP_Font_Face::generate_and_print
  */
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'fontface' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Font_Face::class, 'generate_and_print' )]
 class Tests_Fonts_WPFontFace_GenerateAndPrint extends WP_UnitTestCase {
 	use WP_Font_Face_Tests_Datasets;
 
@@ -24,11 +24,11 @@ class Tests_Fonts_WPFontFace_GenerateAndPrint extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_should_print_given_fonts
 	 *
 	 * @param array  $fonts Prepared fonts.
 	 * @param string $expected Expected CSS.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_print_given_fonts' )]
 	public function test_should_generate_and_print_given_fonts( array $fonts, $expected ) {
 		$font_face       = new WP_Font_Face();
 		$style_element   = "<style class='wp-fonts-local'>\n%s\n</style>\n";

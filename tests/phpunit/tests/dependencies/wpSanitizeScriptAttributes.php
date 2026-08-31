@@ -3,10 +3,10 @@
 /**
  * Test wp_sanitize_script_attributes().
  *
- * @group dependencies
- * @group scripts
- * @covers ::wp_sanitize_script_attributes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
+#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Dependencies_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 
 	public function test_sanitize_script_attributes_type_set() {

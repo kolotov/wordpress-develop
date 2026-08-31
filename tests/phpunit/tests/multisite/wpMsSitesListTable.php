@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group admin
- * @group ms-required
- * @group network-admin
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'network-admin' )]
 class Tests_Multisite_wpMsSitesListTable extends WP_UnitTestCase {
 
 	protected static $site_ids;
@@ -13,10 +13,17 @@ class Tests_Multisite_wpMsSitesListTable extends WP_UnitTestCase {
 	 * @var WP_MS_Sites_List_Table
 	 */
 	public $table = false;
+	private $request;
 
 	public function set_up() {
 		parent::set_up();
-		$this->table = _get_list_table( 'WP_MS_Sites_List_Table', array( 'screen' => 'ms-sites' ) );
+		$this->request = $_REQUEST;
+		$this->table   = _get_list_table( 'WP_MS_Sites_List_Table', array( 'screen' => 'ms-sites' ) );
+	}
+
+	public function tear_down() {
+		$_REQUEST = $this->request;
+		parent::tear_down();
 	}
 
 	public static function wpSetUpBeforeClass( WP_UnitTest_Factory $factory ) {
@@ -232,8 +239,8 @@ class Tests_Multisite_wpMsSitesListTable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42066
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42066' )]
 	public function test_get_views_should_return_views_by_default() {
 		$expected = array(
 			'all'    => '<a href="sites.php" class="current" aria-current="page">All <span class="count">(14)</span></a>',

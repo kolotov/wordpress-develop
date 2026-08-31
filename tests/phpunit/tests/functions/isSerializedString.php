@@ -3,20 +3,20 @@
 /**
  * Tests for `is_serialized_string()`.
  *
- * @ticket 42870
  *
- * @group functions
  *
- * @covers ::is_serialized_string
  */
+#[\PHPUnit\Framework\Attributes\Ticket( '42870' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'is_serialized_string' )]
 class Tests_Functions_IsSerializedString extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_is_serialized_string
 	 *
 	 * @param array|object|int|string $data     Data value to test.
 	 * @param bool                    $expected Expected function result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_serialized_string' )]
 	public function test_is_serialized_string( $data, $expected ) {
 		$this->assertSame( $expected, is_serialized_string( $data ) );
 	}
@@ -26,7 +26,7 @@ class Tests_Functions_IsSerializedString extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_is_serialized_string() {
+	public static function data_is_serialized_string() {
 		return array(
 			'an array'                                => array(
 				'data'     => array(),

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group rewrite
- * @covers ::wp_resolve_numeric_slug_conflicts
  */
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_resolve_numeric_slug_conflicts' )]
 class Tests_Rewrite_wpResolveNumericSlugConflicts extends WP_UnitTestCase {
 
 	/**
@@ -23,12 +23,12 @@ class Tests_Rewrite_wpResolveNumericSlugConflicts extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52252
-	 * @dataProvider data_should_not_throw_warning_for_malformed_date_queries
 	 *
 	 * @param string $permalink_structure Permalink structure.
 	 * @param array  $query_vars          Query string parameters.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52252' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_throw_warning_for_malformed_date_queries' )]
 	public function test_should_not_throw_warning_for_malformed_date_queries( $permalink_structure, $query_vars ) {
 		$this->set_permalink_structure( $permalink_structure );
 
@@ -44,24 +44,24 @@ class Tests_Rewrite_wpResolveNumericSlugConflicts extends WP_UnitTestCase {
 	 *
 	 * @return array Test data.
 	 */
-	public function data_should_not_throw_warning_for_malformed_date_queries() {
+	public static function data_should_not_throw_warning_for_malformed_date_queries() {
 		return array(
 			'/%postname%/ with missing year'         => array(
 				'permalink_structure' => '/%postname%/',
-				'query'               => array(
+				'query_vars'          => array(
 					'monthnum' => 1,
 					'day'      => 15,
 				),
 			),
 			'/%postname%/ with month only'           => array(
 				'permalink_structure' => '/%postname%/',
-				'query'               => array(
+				'query_vars'          => array(
 					'monthnum' => 1,
 				),
 			),
 			'/%year%/%postname%/ with missing month' => array(
 				'permalink_structure' => '/%year%/%postname%/',
-				'query'               => array(
+				'query_vars'          => array(
 					'year' => 2020,
 					'day'  => 15,
 				),

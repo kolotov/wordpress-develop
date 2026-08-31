@@ -3,10 +3,10 @@
 /**
  * Tests for the wp_timezone_choice() function.
  *
- * @group functions
  *
- * @covers ::wp_timezone_choice
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_timezone_choice' )]
 class Tests_Functions_WpTimezoneChoice extends WP_UnitTestCase {
 
 	/**
@@ -20,11 +20,11 @@ class Tests_Functions_WpTimezoneChoice extends WP_UnitTestCase {
 	/**
 	 * Tests default values.
 	 *
-	 * @ticket 59941
-	 * @dataProvider data_wp_timezone_choice
 	 *
 	 * @param string $expected Expected string HTML fragment.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59941' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_timezone_choice' )]
 	public function test_wp_timezone_choice( string $expected ): void {
 		$timezone_list = wp_timezone_choice( '' );
 		$this->assertStringContainsString( $expected, $timezone_list );
@@ -35,7 +35,7 @@ class Tests_Functions_WpTimezoneChoice extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ 0: string }>
 	 */
-	public function data_wp_timezone_choice(): array {
+	public static function data_wp_timezone_choice(): array {
 		return array(
 			'placeholder option'           => array( '<option selected="selected" value="">Select a city</option>' ),
 			'city in Americas'             => array( '<option value="America/Los_Angeles" dir="auto">Los Angeles</option>' ),
@@ -52,12 +52,12 @@ class Tests_Functions_WpTimezoneChoice extends WP_UnitTestCase {
 	/**
 	 * Tests zones are selected from the list.
 	 *
-	 * @ticket 59941
-	 * @dataProvider data_wp_timezone_choice_selected
 	 *
 	 * @param string $selected_zone The timezone to select.
 	 * @param string $expected      Expected string HTML fragment.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59941' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_timezone_choice_selected' )]
 	public function test_wp_timezone_choice_selected( string $selected_zone, string $expected ): void {
 		$actual = wp_timezone_choice( $selected_zone );
 		$this->assertStringContainsString( $expected, $actual );
@@ -68,7 +68,7 @@ class Tests_Functions_WpTimezoneChoice extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ 0: string }>
 	 */
-	public function data_wp_timezone_choice_selected(): array {
+	public static function data_wp_timezone_choice_selected(): array {
 		return array(
 			'city from the list'                   => array(
 				'America/Los_Angeles',
@@ -92,11 +92,11 @@ class Tests_Functions_WpTimezoneChoice extends WP_UnitTestCase {
 	/**
 	 * Tests passing in the locale.
 	 *
-	 * @ticket 59941
-	 * @dataProvider data_wp_timezone_choice_es
 	 *
 	 * @param string $expected Expected string HTML fragment.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59941' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_timezone_choice_es' )]
 	public function test_wp_timezone_choice_es( string $expected ): void {
 		$timezone_list = wp_timezone_choice( '', 'es_ES' );
 		$this->assertStringContainsString( $expected, $timezone_list );
@@ -107,7 +107,7 @@ class Tests_Functions_WpTimezoneChoice extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ 0: string }>
 	 */
-	public function data_wp_timezone_choice_es(): array {
+	public static function data_wp_timezone_choice_es(): array {
 		return array(
 			'placeholder remains in English (no translation override passed)' => array( '<option selected="selected" value="">Select a city</option>' ),
 			'spanish city translation'                     => array( '<option value="Pacific/Port_Moresby" dir="auto">Puerto Moresby</option>' ),
@@ -119,11 +119,11 @@ class Tests_Functions_WpTimezoneChoice extends WP_UnitTestCase {
 	/**
 	 * Tests setting the locale globally.
 	 *
-	 * @ticket 59941
-	 * @dataProvider data_wp_timezone_choice_es_set
 	 *
 	 * @param string $expected Expected string HTML fragment.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59941' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_timezone_choice_es_set' )]
 	public function test_wp_timezone_choice_es_set( string $expected ): void {
 		switch_to_locale( 'es_ES' );
 		$timezone_list = wp_timezone_choice( '' );

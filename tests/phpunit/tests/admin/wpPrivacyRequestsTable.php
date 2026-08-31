@@ -6,9 +6,12 @@
  *
  * @since 5.1.0
  *
- * @group admin
- * @group privacy
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+
+
+
 class Tests_Admin_wpPrivacyRequestsTable extends WP_UnitTestCase {
 
 	/**
@@ -34,7 +37,7 @@ class Tests_Admin_wpPrivacyRequestsTable extends WP_UnitTestCase {
 	 *
 	 * @since 5.1.0
 	 *
-	 * @return PHPUnit_Framework_MockObject_MockObject|WP_Privacy_Requests_Table Mocked class instance.
+	 * @return WP_Privacy_Requests_Table Test class instance.
 	 */
 	public function get_mocked_class_instance() {
 		$args = array(
@@ -43,10 +46,7 @@ class Tests_Admin_wpPrivacyRequestsTable extends WP_UnitTestCase {
 			'screen'   => 'export_personal_data',
 		);
 
-		$instance = $this
-			->getMockBuilder( 'WP_Privacy_Requests_Table' )
-			->setConstructorArgs( array( $args ) )
-			->getMockForAbstractClass();
+		$instance = new class( $args ) extends WP_Privacy_Requests_Table {};
 
 		$reflection = new ReflectionClass( $instance );
 
@@ -77,10 +77,10 @@ class Tests_Admin_wpPrivacyRequestsTable extends WP_UnitTestCase {
 	 * @param string|null $search   Search term.
 	 * @param string      $expected Expected in SQL query.
 
-	 * @dataProvider data_columns_should_be_sortable
-	 * @covers WP_Privacy_Requests_Table::prepare_items
-	 * @ticket 43960
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_columns_should_be_sortable' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '43960' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Privacy_Requests_Table', 'prepare_items' )]
 	public function test_columns_should_be_sortable( $order, $orderby, $search, $expected ) {
 		global $wpdb;
 
@@ -129,79 +129,76 @@ class Tests_Admin_wpPrivacyRequestsTable extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_columns_should_be_sortable() {
+	public static function data_columns_should_be_sortable() {
 		return array(
 			// Default order (ID) DESC.
 			array(
 				'order'    => null,
 				'orderby'  => null,
-				's'        => null,
+				'search'   => null,
 				'expected' => 'post_date DESC',
 			),
 			// Default order (ID) DESC.
 			array(
 				'order'    => '',
 				'orderby'  => '',
-				's'        => '',
+				'search'   => '',
 				'expected' => 'post_date DESC',
 			),
 			// Order by requester (post_title) ASC.
 			array(
 				'order'    => 'ASC',
 				'orderby'  => 'requester',
-				's'        => '',
+				'search'   => '',
 				'expected' => 'post_title ASC',
 			),
 			// Order by requester (post_title) DESC.
 			array(
 				'order'    => 'DESC',
 				'orderby'  => 'requester',
-				's'        => null,
+				'search'   => null,
 				'expected' => 'post_title DESC',
 			),
 			// Order by requested (post_date) ASC.
 			array(
 				'order'    => 'ASC',
 				'orderby'  => 'requested',
-				's'        => null,
+				'search'   => null,
 				'expected' => 'post_date ASC',
 			),
 			// Order by requested (post_date) DESC.
 			array(
 				'order'    => 'DESC',
 				'orderby'  => 'requested',
-				's'        => null,
+				'search'   => null,
 				'expected' => 'post_date DESC',
 			),
 			// Search and order by relevance.
 			array(
 				'order'    => null,
 				'orderby'  => null,
-				's'        => 'foo',
+				'search'   => 'foo',
 				'expected' => 'post_title LIKE',
 			),
 			// Search and order by requester (post_title) ASC.
 			array(
 				'order'    => 'ASC',
 				'orderby'  => 'requester',
-				's'        => 'foo',
+				'search'   => 'foo',
 				'expected' => 'post_title ASC',
 			),
 			// Search and order by requested (post_date) ASC.
 			array(
 				'order'    => 'ASC',
 				'orderby'  => 'requested',
-				's'        => 'foo',
+				'search'   => 'foo',
 				'expected' => 'post_date ASC',
 			),
 		);
 	}
 
-	/**
-	 * @ticket 42066
-	 *
-	 * @covers WP_Privacy_Requests_Table::get_views
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42066' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Privacy_Requests_Table', 'get_views' )]
 	public function test_get_views_should_return_views_by_default() {
 		$expected = array(
 			'all' => '<a href="http://' . WP_TESTS_DOMAIN . '/wp-admin/export-personal-data.php" class="current" aria-current="page">All <span class="count">(0)</span></a>',
@@ -213,10 +210,10 @@ class Tests_Admin_wpPrivacyRequestsTable extends WP_UnitTestCase {
 	/**
 	 * Test the get_timestamp_as_date method formats timestamps correctly.
 	 *
-	 * @ticket 44267
 	 *
-	 * @covers WP_Privacy_Requests_Table::get_timestamp_as_date
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44267' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Privacy_Requests_Table', 'get_timestamp_as_date' )]
 	public function test_get_timestamp_as_date() {
 		$table = $this->get_mocked_class_instance();
 

@@ -1,17 +1,14 @@
 <?php
 
-/**
- * @group admin
- *
- * @covers ::wp_refresh_heartbeat_nonces
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_refresh_heartbeat_nonces' )]
 class Tests_Admin_Includes_Misc_WpRefreshHeartbeatNonces_Test extends WP_UnitTestCase {
 
 	/**
 	 * Tests that wp_refresh_heartbeat_nonces() correctly adds nonces to the response.
 	 *
-	 * @ticket 65199
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65199' )]
 	public function test_wp_refresh_heartbeat_nonces() {
 		$response = array( 'some_data' => 'value' );
 
@@ -28,8 +25,8 @@ class Tests_Admin_Includes_Misc_WpRefreshHeartbeatNonces_Test extends WP_UnitTes
 	/**
 	 * Tests that wp_refresh_heartbeat_nonces() overwrites existing nonces if they are already present.
 	 *
-	 * @ticket 65199
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65199' )]
 	public function test_wp_refresh_heartbeat_nonces_overwrites_existing() {
 		$response = array(
 			'rest_nonce'      => 'old_rest_nonce',

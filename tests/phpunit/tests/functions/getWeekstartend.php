@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group functions
  *
- * @covers ::get_weekstartend
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_weekstartend' )]
 class Tests_Functions_GetWeekstartend extends WP_UnitTestCase {
 
 	public function test_default_start_of_week_option_is_monday() {

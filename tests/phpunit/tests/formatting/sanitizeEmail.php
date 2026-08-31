@@ -2,20 +2,19 @@
 /**
  * Tests for the sanitize_email() function.
  *
- * @group formatting
- * @covers ::sanitize_email
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_email' )]
 class Tests_Formatting_SanitizeEmail extends WP_UnitTestCase {
 	/**
 	 * This test checks that email addresses are properly sanitized.
 	 *
-	 * @ticket 31992
-	 *
-	 * @dataProvider data_sanitized_email_pairs
 	 *
 	 * @param string $address  The email address to sanitize.
 	 * @param string $expected The expected sanitized email address.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31992' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitized_email_pairs' )]
 	public function test_returns_stripped_email_address( $address, $expected ) {
 		$sanitized = sanitize_email( $address );
 
@@ -39,7 +38,7 @@ class Tests_Formatting_SanitizeEmail extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_sanitized_email_pairs() {
+	public static function data_sanitized_email_pairs() {
 		return array(
 			'shorter than 6 characters'      => array( 'a@b', '' ),
 			'contains no @'                  => array( 'ab', '' ),

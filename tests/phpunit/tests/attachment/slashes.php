@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group attachment
- * @group slashes
- * @ticket 21767
  *
- * @covers ::wp_insert_attachment
  */
+#[\PHPUnit\Framework\Attributes\Group( 'attachment' )]
+#[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '21767' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_insert_attachment' )]
 class Tests_Attachment_Slashes extends WP_UnitTestCase {
 
 	/*

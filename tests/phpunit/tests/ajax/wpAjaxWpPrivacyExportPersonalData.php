@@ -5,11 +5,11 @@
  * @package WordPress\UnitTests
  * @since 5.2.0
  *
- * @group ajax
- * @group privacy
  *
- * @covers ::wp_ajax_wp_privacy_export_personal_data
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_wp_privacy_export_personal_data' )]
 class Tests_Ajax_wpAjaxWpPrivacyExportPersonalData extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -267,10 +267,10 @@ class Tests_Ajax_wpAjaxWpPrivacyExportPersonalData extends WP_Ajax_UnitTestCase 
 	/**
 	 * Test requests do not succeed on multisite when the current user is not a network admin.
 	 *
-	 * @ticket 43438
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43438' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_error_when_current_user_missing_required_capability_multisite() {
 		revoke_super_admin( get_current_user_id() );
 

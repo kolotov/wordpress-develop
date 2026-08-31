@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group block-supports
  *
- * @covers ::wp_apply_dimensions_support
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_apply_dimensions_support' )]
 class Tests_Block_Supports_WpApplyDimensionsSupport extends WP_UnitTestCase {
 	/**
 	 * @var string|null
@@ -25,16 +25,15 @@ class Tests_Block_Supports_WpApplyDimensionsSupport extends WP_UnitTestCase {
 	/**
 	 * Tests that minimum height block support works as expected.
 	 *
-	 * @ticket 57582
 	 *
-	 * @covers ::wp_apply_dimensions_support
 	 *
-	 * @dataProvider data_minimum_height_block_support
 	 *
 	 * @param string $block_name The test block name to register.
 	 * @param mixed  $dimensions The dimensions block support settings.
 	 * @param mixed  $expected   The expected results.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57582' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_minimum_height_block_support' )]
 	public function test_minimum_height_block_support( $block_name, $dimensions, $expected ) {
 		$this->test_block_name = $block_name;
 		register_block_type(
@@ -71,7 +70,7 @@ class Tests_Block_Supports_WpApplyDimensionsSupport extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_minimum_height_block_support() {
+	public static function data_minimum_height_block_support() {
 		return array(
 			'style is applied' => array(
 				'block_name' => 'test/dimensions-block-supports',
@@ -104,16 +103,15 @@ class Tests_Block_Supports_WpApplyDimensionsSupport extends WP_UnitTestCase {
 	/**
 	 * Tests that width block support works as expected.
 	 *
-	 * @ticket 64200
 	 *
-	 * @covers ::wp_apply_dimensions_support
 	 *
-	 * @dataProvider data_width_block_support
 	 *
 	 * @param string $block_name The test block name to register.
 	 * @param mixed  $dimensions The dimensions block support settings.
 	 * @param mixed  $expected   The expected results.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64200' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_width_block_support' )]
 	public function test_width_block_support( $block_name, $dimensions, $expected ) {
 		$this->test_block_name = $block_name;
 		register_block_type(
@@ -150,7 +148,7 @@ class Tests_Block_Supports_WpApplyDimensionsSupport extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_width_block_support() {
+	public static function data_width_block_support() {
 		return array(
 			'style is applied' => array(
 				'block_name' => 'test/width-style-is-applied',
@@ -175,16 +173,15 @@ class Tests_Block_Supports_WpApplyDimensionsSupport extends WP_UnitTestCase {
 	/**
 	 * Tests that height block support works as expected.
 	 *
-	 * @ticket 64202
 	 *
-	 * @covers ::wp_apply_dimensions_support
 	 *
-	 * @dataProvider data_height_block_support
 	 *
 	 * @param string $block_name The test block name to register.
 	 * @param mixed  $dimensions The dimensions block support settings.
 	 * @param mixed  $expected   The expected results.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64202' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_height_block_support' )]
 	public function test_height_block_support( $block_name, $dimensions, $expected ) {
 		$this->test_block_name = $block_name;
 		register_block_type(
@@ -221,7 +218,7 @@ class Tests_Block_Supports_WpApplyDimensionsSupport extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_height_block_support() {
+	public static function data_height_block_support() {
 		return array(
 			'style is applied' => array(
 				'block_name' => 'test/height-style-is-applied',
@@ -246,16 +243,15 @@ class Tests_Block_Supports_WpApplyDimensionsSupport extends WP_UnitTestCase {
 	/**
 	 * Tests that minimum width block support works as expected.
 	 *
-	 * @ticket 65037
 	 *
-	 * @covers ::wp_apply_dimensions_support
 	 *
-	 * @dataProvider data_minimum_width_block_support
 	 *
 	 * @param string $block_name The test block name to register.
 	 * @param mixed  $dimensions The dimensions block support settings.
 	 * @param mixed  $expected   The expected results.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65037' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_minimum_width_block_support' )]
 	public function test_minimum_width_block_support( $block_name, $dimensions, $expected ) {
 		$this->test_block_name = $block_name;
 		register_block_type(
@@ -292,7 +288,7 @@ class Tests_Block_Supports_WpApplyDimensionsSupport extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_minimum_width_block_support() {
+	public static function data_minimum_width_block_support() {
 		return array(
 			'style is applied' => array(
 				'block_name' => 'test/min-width-style-is-applied',

@@ -3,8 +3,8 @@
 /**
  * test wp-includes/post.php
  *
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_Post extends WP_UnitTestCase {
 	protected static $grammarian_id;
 
@@ -129,8 +129,8 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16746
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16746' )]
 	public function test_parse_post_content_starting_with_nextpage() {
 		global $multipage, $pages, $numpages;
 
@@ -149,8 +149,8 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16746
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16746' )]
 	public function test_parse_post_content_starting_with_nextpage_multi() {
 		global $multipage, $pages, $numpages;
 
@@ -169,9 +169,9 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24803
-	 * @covers ::wp_count_posts
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24803' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_count_posts' )]
 	public function test_wp_count_posts() {
 		$post_type = rand_str( 20 );
 		register_post_type( $post_type );
@@ -195,10 +195,10 @@ class Tests_Post extends WP_UnitTestCase {
 	 * authored by other users when the current user lacks the capability to
 	 * read private posts.
 	 *
-	 * @ticket 61097
 	 *
-	 * @covers ::wp_count_posts
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61097' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_count_posts' )]
 	public function test_wp_count_posts_readable_excludes_unreadable_private_posts() {
 		$post_type = rand_str( 20 );
 		register_post_type( $post_type );
@@ -231,8 +231,8 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_count_posts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_count_posts' )]
 	public function test_wp_count_posts_filtered() {
 		$post_type = rand_str( 20 );
 		register_post_type( $post_type );
@@ -259,8 +259,8 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_count_posts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_count_posts' )]
 	public function test_wp_count_posts_insert_invalidation() {
 		$post_ids       = self::factory()->post->create_many( 3 );
 		$initial_counts = wp_count_posts();
@@ -282,8 +282,8 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_count_posts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_count_posts' )]
 	public function test_wp_count_posts_trash_invalidation() {
 		$post_ids       = self::factory()->post->create_many( 3 );
 		$initial_counts = wp_count_posts();
@@ -303,9 +303,9 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49685
-	 * @covers ::wp_count_posts
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49685' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_count_posts' )]
 	public function test_wp_count_posts_status_changes_visible() {
 		self::factory()->post->create_many( 3 );
 
@@ -320,8 +320,8 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25566
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25566' )]
 	public function test_wp_tag_cloud_link_with_post_type() {
 		$post_type = 'new_post_type';
 		$tax       = 'new_tag';
@@ -358,8 +358,8 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21212
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21212' )]
 	public function test_utf8mb3_post_saves_with_emoji() {
 		global $wpdb;
 
@@ -399,8 +399,8 @@ class Tests_Post extends WP_UnitTestCase {
 	 * If a sticky post is updated via `wp_update_post()` by a user
 	 * without the `publish_posts` capability, it should stay sticky.
 	 *
-	 * @ticket 24153
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24153' )]
 	public function test_user_without_publish_posts_cannot_affect_sticky() {
 		// Create a sticky post.
 		$post = self::factory()->post->create_and_get(
@@ -437,8 +437,8 @@ class Tests_Post extends WP_UnitTestCase {
 	 * If a sticky post is updated via `edit_post()` by a user
 	 * without the `publish_posts` capability, it should stay sticky.
 	 *
-	 * @ticket 24153
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24153' )]
 	public function test_user_without_publish_posts_cannot_affect_sticky_with_edit_post() {
 		// Create a sticky post.
 		$post = self::factory()->post->create_and_get(
@@ -477,8 +477,8 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Test that hooks are fired when post gets stuck and unstuck.
 	 *
-	 * @ticket 35600
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35600' )]
 	public function test_hooks_fire_when_post_gets_stuck_and_unstuck() {
 		$post_id = self::factory()->post->create();
 		$a1      = new MockAction();
@@ -507,8 +507,8 @@ class Tests_Post extends WP_UnitTestCase {
 	 * function that tries to create a unique name based on the post name.
 	 *
 	 * @see wp_unique_post_slug()
-	 * @ticket 21112
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21112' )]
 	public function test_pre_wp_unique_post_slug_filter() {
 		add_filter( 'pre_wp_unique_post_slug', array( $this, 'filter_pre_wp_unique_post_slug' ), 10, 6 );
 
@@ -530,8 +530,8 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52187
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52187' )]
 	public function test_wp_resolve_post_date() {
 		$post_date     = '2020-12-28 11:26:35';
 		$post_date_gmt = '2020-12-29 10:11:45';
@@ -573,8 +573,8 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Ensure sticking a post updates the `sticky_posts` option.
 	 *
-	 * @covers ::stick_post
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'stick_post' )]
 	public function test_stick_post_updates_option() {
 		stick_post( 1 );
 		$this->assertSameSets( array( 1 ), get_option( 'sticky_posts' ) );
@@ -586,12 +586,12 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Ensure sticking a post does not duplicate post IDs in the option.
 	 *
-	 * @ticket 52007
-	 * @covers ::stick_post
-	 * @dataProvider data_stick_post_does_not_duplicate_post_ids
 	 *
 	 * @param mixed $stick Value to pass to stick_post().
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52007' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_stick_post_does_not_duplicate_post_ids' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'stick_post' )]
 	public function test_stick_post_does_not_duplicate_post_ids( $stick ) {
 		update_option( 'sticky_posts', array( 1, 2 ) );
 
@@ -608,7 +608,7 @@ class Tests_Post extends WP_UnitTestCase {
 	 *     @type mixed $stick Value to pass to stick_post().
 	 * }
 	 */
-	public function data_stick_post_does_not_duplicate_post_ids() {
+	public static function data_stick_post_does_not_duplicate_post_ids() {
 		return array(
 			array( 1 ),
 			array( '1' ),
@@ -619,10 +619,10 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Ensures sticking a post succeeds after deleting the 'sticky_posts' option.
 	 *
-	 * @ticket 52007
-	 * @ticket 55176
-	 * @covers ::stick_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52007' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55176' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'stick_post' )]
 	public function test_stick_post_after_delete_sticky_posts_option() {
 		delete_option( 'sticky_posts' );
 
@@ -633,13 +633,13 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Ensures sticking works with an unexpected option value.
 	 *
-	 * @ticket 52007
-	 * @ticket 55176
-	 * @covers ::stick_post
-	 * @dataProvider data_stick_post_with_unexpected_sticky_posts_option
 	 *
 	 * @param mixed $starting_option Starting value for sticky_posts option.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52007' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55176' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_stick_post_with_unexpected_sticky_posts_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'stick_post' )]
 	public function test_stick_post_with_unexpected_sticky_posts_option( $starting_option ) {
 		update_option( 'sticky_posts', $starting_option );
 
@@ -652,7 +652,7 @@ class Tests_Post extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_stick_post_with_unexpected_sticky_posts_option() {
+	public static function data_stick_post_with_unexpected_sticky_posts_option() {
 		return array(
 			'false'     => array( false ),
 			'a string'  => array( 'string' ),
@@ -666,9 +666,9 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Ensure sticking a post removes other duplicate post IDs from the option.
 	 *
-	 * @ticket 52007
-	 * @covers ::stick_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52007' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'stick_post' )]
 	public function test_stick_post_removes_duplicate_post_ids_when_adding_new_value() {
 		update_option( 'sticky_posts', array( 1, 1, 2, 2 ) );
 
@@ -679,8 +679,8 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Ensure unsticking a post updates the `sticky_posts` option.
 	 *
-	 * @covers ::unstick_post
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unstick_post' )]
 	public function test_unstick_post_updates_option() {
 		update_option( 'sticky_posts', array( 1 ) );
 		unstick_post( 1 );
@@ -694,15 +694,15 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Ensure unsticking a post removes duplicate post IDs from the option.
 	 *
-	 * @ticket 52007
-	 * @covers ::unstick_post
 	 *
-	 * @dataProvider data_unstick_post_removes_duplicate_post_ids
 	 *
 	 * @param array $starting_option Original value of `sticky_posts` option.
 	 * @param mixed $unstick         Parameter passed to `unstick_post()`
 	 * @param array $expected
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52007' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unstick_post_removes_duplicate_post_ids' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unstick_post' )]
 	public function test_unstick_post_removes_duplicate_post_ids( $starting_option, $unstick, $expected ) {
 		update_option( 'sticky_posts', $starting_option );
 		unstick_post( $unstick );
@@ -720,7 +720,7 @@ class Tests_Post extends WP_UnitTestCase {
 	 *     @type array $expected
 	 * }
 	 */
-	public function data_unstick_post_removes_duplicate_post_ids() {
+	public static function data_unstick_post_removes_duplicate_post_ids() {
 		return array(
 			array(
 				array( 1, 1 ),
@@ -753,9 +753,9 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Ensure sticking a duplicate post does not update the `sticky_posts` option.
 	 *
-	 * @ticket 52007
-	 * @covers ::stick_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52007' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'stick_post' )]
 	public function test_stick_post_with_duplicate_post_id_does_not_update_option() {
 		update_option( 'sticky_posts', array( 1, 2, 2 ) );
 		stick_post( 2 );
@@ -765,9 +765,9 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Ensure unsticking a non-sticky post does not update the `sticky_posts` option.
 	 *
-	 * @ticket 52007
-	 * @covers ::unstick_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52007' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unstick_post' )]
 	public function test_unstick_post_with_non_sticky_post_id_does_not_update_option() {
 		update_option( 'sticky_posts', array( 1, 2, 2 ) );
 		unstick_post( 3 );
@@ -777,9 +777,9 @@ class Tests_Post extends WP_UnitTestCase {
 	/**
 	 * Check if post supports block editor.
 	 *
-	 * @ticket 51819
-	 * @covers ::use_block_editor_for_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51819' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'use_block_editor_for_post' )]
 	public function test_use_block_editor_for_post() {
 		$this->assertFalse( use_block_editor_for_post( -1 ) );
 		$bogus_post_id = self::factory()->post->create(
@@ -814,14 +814,12 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26798
-	 *
-	 * @dataProvider data_wp_insert_post_handle_malformed_post_date
-	 *
 	 * The purpose of this test is to ensure that invalid dates do not
 	 * cause PHP errors when wp_insert_post() is called, and that the
 	 * posts are not actually "inserted" (created).
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26798' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_insert_post_handle_malformed_post_date' )]
 	public function test_wp_insert_post_handle_malformed_post_date( $input, $expected ) {
 		$post = array(
 			'post_author'  => self::$user_ids['editor'],
@@ -840,9 +838,9 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26798
 	 */
-	public function data_wp_insert_post_handle_malformed_post_date() {
+	#[\PHPUnit\Framework\Attributes\Ticket( '26798' )]
+	public static function data_wp_insert_post_handle_malformed_post_date() {
 		return array(
 			array(
 				'2012-01-01',
@@ -938,13 +936,11 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26798
-	 *
-	 * @dataProvider data_wp_resolve_post_date_regex
-	 *
 	 * Tests the regex inside of wp_resolve_post_date(), with
 	 * the emphasis on the date format (not the time).
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26798' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_resolve_post_date_regex' )]
 	public function test_wp_resolve_post_date_regex( $date, $expected ) {
 		// Attempt to resolve post date.
 		$actual = wp_resolve_post_date( $date );
@@ -954,9 +950,9 @@ class Tests_Post extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26798
 	 */
-	public function data_wp_resolve_post_date_regex() {
+	#[\PHPUnit\Framework\Attributes\Ticket( '26798' )]
+	public static function data_wp_resolve_post_date_regex() {
 		return array(
 			array(
 				'2012-01-01',

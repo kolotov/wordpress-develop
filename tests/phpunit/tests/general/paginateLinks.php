@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group general
- * @group template
- * @covers ::paginate_links
  */
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'paginate_links' )]
 class Tests_General_PaginateLinks extends WP_UnitTestCase {
 
 	private int $i18n_count = 0;
@@ -57,13 +57,13 @@ EXPECTED;
 	/**
 	 * Test the format parameter behaves as expected.
 	 *
-	 * @dataProvider data_format
 	 *
 	 * @param string $format Format to test.
 	 * @param string $page2  Expected URL for page 2.
 	 * @param string $page3  Expected URL for page 3.
 	 * @param string $page50 Expected URL for page 50.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_format' )]
 	public function test_format( $format, $page2, $page3, $page50 ) {
 		$expected = <<<EXPECTED
 <span aria-current="page" class="page-numbers current">1</span>
@@ -88,7 +88,7 @@ EXPECTED;
 	 *
 	 * @return array[] Data provider.
 	 */
-	public function data_format() {
+	public static function data_format() {
 		return array(
 			'pretty permalinks'                => array( 'page/%#%/', home_url( '/page/2/' ), home_url( '/page/3/' ), home_url( '/page/50/' ) ),
 			'plain permalinks'                 => array( '?page=%#%', home_url( '/?page=2' ), home_url( '/?page=3' ), home_url( '/?page=50' ) ),
@@ -155,8 +155,8 @@ EXPECTED;
 	}
 
 	/**
-	 * @ticket 25735
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25735' )]
 	public function test_paginate_links_number_format() {
 		$this->i18n_count = 0;
 		add_filter( 'number_format_i18n', array( $this, 'increment_i18n_count' ) );
@@ -177,8 +177,8 @@ EXPECTED;
 	}
 
 	/**
-	 * @ticket 24606
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24606' )]
 	public function test_paginate_links_base_value() {
 
 		// Current page: 2.
@@ -212,7 +212,7 @@ EXPECTED;
 			$document->loadHTML( $links[ $link_idx ] );
 			$tag = $document->getElementsByTagName( 'a' )->item( 0 );
 
-			$this->assertNotNull( $tag );
+			$this->assertInstanceOf( DOMElement::class, $tag );
 
 			$href  = $tag->attributes->getNamedItem( 'href' )->value;
 			$class = $tag->attributes->getNamedItem( 'class' )->value;
@@ -234,14 +234,14 @@ EXPECTED;
 
 		$document->loadHTML( $links[0] );
 		$tag = $document->getElementsByTagName( 'span' )->item( 0 );
-		$this->assertNotNull( $tag );
+		$this->assertInstanceOf( DOMElement::class, $tag );
 
 		$class = $tag->attributes->getNamedItem( 'class' )->value;
 		$this->assertSame( 'page-numbers current', $class );
 
 		$document->loadHTML( $links[1] );
 		$tag = $document->getElementsByTagName( 'a' )->item( 0 );
-		$this->assertNotNull( $tag );
+		$this->assertInstanceOf( DOMElement::class, $tag );
 
 		$href = $tag->attributes->getNamedItem( 'href' )->value;
 		$this->assertSame( get_pagenum_link( 2 ), $href );
@@ -258,8 +258,8 @@ EXPECTED;
 	}
 
 	/**
-	 * @ticket 29636
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29636' )]
 	public function test_paginate_links_query_args() {
 		add_filter( 'get_pagenum_link', array( $this, 'add_query_arg' ) );
 		$links = paginate_links(
@@ -288,7 +288,7 @@ EXPECTED;
 		foreach ( $data as $index => $expected_href ) {
 			$document->loadHTML( $links[ $index ] );
 			$tag = $document->getElementsByTagName( 'a' )->item( 0 );
-			$this->assertNotNull( $tag );
+			$this->assertInstanceOf( DOMElement::class, $tag );
 
 			$href = $tag->attributes->getNamedItem( 'href' )->value;
 			$this->assertSame( $expected_href, $href );
@@ -296,8 +296,8 @@ EXPECTED;
 	}
 
 	/**
-	 * @ticket 30831
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30831' )]
 	public function test_paginate_links_with_custom_query_args() {
 		add_filter( 'get_pagenum_link', array( $this, 'add_query_arg' ) );
 		$links = paginate_links(
@@ -328,7 +328,7 @@ EXPECTED;
 		foreach ( $data as $index => $expected_href ) {
 			$document->loadHTML( $links[ $index ] );
 			$tag = $document->getElementsByTagName( 'a' )->item( 0 );
-			$this->assertNotNull( $tag );
+			$this->assertInstanceOf( DOMElement::class, $tag );
 
 			$href = $tag->attributes->getNamedItem( 'href' )->value;
 			$this->assertSame( $expected_href, $href );
@@ -336,8 +336,8 @@ EXPECTED;
 	}
 
 	/**
-	 * @ticket 30831
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30831' )]
 	public function test_paginate_links_should_allow_non_default_format_without_add_args() {
 		// Fake the query params.
 		$request_uri            = $_SERVER['REQUEST_URI'];
@@ -362,8 +362,8 @@ EXPECTED;
 	}
 
 	/**
-	 * @ticket 30831
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30831' )]
 	public function test_paginate_links_should_allow_add_args_to_be_bool_false() {
 		// Fake the query params.
 		$request_uri            = $_SERVER['REQUEST_URI'];
@@ -384,8 +384,8 @@ EXPECTED;
 	}
 
 	/**
-	 * @ticket 31939
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31939' )]
 	public function test_custom_base_query_arg_should_be_stripped_from_current_url_before_generating_pag_links() {
 		// Fake the current URL: example.com?foo.
 		$request_uri            = $_SERVER['REQUEST_URI'];
@@ -408,8 +408,8 @@ EXPECTED;
 	/**
 	 * Ensures pagination links include trailing slashes when the permalink structure includes them.
 	 *
-	 * @ticket 61393
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61393' )]
 	public function test_permalinks_with_trailing_slash_produce_links_with_trailing_slashes(): void {
 		update_option( 'posts_per_page', 2 );
 		$this->set_permalink_structure( '/%postname%/' );
@@ -432,8 +432,8 @@ EXPECTED;
 	/**
 	 * Ensures pagination links do not include trailing slashes when the permalink structure doesn't include them.
 	 *
-	 * @ticket 61393
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61393' )]
 	public function test_permalinks_without_trailing_slash_produce_links_without_trailing_slashes(): void {
 		update_option( 'posts_per_page', 2 );
 		$this->set_permalink_structure( '/%postname%' );
@@ -456,8 +456,8 @@ EXPECTED;
 	/**
 	 * Ensures pagination links do not include trailing slashes when the permalink structure is plain.
 	 *
-	 * @ticket 61393
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61393' )]
 	public function test_plain_permalinks_are_not_modified_with_trailing_slash(): void {
 		update_option( 'posts_per_page', 2 );
 		$this->set_permalink_structure( '' );
@@ -493,13 +493,13 @@ EXPECTED;
 	/**
 	 * Ensures the pagination links do not modify query strings (permalinks with trailing slash).
 	 *
-	 * @ticket 61393
-	 * @ticket 63123
 	 *
-	 * @dataProvider data_query_strings
 	 *
 	 * @param string $query_string Query string.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61393' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63123' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_strings' )]
 	public function test_permalinks_with_trailing_slash_do_not_modify_query_strings( string $query_string ): void {
 		update_option( 'posts_per_page', 2 );
 		$this->set_permalink_structure( '/%postname%/' );
@@ -522,13 +522,13 @@ EXPECTED;
 	/**
 	 * Ensures the pagination links do not modify query strings (permalinks without trailing slash).
 	 *
-	 * @ticket 61393
-	 * @ticket 63123
 	 *
-	 * @dataProvider data_query_strings
 	 *
 	 * @param string $query_string Query string.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61393' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63123' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_strings' )]
 	public function test_permalinks_without_trailing_slash_do_not_modify_query_strings( string $query_string ): void {
 		update_option( 'posts_per_page', 2 );
 		$this->set_permalink_structure( '/%postname%' );
@@ -557,7 +557,7 @@ EXPECTED;
 	 *
 	 * @return array<string, array{ 0: string }> Data provider.
 	 */
-	public function data_query_strings(): array {
+	public static function data_query_strings(): array {
 		return array(
 			'single query var' => array( 'foo=bar' ),
 			'multi query vars' => array( 'foo=bar&pen=pencil' ),

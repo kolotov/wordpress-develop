@@ -6,9 +6,9 @@
  * @subpackage UnitTests
  * @since 4.9.6
  *
- * @group privacy
- * @covers ::wp_privacy_delete_old_export_files
  */
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_privacy_delete_old_export_files' )]
 class Tests_Privacy_wpPrivacyDeleteOldExportFiles extends WP_UnitTestCase {
 	/**
 	 * Path to the index file that blocks directory listing on poorly-configured servers.

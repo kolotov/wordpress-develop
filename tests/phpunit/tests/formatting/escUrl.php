@@ -1,15 +1,18 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::esc_url
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'esc_url' )]
 class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 23605
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23605' )]
 	public function test_spaces() {
 		$this->assertSame( 'http://example.com/Mr%20WordPress', esc_url( 'http://example.com/Mr WordPress' ) );
 		$this->assertSame( 'http://example.com/Mr%20WordPress', esc_url( 'http://example.com/Mr%20WordPress' ) );
@@ -43,8 +46,8 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::sanitize_url
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_url' )]
 	public function test_all_url_parts() {
 		$url = 'https://user:pass@host.example.com:1234/path;p=1?query=2&r[]=3#fragment';
 
@@ -74,8 +77,8 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::sanitize_url
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_url' )]
 	public function test_encoding() {
 		$this->assertSame( 'http://example.com?foo=1&bar=2', sanitize_url( 'http://example.com?foo=1&bar=2' ) );
 		$this->assertSame( 'http://example.com?foo=1&amp;bar=2', sanitize_url( 'http://example.com?foo=1&amp;bar=2' ) );
@@ -90,11 +93,11 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23605
-	 * @ticket 52886
 	 *
-	 * @covers ::wp_allowed_protocols
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23605' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '52886' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_allowed_protocols' )]
 	public function test_protocol() {
 		$this->assertSame( 'http://example.com', esc_url( 'http://example.com' ) );
 		$this->assertSame( '', esc_url( 'nasty://example.com/' ) );
@@ -190,8 +193,8 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23187
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23187' )]
 	public function test_protocol_case() {
 		$this->assertSame( 'http://example.com', esc_url( 'HTTP://example.com' ) );
 		$this->assertSame( 'http://example.com', esc_url( 'Http://example.com' ) );
@@ -217,8 +220,8 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16859
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16859' )]
 	public function test_square_brackets() {
 		$this->assertSame( '/example.php?one%5B%5D=two', esc_url( '/example.php?one[]=two' ) );
 		$this->assertSame( '?foo%5Bbar%5D=baz', esc_url( '?foo[bar]=baz' ) );
@@ -234,23 +237,23 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 	/**
 	 * Courtesy of http://blog.lunatech.com/2009/02/03/what-every-web-developer-must-know-about-url-encoding
 	 *
-	 * @covers ::sanitize_url
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_url' )]
 	public function test_reserved_characters() {
 		$url = "http://example.com/:@-._~!$&'()*+,=;:@-._~!$&'()*+,=:@-._~!$&'()*+,==?/?:@-._~!$%27()*+,;=/?:@-._~!$%27()*+,;==#/?:@-._~!$&'()*+,;=";
 		$this->assertSame( $url, sanitize_url( $url ) );
 	}
 
 	/**
-	 * @ticket 21974
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21974' )]
 	public function test_protocol_relative_with_colon() {
 		$this->assertSame( '//example.com/foo?foo=abc:def', esc_url( '//example.com/foo?foo=abc:def' ) );
 	}
 
 	/**
-	 * @ticket 31632
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31632' )]
 	public function test_mailto_with_newline() {
 		$body       = <<<EOT
 Hi there,
@@ -264,8 +267,8 @@ EOT;
 	}
 
 	/**
-	 * @ticket 31632
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31632' )]
 	public function test_mailto_in_http_url_with_newline() {
 		$body       = <<<EOT
 Hi there,
@@ -279,8 +282,8 @@ EOT;
 	}
 
 	/**
-	 * @ticket 23605
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23605' )]
 	public function test_mailto_with_spaces() {
 		$body = 'Hi there, I thought you might want to sign up for this newsletter';
 
@@ -290,17 +293,17 @@ EOT;
 	}
 
 	/**
-	 * @ticket 28015
 	 *
-	 * @covers ::sanitize_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_url' )]
 	public function test_invalid_characters() {
 		$this->assertEmpty( sanitize_url( '"^<>{}`' ) );
 	}
 
 	/**
-	 * @ticket 34202
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34202' )]
 	public function test_ipv6_hosts() {
 		$this->assertSame( '//[::127.0.0.1]', esc_url( '//[::127.0.0.1]' ) );
 		$this->assertSame( 'http://[::FFFF::127.0.0.1]', esc_url( 'http://[::FFFF::127.0.0.1]' ) );

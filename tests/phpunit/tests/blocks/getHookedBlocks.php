@@ -7,11 +7,14 @@
  *
  * @since 6.4.0
  *
- * @group blocks
- * @group block-hooks
  *
- * @covers ::get_hooked_blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\Group( 'block-hooks' )]
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_hooked_blocks' )]
 class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 
 	const TEST_THEME_NAME = 'block-theme-with-hooked-blocks';
@@ -59,8 +62,8 @@ class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59383
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59383' )]
 	public function test_get_hooked_blocks_no_match_found() {
 		$result = get_hooked_blocks();
 
@@ -68,8 +71,8 @@ class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59383
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59383' )]
 	public function test_get_hooked_blocks_matches_found() {
 		register_block_type(
 			'tests/injected-one',
@@ -132,12 +135,12 @@ class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
-	 * @ticket 60008
-	 * @ticket 60506
 	 *
-	 * @covers ::get_block_file_template
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60008' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_block_file_template' )]
 	public function test_loading_template_with_hooked_blocks() {
 		$this->switch_to_block_theme_hooked_blocks();
 
@@ -163,12 +166,12 @@ class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
-	 * @ticket 60008
-	 * @ticket 60506
 	 *
-	 * @covers ::get_block_file_template
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60008' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_block_file_template' )]
 	public function test_loading_template_part_with_hooked_blocks() {
 		$this->switch_to_block_theme_hooked_blocks();
 
@@ -194,12 +197,12 @@ class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
-	 * @ticket 60008
-	 * @ticket 60506
 	 *
-	 * @covers WP_Block_Patterns_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60008' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'get_registered' )]
 	public function test_loading_pattern_with_hooked_blocks() {
 		$this->switch_to_block_theme_hooked_blocks();
 

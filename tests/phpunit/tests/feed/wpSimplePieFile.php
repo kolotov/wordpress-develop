@@ -6,9 +6,10 @@
  * @subpackage UnitTests
  * @since 5.6.1
  *
- * @group feed
- * @group wp-simplepie-file
  */
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_SimplePie_File::class, '__construct' )]
+#[\PHPUnit\Framework\Attributes\Group( 'feed' )]
+#[\PHPUnit\Framework\Attributes\Group( 'wp-simplepie-file' )]
 class Tests_Feed_wpSimplePieFile extends WP_UnitTestCase {
 	public static function set_up_before_class() {
 		parent::set_up_before_class();
@@ -20,14 +21,13 @@ class Tests_Feed_wpSimplePieFile extends WP_UnitTestCase {
 	/**
 	 * Test that single- and multiple-value headers are parsed in the way that SimplePie expects.
 	 *
-	 * @dataProvider data_header_parsing
 	 *
-	 * @covers WP_SimplePie_File::__construct
 	 *
 	 * @since 5.6.1
 	 *
-	 * @ticket 51056
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_header_parsing' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '51056' )]
 	public function test_header_parsing( $callback, $header_field, $expected ) {
 		add_filter( 'pre_http_request', array( $this, $callback ) );
 
@@ -41,7 +41,7 @@ class Tests_Feed_wpSimplePieFile extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_header_parsing() {
+	public static function data_header_parsing() {
 		return array(
 			'single content type header works' => array(
 				'mocked_response_single_header_values',

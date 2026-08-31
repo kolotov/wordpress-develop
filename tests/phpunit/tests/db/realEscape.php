@@ -3,10 +3,10 @@
 /**
  * Test WPDB _real_escape() method.
  *
- * @group wpdb
  *
- * @covers wpdb::_real_escape
  */
+#[\PHPUnit\Framework\Attributes\Group( 'wpdb' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( wpdb::class, '_real_escape' )]
 class Tests_DB_RealEscape extends WP_UnitTestCase {
 
 	/**
@@ -15,13 +15,13 @@ class Tests_DB_RealEscape extends WP_UnitTestCase {
 	 * Note: this test does not test the actual escaping or other logic in the function.
 	 * It just and only tests and documents how the function handles various input types.
 	 *
-	 * @ticket 53635
 	 *
-	 * @dataProvider data_real_escape_input_type_handling
 	 *
 	 * @param mixed  $input    The input to escape.
 	 * @param string $expected The expected function output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53635' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_real_escape_input_type_handling' )]
 	public function test_real_escape_input_type_handling( $input, $expected ) {
 		global $wpdb;
 
@@ -33,7 +33,7 @@ class Tests_DB_RealEscape extends WP_UnitTestCase {
 	 *
 	 * @var array
 	 */
-	public function data_real_escape_input_type_handling() {
+	public static function data_real_escape_input_type_handling() {
 		return array(
 			'null'             => array(
 				'input'    => null,

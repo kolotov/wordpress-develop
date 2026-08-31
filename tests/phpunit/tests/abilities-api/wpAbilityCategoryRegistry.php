@@ -3,11 +3,11 @@
 /**
  * Tests for the ability category functionality.
  *
- * @covers WP_Ability_Category
- * @covers WP_Ability_Categories_Registry
  *
- * @group abilities-api
  */
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Ability_Category::class )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Ability_Categories_Registry::class )]
+#[\PHPUnit\Framework\Attributes\Group( 'abilities-api' )]
 class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 
 	/**
@@ -96,8 +96,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering a valid category.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_valid_category(): void {
 		$result = $this->registry->register(
 			'test-math',
@@ -116,10 +116,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering category with invalid slug format.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_invalid_slug_format(): void {
 		// Uppercase characters not allowed.
 		$result = $this->registry->register(
@@ -137,10 +137,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering category with invalid slug - underscore.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_invalid_slug_underscore(): void {
 		$result = $this->registry->register(
 			'test_math',
@@ -157,10 +157,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering category without label.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_missing_label(): void {
 		$result = $this->registry->register(
 			'test-math',
@@ -176,10 +176,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering category without description.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_missing_description(): void {
 		$result = $this->registry->register(
 			'test-math',
@@ -195,10 +195,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering duplicate category.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_duplicate_category(): void {
 		$result = $this->registry->register(
 			'test-math',
@@ -225,8 +225,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test unregistering existing category.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_unregister_existing_category(): void {
 		$this->registry->register(
 			'test-math',
@@ -245,10 +245,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test unregistering non-existent category.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_unregister_nonexistent_category(): void {
 		$result = $this->registry->unregister( 'test-nonexistent' );
 
@@ -259,8 +259,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test retrieving existing category.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_existing_category(): void {
 		$this->registry->register(
 			'test-math',
@@ -279,10 +279,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test retrieving non-existent category.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_nonexistent_category(): void {
 		$result = $this->registry->get_registered( 'test-nonexistent' );
 
@@ -293,8 +293,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests checking if an ability category is registered.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_has_registered_ability_category(): void {
 		$category_slug = 'test-math';
 		$this->registry->register(
@@ -313,8 +313,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests checking if a non-existent ability category is registered.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_has_registered_nonexistent_ability_category(): void {
 		$result = $this->registry->is_registered( 'test/non-existent' );
 
@@ -324,8 +324,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test retrieving all registered categories.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_all_categories(): void {
 		$this->registry->register(
 			'test-math',
@@ -354,8 +354,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test category is_registered method.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_category_is_registered(): void {
 		$this->assertFalse( $this->registry->is_registered( 'test-math' ) );
 
@@ -373,8 +373,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test category with special characters in label and description.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_category_with_special_characters(): void {
 		$result = $this->registry->register(
 			'test-special',
@@ -394,7 +394,7 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	 *
 	 * @return array<int, array<string>> Valid ability category slugs.
 	 */
-	public function data_valid_slug_provider(): array {
+	public static function data_valid_slug_provider(): array {
 		return array(
 			array( 'test-simple' ),
 			array( 'test-multiple-words' ),
@@ -407,12 +407,12 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test category slug validation with valid formats.
 	 *
-	 * @ticket 64098
 	 *
-	 * @dataProvider data_valid_slug_provider
 	 *
 	 * @param string $slug The category slug to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_slug_provider' )]
 	public function test_category_slug_valid_formats( string $slug ): void {
 		$result = $this->registry->register(
 			$slug,
@@ -430,7 +430,7 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	 *
 	 * @return array<int, array<string>> Invalid ability category slugs.
 	 */
-	public function data_invalid_slug_provider(): array {
+	public static function data_invalid_slug_provider(): array {
 		return array(
 			array( 'Test-Uppercase' ),
 			array( 'test_underscore' ),
@@ -446,13 +446,13 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test category slug validation with invalid formats.
 	 *
-	 * @ticket 64098
 	 *
-	 * @dataProvider data_invalid_slug_provider
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 *
 	 * @param string $slug The category slug to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_slug_provider' )]
 	public function test_category_slug_invalid_formats( string $slug ): void {
 		$result = $this->registry->register(
 			$slug,
@@ -469,10 +469,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering category with non-string label.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_category_constructor_non_string_label(): void {
 		$result = $this->registry->register(
 			'test-invalid',
@@ -489,10 +489,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering category with empty label.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_category_constructor_empty_label(): void {
 		$result = $this->registry->register(
 			'test-invalid',
@@ -509,10 +509,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering category with non-string description.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_category_constructor_non_string_description(): void {
 		$result = $this->registry->register(
 			'test-invalid',
@@ -529,10 +529,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering category with empty description.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_category_constructor_empty_description(): void {
 		$result = $this->registry->register(
 			'test-invalid',
@@ -549,8 +549,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test register_ability_category_args filter.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_args_filter(): void {
 		add_filter(
 			'wp_register_ability_category_args',
@@ -581,8 +581,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test that WP_Ability_Category cannot be unserialized.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_category_wakeup_throws_exception(): void {
 		$category = $this->registry->register(
 			'test-serialize',
@@ -600,8 +600,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering a category with valid meta.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_with_valid_meta(): void {
 		$meta = array(
 			'icon'     => 'dashicons-calculator',
@@ -626,8 +626,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering a category with empty meta array.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_with_empty_meta(): void {
 		$result = $this->registry->register(
 			'test-empty-meta',
@@ -645,8 +645,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering a category without meta returns empty array.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_without_meta_returns_empty_array(): void {
 		$result = $this->registry->register(
 			'test-no-meta',
@@ -663,10 +663,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering a category with invalid meta (non-array).
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_with_invalid_meta(): void {
 		$result = $this->registry->register(
 			'test-invalid-meta',
@@ -684,10 +684,10 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test registering a category with unknown property triggers _doing_it_wrong.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Category::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_with_unknown_property(): void {
 		$result = $this->registry->register(
 			'test-unknown-property',
@@ -707,8 +707,8 @@ class Tests_Abilities_API_WpAbilityCategoryRegistry extends WP_UnitTestCase {
 	/**
 	 * Test category registry singleton.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_category_registry_singleton(): void {
 		$instance1 = WP_Ability_Categories_Registry::get_instance();
 		$instance2 = WP_Ability_Categories_Registry::get_instance();

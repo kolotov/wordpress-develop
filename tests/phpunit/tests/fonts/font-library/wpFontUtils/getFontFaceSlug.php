@@ -5,18 +5,18 @@
  * @package WordPress
  * @subpackage Font Library
  *
- * @group fonts
- * @group font-library
  *
- * @covers WP_Font_Utils::get_font_face_slug
  */
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'font-library' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Font_Utils::class, 'get_font_face_slug' )]
 class Tests_Fonts_WpFontUtils_GetFontFaceSlug extends WP_UnitTestCase {
 	/**
-	 * @dataProvider data_get_font_face_slug_normalizes_values
 	 *
 	 * @param string[] $settings      Settings to test.
 	 * @param string   $expected_slug Expected slug results.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_font_face_slug_normalizes_values' )]
 	public function test_get_font_face_slug_normalizes_values( $settings, $expected_slug ) {
 		$slug = WP_Font_Utils::get_font_face_slug( $settings );
 
@@ -28,7 +28,7 @@ class Tests_Fonts_WpFontUtils_GetFontFaceSlug extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_get_font_face_slug_normalizes_values() {
+	public static function data_get_font_face_slug_normalizes_values() {
 		return array(
 			'Sets defaults'                           => array(
 				'settings'      => array(

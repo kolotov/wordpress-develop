@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group user
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_User_CountUserPosts extends WP_UnitTestCase {
 	public static $user_id;
 	public static $post_ids = array();
@@ -63,29 +63,29 @@ class Tests_User_CountUserPosts extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21364' )]
 	public function test_count_user_posts_post_type_post() {
 		$this->assertSame( '4', count_user_posts( self::$user_id, 'post' ) );
 	}
 
 	/**
-	 * @ticket 21364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21364' )]
 	public function test_count_user_posts_post_type_cpt() {
 		$this->assertSame( '3', count_user_posts( self::$user_id, 'wptests_pt' ) );
 	}
 
 	/**
-	 * @ticket 32243
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32243' )]
 	public function test_count_user_posts_with_multiple_post_types() {
 		$this->assertSame( '7', count_user_posts( self::$user_id, array( 'wptests_pt', 'post' ) ) );
 	}
 
 	/**
-	 * @ticket 32243
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32243' )]
 	public function test_count_user_posts_should_ignore_non_existent_post_types() {
 		$this->assertSame( '4', count_user_posts( self::$user_id, array( 'foo', 'post' ) ) );
 	}
@@ -93,8 +93,8 @@ class Tests_User_CountUserPosts extends WP_UnitTestCase {
 	/**
 	 * Post count should be correct after reassigning posts to another user.
 	 *
-	 * @ticket 39242
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39242' )]
 	public function test_reassigning_users_posts_modifies_count() {
 		// Create new user.
 		$new_user_id = self::factory()->user->create(
@@ -118,8 +118,8 @@ class Tests_User_CountUserPosts extends WP_UnitTestCase {
 	/**
 	 * Post count should be correct after deleting user without reassigning posts.
 	 *
-	 * @ticket 39242
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39242' )]
 	public function test_post_count_retained_after_deleting_user_without_reassigning_posts() {
 		$this->assertSame( '4', count_user_posts( self::$user_id ), 'User is expected to have a count of four posts prior to deletion.' );
 
@@ -132,8 +132,8 @@ class Tests_User_CountUserPosts extends WP_UnitTestCase {
 	/**
 	 * Post count should work for users that don't exist but have posts assigned.
 	 *
-	 * @ticket 39242
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39242' )]
 	public function test_count_user_posts_for_non_existent_user() {
 		$next_user_id = self::$user_id + 1;
 
@@ -152,8 +152,8 @@ class Tests_User_CountUserPosts extends WP_UnitTestCase {
 	/**
 	 * Cached user count value should be accurate after user is created.
 	 *
-	 * @ticket 39242
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39242' )]
 	public function test_count_user_posts_for_user_created_after_being_assigned_posts() {
 		global $wpdb;
 		$next_user_id = (int) $wpdb->get_var( "SELECT `auto_increment` FROM INFORMATION_SCHEMA.TABLES WHERE table_name = '$wpdb->users'" );
@@ -183,8 +183,8 @@ class Tests_User_CountUserPosts extends WP_UnitTestCase {
 	/**
 	 * User count cache should be hit regardless of post type order.
 	 *
-	 * @ticket 39242
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39242' )]
 	public function test_cache_should_be_hit_regardless_of_post_type_order() {
 		// Prime cache.
 		count_user_posts( self::$user_id, array( 'wptests_pt', 'post' ) );
@@ -199,8 +199,8 @@ class Tests_User_CountUserPosts extends WP_UnitTestCase {
 	/**
 	 * User count cache should be hit for string and array of post types.
 	 *
-	 * @ticket 39242
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39242' )]
 	public function test_cache_should_be_hit_for_string_and_array_equivalent_queries() {
 		// Prime cache.
 		count_user_posts( self::$user_id, 'post' );
@@ -215,8 +215,8 @@ class Tests_User_CountUserPosts extends WP_UnitTestCase {
 	/**
 	 * User count cache should be hit for array duplicates and equivalent queries.
 	 *
-	 * @ticket 39242
 	*/
+	#[\PHPUnit\Framework\Attributes\Ticket( '39242' )]
 	public function test_cache_should_be_hit_for_and_array_duplicates_equivalent_queries() {
 		// Prime cache.
 		count_user_posts( self::$user_id, array( 'post', 'post', 'post' ) );

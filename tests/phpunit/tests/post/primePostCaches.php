@@ -8,11 +8,11 @@
 /**
  * Test class for `_prime_post_caches()`.
  *
- * @group post
- * @group cache
  *
- * @covers ::_prime_post_caches
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_prime_post_caches' )]
 class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 
 	/**
@@ -44,8 +44,8 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57163
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches() {
 		$post_id = self::$posts[0];
 
@@ -85,8 +85,8 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57163
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_with_multiple_posts() {
 		$this->assertSame( self::$posts, _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are already cached.' );
 
@@ -107,8 +107,8 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57163
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_only_posts_cache() {
 		$this->assertSame( self::$posts, _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are already cached.' );
 
@@ -126,8 +126,8 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57163
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_only_posts_and_term_cache() {
 		$this->assertSame( self::$posts, _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are already cached.' );
 
@@ -155,8 +155,8 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57163
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_only_posts_and_meta_cache() {
 		$this->assertSame( self::$posts, _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are already cached.' );
 
@@ -185,8 +185,8 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57163
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_accounts_for_posts_without_primed_meta_terms() {
 		$post_id = self::$posts[0];
 
@@ -211,8 +211,8 @@ class Tests_Post_PrimePostCaches extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57163
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57163' )]
 	public function test_prime_post_caches_does_not_prime_caches_twice() {
 		$this->assertSame( self::$posts, _get_non_cached_ids( self::$posts, 'posts' ), 'Posts are already cached.' );
 

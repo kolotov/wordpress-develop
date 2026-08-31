@@ -6,10 +6,9 @@
  * @subpackage theme
  *
  * @since 7.1.0
- *
- * @covers WP_Theme_JSON
  */
 
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Theme_JSON::class )]
 class Tests_Theme_wpThemeJsonSelectorList extends WP_UnitTestCase {
 	/**
 	 * Invokes a protected static method on WP_Theme_JSON.
@@ -30,11 +29,11 @@ class Tests_Theme_wpThemeJsonSelectorList extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_split_selector_list
 	 *
 	 * @param string $selector CSS selector list.
 	 * @param string[] $expected Expected selectors.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_split_selector_list' )]
 	public function test_split_selector_list( $selector, $expected ) {
 		$this->assertSame(
 			$expected,
@@ -45,7 +44,7 @@ class Tests_Theme_wpThemeJsonSelectorList extends WP_UnitTestCase {
 	/**
 	 * @return array<string, array{selector: string, expected: string[]}>
 	 */
-	public function data_split_selector_list() {
+	public static function data_split_selector_list() {
 		return array(
 			'single selector'                       => array(
 				'selector' => '.wp-block',
@@ -99,11 +98,11 @@ class Tests_Theme_wpThemeJsonSelectorList extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_prepend_to_selector_uses_safe_splitting
 	 *
 	 * @param string $selector CSS selector list.
 	 * @param string $expected Expected prepended selector.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_prepend_to_selector_uses_safe_splitting' )]
 	public function test_prepend_to_selector_uses_safe_splitting( $selector, $expected ) {
 		$this->assertSame(
 			$expected,
@@ -114,7 +113,7 @@ class Tests_Theme_wpThemeJsonSelectorList extends WP_UnitTestCase {
 	/**
 	 * @return array<string, array{selector: string, expected: string}>
 	 */
-	public function data_prepend_to_selector_uses_safe_splitting() {
+	public static function data_prepend_to_selector_uses_safe_splitting() {
 		return array(
 			'fast path for simple selector list' => array(
 				'selector' => 'h1,h2',

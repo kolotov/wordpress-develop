@@ -6,10 +6,14 @@
  * @subpackage Blocks
  * @since 5.0.0
  *
- * @group blocks
  *
- * @coversDefaultClass WP_Block_Type_Registry
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+
+
+
+
+
 class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 
 	/**
@@ -45,14 +49,14 @@ class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject invalid block names.
 	 *
-	 * @ticket 45097
 	 *
-	 * @covers ::register
 	 *
-	 * @dataProvider data_invalid_block_names
 	 *
 	 * @expectedIncorrectUsage WP_Block_Type_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_block_names' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type_Registry', 'register' )]
 	public function test_invalid_block_names( $name ) {
 		$result = $this->registry->register( $name, array() );
 		$this->assertFalse( $result );
@@ -63,7 +67,7 @@ class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ 0: mixed }>
 	 */
-	public function data_invalid_block_names(): array {
+	public static function data_invalid_block_names(): array {
 		return array(
 			'non-string name'      => array( 1 ),
 			'no namespace'         => array( 'paragraph' ),
@@ -75,11 +79,11 @@ class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 	/**
 	 * Should accept valid block names.
 	 *
-	 * @ticket 45097
 	 *
-	 * @covers ::register
-	 * @covers ::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type_Registry', 'get_registered' )]
 	public function test_register_block_type() {
 		$name     = 'core/paragraph';
 		$settings = array(
@@ -95,12 +99,12 @@ class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 	/**
 	 * Should fail to re-register the same block.
 	 *
-	 * @ticket 45097
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Type_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type_Registry', 'register' )]
 	public function test_register_block_type_twice() {
 		$name     = 'core/paragraph';
 		$settings = array(
@@ -116,10 +120,10 @@ class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 	/**
 	 * Should accept a WP_Block_Type instance.
 	 *
-	 * @ticket 45097
 	 *
-	 * @covers ::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type_Registry', 'register' )]
 	public function test_register_block_type_instance() {
 		$block_type = new WP_Fake_Block_Type( 'core/fake' );
 
@@ -130,12 +134,12 @@ class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 	/**
 	 * Unregistering should fail if a block is not registered.
 	 *
-	 * @ticket 45097
 	 *
-	 * @covers ::unregister
 	 *
 	 * @expectedIncorrectUsage WP_Block_Type_Registry::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type_Registry', 'unregister' )]
 	public function test_unregister_not_registered_block() {
 		$result = $this->registry->unregister( 'core/unregistered' );
 		$this->assertFalse( $result );
@@ -144,11 +148,11 @@ class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 	/**
 	 * Should unregister existing blocks.
 	 *
-	 * @ticket 45097
 	 *
-	 * @covers ::unregister
-	 * @covers ::is_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type_Registry', 'unregister' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type_Registry', 'is_registered' )]
 	public function test_unregister_block_type() {
 		$name     = 'core/paragraph';
 		$settings = array(
@@ -163,10 +167,10 @@ class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45097
 	 *
-	 * @covers ::get_all_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type_Registry', 'get_all_registered' )]
 	public function test_get_all_registered() {
 		$names    = array( 'core/paragraph', 'core/image', 'core/blockquote' );
 		$settings = array(

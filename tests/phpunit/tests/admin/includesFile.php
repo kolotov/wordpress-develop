@@ -1,16 +1,11 @@
 <?php
 
-/**
- * @group file
- * @group admin
- */
+#[\PHPUnit\Framework\Attributes\Group( 'file' )]
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 
-	/**
-	 * @ticket 20449
-	 *
-	 * @covers ::get_home_path
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20449' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_home_path' )]
 	public function test_get_home_path() {
 		$home    = get_option( 'home' );
 		$siteurl = get_option( 'siteurl' );
@@ -34,11 +29,8 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 		$_SERVER['SCRIPT_FILENAME'] = $sfn;
 	}
 
-	/**
-	 * @ticket 43329
-	 *
-	 * @covers ::download_url
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43329' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'download_url' )]
 	public function test_download_url_non_200_response_code() {
 		add_filter( 'pre_http_request', array( $this, '_fake_download_url_non_200_response_code' ), 10, 3 );
 
@@ -85,13 +77,13 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38231
-	 * @dataProvider data_download_url_should_respect_filename_from_content_disposition_header
 	 *
-	 * @covers ::download_url
 	 *
 	 * @param $filter A callback containing a fake Content-Disposition header.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38231' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_download_url_should_respect_filename_from_content_disposition_header' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'download_url' )]
 	public function test_download_url_should_respect_filename_from_content_disposition_header( $filter ) {
 		add_filter( 'pre_http_request', array( $this, $filter ), 10, 3 );
 
@@ -110,7 +102,7 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_download_url_should_respect_filename_from_content_disposition_header() {
+	public static function data_download_url_should_respect_filename_from_content_disposition_header() {
 		return array(
 			'valid parameters' => array( 'filter_content_disposition_header_with_filename' ),
 			'path traversal'   => array( 'filter_content_disposition_header_with_filename_with_path_traversal' ),
@@ -119,13 +111,13 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55109
-	 * @dataProvider data_save_to_temp_directory_when_getting_filename_from_content_disposition_header
 	 *
-	 * @covers ::download_url
 	 *
 	 * @param $filter A callback containing a fake Content-Disposition header.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55109' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_save_to_temp_directory_when_getting_filename_from_content_disposition_header' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'download_url' )]
 	public function test_save_to_temp_directory_when_getting_filename_from_content_disposition_header( $filter ) {
 		add_filter( 'pre_http_request', array( $this, $filter ), 10, 3 );
 
@@ -143,7 +135,7 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_save_to_temp_directory_when_getting_filename_from_content_disposition_header() {
+	public static function data_save_to_temp_directory_when_getting_filename_from_content_disposition_header() {
 		return array(
 			'valid parameters' => array( 'filter_content_disposition_header_with_filename' ),
 		);
@@ -204,13 +196,13 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38231
-	 * @dataProvider data_download_url_should_reject_filename_from_invalid_content_disposition_header
 	 *
-	 * @covers ::download_url
 	 *
 	 * @param $filter A callback containing a fake Content-Disposition header.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38231' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_download_url_should_reject_filename_from_invalid_content_disposition_header' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'download_url' )]
 	public function test_download_url_should_reject_filename_from_invalid_content_disposition_header( $filter ) {
 		add_filter( 'pre_http_request', array( $this, $filter ), 10, 3 );
 
@@ -228,7 +220,7 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_download_url_should_reject_filename_from_invalid_content_disposition_header() {
+	public static function data_download_url_should_reject_filename_from_invalid_content_disposition_header() {
 		return array(
 			'no context'        => array( 'filter_content_disposition_header_with_filename_without_context' ),
 			'inline context'    => array( 'filter_content_disposition_header_with_filename_with_inline_context' ),
@@ -293,11 +285,11 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	/**
 	 * Verify that a WP_Error object is returned when invalid input is passed as the `$url` parameter.
 	 *
-	 * @covers ::download_url
-	 * @dataProvider data_download_url_empty_url
 	 *
 	 * @param mixed $url Input URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_download_url_empty_url' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'download_url' )]
 	public function test_download_url_empty_url( $url ) {
 		$error = download_url( $url );
 		$this->assertWPError( $error );
@@ -310,7 +302,7 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_download_url_empty_url() {
+	public static function data_download_url_empty_url() {
 		return array(
 			'null'         => array( null ),
 			'false'        => array( false ),
@@ -324,9 +316,9 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	 * Test that PHP 8.1 "passing null to non-nullable" deprecation notice
 	 * is not thrown when the `$url` does not have a path component.
 	 *
-	 * @ticket 53635
-	 * @covers ::download_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53635' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'download_url' )]
 	public function test_download_url_no_warning_for_url_without_path() {
 		// Hook a mocked HTTP request response.
 		add_filter( 'pre_http_request', array( $this, 'mock_http_request' ), 10, 3 );
@@ -342,9 +334,9 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	 * is not thrown when the `$url` does not have a path component,
 	 * and signature verification via a local file is requested.
 	 *
-	 * @ticket 53635
-	 * @covers ::download_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53635' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'download_url' )]
 	public function test_download_url_no_warning_for_url_without_path_with_signature_verification() {
 		// Hook a mocked HTTP request response.
 		add_filter( 'pre_http_request', array( $this, 'mock_http_request' ), 10, 3 );
@@ -394,14 +386,14 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	 * Test that `download_url()` properly handles setting the file name when set using
 	 * the content type header on URLs with no file extension.
 	 *
-	 * @dataProvider data_download_url_should_use_the_content_type_header_to_set_extension_of_a_file_if_extension_was_not_determined
 	 *
-	 * @covers ::download_url
-	 * @ticket 54738
 	 *
 	 * @param callable $filter    A callback containing a fake Content-Type header.
 	 * @param string   $extension The expected file extension to match.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_download_url_should_use_the_content_type_header_to_set_extension_of_a_file_if_extension_was_not_determined' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '54738' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'download_url' )]
 	public function test_download_url_should_use_the_content_type_header_to_set_extension_of_a_file_if_extension_was_not_determined( $filter, $extension ) {
 		add_filter( 'pre_http_request', $filter );
 
@@ -416,11 +408,11 @@ class Tests_Admin_IncludesFile extends WP_UnitTestCase {
 	 *
 	 * @see test_download_url_should_use_the_content_type_header_to_set_extension_of_a_file_if_extension_was_not_determined()
 	 *
-	 * @ticket 54738
 	 *
 	 * @return Generator
 	 */
-	public function data_download_url_should_use_the_content_type_header_to_set_extension_of_a_file_if_extension_was_not_determined() {
+	#[\PHPUnit\Framework\Attributes\Ticket( '54738' )]
+	public static function data_download_url_should_use_the_content_type_header_to_set_extension_of_a_file_if_extension_was_not_determined() {
 		yield 'Content-Type header in the response' => array(
 			function () {
 				return array(

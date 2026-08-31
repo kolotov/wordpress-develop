@@ -2,13 +2,26 @@
 /**
  * A set of unit tests for functions in wp-includes/general-template.php
  *
- * @group general
- * @group template
- * @group site_icon
  */
 
 require_once ABSPATH . 'wp-admin/includes/class-wp-site-icon.php';
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
 class Tests_General_Template extends WP_UnitTestCase {
 
 	protected $wp_site_icon;
@@ -108,10 +121,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group site_icon
-	 * @covers ::get_site_icon_url
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_icon_url' )]
 	public function test_get_site_icon_url() {
 		$this->assertEmpty( get_site_icon_url(), 'Site icon URL should not be set initially.' );
 
@@ -123,11 +136,11 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65098
-	 * @group site_icon
-	 * @covers ::get_site_icon_url
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65098' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_icon_url' )]
 	public function test_get_site_icon_url_returns_fallback_when_attachment_url_fails(): void {
 		$this->set_site_icon();
 
@@ -147,14 +160,14 @@ class Tests_General_Template extends WP_UnitTestCase {
 	 * On an HTTPS request with an http:// siteurl the icon must still be served
 	 * over HTTPS to avoid a broken, mixed-content image.
 	 *
-	 * @ticket 65696
 	 *
-	 * @group site_icon
 	 *
-	 * @covers ::get_site_icon_url
 	 *
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65696' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_icon_url' )]
 	public function test_get_site_icon_url_scheme() {
 		$this->set_site_icon();
 
@@ -182,24 +195,26 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group site_icon
-	 * @covers ::site_icon_url
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'site_icon_url' )]
 	public function test_site_icon_url() {
-		$this->expectOutputString( '' );
+		ob_start();
 		site_icon_url();
+		$this->assertSame( '', ob_get_clean() );
 
 		$this->set_site_icon();
-		$this->expectOutputString( $this->site_icon_url );
+		ob_start();
 		site_icon_url();
+		$this->assertSame( $this->site_icon_url, ob_get_clean() );
 	}
 
 	/**
-	 * @group site_icon
-	 * @covers ::has_site_icon
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'has_site_icon' )]
 	public function test_has_site_icon() {
 		$this->assertFalse( has_site_icon(), 'Site icon should not be set initially.' );
 
@@ -211,11 +226,11 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group site_icon
-	 * @group multisite
-	 * @group ms-required
-	 * @covers ::has_site_icon
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'has_site_icon' )]
 	public function test_has_site_icon_returns_true_when_called_for_other_site_with_site_icon_set() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );
@@ -226,11 +241,11 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group site_icon
-	 * @group multisite
-	 * @group ms-required
-	 * @covers ::has_site_icon
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'has_site_icon' )]
 	public function test_has_site_icon_returns_false_when_called_for_other_site_without_site_icon_set() {
 		$blog_id = self::factory()->blog->create();
 
@@ -238,13 +253,14 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group site_icon
-	 * @covers ::wp_site_icon
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_site_icon' )]
 	public function test_wp_site_icon() {
-		$this->expectOutputString( '' );
+		ob_start();
 		wp_site_icon();
+		$this->assertSame( '', ob_get_clean() );
 
 		$this->set_site_icon();
 		$output = array(
@@ -256,18 +272,20 @@ class Tests_General_Template extends WP_UnitTestCase {
 		);
 		$output = implode( "\n", $output );
 
-		$this->expectOutputString( $output );
+		ob_start();
 		wp_site_icon();
+		$this->assertSame( $output, ob_get_clean() );
 	}
 
 	/**
-	 * @group site_icon
-	 * @covers ::wp_site_icon
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_site_icon' )]
 	public function test_wp_site_icon_with_filter() {
-		$this->expectOutputString( '' );
+		ob_start();
 		wp_site_icon();
+		$this->assertSame( '', ob_get_clean() );
 
 		$this->set_site_icon();
 		$output = array(
@@ -280,17 +298,19 @@ class Tests_General_Template extends WP_UnitTestCase {
 		);
 		$output = implode( "\n", $output );
 
-		$this->expectOutputString( $output );
 		add_filter( 'site_icon_meta_tags', array( $this, 'custom_site_icon_meta_tag' ) );
+		ob_start();
 		wp_site_icon();
+		$actual = ob_get_clean();
 		remove_filter( 'site_icon_meta_tags', array( $this, 'custom_site_icon_meta_tag' ) );
+		$this->assertSame( $output, $actual );
 	}
 
 	/**
-	 * @ticket 38377
-	 * @group site_icon
-	 * @covers ::wp_site_icon
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38377' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_site_icon' )]
 	public function test_customize_preview_wp_site_icon_empty() {
 		global $wp_customize;
 		wp_set_current_user( self::$administrator_id );
@@ -305,10 +325,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38377
-	 * @group site_icon
-	 * @covers ::wp_site_icon
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38377' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_site_icon' )]
 	public function test_customize_preview_wp_site_icon_dirty() {
 		global $wp_customize;
 		wp_set_current_user( self::$administrator_id );
@@ -389,11 +409,11 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group custom_logo
-	 * @covers ::has_custom_logo
 	 *
 	 * @since 4.5.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'custom_logo' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'has_custom_logo' )]
 	public function test_has_custom_logo() {
 		$this->assertFalse( has_custom_logo(), 'Custom logo should not be set initially.' );
 
@@ -405,11 +425,11 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group custom_logo
-	 * @group multisite
-	 * @group ms-required
-	 * @covers ::has_custom_logo
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'custom_logo' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'has_custom_logo' )]
 	public function test_has_custom_logo_returns_true_when_called_for_other_site_with_custom_logo_set() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );
@@ -420,11 +440,11 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group custom_logo
-	 * @group multisite
-	 * @group ms-required
-	 * @covers ::has_custom_logo
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'custom_logo' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'has_custom_logo' )]
 	public function test_has_custom_logo_returns_false_when_called_for_other_site_without_custom_logo_set() {
 		$blog_id = self::factory()->blog->create();
 
@@ -432,11 +452,11 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group custom_logo
-	 * @covers ::get_custom_logo
 	 *
 	 * @since 4.5.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'custom_logo' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_custom_logo' )]
 	public function test_get_custom_logo() {
 		$this->assertEmpty( get_custom_logo(), 'Custom logo should not be set initially.' );
 
@@ -450,11 +470,11 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group custom_logo
-	 * @group multisite
-	 * @group ms-required
-	 * @covers ::get_custom_logo
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'custom_logo' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_custom_logo' )]
 	public function test_get_custom_logo_returns_logo_when_called_for_other_site_with_custom_logo_set() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );
@@ -481,14 +501,15 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group custom_logo
-	 * @covers ::the_custom_logo
 	 *
 	 * @since 4.5.0
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'custom_logo' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_custom_logo' )]
 	public function test_the_custom_logo() {
-		$this->expectOutputString( '' );
+		ob_start();
 		the_custom_logo();
+		$this->assertSame( '', ob_get_clean() );
 
 		$this->set_custom_logo();
 
@@ -505,15 +526,16 @@ class Tests_General_Template extends WP_UnitTestCase {
 
 		$image = wp_get_attachment_image( $this->custom_logo_id, 'full', false, $custom_logo_attr );
 
-		$this->expectOutputString( '<a href="http://' . WP_TESTS_DOMAIN . '/" class="custom-logo-link" rel="home">' . $image . '</a>' );
+		ob_start();
 		the_custom_logo();
+		$this->assertSame( '<a href="http://' . WP_TESTS_DOMAIN . '/" class="custom-logo-link" rel="home">' . $image . '</a>', ob_get_clean() );
 	}
 
 	/**
-	 * @ticket 38768
-	 * @group custom_logo
-	 * @covers ::the_custom_logo
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38768' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'custom_logo' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_custom_logo' )]
 	public function test_the_custom_logo_with_alt() {
 		$this->set_custom_logo();
 
@@ -574,10 +596,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38253
-	 * @group ms-required
-	 * @covers ::get_site_icon_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38253' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_icon_url' )]
 	public function test_get_site_icon_url_preserves_switched_state() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );
@@ -594,10 +616,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38253
-	 * @group ms-required
-	 * @covers ::has_custom_logo
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38253' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'has_custom_logo' )]
 	public function test_has_custom_logo_preserves_switched_state() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );
@@ -614,10 +636,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38253
-	 * @group ms-required
-	 * @covers ::get_custom_logo
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38253' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_custom_logo' )]
 	public function test_get_custom_logo_preserves_switched_state() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );
@@ -636,15 +658,15 @@ class Tests_General_Template extends WP_UnitTestCase {
 	/**
 	 * Test the aria attribute for the custom logo on the front page set to the blog.
 	 *
-	 * @ticket 62879
 	 *
-	 * @covers ::get_custom_logo
 	 *
-	 * @dataProvider data_get_custom_logo_aria_current_attribute_blog_front_page
 	 *
 	 * @param string $url                The URL to visit.
 	 * @param bool   $attribute_expected Whether the aria-current attribute is expected.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62879' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_custom_logo_aria_current_attribute_blog_front_page' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_custom_logo' )]
 	public function test_get_custom_logo_aria_current_attribute_blog_front_page( $url, $attribute_expected ) {
 		// Set the custom logo.
 		$this->set_custom_logo();
@@ -664,7 +686,7 @@ class Tests_General_Template extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_custom_logo_aria_current_attribute_blog_front_page() {
+	public static function data_get_custom_logo_aria_current_attribute_blog_front_page() {
 		return array(
 			'Front page'  => array( home_url(), true ),
 			'Blog post'   => array( home_url( '/?p=1' ), false ),
@@ -675,14 +697,14 @@ class Tests_General_Template extends WP_UnitTestCase {
 	/**
 	 * Test the aria attribute for the custom logo on the front page set to the blog.
 	 *
-	 * @ticket 62879
 	 *
-	 * @covers ::get_custom_logo
 	 *
-	 * @dataProvider data_get_custom_logo_aria_current_attribute_blog_set_to_page_without_front_page_defined
 	 * @param string $url                The URL to visit.
 	 * @param bool   $attribute_expected Whether the aria-current attribute is expected.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62879' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_custom_logo_aria_current_attribute_blog_set_to_page_without_front_page_defined' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_custom_logo' )]
 	public function test_get_custom_logo_aria_current_attribute_blog_set_to_page_without_front_page_defined( $url, $attribute_expected ) {
 		// Set up pretty permalinks.
 		update_option( 'permalink_structure', '/%postname%/' );
@@ -709,7 +731,7 @@ class Tests_General_Template extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_custom_logo_aria_current_attribute_blog_set_to_page_without_front_page_defined() {
+	public static function data_get_custom_logo_aria_current_attribute_blog_set_to_page_without_front_page_defined() {
 		return array(
 			'Front page'  => array( home_url(), true ),
 			'Blog index'  => array( home_url( '/blog/' ), true ),
@@ -721,15 +743,15 @@ class Tests_General_Template extends WP_UnitTestCase {
 	/**
 	 * Test the aria attribute for the custom logo on the front page set to the blog.
 	 *
-	 * @ticket 62879
 	 *
-	 * @covers ::get_custom_logo
 	 *
-	 * @dataProvider data_get_custom_logo_aria_current_attribute_blog_set_to_page_with_front_page_defined
 	 *
 	 * @param string $url                The URL to visit.
 	 * @param bool   $attribute_expected Whether the aria-current attribute is expected.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62879' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_custom_logo_aria_current_attribute_blog_set_to_page_with_front_page_defined' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_custom_logo' )]
 	public function test_get_custom_logo_aria_current_attribute_blog_set_to_page_with_front_page_defined( $url, $attribute_expected ) {
 		// Set up pretty permalinks.
 		update_option( 'permalink_structure', '/%postname%/' );
@@ -757,7 +779,7 @@ class Tests_General_Template extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_custom_logo_aria_current_attribute_blog_set_to_page_with_front_page_defined() {
+	public static function data_get_custom_logo_aria_current_attribute_blog_set_to_page_with_front_page_defined() {
 		return array(
 			'Front page'  => array( home_url(), true ),
 			'Blog index'  => array( home_url( '/blog/' ), true ),
@@ -767,10 +789,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40969
 	 *
-	 * @covers ::get_header
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40969' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_header' )]
 	public function test_get_header_returns_nothing_on_success() {
 		$this->expectOutputRegex( '/Header/' );
 
@@ -780,10 +802,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40969
 	 *
-	 * @covers ::get_footer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40969' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_footer' )]
 	public function test_get_footer_returns_nothing_on_success() {
 		$this->expectOutputRegex( '/Footer/' );
 
@@ -793,10 +815,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40969
 	 *
-	 * @covers ::get_sidebar
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40969' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_sidebar' )]
 	public function test_get_sidebar_returns_nothing_on_success() {
 		$this->expectOutputRegex( '/Sidebar/' );
 
@@ -806,10 +828,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40969
 	 *
-	 * @covers ::get_template_part
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40969' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_template_part' )]
 	public function test_get_template_part_returns_nothing_on_success() {
 		$this->expectOutputRegex( '/Template Part/' );
 
@@ -819,19 +841,19 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40969
 	 *
-	 * @covers ::get_template_part
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40969' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_template_part' )]
 	public function test_get_template_part_returns_false_on_failure() {
 		$this->assertFalse( get_template_part( 'non-existing-template' ) );
 	}
 
 	/**
-	 * @ticket 21676
 	 *
-	 * @covers ::get_template_part
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21676' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_template_part' )]
 	public function test_get_template_part_passes_arguments_to_template() {
 		$this->expectOutputRegex( '/{"foo":"baz"}/' );
 
@@ -839,10 +861,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44183
 	 *
-	 * @covers ::get_the_archive_title
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44183' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_the_archive_title' )]
 	public function test_get_the_archive_title_is_correct_for_author_queries() {
 		$user_with_posts    = get_user_by( 'id', self::$administrator_id );
 		$user_with_no_posts = get_user_by( 'id', self::$author_id );
@@ -868,11 +890,11 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65098
-	 * @group site_icon
-	 * @covers ::the_embed_site_title
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65098' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_embed_site_title' )]
 	public function test_the_embed_site_title_contains_site_icon_when_set(): void {
 		$this->set_site_icon();
 
@@ -891,11 +913,11 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65098
-	 * @group site_icon
-	 * @covers ::the_embed_site_title
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65098' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_embed_site_title' )]
 	public function test_the_embed_site_title_uses_fallback_when_attachment_url_fails(): void {
 		$this->set_site_icon();
 
@@ -912,10 +934,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65098
-	 * @group site_icon
-	 * @covers ::the_embed_site_title
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65098' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_embed_site_title' )]
 	public function test_the_embed_site_title_omits_img_when_url_is_empty(): void {
 		// Force get_site_icon_url() to return empty string via filter.
 		add_filter( 'get_site_icon_url', '__return_empty_string' );
@@ -928,10 +950,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65098
-	 * @group site_icon
-	 * @covers ::the_embed_site_title
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65098' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_embed_site_title' )]
 	public function test_the_embed_site_title_omits_srcset_when_1x_and_2x_urls_are_identical(): void {
 		// Force both sizes to return the same URL.
 		$svg_url = 'https://example.com/icon.svg';
@@ -951,10 +973,10 @@ class Tests_General_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65098
-	 * @group site_icon
-	 * @covers ::the_embed_site_title
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65098' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'site_icon' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_embed_site_title' )]
 	public function test_the_embed_site_title_uses_fallback_without_srcset_when_no_site_icon_set(): void {
 		$output   = get_echo( 'the_embed_site_title' );
 		$fallback = includes_url( 'images/w-logo-gray-white-bg.svg' );

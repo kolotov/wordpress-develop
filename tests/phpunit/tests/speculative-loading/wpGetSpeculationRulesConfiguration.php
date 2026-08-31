@@ -7,9 +7,9 @@
  */
 
 /**
- * @group speculative-loading
- * @covers ::wp_get_speculation_rules_configuration
  */
+#[\PHPUnit\Framework\Attributes\Group( 'speculative-loading' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_speculation_rules_configuration' )]
 class Tests_Speculative_Loading_wpGetSpeculationRulesConfiguration extends WP_UnitTestCase {
 
 	/**
@@ -44,8 +44,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesConfiguration extends WP_Un
 	/**
 	 * Tests that the default configuration is the expected value.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_configuration_default() {
 		$filter_default = null;
 		add_filter(
@@ -78,8 +78,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesConfiguration extends WP_Un
 	/**
 	 * Tests that the speculative loading is disabled by default when not using pretty permalinks.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_configuration_without_pretty_permalinks() {
 		update_option( 'permalink_structure', '' );
 		$this->assertNull( wp_get_speculation_rules_configuration() );
@@ -88,8 +88,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesConfiguration extends WP_Un
 	/**
 	 * Tests that the speculative loading is disabled by default for logged-in users.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_configuration_with_logged_in_user() {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 		$this->assertNull( wp_get_speculation_rules_configuration() );
@@ -98,9 +98,9 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesConfiguration extends WP_Un
 	/**
 	 * Tests that the configuration can be filtered and leads to the expected results.
 	 *
-	 * @ticket 62503
-	 * @dataProvider data_wp_get_speculation_rules_configuration_filter
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_speculation_rules_configuration_filter' )]
 	public function test_wp_get_speculation_rules_configuration_filter( $filter_value, $expected ) {
 		add_filter(
 			'wp_speculation_rules_configuration',
@@ -291,8 +291,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesConfiguration extends WP_Un
 	/**
 	 * Tests that an overridden default is what the 'auto' value resolves to.
 	 *
-	 * @ticket 65624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65624' )]
 	public function test_wp_get_speculation_rules_configuration_with_overridden_default(): void {
 		putenv( 'WP_SPECULATIVE_LOADING_DEFAULT_EAGERNESS=moderate' );
 
@@ -310,8 +310,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesConfiguration extends WP_Un
 	 *
 	 * This ensures a plugin such as Speculative Loading continues to win over a hosting provider's default.
 	 *
-	 * @ticket 65624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65624' )]
 	public function test_wp_get_speculation_rules_configuration_filter_beats_overridden_default(): void {
 		putenv( 'WP_SPECULATIVE_LOADING_DEFAULT_EAGERNESS=moderate' );
 
@@ -337,8 +337,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRulesConfiguration extends WP_Un
 	/**
 	 * Tests that speculative loading remains disabled when a default is overridden.
 	 *
-	 * @ticket 65624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65624' )]
 	public function test_wp_get_speculation_rules_configuration_with_overridden_default_while_disabled(): void {
 		putenv( 'WP_SPECULATIVE_LOADING_DEFAULT_EAGERNESS=moderate' );
 

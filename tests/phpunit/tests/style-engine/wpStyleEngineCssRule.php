@@ -6,21 +6,27 @@
  * @subpackage StyleEngine
  * @since 6.1.0
  *
- * @group style-engine
+
  */
 
 /**
  * Tests for registering, storing and generating CSS rules.
  *
- * @coversDefaultClass WP_Style_Engine_CSS_Rule
  */
+#[\PHPUnit\Framework\Attributes\Group( 'style-engine' )]
+
+
+
+
+
+
 class Tests_Style_Engine_wpStyleEngineCSSRule extends WP_UnitTestCase {
 	/**
 	 * Tests that declarations are set on instantiation.
 	 *
-	 * @ticket 56467
-	 * @covers ::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', '__construct' )]
 	public function test_should_instantiate_with_selector_and_rules() {
 		$selector           = '.law-and-order';
 		$input_declarations = array(
@@ -40,11 +46,11 @@ class Tests_Style_Engine_wpStyleEngineCSSRule extends WP_UnitTestCase {
 	/**
 	 * Tests setting and getting a rules group.
 	 *
-	 * @ticket 61099
 	 *
-	 * @covers ::set_rules_group
-	 * @covers ::get_rules_group
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61099' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', 'set_rules_group' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', 'get_rules_group' )]
 	public function test_should_set_rules_group() {
 		$rule = new WP_Style_Engine_CSS_Rule( '.heres-johnny', array(), '@layer state' );
 
@@ -58,11 +64,11 @@ class Tests_Style_Engine_wpStyleEngineCSSRule extends WP_UnitTestCase {
 	/**
 	 * Tests that declaration properties are deduplicated.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::add_declarations
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', 'add_declarations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', 'get_css' )]
 	public function test_should_dedupe_properties_in_rules() {
 		$selector                    = '.taggart';
 		$first_declaration           = array(
@@ -82,11 +88,11 @@ class Tests_Style_Engine_wpStyleEngineCSSRule extends WP_UnitTestCase {
 	/**
 	 * Tests that declarations can be added to existing rules.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::add_declarations
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', 'add_declarations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', 'get_css' )]
 	public function test_should_add_declarations_to_existing_rules() {
 		// Declarations using a WP_Style_Engine_CSS_Declarations object.
 		$some_css_declarations = new WP_Style_Engine_CSS_Declarations( array( 'margin-top' => '10px' ) );
@@ -103,10 +109,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRule extends WP_UnitTestCase {
 	/**
 	 * Tests setting a selector to a rule.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::set_selector
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', 'set_selector' )]
 	public function test_should_set_selector() {
 		$selector = '.taggart';
 		$css_rule = new WP_Style_Engine_CSS_Rule( $selector );
@@ -121,10 +127,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRule extends WP_UnitTestCase {
 	/**
 	 * Tests generating a CSS rule string.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', 'get_css' )]
 	public function test_should_generate_css_rule_string() {
 		$selector           = '.chips';
 		$input_declarations = array(
@@ -141,10 +147,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRule extends WP_UnitTestCase {
 	/**
 	 * Tests that an empty string will be returned where there are no declarations in a CSS rule.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', 'get_css' )]
 	public function test_should_return_empty_string_with_no_declarations() {
 		$selector           = '.holmes';
 		$input_declarations = array();
@@ -157,10 +163,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRule extends WP_UnitTestCase {
 	/**
 	 * Tests that CSS rules are prettified.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rule', 'get_css' )]
 	public function test_should_prettify_css_rule_output() {
 		$selector           = '.baptiste';
 		$input_declarations = array(

@@ -7,10 +7,9 @@
  *
  * @since 6.9
  *
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlProcessorMetaTag extends WP_UnitTestCase {
 	/**
 	 * Data provider.
@@ -29,10 +28,10 @@ class Tests_HtmlApi_WpHtmlProcessorMetaTag extends WP_UnitTestCase {
 	/**
 	 * Ensures that META tags correctly handle encoding confidence.
 	 *
-	 * @ticket 63738
 	 *
-	 * @dataProvider data_supported_meta_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63738' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_supported_meta_tags' )]
 	public function test_supported_meta_tag( string $html ) {
 		$html      = '<!DOCTYPE html>' . $html;
 		$processor = new class($html) extends WP_HTML_Processor {
@@ -59,10 +58,10 @@ class Tests_HtmlApi_WpHtmlProcessorMetaTag extends WP_UnitTestCase {
 	/**
 	 * Ensures that unsupported encoding META tags bail.
 	 *
-	 * @ticket 63738
 	 *
-	 * @dataProvider data_unsupported_meta_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63738' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unsupported_meta_tags' )]
 	public function test_unsupported_meta_tags( string $html, string $unsupported_message ) {
 		$html      = '<!DOCTYPE html>' . $html;
 		$processor = new class($html) extends WP_HTML_Processor {

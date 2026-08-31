@@ -5,10 +5,10 @@ require_once __DIR__ . '/base.php';
 /**
  * Tests wp_get_global_stylesheet().
  *
- * @group themes
  *
- * @covers ::wp_get_global_stylesheet
  */
+#[\PHPUnit\Framework\Attributes\Group( 'themes' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_global_stylesheet' )]
 class Tests_Theme_WpGetGlobalStylesheet extends WP_Theme_UnitTestCase {
 
 	/**
@@ -57,15 +57,15 @@ class Tests_Theme_WpGetGlobalStylesheet extends WP_Theme_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54782
 	 *
-	 * @dataProvider data_should_conditionally_include_font_sizes
 	 *
 	 * @param array  $expected            Expected CSS for each font size.
 	 * @param string $theme               The theme to switch to / use.
 	 * @param array  $types               Optional. Types of styles to load. Default empty array.
 	 * @param bool   $classic_has_presets Optional. Whether to apply presets for classic theme tests. Default false.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54782' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_conditionally_include_font_sizes' )]
 	public function test_should_conditionally_include_font_sizes( array $expected, $theme, array $types = array(), $classic_has_presets = false ) {
 		$this->maybe_switch_theme( $theme );
 		$this->add_custom_font_sizes( $classic_has_presets );
@@ -87,7 +87,7 @@ class Tests_Theme_WpGetGlobalStylesheet extends WP_Theme_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_conditionally_include_font_sizes() {
+	public static function data_should_conditionally_include_font_sizes() {
 		return array(
 			'block theme using defaults'                   => array(
 				'expected' => array(
@@ -155,15 +155,15 @@ class Tests_Theme_WpGetGlobalStylesheet extends WP_Theme_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54782
 	 *
-	 * @dataProvider data_should_not_conditionally_include_font_sizes
 	 *
 	 * @param array  $expected            Expected CSS for each font size.
 	 * @param string $theme               The theme to switch to / use.
 	 * @param array  $types               Optional. Types of styles to load. Default empty array.
 	 * @param bool   $classic_has_presets Optional. Whether to apply presets for classic theme tests. Default false.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54782' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_conditionally_include_font_sizes' )]
 	public function test_should_not_conditionally_include_font_sizes( array $expected, $theme, array $types = array(), $classic_has_presets = false ) {
 		$this->maybe_switch_theme( $theme );
 		$this->add_custom_font_sizes( $classic_has_presets );
@@ -185,7 +185,7 @@ class Tests_Theme_WpGetGlobalStylesheet extends WP_Theme_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_not_conditionally_include_font_sizes() {
+	public static function data_should_not_conditionally_include_font_sizes() {
 		return array(
 			'block theme using presets'                   => array(
 				'expected' => array(
@@ -223,8 +223,8 @@ class Tests_Theme_WpGetGlobalStylesheet extends WP_Theme_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56970
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56970' )]
 	public function test_switching_themes_should_recalculate_stylesheet() {
 		$expected = '--wp--preset--font-size--custom: 100px;';
 
@@ -239,8 +239,8 @@ class Tests_Theme_WpGetGlobalStylesheet extends WP_Theme_UnitTestCase {
 	/**
 	 * Tests that the function relies on the development mode for whether to use caching.
 	 *
-	 * @ticket 57487
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57487' )]
 	public function test_caching_is_used_when_developing_theme() {
 		global $_wp_tests_development_mode;
 
@@ -262,8 +262,8 @@ class Tests_Theme_WpGetGlobalStylesheet extends WP_Theme_UnitTestCase {
 	/**
 	 * Tests that theme color palette presets are output when appearance tools are enabled via theme support.
 	 *
-	 * @ticket 60134
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60134' )]
 	public function test_theme_color_palette_presets_output_when_border_support_enabled() {
 
 		$args = array(

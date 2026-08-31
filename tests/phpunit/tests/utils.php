@@ -3,13 +3,13 @@
 /**
  * Test some helper utility functions of the test framework.
  *
- * @group testsuite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'testsuite' )]
 class Tests_Utils extends WP_UnitTestCase {
 
 	/**
-	 * @covers ::strip_ws
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_strip_ws() {
 		$this->assertSame( '', strip_ws( '' ) );
 		$this->assertSame( 'foo', strip_ws( 'foo' ) );
@@ -37,8 +37,8 @@ class Tests_Utils extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::mask_input_value
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_mask_input_value() {
 		$in = <<<EOF
 <h2>Assign Authors</h2>

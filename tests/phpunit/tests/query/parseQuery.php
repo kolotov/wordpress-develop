@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	/**
 	 * Data provider for test_parse_query_s_type.
 	 *
 	 * @return array[]
 	 */
-	public function data_parse_query_s_types() {
+	public static function data_parse_query_s_types() {
 		return array(
 			'array input returns empty string' => array( array( 'foo' ), '' ),
 			'string input returns string'      => array( 'foo', 'foo' ),
@@ -22,13 +22,13 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	/**
 	 * Tests that WP_Query::parse_query() handles various types for the 's' parameter.
 	 *
-	 * @ticket 29736
 	 *
-	 * @dataProvider data_parse_query_s_types
 	 *
 	 * @param mixed $input    The value to pass as 's'.
 	 * @param mixed $expected The expected value of query_vars['s'].
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29736' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_parse_query_s_types' )]
 	public function test_parse_query_s_type( $input, $expected ) {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -41,8 +41,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33372
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33372' )]
 	public function test_parse_query_p_negative_int() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -55,8 +55,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33372
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33372' )]
 	public function test_parse_query_p_array() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -69,8 +69,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33372
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33372' )]
 	public function test_parse_query_p_object() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -85,8 +85,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	/**
 	 * Ensure an array of authors is rejected.
 	 *
-	 * @ticket 17737
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17737' )]
 	public function test_parse_query_author_array() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -101,8 +101,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	/**
 	 * Ensure a non-scalar (non-numeric) author value is rejected.
 	 *
-	 * @ticket 17737
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17737' )]
 	public function test_parse_query_author_string() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -119,8 +119,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	 *
 	 * Note the returned 'cat' query_var value is a string.
 	 *
-	 * @ticket 17737
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17737' )]
 	public function test_parse_query_cat_array_mixed() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -135,8 +135,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	/**
 	 * Ensure a nonscalar menu_order value is rejected.
 	 *
-	 * @ticket 17737
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17737' )]
 	public function test_parse_query_menu_order_nonscalar() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -151,8 +151,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	/**
 	 * Ensure numeric 'subpost' gets assigned to 'attachment'.
 	 *
-	 * @ticket 17737
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17737' )]
 	public function test_parse_query_subpost_scalar() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -167,8 +167,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	/**
 	 * Ensure non-scalar 'subpost' does not get assigned to 'attachment'.
 	 *
-	 * @ticket 17737
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17737' )]
 	public function test_parse_query_subpost_nonscalar() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -183,8 +183,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	/**
 	 * Ensure numeric 'attachment_id' value is assigned.
 	 *
-	 * @ticket 17737
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17737' )]
 	public function test_parse_query_attachment_id() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -199,8 +199,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	/**
 	 * Ensure non-scalar 'attachment_id' value is rejected.
 	 *
-	 * @ticket 17737
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17737' )]
 	public function test_parse_query_attachment_id_nonscalar() {
 		$q = new WP_Query();
 		$q->parse_query(
@@ -219,8 +219,8 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	 * The message that we should not see:
 	 * `TypeError: urldecode(): Argument #1 ($string) must be of type string, array given`.
 	 *
-	 * @ticket 64870
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64870' )]
 	public function test_parse_query_hierarchical_taxonomy_query_var_array() {
 		register_taxonomy(
 			'wptests_tax',

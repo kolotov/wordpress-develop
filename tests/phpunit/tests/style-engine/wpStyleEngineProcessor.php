@@ -6,23 +6,26 @@
  * @subpackage StyleEngine
  * @since 6.1.0
  *
- * @group style-engine
+
  */
 
 /**
  * Tests for compiling and rendering styles from a store of CSS rules.
  *
- * @coversDefaultClass WP_Style_Engine_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'style-engine' )]
+
+
+
 class Tests_Style_Engine_wpStyleEngineProcessor extends WP_UnitTestCase {
 	/**
 	 * Tests adding rules and returning compiled CSS rules.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::add_rules
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'add_rules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'get_css' )]
 	public function test_should_return_rules_as_compiled_css() {
 		$a_nice_css_rule = new WP_Style_Engine_CSS_Rule( '.a-nice-rule' );
 		$a_nice_css_rule->add_declarations(
@@ -51,11 +54,11 @@ class Tests_Style_Engine_wpStyleEngineProcessor extends WP_UnitTestCase {
 	/**
 	 * Tests adding nested rules with at-rules and returning compiled CSS rules.
 	 *
-	 * @ticket 61099
 	 *
-	 * @covers ::add_rules
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61099' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'add_rules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'get_css' )]
 	public function test_should_return_nested_rules_as_compiled_css() {
 		$a_nice_css_rule = new WP_Style_Engine_CSS_Rule( '.a-nice-rule' );
 		$a_nice_css_rule->add_declarations(
@@ -88,10 +91,10 @@ class Tests_Style_Engine_wpStyleEngineProcessor extends WP_UnitTestCase {
 	/**
 	 * Tests compiling CSS rules and formatting them with new lines and indents.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'get_css' )]
 	public function test_should_return_prettified_css_rules() {
 		$a_wonderful_css_rule = new WP_Style_Engine_CSS_Rule( '.a-wonderful-rule' );
 		$a_wonderful_css_rule->add_declarations(
@@ -141,10 +144,10 @@ class Tests_Style_Engine_wpStyleEngineProcessor extends WP_UnitTestCase {
 	/**
 	 * Tests compiling nested CSS rules and formatting them with new lines and indents.
 	 *
-	 * @ticket 61099
 	 *
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61099' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'get_css' )]
 	public function test_should_return_prettified_nested_css_rules() {
 		$a_wonderful_css_rule = new WP_Style_Engine_CSS_Rule( '.a-wonderful-rule' );
 		$a_wonderful_css_rule->add_declarations(
@@ -189,10 +192,10 @@ class Tests_Style_Engine_wpStyleEngineProcessor extends WP_UnitTestCase {
 	/**
 	 * Tests adding a store and compiling CSS rules from that store.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::add_store
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'add_store' )]
 	public function test_should_return_store_rules_as_css() {
 		$a_nice_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'nice' );
 		$a_nice_store->add_rule( '.a-nice-rule' )->add_declarations(
@@ -220,11 +223,11 @@ class Tests_Style_Engine_wpStyleEngineProcessor extends WP_UnitTestCase {
 	/**
 	 * Tests that CSS declarations are merged and deduped in the final CSS rules output.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::add_rules
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'add_rules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'get_css' )]
 	public function test_should_dedupe_and_merge_css_declarations() {
 		$an_excellent_rule      = new WP_Style_Engine_CSS_Rule( '.an-excellent-rule' );
 		$an_excellent_processor = new WP_Style_Engine_Processor();
@@ -274,11 +277,11 @@ class Tests_Style_Engine_wpStyleEngineProcessor extends WP_UnitTestCase {
 	 *
 	 * This is the default.
 	 *
-	 * @ticket 58811
-	 * @ticket 56467
 	 *
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58811' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'get_css' )]
 	public function test_should_not_optimize_css_output() {
 		$a_sweet_rule = new WP_Style_Engine_CSS_Rule(
 			'.a-sweet-rule',
@@ -321,11 +324,11 @@ class Tests_Style_Engine_wpStyleEngineProcessor extends WP_UnitTestCase {
 	/**
 	 * Tests that 'optimized' CSS is output, that is, that duplicate CSS rules are combined under their corresponding selectors.
 	 *
-	 * @ticket 58811
-	 * @ticket 56467
 	 *
-	 * @covers ::get_css
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58811' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'get_css' )]
 	public function test_should_not_optimize_css_output_by_default() {
 		$a_sweet_rule = new WP_Style_Engine_CSS_Rule(
 			'.a-sweet-rule',
@@ -355,10 +358,10 @@ class Tests_Style_Engine_wpStyleEngineProcessor extends WP_UnitTestCase {
 	/**
 	 * Tests that CSS rules with different declaration options are not combined.
 	 *
-	 * @covers ::get_css
 	 *
-	 * @ticket 65561
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65561' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'get_css' )]
 	public function test_should_not_combine_css_rules_with_different_declaration_options() {
 		$important_declarations = new WP_Style_Engine_CSS_Declarations();
 		$important_declarations->add_declaration(
@@ -394,11 +397,11 @@ class Tests_Style_Engine_wpStyleEngineProcessor extends WP_UnitTestCase {
 	/**
 	 * Tests that incoming CSS rules are optimized and merged with existing CSS rules.
 	 *
-	 * @ticket 58811
-	 * @ticket 56467
 	 *
-	 * @covers ::add_rules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58811' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_Processor', 'add_rules' )]
 	public function test_should_combine_previously_added_css_rules() {
 		$a_lovely_processor = new WP_Style_Engine_Processor();
 		$a_lovely_rule      = new WP_Style_Engine_CSS_Rule(

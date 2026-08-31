@@ -1,10 +1,14 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers WP_Comment::get_instance
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Comment::class, 'get_instance' )]
 class Tests_Comment_WpComment extends WP_UnitTestCase {
 	protected static $comment_id;
 
@@ -28,8 +32,8 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_work_for_numeric_string() {
 		$found = WP_Comment::get_instance( (string) self::$comment_id );
 
@@ -37,8 +41,8 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_fail_for_negative_number() {
 		$found = WP_Comment::get_instance( -self::$comment_id );
 
@@ -46,8 +50,8 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_fail_for_non_numeric_string() {
 		$found = WP_Comment::get_instance( 'abc' );
 
@@ -55,8 +59,8 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_succeed_for_float_that_is_equal_to_post_id() {
 		$found = WP_Comment::get_instance( 1.0 );
 
@@ -64,10 +68,10 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64898
 	 *
-	 * @covers WP_Comment::get_children
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', 'get_children' )]
 	public function test_get_children_should_return_count_without_storing_it_in_the_children_cache(): void {
 		$post_id  = self::factory()->post->create();
 		$parent   = self::factory()->comment->create( array( 'comment_post_ID' => $post_id ) );
@@ -97,10 +101,10 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64898
 	 *
-	 * @covers WP_Comment::get_children
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', 'get_children' )]
 	public function test_get_children_should_return_ids_without_storing_them_in_the_children_cache(): void {
 		$post_id  = self::factory()->post->create();
 		$parent   = self::factory()->comment->create( array( 'comment_post_ID' => $post_id ) );
@@ -130,11 +134,11 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64898
 	 *
-	 * @covers WP_Comment::__isset
-	 * @covers WP_Comment::__get
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', '__isset' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', '__get' )]
 	public function test_post_fields_should_be_null_when_the_comments_post_is_deleted(): void {
 		$post_id    = self::factory()->post->create();
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => $post_id ) );
@@ -151,11 +155,11 @@ class Tests_Comment_WpComment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64898
 	 *
-	 * @covers WP_Comment::__isset
-	 * @covers WP_Comment::__get
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', '__isset' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', '__get' )]
 	public function test_post_fields_should_be_null_for_an_unattached_comment(): void {
 		$post_id    = self::factory()->post->create();
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => 0 ) );

@@ -1,17 +1,16 @@
 <?php
 
 /**
- * @group compat
- *
- * @covers ::mb_chr
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'mb_chr' )]
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 class Tests_Compat_mbChr extends WP_UnitTestCase {
 	/**
 	 * Ensures that the mb_chr() polyfill matches the behavior of mb_chr()
 	 * for the supported UTF-8 encoding.
 	 *
-	 * @ticket 65342
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65342' )]
 	public function test_mb_chr_polyfill_matches_spec() {
 		for ( $code_point = 0; $code_point <= 0x10FFFF; $code_point++ ) {
 			$this->assertSame(

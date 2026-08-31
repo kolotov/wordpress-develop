@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::esc_js
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'esc_js' )]
 class Tests_Formatting_EscJs extends WP_UnitTestCase {
 	public function test_js_escape_simple() {
 		$out = esc_js( 'foo bar baz();' );

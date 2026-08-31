@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group oembed
- * @group restapi
  */
+#[\PHPUnit\Framework\Attributes\Group( 'oembed' )]
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
 class Test_oEmbed_Controller extends WP_UnitTestCase {
 	/**
 	 * @var WP_REST_Server
@@ -342,8 +342,8 @@ class Test_oEmbed_Controller extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34971
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34971' )]
 	public function test_request_static_front_page() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -426,9 +426,9 @@ class Test_oEmbed_Controller extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_request_ms_child_in_root_blog() {
 		$child = self::factory()->blog->create();
 		switch_to_blog( $child );
@@ -599,10 +599,10 @@ class Test_oEmbed_Controller extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45447
 	 *
 	 * @see wp_maybe_load_embeds()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45447' )]
 	public function test_proxy_with_classic_embed_provider() {
 		wp_set_current_user( self::$editor );
 		$request = new WP_REST_Request( 'GET', '/oembed/1.0/proxy' );
@@ -610,6 +610,7 @@ class Test_oEmbed_Controller extends WP_UnitTestCase {
 		$request->set_param( 'maxwidth', 456 );
 		$request->set_param( 'maxheight', 789 );
 		$request->set_param( '_wpnonce', wp_create_nonce( 'wp_rest' ) );
+		wp_scripts();
 		$response = rest_get_server()->dispatch( $request );
 		$this->assertSame( 200, $response->get_status() );
 		$this->assertSame( 2, $this->request_count );
@@ -660,8 +661,8 @@ class Test_oEmbed_Controller extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45142
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45142' )]
 	public function test_proxy_with_internal_url() {
 		wp_set_current_user( self::$editor );
 
@@ -704,8 +705,8 @@ class Test_oEmbed_Controller extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45142
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45142' )]
 	public function test_proxy_with_static_front_page_url() {
 		wp_set_current_user( self::$editor );
 
@@ -755,8 +756,8 @@ class Test_oEmbed_Controller extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45142
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45142' )]
 	public function test_proxy_filters_result_of_untrusted_oembed_provider() {
 		wp_set_current_user( self::$editor );
 
@@ -778,8 +779,8 @@ class Test_oEmbed_Controller extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45142
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45142' )]
 	public function test_proxy_does_not_filter_result_of_trusted_oembed_provider() {
 		wp_set_current_user( self::$editor );
 

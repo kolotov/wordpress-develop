@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group rewrite
  *
- * @covers ::add_rewrite_rule
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'add_rewrite_rule' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
 class Tests_Rewrite_AddRewriteRule extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -14,8 +14,8 @@ class Tests_Rewrite_AddRewriteRule extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16840
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16840' )]
 	public function test_add_rewrite_rule_redirect() {
 		global $wp_rewrite;
 
@@ -31,8 +31,8 @@ class Tests_Rewrite_AddRewriteRule extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16840
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16840' )]
 	public function test_add_rewrite_rule_redirect_array() {
 		global $wp_rewrite;
 

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @group user
- * @group datequery
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datequery' )]
 class Tests_User_DateQuery extends WP_UnitTestCase {
 	/**
-	 * @ticket 27283
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27283' )]
 	public function test_user_registered() {
 		$u1 = self::factory()->user->create(
 			array(
@@ -34,8 +34,8 @@ class Tests_User_DateQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27283
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27283' )]
 	public function test_user_registered_relation_or() {
 		$u1 = self::factory()->user->create(
 			array(

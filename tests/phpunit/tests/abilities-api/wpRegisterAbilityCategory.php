@@ -3,14 +3,14 @@
 /**
  * Tests for the ability category registry functionality.
  *
- * @covers wp_register_ability_category
- * @covers wp_unregister_ability_category
- * @covers wp_has_ability_category
- * @covers wp_get_ability_category
- * @covers wp_get_ability_categories
  *
- * @group abilities-api
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_register_ability_category' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_unregister_ability_category' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_has_ability_category' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_ability_category' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_ability_categories' )]
+#[\PHPUnit\Framework\Attributes\Group( 'abilities-api' )]
 class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 
 	public static $test_ability_category_name = 'test-math';
@@ -56,10 +56,10 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Test registering ability category before `wp_abilities_api_categories_init` hook.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage wp_register_ability_category
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_category_before_init_hook(): void {
 		$this->assertFalse( doing_action( 'wp_abilities_api_categories_init' ) );
 
@@ -74,10 +74,10 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Tests registering an ability category when `init` action has not fired.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::get_instance
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_ability_category_no_init_action(): void {
 		global $wp_actions;
 
@@ -105,8 +105,8 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Test registering a valid ability category.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_register_valid_category(): void {
 		$this->simulate_doing_wp_ability_categories_init_action();
 
@@ -124,10 +124,10 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Tests unregistering an ability category when `init` action has not fired.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::get_instance
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_unregister_ability_category_no_init_action(): void {
 		global $wp_actions;
 
@@ -152,10 +152,10 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Test unregistering non-existent ability category.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_unregister_nonexistent_category(): void {
 		$this->simulate_doing_wp_ability_categories_init_action();
 
@@ -167,8 +167,8 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Test unregistering existing ability category.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_unregister_existing_category(): void {
 		$this->simulate_doing_wp_ability_categories_init_action();
 
@@ -186,10 +186,10 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Tests checking if an ability category is registered when `init` action has not fired.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::get_instance
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_has_ability_category_no_init_action(): void {
 		global $wp_actions;
 
@@ -214,8 +214,8 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Tests checking if a non-existent ability category is registered.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_has_registered_nonexistent_ability_category(): void {
 		$this->simulate_doing_wp_ability_categories_init_action();
 
@@ -227,8 +227,8 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Tests checking if an ability category is registered.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_has_registered_ability_category(): void {
 		$this->simulate_doing_wp_ability_categories_init_action();
 
@@ -247,10 +247,10 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Tests retrieving an ability category when `init` action has not fired.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::get_instance
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_ability_category_no_init_action(): void {
 		global $wp_actions;
 
@@ -275,10 +275,10 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Test retrieving non-existent ability category.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_nonexistent_category(): void {
 		$this->simulate_doing_wp_ability_categories_init_action();
 
@@ -290,8 +290,8 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Test retrieving existing ability category registered with the `wp_abilities_api_categories_init` callback.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_existing_category_using_callback(): void {
 		$name = self::$test_ability_category_name;
 		$args = self::$test_ability_category_args;
@@ -320,10 +320,10 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Test retrieving all registered ability categories when `init` action has not fired.
 	 *
-	 * @ticket 64098
 	 *
 	 * @expectedIncorrectUsage WP_Ability_Categories_Registry::get_instance
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_ability_categories_no_init_action(): void {
 		global $wp_actions;
 
@@ -348,8 +348,8 @@ class Tests_Abilities_API_WpRegisterAbilityCategory extends WP_UnitTestCase {
 	/**
 	 * Test retrieving all registered ability categories.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_all_categories(): void {
 		$this->simulate_doing_wp_ability_categories_init_action();
 

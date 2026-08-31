@@ -5,10 +5,10 @@ if ( is_multisite() ) :
 	/**
 	 * Tests for the populate_network hooks.
 	 *
-	 * @group ms-network
-	 * @group ms-populate-network
-	 * @group multisite
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-network' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-populate-network' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	class Tests_Multisite_PopulateNetworkHooks extends WP_UnitTestCase {
 		protected $action_counts = array(
 			'before_populate_network'    => 0,
@@ -39,8 +39,8 @@ if ( is_multisite() ) :
 		/**
 		 * Test that the before_populate_network hook fires.
 		 *
-		 * @ticket 27289
 		 */
+		#[\PHPUnit\Framework\Attributes\Ticket( '27289' )]
 		public function test_before_populate_network_hook() {
 			$this->action_counts = array_fill_keys( array_keys( $this->action_counts ), 0 );
 			$this->action_args   = array();
@@ -75,8 +75,8 @@ if ( is_multisite() ) :
 		/**
 		 * Test that the hooks can modify parameters.
 		 *
-		 * @ticket 27289
 		 */
+		#[\PHPUnit\Framework\Attributes\Ticket( '27289' )]
 		public function test_populate_network_hook_filter() {
 			$this->hook_called = false;
 

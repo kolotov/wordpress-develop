@@ -1,15 +1,17 @@
 <?php
 
 /**
- * @group option
  */
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_SanitizeOption extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_sanitize_option
 	 *
-	 * @covers ::sanitize_option
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_option' )]
 	public function test_sanitize_option( $option_name, $sanitized, $original ) {
 		$this->assertSame( $sanitized, sanitize_option( $option_name, $original ) );
 	}
@@ -20,7 +22,7 @@ class Tests_Option_SanitizeOption extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_sanitize_option() {
+	public static function data_sanitize_option() {
 		return array(
 			array( 'admin_email', 'mail@example.com', 'mail@example.com' ),
 			array( 'admin_email', get_option( 'admin_email' ), 'invalid' ),
@@ -97,15 +99,15 @@ class Tests_Option_SanitizeOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_sanitize_option_upload_path
 	 *
-	 * @covers ::sanitize_option
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_option_upload_path' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_option' )]
 	public function test_sanitize_option_upload_path( $provided, $expected ) {
 		$this->assertSame( $expected, sanitize_option( 'upload_path', $provided ) );
 	}
 
-	public function data_sanitize_option_upload_path() {
+	public static function data_sanitize_option_upload_path() {
 		return array(
 			array( '<a href="http://www.example.com">Link</a>', 'Link' ),
 			array( '<scr' . 'ipt>url</scr' . 'ipt>', 'url' ),
@@ -115,10 +117,10 @@ class Tests_Option_SanitizeOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36122
 	 *
-	 * @covers ::sanitize_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36122' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_option' )]
 	public function test_emoji_in_blogname_and_description() {
 		global $wpdb;
 
@@ -135,15 +137,16 @@ class Tests_Option_SanitizeOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_sanitize_option_permalink_structure
 	 *
-	 * @covers ::sanitize_option
-	 * @covers ::get_settings_errors
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_option_permalink_structure' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_settings_errors' )]
 	public function test_sanitize_option_permalink_structure( $provided, $expected, $valid ) {
 		global $wp_settings_errors;
 
 		$old_wp_settings_errors = (array) $wp_settings_errors;
+		$previous_value         = get_option( 'permalink_structure' );
 
 		$actual = sanitize_option( 'permalink_structure', $provided );
 		$errors = get_settings_errors( 'permalink_structure' );
@@ -153,15 +156,15 @@ class Tests_Option_SanitizeOption extends WP_UnitTestCase {
 
 		if ( $valid ) {
 			$this->assertEmpty( $errors );
+			$this->assertSame( $expected, $actual );
 		} else {
 			$this->assertNotEmpty( $errors );
 			$this->assertSame( 'invalid_permalink_structure', $errors[0]['code'] );
+			$this->assertSame( $previous_value, $actual );
 		}
-
-		$this->assertEquals( $expected, $actual );
 	}
 
-	public function data_sanitize_option_permalink_structure() {
+	public static function data_sanitize_option_permalink_structure() {
 		return array(
 			array( '', '', true ),
 			array( '%postname', false, false ),

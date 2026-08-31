@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group pomo
  */
+#[\PHPUnit\Framework\Attributes\Group( 'pomo' )]
 class Tests_POMO_Translations extends WP_UnitTestCase {
 
 	public function test_add_entry() {
@@ -128,8 +128,8 @@ class Tests_POMO_Translations extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55941
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55941' )]
 	public function test_translate_falsy_key() {
 		$entry_empty = new Translation_Entry(
 			array(

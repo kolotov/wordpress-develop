@@ -3,9 +3,9 @@
 /**
  * Tests for _wp_filter_build_unique_id().
  *
- * @group hooks
- * @covers ::_wp_filter_build_unique_id
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_filter_build_unique_id' )]
+#[\PHPUnit\Framework\Attributes\Group( 'hooks' )]
 class Tests_Hooks_BuildUniqueId extends WP_UnitTestCase {
 
 	public function test_string_callback_returns_string(): void {

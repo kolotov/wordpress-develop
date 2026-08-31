@@ -1,11 +1,8 @@
 <?php
 
-/**
- * @group admin
- * @group comment
- *
- * @covers ::comment_exists
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'comment_exists' )]
 class Admin_Includes_Comment_CommentExists_Test extends WP_UnitTestCase {
 
 	/**
@@ -56,30 +53,22 @@ class Admin_Includes_Comment_CommentExists_Test extends WP_UnitTestCase {
 		$this->assertSame( (string) self::$post_id, comment_exists( 1, '2014-05-06 12:00:00' ) );
 	}
 
-	/**
-	 * @ticket 33871
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33871' )]
 	public function test_default_value_of_timezone_should_be_blog() {
 		$this->assertSame( (string) self::$post_id, comment_exists( 1, '2014-05-06 12:00:00' ) );
 	}
 
-	/**
-	 * @ticket 33871
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33871' )]
 	public function test_should_respect_timezone_blog() {
 		$this->assertSame( (string) self::$post_id, comment_exists( 1, '2014-05-06 12:00:00', 'blog' ) );
 	}
 
-	/**
-	 * @ticket 33871
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33871' )]
 	public function test_should_respect_timezone_gmt() {
 		$this->assertSame( (string) self::$post_id, comment_exists( 1, '2014-05-06 07:00:00', 'gmt' ) );
 	}
 
-	/**
-	 * @ticket 33871
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33871' )]
 	public function test_invalid_timezone_should_fall_back_on_blog() {
 		$this->assertSame( (string) self::$post_id, comment_exists( 1, '2014-05-06 12:00:00', 'not_a_valid_value' ) );
 	}

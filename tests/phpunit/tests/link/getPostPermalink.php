@@ -1,8 +1,8 @@
 <?php
 /**
- * @group link
- * @covers ::get_post_permalink
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_permalink' )]
 class Tests_Link_GetPostPermalink extends WP_UnitTestCase {
 
 	public function test_get_post_permalink_should_return_string_on_success() {

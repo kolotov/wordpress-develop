@@ -1,23 +1,25 @@
 <?php
 
 /**
- * @group user
- * @group capabilities
- * @covers ::map_meta_cap
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\Group( 'capabilities' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'map_meta_cap' )]
 class Tests_User_MapMetaCap extends WP_UnitTestCase {
 
-	protected static $post_type    = 'mapmetacap';
-	protected static $super_admins = null;
-	protected static $user_id      = null;
-	protected static $author_id    = null;
-	protected static $post_id      = null;
+	protected static $post_type            = 'mapmetacap';
+	protected static $super_admins         = null;
+	protected static $super_admins_existed = false;
+	protected static $user_id              = null;
+	protected static $author_id            = null;
+	protected static $post_id              = null;
 
 	public static function wpSetUpBeforeClass( WP_UnitTest_Factory $factory ) {
 		self::$user_id   = $factory->user->create( array( 'role' => 'administrator' ) );
 		self::$author_id = $factory->user->create( array( 'role' => 'administrator' ) );
 
-		if ( isset( $GLOBALS['super_admins'] ) ) {
+		self::$super_admins_existed = array_key_exists( 'super_admins', $GLOBALS );
+		if ( self::$super_admins_existed ) {
 			self::$super_admins = $GLOBALS['super_admins'];
 		}
 		$user                    = new WP_User( self::$user_id );
@@ -35,13 +37,17 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 	}
 
 	public static function wpTearDownAfterClass() {
-		$GLOBALS['super_admins'] = self::$super_admins;
+		if ( self::$super_admins_existed ) {
+			$GLOBALS['super_admins'] = self::$super_admins;
+		} else {
+			unset( $GLOBALS['super_admins'] );
+		}
 		unset( $GLOBALS['wp_post_types'][ self::$post_type ] );
 	}
 
 	/**
-	 * @ticket 13905
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '13905' )]
 	public function test_capability_type_post_with_invalid_id() {
 		$this->assertSame(
 			array( 'do_not_allow' ),
@@ -306,8 +312,8 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30991' )]
 	public function test_delete_posts_cap_without_map_meta_cap() {
 		register_post_type(
 			self::$post_type,
@@ -337,8 +343,8 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20488
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20488' )]
 	public function test_file_edit_caps_not_reliant_on_unfiltered_html_constant() {
 		$this->assertFalse( defined( 'DISALLOW_FILE_MODS' ) );
 		$this->assertFalse( defined( 'DISALLOW_FILE_EDIT' ) );
@@ -355,8 +361,8 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 	/**
 	 * Test a post without an author.
 	 *
-	 * @ticket 27020
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27020' )]
 	public function test_authorless_posts_capabilities() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -374,8 +380,8 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 	/**
 	 * Test deleting front page.
 	 *
-	 * @ticket 37580
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37580' )]
 	public function test_only_users_who_can_manage_options_can_delete_page_on_front() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -394,8 +400,8 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 	/**
 	 * Test deleting posts page.
 	 *
-	 * @ticket 37580
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37580' )]
 	public function test_only_users_who_can_manage_options_can_delete_page_for_posts() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -412,11 +418,11 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_meta_caps_throw_doing_it_wrong_without_required_argument_provided
-	 * @ticket 44591
 	 *
 	 * @param string $cap The meta capability requiring an argument.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_meta_caps_throw_doing_it_wrong_without_required_argument_provided' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '44591' )]
 	public function test_meta_caps_throw_doing_it_wrong_without_required_argument_provided( $cap ) {
 		$admin_user = self::$user_id;
 		$this->setExpectedIncorrectUsage( 'map_meta_cap' );
@@ -430,7 +436,7 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 	 *     @type string $cap The meta capability requiring an argument.
 	 * }
 	 */
-	public function data_meta_caps_throw_doing_it_wrong_without_required_argument_provided() {
+	public static function data_meta_caps_throw_doing_it_wrong_without_required_argument_provided() {
 		return array(
 			array( 'delete_post' ),
 			array( 'delete_page' ),

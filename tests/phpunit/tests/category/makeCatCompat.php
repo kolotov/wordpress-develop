@@ -1,10 +1,10 @@
 <?php
 /**
- * @group taxonomy
- * @group category
  *
- * @covers ::_make_cat_compat
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\Group( 'category' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_make_cat_compat' )]
 class Tests_Category_MakeCatCompat extends WP_UnitTestCase {
 
 	/**

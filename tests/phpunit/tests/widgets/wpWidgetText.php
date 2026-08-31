@@ -9,8 +9,8 @@
 /**
  * Test wp-includes/widgets/class-wp-widget-text.php
  *
- * @group widgets
  */
+#[\PHPUnit\Framework\Attributes\Group( 'widgets' )]
 class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Args passed to the widget_text filter.
@@ -44,8 +44,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Test constructor method.
 	 *
-	 * @covers WP_Widget_Text::__construct
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', '__construct' )]
 	public function test_construct() {
 		$widget = new WP_Widget_Text();
 		$this->assertSame( 'text', $widget->id_base );
@@ -58,8 +58,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Test enqueue_admin_scripts method.
 	 *
-	 * @covers WP_Widget_Text::_register
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', '_register' )]
 	public function test__register() {
 		set_current_screen( 'widgets.php' );
 		$widget = new WP_Widget_Text();
@@ -74,9 +74,9 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	 * Test register in customize preview.
 	 *
 	 * @global WP_Customize_Manager $wp_customize
-	 * @covers WP_Widget_Text::__construct
-	 * @covers WP_Widget_Text::_register
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', '__construct' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', '_register' )]
 	public function test__register_in_customize_preview() {
 		global $wp_customize;
 		wp_set_current_user(
@@ -104,8 +104,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	 *
 	 * @global WP_Scripts $wp_scripts
 	 * @global WP_Styles $wp_styles
-	 * @covers WP_Widget_Text::enqueue_preview_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', 'enqueue_preview_scripts' )]
 	public function test_enqueue_preview_scripts() {
 		global $wp_scripts, $wp_styles;
 		$wp_scripts = null;
@@ -126,8 +126,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Test widget method.
 	 *
-	 * @covers WP_Widget_Text::widget
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', 'widget' )]
 	public function test_widget() {
 		$widget = new WP_Widget_Text();
 		$text   = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Praesent ut turpis consequat lorem volutpat bibendum vitae vitae ante.";
@@ -310,8 +310,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Test widget method with shortcodes.
 	 *
-	 * @covers WP_Widget_Text::widget
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', 'widget' )]
 	public function test_widget_shortcodes() {
 		global $post;
 		$post_id = self::factory()->post->create();
@@ -462,8 +462,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Test is_legacy_instance method.
 	 *
-	 * @covers WP_Widget_Text::is_legacy_instance
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', 'is_legacy_instance' )]
 	public function test_is_legacy_instance() {
 		$widget        = new WP_Widget_Text();
 		$base_instance = array(
@@ -627,8 +627,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Test update method.
 	 *
-	 * @covers WP_Widget_Text::form
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', 'form' )]
 	public function test_form() {
 		add_filter( 'user_can_richedit', '__return_true' );
 		$widget = new WP_Widget_Text();
@@ -703,8 +703,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Test update method.
 	 *
-	 * @covers WP_Widget_Text::update
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', 'update' )]
 	public function test_update() {
 		$widget   = new WP_Widget_Text();
 		$instance = array(
@@ -752,8 +752,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Test update for legacy widgets.
 	 *
-	 * @covers WP_Widget_Text::update
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', 'update' )]
 	public function test_update_legacy() {
 		$widget = new WP_Widget_Text();
 
@@ -978,8 +978,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Test enqueue_admin_scripts method.
 	 *
-	 * @covers WP_Widget_Text::enqueue_admin_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', 'enqueue_admin_scripts' )]
 	public function test_enqueue_admin_scripts() {
 		set_current_screen( 'widgets.php' );
 		$widget = new WP_Widget_Text();
@@ -991,8 +991,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Test render_control_template_scripts method.
 	 *
-	 * @covers WP_Widget_Text::render_control_template_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Text', 'render_control_template_scripts' )]
 	public function test_render_control_template_scripts() {
 		ob_start();
 		WP_Widget_Text::render_control_template_scripts();
@@ -1004,8 +1004,8 @@ class Tests_Widgets_wpWidgetText extends WP_UnitTestCase {
 	/**
 	 * Ensure that rel="noopener" is not added to links without a target.
 	 *
-	 * @ticket 46421
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46421' )]
 	public function test_render_links_without_target() {
 		$widget = new WP_Widget_Text();
 

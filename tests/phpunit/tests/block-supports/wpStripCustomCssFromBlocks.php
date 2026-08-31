@@ -1,22 +1,27 @@
 <?php
 
 /**
- * @group block-supports
  *
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+
+
+
+
+
 class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 
 	/**
 	 * Tests that style.css is stripped from block attributes.
 	 *
-	 * @ticket 64771
 	 *
-	 * @covers ::wp_strip_custom_css_from_blocks
-	 * @dataProvider data_strips_css_from_blocks
 	 *
 	 * @param string $content  Post content containing blocks.
 	 * @param string $message  Assertion message.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_strips_css_from_blocks' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_strip_custom_css_from_blocks' )]
 	public function test_strips_css_from_blocks( $content, $message ) {
 		$result = wp_unslash( wp_strip_custom_css_from_blocks( $content ) );
 		$blocks = parse_blocks( $result );
@@ -30,7 +35,7 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_strips_css_from_blocks() {
+	public static function data_strips_css_from_blocks() {
 		return array(
 			'single block' => array(
 				'content' => '<!-- wp:paragraph {"style":{"css":"color: red;"}} --><p>Hello</p><!-- /wp:paragraph -->',
@@ -42,9 +47,9 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests that style.css is stripped from nested inner blocks.
 	 *
-	 * @covers ::wp_strip_custom_css_from_blocks
-	 * @ticket 64771
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_strip_custom_css_from_blocks' )]
 	public function test_strips_css_from_inner_blocks() {
 		$content = '<!-- wp:group --><div class="wp-block-group"><!-- wp:paragraph {"style":{"css":"color: red;"}} --><p>Hello</p><!-- /wp:paragraph --></div><!-- /wp:group -->';
 
@@ -58,9 +63,9 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests that content without blocks is returned unchanged.
 	 *
-	 * @covers ::wp_strip_custom_css_from_blocks
-	 * @ticket 64771
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_strip_custom_css_from_blocks' )]
 	public function test_returns_non_block_content_unchanged() {
 		$content = '<p>This is plain HTML content with no blocks.</p>';
 
@@ -72,9 +77,9 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests that content without style.css attributes is returned unchanged.
 	 *
-	 * @covers ::wp_strip_custom_css_from_blocks
-	 * @ticket 64771
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_strip_custom_css_from_blocks' )]
 	public function test_returns_unchanged_when_no_css_attributes() {
 		$content = '<!-- wp:paragraph {"style":{"color":{"text":"#ff0000"}}} --><p class="has-text-color" style="color:#ff0000">Hello</p><!-- /wp:paragraph -->';
 
@@ -86,9 +91,9 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests that other style properties are preserved when css is stripped.
 	 *
-	 * @covers ::wp_strip_custom_css_from_blocks
-	 * @ticket 64771
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_strip_custom_css_from_blocks' )]
 	public function test_preserves_other_style_properties() {
 		$content = '<!-- wp:paragraph {"style":{"css":"color: red;","color":{"text":"#ff0000"}}} --><p>Hello</p><!-- /wp:paragraph -->';
 
@@ -102,9 +107,9 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests that empty style object is cleaned up after stripping css.
 	 *
-	 * @covers ::wp_strip_custom_css_from_blocks
-	 * @ticket 64771
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_strip_custom_css_from_blocks' )]
 	public function test_cleans_up_empty_style_object() {
 		$content = '<!-- wp:paragraph {"style":{"css":"color: red;"}} --><p>Hello</p><!-- /wp:paragraph -->';
 
@@ -117,9 +122,9 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests that slashed content is handled correctly.
 	 *
-	 * @covers ::wp_strip_custom_css_from_blocks
-	 * @ticket 64771
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_strip_custom_css_from_blocks' )]
 	public function test_handles_slashed_content() {
 		$content = '<!-- wp:paragraph {"style":{"css":"color: red;"}} --><p>Hello</p><!-- /wp:paragraph -->';
 		$slashed = wp_slash( $content );
@@ -133,11 +138,11 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests that the content_save_pre filter is added for a user without edit_css.
 	 *
-	 * @ticket 64771
 	 *
-	 * @covers ::wp_custom_css_kses_init
-	 * @covers ::wp_custom_css_kses_init_filters
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_custom_css_kses_init' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_custom_css_kses_init_filters' )]
 	public function test_filter_added_for_user_without_edit_css() {
 		$author_id = self::factory()->user->create( array( 'role' => 'author' ) );
 		wp_set_current_user( $author_id );
@@ -153,11 +158,11 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests that the content_save_pre filter is not added for a user with edit_css.
 	 *
-	 * @ticket 64771
 	 *
-	 * @covers ::wp_custom_css_kses_init
-	 * @covers ::wp_custom_css_remove_filters
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_custom_css_kses_init' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_custom_css_remove_filters' )]
 	public function test_filter_not_added_for_user_with_edit_css() {
 		$admin_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
 		if ( is_multisite() ) {
@@ -182,10 +187,10 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	 * wp_custom_css_kses_init() is hooked to set_current_user, so wp_set_current_user()
 	 * alone should update the filter state without a manual call.
 	 *
-	 * @ticket 64771
 	 *
-	 * @covers ::wp_custom_css_kses_init
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_custom_css_kses_init' )]
 	public function test_set_current_user_action_triggers_reinit() {
 		$admin_id  = self::factory()->user->create( array( 'role' => 'administrator' ) );
 		$author_id = self::factory()->user->create( array( 'role' => 'author' ) );
@@ -211,10 +216,10 @@ class Tests_Block_Supports_WpStripCustomCssFromBlocks extends WP_UnitTestCase {
 	/**
 	 * Tests that the filter is enabled during import regardless of user capability.
 	 *
-	 * @ticket 64771
 	 *
-	 * @covers ::wp_custom_css_force_filtered_html_on_import_filter
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64771' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_custom_css_force_filtered_html_on_import_filter' )]
 	public function test_force_filtered_html_on_import_enables_filter_for_privileged_user() {
 		$admin_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
 		if ( is_multisite() ) {

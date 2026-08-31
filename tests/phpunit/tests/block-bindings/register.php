@@ -6,9 +6,14 @@
  * @subpackage Blocks
  * @since 6.5.0
  *
- * @group blocks
- * @group block-bindings
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\Group( 'block-bindings' )]
+
+
+
+
+
 class Tests_Block_Bindings_Register extends WP_UnitTestCase {
 
 	public static $test_source_name       = 'test/source';
@@ -45,16 +50,27 @@ class Tests_Block_Bindings_Register extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
+	private function assert_test_source( $expected_name, $source ) {
+		$this->assertInstanceOf( WP_Block_Bindings_Source::class, $source );
+		$this->assertSame( $expected_name, $source->name );
+		$this->assertSame( 'Test source', $source->label );
+		$this->assertNull( $source->uses_context );
+
+		$callback_property = new ReflectionProperty( WP_Block_Bindings_Source::class, 'get_value_callback' );
+		$this->assertSame( self::$test_source_properties['get_value_callback'], $callback_property->getValue( $source ) );
+		$this->assertSame( 'test-value', $source->get_value( array(), null, 'content' ) );
+	}
+
 	/**
 	 * Should find all registered sources.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers ::register_block_bindings_source
-	 * @covers ::get_all_registered_block_bindings_sources
-	 * @covers ::get_block_bindings_source
-	 * @covers WP_Block_Bindings_Source::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_bindings_source' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_all_registered_block_bindings_sources' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_block_bindings_source' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Source', '__construct' )]
 	public function test_get_all_registered() {
 		$source_one_name       = 'test/source-one';
 		$source_one_properties = self::$test_source_properties;
@@ -78,29 +94,35 @@ class Tests_Block_Bindings_Register extends WP_UnitTestCase {
 			'core/term-data'         => get_block_bindings_source( 'core/term-data' ),
 		);
 
-		$registered = get_all_registered_block_bindings_sources();
-		$this->assertEquals( $expected, $registered );
+		$registered              = get_all_registered_block_bindings_sources();
+		$expected_source_names   = array_keys( $expected );
+		$registered_source_names = array_keys( $registered );
+		sort( $expected_source_names );
+		sort( $registered_source_names );
+		$this->assertSame( $expected_source_names, $registered_source_names );
+
+		foreach ( array( $source_one_name, $source_two_name, $source_three_name ) as $source_name ) {
+			$this->assert_test_source( $source_name, $registered[ $source_name ] );
+		}
+
+		foreach ( array( 'core/post-data', 'core/post-meta', 'core/pattern-overrides', 'core/term-data' ) as $source_name ) {
+			$this->assertSame( $expected[ $source_name ], $registered[ $source_name ] );
+		}
 	}
 
 	/**
 	 * Should unregister existing block binding source.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers ::register_block_bindings_source
-	 * @covers ::unregister_block_bindings_source
-	 * @covers WP_Block_Bindings_Source::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_bindings_source' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unregister_block_bindings_source' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Bindings_Source', '__construct' )]
 	public function test_unregister_block_source() {
 		register_block_bindings_source( self::$test_source_name, self::$test_source_properties );
 
 		$result = unregister_block_bindings_source( self::$test_source_name );
-		$this->assertEquals(
-			new WP_Block_Bindings_Source(
-				self::$test_source_name,
-				self::$test_source_properties
-			),
-			$result
-		);
+		$this->assert_test_source( self::$test_source_name, $result );
 	}
 }

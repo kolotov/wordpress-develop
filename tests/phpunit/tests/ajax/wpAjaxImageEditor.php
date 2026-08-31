@@ -11,12 +11,16 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  * @subpackage UnitTests
  * @since 3.5.0
  *
- * @group ajax
  *
- * @covers ::wp_ajax_image_editor
  *
- * @requires function imagejpeg
  */
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+
+#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_image_editor' )]
 class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -29,11 +33,10 @@ class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26381
-	 * @requires function imagejpeg
 	 *
-	 * @covers ::wp_save_image
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26381' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function testCropImageIntoLargerOne() {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
 
@@ -56,12 +59,10 @@ class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32171
-	 * @requires function imagejpeg
 	 *
-	 * @covers ::wp_insert_attachment
-	 * @covers ::wp_save_image
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32171' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function testImageEditOverwriteConstant() {
 		define( 'IMAGE_EDIT_OVERWRITE', true );
 
@@ -121,8 +122,8 @@ class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
 	 * Tests that the image meta data file size is updated after editing an image,
 	 * this includes both the full size image and all the generated sizes.
 	 *
-	 * @ticket 59684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59684' )]
 	public function test_filesize_updated_after_editing_an_image() {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
 
@@ -162,8 +163,8 @@ class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
 	 * Tests that the image meta data file size is restored after restoring the original image,
 	 * this includes both the full size image and all the generated sizes.
 	 *
-	 * @ticket 59684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59684' )]
 	public function test_filesize_restored_after_restoring_original_image() {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
 
@@ -204,14 +205,14 @@ class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
 	 * `wp_get_attachment_metadata`. `wp_save_image()` only validates that the metadata itself is an
 	 * array, then passes `$meta['sizes']` straight to `array_merge()`.
 	 *
-	 * @ticket 65748
 	 *
-	 * @covers ::wp_save_image
 	 *
-	 * @dataProvider data_save_image_with_unusable_sizes_metadata
 	 *
 	 * @param array{ sizes?: mixed } $meta Attachment metadata to store before editing, minus the file-specific keys.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_save_image_with_unusable_sizes_metadata' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_save_image' )]
 	public function test_save_image_with_unusable_sizes_metadata( array $meta ) {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
 
@@ -261,14 +262,14 @@ class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
 	 * "Cannot use a scalar value as an array", and `false` is deprecated as of PHP 8.1 and
 	 * an error as of PHP 9. The same metadata that fatals `wp_save_image()` reaches this code.
 	 *
-	 * @ticket 65748
 	 *
-	 * @covers ::wp_restore_image
 	 *
-	 * @dataProvider data_save_image_with_unusable_sizes_metadata
 	 *
 	 * @param array{ sizes?: mixed } $meta Replacement `sizes` metadata to store before restoring.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_save_image_with_unusable_sizes_metadata' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_restore_image' )]
 	public function test_restore_image_with_unusable_sizes_metadata( array $meta ) {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
 
@@ -317,7 +318,7 @@ class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
 	 *
 	 * @return array<non-empty-string, array{ 0: array{ sizes?: mixed } }>
 	 */
-	public function data_save_image_with_unusable_sizes_metadata(): array {
+	public static function data_save_image_with_unusable_sizes_metadata(): array {
 		return array(
 			'no sizes key'  => array( array() ),
 			'null sizes'    => array( array( 'sizes' => null ) ),

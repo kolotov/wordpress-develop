@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::remove_accents
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'remove_accents' )]
 class Tests_Formatting_RemoveAccents extends WP_UnitTestCase {
 
 	public function test_remove_accents_simple() {
@@ -12,16 +12,14 @@ class Tests_Formatting_RemoveAccents extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24661
-	 *
 	 * Tests Unicode sequence normalization from NFD (Normalization Form Decomposed)
 	 * to NFC (Normalization Form [Pre]Composed), the encoding used in `remove_accents()`.
 	 *
 	 * For more information on Unicode normalization, see
 	 * https://unicode.org/faq/normalization.html.
-	 *
-	 * @requires extension intl
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24661' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'intl' )]
 	public function test_remove_accents_latin1_supplement_nfd_encoding() {
 		$input  = 'ªºÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ';
 		$output = 'aoAAAAAAAECEEEEIIIIDNOOOOOOUUUUYTHsaaaaaaaeceeeeiiiidnoooooouuuuythy';
@@ -30,8 +28,8 @@ class Tests_Formatting_RemoveAccents extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 9591
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '9591' )]
 	public function test_remove_accents_latin1_supplement() {
 		$input  = 'ªºÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ';
 		$output = 'aoAAAAAAAECEEEEIIIIDNOOOOOOUUUUYTHsaaaaaaaeceeeeiiiidnoooooouuuuythy';
@@ -66,8 +64,8 @@ class Tests_Formatting_RemoveAccents extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 17738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17738' )]
 	public function test_remove_accents_vowels_diacritic() {
 		// Vowels with diacritic.
 		// Unmarked.
@@ -85,8 +83,8 @@ class Tests_Formatting_RemoveAccents extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20772
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20772' )]
 	public function test_remove_accents_hanyu_pinyin() {
 		// Vowels with diacritic (Chinese, Hanyu Pinyin).
 		// Macron.
@@ -102,15 +100,15 @@ class Tests_Formatting_RemoveAccents extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 3782
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '3782' )]
 	public function test_remove_accents_germanic_umlauts() {
 		$this->assertSame( 'AeOeUeaeoeuess', remove_accents( 'ÄÖÜäöüß', 'de_DE' ) );
 	}
 
 	/**
-	 * @ticket 64821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64821' )]
 	public function test_remove_accents_germanic_capital_eszett() {
 		// U+1E9E LATIN CAPITAL LETTER SHARP S, standardized in German orthography in 2017 (DIN 5008).
 		$this->assertSame( 'SS', remove_accents( 'ẞ', 'de_DE' ) );
@@ -119,23 +117,23 @@ class Tests_Formatting_RemoveAccents extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23907
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23907' )]
 	public function test_remove_danish_accents() {
 		$this->assertSame( 'AeOeAaaeoeaa', remove_accents( 'ÆØÅæøå', 'da_DK' ) );
 	}
 
 	/**
-	 * @ticket 37086
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37086' )]
 	public function test_remove_catalan_middot() {
 		$this->assertSame( 'allallalla', remove_accents( 'al·lallaŀla', 'ca' ) );
 		$this->assertSame( 'al·lallalla', remove_accents( 'al·lallaŀla' ) );
 	}
 
 	/**
-	 * @ticket 38078
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38078' )]
 	public function test_transcribe_serbian_crossed_d() {
 		$this->assertSame( 'DJdj', remove_accents( 'Đđ', 'sr_RS' ) );
 		$this->assertSame( 'Dd', remove_accents( 'Đđ' ) );

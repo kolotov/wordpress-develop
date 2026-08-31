@@ -6,11 +6,17 @@
  * @subpackage REST_API
  * @since 7.1.0
  *
- * @group restapi
- * @group icons
  *
- * @coversDefaultClass WP_REST_Icon_Collections_Controller
  */
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+#[\PHPUnit\Framework\Attributes\Group( 'icons' )]
 class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller_Testcase {
 	protected static $admin_id;
 	protected static $editor_id;
@@ -45,10 +51,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::register_routes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
 		$this->assertArrayHasKey( '/wp/v2/icon-collections', $routes );
@@ -56,10 +62,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::get_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'get_items' )]
 	public function test_get_items() {
 		wp_register_icon_collection( 'rest-test-collection', array( 'label' => 'REST Test' ) );
 
@@ -81,10 +87,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::get_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'get_item' )]
 	public function test_get_item() {
 		wp_register_icon_collection(
 			'rest-test-collection',
@@ -109,10 +115,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::get_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'get_item' )]
 	public function test_get_item_returns_404_for_unknown_collection() {
 		wp_set_current_user( self::$editor_id );
 
@@ -123,10 +129,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::get_items_permissions_check
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'get_items_permissions_check' )]
 	public function test_get_items_requires_edit_posts_capability() {
 		wp_set_current_user( self::$subscriber_id );
 
@@ -137,10 +143,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::get_items_permissions_check
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'get_items_permissions_check' )]
 	public function test_get_items_requires_authentication() {
 		wp_set_current_user( 0 );
 
@@ -151,10 +157,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::get_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'get_items' )]
 	public function test_get_items_admin_has_access() {
 		wp_set_current_user( self::$admin_id );
 
@@ -165,10 +171,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::get_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'get_items' )]
 	public function test_get_items_contributor_has_access() {
 		wp_set_current_user( self::$contributor_id );
 
@@ -179,10 +185,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::get_item_permissions_check
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'get_item_permissions_check' )]
 	public function test_get_item_requires_authentication() {
 		wp_set_current_user( 0 );
 
@@ -193,10 +199,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::prepare_item_for_response
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'prepare_item_for_response' )]
 	public function test_prepare_item() {
 		wp_set_current_user( self::$editor_id );
 
@@ -212,10 +218,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::prepare_item_for_response
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'prepare_item_for_response' )]
 	public function test_get_items_fields_parameter() {
 		wp_set_current_user( self::$editor_id );
 
@@ -233,10 +239,10 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @ticket 64847
 	 *
-	 * @covers ::get_item_schema
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Icon_Collections_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/icon-collections' );
 		$response = rest_get_server()->dispatch( $request );
@@ -253,8 +259,8 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	 * Asserts that no icon collections can be created.
 	 * No controller method is executed; 404 is returned by route matching.
 	 *
-	 * @ticket 64847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
 	public function test_create_item() {
 		$request = new WP_REST_Request( 'POST', '/wp/v2/icon-collections' );
 		$request->set_param( 'slug', 'foo' );
@@ -269,8 +275,8 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	 * Asserts that no icon collections can be updated.
 	 * No controller method is executed; 404 is returned by route matching.
 	 *
-	 * @ticket 64847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
 	public function test_update_item() {
 		$request = new WP_REST_Request( 'POST', '/wp/v2/icon-collections/core' );
 		$request->set_param( 'label', 'Foo' );
@@ -284,8 +290,8 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	 * Asserts that no icon collections can be deleted.
 	 * No controller method is executed; 404 is returned by route matching.
 	 *
-	 * @ticket 64847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
 	public function test_delete_item() {
 		$request  = new WP_REST_Request( 'DELETE', '/wp/v2/icon-collections/core' );
 		$response = rest_get_server()->dispatch( $request );
@@ -294,8 +300,8 @@ class Tests_REST_WpRestIconCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_context_param() {
 	}
 }

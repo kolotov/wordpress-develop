@@ -6,10 +6,10 @@
  * @subpackage UnitTests
  * @since 4.9.8
  *
- * @group privacy
- * @group user
- * @covers ::_wp_privacy_send_request_confirmation_notification
  */
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_privacy_send_request_confirmation_notification' )]
 class Tests_Privacy_wpPrivacySendRequestConfirmationNotification extends WP_UnitTestCase {
 	/**
 	 * Reset the mocked PHPMailer instance before each test method.
@@ -34,8 +34,8 @@ class Tests_Privacy_wpPrivacySendRequestConfirmationNotification extends WP_Unit
 	/**
 	 * The function should not send an email when the request ID does not exist.
 	 *
-	 * @ticket 43967
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43967' )]
 	public function test_should_not_send_email_when_not_a_valid_request_id() {
 		_wp_privacy_send_request_confirmation_notification( 1234567890 );
 		$mailer = tests_retrieve_phpmailer_instance();
@@ -46,8 +46,8 @@ class Tests_Privacy_wpPrivacySendRequestConfirmationNotification extends WP_Unit
 	/**
 	 * The function should not send an email when the ID passed does not correspond to a user request.
 	 *
-	 * @ticket 43967
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43967' )]
 	public function test_should_not_send_email_when_not_a_user_request() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -64,8 +64,8 @@ class Tests_Privacy_wpPrivacySendRequestConfirmationNotification extends WP_Unit
 	/**
 	 * The function should send an email to the site admin when a user request is confirmed.
 	 *
-	 * @ticket 43967
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43967' )]
 	public function test_should_send_email_to_site_admin_when_user_request_confirmed() {
 		$email      = 'export.request.from.unregistered.user@example.com';
 		$request_id = wp_create_user_request( $email, 'export_personal_data' );
@@ -87,8 +87,8 @@ class Tests_Privacy_wpPrivacySendRequestConfirmationNotification extends WP_Unit
 	/**
 	 * The function should only send an email to the site admin when a user request is confirmed.
 	 *
-	 * @ticket 43967
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43967' )]
 	public function test_should_only_send_email_to_site_admin_when_user_request_is_confirmed() {
 		$email      = 'export.request.from.unregistered.user@example.com';
 		$request_id = wp_create_user_request( $email, 'export_personal_data' );
@@ -107,8 +107,8 @@ class Tests_Privacy_wpPrivacySendRequestConfirmationNotification extends WP_Unit
 	/**
 	 * The function should only send an email once to the site admin when a user request is confirmed.
 	 *
-	 * @ticket 43967
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43967' )]
 	public function test_should_only_send_email_once_to_admin_when_user_request_is_confirmed() {
 		$email      = 'export.request.from.unregistered.user@example.com';
 		$request_id = wp_create_user_request( $email, 'export_personal_data' );
@@ -131,8 +131,8 @@ class Tests_Privacy_wpPrivacySendRequestConfirmationNotification extends WP_Unit
 	/**
 	 * The email address should be filterable.
 	 *
-	 * @ticket 43967
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43967' )]
 	public function test_email_address_should_be_filterable() {
 		$email      = 'export.request.from.unregistered.user@example.com';
 		$request_id = wp_create_user_request( $email, 'export_personal_data' );
@@ -164,8 +164,8 @@ class Tests_Privacy_wpPrivacySendRequestConfirmationNotification extends WP_Unit
 	/**
 	 * The email content should be filterable.
 	 *
-	 * @ticket 43967
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43967' )]
 	public function test_email_content_should_be_filterable() {
 		$email      = 'export.request.from.unregistered.user@example.com';
 		$request_id = wp_create_user_request( $email, 'export_personal_data' );
@@ -208,8 +208,8 @@ class Tests_Privacy_wpPrivacySendRequestConfirmationNotification extends WP_Unit
 	 *
 	 * @since 5.4.0
 	 *
-	 * @ticket 44501
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44501' )]
 	public function test_email_headers_should_be_filterable() {
 		$email      = 'export.request.from.unregistered.user@example.com';
 		$request_id = wp_create_user_request( $email, 'export_personal_data' );

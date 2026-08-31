@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group oembed
  */
+#[\PHPUnit\Framework\Attributes\Group( 'oembed' )]
 class Tests_Embed_Template extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -345,15 +345,15 @@ class Tests_Embed_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35567
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35567' )]
 	public function test_is_embeddable_post_non_existent_post() {
 		$this->assertFalse( is_post_embeddable( 99999 ) );
 	}
 
 	/**
-	 * @ticket 35567
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35567' )]
 	public function test_is_embeddable_post_should_return_false_for_non_embeddable_post_type() {
 		register_post_type( 'not_embeddable', array( 'embeddable' => false ) );
 
@@ -367,8 +367,8 @@ class Tests_Embed_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35567
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35567' )]
 	public function test_is_embeddable_post_should_return_true_for_embeddable_post_type() {
 		register_post_type( 'embeddable', array( 'embeddable' => true ) );
 
@@ -382,8 +382,8 @@ class Tests_Embed_Template extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35567
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35567' )]
 	public function test_is_embeddable_post_filtered() {
 		register_post_type( 'not_embeddable', array( 'embeddable' => false ) );
 

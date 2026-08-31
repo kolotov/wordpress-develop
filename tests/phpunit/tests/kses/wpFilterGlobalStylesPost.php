@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group kses
  *
- * @covers ::wp_filter_global_styles_post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'kses' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_filter_global_styles_post' )]
 class Tests_Kses_WpFilterGlobalStylesPost extends WP_UnitTestCase {
 
 	/**
@@ -27,11 +27,11 @@ class Tests_Kses_WpFilterGlobalStylesPost extends WP_UnitTestCase {
 	);
 
 	/**
-	 * @dataProvider data_should_not_remove_safe_global_style_rules
-	 * @ticket       56266
 	 *
 	 * @param string $rule A rule to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_remove_safe_global_style_rules' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56266' )]
 	public function test_should_not_remove_safe_global_style_rules( $rule ) {
 		$theme_data               = wp_parse_args( $this->user_theme_data, array( $rule => 'someValue' ) );
 		$filtered_user_theme_json = $this->filter_global_styles( $theme_data );
@@ -46,7 +46,7 @@ class Tests_Kses_WpFilterGlobalStylesPost extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_should_not_remove_safe_global_style_rules() {
+	public static function data_should_not_remove_safe_global_style_rules() {
 		$result = array();
 		foreach ( WP_Theme_JSON::VALID_TOP_LEVEL_KEYS as $safe_rule ) {
 			$result[ $safe_rule ] = array( $safe_rule );
@@ -59,8 +59,8 @@ class Tests_Kses_WpFilterGlobalStylesPost extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56266' )]
 	public function test_should_remove_unsafe_global_style_rules() {
 		$filtered_user_theme_json = $this->filter_global_styles( $this->user_theme_data );
 		$this->assertArrayNotHasKey( 'nonSchemaRule', $filtered_user_theme_json, 'Filtered json data must not contain unsafe global style rules.' );

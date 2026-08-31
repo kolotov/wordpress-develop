@@ -1,26 +1,34 @@
 <?php
 
 /**
- * @group formatting
- * @group emoji
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\Group( 'emoji' )]
+
+
+
+
+
 class Tests_Formatting_Emoji extends WP_UnitTestCase {
 
-	private $png_cdn = 'https://s.w.org/images/core/emoji/17.0.2/72x72/';
-	private $svg_cdn = 'https://s.w.org/images/core/emoji/17.0.2/svg/';
+	private const PNG_CDN = 'https://s.w.org/images/core/emoji/17.0.2/72x72/';
+	private const SVG_CDN = 'https://s.w.org/images/core/emoji/17.0.2/svg/';
+
+	private $png_cdn = self::PNG_CDN;
+	private $svg_cdn = self::SVG_CDN;
 
 	/**
 	 * Tests that the emoji detection script is hooked onto the front end footer
 	 * when the footer scripts have not yet been printed.
 	 *
-	 * @ticket 64076
-	 * @ticket 65310
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 *
-	 * @covers ::print_emoji_detection_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64076' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65310' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'print_emoji_detection_script' )]
 	public function test_print_emoji_detection_script_on_front_end(): void {
 		$this->assertFalse( is_admin(), 'Expected to not be in the admin.' );
 		$this->assertFalse(
@@ -45,14 +53,14 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 	 * Tests that the emoji detection script is printed directly when the front
 	 * end footer scripts have already been printed.
 	 *
-	 * @ticket 64076
-	 * @ticket 65310
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 *
-	 * @covers ::print_emoji_detection_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64076' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65310' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'print_emoji_detection_script' )]
 	public function test_print_emoji_detection_script_on_front_end_after_footer_scripts_printed(): void {
 		// `_print_emoji_detection_script()` assumes `wp-includes/js/wp-emoji-loader.js` is present:
 		self::touch( ABSPATH . WPINC . '/js/wp-emoji-loader.js' );
@@ -92,14 +100,14 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 	 * Tests that the emoji detection script is hooked onto the admin footer
 	 * when the footer scripts have not yet been printed.
 	 *
-	 * @ticket 64076
-	 * @ticket 65310
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 *
-	 * @covers ::print_emoji_detection_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64076' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65310' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'print_emoji_detection_script' )]
 	public function test_print_emoji_detection_script_in_admin(): void {
 		set_current_screen( 'edit-post' );
 		$this->assertTrue( is_admin(), 'Expected to be in the admin.' );
@@ -125,14 +133,14 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 	 * Tests that the emoji detection script is printed directly when the admin
 	 * footer scripts have already been printed.
 	 *
-	 * @ticket 64076
-	 * @ticket 65310
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 *
-	 * @covers ::print_emoji_detection_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64076' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65310' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'print_emoji_detection_script' )]
 	public function test_print_emoji_detection_script_in_admin_after_footer_scripts_printed(): void {
 		// `_print_emoji_detection_script()` assumes `wp-includes/js/wp-emoji-loader.js` is present:
 		self::touch( ABSPATH . WPINC . '/js/wp-emoji-loader.js' );
@@ -170,10 +178,10 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63842
 	 *
-	 * @covers ::_print_emoji_detection_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63842' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_print_emoji_detection_script' )]
 	public function test_script_tag_printing() {
 		// `_print_emoji_detection_script()` assumes `wp-includes/js/wp-emoji-loader.js` is present:
 		self::touch( ABSPATH . WPINC . '/js/wp-emoji-loader.js' );
@@ -207,10 +215,10 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36525
 	 *
-	 * @covers ::_print_emoji_detection_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36525' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_print_emoji_detection_script' )]
 	public function test_unfiltered_emoji_cdns() {
 		// `_print_emoji_detection_script()` assumes `wp-includes/js/wp-emoji-loader.js` is present:
 		self::touch( ABSPATH . WPINC . '/js/wp-emoji-loader.js' );
@@ -225,10 +233,10 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36525
 	 *
-	 * @covers ::_print_emoji_detection_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36525' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_print_emoji_detection_script' )]
 	public function test_filtered_emoji_svn_cdn() {
 		$filtered_svn_cdn = $this->_filtered_emoji_svg_cdn();
 
@@ -250,10 +258,10 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36525
 	 *
-	 * @covers ::_print_emoji_detection_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36525' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_print_emoji_detection_script' )]
 	public function test_filtered_emoji_png_cdn() {
 		$filtered_png_cdn = $this->_filtered_emoji_png_cdn();
 
@@ -271,10 +279,10 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41501
 	 *
-	 * @covers ::_wp_emoji_list
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41501' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_emoji_list' )]
 	public function test_wp_emoji_list_returns_data() {
 		$default = _wp_emoji_list();
 		$this->assertNotEmpty( $default, 'Default should not be empty' );
@@ -295,7 +303,7 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 		$this->assertNotSame( $default, $partials );
 	}
 
-	public function data_wp_encode_emoji() {
+	public static function data_wp_encode_emoji() {
 		return array(
 			array(
 				// Not emoji.
@@ -326,16 +334,16 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35293
-	 * @dataProvider data_wp_encode_emoji
 	 *
-	 * @covers ::wp_encode_emoji
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35293' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_encode_emoji' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_encode_emoji' )]
 	public function test_wp_encode_emoji( $emoji, $expected ) {
 		$this->assertSame( $expected, wp_encode_emoji( $emoji ) );
 	}
 
-	public function data_wp_staticize_emoji() {
+	public static function data_wp_staticize_emoji() {
 		$data = array(
 			array(
 				// Not emoji.
@@ -345,22 +353,22 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 			array(
 				// Simple emoji.
 				'🙂',
-				'<img src="' . $this->png_cdn . '1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" />',
+				'<img src="' . self::PNG_CDN . '1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" />',
 			),
 			array(
 				// Skin tone, gender, ZWJ, emoji selector.
 				'👮🏼‍♀️',
-				'<img src="' . $this->png_cdn . '1f46e-1f3fc-200d-2640-fe0f.png" alt="👮🏼‍♀️" class="wp-smiley" style="height: 1em; max-height: 1em;" />',
+				'<img src="' . self::PNG_CDN . '1f46e-1f3fc-200d-2640-fe0f.png" alt="👮🏼‍♀️" class="wp-smiley" style="height: 1em; max-height: 1em;" />',
 			),
 			array(
 				// Unicode 10.
 				'🧚',
-				'<img src="' . $this->png_cdn . '1f9da.png" alt="🧚" class="wp-smiley" style="height: 1em; max-height: 1em;" />',
+				'<img src="' . self::PNG_CDN . '1f9da.png" alt="🧚" class="wp-smiley" style="height: 1em; max-height: 1em;" />',
 			),
 			array(
 				// Hairy creature (Unicode 17).
 				'🫈',
-				'<img src="' . $this->png_cdn . '1fac8.png" alt="🫈" class="wp-smiley" style="height: 1em; max-height: 1em;" />',
+				'<img src="' . self::PNG_CDN . '1fac8.png" alt="🫈" class="wp-smiley" style="height: 1em; max-height: 1em;" />',
 			),
 		);
 
@@ -368,11 +376,11 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35293
-	 * @dataProvider data_wp_staticize_emoji
 	 *
-	 * @covers ::wp_staticize_emoji
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35293' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_staticize_emoji' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_staticize_emoji' )]
 	public function test_wp_staticize_emoji( $emoji, $expected ) {
 		$this->assertSame( $expected, wp_staticize_emoji( $emoji ) );
 	}

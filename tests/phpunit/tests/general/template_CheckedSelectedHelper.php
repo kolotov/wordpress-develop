@@ -2,9 +2,9 @@
 /**
  * A set of unit tests for the __checked_selected_helper() and associated functions in wp-includes/general-template.php.
  *
- * @group general
  */
 
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
 class Tests_General_Template_CheckedSelectedHelper extends WP_UnitTestCase {
 
 	/**
@@ -24,9 +24,9 @@ class Tests_General_Template_CheckedSelectedHelper extends WP_UnitTestCase {
 	/**
 	 * Tests that the return value for selected() is as expected with equal values.
 	 *
-	 * @ticket 53858
-	 * @covers ::selected
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53858' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'selected' )]
 	public function test_selected_with_equal_values() {
 		$this->assertSame( " selected='selected'", selected( 'foo', 'foo', false ) );
 	}
@@ -34,9 +34,9 @@ class Tests_General_Template_CheckedSelectedHelper extends WP_UnitTestCase {
 	/**
 	 * Tests that the return value for checked() is as expected with equal values.
 	 *
-	 * @ticket 53858
-	 * @covers ::checked
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53858' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'checked' )]
 	public function test_checked_with_equal_values() {
 		$this->assertSame( " checked='checked'", checked( 'foo', 'foo', false ) );
 	}
@@ -44,49 +44,43 @@ class Tests_General_Template_CheckedSelectedHelper extends WP_UnitTestCase {
 	/**
 	 * Tests that the return value for disabled() is as expected with equal values.
 	 *
-	 * @ticket 53858
-	 * @covers ::disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53858' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'disabled' )]
 	public function test_disabled_with_equal_values() {
 		$this->assertSame( " disabled='disabled'", disabled( 'foo', 'foo', false ) );
 	}
 
 	/**
-	 * Tests that the return value for readonly() is as expected with equal values.
-	 *
-	 * @ticket 53858
-	 * @covers ::readonly
-	 * @requires PHP < 8.1
+	 * Tests that the legacy readonly() alias is unavailable on modern PHP.
 	 */
-	public function test_readonly_with_equal_values() {
-		$this->setExpectedDeprecated( 'readonly' );
-
-		// Call the function via a variable to prevent a parse error for this file on PHP 8.1.
-		$fn = 'readonly';
-		$this->assertSame( " readonly='readonly'", $fn( 'foo', 'foo', false ) );
+	#[\PHPUnit\Framework\Attributes\Ticket( '53858' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	public function test_readonly_alias_is_not_loaded_on_modern_php() {
+		$this->assertFalse( function_exists( 'readonly' ) );
 	}
 
 	/**
 	 * Tests that the return value for wp_readonly() is as expected with equal values.
 	 *
-	 * @ticket 53858
-	 * @covers ::wp_readonly
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53858' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_readonly' )]
 	public function test_wp_readonly_with_equal_values() {
 		$this->assertSame( " readonly='readonly'", wp_readonly( 'foo', 'foo', false ) );
 	}
 
 	/**
-	 * @dataProvider data_equal_values
 	 *
-	 * @ticket 9862
-	 * @ticket 51166
-	 * @ticket 53858
-	 * @covers ::__checked_selected_helper
 	 *
 	 * @param mixed $helper  One of the values to compare.
 	 * @param mixed $current The other value to compare.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_equal_values' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '9862' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '51166' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '53858' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '__checked_selected_helper' )]
 	public function test_checked_selected_helper_with_equal_values( $helper, $current ) {
 		$this->assertSame( " test='test'", __checked_selected_helper( $helper, $current, false, 'test' ) );
 	}
@@ -96,7 +90,7 @@ class Tests_General_Template_CheckedSelectedHelper extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_equal_values() {
+	public static function data_equal_values() {
 		return array(
 			'same value, "foo"; 1: string; 2: string'   => array( 'foo', 'foo' ),
 			'same value, 1; 1: string; 2: int'          => array( '1', 1 ),
@@ -122,16 +116,16 @@ class Tests_General_Template_CheckedSelectedHelper extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_non_equal_values
 	 *
-	 * @ticket 9862
-	 * @ticket 51166
-	 * @ticket 53858
-	 * @covers ::__checked_selected_helper
 	 *
 	 * @param mixed $helper  One of the values to compare.
 	 * @param mixed $current The other value to compare.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_non_equal_values' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '9862' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '51166' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '53858' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '__checked_selected_helper' )]
 	public function test_checked_selected_helper_with_non_equal_values( $helper, $current ) {
 		$this->assertSame( '', __checked_selected_helper( $helper, $current, false, 'test' ) );
 	}
@@ -141,7 +135,7 @@ class Tests_General_Template_CheckedSelectedHelper extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_non_equal_values() {
+	public static function data_non_equal_values() {
 		return array(
 			'1: string foo; 2: string bar' => array( 'foo', 'bar' ),
 			'1: string 0; 2: empty string' => array( '0', '' ),
@@ -164,9 +158,9 @@ class Tests_General_Template_CheckedSelectedHelper extends WP_UnitTestCase {
 	 * Tests that the `$echo` parameter is handled correctly and that even when the output is echoed out,
 	 * the text is also returned.
 	 *
-	 * @ticket 53858
-	 * @covers ::__checked_selected_helper
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53858' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '__checked_selected_helper' )]
 	public function test_checked_selected_helper_echoes_result_by_default() {
 		$expected = " disabled='disabled'";
 		$this->expectOutputString( $expected );
@@ -176,18 +170,18 @@ class Tests_General_Template_CheckedSelectedHelper extends WP_UnitTestCase {
 	/**
 	 * Tests that the function compares against `true` when the second parameter is not passed.
 	 *
-	 * @dataProvider data_checked_selected_helper_default_value_for_second_parameter
 	 *
-	 * @ticket 53858
-	 * @covers ::__checked_selected_helper
-	 * @covers ::selected
-	 * @covers ::checked
-	 * @covers ::disabled
-	 * @covers ::wp_readonly
 	 *
 	 * @param mixed $input         Input value
 	 * @param mixed $expect_output Optional. Whether output is expected. Defaults to false.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_checked_selected_helper_default_value_for_second_parameter' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '53858' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '__checked_selected_helper' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'selected' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'checked' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'disabled' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_readonly' )]
 	public function test_checked_selected_helper_default_value_for_second_parameter( $input, $expect_output = false ) {
 		$fn       = array_rand( $this->child_functions );
 		$expected = '';
@@ -212,7 +206,7 @@ class Tests_General_Template_CheckedSelectedHelper extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_checked_selected_helper_default_value_for_second_parameter() {
+	public static function data_checked_selected_helper_default_value_for_second_parameter() {
 		return array(
 			'truthy; boolean true'          => array(
 				'input'         => true,

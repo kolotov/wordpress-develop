@@ -1,10 +1,11 @@
 <?php
 /**
- * @group blocks
- * @group block-templates
  *
- * @covers ::get_block_templates
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\Group( 'block-templates' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_block_templates' )]
 class Tests_Blocks_GetBlockTemplates extends WP_UnitTestCase {
 
 	const TEST_THEME = 'block-theme';
@@ -146,14 +147,14 @@ class Tests_Blocks_GetBlockTemplates extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56271
 	 *
-	 * @dataProvider data_get_block_templates_returns_unique_entities
 	 *
 	 * @param string $template_type        The template type.
 	 * @param string $original_template_id ID (slug) of the default entity.
 	 * @param string $error_message        An error message to display if the test fails.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56271' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_block_templates_returns_unique_entities' )]
 	public function test_get_block_templates_returns_unique_entities( $template_type, $original_template_id, $error_message ) {
 		$original_template = _get_block_template_file( $template_type, $original_template_id );
 		$this->assertNotEmpty( $original_template, 'An original (non-duplicate) template must exist for this test to work correctly.' );
@@ -170,7 +171,7 @@ class Tests_Blocks_GetBlockTemplates extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_get_block_templates_returns_unique_entities() {
+	public static function data_get_block_templates_returns_unique_entities() {
 		return array(
 			'wp_template template type'      => array(
 				'template_type'        => 'wp_template',
@@ -186,13 +187,13 @@ class Tests_Blocks_GetBlockTemplates extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_get_block_templates_should_respect_posttypes_property
-	 * @ticket 55881
-	 * @ticket 61110
 	 *
 	 * @param string $post_type Post type for query.
 	 * @param array  $expected  Expected template IDs.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_block_templates_should_respect_posttypes_property' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55881' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61110' )]
 	public function test_get_block_templates_should_respect_posttypes_property( $post_type, $expected ) {
 		$templates = get_block_templates( array( 'post_type' => $post_type ) );
 
@@ -210,7 +211,7 @@ class Tests_Blocks_GetBlockTemplates extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_get_block_templates_should_respect_posttypes_property() {
+	public static function data_get_block_templates_should_respect_posttypes_property() {
 		return array(
 			'post' => array(
 				'post_type' => 'post',
@@ -230,15 +231,15 @@ class Tests_Blocks_GetBlockTemplates extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_get_block_templates_should_not_leak_plugin_registered_templates_with_default_post_type_slugs
-	 * @ticket 62319
 	 *
-	 * @covers ::get_block_templates
 	 *
 	 * @param string $template_slug Default slug for the post type.
 	 * @param string $post_type     Post type for query.
 	 * @param array  $expected      Expected template IDs.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_block_templates_should_not_leak_plugin_registered_templates_with_default_post_type_slugs' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62319' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_block_templates' )]
 	public function test_get_block_templates_should_not_leak_plugin_registered_templates_with_default_post_type_slugs( $template_slug, $post_type, $expected ) {
 		$template_name = 'test-plugin//' . $template_slug;
 		$template_args = array(
@@ -268,7 +269,7 @@ class Tests_Blocks_GetBlockTemplates extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_get_block_templates_should_not_leak_plugin_registered_templates_with_default_post_type_slugs() {
+	public static function data_get_block_templates_should_not_leak_plugin_registered_templates_with_default_post_type_slugs() {
 		return array(
 			'post' => array(
 				'template_slug' => 'single',

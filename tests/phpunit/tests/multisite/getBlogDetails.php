@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @ticket 29845
- * @group ms-required
- * @group ms-site
- * @group multisite
  *
- * @covers ::get_blog_details
  */
+#[\PHPUnit\Framework\Attributes\Ticket( '29845' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_blog_details' )]
 class Tests_Multisite_GetBlogDetails extends WP_UnitTestCase {
 
 	protected static $network_ids;
@@ -127,7 +127,7 @@ class Tests_Multisite_GetBlogDetails extends WP_UnitTestCase {
 		}
 
 		$site = get_blog_details( array( 'domain' => 'wordpress.org' ) );
-		$this->assertSame( self::$site_ids['wordpress.org/'], $site->blog_id );
+		$this->assertSame( self::$site_ids['wordpress.org/'], (int) $site->blog_id );
 	}
 
 	public function test_get_blog_details_with_only_domain_in_fields_subdirectory() {
@@ -145,8 +145,8 @@ class Tests_Multisite_GetBlogDetails extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50391
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50391' )]
 	public function test_get_blog_details_does_not_switch_to_current_blog() {
 		$count = did_action( 'switch_blog' );
 
@@ -155,10 +155,10 @@ class Tests_Multisite_GetBlogDetails extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_get_all
 	 *
-	 * @ticket 40228
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40228' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_all' )]
 	public function test_get_blog_details_get_object_vars( $get_all ) {
 		$site = get_blog_details(
 			array(
@@ -174,10 +174,10 @@ class Tests_Multisite_GetBlogDetails extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_get_all
 	 *
-	 * @ticket 40228
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40228' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_all' )]
 	public function test_get_blog_details_iterate_over_result( $get_all ) {
 		$site = get_blog_details(
 			array(
@@ -195,7 +195,7 @@ class Tests_Multisite_GetBlogDetails extends WP_UnitTestCase {
 		$this->assertSameSets( $this->get_fields( $get_all ), $result );
 	}
 
-	public function data_get_all() {
+	public static function data_get_all() {
 		return array(
 			array( false ),
 			array( true ),

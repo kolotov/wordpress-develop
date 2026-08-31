@@ -55,7 +55,8 @@ jobs:
       actions: read
       contents: read
     timeout-minutes: 5
-    if: ${{ github.repository == 'WordPress/wordpress-develop' && github.event.workflow_run.event != 'pull_request' }}
+    # Prepare Slack notifications for non-pull-request workflow runs in this fork.
+    if: ${{ github.repository == 'kolotov/wordpress-develop' && github.event.workflow_run.event != 'pull_request' }}
     outputs:
       previous_conclusion: ${{ steps.previous-attempt-result.outputs.result }}
       timed_out: ${{ steps.timeout-check.outputs.result }}
@@ -175,7 +176,7 @@ jobs:
             -n \
             --arg workflow_name "${GITHUB_WORKFLOW}" \
             --arg ref_name "${CURRENT_BRANCH}" \
-            --arg run_url "https://github.com/WordPress/wordpress-develop/actions/runs/${GITHUB_RUN_ID}/attempts/${GITHUB_RUN_ATTEMPT}" \
+            --arg run_url "https://github.com/kolotov/wordpress-develop/actions/runs/${GITHUB_RUN_ID}/attempts/${GITHUB_RUN_ATTEMPT}" \
             --arg commit_message "${COMMIT_MSG}" \
             '{workflow_name: $workflow_name, ref_name: $ref_name, run_url: $run_url, commit_message: $commit_message}' | jq -c .
           )"

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group date
- * @group datetime
  *
- * @covers ::date_i18n
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'date_i18n' )]
 class Tests_Date_DateI18n extends WP_UnitTestCase {
 
 	/**
@@ -20,8 +20,8 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28636
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28636' )]
 	public function test_should_return_current_time_on_invalid_timestamp() {
 		$timezone = 'Europe/Helsinki';
 		update_option( 'timezone_string', $timezone );
@@ -33,8 +33,8 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28636
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28636' )]
 	public function test_should_handle_zero_timestamp() {
 		$timezone = 'Europe/Helsinki';
 		update_option( 'timezone_string', $timezone );
@@ -112,8 +112,8 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 	/**
 	 * Ensures that deprecated timezone strings are handled correctly.
 	 *
-	 * @ticket 56468
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56468' )]
 	public function test_adjusts_format_based_on_deprecated_timezone_string() {
 		update_option( 'timezone_string', 'America/Buenos_Aires' ); // This timezone was deprecated pre-PHP 5.6.
 
@@ -123,8 +123,8 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34835
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34835' )]
 	public function test_gmt_offset_should_output_correct_timezone() {
 		$timezone_formats = 'P I O T Z e';
 		$timezone_string  = 'America/Regina';
@@ -140,10 +140,10 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20973
 	 *
-	 * @dataProvider data_formats
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20973' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_formats' )]
 	public function test_date_i18n_handles_shorthand_formats( $short, $full ) {
 		update_option( 'timezone_string', 'America/Regina' );
 
@@ -151,7 +151,7 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 		$this->assertSame( $short, date_i18n( '\\' . $short ) );
 	}
 
-	public function data_formats() {
+	public static function data_formats() {
 		return array(
 			array(
 				'c',
@@ -165,8 +165,8 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25768
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25768' )]
 	public function test_should_return_wp_timestamp() {
 		update_option( 'timezone_string', 'Europe/Helsinki' );
 
@@ -180,8 +180,8 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43530
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43530' )]
 	public function test_swatch_internet_time_with_wp_timestamp() {
 		update_option( 'timezone_string', 'America/Regina' );
 
@@ -189,8 +189,8 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25768
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25768' )]
 	public function test_should_handle_escaped_formats() {
 		$format = 'D | \D | \\D | \\\D | \\\\D | \\\\\D | \\\\\\D';
 
@@ -198,13 +198,13 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25768
 	 *
-	 * @dataProvider data_should_handle_dst
 	 *
 	 * @param string $time     Time to test in Y-m-d H:i:s format.
 	 * @param string $timezone PHP timezone string to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25768' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_handle_dst' )]
 	public function test_should_handle_dst( $time, $timezone ) {
 		update_option( 'timezone_string', $timezone );
 
@@ -216,7 +216,7 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 		$this->assertSame( $datetime->format( $format ), date_i18n( $format, $wp_timestamp ) );
 	}
 
-	public function data_should_handle_dst() {
+	public static function data_should_handle_dst() {
 		return array(
 			'Before DST start' => array( '2019-03-31 02:59:00', 'Europe/Helsinki' ),
 			'After DST start'  => array( '2019-03-31 04:01:00', 'Europe/Helsinki' ),

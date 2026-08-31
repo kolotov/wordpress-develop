@@ -12,10 +12,10 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  * @subpackage UnitTests
  * @since 3.4.0
  *
- * @group ajax
  *
- * @covers ::wp_ajax_heartbeat
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_heartbeat' )]
 class Tests_Ajax_wpAjaxHeartbeat extends WP_Ajax_UnitTestCase {
 
 	/**

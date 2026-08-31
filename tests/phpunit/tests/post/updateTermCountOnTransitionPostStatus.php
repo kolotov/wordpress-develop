@@ -5,10 +5,10 @@
  *
  * See `Tests_Term_WpSetObjectTerms` for tests that cover changing terms on a post when saving it.
  *
- * @group taxonomy
  *
- * @covers ::_update_term_count_on_transition_post_status
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_update_term_count_on_transition_post_status' )]
 class Tests_Taxonomy_UpdateTermCountOnTransitionPostStatus extends WP_UnitTestCase {
 
 	/**
@@ -55,8 +55,8 @@ class Tests_Taxonomy_UpdateTermCountOnTransitionPostStatus extends WP_UnitTestCa
 	/**
 	 * Test that the term count is updated when a post is published.
 	 *
-	 * @ticket 42522
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42522' )]
 	public function test_update_term_count_on_publish() {
 		$this->assertTermCount( 1, self::$term_id );
 
@@ -84,8 +84,8 @@ class Tests_Taxonomy_UpdateTermCountOnTransitionPostStatus extends WP_UnitTestCa
 	/**
 	 * Test that the term count is updated when a post is moved to trash.
 	 *
-	 * @ticket 42522
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42522' )]
 	public function test_update_term_count_on_trash() {
 		$this->assertTermCount( 1, self::$term_id );
 
@@ -98,8 +98,8 @@ class Tests_Taxonomy_UpdateTermCountOnTransitionPostStatus extends WP_UnitTestCa
 	/**
 	 * Test that the term count is updated when a post is restored from trash.
 	 *
-	 * @ticket 42522
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42522' )]
 	public function test_update_term_count_on_restore() {
 		$this->assertTermCount( 1, self::$term_id );
 
@@ -122,8 +122,8 @@ class Tests_Taxonomy_UpdateTermCountOnTransitionPostStatus extends WP_UnitTestCa
 	/**
 	 * Test that the term count is updated when a post is deleted permanently.
 	 *
-	 * @ticket 42522
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42522' )]
 	public function test_update_term_count_on_delete() {
 		$this->assertTermCount( 1, self::$term_id );
 
@@ -136,8 +136,8 @@ class Tests_Taxonomy_UpdateTermCountOnTransitionPostStatus extends WP_UnitTestCa
 	/**
 	 * Test that the term count is not recalculated when neither the terms nor the post status change.
 	 *
-	 * @ticket 42522
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42522' )]
 	public function test_term_count_is_not_recalculated_when_status_does_not_change() {
 		// Create a mock action for checking the `edited_term_taxonomy` hook call count.
 		$edited_term_taxonomy_action = new MockAction();
@@ -180,8 +180,8 @@ class Tests_Taxonomy_UpdateTermCountOnTransitionPostStatus extends WP_UnitTestCa
 	 *
 	 * This accounts for a transition such as draft -> pending.
 	 *
-	 * @ticket 63562
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63562' )]
 	public function test_term_count_is_not_recalculated_when_both_status_are_counted() {
 		// Create a mock action for checking the `edited_term_taxonomy` hook call count.
 		$edited_term_taxonomy_action = new MockAction();
@@ -226,8 +226,8 @@ class Tests_Taxonomy_UpdateTermCountOnTransitionPostStatus extends WP_UnitTestCa
 	 *
 	 * This accounts for a transition such as draft -> pending.
 	 *
-	 * @ticket 63562
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63562' )]
 	public function test_term_count_is_not_recalculated_when_neither_status_is_counted() {
 		// Create a mock action for checking the `edited_term_taxonomy` hook call count.
 		$edited_term_taxonomy_action = new MockAction();
@@ -264,8 +264,8 @@ class Tests_Taxonomy_UpdateTermCountOnTransitionPostStatus extends WP_UnitTestCa
 	/**
 	 * Test to ensure that the `update_post_term_count_statuses` filter is respected.
 	 *
-	 * @ticket 63562
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63562' )]
 	public function test_update_post_term_count_statuses_filter_is_respected() {
 		// Create a mock action for checking the `edited_term_taxonomy` hook call count.
 		$edited_term_taxonomy_action = new MockAction();

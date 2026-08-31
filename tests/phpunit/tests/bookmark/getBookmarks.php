@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group bookmark
  */
+#[\PHPUnit\Framework\Attributes\Group( 'bookmark' )]
 class Tests_Bookmark_GetBookmarks extends WP_UnitTestCase {
 	public function test_should_hit_cache() {
 		$bookmarks = self::factory()->bookmark->create_many( 2 );
@@ -55,8 +55,8 @@ class Tests_Bookmark_GetBookmarks extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18356
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18356' )]
 	public function test_orderby_rand_should_not_be_cached() {
 		$bookmarks = self::factory()->bookmark->create_many( 2 );
 

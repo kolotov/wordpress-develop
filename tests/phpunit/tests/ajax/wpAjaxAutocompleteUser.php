@@ -12,13 +12,11 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  * @subpackage UnitTests
  * @since 7.1.0
  *
- * @ticket 65051
- *
- * @group ajax
- * @group ms-required
- *
- * @covers ::wp_ajax_autocomplete_user
  */
+#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_autocomplete_user' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -79,8 +77,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that users of the current site are returned when searching them.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_should_return_users_matching_the_search_term() {
 		wp_set_current_user( self::$super_admin_id );
 
@@ -105,8 +103,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that the email address is returned when it is the requested field.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_should_return_the_email_address_as_the_value_when_requested() {
 		wp_set_current_user( self::$super_admin_id );
 
@@ -130,8 +128,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that users of the current site are excluded when adding a user to it.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_should_exclude_users_of_the_current_site_when_adding() {
 		wp_set_current_user( self::$super_admin_id );
 
@@ -150,12 +148,12 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that HTML tags are removed from the search term.
 	 *
-	 * @ticket 65051
 	 *
-	 * @dataProvider data_terms_containing_tags
 	 *
 	 * @param string $term Term containing HTML tags.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_terms_containing_tags' )]
 	public function test_should_strip_tags_from_the_search_term( string $term ) {
 		wp_set_current_user( self::$super_admin_id );
 
@@ -200,8 +198,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that searching for an email address with apostrophes is successful.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_search_email_address_with_apostrophe() {
 		wp_set_current_user( self::$super_admin_id );
 
@@ -225,8 +223,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that a missing search term does not return results.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_missing_term_does_not_return_results() {
 		wp_set_current_user( self::$super_admin_id );
 
@@ -242,12 +240,12 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that an empty search term does not return results.
 	 *
-	 * @ticket 65051
 	 *
-	 * @dataProvider data_empty_terms
 	 *
 	 * @param string $term Empty or whitespace-only term.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_empty_terms' )]
 	public function test_empty_term_does_not_return_results( string $term ) {
 		wp_set_current_user( self::$super_admin_id );
 
@@ -276,8 +274,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that a non-string search term does not return results.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_non_string_term_does_not_return_results() {
 		wp_set_current_user( self::$super_admin_id );
 
@@ -294,8 +292,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that a term consisting only of asterisks does not match all users.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_asterisk_only_term_does_not_return_results() {
 		wp_set_current_user( self::$super_admin_id );
 
@@ -312,8 +310,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that a term wrapped in asterisks still matches.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_asterisk_wrapped_term_returns_results() {
 		wp_set_current_user( self::$super_admin_id );
 
@@ -333,8 +331,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that users without the 'promote_users' capability are denied.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_should_deny_users_without_the_promote_users_capability() {
 		wp_set_current_user( self::$subscriber_id );
 
@@ -351,8 +349,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that site administrators are denied unless the filter allows them.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_should_deny_site_administrators_by_default() {
 		wp_set_current_user( self::$site_admin_id );
 
@@ -370,8 +368,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	 * Tests that site administrators are allowed by the
 	 * 'autocomplete_users_for_site_admins' filter.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_should_allow_site_administrators_when_filtered() {
 		wp_set_current_user( self::$site_admin_id );
 
@@ -393,8 +391,8 @@ class Tests_Ajax_wpAjaxAutocompleteUser extends WP_Ajax_UnitTestCase {
 	/**
 	 * Tests that no autocompletion happens on large networks.
 	 *
-	 * @ticket 65051
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65051' )]
 	public function test_should_deny_the_request_on_a_large_network() {
 		wp_set_current_user( self::$super_admin_id );
 

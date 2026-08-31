@@ -2,10 +2,10 @@
 // phpcs:disable WordPress.WP.CapitalPDangit.MisspelledInText -- 🙃
 
 /**
- * @group formatting
  *
- * @covers ::capital_P_dangit
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'capital_P_dangit' )]
 class Tests_Formatting_CapitalPDangit extends WP_UnitTestCase {
 	public function test_esc_attr_quotes() {
 		global $wp_current_filter;

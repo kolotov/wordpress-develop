@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group media
- * @group taxonomy
  */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Media_GetAttachmentTaxonomies extends WP_UnitTestCase {
 	public function test_should_return_attachment_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'attachment' );
@@ -101,8 +101,8 @@ class Tests_Media_GetAttachmentTaxonomies extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37368
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37368' )]
 	public function test_should_respect_output_objects() {
 		register_taxonomy( 'wptests_tax2', 'attachment:image' );
 
@@ -125,8 +125,8 @@ class Tests_Media_GetAttachmentTaxonomies extends WP_UnitTestCase {
 
 
 	/**
-	 * @ticket 37368
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37368' )]
 	public function test_should_return_unique_taxonomies_for_output_objects() {
 		register_taxonomy( 'wptests_tax2', array( 'attachment:image', 'attachment:image/jpeg' ) );
 

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group taxonomy
- * @group category
  *
- * @covers ::get_category_parents
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\Group( 'category' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_category_parents' )]
 class Tests_Category_GetCategoryParents extends WP_UnitTestCase {
 	protected $c1;
 	protected $c2;

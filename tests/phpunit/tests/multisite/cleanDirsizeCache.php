@@ -3,17 +3,17 @@
 /**
  * Tests specific to the directory size caching in multisite.
  *
- * @ticket 19879
- * @group ms-required
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Ticket( '19879' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_CleanDirsizeCache extends WP_UnitTestCase {
 
 	/**
 	 * Test whether dirsize_cache values are used correctly with a more complex dirsize cache mock.
 	 *
-	 * @ticket 19879
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19879' )]
 	public function test_get_dirsize_cache_in_recurse_dirsize_mock() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );
@@ -61,8 +61,8 @@ class Tests_Multisite_CleanDirsizeCache extends WP_UnitTestCase {
 	/**
 	 * Test whether the dirsize_cache invalidation works given a file path as input.
 	 *
-	 * @ticket 19879
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19879' )]
 	public function test_clean_dirsize_cache_file_input_mock() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );
@@ -109,8 +109,8 @@ class Tests_Multisite_CleanDirsizeCache extends WP_UnitTestCase {
 	/**
 	 * Test whether the dirsize_cache invalidation works given a directory path as input.
 	 *
-	 * @ticket 19879
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19879' )]
 	public function test_clean_dirsize_cache_folder_input_mock() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );
@@ -157,8 +157,8 @@ class Tests_Multisite_CleanDirsizeCache extends WP_UnitTestCase {
 	/**
 	 * Test whether dirsize_cache values are used correctly with a simple real upload.
 	 *
-	 * @ticket 19879
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19879' )]
 	public function test_get_dirsize_cache_in_recurse_dirsize_upload() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );
@@ -203,8 +203,8 @@ class Tests_Multisite_CleanDirsizeCache extends WP_UnitTestCase {
 	/**
 	 * Test whether the filter to calculate space for an existing directory works as expected.
 	 *
-	 * @ticket 19879
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19879' )]
 	public function test_pre_recurse_dirsize_filter() {
 		add_filter( 'pre_recurse_dirsize', array( $this, 'filter_pre_recurse_dirsize' ) );
 
@@ -236,8 +236,8 @@ class Tests_Multisite_CleanDirsizeCache extends WP_UnitTestCase {
 	/*
 	 * Test that 5.6+ gracefully handles the old 5.5 transient structure.
 	 *
-	 * @ticket 51913
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51913' )]
 	public function test_5_5_transient_structure_compat() {
 		$blog_id = self::factory()->blog->create();
 		switch_to_blog( $blog_id );

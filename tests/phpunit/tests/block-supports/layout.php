@@ -6,10 +6,17 @@
  * @subpackage Block Supports
  * @since 6.0.0
  *
- * @group block-supports
  *
- * @covers ::wp_restore_image_outer_container
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_restore_image_outer_container' )]
 class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 
 	/**
@@ -46,6 +53,9 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 		/*
 		 * Register a style variation with a custom blockGap value for testing.
 		 */
+		if ( WP_Block_Styles_Registry::get_instance()->is_registered( 'core/group', 'custom-gap' ) ) {
+			unregister_block_style( 'core/group', 'custom-gap' );
+		}
 		register_block_style(
 			'core/group',
 			array(
@@ -83,10 +93,10 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65667
 	 *
-	 * @covers ::wp_sanitize_block_gap_value
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65667' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_block_gap_value' )]
 	public function test_sanitize_block_gap_value_rejects_nested_array_values() {
 		$this->assertSame(
 			array(
@@ -103,8 +113,8 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55505
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 	public function test_outer_container_not_restored_for_non_aligned_image_block_with_non_themejson_theme() {
 		// The "default" theme doesn't have theme.json support.
 		switch_theme( 'default' );
@@ -119,8 +129,8 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55505
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 	public function test_outer_container_restored_for_aligned_image_block_with_non_themejson_theme() {
 		// The "default" theme doesn't have theme.json support.
 		switch_theme( 'default' );
@@ -135,13 +145,13 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55505
 	 *
-	 * @dataProvider data_block_image_html_restored_outer_container
 	 *
 	 * @param string $block_image_html The block image HTML passed to `wp_restore_image_outer_container`.
 	 * @param string $expected         The expected block image HTML.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_block_image_html_restored_outer_container' )]
 	public function test_additional_styles_moved_to_restored_outer_container_for_aligned_image_block_with_non_themejson_theme( $block_image_html, $expected ) {
 		// The "default" theme doesn't have theme.json support.
 		switch_theme( 'default' );
@@ -165,7 +175,7 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_block_image_html_restored_outer_container() {
+	public static function data_block_image_html_restored_outer_container() {
 		$expected = '<div class="wp-block-image is-style-round my-custom-classname"><figure class="alignright size-full"><img src="/my-image.jpg"/></figure></div>';
 
 		return array(
@@ -193,8 +203,8 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55505
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 	public function test_outer_container_not_restored_for_aligned_image_block_with_themejson_theme() {
 		switch_theme( 'block-theme' );
 		$block         = array(
@@ -210,19 +220,19 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57584
-	 * @ticket 58548
-	 * @ticket 60292
-	 * @ticket 61111
-	 * @ticket 65101
 	 *
-	 * @dataProvider data_layout_support_flag_renders_classnames_on_wrapper
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
 	 * @param array  $args            Dataset to test.
 	 * @param string $expected_output The expected output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57584' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58548' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60292' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61111' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65101' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_layout_support_flag_renders_classnames_on_wrapper' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_layout_support_flag_renders_classnames_on_wrapper( $args, $expected_output ) {
 		switch_theme( 'default' );
 		$actual_output = wp_render_layout_support_flag( $args['block_content'], $args['block'] );
@@ -234,7 +244,7 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_layout_support_flag_renders_classnames_on_wrapper() {
+	public static function data_layout_support_flag_renders_classnames_on_wrapper() {
 		return array(
 			'single wrapper block layout with flow type'   => array(
 				'args'            => array(
@@ -428,15 +438,15 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	/**
 	 * Check that wp_restore_group_inner_container() restores the legacy inner container on the Group block.
 	 *
-	 * @ticket 60130
 	 *
-	 * @covers ::wp_restore_group_inner_container
 	 *
-	 * @dataProvider data_restore_group_inner_container
 	 *
 	 * @param array  $args            Dataset to test.
 	 * @param string $expected_output The expected output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60130' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_restore_group_inner_container' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_restore_group_inner_container' )]
 	public function test_restore_group_inner_container( $args, $expected_output ) {
 		$actual_output = wp_restore_group_inner_container( $args['block_content'], $args['block'] );
 		$this->assertSame( $expected_output, $actual_output );
@@ -447,7 +457,7 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_restore_group_inner_container() {
+	public static function data_restore_group_inner_container() {
 		return array(
 			'group block with existing inner container'    => array(
 				'args'            => array(
@@ -518,14 +528,14 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	/**
 	 * Check that wp_get_child_layout_style_rules() renders flex child sizing styles.
 	 *
-	 * @dataProvider data_wp_get_child_layout_style_rules
 	 *
-	 * @covers ::wp_get_child_layout_style_rules
 	 *
 	 * @param array      $child_layout       Child layout values.
 	 * @param array|null $viewport_overrides Optional child viewport layout overrides.
 	 * @param array      $expected_output    The expected output.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_child_layout_style_rules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_child_layout_style_rules' )]
 	public function test_wp_get_child_layout_style_rules( $child_layout, $viewport_overrides, $expected_output ) {
 		$actual_output = wp_get_child_layout_style_rules(
 			'.wp-container-content-test',
@@ -542,7 +552,7 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_get_child_layout_style_rules() {
+	public static function data_wp_get_child_layout_style_rules() {
 		return array(
 			'legacy fixed sizing remains shrinkable'      => array(
 				'child_layout'       => array(
@@ -674,16 +684,16 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	/**
 	 * Checks that `wp_add_parent_layout_to_parsed_block` adds the parent layout attribute to the block object.
 	 *
-	 * @ticket 61111
 	 *
-	 * @covers ::wp_add_parent_layout_to_parsed_block
 	 *
-	 * @dataProvider data_wp_add_parent_layout_to_parsed_block
 	 *
 	 * @param array    $block        The block object.
 	 * @param WP_Block $parent_block The parent block object.
 	 * @param array    $expected     The expected block object.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61111' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_add_parent_layout_to_parsed_block' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_add_parent_layout_to_parsed_block' )]
 	public function test_wp_add_parent_layout_to_parsed_block( $block, $parent_block, $expected ) {
 		$actual = wp_add_parent_layout_to_parsed_block( $block, array(), $parent_block );
 		$this->assertSame( $expected, $actual );
@@ -694,7 +704,7 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_add_parent_layout_to_parsed_block() {
+	public static function data_wp_add_parent_layout_to_parsed_block() {
 		return array(
 			'block with no parent layout' => array(
 				'block'        => array(
@@ -753,14 +763,14 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 * Check that wp_render_layout_support_flag() renders consistent hashes
 	 * for the container class when the relevant layout properties are the same.
 	 *
-	 * @dataProvider data_layout_support_flag_renders_consistent_container_hash
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 *
 	 * @param array $block_attrs     Dataset to test.
 	 * @param array $expected_class  Class generated for the passed dataset.
 	 */
-	public function test_layout_support_flag_renders_consistent_container_hash( $block_attrs, $expected_class ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_layout_support_flag_renders_consistent_container_hash' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
+	public function test_layout_support_flag_renders_consistent_container_hash( $block_attributes, $expected_class ) {
 		switch_theme( 'default' );
 
 		$block_content = '<div class="wp-block-group"></div>';
@@ -771,7 +781,7 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 			'innerContent' => array(
 				'<div class="wp-block-group"></div>',
 			),
-			'attrs'        => $block_attrs,
+			'attrs'        => $block_attributes,
 		);
 
 		/*
@@ -808,7 +818,7 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_layout_support_flag_renders_consistent_container_hash() {
+	public static function data_layout_support_flag_renders_consistent_container_hash() {
 		return array(
 			'default type block gap 12px'      => array(
 				'block_attributes' => array(
@@ -900,11 +910,11 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 * layout classname should include the full block namespace to ensure
 	 * that CSS selectors match correctly.
 	 *
-	 * @ticket 63839
-	 * @covers ::wp_render_layout_support_flag
 	 *
-	 * @dataProvider data_layout_classname_with_custom_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63839' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_layout_classname_with_custom_blocks' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_layout_classname_includes_namespace_for_custom_blocks( $block_name, $layout_type, $expected_class, $should_not_contain ) {
 		switch_theme( 'default' );
 
@@ -944,7 +954,7 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_layout_classname_with_custom_blocks() {
+	public static function data_layout_classname_with_custom_blocks() {
 		return array(
 			'custom block with constrained layout' => array(
 				'block_name'         => 'foo/bar',
@@ -976,11 +986,14 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	/**
 	 * Tests that block style variations with blockGap values are applied to layout styles.
 	 *
-	 * @ticket 64624
-	 * @covers ::wp_render_layout_support_flag
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64624' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_layout_support_flag_uses_variation_block_gap_value() {
 		switch_theme( 'block-theme' );
+		WP_Theme_JSON_Resolver::clean_cached_data();
 
 		$block_content = '<div class="wp-block-group is-style-custom-gap"></div>';
 		$block         = array(
@@ -1016,15 +1029,15 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_block_style_variation_name_from_registered_style correctly extracts variation names from class strings.
 	 *
-	 * @ticket 64624
-	 * @covers ::wp_get_block_style_variation_name_from_registered_style
 	 *
-	 * @dataProvider data_get_block_style_variation_name_from_registered_style
 	 *
 	 * @param string      $class_name        CSS class string to test.
 	 * @param array       $registered_styles Registered block styles.
 	 * @param string|null $expected_result   Expected variation name or null.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64624' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_block_style_variation_name_from_registered_style' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_block_style_variation_name_from_registered_style' )]
 	public function test_get_block_style_variation_name_from_registered_style( $class_name, $registered_styles, $expected_result ) {
 		$result = wp_get_block_style_variation_name_from_registered_style( $class_name, $registered_styles );
 		$this->assertSame( $expected_result, $result );
@@ -1035,7 +1048,7 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_get_block_style_variation_name_from_registered_style() {
+	public static function data_get_block_style_variation_name_from_registered_style() {
 		return array(
 			'empty class name'                             => array(
 				'class_name'        => '',
@@ -1104,8 +1117,8 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 * Tests that a non-string `className` attribute does not cause a fatal
 	 * when checking for style variation layout styles.
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_layout_support_flag_with_non_string_class_name() {
 		$block_content = '<div class="wp-block-group 0 1"></div>';
 		$block         = array(
@@ -1134,10 +1147,10 @@ class Tests_Block_Supports_Layout extends WP_UnitTestCase {
 	 * blocks re-enters this filter, so the bail-out has to happen before the
 	 * lookup or the recursion has no base case.
 	 *
-	 * @ticket 65741
 	 *
-	 * @covers ::wp_render_layout_support_flag
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65741' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_layout_support_flag' )]
 	public function test_layout_support_flag_returns_early_before_resolving_global_settings() {
 		$user_data_resolutions = 0;
 		add_filter(

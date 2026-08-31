@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @group user
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_wpGetUsersWithNoRole extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 22993
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22993' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_get_users_with_no_role_is_accurate() {
 		// Setup users.
 		$admin       = self::factory()->user->create(
@@ -45,11 +45,11 @@ class Tests_User_wpGetUsersWithNoRole extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22993
-	 * @ticket 36196
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22993' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '36196' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_get_users_with_no_role_multisite_is_accurate() {
 		// Setup users.
 		$admin  = self::factory()->user->create(
@@ -107,8 +107,8 @@ class Tests_User_wpGetUsersWithNoRole extends WP_UnitTestCase {
 	/**
 	 * Role comparison must be done on role name, not role display name.
 	 *
-	 * @ticket 38234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38234' )]
 	public function test_get_users_with_no_role_matches_on_role_name() {
 		// Create a role with a display name which would not match the role name
 		// in a case-insensitive SQL query.
@@ -128,10 +128,10 @@ class Tests_User_wpGetUsersWithNoRole extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42015
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42015' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_get_users_with_no_role_matches_on_role_name_different_site() {
 		$site_id = (int) self::factory()->blog->create();
 

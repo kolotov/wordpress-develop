@@ -1,14 +1,24 @@
 <?php
 
 /**
- * @group http
- * @group external-http
  */
+
+
+
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'http' )]
+#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 class Tests_HTTP_Functions extends WP_UnitTestCase {
 
 	/**
-	 * @covers ::wp_remote_head
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_head' )]
 	public function test_head_request() {
 		// This URL gives a direct 200 response.
 		$url      = 'https://s.w.org/screenshots/3.9/dashboard.png';
@@ -25,8 +35,8 @@ class Tests_HTTP_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_remote_head
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_head' )]
 	public function test_head_redirect() {
 		// This URL will 301 redirect.
 		$url      = 'https://wp.org/screenshots/3.9/dashboard.png';
@@ -37,8 +47,8 @@ class Tests_HTTP_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_remote_head
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_head' )]
 	public function test_head_404() {
 		$url      = 'https://wordpress.org/screenshots/3.9/awefasdfawef.jpg';
 		$response = $this->wp_remote_head( $url );
@@ -48,10 +58,10 @@ class Tests_HTTP_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_remote_get
-	 * @covers ::wp_remote_retrieve_headers
-	 * @covers ::wp_remote_retrieve_response_code
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_get' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_headers' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_response_code' )]
 	public function test_get_request() {
 		$url = 'https://s.w.org/screenshots/3.9/dashboard.png';
 
@@ -68,10 +78,10 @@ class Tests_HTTP_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_remote_get
-	 * @covers ::wp_remote_retrieve_headers
-	 * @covers ::wp_remote_retrieve_response_code
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_get' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_headers' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_response_code' )]
 	public function test_get_redirect() {
 		// This will redirect to wordpress.org.
 		$url = 'https://wp.org/screenshots/3.9/dashboard.png';
@@ -89,8 +99,8 @@ class Tests_HTTP_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_remote_get
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_get' )]
 	public function test_get_redirect_limit_exceeded() {
 		// This will redirect to wordpress.org.
 		$url = 'https://wp.org/screenshots/3.9/dashboard.png';
@@ -102,13 +112,13 @@ class Tests_HTTP_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33711
 	 *
-	 * @covers ::wp_remote_head
-	 * @covers ::wp_remote_retrieve_cookies
-	 * @covers ::wp_remote_retrieve_cookie
-	 * @covers ::wp_remote_retrieve_cookie_value
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33711' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_head' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_cookies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_cookie' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_cookie_value' )]
 	public function test_get_response_cookies() {
 		$url = 'https://login.wordpress.org/wp-login.php';
 
@@ -136,12 +146,12 @@ class Tests_HTTP_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37437
 	 *
-	 * @covers ::wp_remote_get
-	 * @covers ::wp_remote_retrieve_cookies
-	 * @covers ::wp_remote_retrieve_cookie
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37437' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_get' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_cookies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_cookie' )]
 	public function test_get_response_cookies_with_wp_http_cookie_object() {
 		$url = 'https://login.wordpress.org/wp-login.php';
 
@@ -172,12 +182,12 @@ class Tests_HTTP_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37437
 	 *
-	 * @covers ::wp_remote_get
-	 * @covers ::wp_remote_retrieve_cookies
-	 * @covers ::wp_remote_retrieve_cookie
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37437' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_get' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_cookies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_cookie' )]
 	public function test_get_response_cookies_with_name_value_array() {
 		$url = 'https://login.wordpress.org/wp-login.php';
 
@@ -203,14 +213,14 @@ class Tests_HTTP_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43231
 	 *
-	 * @covers WP_HTTP_Requests_Response::__construct
-	 * @covers WP_Http_Cookie::__construct
-	 * @covers WP_Http::normalize_cookies
-	 * @covers ::wp_remote_retrieve_cookies
-	 * @covers ::wp_remote_retrieve_cookie
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43231' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTTP_Requests_Response', '__construct' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Http_Cookie', '__construct' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Http', 'normalize_cookies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_cookies' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_remote_retrieve_cookie' )]
 	public function test_get_cookie_host_only() {
 		// Emulate WP_Http::request() internals.
 		$requests_response = new WpOrg\Requests\Response();

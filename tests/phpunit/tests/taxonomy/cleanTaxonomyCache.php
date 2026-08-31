@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @group taxonomy
  *
- * @covers ::clean_taxonomy_cache
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'clean_taxonomy_cache' )]
 class Tests_Taxonomy_CleanTaxonomyCache extends WP_UnitTestCase {
 	/**
 	 * Ensure clearing the cache of a non-hierarchical taxonomy doesn't attempt to delete the hierarchy cache.
 	 *
-	 * @ticket 64090
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64090' )]
 	public function test_hierarchy_cache_not_cleared_for_non_hierarchical_taxonomy() {
 		// Prime the tag cache by inserting terms.
 		wp_insert_term( 'foo', 'post_tag' );
@@ -42,8 +42,8 @@ class Tests_Taxonomy_CleanTaxonomyCache extends WP_UnitTestCase {
 	/**
 	 * Ensure clearing the cache of a hierarchical taxonomy does attempt to delete the hierarchy cache.
 	 *
-	 * @ticket 64090
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64090' )]
 	public function test_hierarchy_cache_cleared_for_hierarchical_taxonomy() {
 		// Prime the category cache by inserting terms.
 		wp_insert_term( 'foo', 'category' );

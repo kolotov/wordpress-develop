@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group http
- * @covers ::wp_remote_retrieve_headers
  */
+#[\PHPUnit\Framework\Attributes\Group( 'http' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_remote_retrieve_headers' )]
 class Tests_HTTP_wpRemoteRetrieveHeaders extends WP_UnitTestCase {
 
 	/**

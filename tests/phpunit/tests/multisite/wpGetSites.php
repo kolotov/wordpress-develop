@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group ms-required
- * @group ms-site
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_wpGetSites extends WP_UnitTestCase {
 	protected static $site_ids;
 
@@ -75,12 +75,12 @@ class Tests_Multisite_wpGetSites extends WP_UnitTestCase {
 
 	/**
 	 * @expectedDeprecated wp_get_sites
-	 * @dataProvider data_wp_get_sites
 	 *
 	 * @param $expected
 	 * @param $args
 	 * @param $error
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_sites' )]
 	public function test_wp_get_sites( $expected, $args, $error ) {
 		$this->assertCount( $expected, wp_get_sites( $args ), $error );
 	}
@@ -88,7 +88,7 @@ class Tests_Multisite_wpGetSites extends WP_UnitTestCase {
 	/**
 	 * @return array
 	 */
-	public function data_wp_get_sites() {
+	public static function data_wp_get_sites() {
 		return array(
 			array( 3, array(), 'Default arguments should return all sites from the current network.' ),
 			array( 0, array( 'network_id' => 999 ), 'No sites should match a query with an invalid network ID.' ),

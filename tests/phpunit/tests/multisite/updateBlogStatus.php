@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group ms-required
- * @group ms-site
- * @group multisite
  *
- * @covers ::update_blog_status
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'update_blog_status' )]
 class Tests_Multisite_UpdateBlogStatus extends WP_UnitTestCase {
 
 	/**
@@ -47,8 +47,8 @@ class Tests_Multisite_UpdateBlogStatus extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group external-http
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test_content_from_spam_blog_is_not_available() {
 		$spam_blog_id = self::factory()->blog->create();
 		switch_to_blog( $spam_blog_id );

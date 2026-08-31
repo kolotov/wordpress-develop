@@ -3,11 +3,12 @@
 /**
  * Tests specific to users in multisite.
  *
- * @group user
- * @group ms-required
- * @group ms-user
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-user' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+
 class Tests_User_Multisite extends WP_UnitTestCase {
 
 	public function test_remove_user_from_blog() {
@@ -180,10 +181,10 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	 * Ensures the `is_user_member_of_blog` filter can override the return value
 	 * and receives the resolved user ID and blog ID.
 	 *
-	 * @ticket 65096
 	 *
-	 * @covers ::is_user_member_of_blog
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65096' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_user_member_of_blog' )]
 	public function test_is_user_member_of_blog_filter() {
 		$user_id = self::factory()->user->create();
 		$blog_id = self::factory()->blog->create();
@@ -209,10 +210,10 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	 * Ensures the `is_user_member_of_blog` filter is not invoked for requests
 	 * that short-circuit before the membership is computed.
 	 *
-	 * @ticket 65096
 	 *
-	 * @covers ::is_user_member_of_blog
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65096' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_user_member_of_blog' )]
 	public function test_is_user_member_of_blog_filter_not_called_for_invalid_input() {
 		$filter_calls = 0;
 		$filter       = function ( $is_member ) use ( &$filter_calls ) {
@@ -242,8 +243,8 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23192
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23192' )]
 	public function test_is_user_spammy() {
 		$user_id = self::factory()->user->create(
 			array(
@@ -271,8 +272,8 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20601
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20601' )]
 	public function test_user_member_of_blog() {
 		global $wp_rewrite;
 
@@ -365,8 +366,8 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27205
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27205' )]
 	public function test_granting_super_admins() {
 		if ( isset( $GLOBALS['super_admins'] ) ) {
 			$old_global = $GLOBALS['super_admins'];
@@ -408,15 +409,15 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33800
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33800' )]
 	public function test_should_return_false_for_non_numeric_string_user_id() {
 		$this->assertFalse( wpmu_delete_user( 'abcde' ) );
 	}
 
 	/**
-	 * @ticket 33800
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33800' )]
 	public function test_should_return_false_for_object_user_id() {
 		$u_obj = self::factory()->user->create_and_get();
 		$this->assertFalse( wpmu_delete_user( $u_obj ) );
@@ -424,8 +425,8 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38356
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38356' )]
 	public function test_add_user_to_blog_subscriber() {
 		$site_id = self::factory()->blog->create();
 		$user_id = self::factory()->user->create();
@@ -443,8 +444,8 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38356
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38356' )]
 	public function test_add_user_to_blog_invalid_user() {
 		global $wpdb;
 
@@ -460,8 +461,8 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41101
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41101' )]
 	public function test_should_fail_can_add_user_to_blog_filter() {
 		$site_id = self::factory()->blog->create();
 		$user_id = self::factory()->user->create();
@@ -473,8 +474,8 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41101
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41101' )]
 	public function test_should_succeed_can_add_user_to_blog_filter() {
 		$site_id = self::factory()->blog->create();
 		$user_id = self::factory()->user->create();
@@ -486,8 +487,8 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23016' )]
 	public function test_wp_roles_global_is_reset() {
 		global $wp_roles;
 		$role      = 'test_global_is_reset';
@@ -514,8 +515,8 @@ class Tests_User_Multisite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39170
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39170' )]
 	public function test_revoke_super_admin_with_network_email() {
 		if ( isset( $GLOBALS['super_admins'] ) ) {
 			$old_global = $GLOBALS['super_admins'];

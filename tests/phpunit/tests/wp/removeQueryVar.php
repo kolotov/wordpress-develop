@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group wp
  *
- * @covers WP::remove_query_var
  */
+#[\PHPUnit\Framework\Attributes\Group( 'wp' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP::class, 'remove_query_var' )]
 class Tests_WP_RemoveQueryVar extends WP_UnitTestCase {
 
 	/**

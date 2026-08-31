@@ -5,26 +5,26 @@
  * @package WordPress
  * @subpackage Font Library
  *
- * @group fonts
- * @group font-library
  *
- * @covers WP_Font_Utils::sanitize_from_schema
  */
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'font-library' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Font_Utils::class, 'sanitize_from_schema' )]
 class Tests_Fonts_WpFontUtils_SanitizeFromSchema extends WP_UnitTestCase {
 	/**
-	 * @dataProvider data_sanitize_from_schema
 	 *
 	 * @param array $data     Data to sanitize.
 	 * @param array $schema   Schema to use for sanitization.
 	 * @param array $expected Expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_from_schema' )]
 	public function test_sanitize_from_schema( $data, $schema, $expected ) {
 		$result = WP_Font_Utils::sanitize_from_schema( $data, $schema );
 
 		$this->assertSame( $result, $expected );
 	}
 
-	public function data_sanitize_from_schema() {
+	public static function data_sanitize_from_schema() {
 		return array(
 			'One level associative array'  => array(
 				'data'     => array(

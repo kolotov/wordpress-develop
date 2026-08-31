@@ -5,10 +5,11 @@ require_once __DIR__ . '/base.php';
 /**
  * Tests wp_enqueue_stored_styles().
  *
- * @group themes
  *
- * @covers ::wp_enqueue_stored_styles
  */
+#[\PHPUnit\Framework\Attributes\Group( 'themes' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_enqueue_stored_styles' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_style_engine_get_stylesheet_from_css_rules' )]
 class Tests_Themes_WpEnqueueStoredStyles extends WP_Theme_UnitTestCase {
 	/**
 	 * @var WP_Scripts|null
@@ -43,11 +44,9 @@ class Tests_Themes_WpEnqueueStoredStyles extends WP_Theme_UnitTestCase {
 	/**
 	 * Tests that stored CSS is enqueued.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::wp_style_engine_get_stylesheet_from_css_rules
-	 * @covers ::wp_enqueue_stored_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
 	public function test_should_enqueue_stored_styles() {
 		$core_styles_to_enqueue = array(
 			array(

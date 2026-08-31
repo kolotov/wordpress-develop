@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @group dependencies
- * @group scripts
- */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
+
+
+
 class Tests_Dependencies_jQuery extends WP_UnitTestCase {
 
-	/**
-	 * @covers WP_Scripts::query
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'query' )]
 	public function test_location_of_jquery() {
 		$scripts = new WP_Scripts();
 		wp_default_scripts( $scripts );
@@ -40,12 +39,12 @@ class Tests_Dependencies_jQuery extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22896
 	 *
 	 * @expectedIncorrectUsage wp_deregister_script
 	 *
-	 * @covers ::wp_script_is
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22896' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_script_is' )]
 	public function test_dont_allow_deregister_core_scripts_in_admin() {
 		set_current_screen( 'edit.php' );
 		$this->assertTrue( is_admin() );
@@ -87,10 +86,10 @@ class Tests_Dependencies_jQuery extends WP_UnitTestCase {
 	/**
 	 * Test placing of jQuery in footer.
 	 *
-	 * @ticket 25247
 	 *
-	 * @covers WP_Scripts::do_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25247' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Scripts', 'do_items' )]
 	public function test_jquery_in_footer() {
 		$scripts = new WP_Scripts();
 		$scripts->add( 'jquery', false, array( 'jquery-core', 'jquery-migrate' ) );

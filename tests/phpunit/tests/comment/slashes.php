@@ -1,10 +1,14 @@
 <?php
 
 /**
- * @group comment
- * @group slashes
- * @ticket 21767
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '21767' )]
+
+
+
+
 class Tests_Comment_Slashes extends WP_UnitTestCase {
 
 	/*
@@ -38,8 +42,8 @@ class Tests_Comment_Slashes extends WP_UnitTestCase {
 	/**
 	 * Tests the extended model function that expects slashed data.
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_new_comment() {
 		$post_id = self::$post_id;
 
@@ -79,8 +83,8 @@ class Tests_Comment_Slashes extends WP_UnitTestCase {
 	/**
 	 * Tests the controller function that expects slashed data.
 	 *
-	 * @covers ::edit_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'edit_comment' )]
 	public function test_edit_comment() {
 		$post_id    = self::$post_id;
 		$comment_id = self::factory()->comment->create(
@@ -127,8 +131,8 @@ class Tests_Comment_Slashes extends WP_UnitTestCase {
 	/**
 	 * Tests the model function that expects slashed data.
 	 *
-	 * @covers ::wp_insert_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_comment' )]
 	public function test_wp_insert_comment() {
 		$post_id = self::$post_id;
 
@@ -160,8 +164,8 @@ class Tests_Comment_Slashes extends WP_UnitTestCase {
 	/**
 	 * Tests the model function that expects slashed data.
 	 *
-	 * @covers ::wp_update_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_comment' )]
 	public function test_wp_update_comment() {
 		$post_id    = self::$post_id;
 		$comment_id = self::factory()->comment->create(

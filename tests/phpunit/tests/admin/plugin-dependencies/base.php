@@ -49,6 +49,14 @@ abstract class WP_PluginDependencies_UnitTestCase extends WP_UnitTestCase {
 		parent::set_up_before_class();
 
 		self::$instance = new WP_Plugin_Dependencies();
+
+		// Multisite bootstrapping may initialize plugin dependencies before this
+		// test class runs. Ensure every derived class starts from the documented
+		// defaults regardless of process or file execution order.
+		foreach ( self::$static_properties as $name => $default_value ) {
+			$property = new ReflectionProperty( self::$instance, $name );
+			$property->setValue( self::$instance, $default_value );
+		}
 	}
 
 	/**

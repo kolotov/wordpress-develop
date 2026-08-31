@@ -1,16 +1,23 @@
 <?php
 
 /**
- * @group option
  */
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_UpdateOption extends WP_UnitTestCase {
 	/**
-	 * @ticket 31047
 	 *
-	 * @covers ::add_filter
-	 * @covers ::update_option
-	 * @covers ::remove_filter
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31047' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_filter' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'remove_filter' )]
 	public function test_should_respect_default_option_filter_when_option_does_not_yet_exist_in_database() {
 		add_filter( 'default_option_doesnotexist', array( $this, '__return_foo' ) );
 		$added = update_option( 'doesnotexist', 'bar' );
@@ -21,12 +28,12 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26394
 	 *
-	 * @covers ::update_option
-	 * @covers ::wp_load_alloptions
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_should_set_autoload_yes_for_nonexistent_option_when_autoload_param_is_missing() {
 		$this->flush_cache();
 		update_option( 'test_update_option_default', 'value' );
@@ -44,12 +51,12 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26394
 	 *
-	 * @covers ::update_option
-	 * @covers ::wp_load_alloptions
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_should_set_autoload_yes_for_nonexistent_option_when_autoload_param_is_yes() {
 		$this->flush_cache();
 		update_option( 'test_update_option_default', 'value', true );
@@ -67,12 +74,12 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26394
 	 *
-	 * @covers ::update_option
-	 * @covers ::wp_load_alloptions
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_should_set_autoload_no_for_nonexistent_option_when_autoload_param_is_no() {
 		$this->flush_cache();
 		update_option( 'test_update_option_default', 'value', false );
@@ -91,12 +98,12 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26394
 	 *
-	 * @covers ::update_option
-	 * @covers ::wp_load_alloptions
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_should_set_autoload_no_for_nonexistent_option_when_autoload_param_is_false() {
 		$this->flush_cache();
 		update_option( 'test_update_option_default', 'value', false );
@@ -115,12 +122,12 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26394
 	 *
-	 * @covers ::update_option
-	 * @covers ::wp_load_alloptions
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_autoload_should_be_updated_for_existing_option_when_value_is_changed() {
 		add_option( 'foo', 'bar', '', false );
 		$updated = update_option( 'foo', 'bar2', true );
@@ -139,12 +146,12 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26394
 	 *
-	 * @covers ::update_option
-	 * @covers ::wp_load_alloptions
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_autoload_should_not_be_updated_for_existing_option_when_value_is_unchanged() {
 		add_option( 'foo', 'bar', '', true );
 		$updated = update_option( 'foo', 'bar', false );
@@ -164,12 +171,12 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26394
 	 *
-	 * @covers ::update_option
-	 * @covers ::wp_load_alloptions
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_autoload_should_not_be_updated_for_existing_option_when_value_is_changed_but_no_value_of_autoload_is_provided() {
 		add_option( 'foo', 'bar', '', true );
 
@@ -191,12 +198,12 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38903
 	 *
-	 * @covers ::add_option
-	 * @covers ::get_num_queries
-	 * @covers ::update_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38903' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_num_queries' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_update_option_array_with_object() {
 		$array_w_object = array(
 			'url'       => 'http://src.wordpress-develop.dev/wp-content/uploads/2016/10/cropped-Blurry-Lights.jpg',

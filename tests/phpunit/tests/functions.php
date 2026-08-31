@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group functions
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 class Tests_Functions extends WP_UnitTestCase {
 	public function test_wp_parse_args_object() {
 		$x        = new MockClass();
@@ -76,8 +76,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30753
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30753' )]
 	public function test_wp_parse_args_boolean_strings() {
 		$args = wp_parse_args( 'foo=false&bar=true' );
 		$this->assertIsString( $args['foo'] );
@@ -85,8 +85,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35972
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35972' )]
 	public function test_bool_from_yn() {
 		$this->assertTrue( bool_from_yn( 'Y' ) );
 		$this->assertTrue( bool_from_yn( 'y' ) );
@@ -132,9 +132,9 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests path_join().
 	 *
-	 * @ticket 55897
-	 * @dataProvider data_path_join
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55897' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_path_join' )]
 	public function test_path_join( $base, $path, $expected ) {
 		$this->assertSame( $expected, path_join( $base, $path ) );
 	}
@@ -144,7 +144,7 @@ class Tests_Functions extends WP_UnitTestCase {
 	 *
 	 * @return string[][]
 	 */
-	public function data_path_join() {
+	public static function data_path_join() {
 		return array(
 			// Absolute paths.
 			'absolute path should return path' => array(
@@ -192,16 +192,16 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33265
-	 * @ticket 35996
 	 *
-	 * @dataProvider data_wp_normalize_path
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33265' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '35996' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_normalize_path' )]
 	public function test_wp_normalize_path( $path, $expected ) {
 		$this->assertSame( $expected, wp_normalize_path( $path ) );
 	}
 
-	public function data_wp_normalize_path() {
+	public static function data_wp_normalize_path() {
 		return array(
 			// Windows paths.
 			array( 'C:\\www\\path\\', 'C:/www/path/' ),
@@ -235,8 +235,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	 * This is important because the function uses a static cache, and the input
 	 * must be cast to string before being used as an array key.
 	 *
-	 * @ticket 64538
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64538' )]
 	public function test_wp_normalize_path_with_stringable_object() {
 		$file_info = new SplFileInfo( '/var/www/html\\test' );
 
@@ -248,8 +248,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	 *
 	 * The function uses a static cache, so this verifies cache behavior.
 	 *
-	 * @ticket 64538
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64538' )]
 	public function test_wp_normalize_path_returns_consistent_results() {
 		$path = 'C:\\www\\path\\';
 
@@ -265,8 +265,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_normalize_path() static cache stores results.
 	 *
-	 * @ticket 64538
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64538' )]
 	public function test_wp_normalize_path_static_cache() {
 		$path     = '/var/www/cache-test\\subdir\\';
 		$expected = '/var/www/cache-test/subdir/';
@@ -324,8 +324,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42437
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42437' )]
 	public function test_unique_filename_with_dimension_like_filename() {
 		$testdir = DIR_TESTDATA . '/images/';
 
@@ -349,8 +349,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53668
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53668' )]
 	public function test_wp_unique_filename_with_additional_image_extension() {
 		$testdir = DIR_TESTDATA . '/images/';
 
@@ -431,8 +431,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group add_query_arg
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'add_query_arg' )]
 	public function test_add_query_arg() {
 		$old_req_uri = $_SERVER['REQUEST_URI'];
 
@@ -568,8 +568,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31306
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31306' )]
 	public function test_add_query_arg_numeric_keys() {
 		$url = add_query_arg( array( 'foo' => 'bar' ), '1=1' );
 		$this->assertSame( '1=1&foo=bar', $url );
@@ -591,16 +591,16 @@ class Tests_Functions extends WP_UnitTestCase {
 	 * Tests that add_query_arg removes the question mark when
 	 * a parameter is set to false.
 	 *
-	 * @dataProvider data_add_query_arg_removes_question_mark
 	 *
-	 * @ticket 44499
-	 * @group  add_query_arg
 	 *
-	 * @covers ::add_query_arg
 	 *
 	 * @param string $url      Url to test.
 	 * @param string $expected Expected URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_add_query_arg_removes_question_mark' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '44499' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'add_query_arg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_query_arg' )]
 	public function test_add_query_arg_removes_question_mark( $url, $expected, $key = 'param', $value = false ) {
 		$this->assertSame( $expected, add_query_arg( $key, $value, $url ) );
 	}
@@ -610,7 +610,7 @@ class Tests_Functions extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_add_query_arg_removes_question_mark() {
+	public static function data_add_query_arg_removes_question_mark() {
 		return array(
 			'anchor'                                     => array(
 				'url'      => 'http://example.org?#anchor',
@@ -644,8 +644,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21594
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21594' )]
 	public function test_get_allowed_mime_types() {
 		$mimes = get_allowed_mime_types();
 
@@ -664,8 +664,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21594
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21594' )]
 	public function test_wp_get_mime_types() {
 		$mimes = wp_get_mime_types();
 
@@ -696,8 +696,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23688
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23688' )]
 	public function test_canonical_charset() {
 		$orig_blog_charset = get_option( 'blog_charset' );
 
@@ -733,8 +733,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_device_can_upload
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_device_can_upload' )]
 	public function test_device_can_upload( $user_agent, $expected ) {
 		$_SERVER['HTTP_USER_AGENT'] = $user_agent;
 		$actual                     = _device_can_upload();
@@ -742,7 +742,7 @@ class Tests_Functions extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	public function data_device_can_upload() {
+	public static function data_device_can_upload() {
 		return array(
 			// iPhone iOS 5.0.1, Safari 5.1.
 			array(
@@ -793,8 +793,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 9064
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '9064' )]
 	public function test_wp_extract_urls() {
 		$original_urls = array(
 			'http://woo.com/1,2,3,4,5,6/-1-2-3-4-/woo.html',
@@ -972,10 +972,10 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests for backward compatibility of `wp_extract_urls` to remove unused semicolons.
 	 *
-	 * @ticket 30580
 	 *
-	 * @covers ::wp_extract_urls
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30580' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_extract_urls' )]
 	public function test_wp_extract_urls_remove_semicolon() {
 		$expected = array(
 			'http://typo.com',
@@ -992,23 +992,23 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28786
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28786' )]
 	public function test_wp_json_encode() {
 		$this->assertSame( wp_json_encode( 'a' ), '"a"' );
 	}
 
 	/**
-	 * @ticket 28786
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28786' )]
 	public function test_wp_json_encode_utf8() {
 		$this->assertSame( wp_json_encode( '这' ), '"\u8fd9"' );
 	}
 
 	/**
-	 * @ticket 28786
-	 * @requires function mb_detect_order
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28786' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'mb_detect_order' )]
 	public function test_wp_json_encode_non_utf8() {
 		$charsets     = mb_detect_order();
 		$old_charsets = $charsets;
@@ -1028,9 +1028,9 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28786
-	 * @requires function mb_detect_order
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28786' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'mb_detect_order' )]
 	public function test_wp_json_encode_non_utf8_in_array() {
 		$charsets     = mb_detect_order();
 		$old_charsets = $charsets;
@@ -1050,15 +1050,15 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28786
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28786' )]
 	public function test_wp_json_encode_array() {
 		$this->assertSame( wp_json_encode( array( 'a' ) ), '["a"]' );
 	}
 
 	/**
-	 * @ticket 28786
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28786' )]
 	public function test_wp_json_encode_object() {
 		$object    = new stdClass();
 		$object->a = 'b';
@@ -1066,8 +1066,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28786
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28786' )]
 	public function test_wp_json_encode_depth() {
 		$data = array( array( array( 1, 2, 3 ) ) );
 		$json = wp_json_encode( $data, 0, 1 );
@@ -1079,8 +1079,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53238
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53238' )]
 	public function test_wp_json_file_decode() {
 		$result = wp_json_file_decode(
 			DIR_TESTDATA . '/blocks/notice/block.json'
@@ -1091,8 +1091,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53238
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53238' )]
 	public function test_wp_json_file_decode_associative_array() {
 		$result = wp_json_file_decode(
 			DIR_TESTDATA . '/blocks/notice/block.json',
@@ -1104,9 +1104,9 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36054
-	 * @dataProvider data_mysql_to_rfc3339
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36054' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_mysql_to_rfc3339' )]
 	public function test_mysql_to_rfc3339( $expected, $actual ) {
 		$date_return = mysql_to_rfc3339( $actual );
 
@@ -1116,7 +1116,7 @@ class Tests_Functions extends WP_UnitTestCase {
 		$this->assertEquals( new DateTime( $expected ), new DateTime( $date_return ), 'The date is not the same after the call method' );
 	}
 
-	public function data_mysql_to_rfc3339() {
+	public static function data_mysql_to_rfc3339() {
 		return array(
 			array( '2016-03-15T18:54:46', '15-03-2016 18:54:46' ),
 			array( '2016-03-02T19:13:25', '2016-03-02 19:13:25' ),
@@ -1127,8 +1127,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35987
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35987' )]
 	public function test_wp_get_ext_types() {
 		$extensions = wp_get_ext_types();
 
@@ -1146,8 +1146,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35987
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35987' )]
 	public function test_wp_ext2type() {
 		$extensions = wp_get_ext_types();
 
@@ -1169,8 +1169,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	 * Unfortunately as the default for 'WP_MAX_MEMORY_LIMIT' in the
 	 * test suite is -1, we can not test the memory limit negotiations.
 	 *
-	 * @ticket 32075
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32075' )]
 	public function test_wp_raise_memory_limit() {
 		if ( -1 !== WP_MAX_MEMORY_LIMIT ) {
 			$this->markTestSkipped( 'WP_MAX_MEMORY_LIMIT should be set to -1.' );
@@ -1188,9 +1188,9 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests wp_generate_uuid4().
 	 *
-	 * @covers ::wp_generate_uuid4
-	 * @ticket 38164
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38164' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_generate_uuid4' )]
 	public function test_wp_generate_uuid4() {
 		$uuids = array();
 		for ( $i = 0; $i < 20; $i += 1 ) {
@@ -1206,9 +1206,9 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests wp_is_uuid().
 	 *
-	 * @covers ::wp_is_uuid
-	 * @ticket 39778
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39778' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_is_uuid' )]
 	public function test_wp_is_valid_uuid() {
 		$uuids_v4 = array(
 			'27fe2421-780c-44c5-b39b-fff753092b55',
@@ -1256,9 +1256,9 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests wp_unique_id().
 	 *
-	 * @covers ::wp_unique_id
-	 * @ticket 44883
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44883' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unique_id' )]
 	public function test_wp_unique_id() {
 
 		// Test without prefix.
@@ -1282,9 +1282,9 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40017
-	 * @dataProvider data_wp_get_image_mime
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40017' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_image_mime' )]
 	public function test_wp_get_image_mime( $file, $expected ) {
 		if ( ! is_callable( 'exif_imagetype' ) && ! function_exists( 'getimagesize' ) ) {
 			$this->markTestSkipped( 'The exif PHP extension is not loaded.' );
@@ -1300,7 +1300,7 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Data provider for test_wp_get_image_mime().
 	 */
-	public function data_wp_get_image_mime() {
+	public static function data_wp_get_image_mime() {
 		$data = array(
 			// Standard JPEG.
 			array(
@@ -1379,9 +1379,9 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35725
-	 * @dataProvider data_wp_getimagesize
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35725' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_getimagesize' )]
 	public function test_wp_getimagesize( $file, $expected ) {
 		if ( ! is_callable( 'exif_imagetype' ) && ! function_exists( 'getimagesize' ) ) {
 			$this->markTestSkipped( 'The exif PHP extension is not loaded.' );
@@ -1404,7 +1404,7 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Data provider for test_wp_getimagesize().
 	 */
-	public function data_wp_getimagesize() {
+	public static function data_wp_getimagesize() {
 		$data = array(
 			// Standard JPEG.
 			array(
@@ -1562,8 +1562,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_getimagesize() correctly handles HEIC image files.
 	 *
-	 * @ticket 53645
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53645' )]
 	public function test_wp_getimagesize_heic() {
 		if ( ! is_callable( 'exif_imagetype' ) && ! function_exists( 'getimagesize' ) ) {
 			$this->markTestSkipped( 'The exif PHP extension is not loaded.' );
@@ -1605,15 +1605,15 @@ class Tests_Functions extends WP_UnitTestCase {
 
 
 	/**
-	 * @ticket 39550
-	 * @dataProvider data_wp_check_filetype_and_ext
-	 * @requires extension fileinfo
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39550' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_check_filetype_and_ext' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'fileinfo' )]
 	public function test_wp_check_filetype_and_ext( $file, $filename, $expected ) {
 		$this->assertSame( $expected, wp_check_filetype_and_ext( $file, $filename ) );
 	}
 
-	public function data_wp_check_filetype_and_ext() {
+	public static function data_wp_check_filetype_and_ext() {
 		$data = array(
 			// Standard image.
 			array(
@@ -1789,10 +1789,10 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39550
-	 * @group ms-excluded
-	 * @requires extension fileinfo
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39550' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'fileinfo' )]
 	public function test_wp_check_filetype_and_ext_with_filtered_svg() {
 		$file     = DIR_TESTDATA . '/uploads/video-play.svg';
 		$filename = 'video-play.svg';
@@ -1815,10 +1815,10 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39550
-	 * @group ms-excluded
-	 * @requires extension fileinfo
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39550' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'fileinfo' )]
 	public function test_wp_check_filetype_and_ext_with_filtered_woff() {
 		$file     = DIR_TESTDATA . '/uploads/dashicons.woff';
 		$filename = 'dashicons.woff';
@@ -1855,14 +1855,14 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Test file path validation
 	 *
-	 * @ticket 42016
-	 * @ticket 61488
-	 * @dataProvider data_validate_file
 	 *
 	 * @param string $file          File path.
 	 * @param array  $allowed_files List of allowed files.
 	 * @param int    $expected      Expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42016' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61488' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_validate_file' )]
 	public function test_validate_file( $file, $allowed_files, $expected ) {
 		$this->assertSame( $expected, validate_file( $file, $allowed_files ) );
 	}
@@ -1878,7 +1878,7 @@ class Tests_Functions extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_validate_file() {
+	public static function data_validate_file() {
 		return array(
 
 			// Allowed files:
@@ -2122,11 +2122,11 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Test stream URL validation.
 	 *
-	 * @dataProvider data_wp_is_stream
 	 *
 	 * @param string $path     The resource path or URL.
 	 * @param bool   $expected Expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_is_stream' )]
 	public function test_wp_is_stream( $path, $expected ) {
 		if ( ! extension_loaded( 'openssl' ) && false !== strpos( $path, 'https://' ) ) {
 			$this->markTestSkipped( 'The openssl PHP extension is not loaded.' );
@@ -2145,7 +2145,7 @@ class Tests_Functions extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_wp_is_stream() {
+	public static function data_wp_is_stream() {
 		return array(
 			// Legitimate stream examples.
 			array( 'http://example.com', true ),
@@ -2165,12 +2165,12 @@ class Tests_Functions extends WP_UnitTestCase {
 	/**
 	 * Test human_readable_duration().
 	 *
-	 * @ticket 39667
-	 * @dataProvider data_human_readable_duration
 	 *
 	 * @param string $input    Duration.
 	 * @param string $expected Expected human readable duration.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39667' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_human_readable_duration' )]
 	public function test_human_readable_duration( $input, $expected ) {
 		$this->assertSame( $expected, human_readable_duration( $input ) );
 	}
@@ -2185,7 +2185,7 @@ class Tests_Functions extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_human_readable_duration() {
+	public static function data_human_readable_duration() {
 		return array(
 			// Valid ii:ss cases.
 			array( '0:0', '0 minutes, 0 seconds' ),
@@ -2241,15 +2241,15 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49404
-	 * @dataProvider data_wp_is_json_media_type
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49404' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_is_json_media_type' )]
 	public function test_wp_is_json_media_type( $input, $expected ) {
 		$this->assertSame( $expected, wp_is_json_media_type( $input ) );
 	}
 
 
-	public function data_wp_is_json_media_type() {
+	public static function data_wp_is_json_media_type() {
 		return array(
 			array( 'application/ld+json', true ),
 			array( 'application/ld+json; profile="https://www.w3.org/ns/activitystreams"', true ),
@@ -2264,8 +2264,8 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53668
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53668' )]
 	public function test_wp_get_default_extension_for_mime_type() {
 		$this->assertSame( 'jpg', wp_get_default_extension_for_mime_type( 'image/jpeg' ), 'jpg not returned as default extension for "image/jpeg"' );
 		$this->assertNotEquals( 'jpeg', wp_get_default_extension_for_mime_type( 'image/jpeg' ), 'jpeg should not be returned as default extension for "image/jpeg"' );
@@ -2278,9 +2278,9 @@ class Tests_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55505
-	 * @covers ::wp_recursive_ksort
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_recursive_ksort' )]
 	public function test_wp_recursive_ksort() {
 		// Create an array to test.
 		$theme_json = array(

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @group general
- * @group template
- * @covers ::wp_title
  */
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_title' )]
 class Tests_General_WpTitle extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 31521
 	 *
-	 * @dataProvider data_wp_title_archive
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31521' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_title_archive' )]
 	public function test_wp_title_archive( $query, $expected ) {
 		self::factory()->post->create(
 			array(
@@ -31,7 +31,7 @@ class Tests_General_WpTitle extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_title_archive() {
+	public static function data_wp_title_archive() {
 		return array(
 			'year with posts'                => array(
 				'query'    => '2021',

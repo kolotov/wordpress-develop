@@ -2,8 +2,9 @@
 /**
  * Test wp_kses_hair() function.
  *
- * @group kses
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_kses_hair' )]
+#[\PHPUnit\Framework\Attributes\Group( 'kses' )]
 class Tests_Kses_WpKsesHair extends WP_UnitTestCase {
 
 	/**
@@ -24,10 +25,9 @@ class Tests_Kses_WpKsesHair extends WP_UnitTestCase {
 	/**
 	 * Test wp_kses_hair() with various attribute patterns.
 	 *
-	 * @ticket 63724
-	 * @dataProvider data_attribute_parsing
-	 * @covers wp_kses_hair
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63724' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attribute_parsing' )]
 	public function test_attribute_parsing( string $input, array $expected ) {
 		$result = wp_kses_hair( $input, $this->allowed_protocols );
 		$this->assertSame( $expected, $result );
@@ -38,7 +38,7 @@ class Tests_Kses_WpKsesHair extends WP_UnitTestCase {
 	 *
 	 * @return Generator
 	 */
-	public function data_attribute_parsing() {
+	public static function data_attribute_parsing() {
 		yield 'empty attributes' => array(
 			'',
 			array(),
@@ -952,10 +952,9 @@ class Tests_Kses_WpKsesHair extends WP_UnitTestCase {
 	/**
 	 * Test wp_kses_hair() with URL protocol filtering.
 	 *
-	 * @ticket 63724
-	 * @dataProvider data_protocol_filtering
-	 * @covers wp_kses_hair
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63724' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_protocol_filtering' )]
 	public function test_protocol_filtering( string $input, array $expected ) {
 		$result = wp_kses_hair( $input, $this->allowed_protocols );
 		$this->assertSame( $expected, $result );
@@ -966,7 +965,7 @@ class Tests_Kses_WpKsesHair extends WP_UnitTestCase {
 	 *
 	 * @return Generator
 	 */
-	public function data_protocol_filtering() {
+	public static function data_protocol_filtering() {
 		yield 'href allowed protocol http' => array(
 			'href="http://example.com"',
 			array(
@@ -1091,9 +1090,8 @@ class Tests_Kses_WpKsesHair extends WP_UnitTestCase {
 	/**
 	 * Test wp_kses_hair() with custom allowed protocols.
 	 *
-	 * @ticket 63724
-	 * @covers wp_kses_hair
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63724' )]
 	public function test_custom_allowed_protocols() {
 		$custom_protocols = array( 'gopher' );
 		$attr             = 'href="gopher://gopher.example.org"';

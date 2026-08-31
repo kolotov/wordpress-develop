@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group post
- * @covers ::post_class
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'post_class' )]
 class Tests_Post_PostClass extends WP_UnitTestCase {
 	protected $post_id;
 

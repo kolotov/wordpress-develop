@@ -3,13 +3,13 @@ require_once ABSPATH . WPINC . '/class-IXR.php';
 require_once ABSPATH . WPINC . '/class-wp-http-ixr-client.php';
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_Client extends WP_XMLRPC_UnitTestCase {
 
 	/**
-	 * @ticket 26947
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26947' )]
 	public function test_ixr_client_allows_query_strings() {
 		$client = new IXR_Client( 'http://example.com/server.php?this-is-needed=true#not-this' );
 		$this->assertSame( 'example.com', $client->server );
@@ -18,16 +18,16 @@ class Tests_XMLRPC_Client extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64635
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64635' )]
 	public function test_ixr_client_can_handle_missing_host() {
 		$client = new IXR_Client( '/no-host-here' );
 		$this->assertSame( '', $client->server );
 	}
 
 	/**
-	 * @ticket 26947
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26947' )]
 	public function test_wp_ixr_client_allows_query_strings() {
 		$client = new WP_HTTP_IXR_Client( 'http://example.com/server.php?this-is-needed=true#not-this' );
 		$this->assertSame( 'example.com', $client->server );
@@ -36,8 +36,8 @@ class Tests_XMLRPC_Client extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40784
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40784' )]
 	public function test_wp_ixr_client_can_handle_protocolless_urls() {
 		$client = new WP_HTTP_IXR_Client( '//example.com/server.php' );
 		$this->assertSame( '', $client->scheme );
@@ -45,8 +45,8 @@ class Tests_XMLRPC_Client extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40784
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40784' )]
 	public function test_wp_ixr_client_can_handle_relative_urls() {
 		$client = new WP_HTTP_IXR_Client( '/server.php' );
 		$this->assertSame( '', $client->scheme );
@@ -55,8 +55,8 @@ class Tests_XMLRPC_Client extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40784
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40784' )]
 	public function test_wp_ixr_client_can_handle_invalid_urls() {
 		$client = new WP_HTTP_IXR_Client( '' );
 		$this->assertSame( '', $client->scheme );

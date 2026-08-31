@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group ms-required
- * @group multisite
- * @covers ::get_space_used
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_space_used' )]
 class Tests_Multisite_GetSpaceUsed extends WP_UnitTestCase {
 
 	public function test_get_space_used_switched_site() {

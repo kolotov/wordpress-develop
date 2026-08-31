@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group ms-required
- * @group multisite
  *
- * @covers ::wpmu_log_new_registrations
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wpmu_log_new_registrations' )]
 class Tests_Multisite_wpmuLogNewRegistrations extends WP_UnitTestCase {
 
 	public function test_wpmu_log_new_registrations() {

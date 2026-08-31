@@ -3,9 +3,9 @@
 /**
  * Tests for the `wp_get_chromium_major_version()` function.
  *
- * @group media
- * @covers ::wp_get_chromium_major_version
  */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_chromium_major_version' )]
 class Tests_Media_wpGetChromiumMajorVersion extends WP_UnitTestCase {
 
 	/**
@@ -29,22 +29,19 @@ class Tests_Media_wpGetChromiumMajorVersion extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 * @ticket 64766
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64766' )]
 	public function test_returns_null_when_no_user_agent() {
 		unset( $_SERVER['HTTP_USER_AGENT'] );
 		$this->assertNull( wp_get_chromium_major_version() );
 	}
 
 	/**
-	 * @ticket 64766
-	 *
-	 * @dataProvider data_user_agents
 	 *
 	 * @param string   $user_agent The user agent string.
 	 * @param int|null $expected   The expected Chromium major version, or null.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64766' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_user_agents' )]
 	public function test_returns_expected_version( $user_agent, $expected ) {
 		$_SERVER['HTTP_USER_AGENT'] = $user_agent;
 		$this->assertSame( $expected, wp_get_chromium_major_version() );
@@ -55,7 +52,7 @@ class Tests_Media_wpGetChromiumMajorVersion extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_user_agents() {
+	public static function data_user_agents() {
 		return array(
 			'empty user agent'   => array( '', null ),
 			'Firefox'            => array( 'Mozilla/5.0 (Windows NT 10.0; rv:128.0) Gecko/20100101 Firefox/128.0', null ),

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group bookmark
- * @covers ::get_bookmark
  */
+#[\PHPUnit\Framework\Attributes\Group( 'bookmark' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_bookmark' )]
 class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	/**
 	 * Instance of the bookmark object.
@@ -41,8 +41,8 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	/**
 	 * Path 1A: Given empty bookmark and global link exists.
 	 *
-	 * @dataProvider data_when_empty_bookmark
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_when_empty_bookmark' )]
 	public function test_should_return_global_link_in_requested_output_format( $args ) {
 		$GLOBALS['link'] = self::$bookmark;
 		$args            = $this->init_func_args( $args, 0 );
@@ -59,8 +59,8 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	/**
 	 * Path 1B: Given empty bookmark and global link does not exist.
 	 *
-	 * @dataProvider data_when_empty_bookmark
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_when_empty_bookmark' )]
 	public function test_should_return_null( $args ) {
 		$args = $this->init_func_args( $args, 0 );
 
@@ -75,7 +75,7 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	/**
 	 * Path 1 data provider, i.e. when given empty bookmark.
 	 */
-	public function data_when_empty_bookmark() {
+	public static function data_when_empty_bookmark() {
 		return array(
 			// Unhappy path.
 			'with bookmark type mismatch'        => array(
@@ -126,8 +126,8 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	/**
 	 * Path 2: Bookmark instance is given.
 	 *
-	 * @dataProvider data_when_instance_bookmark
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_when_instance_bookmark' )]
 	public function test_should_cache_bookmark_when_given_instance( $args ) {
 		$args     = $this->init_func_args( $args );
 		$bookmark = $args[0];
@@ -149,7 +149,7 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	/**
 	 * Path 2 data provider, i.e. when bookmark instance is given.
 	 */
-	public function data_when_instance_bookmark() {
+	public static function data_when_instance_bookmark() {
 		return array(
 			// Unhappy path.
 			'with incomplete bookmark data'      => array(
@@ -195,10 +195,10 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	/**
 	 * Path 3A: Uses the global link when exists and the given bookmark link ID matches the global link.
 	 *
-	 * @dataProvider data_when_else
 	 *
 	 * @param array $args Function argument list.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_when_else' )]
 	public function test_should_return_global_when_else( $args ) {
 		$args            = $this->init_func_args( $args, self::$bookmark->link_id );
 		$GLOBALS['link'] = self::$bookmark;
@@ -214,10 +214,10 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	/**
 	 * Path 3B: Pulls from cache when given existing bookmark link ID.
 	 *
-	 * @dataProvider data_when_else
 	 *
 	 * @param array $args Function argument list.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_when_else' )]
 	public function test_should_return_cached_bookmark_when_given_existing_link_id( $args ) {
 		// Cache the bookmark instance to setup the test.
 		wp_cache_add( self::$bookmark->link_id, self::$bookmark, 'bookmark' );
@@ -245,10 +245,10 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	/**
 	 * Path 3C: Attempts to pull non-existent bookmark from database.
 	 *
-	 * @dataProvider data_when_else
 	 *
 	 * @param array $args Function argument list.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_when_else' )]
 	public function test_should_return_null_when_bookmark_not_in_database( $args ) {
 		$bookmark_link_id = self::$bookmark->link_id * 100;
 		$args             = $this->init_func_args( $args, $bookmark_link_id );
@@ -270,10 +270,10 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	/**
 	 * Path 3D: Pulls existing bookmark from the database.
 	 *
-	 * @dataProvider data_when_else
 	 *
 	 * @param array $args Function argument list.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_when_else' )]
 	public function test_should_return_existing_bookmark_from_database( $args ) {
 		$args     = $this->init_func_args( $args, self::$bookmark->link_id );
 		$expected = $this->maybe_format_expected_data( $args, self::$bookmark );
@@ -304,7 +304,7 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	 * Path 3's data provider which covers the "else" branch, i.e. when the bookmark argument is not empty and
 	 * not an object.
 	 */
-	public function data_when_else() {
+	public static function data_when_else() {
 		return array(
 			// Unhappy path.
 			'with invalid output'                => array(
@@ -341,8 +341,8 @@ class Tests_Bookmark_GetBookmark extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53235
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53235' )]
 	public function test_numeric_properties_should_be_cast_to_ints() {
 		$contexts = array( 'raw', 'edit', 'db', 'display', 'attribute', 'js' );
 

@@ -3,10 +3,10 @@
 /**
  * Test get_site() wrapper of WP_Site in multisite.
  *
- * @group ms-required
- * @group ms-site
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_GetSite extends WP_UnitTestCase {
 
 	protected static $site_ids;

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wpautop
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wpautop' )]
 class Tests_Formatting_wpAutop extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 11008
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11008' )]
 	public function test_first_post() {
 		$expected  = '<p>Welcome to WordPress!  This post contains important information.  After you read it, you can make it private to hide it from visitors but still have the information handy for future reference.</p>
 <p>First things first:</p>
@@ -70,8 +70,8 @@ PS.  Not yet subscribed for update notifications?  <a href="%1$s" title="Subscri
 	/**
 	 * wpautop() Should not alter the contents of "<pre>" elements
 	 *
-	 * @ticket 19855
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19855' )]
 	public function test_skip_pre_elements() {
 		$code = file_get_contents( DIR_TESTDATA . '/formatting/sizzle.js' );
 		$code = str_replace( "\r", '', $code );
@@ -97,8 +97,8 @@ PS.  Not yet subscribed for update notifications?  <a href="%1$s" title="Subscri
 	/**
 	 * wpautop() Should not add <br/> to "<input>" elements
 	 *
-	 * @ticket 16456
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16456' )]
 	public function test_skip_input_elements() {
 		$str = 'Username: <input type="text" id="username" name="username" /><br />Password: <input type="password" id="password1" name="password1" />';
 		$this->assertSame( "<p>$str</p>", trim( wpautop( $str ) ) );
@@ -107,8 +107,8 @@ PS.  Not yet subscribed for update notifications?  <a href="%1$s" title="Subscri
 	/**
 	 * wpautop() Should add <p> around inline "<math>" elements.
 	 *
-	 * @ticket 13340
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '13340' )]
 	public function test_wrap_inline_math_elements() {
 		$str = '<math><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></mrow></math>';
 
@@ -118,8 +118,8 @@ PS.  Not yet subscribed for update notifications?  <a href="%1$s" title="Subscri
 	/**
 	 * wpautop() Should not add <br> inside block "<math>" elements.
 	 *
-	 * @ticket 13340
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '13340' )]
 	public function test_skip_block_math_elements() {
 		$str = '<math display="block">
 	<mtable>
@@ -164,8 +164,8 @@ PS.  Not yet subscribed for update notifications?  <a href="%1$s" title="Subscri
 	/**
 	 * wpautop() Should not add <p> and <br/> around <source> and <track>
 	 *
-	 * @ticket 26864
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26864' )]
 	public function test_source_track_elements() {
 		$content = "Paragraph one.\n\n" .
 			'<video class="wp-video-shortcode" id="video-0-1" width="640" height="360" preload="metadata" controls="controls">
@@ -250,8 +250,8 @@ PS.  Not yet subscribed for update notifications?  <a href="%1$s" title="Subscri
 	/**
 	 * wpautop() Should not add <p> and <br/> around <param> and <embed>
 	 *
-	 * @ticket 26864
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26864' )]
 	public function test_param_embed_elements() {
 		$content1 = '
 Paragraph one.
@@ -329,8 +329,8 @@ Paragraph two.';
 	/**
 	 * wpautop() Should not add <br/> to "<select>" or "<option>" elements
 	 *
-	 * @ticket 22230
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22230' )]
 	public function test_skip_select_option_elements() {
 		$str = 'Country: <select id="state" name="state"><option value="1">Alabama</option><option value="2">Alaska</option><option value="3">Arizona</option><option value="4">Arkansas</option><option value="5">California</option></select>';
 		$this->assertSame( "<p>$str</p>", trim( wpautop( $str ) ) );
@@ -339,8 +339,8 @@ Paragraph two.';
 	/**
 	 * wpautop() should treat block level HTML elements as blocks.
 	 *
-	 * @ticket 27268
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27268' )]
 	public function test_that_wpautop_treats_block_level_elements_as_blocks() {
 		$blocks = array(
 			'table',
@@ -432,8 +432,8 @@ Paragraph two.';
 	/**
 	 * wpautop() should autop a blockquote's contents but not the blockquote itself
 	 *
-	 * @ticket 27268
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27268' )]
 	public function test_that_wpautop_does_not_wrap_blockquotes_but_does_autop_their_contents() {
 		$content  = '<blockquote>foo</blockquote>';
 		$expected = '<blockquote><p>foo</p></blockquote>';
@@ -444,8 +444,8 @@ Paragraph two.';
 	/**
 	 * wpautop() should treat inline HTML elements as inline.
 	 *
-	 * @ticket 27268
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27268' )]
 	public function test_that_wpautop_treats_inline_elements_as_inline() {
 		$inlines = array(
 			'a',
@@ -493,14 +493,14 @@ Paragraph two.';
 	/**
 	 * Do not allow newlines within HTML elements to become mangled.
 	 *
-	 * @ticket 33106
-	 * @dataProvider data_element_sanity
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33106' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_element_sanity' )]
 	public function test_element_sanity( $input, $output ) {
 		return $this->assertSame( $output, wpautop( $input ) );
 	}
 
-	public function data_element_sanity() {
+	public static function data_element_sanity() {
 		return array(
 			array(
 				"Hello <a\nhref='world'>",
@@ -546,8 +546,8 @@ Paragraph two.';
 	/**
 	 * wpautop() should not convert line breaks after <br /> tags
 	 *
-	 * @ticket 33377
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33377' )]
 	public function test_that_wpautop_skips_line_breaks_after_br() {
 		$content = '
 line 1<br>
@@ -569,8 +569,8 @@ line 5</p>';
 	/**
 	 * wpautop() should convert multiple line breaks into a paragraph regardless of <br /> format
 	 *
-	 * @ticket 33377
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33377' )]
 	public function test_that_wpautop_adds_a_paragraph_after_multiple_br() {
 		$content = '
 line 1<br>
@@ -587,8 +587,8 @@ line 2<br/>
 
 
 	/**
-	 * @ticket 4857
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '4857' )]
 	public function test_that_text_before_blocks_is_wrapped_in_a_paragraph() {
 		$content  = 'a<div>b</div>';
 		$expected = "<p>a</p>\n<div>b</div>";
@@ -599,8 +599,8 @@ line 2<br/>
 	/**
 	 * wpautop() should not add extra </p> before <figcaption>
 	 *
-	 * @ticket 39307
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39307' )]
 	public function test_that_wpautop_does_not_add_extra_closing_p_in_figure() {
 		$content1  = '<figure><img src="example.jpg" /><figcaption>Caption</figcaption></figure>';
 		$expected1 = $content1;
@@ -618,8 +618,8 @@ line 2<br/>
 	}
 
 	/**
-	 * @ticket 14674
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14674' )]
 	public function test_the_hr_is_not_wrapped_in_a_paragraph() {
 		$content  = 'paragraph1<hr>paragraph2';
 		$expected = "<p>paragraph1</p>\n<hr>\n<p>paragraph2</p>";
@@ -630,8 +630,8 @@ line 2<br/>
 	/**
 	 * wpautop() should ignore inline SVG graphics
 	 *
-	 * @ticket 9437
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '9437' )]
 	public function test_that_wpautop_ignores_inline_svgs() {
 		$content =
 			'<svg xmlns="http://www.w3.org/2000/svg">
@@ -648,8 +648,8 @@ line 2<br/>
 	/**
 	 * wpautop() should ignore inline scripts
 	 *
-	 * @ticket 9437
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '9437' )]
 	public function test_that_wpautop_ignores_inline_scripts() {
 		$content =
 			'<script type="text/javascript">

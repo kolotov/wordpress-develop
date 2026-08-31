@@ -6,29 +6,22 @@
  * @subpackage StyleEngine
  * @since 6.1.0
  *
- * @group style-engine
  */
 
 /**
  * Tests for registering, storing and generating styles.
  */
+#[\PHPUnit\Framework\Attributes\Group( 'style-engine' )]
+
+
+
+
 class Tests_wpStyleEngine extends WP_UnitTestCase {
 	/**
 	 * Tests generating block styles and classnames based on various manifestations of the $block_styles argument.
 	 *
-	 * @ticket 56467
-	 * @ticket 58549
-	 * @ticket 58590
-	 * @ticket 60175
-	 * @ticket 61720
-	 * @ticket 62189
-	 * @ticket 63799
-	 * @ticket 64974
-	 * @ticket 65037
 	 *
-	 * @covers ::wp_style_engine_get_styles
 	 *
-	 * @dataProvider data_wp_style_engine_get_styles
 	 *
 	 * @param array  $block_styles    The incoming block styles object.
 	 * @param array  $options         {
@@ -42,6 +35,17 @@ class Tests_wpStyleEngine extends WP_UnitTestCase {
 	 * }
 	 * @param string $expected_output The expected output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58549' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58590' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60175' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61720' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62189' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63799' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64974' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65037' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_style_engine_get_styles' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_style_engine_get_styles' )]
 	public function test_wp_style_engine_get_styles( $block_styles, $options, $expected_output ) {
 		$generated_styles = wp_style_engine_get_styles( $block_styles, $options );
 
@@ -53,7 +57,7 @@ class Tests_wpStyleEngine extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_style_engine_get_styles() {
+	public static function data_wp_style_engine_get_styles() {
 		return array(
 			'default_return_value'                         => array(
 				'block_styles'    => array(),
@@ -673,10 +677,10 @@ class Tests_wpStyleEngine extends WP_UnitTestCase {
 	/**
 	 * Tests adding rules to a store and retrieving a generated stylesheet.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::wp_style_engine_get_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_style_engine_get_styles' )]
 	public function test_should_store_block_styles_using_context() {
 		$block_styles = array(
 			'spacing' => array(
@@ -705,10 +709,10 @@ class Tests_wpStyleEngine extends WP_UnitTestCase {
 	/**
 	 * Tests that passing no context does not store styles.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::wp_style_engine_get_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_style_engine_get_styles' )]
 	public function test_should_not_store_block_styles_without_context() {
 		$block_styles = array(
 			'typography' => array(
@@ -731,10 +735,10 @@ class Tests_wpStyleEngine extends WP_UnitTestCase {
 	/**
 	 * Tests adding rules to a store and retrieving a generated stylesheet.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::wp_style_engine_get_stylesheet_from_context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_style_engine_get_stylesheet_from_context' )]
 	public function test_should_get_stored_stylesheet_from_context() {
 		$css_rules           = array(
 			array(
@@ -769,10 +773,10 @@ class Tests_wpStyleEngine extends WP_UnitTestCase {
 	/**
 	 * Tests returning a generated stylesheet from a set of rules.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::wp_style_engine_get_stylesheet_from_css_rules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_style_engine_get_stylesheet_from_css_rules' )]
 	public function test_should_return_stylesheet_from_css_rules() {
 		$css_rules = array(
 			array(
@@ -812,11 +816,11 @@ class Tests_wpStyleEngine extends WP_UnitTestCase {
 	/**
 	 * Tests returning a generated stylesheet with important declarations.
 	 *
-	 * @covers ::wp_style_engine_get_stylesheet_from_css_rules
-	 * @covers WP_Style_Engine::compile_stylesheet_from_css_rules
 	 *
-	 * @ticket 65561
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65561' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_style_engine_get_stylesheet_from_css_rules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine', 'compile_stylesheet_from_css_rules' )]
 	public function test_should_return_stylesheet_with_important_declarations() {
 		$declarations = new WP_Style_Engine_CSS_Declarations();
 		$declarations->add_declaration(
@@ -841,11 +845,11 @@ class Tests_wpStyleEngine extends WP_UnitTestCase {
 	/**
 	 * Tests that incoming styles are deduped and merged.
 	 *
-	 * @ticket 58811
-	 * @ticket 56467
 	 *
-	 * @covers ::wp_style_engine_get_stylesheet_from_css_rules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58811' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_style_engine_get_stylesheet_from_css_rules' )]
 	public function test_should_dedupe_and_merge_css_rules() {
 		$css_rules = array(
 			array(
@@ -891,10 +895,10 @@ class Tests_wpStyleEngine extends WP_UnitTestCase {
 	/**
 	 * Tests returning a generated stylesheet from a set of nested rules and merging their declarations.
 	 *
-	 * @ticket 61099
 	 *
-	 * @covers ::wp_style_engine_get_stylesheet_from_css_rules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61099' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_style_engine_get_stylesheet_from_css_rules' )]
 	public function test_should_merge_declarations_for_rules_groups() {
 		$css_rules = array(
 			array(
@@ -925,10 +929,10 @@ class Tests_wpStyleEngine extends WP_UnitTestCase {
 	/**
 	 * Tests returning a generated stylesheet from a set of nested rules.
 	 *
-	 * @ticket 61099
 	 *
-	 * @covers ::wp_style_engine_get_stylesheet_from_css_rules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61099' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_style_engine_get_stylesheet_from_css_rules' )]
 	public function test_should_return_stylesheet_with_nested_rules() {
 		$css_rules = array(
 			array(

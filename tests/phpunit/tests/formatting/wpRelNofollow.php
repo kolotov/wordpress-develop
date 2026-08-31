@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wp_rel_nofollow
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_rel_nofollow' )]
 class Tests_Formatting_wpRelNofollow extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 9959
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '9959' )]
 	public function test_add_no_follow() {
 		$content  = '<p>This is some cool <a href="/">Code</a></p>';
 		$expected = '<p>This is some cool <a href="/" rel="nofollow">Code</a></p>';
@@ -17,8 +17,8 @@ class Tests_Formatting_wpRelNofollow extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 9959
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '9959' )]
 	public function test_convert_no_follow() {
 		$content  = '<p>This is some cool <a href="/" rel="weird">Code</a></p>';
 		$expected = '<p>This is some cool <a href="/" rel="weird nofollow">Code</a></p>';
@@ -26,14 +26,14 @@ class Tests_Formatting_wpRelNofollow extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 11360
-	 * @dataProvider data_wp_rel_nofollow
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11360' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_rel_nofollow' )]
 	public function test_wp_rel_nofollow( $input, $output, $expect_deprecation = false ) {
 		$this->assertEqualHTML( $output, stripslashes( wp_rel_nofollow( $input ) ) );
 	}
 
-	public function data_wp_rel_nofollow() {
+	public static function data_wp_rel_nofollow() {
 		$home_url_http  = set_url_scheme( home_url(), 'http' );
 		$home_url_https = set_url_scheme( home_url(), 'https' );
 

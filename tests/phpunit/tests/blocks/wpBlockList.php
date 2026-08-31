@@ -6,8 +6,8 @@
  * @subpackage Blocks
  * @since 5.5.0
  *
- * @group blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 class Tests_Blocks_wpBlockList extends WP_UnitTestCase {
 
 	/**
@@ -37,8 +37,8 @@ class Tests_Blocks_wpBlockList extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_array_access() {
 		$parsed_blocks = parse_blocks( '<!-- wp:example /-->' );
 		$context       = array();
@@ -61,8 +61,8 @@ class Tests_Blocks_wpBlockList extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_iterable() {
 		$parsed_blocks = parse_blocks( '<!-- wp:example --><!-- wp:example /--><!-- /wp:example -->' );
 		$context       = array();
@@ -93,8 +93,8 @@ class Tests_Blocks_wpBlockList extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49927
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_countable() {
 		$parsed_blocks = parse_blocks( '<!-- wp:example /-->' );
 		$context       = array();

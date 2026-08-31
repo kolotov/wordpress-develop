@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::wp_count_comments
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_count_comments' )]
 class Tests_Comment_wpCountComments extends WP_UnitTestCase {
 
 	public function test_wp_count_comments() {

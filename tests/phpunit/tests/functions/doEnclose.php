@@ -7,11 +7,11 @@
  *
  * @since 5.3.0
  *
- * @group functions
- * @group post
  *
- * @covers ::do_enclose
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'do_enclose' )]
 class Tests_Functions_DoEnclose extends WP_UnitTestCase {
 
 	/**
@@ -29,8 +29,8 @@ class Tests_Functions_DoEnclose extends WP_UnitTestCase {
 	 *
 	 * @since 5.3.0
 	 *
-	 * @dataProvider data_do_enclose
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_do_enclose' )]
 	public function test_function_with_explicit_content_input( $content, $expected ) {
 		$post_id = self::factory()->post->create();
 
@@ -45,8 +45,8 @@ class Tests_Functions_DoEnclose extends WP_UnitTestCase {
 	 *
 	 * @since 5.3.0
 	 *
-	 * @dataProvider data_do_enclose
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_do_enclose' )]
 	public function test_function_with_implicit_content_input( $content, $expected ) {
 		$post_id = self::factory()->post->create(
 			array(
@@ -73,7 +73,7 @@ class Tests_Functions_DoEnclose extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_do_enclose() {
+	public static function data_do_enclose() {
 		return array(
 			'null'                  => array(
 				'content'  => null,

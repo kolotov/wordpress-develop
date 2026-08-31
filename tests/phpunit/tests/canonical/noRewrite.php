@@ -3,10 +3,10 @@
 require_once dirname( __DIR__ ) . '/canonical.php';
 
 /**
- * @group canonical
- * @group rewrite
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'canonical' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Canonical_NoRewrite extends WP_Canonical_UnitTestCase {
 
 	// These test cases are run against the test handler in WP_Canonical.
@@ -22,13 +22,13 @@ class Tests_Canonical_NoRewrite extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data' )]
 	public function test( $test_url, $expected, $ticket = 0, $expected_doing_it_wrong = array() ) {
 		$this->assertCanonical( $test_url, $expected, $ticket, $expected_doing_it_wrong );
 	}
 
-	public function data() {
+	public static function data() {
 		/*
 		 * Test URL.
 		 * [0]: Test URL.
@@ -282,11 +282,11 @@ class Tests_Canonical_NoRewrite extends WP_Canonical_UnitTestCase {
 	/**
 	 * Test the canonical URL when the host header is not set.
 	 *
-	 * @ticket 63316
-	 * @dataProvider data_missing_host_header
 	 * @param string $wp_home The WP_HOME value to set.
 	 * @param string $expected_url The expected canonical URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63316' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_missing_host_header' )]
 	public function test_missing_host_header( $wp_home, $expected_url ) {
 		$_SERVER['HTTP_HOST'] = null;
 		add_filter(
@@ -303,7 +303,7 @@ class Tests_Canonical_NoRewrite extends WP_Canonical_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_missing_host_header() {
+	public static function data_missing_host_header() {
 		return array(
 			'no port'   => array(
 				'wp_home'      => 'http://example.com',

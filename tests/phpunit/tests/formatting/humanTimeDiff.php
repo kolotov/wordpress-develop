@@ -1,25 +1,25 @@
 <?php
 
 /**
- * @group formatting
- * @ticket 38773
  *
- * @covers ::human_time_diff
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '38773' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'human_time_diff' )]
 class Tests_Formatting_HumanTimeDiff extends WP_UnitTestCase {
 
 	/**
-	 * @group formatting
-	 * @ticket 38773
-	 * @dataProvider data_human_time_diff
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '38773' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_human_time_diff' )]
 	public function test_human_time_diff( $expected, $stopdate, $message ) {
 		$startdate = new DateTime( '2016-01-01 12:00:00' );
 		$this->assertSame( $expected, human_time_diff( $startdate->format( 'U' ), $stopdate->format( 'U' ) ), $message );
 	}
 
 	// Data for test_human_time_diff.
-	public function data_human_time_diff() {
+	public static function data_human_time_diff() {
 		return array(
 			array(
 				'37 seconds',

@@ -3,22 +3,22 @@
 /**
  * Tests for the wp_parse_slug_list() function.
  *
- * @group functions
  *
- * @covers ::wp_parse_slug_list
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_parse_slug_list' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 class Tests_Functions_WpParseSlugList extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 35582
-	 * @ticket 60217
 	 *
-	 * @dataProvider data_wp_parse_slug_list
-	 * @dataProvider data_unexpected_input
 	 *
 	 * @param mixed[]|string $input_list
 	 * @param array<string> $expected
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35582' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60217' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_parse_slug_list' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unexpected_input' )]
 	public function test_wp_parse_slug_list( $input_list, array $expected ): void {
 		$parsed_list = wp_parse_slug_list( $input_list );
 		$this->assertThat(
@@ -39,7 +39,7 @@ class Tests_Functions_WpParseSlugList extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ input_list: mixed[]|string, expected: array<string> }>
 	 */
-	public function data_wp_parse_slug_list(): array {
+	public static function data_wp_parse_slug_list(): array {
 		return array(
 			'regular'                    => array(
 				'input_list' => 'apple,banana,carrot,dog',
@@ -95,7 +95,7 @@ class Tests_Functions_WpParseSlugList extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ input_list: mixed[]|string, expected: array<string> }>
 	 */
-	public function data_unexpected_input(): array {
+	public static function data_unexpected_input(): array {
 		return array(
 			'string with commas' => array(
 				'input_list' => '1,2,string with spaces',
@@ -105,11 +105,11 @@ class Tests_Functions_WpParseSlugList extends WP_UnitTestCase {
 				'input_list' => array( '1', 2, 'string with spaces' ),
 				'expected'   => array( '1', '2', 'string-with-spaces' ),
 			),
-			'string with spaces' => array(
+			'unexpected string with spaces' => array(
 				'input_list' => '1 2 string with spaces',
 				'expected'   => array( '1', '2', 'string', 'with', 'spaces' ),
 			),
-			'array with spaces'  => array(
+			'unexpected array with spaces'  => array(
 				'input_list' => array( '1 2 string with spaces' ),
 				'expected'   => array( '1-2-string-with-spaces' ),
 			),

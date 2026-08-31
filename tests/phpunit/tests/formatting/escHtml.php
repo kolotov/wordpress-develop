@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::esc_html
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'esc_html' )]
 class Tests_Formatting_EscHtml extends WP_UnitTestCase {
 	public function test_esc_html_basics() {
 		// Simple string.

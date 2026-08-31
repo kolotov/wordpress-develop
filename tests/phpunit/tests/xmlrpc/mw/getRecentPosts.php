@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_mw_getRecentPosts extends WP_XMLRPC_UnitTestCase {
 	protected static $post_id;
 
@@ -29,8 +29,8 @@ class Tests_XMLRPC_mw_getRecentPosts extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22320
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22320' )]
 	public function test_no_editing_privileges() {
 		$this->make_user_by_role( 'subscriber' );
 
@@ -95,8 +95,8 @@ class Tests_XMLRPC_mw_getRecentPosts extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_post_thumbnail() {
 		add_theme_support( 'post-thumbnails' );
 

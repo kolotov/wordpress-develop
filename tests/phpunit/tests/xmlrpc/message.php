@@ -9,8 +9,9 @@
 /**
  * Test wp-includes/IXR/class-IXR-message.php
  *
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
+#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_XMLRPC_Message extends WP_UnitTestCase {
 
 	/**
@@ -20,10 +21,9 @@ class Tests_XMLRPC_Message extends WP_UnitTestCase {
 	 * The notice that we should not see:
 	 * `Deprecated: Creation of dynamic property IXR_Message::$currentTag is deprecated`.
 	 *
-	 * @ticket 56033
 	 *
-	 * @covers IXR_Message::tag_open
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56033' )]
 	public function test_tag_open_does_not_create_dynamic_property() {
 		$message = new IXR_Message( '<methodResponse><params><param><value>1</value></param></params></methodResponse>' );
 		$this->assertTrue( $message->parse() );
@@ -36,7 +36,6 @@ class Tests_XMLRPC_Message extends WP_UnitTestCase {
 	 *
 	 * Safeguards handling of the PHP 8.4 deprecation of `xml_set_object()`.
 	 *
-	 * @covers IXR_Message::parse
 	 */
 	public function test_parse_sets_handlers() {
 		$xml     = '<methodResponse><params><param><value>1</value></param></params></methodResponse>';

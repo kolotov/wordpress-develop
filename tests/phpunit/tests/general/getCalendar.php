@@ -4,11 +4,11 @@
  *
  * @since 6.8.0
  *
- * @group general
- * @group template
  *
- * @covers ::get_calendar
  */
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_calendar' )]
 class Tests_General_GetCalendar extends WP_UnitTestCase {
 
 	/**
@@ -58,8 +58,8 @@ class Tests_General_GetCalendar extends WP_UnitTestCase {
 	/**
 	 * Test that get_calendar() displays output when display is true.
 	 *
-	 * @ticket 34093
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34093' )]
 	public function test_get_calendar_display() {
 		$calendar_html = get_echo( 'get_calendar', array( array( 'display' => true ) ) );
 		$this->assertStringContainsString( '<th scope="col" aria-label="Monday">M</th>', $calendar_html, 'Calendar is expected to use initials for day names' );
@@ -71,8 +71,8 @@ class Tests_General_GetCalendar extends WP_UnitTestCase {
 	/**
 	 * Test that get_calendar() respects the get_calendar_args filter.
 	 *
-	 * @ticket 34093
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34093' )]
 	public function test_get_calendar_args_filter() {
 		add_filter(
 			'get_calendar_args',
@@ -94,8 +94,8 @@ class Tests_General_GetCalendar extends WP_UnitTestCase {
 	/**
 	 * Test that get_calendar() respects the args post type parameter.
 	 *
-	 * @ticket 34093
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34093' )]
 	public function test_get_calendar_post_type_args() {
 		$calendar_html = get_echo( 'get_calendar', array( array( 'post_type' => 'page' ) ) );
 
@@ -109,8 +109,8 @@ class Tests_General_GetCalendar extends WP_UnitTestCase {
 	/**
 	 * Test that get_calendar() respects the args initial parameter.
 	 *
-	 * @ticket 34093
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34093' )]
 	public function test_get_calendar_initial_args() {
 		$first_calendar_html  = get_echo( 'get_calendar', array( array( 'initial' => true ) ) );
 		$second_calendar_html = get_echo( 'get_calendar', array( array( 'initial' => false ) ) );
@@ -122,8 +122,8 @@ class Tests_General_GetCalendar extends WP_UnitTestCase {
 	/**
 	 * Test that get_calendar() uses a different cache for different arguments.
 	 *
-	 * @ticket 34093
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34093' )]
 	public function test_get_calendar_caching_accounts_for_args() {
 		$first_calendar_html  = get_echo( 'get_calendar' );
 		$second_calendar_html = get_echo( 'get_calendar', array( array( 'post_type' => 'page' ) ) );
@@ -134,8 +134,8 @@ class Tests_General_GetCalendar extends WP_UnitTestCase {
 	/**
 	 * Test that get_calendar() uses the same cache for equivalent arguments.
 	 *
-	 * @ticket 34093
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34093' )]
 	public function test_get_calendar_caching_accounts_for_equivalent_args() {
 		get_echo( 'get_calendar', array( array( 'post_type' => 'page' ) ) );
 
@@ -178,8 +178,8 @@ class Tests_General_GetCalendar extends WP_UnitTestCase {
 	/**
 	 * Test that get_calendar() maintains backwards compatibility with old parameter format.
 	 *
-	 * @ticket 34093
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34093' )]
 	public function test_get_calendar_backwards_compatibility() {
 		$first_calendar_html = get_echo( 'get_calendar', array( false ) );
 

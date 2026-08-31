@@ -3,13 +3,13 @@
 /**
  * Test get_id_from_blogname() in multisite.
  *
- * @group blogname
- * @group ms-required
- * @group ms-site
- * @group multisite
  *
- * @covers ::get_id_from_blogname
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blogname' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_id_from_blogname' )]
 class Tests_Multisite_GetIdFromBlogname extends WP_UnitTestCase {
 
 	protected static $network_ids;
@@ -87,8 +87,8 @@ class Tests_Multisite_GetIdFromBlogname extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34450
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34450' )]
 	public function test_get_id_from_blogname_no_www() {
 		global $current_site;
 
@@ -108,8 +108,8 @@ class Tests_Multisite_GetIdFromBlogname extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34450
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34450' )]
 	public function test_get_id_from_blogname_www() {
 		global $current_site;
 

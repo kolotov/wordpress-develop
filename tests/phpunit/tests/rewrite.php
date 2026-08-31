@@ -3,8 +3,8 @@
 /**
  * A set of unit tests for functions in wp-includes/rewrite.php
  *
- * @group rewrite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
 class Tests_Rewrite extends WP_UnitTestCase {
 	private $home_url;
 
@@ -36,8 +36,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16840
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16840' )]
 	public function test_add_rule() {
 		global $wp_rewrite;
 
@@ -54,8 +54,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16840
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16840' )]
 	public function test_add_rule_redirect_array() {
 		global $wp_rewrite;
 
@@ -78,8 +78,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16840
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16840' )]
 	public function test_add_rule_top() {
 		global $wp_rewrite;
 
@@ -130,10 +130,10 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35531
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35531' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_url_to_postid_of_http_site_when_current_site_uses_https() {
 		$_SERVER['HTTPS'] = 'on';
 
@@ -256,8 +256,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::url_to_postid
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'url_to_postid' )]
 	public function test_url_to_postid_url_has_only_path() {
 		$this->assertSame( 0, url_to_postid( '/example/' ) );
 	}
@@ -268,15 +268,15 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	 * A 'www.' elsewhere in the host belongs to a different domain, which an attacker
 	 * can register: stripping it everywhere makes 'exwww.ample.com' match 'example.com'.
 	 *
-	 * @ticket 65016
 	 *
-	 * @covers ::url_to_postid
 	 *
-	 * @dataProvider data_url_to_postid_host_matching
 	 *
 	 * @param string $host     Host of the URL to resolve.
 	 * @param bool   $is_local Whether the host should be treated as this site.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65016' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_url_to_postid_host_matching' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'url_to_postid' )]
 	public function test_url_to_postid_matches_www_prefix_only( $host, $is_local ) {
 		update_option( 'home', 'https://example.com' );
 		update_option( 'siteurl', 'https://example.com' );
@@ -293,7 +293,7 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_url_to_postid_host_matching() {
+	public static function data_url_to_postid_host_matching() {
 		return array(
 			'the site host'              => array( 'example.com', true ),
 			'the site host with www'     => array( 'www.example.com', true ),
@@ -305,8 +305,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::url_to_postid
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'url_to_postid' )]
 	public function test_url_to_postid_home_has_only_path() {
 		update_option( 'home', home_url( '/example/' ) );
 
@@ -330,8 +330,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30438
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30438' )]
 	public function test_parse_request_home_path() {
 		$home_url = home_url( '/path/' );
 		update_option( 'home', $home_url );
@@ -350,8 +350,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30438
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30438' )]
 	public function test_parse_request_home_path_with_regex_character() {
 		$home_url       = home_url( '/ma.ch/' );
 		$not_a_home_url = home_url( '/match/' );
@@ -387,8 +387,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30018
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30018' )]
 	public function test_parse_request_home_path_non_public_type() {
 		register_post_type( 'foo', array( 'public' => false ) );
 
@@ -440,8 +440,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	/**
 	 * Reveals bug introduced in WP 3.0
 	 *
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_url_to_postid_ms_home_url_collision() {
 		$blog_id = self::factory()->blog->create( array( 'path' => '/example' ) );
 		switch_to_blog( $blog_id );
@@ -461,8 +461,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21970
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21970' )]
 	public function test_url_to_postid_with_post_slug_that_clashes_with_a_trashed_page() {
 		$this->set_permalink_structure( '/%postname%/' );
 
@@ -478,8 +478,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34971
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34971' )]
 	public function test_url_to_postid_static_front_page() {
 		$post_id = self::factory()->post->create( array( 'post_type' => 'page' ) );
 
@@ -498,8 +498,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39373
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39373' )]
 	public function test_url_to_postid_should_bail_when_host_does_not_match() {
 		$this->set_permalink_structure( '/%postname%/' );
 
@@ -512,8 +512,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21970
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21970' )]
 	public function test_parse_request_with_post_slug_that_clashes_with_a_trashed_page() {
 		$this->set_permalink_structure( '/%postname%/' );
 
@@ -532,8 +532,8 @@ class Tests_Rewrite extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29107
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29107' )]
 	public function test_flush_rules_does_not_delete_option() {
 		$this->set_permalink_structure( '' );
 

@@ -3,10 +3,10 @@
 /**
  * Tests for the comment_time() function.
  *
- * @group comment
  *
- * @covers ::comment_time
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'comment_time' )]
 class Tests_Comment_CommentTime extends WP_UnitTestCase {
 
 	/**
@@ -47,12 +47,12 @@ class Tests_Comment_CommentTime extends WP_UnitTestCase {
 	/**
 	 * Tests that comment_time() displays the same value that get_comment_time() returns.
 	 *
-	 * @ticket 58064
 	 *
-	 * @dataProvider data_should_output_the_same_value_that_get_comment_time_returns
 	 *
 	 * @param string $format PHP date format.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58064' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_output_the_same_value_that_get_comment_time_returns' )]
 	public function test_should_output_the_same_value_that_get_comment_time_returns( $format ) {
 		$expected = get_comment_time( $format, false, true, self::$comment_id );
 
@@ -68,7 +68,7 @@ class Tests_Comment_CommentTime extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_output_the_same_value_that_get_comment_time_returns() {
+	public static function data_should_output_the_same_value_that_get_comment_time_returns() {
 		return array(
 			'an empty format'   => array(
 				'format' => '',
@@ -83,8 +83,8 @@ class Tests_Comment_CommentTime extends WP_UnitTestCase {
 	 * Tests that comment_time() defaults to the global comment when comment ID
 	 * is not provided.
 	 *
-	 * @ticket 58064
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58064' )]
 	public function test_should_default_to_the_global_comment_when_comment_id_is_not_provided() {
 		global $comment;
 
@@ -108,8 +108,8 @@ class Tests_Comment_CommentTime extends WP_UnitTestCase {
 	 * Tests that comment_time() displays an empty string when global comment is not set
 	 * and comment ID is not provided.
 	 *
-	 * @ticket 58064
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58064' )]
 	public function test_should_output_an_empty_string_when_global_comment_is_not_set_and_comment_id_is_not_provided() {
 		global $comment;
 

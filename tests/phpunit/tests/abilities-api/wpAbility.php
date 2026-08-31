@@ -3,10 +3,14 @@
 /**
  * Tests for the abilities registry functionality.
  *
- * @covers WP_Ability
  *
- * @group abilities-api
  */
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'abilities-api' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Ability::class )]
 class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 
 	public static $test_ability_name       = 'test/calculator';
@@ -51,11 +55,11 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Direct instantiation of WP_Ability with invalid properties should throw an exception.
 	 *
-	 * @ticket 64098
 	 *
-	 * @covers WP_Ability::__construct
-	 * @covers WP_Ability::prepare_properties
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', '__construct' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_wp_ability_invalid_properties_throws_exception() {
 		$this->expectException( InvalidArgumentException::class );
 		new WP_Ability(
@@ -70,9 +74,10 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 
 	/*
 	 * Tests that getting non-existing metadata item returns default value.
-	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', '__construct' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'prepare_properties' )]
 	public function test_meta_get_non_existing_item_returns_default() {
 		$ability = new WP_Ability( self::$test_ability_name, self::$test_ability_properties );
 
@@ -85,8 +90,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that getting non-existing metadata item with custom default returns that default.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_meta_get_non_existing_item_with_custom_default() {
 		$ability = new WP_Ability( self::$test_ability_name, self::$test_ability_properties );
 
@@ -100,8 +105,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests getting all annotations when selective overrides are applied.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_merged_annotations_from_meta() {
 		$ability = new WP_Ability( self::$test_ability_name, self::$test_ability_properties );
 
@@ -119,8 +124,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests getting default annotations when not provided.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_default_annotations_from_meta() {
 		$args = self::$test_ability_properties;
 		unset( $args['meta']['annotations'] );
@@ -140,8 +145,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests getting all annotations when values overridden.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_get_overridden_annotations_from_meta() {
 		$annotations = array(
 			'readonly'    => true,
@@ -165,8 +170,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that invalid `annotations` value throws an exception.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_annotations_from_meta_throws_exception() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -186,8 +191,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that `show_in_rest` metadata defaults to false when not provided.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_meta_show_in_rest_defaults_to_false() {
 		$ability = new WP_Ability( self::$test_ability_name, self::$test_ability_properties );
 
@@ -200,8 +205,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that `show_in_rest` metadata can be set to true.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_meta_show_in_rest_can_be_set_to_true() {
 		$args    = array_merge(
 			self::$test_ability_properties,
@@ -222,8 +227,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that `show_in_rest` can be set to false.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_show_in_rest_can_be_set_to_false() {
 		$args    = array_merge(
 			self::$test_ability_properties,
@@ -244,8 +249,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that invalid `show_in_rest` value throws an exception.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_show_in_rest_throws_exception() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -265,8 +270,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that `public` metadata seeds `show_in_rest` to true when it is not set explicitly.
 	 *
-	 * @ticket 65568
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65568' )]
 	public function test_meta_public_true_defaults_show_in_rest_to_true() {
 		$args    = array_merge(
 			self::$test_ability_properties,
@@ -291,8 +296,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that an explicit `show_in_rest` value of false wins over `public` set to true.
 	 *
-	 * @ticket 65568
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65568' )]
 	public function test_meta_explicit_show_in_rest_false_wins_over_public_true() {
 		$args    = array_merge(
 			self::$test_ability_properties,
@@ -314,8 +319,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that `public` metadata defaults to false when not provided.
 	 *
-	 * @ticket 65568
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65568' )]
 	public function test_meta_public_defaults_to_false_when_unset() {
 		$ability = new WP_Ability( self::$test_ability_name, self::$test_ability_properties );
 
@@ -337,8 +342,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that a null `public` value is treated as unset.
 	 *
-	 * @ticket 65568
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65568' )]
 	public function test_meta_public_null_is_treated_as_unset() {
 		$args    = array_merge(
 			self::$test_ability_properties,
@@ -363,8 +368,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that invalid `public` value throws an exception.
 	 *
-	 * @ticket 65568
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65568' )]
 	public function test_meta_public_throws_exception_for_non_boolean() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -386,7 +391,7 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{0: array, 1: callable, 2: mixed, 3: mixed}> Data sets with different configurations.
 	 */
-	public function data_execute_input() {
+	public static function data_execute_input() {
 		return array(
 			'null input'    => array(
 				array(
@@ -492,15 +497,15 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests the execution of the ability.
 	 *
-	 * @ticket 64098
 	 *
-	 * @dataProvider data_execute_input
 	 *
 	 * @param array    $input_schema      The input schema for the ability.
 	 * @param callable $execute_callback  The execute callback for the ability.
 	 * @param mixed    $input             The input to pass to the execute method.
 	 * @param mixed    $result            The expected result from the execute method.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_execute_input' )]
 	public function test_execute_input( $input_schema, $execute_callback, $input, $result ) {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -524,7 +529,7 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{0: array, 1: mixed, 2: bool}> Data sets.
 	 */
-	public function data_validate_input_top_level_required() {
+	public static function data_validate_input_top_level_required() {
 		$required_true   = array(
 			'type'     => 'string',
 			'required' => true,
@@ -581,16 +586,16 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * `null` value acceptable. For an object root type, a draft-04 `required` array
 	 * of property names is honored and enforces the presence of those properties.
 	 *
-	 * @ticket 64955
 	 *
-	 * @covers WP_Ability::validate_input
 	 *
-	 * @dataProvider data_validate_input_top_level_required
 	 *
 	 * @param array $input_schema The input schema under test.
 	 * @param mixed $input        The input value to validate.
 	 * @param bool  $is_valid     Whether the input is expected to pass validation.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64955' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_validate_input_top_level_required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Ability', 'validate_input' )]
 	public function test_validate_input_top_level_required( $input_schema, $input, $is_valid ) {
 		$ability = new WP_Ability(
 			self::$test_ability_name,
@@ -634,7 +639,7 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{0: callable}> Data sets with different execute callbacks.
 	 */
-	public function data_execute_callback() {
+	public static function data_execute_callback() {
 		return array(
 			'function name string'       => array(
 				'strlen',
@@ -651,7 +656,7 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 				array( 'Tests_Abilities_API_WpAbility', 'my_static_execute_callback' ),
 			),
 			'object method'              => array(
-				array( $this, 'my_instance_execute_callback' ),
+				array( 'test_case_method' => 'my_instance_execute_callback' ),
 			),
 		);
 	}
@@ -659,13 +664,17 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests the execution of the ability with different types of callbacks.
 	 *
-	 * @ticket 64098
 	 *
-	 * @dataProvider data_execute_callback
 	 *
 	 * @param callable $execute_callback The execute callback to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_execute_callback' )]
 	public function test_execute_with_different_callbacks( $execute_callback ) {
+		if ( is_array( $execute_callback ) && isset( $execute_callback['test_case_method'] ) ) {
+			$execute_callback = array( $this, 'my_instance_execute_callback' );
+		}
+
 		$args = array_merge(
 			self::$test_ability_properties,
 			array(
@@ -685,8 +694,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests the execution of the ability with no input.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_execute_no_input() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -706,8 +715,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * Tests that an exception thrown by the execute callback is converted to a WP_Error
 	 * instead of being propagated as an uncaught throwable.
 	 *
-	 * @ticket 65058
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65058' )]
 	public function test_execute_catches_callback_exception() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -730,8 +739,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * Tests that an exception thrown by the permission callback is converted to a WP_Error
 	 * instead of being propagated as an uncaught throwable.
 	 *
-	 * @ticket 65058
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65058' )]
 	public function test_check_permissions_catches_callback_exception() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -753,8 +762,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that before_execute_ability action is fired with correct parameters.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_before_execute_ability_action() {
 		$action_ability_name = null;
 		$action_input        = null;
@@ -796,8 +805,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that before_execute_ability action is fired with null input when no input schema is defined.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_before_execute_ability_action_no_input() {
 		$action_ability_name = null;
 		$action_input        = null;
@@ -835,8 +844,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that after_execute_ability action is fired with correct parameters.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_after_execute_ability_action() {
 		$action_ability_name = null;
 		$action_input        = null;
@@ -881,8 +890,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that after_execute_ability action is fired with null input when no input schema is defined.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_after_execute_ability_action_no_input() {
 		$action_ability_name = null;
 		$action_input        = null;
@@ -924,8 +933,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that neither action is fired when execution fails due to permission issues.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_actions_not_fired_on_permission_failure() {
 		$before_action_fired = false;
 		$after_action_fired  = false;
@@ -964,8 +973,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that after_execute_ability action is not fired when execution callback returns WP_Error.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_after_action_not_fired_on_execution_error() {
 		$before_action_fired = false;
 		$after_action_fired  = false;
@@ -1004,8 +1013,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that after_execute_ability action is not fired when output validation fails.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_after_action_not_fired_on_output_validation_error() {
 		$before_action_fired = false;
 		$after_action_fired  = false;
@@ -1049,8 +1058,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * Tests that the wp_ability_normalize_input filter can transform input and receives the
 	 * expected ability name and instance (verified via args-as-guards on the transformation).
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_normalize_input_filter_can_transform_input() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1089,8 +1098,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that returning a WP_Error from wp_ability_normalize_input halts execution.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_normalize_input_filter_wp_error_halts_execution() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1124,8 +1133,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * Tests that the wp_ability_permission_result filter can grant permission that the
 	 * callback denied, with the filter's args verified via args-as-guards.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_permission_result_filter_can_grant_permission() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1170,8 +1179,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that the wp_ability_permission_result filter can deny permission granted by the callback.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_permission_result_filter_can_deny_permission() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1204,8 +1213,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * Tests that the wp_ability_permission_result filter can convert a WP_Error denial from the
 	 * callback into a grant, proving the filter receives the WP_Error verbatim.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_permission_result_filter_can_convert_wp_error_to_grant() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1240,8 +1249,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * Tests that the wp_ability_permission_result filter fires when check_permissions() is
 	 * called directly (not via execute()).
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_permission_result_filter_fires_on_direct_check_permissions_call() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1270,8 +1279,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * Tests that a non-bool, non-WP_Error return from the wp_ability_permission_result filter is
 	 * coerced to false so check_permissions() honors its documented bool|WP_Error return type.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_permission_result_filter_invalid_value_coerced_to_false() {
 		$filter = static function () {
 			return 'not-a-bool';
@@ -1293,8 +1302,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * surface a WP_Error; receiving the short-circuit value proves the bypass. Filter args
 	 * are verified via args-as-guards on the short-circuit value.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_pre_execute_ability_filter_short_circuits_pipeline() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1332,8 +1341,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that returning the default value from wp_pre_execute_ability lets the pipeline run.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_pre_execute_ability_filter_default_value_runs_pipeline() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1361,8 +1370,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that returning null explicitly from wp_pre_execute_ability short-circuits with null.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_pre_execute_ability_filter_null_short_circuits() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1395,8 +1404,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * short-circuit value, not confused with the WP_Filter_Sentinel default. This proves the
 	 * sentinel disambiguates arbitrary object returns.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_pre_execute_ability_filter_object_short_circuits() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1428,8 +1437,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that returning a WP_Error from wp_pre_execute_ability short-circuits with the error.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_pre_execute_ability_filter_wp_error_short_circuits() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1459,8 +1468,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * Tests that the wp_ability_execute_result filter can transform the result, with all
 	 * filter args verified via args-as-guards.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_execute_result_filter_can_transform_result() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1499,8 +1508,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * Tests that the wp_ability_execute_result filter can repair an invalid execute result so
 	 * output validation passes — also proves the filter runs before output validation.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_execute_result_filter_can_fix_invalid_output() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1528,8 +1537,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that the wp_ability_execute_result filter runs before the wp_after_execute_ability action.
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_execute_result_filter_runs_before_after_execute_action() {
 		$order = array();
 
@@ -1567,8 +1576,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * Tests that the wp_ability_execute_result filter receives a WP_Error from the execute
 	 * callback and can pass it through (verified via args-as-guards on the WP_Error code).
 	 *
-	 * @ticket 64989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64989' )]
 	public function test_execute_result_filter_receives_wp_error_from_do_execute() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1600,8 +1609,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests wp_ability_validate_input filter receives all parameters.
 	 *
-	 * @ticket 64311
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64311' )]
 	public function test_validate_input_filter_receives_all_parameters() {
 		$captured = array();
 
@@ -1639,8 +1648,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests wp_ability_validate_input filter can override validation failure.
 	 *
-	 * @ticket 64311
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64311' )]
 	public function test_validate_input_filter_overrides_validation_failure() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1677,8 +1686,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests wp_ability_validate_input filter receives WP_Error on validation failure.
 	 *
-	 * @ticket 64311
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64311' )]
 	public function test_validate_input_filter_receives_error_on_invalid_input() {
 		$error_code = null;
 
@@ -1716,8 +1725,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests wp_ability_validate_input filter can replace error with custom error.
 	 *
-	 * @ticket 64311
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64311' )]
 	public function test_validate_input_filter_replaces_error_with_custom() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1751,8 +1760,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests wp_ability_validate_output filter receives all parameters.
 	 *
-	 * @ticket 64311
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64311' )]
 	public function test_validate_output_filter_receives_all_parameters() {
 		$captured = array();
 
@@ -1790,8 +1799,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests wp_ability_validate_output filter can override validation failure.
 	 *
-	 * @ticket 64311
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64311' )]
 	public function test_validate_output_filter_overrides_validation_failure() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1824,8 +1833,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests wp_ability_validate_output filter receives WP_Error on validation failure.
 	 *
-	 * @ticket 64311
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64311' )]
 	public function test_validate_output_filter_receives_error_on_invalid_output() {
 		$error_code = null;
 
@@ -1863,8 +1872,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests wp_ability_validate_output filter can replace error with custom error.
 	 *
-	 * @ticket 64311
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64311' )]
 	public function test_validate_output_filter_replaces_error_with_custom() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1898,8 +1907,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_ability_invoked action fires with correct parameters and raw input before normalization.
 	 *
-	 * @ticket 65248
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65248' )]
 	public function test_ability_invoked_action_fires_with_correct_params() {
 		$args = array_merge(
 			self::$test_ability_properties,
@@ -1930,8 +1939,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_ability_invoked action fires when execution is short-circuited.
 	 *
-	 * @ticket 65248
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65248' )]
 	public function test_ability_invoked_action_fires_on_pre_execute_short_circuit() {
 		$action = new MockAction();
 		add_action( 'wp_ability_invoked', array( $action, 'action' ) );
@@ -1952,8 +1961,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_ability_invoked action fires on permission failure.
 	 *
-	 * @ticket 65248
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65248' )]
 	public function test_ability_invoked_action_fires_on_permission_failure() {
 		$action = new MockAction();
 		add_action( 'wp_ability_invoked', array( $action, 'action' ) );
@@ -1977,8 +1986,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_ability_invoked action fires on input validation failure.
 	 *
-	 * @ticket 65248
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65248' )]
 	public function test_ability_invoked_action_fires_on_validation_failure() {
 		$action = new MockAction();
 		add_action( 'wp_ability_invoked', array( $action, 'action' ) );
@@ -2012,8 +2021,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * by the clients that consume the schema anyway. Custom validation belongs in
 	 * the `wp_ability_validate_input` filter.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_validate_input_ignores_schema_validate_callback() {
 		$callback_invoked = false;
 
@@ -2047,8 +2056,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * schema callback never runs. Custom output validation belongs in the
 	 * `wp_ability_validate_output` filter.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_validate_output_ignores_schema_validate_callback() {
 		$callback_invoked = false;
 
@@ -2086,8 +2095,8 @@ class Tests_Abilities_API_WpAbility extends WP_UnitTestCase {
 	 * rejected rather than coerced. This is the easiest REST assumption to carry
 	 * over by mistake, so it is pinned explicitly.
 	 *
-	 * @ticket 64098
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64098' )]
 	public function test_execute_ignores_schema_sanitize_callback() {
 		$callback_invoked = false;
 

@@ -6,9 +6,9 @@
  * This exercises both query.php and rewrite.php: urls are fed through the rewrite code,
  * then we test the effects of each url on the wp_query object.
  *
- * @group query
- * @group rewrite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
 class Tests_Query_Conditionals extends WP_UnitTestCase {
 
 	protected $page_ids;
@@ -490,8 +490,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 13961
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '13961' )]
 	public function test_search_encoded_chars() {
 		$this->go_to( '/search/F%C3%BCnf%2Bbar/' );
 		$this->assertSame( get_query_var( 's' ), 'Fünf+bar' );
@@ -907,8 +907,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16802
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16802' )]
 	public function test_is_single_with_parent() {
 		// Use custom hierarchical post type.
 		$post_type = 'test_hierarchical';
@@ -961,8 +961,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24674
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24674' )]
 	public function test_is_single_with_slug_that_begins_with_a_number_that_clashes_with_another_post_id() {
 		$p1 = self::factory()->post->create();
 
@@ -984,8 +984,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24612
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24612' )]
 	public function test_is_single_with_slug_that_clashes_with_attachment() {
 		$this->set_permalink_structure( '/%postname%/' );
 
@@ -1014,8 +1014,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38225
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38225' )]
 	public function test_is_single_with_attachment() {
 		$post_id = self::factory()->post->create();
 
@@ -1054,8 +1054,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16802
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16802' )]
 	public function test_is_page_with_parent() {
 		$parent_id = self::factory()->post->create(
 			array(
@@ -1109,8 +1109,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24674
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24674' )]
 	public function test_is_attachment_with_slug_that_begins_with_a_number_that_clashes_with_a_page_ID() {
 		$p1 = self::factory()->post->create( array( 'post_type' => 'attachment' ) );
 
@@ -1133,8 +1133,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24674
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24674' )]
 	public function test_is_author_with_nicename_that_begins_with_a_number_that_clashes_with_another_author_id() {
 		$u1 = self::$user_a_id;
 
@@ -1156,8 +1156,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24674
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24674' )]
 	public function test_is_category_with_slug_that_begins_with_a_number_that_clashes_with_another_category_id() {
 		$c1 = self::factory()->category->create();
 
@@ -1179,8 +1179,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24674
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24674' )]
 	public function test_is_tag_with_slug_that_begins_with_a_number_that_clashes_with_another_tag_id() {
 		$t1 = self::factory()->tag->create();
 
@@ -1202,8 +1202,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24674
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24674' )]
 	public function test_is_page_with_page_id_zero_and_random_page_slug() {
 		$post_id = self::factory()->post->create( array( 'post_type' => 'page' ) );
 		$this->go_to( "/?page_id=$post_id" );
@@ -1224,8 +1224,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24674
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24674' )]
 	public function test_is_page_with_page_slug_that_begins_with_a_number_that_clashes_with_a_page_ID() {
 		$p1 = self::factory()->post->create( array( 'post_type' => 'page' ) );
 
@@ -1255,8 +1255,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31271
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31271' )]
 	public function test_is_page_template_default() {
 		$post_id = self::factory()->post->create( array( 'post_type' => 'page' ) );
 		$this->go_to( "/?page_id=$post_id" );
@@ -1265,8 +1265,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31271
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31271' )]
 	public function test_is_page_template_array() {
 		$post_id = self::factory()->post->create( array( 'post_type' => 'page' ) );
 		update_post_meta( $post_id, '_wp_page_template', 'example.php' );
@@ -1276,8 +1276,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18375
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_is_page_template_other_post_type() {
 		$post_id = self::factory()->post->create( array( 'post_type' => 'post' ) );
 		update_post_meta( $post_id, '_wp_page_template', 'example.php' );
@@ -1287,8 +1287,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39211
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39211' )]
 	public function test_is_page_template_not_singular() {
 		global $wpdb;
 
@@ -1313,8 +1313,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_attachment_should_not_match_numeric_id_to_post_title_beginning_with_id() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -1338,8 +1338,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_attachment_should_not_match_numeric_id_to_post_name_beginning_with_id() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -1363,8 +1363,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_author_should_not_match_numeric_id_to_nickname_beginning_with_id() {
 		$u1 = self::$user_a_id;
 		$u2 = self::factory()->user->create(
@@ -1381,8 +1381,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_author_should_not_match_numeric_id_to_user_nicename_beginning_with_id() {
 		$u1 = self::$user_a_id;
 		$u2 = self::factory()->user->create(
@@ -1399,8 +1399,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_category_should_not_match_numeric_id_to_name_beginning_with_id() {
 		$t1 = self::factory()->term->create(
 			array(
@@ -1424,8 +1424,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_category_should_not_match_numeric_id_to_slug_beginning_with_id() {
 		$t1 = self::factory()->term->create(
 			array(
@@ -1449,8 +1449,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_tag_should_not_match_numeric_id_to_name_beginning_with_id() {
 		$t1 = self::factory()->term->create(
 			array(
@@ -1474,8 +1474,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_tag_should_not_match_numeric_id_to_slug_beginning_with_id() {
 		$t1 = self::factory()->term->create(
 			array(
@@ -1499,8 +1499,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_page_should_not_match_numeric_id_to_post_title_beginning_with_id() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -1524,8 +1524,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_page_should_not_match_numeric_id_to_post_name_beginning_with_id() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -1549,8 +1549,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_single_should_not_match_numeric_id_to_post_title_beginning_with_id() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -1574,8 +1574,8 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35902' )]
 	public function test_is_single_should_not_match_numeric_id_to_post_name_beginning_with_id() {
 		$p1 = self::factory()->post->create(
 			array(
@@ -1599,9 +1599,9 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44005
-	 * @group privacy
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44005' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
 	public function test_is_privacy_policy() {
 		$page_id = self::factory()->post->create(
 			array(
@@ -1618,12 +1618,12 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55104
 	 *
-	 * @dataProvider data_conditional_tags_trigger_doing_it_wrong_and_return_false_if_wp_query_is_not_set
 	 *
 	 * @param string $function_name The name of the function to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55104' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_conditional_tags_trigger_doing_it_wrong_and_return_false_if_wp_query_is_not_set' )]
 	public function test_conditional_tags_trigger_doing_it_wrong_and_return_false_if_wp_query_is_not_set( $function_name ) {
 		unset( $GLOBALS['wp_query'] );
 
@@ -1641,7 +1641,7 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	/**
 	 * Data provider.
 	 */
-	public function data_conditional_tags_trigger_doing_it_wrong_and_return_false_if_wp_query_is_not_set() {
+	public static function data_conditional_tags_trigger_doing_it_wrong_and_return_false_if_wp_query_is_not_set() {
 		// Get the list of `is_*()` conditional tags.
 		$functions = array_filter(
 			get_class_methods( 'WP_Query' ),
@@ -1662,13 +1662,13 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55722
 	 *
-	 * @dataProvider data_loop_functions_do_not_trigger_a_fatal_error_if_wp_query_is_not_set
 	 *
 	 * @param string     $function_name The name of the function to test.
 	 * @param false|null $expected      Expected return value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55722' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_loop_functions_do_not_trigger_a_fatal_error_if_wp_query_is_not_set' )]
 	public function test_loop_functions_do_not_trigger_a_fatal_error_if_wp_query_is_not_set( $function_name, $expected ) {
 		unset( $GLOBALS['wp_query'] );
 
@@ -1683,7 +1683,7 @@ class Tests_Query_Conditionals extends WP_UnitTestCase {
 	 *     @type false|null $expected      Expected return value.
 	 * }
 	 */
-	public function data_loop_functions_do_not_trigger_a_fatal_error_if_wp_query_is_not_set() {
+	public static function data_loop_functions_do_not_trigger_a_fatal_error_if_wp_query_is_not_set() {
 		return array(
 			array( 'have_posts', false ),
 			array( 'in_the_loop', false ),

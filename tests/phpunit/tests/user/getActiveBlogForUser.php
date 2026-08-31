@@ -3,11 +3,11 @@
 /**
  * Tests specific to users in multisite.
  *
- * @group user
- * @group ms-required
- * @group ms-user
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-user' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_User_GetActiveBlogForUser extends WP_UnitTestCase {
 
 	public static $user_id = false;
@@ -24,8 +24,8 @@ class Tests_User_GetActiveBlogForUser extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38355
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38355' )]
 	public function test_get_active_blog_for_user_with_no_sites() {
 		$current_site_id = get_current_blog_id();
 
@@ -37,8 +37,8 @@ class Tests_User_GetActiveBlogForUser extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38355
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38355' )]
 	public function test_get_active_blog_for_user_with_primary_site() {
 		$site_id_one = self::factory()->blog->create( array( 'user_id' => self::$user_id ) );
 		$site_id_two = self::factory()->blog->create( array( 'user_id' => self::$user_id ) );
@@ -58,8 +58,8 @@ class Tests_User_GetActiveBlogForUser extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38355
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38355' )]
 	public function test_get_active_blog_for_user_without_primary_site() {
 		$sites           = get_blogs_of_user( self::$user_id );
 		$site_ids        = array_keys( $sites );
@@ -75,8 +75,8 @@ class Tests_User_GetActiveBlogForUser extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38355
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38355' )]
 	public function test_get_active_blog_for_user_with_spam_site() {
 		$current_site_id = get_current_blog_id();
 

@@ -5,10 +5,10 @@
  *
  * @since 6.2.0
  *
- * @group link
  *
- * @covers ::get_the_posts_navigation
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_posts_navigation' )]
 class Tests_Link_GetThePostsNavigation extends WP_UnitTestCase {
 
 	/**
@@ -24,15 +24,15 @@ class Tests_Link_GetThePostsNavigation extends WP_UnitTestCase {
 	 * Tests that get_the_posts_navigation() only includes the "Older posts" and "Newer" posts
 	 * links when appropriate.
 	 *
-	 * @ticket 55751
 	 *
-	 * @dataProvider data_get_the_posts_navigation
 	 *
 	 * @param int  $per_page  Posts per page to be queried.
 	 * @param int  $paged_num Pagination page number.
 	 * @param bool $older     Whether an "Older posts" link should be included.
 	 * @param bool $newer     Whether a "Newer posts" link should be included.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55751' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_the_posts_navigation' )]
 	public function test_get_the_posts_navigation( $per_page, $paged_num, $older, $newer ) {
 		global $wp_query, $paged;
 
@@ -76,31 +76,31 @@ class Tests_Link_GetThePostsNavigation extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_the_posts_navigation() {
+	public static function data_get_the_posts_navigation() {
 		return array(
 			'older posts'                 => array(
-				'post_per_page' => 1,
-				'paged_num'     => 1,
-				'older'         => true,
-				'newer'         => false,
+				'per_page'  => 1,
+				'paged_num' => 1,
+				'older'     => true,
+				'newer'     => false,
 			),
 			'newer posts'                 => array(
-				'post_per_page' => 1,
-				'paged_num'     => 3,
-				'older'         => false,
-				'newer'         => true,
+				'per_page'  => 1,
+				'paged_num' => 3,
+				'older'     => false,
+				'newer'     => true,
 			),
 			'newer posts and older posts' => array(
-				'post_per_page' => 1,
-				'paged_num'     => 2,
-				'older'         => true,
-				'newer'         => true,
+				'per_page'  => 1,
+				'paged_num' => 2,
+				'older'     => true,
+				'newer'     => true,
 			),
 			'empty posts'                 => array(
-				'post_per_page' => 3,
-				'paged_num'     => 1,
-				'older'         => false,
-				'newer'         => false,
+				'per_page'  => 3,
+				'paged_num' => 1,
+				'older'     => false,
+				'newer'     => false,
 			),
 		);
 	}

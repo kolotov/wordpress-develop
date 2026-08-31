@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group import
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_importers' )]
+#[\PHPUnit\Framework\Attributes\Group( 'import' )]
 class Tests_Import_Import extends WP_UnitTestCase {
 	/**
-	 * @covers ::get_importers
 	 */
 	public function test_ordering_of_importers() {
 		global $wp_importers;

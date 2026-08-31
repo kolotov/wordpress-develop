@@ -6,9 +6,9 @@
  * @subpackage UnitTests
  * @since 5.1.0
  *
- * @group privacy
- * @covers ::_wp_privacy_send_erasure_fulfillment_notification
  */
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_privacy_send_erasure_fulfillment_notification' )]
 class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitTestCase {
 	/**
 	 * Request ID.
@@ -101,8 +101,8 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	/**
 	 * The function should not send an email when the request ID does not exist.
 	 *
-	 * @ticket 44234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44234' )]
 	public function test_should_not_send_email_when_not_a_valid_request_id() {
 		_wp_privacy_send_erasure_fulfillment_notification( 1234567890 );
 
@@ -114,8 +114,8 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	/**
 	 * The function should not send an email when the ID passed does not correspond to a user request.
 	 *
-	 * @ticket 44234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44234' )]
 	public function test_should_not_send_email_when_not_a_user_request() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -132,8 +132,8 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	/**
 	 * The function should not send an email when the request is not completed.
 	 *
-	 * @ticket 44234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44234' )]
 	public function test_should_not_send_email_when_request_not_completed() {
 		wp_update_post(
 			array(
@@ -153,8 +153,8 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	/**
 	 * The function should send an email when a valid request ID is passed.
 	 *
-	 * @ticket 44234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44234' )]
 	public function test_should_send_email_no_privacy_policy() {
 
 		_wp_privacy_send_erasure_fulfillment_notification( self::$request_id );
@@ -174,8 +174,8 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	/**
 	 * The email should include a link to the site's privacy policy when set.
 	 *
-	 * @ticket 44234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44234' )]
 	public function test_should_send_email_with_privacy_policy() {
 		$privacy_policy = self::factory()->post->create(
 			array(
@@ -199,8 +199,8 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	/**
 	 * The function should send a fulfillment email only once.
 	 *
-	 * @ticket 44234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44234' )]
 	public function test_should_send_email_only_once() {
 		// First function call.
 		_wp_privacy_send_erasure_fulfillment_notification( self::$request_id );
@@ -227,8 +227,8 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	/**
 	 * The email address of the recipient of the fulfillment notification should be filterable.
 	 *
-	 * @ticket 44234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44234' )]
 	public function test_email_address_of_recipient_should_be_filterable() {
 		add_filter( 'user_erasure_fulfillment_email_to', array( $this, 'filter_email_address' ) );
 		_wp_privacy_send_erasure_fulfillment_notification( self::$request_id );
@@ -253,8 +253,8 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	/**
 	 * The email subject of the fulfillment notification should be filterable.
 	 *
-	 * @ticket 44234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44234' )]
 	public function test_email_subject_should_be_filterable() {
 		add_filter( 'user_erasure_fulfillment_email_subject', array( $this, 'filter_email_subject' ) );
 		_wp_privacy_send_erasure_fulfillment_notification( self::$request_id );
@@ -279,8 +279,8 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	/**
 	 * The email body text of the fulfillment notification should be filterable.
 	 *
-	 * @ticket 44234
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44234' )]
 	public function test_email_body_text_should_be_filterable() {
 		add_filter( 'user_erasure_fulfillment_email_content', array( $this, 'filter_email_body_text' ) );
 		_wp_privacy_send_erasure_fulfillment_notification( self::$request_id );
@@ -307,8 +307,8 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	 *
 	 * @since 5.4.0
 	 *
-	 * @ticket 44501
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44501' )]
 	public function test_email_headers_should_be_filterable() {
 		add_filter( 'user_erasure_fulfillment_email_headers', array( $this, 'modify_email_headers' ) );
 		_wp_privacy_send_erasure_fulfillment_notification( self::$request_id );
@@ -338,9 +338,9 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	 * The function should respect the user locale settings when the site uses the default locale.
 	 *
 	 * @since 5.2.0
-	 * @ticket 44721
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44721' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_fulfillment_email_in_user_locale() {
 		update_user_meta( self::$request_user->ID, 'locale', 'es_ES' );
 
@@ -355,9 +355,9 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	 * uses the site's default locale, and the user has a different locale.
 	 *
 	 * @since 5.2.0
-	 * @ticket 44721
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44721' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_fulfillment_email_in_user_locale_when_site_is_not_en_us() {
 		update_option( 'WPLANG', 'es_ES' );
 		switch_to_locale( 'es_ES' );
@@ -376,9 +376,9 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	 * has a different selected locale, and the user uses the site's default locale.
 	 *
 	 * @since 5.2.0
-	 * @ticket 44721
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44721' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_fulfillment_email_in_user_locale_when_admin_and_site_have_different_locales() {
 		update_option( 'WPLANG', 'es_ES' );
 		switch_to_locale( 'es_ES' );
@@ -397,9 +397,9 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	 * administrator and the user use different locales.
 	 *
 	 * @since 5.2.0
-	 * @ticket 44721
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44721' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_fulfillment_email_in_user_locale_when_both_have_different_locales_than_site() {
 		update_option( 'WPLANG', 'es_ES' );
 		switch_to_locale( 'es_ES' );
@@ -420,9 +420,9 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	 * administrator does not use the site's locale.
 	 *
 	 * @since 5.2.0
-	 * @ticket 44721
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44721' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_fulfillment_email_in_site_locale() {
 		update_user_meta( self::$admin_user->ID, 'locale', 'es_ES' );
 		wp_set_current_user( self::$admin_user->ID );
@@ -446,9 +446,9 @@ class Tests_Privacy_wpPrivacySendErasureFulfillmentNotification extends WP_UnitT
 	 * unregistered user, and the administrator does not use the site's default locale.
 	 *
 	 * @since 5.2.0
-	 * @ticket 44721
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44721' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_fulfillment_email_in_site_locale_when_not_en_us_and_admin_has_different_locale() {
 		update_option( 'WPLANG', 'es_ES' );
 		switch_to_locale( 'es_ES' );

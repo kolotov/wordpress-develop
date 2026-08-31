@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getPost extends WP_XMLRPC_UnitTestCase {
 	public $post_data;
 	public $post_id;
@@ -120,8 +120,8 @@ class Tests_XMLRPC_wp_getPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21308
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21308' )]
 	public function test_valid_page() {
 		$this->make_user_by_role( 'editor' );
 

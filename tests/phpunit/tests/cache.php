@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group cache
  */
+#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
 class Tests_Cache extends WP_UnitTestCase {
 	public $cache = null;
 
@@ -28,11 +28,11 @@ class Tests_Cache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56198
 	 *
-	 * @covers WP_Object_Cache::is_valid_key
-	 * @dataProvider data_is_valid_key
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56198' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_valid_key' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Object_Cache', 'is_valid_key' )]
 	public function test_is_valid_key( $key, $valid ) {
 		if ( wp_using_ext_object_cache() ) {
 			$this->markTestSkipped( 'This test requires that an external object cache is not in use.' );
@@ -57,7 +57,7 @@ class Tests_Cache extends WP_UnitTestCase {
 	 *     @type bool  $valid Whether the key should be considered valid.
 	 * }
 	 */
-	public function data_is_valid_key() {
+	public static function data_is_valid_key() {
 		return array(
 			'false'          => array( false, false ),
 			'null'           => array( null, false ),
@@ -96,8 +96,8 @@ class Tests_Cache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20004
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20004' )]
 	public function test_add_get_null() {
 		$key = __FUNCTION__;
 		$val = null;
@@ -108,8 +108,8 @@ class Tests_Cache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20004
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20004' )]
 	public function test_add_get_false() {
 		$key = __FUNCTION__;
 		$val = false;
@@ -198,11 +198,11 @@ class Tests_Cache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 4476
-	 * @ticket 9773
 	 *
-	 * @covers ::wp_cache_flush_group
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '4476' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '9773' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_flush_group' )]
 	public function test_wp_cache_flush_group() {
 		$key = 'my-key';
 		$val = 'my-val';
@@ -294,8 +294,8 @@ class Tests_Cache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21327
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21327' )]
 	public function test_wp_cache_decr() {
 		$key = __FUNCTION__;
 
@@ -408,8 +408,8 @@ class Tests_Cache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54574' )]
 	public function test_wp_cache_add_multiple() {
 		$found = wp_cache_add_multiple(
 			array(
@@ -430,8 +430,8 @@ class Tests_Cache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54574' )]
 	public function test_wp_cache_set_multiple() {
 		$found = wp_cache_set_multiple(
 			array(
@@ -452,8 +452,8 @@ class Tests_Cache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20875
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20875' )]
 	public function test_wp_cache_get_multiple() {
 		wp_cache_set( 'foo1', 'bar', 'group1' );
 		wp_cache_set( 'foo2', 'bar', 'group1' );
@@ -471,8 +471,8 @@ class Tests_Cache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54574' )]
 	public function test_wp_cache_delete_multiple() {
 		wp_cache_set( 'foo1', 'bar', 'group1' );
 		wp_cache_set( 'foo2', 'bar', 'group1' );

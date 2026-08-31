@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+
 class Tests_Query_InvalidQueries extends WP_UnitTestCase {
 
 	/**
@@ -85,8 +86,8 @@ class Tests_Query_InvalidQueries extends WP_UnitTestCase {
 	/**
 	 * Test WP Query with an invalid post type.
 	 *
-	 * @ticket 48556
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48556' )]
 	public function test_unregistered_post_type_wp_query() {
 		global $wpdb;
 
@@ -100,8 +101,8 @@ class Tests_Query_InvalidQueries extends WP_UnitTestCase {
 	/**
 	 * Test WP Query with an invalid post type in a multiple post type query.
 	 *
-	 * @ticket 48556
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48556' )]
 	public function test_unregistered_post_type_wp_query_multiple_post_types() {
 		global $wpdb;
 
@@ -118,8 +119,8 @@ class Tests_Query_InvalidQueries extends WP_UnitTestCase {
 	/**
 	 * Test WP Query with an invalid post type specified in the URL.
 	 *
-	 * @ticket 48556
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48556' )]
 	public function test_unregistered_post_type_goto() {
 		global $wpdb, $wp_query;
 
@@ -163,9 +164,9 @@ class Tests_Query_InvalidQueries extends WP_UnitTestCase {
 	/**
 	 * Ensure a non-scalar page parameter does not throw a fatal error for trim().
 	 *
-	 * @ticket 56558
-	 * @covers WP_Query::get_posts
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56558' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'get_posts' )]
 	public function test_non_scalar_page_value() {
 		$query = new WP_Query(
 			array(

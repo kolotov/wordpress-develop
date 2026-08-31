@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @group taxonomy
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Term_WpDeleteTerm extends WP_UnitTestCase {
 	protected $deleted_term;
 	protected $object_ids;
 
 	/**
-	 * @ticket 33485
-	 * @ticket 35213
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33485' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '35213' )]
 	public function test_count_property_passed_to_filters_should_reflect_pre_deleted_term() {
 		register_taxonomy( 'wptests_tax', 'post' );
 

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @group functions
  *
- * @covers ::wp_cache_set_salted
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_cache_set_salted' )]
 class Tests_Functions_wpCacheSetSalted extends WP_UnitTestCase {
 
 	/**
 	 * Test that wp_cache_set_salted sets the data correctly.
 	 *
-	 * @ticket 59592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59592' )]
 	public function test_wp_cache_set_salted() {
 		$cache_key    = 'cache_key';
 		$cache_group  = 'query_data';
@@ -32,8 +32,8 @@ class Tests_Functions_wpCacheSetSalted extends WP_UnitTestCase {
 	/**
 	 * Test that wp_cache_set_salted sets the data with a salt.
 	 *
-	 * @ticket 59592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59592' )]
 	public function test_wp_cache_set_salted_array_salt() {
 		$cache_key    = 'cache_key';
 		$cache_group  = 'query_data';

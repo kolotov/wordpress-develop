@@ -12,10 +12,10 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  * @subpackage UnitTests
  * @since 3.4.0
  *
- * @group ajax
  *
- * @covers ::wp_ajax_wp_compression_test
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_wp_compression_test' )]
 class Tests_Ajax_wpAjaxWpCompressionTest extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -58,8 +58,8 @@ class Tests_Ajax_wpAjaxWpCompressionTest extends WP_Ajax_UnitTestCase {
 	/**
 	 * Fetch the test text (gzdeflate)
 	 *
-	 * @requires function gzdeflate
 	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'gzdeflate' )]
 	public function test_gzdeflate() {
 
 		// Become an administrator.
@@ -84,8 +84,8 @@ class Tests_Ajax_wpAjaxWpCompressionTest extends WP_Ajax_UnitTestCase {
 	/**
 	 * Fetch the test text (gzencode)
 	 *
-	 * @requires function gzencode
 	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'gzencode' )]
 	public function test_gzencode() {
 
 		// Become an administrator.

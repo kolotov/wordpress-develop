@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group post
- * @covers ::get_body_class
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_body_class' )]
 class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	protected $post_id;
 
@@ -13,8 +13,8 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30883
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_category_slugs() {
 		$cat_id1 = self::factory()->category->create( array( 'name' => 'Первая рубрика' ) );
 		$cat_id2 = self::factory()->category->create( array( 'name' => 'Вторая рубрика' ) );
@@ -32,8 +32,8 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30883
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_tag_slugs() {
 		$tag_id1 = self::factory()->tag->create( array( 'name' => 'Первая метка' ) );
 		$tag_id2 = self::factory()->tag->create( array( 'name' => 'Вторая метка' ) );
@@ -55,8 +55,8 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30883
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30883' )]
 	public function test_with_utf8_term_slugs() {
 		register_taxonomy( 'wptests_tax', 'post' );
 		$term_id1 = self::factory()->term->create(
@@ -94,9 +94,9 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35164
-	 * @ticket 36510
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35164' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '36510' )]
 	public function test_singular_body_classes() {
 		$post_id = self::factory()->post->create();
 		$this->go_to( get_permalink( $post_id ) );
@@ -142,8 +142,8 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18375
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_page_template_body_classes_attachment() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -164,8 +164,8 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18375
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18375' )]
 	public function test_page_template_body_classes_post() {
 		$post_id = self::factory()->post->create();
 
@@ -182,8 +182,8 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38225
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38225' )]
 	public function test_attachment_body_classes() {
 		$post_id = self::factory()->post->create();
 
@@ -205,8 +205,8 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38168
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38168' )]
 	public function test_custom_background_class_is_added_when_theme_supports_it() {
 		add_theme_support( 'custom-background', array( 'default-color', '#ffffff' ) );
 		set_theme_mod( 'background_color', '#000000' );
@@ -222,8 +222,8 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38168
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38168' )]
 	public function test_custom_background_class_is_not_added_when_theme_support_is_missing() {
 		set_theme_mod( 'background_color', '#000000' );
 
@@ -237,9 +237,9 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44005
-	 * @group privacy
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44005' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
 	public function test_privacy_policy_body_class() {
 		$page_id = self::factory()->post->create(
 			array(
@@ -262,8 +262,8 @@ class Tests_Post_GetBodyClass extends WP_UnitTestCase {
 	/**
 	 * Test theme-related body classes.
 	 *
-	 * @ticket 19736
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19736' )]
 	public function test_theme_body_classes() {
 		$original_theme = wp_get_theme();
 

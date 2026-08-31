@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group functions
- * @group query
  *
- * @covers ::wp
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp' )]
 class Tests_Functions_WP extends WP_UnitTestCase {
 
 	public function test_wp_sets_global_vars() {

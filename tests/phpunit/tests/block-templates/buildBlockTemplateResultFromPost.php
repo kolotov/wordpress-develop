@@ -3,9 +3,9 @@
 require_once __DIR__ . '/base.php';
 
 /**
- * @group block-templates
- * @covers ::_build_block_template_result_from_post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-templates' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_build_block_template_result_from_post' )]
 class Tests_Block_Templates_BuildBlockTemplateResultFromPost extends WP_Block_Templates_UnitTestCase {
 
 	/**
@@ -28,8 +28,8 @@ class Tests_Block_Templates_BuildBlockTemplateResultFromPost extends WP_Block_Te
 	}
 
 	/**
-	 * @ticket 54335
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54335' )]
 	public function test_should_build_template() {
 		$template = _build_block_template_result_from_post(
 			self::$template_post,
@@ -49,8 +49,8 @@ class Tests_Block_Templates_BuildBlockTemplateResultFromPost extends WP_Block_Te
 	}
 
 	/**
-	 * @ticket 54335
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54335' )]
 	public function test_should_build_template_part() {
 		$template_part = _build_block_template_result_from_post(
 			self::$template_part_post,
@@ -70,9 +70,9 @@ class Tests_Block_Templates_BuildBlockTemplateResultFromPost extends WP_Block_Te
 	}
 
 	/**
-	 * @ticket 59646
-	 * @ticket 60506
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59646' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
 	public function test_should_inject_hooked_block_into_template() {
 		register_block_type(
 			'tests/my-block',
@@ -91,9 +91,9 @@ class Tests_Block_Templates_BuildBlockTemplateResultFromPost extends WP_Block_Te
 	}
 
 	/**
-	 * @ticket 59646
-	 * @ticket 60506
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59646' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
 	public function test_should_inject_hooked_block_into_template_part() {
 		register_block_type(
 			'tests/my-block',
@@ -112,10 +112,10 @@ class Tests_Block_Templates_BuildBlockTemplateResultFromPost extends WP_Block_Te
 	}
 
 	/**
-	 * @ticket 59646
-	 * @ticket 60506
-	 * @ticket 60854
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59646' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60854' )]
 	public function test_should_injected_hooked_block_into_template_part_first_child() {
 		register_block_type(
 			'tests/my-block',
@@ -134,10 +134,10 @@ class Tests_Block_Templates_BuildBlockTemplateResultFromPost extends WP_Block_Te
 	}
 
 	/**
-	 * @ticket 59646
-	 * @ticket 60506
-	 * @ticket 60854
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59646' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60854' )]
 	public function test_should_injected_hooked_block_into_template_part_last_child() {
 		register_block_type(
 			'tests/my-block',
@@ -156,9 +156,9 @@ class Tests_Block_Templates_BuildBlockTemplateResultFromPost extends WP_Block_Te
 	}
 
 	/**
-	 * @ticket 59646
-	 * @ticket 60506
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59646' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
 	public function test_should_not_inject_ignored_hooked_block_into_template() {
 		register_block_type(
 			'tests/ignored',
@@ -177,9 +177,9 @@ class Tests_Block_Templates_BuildBlockTemplateResultFromPost extends WP_Block_Te
 	}
 
 	/**
-	 * @ticket 59646
-	 * @ticket 60506
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59646' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
 	public function test_should_not_inject_ignored_hooked_block_into_template_part() {
 		register_block_type(
 			'tests/ignored',

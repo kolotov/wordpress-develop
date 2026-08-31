@@ -1,9 +1,9 @@
 <?php
 /**
- * @group canonical
- * @group rewrite
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'canonical' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Canonical_Paged extends WP_Canonical_UnitTestCase {
 
 	public function test_redirect_canonical_with_nextpage_pagination() {

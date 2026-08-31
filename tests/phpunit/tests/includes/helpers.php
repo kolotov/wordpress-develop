@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @group phpunit
  */
+#[\PHPUnit\Framework\Attributes\Group( 'phpunit' )]
 class Tests_TestHelpers extends WP_UnitTestCase {
 	/**
-	 * @ticket 30522
 	 */
-	public function data_assertSameSets() {
+	#[\PHPUnit\Framework\Attributes\Ticket( '30522' )]
+	public static function data_assertSameSets() {
 		return array(
 			array(
 				array( 1, 2, 3 ), // Test expected.
@@ -48,14 +48,14 @@ class Tests_TestHelpers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_assertSameSets
-	 * @ticket 30522
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_assertSameSets' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '30522' )]
 	public function test_assertSameSets( $expected, $actual, $exception ) {
 		if ( $exception ) {
 			try {
 				$this->assertSameSets( $expected, $actual );
-			} catch ( PHPUnit_Framework_ExpectationFailedException $ex ) {
+			} catch ( PHPUnit\Framework\ExpectationFailedException $ex ) {
 				return;
 			}
 
@@ -66,9 +66,9 @@ class Tests_TestHelpers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30522
 	 */
-	public function data_assertSameSetsWithIndex() {
+	#[\PHPUnit\Framework\Attributes\Ticket( '30522' )]
+	public static function data_assertSameSetsWithIndex() {
 		return array(
 			array(
 				array( 1, 2, 3 ), // Test expected.
@@ -204,14 +204,14 @@ class Tests_TestHelpers extends WP_UnitTestCase {
 		);
 	}
 	/**
-	 * @dataProvider data_assertSameSetsWithIndex
-	 * @ticket 30522
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_assertSameSetsWithIndex' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '30522' )]
 	public function test_assertSameSetsWithIndex( $expected, $actual, $exception ) {
 		if ( $exception ) {
 			try {
 				$this->assertSameSetsWithIndex( $expected, $actual );
-			} catch ( PHPUnit_Framework_ExpectationFailedException $ex ) {
+			} catch ( PHPUnit\Framework\ExpectationFailedException $ex ) {
 				return;
 			}
 
@@ -231,24 +231,24 @@ class Tests_TestHelpers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28486
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28486' )]
 	public function test_setExpectedDeprecated() {
 		$this->setExpectedDeprecated( 'Tests_TestHelpers::mock_deprecated' );
 		$this->assertTrue( $this->mock_deprecated() );
 	}
 
 	/**
-	 * @ticket 28486
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28486' )]
 	public function test_setExpectedIncorrectUsage() {
 		$this->setExpectedIncorrectUsage( 'Tests_TestHelpers::mock_incorrect_usage' );
 		$this->assertTrue( $this->mock_incorrect_usage() );
 	}
 
 	/**
-	 * @ticket 31417
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31417' )]
 	public function test_go_to_should_go_to_home_page_when_passing_the_untrailingslashed_home_url() {
 		$this->assertFalse( is_home() );
 		$home = untrailingslashit( get_option( 'home' ) );
@@ -267,8 +267,8 @@ class Tests_TestHelpers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36166
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36166' )]
 	public function test_die_handler_should_handle_wp_error() {
 		$this->expectException( 'WPDieException' );
 
@@ -276,8 +276,8 @@ class Tests_TestHelpers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46813
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46813' )]
 	public function test_die_handler_should_not_cause_doing_it_wrong_notice_without_wp_query_set() {
 		$this->expectException( 'WPDieException' );
 		unset( $GLOBALS['wp_query'] );
@@ -288,9 +288,9 @@ class Tests_TestHelpers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45933
-	 * @dataProvider data_die_process_input
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45933' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_die_process_input' )]
 	public function test_die_process_input( $input, $expected ) {
 		$defaults = array(
 			'message' => '',
@@ -316,7 +316,7 @@ class Tests_TestHelpers extends WP_UnitTestCase {
 		$this->assertSameSets( $expected['args'], array_intersect_key( $args, $expected['args'] ) );
 	}
 
-	public function data_die_process_input() {
+	public static function data_die_process_input() {
 		return array(
 			array(
 				array(
@@ -393,8 +393,8 @@ class Tests_TestHelpers extends WP_UnitTestCase {
 	/**
 	 * This test is just a setup for the one that follows.
 	 *
-	 * @ticket 38196
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38196' )]
 	public function test_setup_postdata_globals_should_be_reset_on_teardown__setup() {
 		$post                = self::factory()->post->create_and_get();
 		$GLOBALS['wp_query'] = new WP_Query();
@@ -403,8 +403,8 @@ class Tests_TestHelpers extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38196
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38196' )]
 	public function test_setup_postdata_globals_should_be_reset_on_teardown() {
 		$globals = array( 'post', 'id', 'authordata', 'currentday', 'currentmonth', 'page', 'pages', 'multipage', 'more', 'numpages' );
 

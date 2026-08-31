@@ -3,21 +3,47 @@
 /**
  * Tests for WP_Block_Metadata_Registry class.
  *
- * @group blocks
- * @coversDefaultClass WP_Block_Metadata_Registry
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+
+
+
+
 class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 
 	private $temp_manifest_file;
 
+	private $registry_state;
+
 	public function set_up() {
 		parent::set_up();
+		$this->registry_state     = $this->get_registry_state();
 		$this->temp_manifest_file = wp_tempnam( 'block-metadata-manifest' );
 	}
 
 	public function tear_down() {
-		unlink( $this->temp_manifest_file );
+		$this->restore_registry_state( $this->registry_state );
+		if ( file_exists( $this->temp_manifest_file ) ) {
+			unlink( $this->temp_manifest_file );
+		}
 		parent::tear_down();
+	}
+
+	private function get_registry_state() {
+		$state = array();
+		foreach ( array( 'collections', 'last_matched_collection', 'default_collection_roots' ) as $property_name ) {
+			$property                = new ReflectionProperty( WP_Block_Metadata_Registry::class, $property_name );
+			$state[ $property_name ] = $property->getValue();
+		}
+
+		return $state;
+	}
+
+	private function restore_registry_state( $state ) {
+		foreach ( $state as $property_name => $value ) {
+			$property = new ReflectionProperty( WP_Block_Metadata_Registry::class, $property_name );
+			$property->setValue( null, $value );
+		}
 	}
 
 	public function test_register_collection_and_get_metadata() {
@@ -34,7 +60,7 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 		WP_Block_Metadata_Registry::register_collection( $path, $this->temp_manifest_file );
 
 		$retrieved_metadata = WP_Block_Metadata_Registry::get_metadata( $path . '/test-block' );
-		$this->assertEquals( $manifest_data['test-block'], $retrieved_metadata );
+		$this->assertSame( $manifest_data['test-block'], $retrieved_metadata );
 	}
 
 	public function test_get_nonexistent_metadata() {
@@ -82,8 +108,8 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62140
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62140' )]
 	public function test_register_collection_with_valid_muplugin_path() {
 		$plugin_path = WPMU_PLUGIN_DIR . '/my-plugin/blocks';
 		$result      = WP_Block_Metadata_Registry::register_collection( $plugin_path, $this->temp_manifest_file );
@@ -91,8 +117,8 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62140
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62140' )]
 	public function test_register_collection_with_invalid_muplugin_path() {
 		$invalid_plugin_path = WPMU_PLUGIN_DIR;
 
@@ -103,8 +129,8 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62140
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62140' )]
 	public function test_register_collection_with_valid_theme_path() {
 		$theme_path = WP_CONTENT_DIR . '/themes/my-theme/blocks';
 		$result     = WP_Block_Metadata_Registry::register_collection( $theme_path, $this->temp_manifest_file );
@@ -112,8 +138,8 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62140
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62140' )]
 	public function test_register_collection_with_invalid_theme_path() {
 		$invalid_theme_path = WP_CONTENT_DIR . '/themes';
 
@@ -124,8 +150,8 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62140
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62140' )]
 	public function test_register_collection_with_arbitrary_path() {
 		$arbitrary_path = '/var/arbitrary/path';
 		$result         = WP_Block_Metadata_Registry::register_collection( $arbitrary_path, $this->temp_manifest_file );
@@ -133,8 +159,8 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62140
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62140' )]
 	public function test_register_collection_with_arbitrary_path_and_collection_roots_filter() {
 		$arbitrary_path = '/var/arbitrary/path';
 		add_filter(
@@ -158,8 +184,8 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62140
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62140' )]
 	public function test_register_collection_with_wp_content_parent_directory_path() {
 		$invalid_path = dirname( WP_CONTENT_DIR );
 
@@ -170,8 +196,8 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62140
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62140' )]
 	public function test_register_collection_with_wp_includes_parent_directory_path() {
 		$invalid_path = ABSPATH;
 
@@ -193,9 +219,9 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that the `get_collection_block_metadata_files()` method returns the expected list of block metadata files.
 	 *
-	 * @ticket 62267
-	 * @covers ::get_collection_block_metadata_files
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62267' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Metadata_Registry', 'get_collection_block_metadata_files' )]
 	public function test_get_collection_block_metadata_files() {
 		$path          = WP_PLUGIN_DIR . '/test-plugin/data/block-types';
 		$manifest_data = array(
@@ -224,11 +250,11 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that `register_collection()`, `get_metadata()`, and `get_collection_metadata_files()` handle Windows paths.
 	 *
-	 * @ticket 63027
-	 * @covers ::register_collection
-	 * @covers ::get_metadata
-	 * @covers ::get_collection_metadata_files
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63027' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Metadata_Registry', 'register_collection' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Metadata_Registry', 'get_metadata' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Metadata_Registry', 'get_collection_block_metadata_files' )]
 	public function test_with_windows_paths() {
 		// Set up a mock manifest file.
 		$manifest_data = array(
@@ -260,9 +286,9 @@ class Tests_Blocks_WpBlockMetadataRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that `register_collection()` handles Windows paths correctly for verifying allowed roots.
 	 *
-	 * @ticket 63027
-	 * @covers ::register_collection
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63027' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Metadata_Registry', 'register_collection' )]
 	public function test_with_windows_paths_and_disallowed_location() {
 		$parent_path  = 'C:\\Site\\wp-content';
 		$plugins_path = $parent_path . '\\plugins';

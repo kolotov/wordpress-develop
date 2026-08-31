@@ -1,10 +1,12 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::wp_handle_comment_submission
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_handle_comment_submission' )]
 class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 
 	protected static $post;
@@ -129,8 +131,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39650
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39650' )]
 	public function test_submitting_comment_to_draft_post_returns_error_message_for_user_with_correct_caps() {
 		$error = 'comment_on_draft';
 
@@ -275,8 +277,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	/**
 	 * wp_handle_comment_submission() expects un-slashed data.
 	 *
-	 * @group slashes
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
 	public function test_submitting_comment_handles_slashes_correctly() {
 		$data    = array(
 			'comment_post_ID' => self::$post->ID,
@@ -613,8 +615,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 10377
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10377' )]
 	public function test_submitting_comment_with_content_too_long_returns_error() {
 		$error = 'comment_content_column_length';
 
@@ -631,8 +633,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 10377
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10377' )]
 	public function test_submitting_comment_with_author_too_long_returns_error() {
 		$error = 'comment_author_column_length';
 
@@ -649,8 +651,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 10377
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10377' )]
 	public function test_submitting_comment_with_email_too_long_returns_error() {
 		$error = 'comment_author_email_column_length';
 
@@ -667,8 +669,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 10377
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10377' )]
 	public function test_submitting_comment_with_url_too_long_returns_error() {
 		$error = 'comment_author_url_column_length';
 
@@ -686,8 +688,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49236
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49236' )]
 	public function test_submitting_comment_with_empty_type_results_in_correct_type() {
 		$data    = array(
 			'comment_post_ID' => self::$post->ID,
@@ -705,10 +707,10 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49236
 	 *
-	 * @covers ::wp_insert_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49236' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_comment' )]
 	public function test_inserting_comment_with_empty_type_results_in_correct_type() {
 		$data       = array(
 			'comment_post_ID' => self::$post->ID,
@@ -727,8 +729,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34997
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34997' )]
 	public function test_comment_submission_sends_all_expected_parameters_to_preprocess_comment_filter() {
 		$user = get_userdata( self::$author_id );
 		wp_set_current_user( $user->ID );
@@ -762,8 +764,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56712
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56712' )]
 	public function test_submitting_comment_without_optional_parameters_sets_them_to_empty_strings() {
 		$data = array(
 			'comment_post_ID' => self::$post->ID,
@@ -793,8 +795,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36901
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36901' )]
 	public function test_submitting_duplicate_comments() {
 		$data           = array(
 			'comment_post_ID' => self::$post->ID,
@@ -809,8 +811,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36901
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36901' )]
 	public function test_comments_flood() {
 		$data          = array(
 			'comment_post_ID' => self::$post->ID,
@@ -828,8 +830,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36901
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36901' )]
 	public function test_comments_flood_user_can_moderate_comments() {
 		$user = get_user_by( 'id', self::$editor_id );
 		wp_set_current_user( $user->ID );
@@ -854,12 +856,12 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	 * Tests that wp_handle_comment_submission() only allows replying to
 	 * an approved parent comment.
 	 *
-	 * @ticket 53962
 	 *
-	 * @dataProvider data_should_only_allow_replying_to_an_approved_parent_comment
 	 *
 	 * @param int $approved Whether the parent comment is approved.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53962' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_only_allow_replying_to_an_approved_parent_comment' )]
 	public function test_should_only_allow_replying_to_an_approved_parent_comment( $approved ) {
 		wp_set_current_user( self::$editor_id );
 
@@ -901,7 +903,7 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_only_allow_replying_to_an_approved_parent_comment() {
+	public static function data_should_only_allow_replying_to_an_approved_parent_comment() {
 		return array(
 			'an approved parent comment'   => array( 'approved' => 1 ),
 			'an unapproved parent comment' => array( 'approved' => 0 ),
@@ -912,12 +914,12 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	 * Tests that wp_handle_comment_submission() only allows replying to
 	 * an existing parent comment.
 	 *
-	 * @ticket 53962
 	 *
-	 * @dataProvider data_should_only_allow_replying_to_an_existing_parent_comment
 	 *
 	 * @param bool $exists Whether the parent comment exists.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53962' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_only_allow_replying_to_an_existing_parent_comment' )]
 	public function test_should_only_allow_replying_to_an_existing_parent_comment( $exists ) {
 		wp_set_current_user( self::$editor_id );
 
@@ -963,7 +965,7 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_only_allow_replying_to_an_existing_parent_comment() {
+	public static function data_should_only_allow_replying_to_an_existing_parent_comment() {
 		return array(
 			'an existing parent comment'    => array( 'exists' => true ),
 			'a non-existent parent comment' => array( 'exists' => false ),
@@ -987,8 +989,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61827
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61827' )]
 	public function test_disallowed_keys_html_match_gives_approved_status_of_trash() {
 		$data = array(
 			'comment_post_ID' => self::$post->ID,
@@ -1006,8 +1008,8 @@ class Tests_Comment_wpHandleCommentSubmission extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61827
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61827' )]
 	public function test_disallowed_keys_filtered_html_match_does_not_call_check_comment_flood_action_twice() {
 		$data = array(
 			'comment_post_ID' => self::$post->ID,

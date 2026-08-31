@@ -1,30 +1,30 @@
 <?php
 
 /**
- * @group compat
  *
- * @covers ::array_any
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'array_any' )]
 class Test_Compat_arrayAny extends WP_UnitTestCase {
 
 	/**
 	 * Test that array_any() is always available (either from PHP or WP).
 	 *
-	 * @ticket 62558
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62558' )]
 	public function test_array_any_availability() {
 		$this->assertTrue( function_exists( 'array_any' ) );
 	}
 
 	/**
-	 * @dataProvider data_array_any
 	 *
-	 * @ticket 62558
 	 *
 	 * @param bool $expected The expected value.
 	 * @param array $arr The array.
 	 * @param callable $callback The callback.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_array_any' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62558' )]
 	public function test_array_any( bool $expected, array $arr, callable $callback ) {
 		$this->assertSame( $expected, array_any( $arr, $callback ) );
 	}
@@ -34,7 +34,7 @@ class Test_Compat_arrayAny extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_array_any(): array {
+	public static function data_array_any(): array {
 		return array(
 			'empty array' => array(
 				'expected' => false,

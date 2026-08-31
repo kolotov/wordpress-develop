@@ -11,9 +11,9 @@
 /**
  * Class to Test wp_delete_post() function
  *
- * @group post
- * @covers ::wp_delete_post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_delete_post' )]
 class Tests_Post_WpDeletePost extends WP_UnitTestCase {
 
 	/**
@@ -46,8 +46,8 @@ class Tests_Post_WpDeletePost extends WP_UnitTestCase {
 	/**
 	 * Tests: "When I delete a future post using wp_delete_post( $post->ID ) it does not update the cron correctly."
 	 *
-	 * @ticket 5364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5364' )]
 	public function test_delete_future_post_cron() {
 		$future_date = strtotime( '+1 day' );
 
@@ -80,8 +80,8 @@ class Tests_Post_WpDeletePost extends WP_UnitTestCase {
 	/**
 	 * Tests that if the post_id is 0, wp_delete_post should return false.
 	 *
-	 * @ticket 63975
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63975' )]
 	public function test_wp_delete_post_short_circuit_on_post_id_zero() {
 		$this->setExpectedIncorrectUsage( 'wp_delete_post' );
 		$this->assertFalse( wp_delete_post( 0, true ) );
@@ -102,8 +102,8 @@ class Tests_Post_WpDeletePost extends WP_UnitTestCase {
 	/**
 	 * Tests actions triggered when deleting a post, even when a string ID is supplied.
 	 *
-	 * @ticket 63975
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63975' )]
 	public function test_wp_delete_post_actions() {
 		$actions               = array(
 			'before_delete_post',
@@ -143,8 +143,8 @@ class Tests_Post_WpDeletePost extends WP_UnitTestCase {
 	/**
 	 * Tests short-circuiting wp_delete_post() with pre_delete_post filter.
 	 *
-	 * @ticket 63975
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63975' )]
 	public function test_wp_delete_post_can_be_short_circuited() {
 		$post_id = self::factory()->post->create();
 		$filter  = function ( $check, WP_Post $post, bool $force_delete ) use ( $post_id ) {

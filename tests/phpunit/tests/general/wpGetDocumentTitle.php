@@ -3,12 +3,12 @@
 /**
  * A set of unit tests for functions in wp-includes/general-template.php
  *
- * @group general
- * @group template
- * @group document-title
- * @covers ::wp_get_document_title
- * @covers ::_wp_render_title_tag
  */
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\Group( 'document-title' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_document_title' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_render_title_tag' )]
 class Tests_General_wpGetDocumentTitle extends WP_UnitTestCase {
 
 	public $blog_name;
@@ -65,8 +65,8 @@ class Tests_General_wpGetDocumentTitle extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 6479
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6479' )]
 	public function test__wp_render_title_tag_with_blog_description() {
 		$this->go_to( '/' );
 

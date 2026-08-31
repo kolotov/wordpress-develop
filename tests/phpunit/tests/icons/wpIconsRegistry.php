@@ -5,10 +5,12 @@
  * @package WordPress
  * @since 7.1.0
  *
- * @group icons
  *
- * @coversDefaultClass WP_Icons_Registry
  */
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'icons' )]
 class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 
 	/**
@@ -80,7 +82,7 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{0: string}>
 	 */
-	public function data_valid_icon_names() {
+	public static function data_valid_icon_names() {
 		return array(
 			'single character'                => array( 'test-collection/a' ),
 			'simple name'                     => array( 'test-collection/icon' ),
@@ -95,14 +97,14 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64651
 	 *
-	 * @dataProvider data_valid_icon_names
 	 *
-	 * @covers ::register
 	 *
 	 * @param string $name Valid icon name candidate.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_icon_names' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_register_icon( $name ) {
 		$result = $this->registry->register(
 			$name,
@@ -116,7 +118,7 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 		$this->assertTrue( $this->registry->is_registered( $name ) );
 	}
 
-	public function data_invalid_icon_names() {
+	public static function data_invalid_icon_names() {
 		return array(
 			'integer name'            => array( 1 ),
 			'null name'               => array( null ),
@@ -134,12 +136,12 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64651
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Icons_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_register_icon_twice() {
 		$settings = array(
 			'label'   => 'Icon',
@@ -151,16 +153,16 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64651
 	 *
-	 * @dataProvider data_invalid_icon_names
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Icons_Registry::register
 	 *
 	 * @param mixed $name Invalid icon name candidate.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_icon_names' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_register_invalid_name( $name ) {
 		$result = $this->registry->register(
 			$name,
@@ -176,12 +178,12 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	 * Should reject a non-namespaced name, since the collection is derived from
 	 * the namespaced icon name in the form "collection/icon-name".
 	 *
-	 * @ticket 64651
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Icons_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_register_rejects_non_namespaced_name() {
 		$result = $this->registry->register(
 			'non-namespaced-icon',
@@ -199,12 +201,12 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	 * Should reject `collection` passed as an icon property, since the collection
 	 * is derived from the namespaced icon name instead.
 	 *
-	 * @ticket 64651
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Icons_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_register_rejects_collection_property() {
 		$result = $this->registry->register(
 			'test-collection/my-icon',
@@ -220,12 +222,12 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should fail when the name references a collection that is not registered.
 	 *
-	 * @ticket 64651
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Icons_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_register_rejects_unregistered_collection() {
 		$result = $this->registry->register(
 			'unregistered-collection/my-icon',
@@ -240,10 +242,10 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should register an icon that provides its content through `file_path`.
 	 *
-	 * @ticket 64847
 	 *
-	 * @covers ::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_register_icon_with_file_path() {
 		$path = $this->create_temp_icon_file( '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"></svg>' );
 
@@ -265,10 +267,10 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should register an icon with its `content` sanitized.
 	 *
-	 * @ticket 64847
 	 *
-	 * @covers ::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_register_icon_sanitizes_content() {
 		$result = $this->registry->register(
 			'test-collection/unsafe-content',
@@ -287,12 +289,12 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should fail to register an icon that provides both `content` and `file_path`.
 	 *
-	 * @ticket 64847
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Icons_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_register_icon_with_content_and_file_path() {
 		$result = $this->registry->register(
 			'test-collection/content-and-file-path',
@@ -309,12 +311,12 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should fail to register an icon that provides neither `content` nor `file_path`.
 	 *
-	 * @ticket 64847
 	 *
-	 * @covers ::register
 	 *
 	 * @expectedIncorrectUsage WP_Icons_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_register_icon_without_content_or_file_path() {
 		$result = $this->registry->register(
 			'test-collection/no-content',
@@ -327,10 +329,10 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64651
 	 *
-	 * @covers ::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'register' )]
 	public function test_same_name_across_collections_does_not_collide() {
 		$collections = WP_Icon_Collections_Registry::get_instance();
 		$collections->register( 'other-collection', array( 'label' => 'Other' ) );
@@ -364,10 +366,10 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64651
 	 *
-	 * @covers ::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'unregister' )]
 	public function test_unregister_icon() {
 		$this->registry->register(
 			'test-collection/my-icon',
@@ -383,21 +385,21 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64651
 	 *
-	 * @covers ::unregister
 	 *
 	 * @expectedIncorrectUsage WP_Icons_Registry::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'unregister' )]
 	public function test_unregister_unknown_icon() {
 		$this->assertFalse( $this->registry->unregister( 'test-collection/ghost' ) );
 	}
 
 	/**
-	 * @ticket 64651
 	 *
-	 * @covers ::get_content
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'get_content' )]
 	public function test_get_content_reads_from_valid_file_path() {
 		$path = $this->create_temp_icon_file( '<svg><path d="M0 0"/></svg>' );
 
@@ -418,7 +420,7 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{0: string|null, 1: string}> Data sets of [ $contents, $extension ].
 	 */
-	public function data_invalid_icon_files() {
+	public static function data_invalid_icon_files() {
 		return array(
 			'missing file'        => array( null, 'svg' ),
 			'non-svg extension'   => array( '<svg><path d="M0 0"/></svg>', 'txt' ),
@@ -427,15 +429,15 @@ class Tests_Icons_WpIconsRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64651
 	 *
-	 * @dataProvider data_invalid_icon_files
 	 *
-	 * @covers ::get_content
 	 *
 	 * @param string|null $contents  File contents, or null to leave the file uncreated.
 	 * @param string      $extension File extension, without the leading dot.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_icon_files' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64651' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Icons_Registry', 'get_content' )]
 	public function test_get_content_returns_null_for_invalid_file( $contents, $extension ) {
 		$path = $this->create_temp_icon_file( $contents, $extension );
 

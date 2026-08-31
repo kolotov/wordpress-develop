@@ -3,9 +3,9 @@
 /**
  * Test the IteratorAggregate implementation of WP_Hook
  *
- * @group hooks
- * @covers WP_Hook::build_preinitialized_hooks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'hooks' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Hook::class, 'build_preinitialized_hooks' )]
 class Tests_Hooks_PreinitHooks extends WP_UnitTestCase {
 
 	public function test_array_to_hooks() {

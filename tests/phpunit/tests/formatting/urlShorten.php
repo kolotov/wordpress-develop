@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::url_shorten
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'url_shorten' )]
 class Tests_Formatting_UrlShorten extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_url_shorten
 	 *
 	 * @param string $url      URL to shorten.
 	 * @param string $expected Expected shortened URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_url_shorten' )]
 	public function test_url_shorten( $url, $expected ) {
 		$this->assertSame( $expected, url_shorten( $url ) );
 	}
 
-	public function data_url_shorten() {
+	public static function data_url_shorten() {
 		// When shortened, the URL is cut to ( $length - 3 ) characters before '&hellip;' is appended.
 		return array(
 			'escaped slashes are not stripped' => array(
@@ -50,17 +50,17 @@ class Tests_Formatting_UrlShorten extends WP_UnitTestCase {
 	/**
 	 * Ensures the optional $length parameter overrides the default of 35.
 	 *
-	 * @dataProvider data_url_shorten_custom_length
 	 *
 	 * @param string $url      URL to shorten.
 	 * @param int    $length   Maximum length of the shortened URL.
 	 * @param string $expected Expected shortened URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_url_shorten_custom_length' )]
 	public function test_url_shorten_respects_custom_length( $url, $length, $expected ) {
 		$this->assertSame( $expected, url_shorten( $url, $length ) );
 	}
 
-	public function data_url_shorten_custom_length() {
+	public static function data_url_shorten_custom_length() {
 		// The URL below is 41 characters long after cleaning.
 		$url = 'http://wordpress.org/about/philosophy/#decisions';
 

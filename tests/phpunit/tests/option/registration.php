@@ -1,13 +1,19 @@
 <?php
 
 /**
- * @group option
  */
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_Registration extends WP_UnitTestCase {
 
 	/**
-	 * @covers ::register_setting
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	public function test_register() {
 		register_setting( 'test_group', 'test_option' );
 
@@ -24,9 +30,9 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::register_setting
-	 * @covers ::apply_filters
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'apply_filters' )]
 	public function test_register_with_callback() {
 		register_setting( 'test_group', 'test_option', array( $this, 'filter_registered_setting' ) );
 
@@ -35,10 +41,10 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::register_setting
-	 * @covers WP_REST_Settings_Controller
-	 * @covers ::apply_filters
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_CLASS, 'WP_REST_Settings_Controller' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'apply_filters' )]
 	public function test_register_with_array() {
 		register_setting(
 			'test_group',
@@ -57,10 +63,10 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38176
 	 *
-	 * @covers ::register_setting
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38176' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	public function test_register_with_default() {
 		register_setting(
 			'test_group',
@@ -74,10 +80,10 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38176
 	 *
-	 * @covers ::register_setting
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38176' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	public function test_register_with_default_override() {
 		register_setting(
 			'test_group',
@@ -93,12 +99,12 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38930
 	 *
-	 * @covers ::register_setting
-	 * @covers ::add_option
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38930' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_add_option_with_no_options_cache() {
 		register_setting(
 			'test_group',
@@ -115,8 +121,8 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 	/**
 	 * @expectedDeprecated register_setting
 	 *
-	 * @covers ::register_setting
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	public function test_register_deprecated_group_misc() {
 		register_setting( 'misc', 'test_option' );
 	}
@@ -124,18 +130,18 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 	/**
 	 * @expectedDeprecated register_setting
 	 *
-	 * @covers ::register_setting
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	public function test_register_deprecated_group_privacy() {
 		register_setting( 'privacy', 'test_option' );
 	}
 
 	/**
-	 * @ticket 43207
 	 *
-	 * @covers ::register_setting
-	 * @covers ::unregister_setting
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43207' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unregister_setting' )]
 	public function test_unregister_setting_removes_default() {
 		register_setting(
 			'test_group',
@@ -153,10 +159,10 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 	/**
 	 * Ensures that unregister_setting() does not throw a notice or warning for unknown settings.
 	 *
-	 * @ticket 57674
 	 *
-	 * @covers ::unregister_setting
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57674' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unregister_setting' )]
 	public function test_unregister_invalid_setting_does_not_throw_notice_or_warning() {
 		$setting = uniqid();
 		unregister_setting( $setting, $setting );

@@ -7,11 +7,11 @@
  *
  * @since 6.7.0
  *
- * @group fonts
- * @group fontface
  *
- * @covers WP_Font_Face_Resolver::get_fonts_from_style_variations
  */
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'fontface' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Font_Face_Resolver::class, 'get_fonts_from_style_variations' )]
 class Tests_Fonts_WPFontFaceResolver_GetFontsFromStyleVariations extends WP_Font_Face_UnitTestCase {
 	const FONTS_THEME = 'fonts-block-theme';
 
@@ -24,8 +24,8 @@ class Tests_Fonts_WPFontFaceResolver_GetFontsFromStyleVariations extends WP_Font
 	/**
 	 * Ensure that an empty array is returned when the theme has no style variations.
 	 *
-	 * @ticket 62231
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62231' )]
 	public function test_should_return_empty_array_when_theme_has_no_style_variations() {
 		switch_theme( 'block-theme' );
 
@@ -37,8 +37,8 @@ class Tests_Fonts_WPFontFaceResolver_GetFontsFromStyleVariations extends WP_Font
 	/**
 	 * Ensure that all variations are loaded from a theme.
 	 *
-	 * @ticket 62231
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62231' )]
 	public function test_should_return_all_fonts_from_all_style_variations() {
 		switch_theme( static::FONTS_THEME );
 
@@ -51,8 +51,8 @@ class Tests_Fonts_WPFontFaceResolver_GetFontsFromStyleVariations extends WP_Font
 	/**
 	 * Ensure that file:./ is replaced in the src list.
 	 *
-	 * @ticket 62231
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62231' )]
 	public function test_should_replace_src_file_placeholder() {
 		switch_theme( static::FONTS_THEME );
 

@@ -4,17 +4,16 @@
  *
  * @package WordPress
  * @subpackage HTML-API
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Tag_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlTagProcessorModifiableText extends WP_UnitTestCase {
 	/**
 	 * Ensures that calls to `get_modifiable_text()` don't change the
 	 * parser state in a way that would corrupt repeated calls.
 	 *
-	 * @ticket 61576
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_get_modifiable_text_is_idempotent() {
 		$processor = new WP_HTML_Tag_Processor( "<pre>\nFirst newline ignored.</pre>" );
 
@@ -56,14 +55,14 @@ class Tests_HtmlApi_WpHtmlTagProcessorModifiableText extends WP_UnitTestCase {
 	 * Ensures that `get_modifiable_text()` reads enqueued updates when read
 	 * from after writing; guarantees consistency through writes.
 	 *
-	 * @ticket 61617
-	 * @ticket 62241
 	 *
-	 * @dataProvider data_get_modifiable_text_replacements
 	 *
 	 * @param string $initial     Initial text.
 	 * @param string $replacement Replacement text.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61617' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62241' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_modifiable_text_replacements' )]
 	public function test_get_modifiable_text_is_consistent_after_writes( $initial, $replacement ) {
 		$processor = new WP_HTML_Tag_Processor( $initial );
 		$processor->next_token();
@@ -102,13 +101,13 @@ class Tests_HtmlApi_WpHtmlTagProcessorModifiableText extends WP_UnitTestCase {
 	 * Ensures that `get_modifiable_text()` reads enqueued updates when read from
 	 * after writing; guarantees consistency through writes after closed tag element.
 	 *
-	 * @ticket 62241
 	 *
-	 * @dataProvider data_get_modifiable_text_replacements
 	 *
 	 * @param string $initial     Initial text.
 	 * @param string $replacement Replacement text.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62241' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_modifiable_text_replacements' )]
 	public function test_get_modifiable_text_is_consistent_after_writes_when_text_after_closed_tag_element( $initial, $replacement ) {
 		$html_before = '<p>some content</p>';
 		$processor   = new WP_HTML_Tag_Processor( $html_before . $initial );
@@ -154,8 +153,8 @@ class Tests_HtmlApi_WpHtmlTagProcessorModifiableText extends WP_UnitTestCase {
 	 * Ensures that `get_modifiable_text()` reads enqueued updates when read from after
 	 * writing when starting from an empty text; guarantees consistency through writes.
 	 *
-	 * @ticket 61617
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61617' )]
 	public function test_get_modifiable_text_is_consistent_after_writes_to_empty_text() {
 		$after     = 'different text';
 		$processor = new WP_HTML_Tag_Processor( '<script></script>' );
@@ -192,8 +191,8 @@ class Tests_HtmlApi_WpHtmlTagProcessorModifiableText extends WP_UnitTestCase {
 	 * Ensures that updates to modifiable text that are shorter than the
 	 * original text do not cause the parser to lose its orientation.
 	 *
-	 * @ticket 61617
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61617' )]
 	public function test_setting_shorter_modifiable_text() {
 		$processor = new WP_HTML_Tag_Processor( '<div><textarea>very long text</textarea><div id="not a <span>">' );
 
@@ -238,8 +237,8 @@ class Tests_HtmlApi_WpHtmlTagProcessorModifiableText extends WP_UnitTestCase {
 	 * Ensures that reads to modifiable text after setting it reads the updated
 	 * enqueued values, and not the original value.
 	 *
-	 * @ticket 61617
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61617' )]
 	public function test_modifiable_text_reads_updates_after_setting() {
 		$processor = new WP_HTML_Tag_Processor( 'This is text<!-- this is not -->' );
 
@@ -345,15 +344,15 @@ HTML
 	/**
 	 * Ensures that modifiable text updates are not applied where they aren't supported.
 	 *
-	 * @ticket 61617
 	 *
-	 * @dataProvider data_tokens_not_supporting_modifiable_text_updates
 	 *
 	 * @expectedIncorrectUsage WP_HTML_Tag_Processor::set_modifiable_text
 	 *
 	 * @param string $html             Contains HTML with a token not supporting modifiable text updates.
 	 * @param int    $advance_n_tokens Count of times to run `next_token()` before reaching target node.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61617' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_tokens_not_supporting_modifiable_text_updates' )]
 	public function test_rejects_updates_on_unsupported_match_locations( string $html, int $advance_n_tokens ) {
 		$processor = new WP_HTML_Tag_Processor( $html );
 		while ( --$advance_n_tokens >= 0 ) {
@@ -394,15 +393,15 @@ HTML
 	/**
 	 * Ensures that modifiable text updates are applied as expected to supported nodes.
 	 *
-	 * @ticket 61617
 	 *
-	 * @dataProvider data_tokens_with_basic_modifiable_text_updates
 	 *
 	 * @param string $html             Contains HTML with a token supporting modifiable text updates.
 	 * @param int    $advance_n_tokens Count of times to run `next_token()` before reaching target node.
 	 * @param string $raw_replacement  This should be escaped properly when replaced as modifiable text.
 	 * @param string $transformed      Expected output after updating modifiable text.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61617' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_tokens_with_basic_modifiable_text_updates' )]
 	public function test_updates_basic_modifiable_text_on_supported_nodes( string $html, int $advance_n_tokens, string $raw_replacement, string $transformed ) {
 		$processor = new WP_HTML_Tag_Processor( $html );
 		while ( --$advance_n_tokens >= 0 ) {
@@ -457,14 +456,14 @@ HTML
 	 * the update always writes the `?>` form of the closer, whose `?` is dropped
 	 * when parsing, so that data ending in `?` remains intact.
 	 *
-	 * @ticket 61530
 	 *
-	 * @dataProvider data_processing_instruction_data_updates
 	 *
 	 * @param string $html     Contains a processing instruction as its first token.
 	 * @param string $new_data Data to set on the processing instruction.
 	 * @param string $expected Expected document after the update.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61530' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_processing_instruction_data_updates' )]
 	public function test_sets_processing_instruction_data( string $html, string $new_data, string $expected ): void {
 		$processor = new WP_HTML_Tag_Processor( $html );
 		$processor->next_token();
@@ -554,8 +553,8 @@ HTML
 	 * Ensures that repeated processing instruction data updates replace
 	 * each other instead of accumulating syntax adjustments.
 	 *
-	 * @ticket 61530
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61530' )]
 	public function test_replaces_previous_processing_instruction_data_update(): void {
 		$processor = new WP_HTML_Tag_Processor( '<?wp-bit?>' );
 		$processor->next_token();
@@ -584,16 +583,16 @@ HTML
 	 * document is not allowed, like attempting to set `-->` within a comment or `</script>`
 	 * within a text/plain SCRIPT tag.
 	 *
-	 * @ticket 61617
-	 * @ticket 62797
 	 *
-	 * @dataProvider data_unallowed_modifiable_text_updates
 	 *
 	 * @expectedIncorrectUsage WP_HTML_Tag_Processor::set_modifiable_text
 	 *
 	 * @param string $html_with_nonempty_modifiable_text Will be used to find the test element.
 	 * @param string $invalid_update                     Update containing possibly-compromising text.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61617' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62797' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unallowed_modifiable_text_updates' )]
 	public function test_rejects_dangerous_updates( string $html_with_nonempty_modifiable_text, string $invalid_update ) {
 		$processor = new WP_HTML_Tag_Processor( $html_with_nonempty_modifiable_text );
 
@@ -646,14 +645,14 @@ HTML
 	/**
 	 * Ensures that JavaScript script tag contents are safely updated.
 	 *
-	 * @ticket 62797
 	 *
-	 * @dataProvider data_script_tag_text_updates
 	 *
 	 * @param string $html     HTML containing a SCRIPT tag to be modified.
 	 * @param string $update   Update containing possibly-compromising text.
 	 * @param string $expected Expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62797' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_script_tag_text_updates' )]
 	public function test_safely_updates_script_tag_contents( string $html, string $update, string $expected ) {
 		$processor = new WP_HTML_Tag_Processor( $html );
 		$this->assertTrue( $processor->next_tag( 'SCRIPT' ) );
@@ -688,8 +687,8 @@ HTML
 	}
 
 	/**
-	 * @ticket 64419
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64419' )]
 	public function test_complex_javascript_and_json_auto_escaping() {
 		$processor = new WP_HTML_Tag_Processor( "<script></script>\n<script></script>\n<hr>" );
 		$processor->next_tag( 'SCRIPT' );
@@ -744,8 +743,8 @@ HTML;
 	}
 
 	/**
-	 * @ticket 64419
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64419' )]
 	public function test_json_auto_escaping() {
 		// This is not a typical JSON encoding or escaping, but it is valid.
 		$json_text             = '"Escaped BS: \\\\; Escaped BS+LT: \\\\<; Unescaped LT: <; Script closer: </script>"';
@@ -788,8 +787,8 @@ HTML;
 	 * Setting the modifiable text with a leading newline should ensure that the leading newline
 	 * is present in the resulting element.
 	 *
-	 * @ticket 64609
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64609' )]
 	public function test_modifiable_text_special_textarea(): void {
 		$processor = new WP_HTML_Tag_Processor( '<textarea></textarea>' );
 		$processor->next_token();
@@ -817,11 +816,11 @@ HTML;
 	 *
 	 * This includes atomic-like foreign elements as well as non-atomic foreign elements.
 	 *
-	 * @ticket 64751
-	 * @dataProvider data_set_modifiable_fails_non_atomic_tags
 	 *
 	 * @expectedIncorrectUsage WP_HTML_Tag_Processor::set_modifiable_text
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64751' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_set_modifiable_fails_non_atomic_tags' )]
 	public function test_set_modifiable_fails_non_atomic_tags(
 		string $html,
 		string $parsing_namespace,

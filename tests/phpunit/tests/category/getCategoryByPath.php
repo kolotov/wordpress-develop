@@ -1,10 +1,10 @@
 <?php
 /**
- * @group taxonomy
- * @group category
  *
- * @covers ::get_category_by_path
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\Group( 'category' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_category_by_path' )]
 class Tests_Category_GetCategoryByPath extends WP_UnitTestCase {
 
 	/**

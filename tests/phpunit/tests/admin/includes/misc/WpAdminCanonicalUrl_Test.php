@@ -1,10 +1,7 @@
 <?php
 
-/**
- * @group admin
- *
- * @covers ::wp_admin_canonical_url
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_admin_canonical_url' )]
 class Tests_Admin_Includes_Misc_WpAdminCanonicalUrl_Test extends WP_UnitTestCase {
 
 	/**
@@ -29,13 +26,13 @@ class Tests_Admin_Includes_Misc_WpAdminCanonicalUrl_Test extends WP_UnitTestCase
 	/**
 	 * Tests wp_admin_canonical_url().
 	 *
-	 * @ticket 65192
 	 *
-	 * @dataProvider data_wp_admin_canonical_url
 	 *
 	 * @param array  $server_vars `$_SERVER` variables to set.
 	 * @param string $expected    Expected output substring.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65192' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_admin_canonical_url' )]
 	public function test_wp_admin_canonical_url( array $server_vars, $expected ) {
 		foreach ( $server_vars as $key => $value ) {
 			$_SERVER[ $key ] = $value;
@@ -57,7 +54,7 @@ class Tests_Admin_Includes_Misc_WpAdminCanonicalUrl_Test extends WP_UnitTestCase
 	 *     expected:    string
 	 * }>
 	 */
-	public function data_wp_admin_canonical_url(): array {
+	public static function data_wp_admin_canonical_url(): array {
 		return array(
 			'no removable query args'       => array(
 				'server_vars' => array(
@@ -94,8 +91,8 @@ class Tests_Admin_Includes_Misc_WpAdminCanonicalUrl_Test extends WP_UnitTestCase
 	/**
 	 * Tests wp_admin_canonical_url() when removable query args are filtered to be empty.
 	 *
-	 * @ticket 65192
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65192' )]
 	public function test_wp_admin_canonical_url_with_empty_removable_args() {
 		add_filter( 'removable_query_args', '__return_empty_array' );
 
@@ -111,8 +108,8 @@ class Tests_Admin_Includes_Misc_WpAdminCanonicalUrl_Test extends WP_UnitTestCase
 	/**
 	 * Tests the `wp_admin_canonical_url` filter.
 	 *
-	 * @ticket 65192
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65192' )]
 	public function test_wp_admin_canonical_url_filter() {
 		$_SERVER['HTTP_HOST']   = 'example.org';
 		$_SERVER['REQUEST_URI'] = '/wp-admin/index.php?settings-updated=true';

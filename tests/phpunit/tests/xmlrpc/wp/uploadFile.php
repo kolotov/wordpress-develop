@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group xmlrpc
- * @requires function imagejpeg
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
+#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 
 	public function tear_down() {
@@ -44,10 +44,10 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 * the method must return an IXR_Error rather than attempting to access
 	 * array offsets on a non-array value.
 	 *
-	 * @ticket 65611
 	 *
-	 * @covers wp_xmlrpc_server::mw_newMediaObject
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65611' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_newMediaObject' )]
 	public function test_invalid_attachment_data_should_return_error() {
 		$this->make_user_by_role( 'editor' );
 
@@ -64,10 +64,10 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 * data struct was read before the login was attempted. The struct must
 	 * only be read once the request is authenticated.
 	 *
-	 * @ticket 65611
 	 *
-	 * @covers wp_xmlrpc_server::mw_newMediaObject
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65611' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_newMediaObject' )]
 	public function test_anonymous_request_with_invalid_attachment_data_should_return_login_error() {
 		$result = $this->myxmlrpcserver->mw_newMediaObject( array( 0, 'not-a-user', 'not-a-password', 'not-a-struct' ) );
 		$this->assertIXRError( $result, 'An anonymous request should return an IXR_Error.' );
@@ -82,10 +82,10 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 * not allowed to upload is told that rather than being told the data is
 	 * malformed. Sending unusable data must not change which error comes back.
 	 *
-	 * @ticket 65611
 	 *
-	 * @covers wp_xmlrpc_server::mw_newMediaObject
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65611' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_newMediaObject' )]
 	public function test_incapable_user() {
 		$this->make_user_by_role( 'subscriber' );
 
@@ -98,14 +98,14 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 * Tests that too few arguments return an error instead of emitting a PHP
 	 * notice for the undefined arguments.
 	 *
-	 * @ticket 65611
 	 *
-	 * @covers wp_xmlrpc_server::mw_newMediaObject
 	 *
-	 * @dataProvider data_insufficient_arguments
 	 *
 	 * @param list<mixed> $args The arguments to pass to the method.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65611' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_insufficient_arguments' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_newMediaObject' )]
 	public function test_insufficient_arguments_should_return_error( array $args ) {
 		$this->make_user_by_role( 'editor' );
 
@@ -119,7 +119,7 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 *
 	 * @return array<non-falsy-string, array{args: list<mixed>}>
 	 */
-	public function data_insufficient_arguments(): array {
+	public static function data_insufficient_arguments(): array {
 		return array(
 			'no arguments'     => array(
 				'args' => array(),
@@ -141,14 +141,14 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 * succeed. It must fail with an IXR_Error rather than by reading an
 	 * undefined array offset.
 	 *
-	 * @ticket 65611
 	 *
-	 * @covers wp_xmlrpc_server::mw_newMediaObject
 	 *
-	 * @dataProvider data_attachment_data_without_name
 	 *
 	 * @param array<string, mixed> $data The data argument to pass to the method.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65611' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attachment_data_without_name' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_newMediaObject' )]
 	public function test_attachment_data_without_name_should_return_error( array $data ) {
 		$this->make_user_by_role( 'editor' );
 
@@ -162,7 +162,7 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 *
 	 * @return array<non-falsy-string, array{data: array<string, mixed>}>
 	 */
-	public function data_attachment_data_without_name(): array {
+	public static function data_attachment_data_without_name(): array {
 		return array(
 			'empty struct'       => array(
 				'data' => array(),
@@ -194,14 +194,14 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 * it must be reported as a 400 like any other unusable name instead of
 	 * reaching wp_upload_bits() and surfacing as a 500.
 	 *
-	 * @ticket 65611
 	 *
-	 * @covers wp_xmlrpc_server::mw_newMediaObject
 	 *
-	 * @dataProvider data_attachment_data_with_unusable_name
 	 *
 	 * @param string $name The file name to pass to the method.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65611' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attachment_data_with_unusable_name' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_newMediaObject' )]
 	public function test_attachment_data_with_unusable_name_should_return_error( string $name ) {
 		$this->make_user_by_role( 'editor' );
 
@@ -221,7 +221,7 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 *
 	 * @return array<non-falsy-string, array{name: string}>
 	 */
-	public function data_attachment_data_with_unusable_name(): array {
+	public static function data_attachment_data_with_unusable_name(): array {
 		return array(
 			'empty name'           => array(
 				'name' => '',
@@ -256,14 +256,14 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 * survives sanitize_mime_type() to reach the database as the attachment's
 	 * post MIME type. Both members must be rejected before that point.
 	 *
-	 * @ticket 65611
 	 *
-	 * @covers wp_xmlrpc_server::mw_newMediaObject
 	 *
-	 * @dataProvider data_attachment_data_with_invalid_members
 	 *
 	 * @param array<string, mixed> $data The data argument to pass to the method.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65611' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attachment_data_with_invalid_members' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_newMediaObject' )]
 	public function test_attachment_data_with_invalid_members_should_return_error( array $data ) {
 		$this->make_user_by_role( 'editor' );
 
@@ -277,7 +277,7 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 *
 	 * @return array<non-falsy-string, array{data: array<string, mixed>}>
 	 */
-	public function data_attachment_data_with_invalid_members(): array {
+	public static function data_attachment_data_with_invalid_members(): array {
 		return array(
 			'non-string bits' => array(
 				'data' => array(
@@ -302,14 +302,14 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 * Only the name is required. The type and bits members are tolerated when
 	 * absent, and must not emit a PHP notice for the undefined array keys.
 	 *
-	 * @ticket 65611
 	 *
-	 * @covers wp_xmlrpc_server::mw_newMediaObject
 	 *
-	 * @dataProvider data_attachment_data_with_optional_members_omitted
 	 *
 	 * @param array<string, mixed> $data The data argument to pass to the method.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65611' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attachment_data_with_optional_members_omitted' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_newMediaObject' )]
 	public function test_attachment_data_with_optional_members_omitted_should_be_accepted( array $data ) {
 		$this->make_user_by_role( 'editor' );
 
@@ -324,7 +324,7 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 	 *
 	 * @return array<non-falsy-string, array{data: array<string, mixed>}>
 	 */
-	public function data_attachment_data_with_optional_members_omitted(): array {
+	public static function data_attachment_data_with_optional_members_omitted(): array {
 		return array(
 			'missing type' => array(
 				'data' => array(
@@ -334,8 +334,8 @@ class Tests_XMLRPC_wp_uploadFile extends WP_XMLRPC_UnitTestCase {
 			),
 			'missing bits' => array(
 				'data' => array(
-					'name' => 'a2-small.jpg',
-					'type' => 'image/jpeg',
+					'name' => 'empty.txt',
+					'type' => 'text/plain',
 				),
 			),
 		);

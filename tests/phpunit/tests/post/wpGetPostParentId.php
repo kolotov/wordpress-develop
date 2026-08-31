@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @group post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+
 class Tests_Post_wpGetPostParentId extends WP_UnitTestCase {
 	/**
 	 * Parent post ID.
@@ -34,9 +35,9 @@ class Tests_Post_wpGetPostParentId extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48358
-	 * @covers ::wp_get_post_parent_id
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_post_parent_id' )]
 	public function test_wp_get_post_parent_id_with_no_post_argument_default_to_global_post_id() {
 		$GLOBALS['post'] = get_post( self::$post_id );
 		$this->assertSame( self::$parent_post_id, wp_get_post_parent_id() );

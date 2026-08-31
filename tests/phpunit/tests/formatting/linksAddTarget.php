@@ -2,17 +2,17 @@
 /**
  * Tests for the links_add_target() function.
  *
- * @group formatting
  *
- * @covers ::links_add_target
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'links_add_target' )]
 class Tests_Formatting_LinksAddTarget extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 26164
 	 *
-	 * @dataProvider data_links_add_target
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26164' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_links_add_target' )]
 	public function test_links_add_target( $content, $target, $tags, $expected ) {
 		if ( is_null( $target ) ) {
 			$this->assertSame( $expected, links_add_target( $content ) );
@@ -35,7 +35,7 @@ class Tests_Formatting_LinksAddTarget extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_links_add_target() {
+	public static function data_links_add_target() {
 		return array(
 			array(
 				'MY CONTENT <div> SOME ADDITIONAL TEXT <a href="XYZ" src="ABC">LINK</a> HERE </div> END TEXT',

@@ -7,18 +7,17 @@
  */
 
 /**
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Doctype_Info
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlDoctypeInfo extends WP_UnitTestCase {
 	/**
 	 * Test DOCTYPE handling.
 	 *
-	 * @ticket 61576
 	 *
-	 * @dataProvider data_parseable_raw_doctypes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_parseable_raw_doctypes' )]
 	public function test_doctype_doc_info(
 		string $html,
 		string $expected_compat_mode,
@@ -93,10 +92,10 @@ class Tests_HtmlApi_WpHtmlDoctypeInfo extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider invalid_inputs
 	 *
-	 * @ticket 61576
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'invalid_inputs' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_invalid_inputs_return_null( string $html ) {
 		$this->assertNull( WP_HTML_Doctype_Info::from_doctype_token( $html ) );
 	}

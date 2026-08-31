@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group pomo
  */
+#[\PHPUnit\Framework\Attributes\Group( 'pomo' )]
 class Tests_POMO_PO extends WP_UnitTestCase {
 
 	/**
@@ -339,10 +339,10 @@ msgstr[2] "бабаяга"',
 	}
 
 	/**
-	 * @ticket 64928
 	 *
-	 * @dataProvider data_import_from_file_with_various_line_endings
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64928' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_import_from_file_with_various_line_endings' )]
 	public function test_import_from_file_with_various_line_endings( $newline, $printable_newline ) {
 		$import_file = $this->temp_filename();
 

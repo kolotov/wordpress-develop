@@ -3,11 +3,11 @@
 /**
  * Tests wp_zip_file_is_valid().
  *
- * @group file
- * @group filesystem
  *
- * @covers ::wp_zip_file_is_valid
  */
+#[\PHPUnit\Framework\Attributes\Group( 'file' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_zip_file_is_valid' )]
 class Tests_Filesystem_WpZipFileIsValid extends WP_UnitTestCase {
 
 	/**
@@ -33,13 +33,13 @@ class Tests_Filesystem_WpZipFileIsValid extends WP_UnitTestCase {
 	/**
 	 * Tests ZIP file validity is correctly determined.
 	 *
-	 * @ticket 60398
 	 *
-	 * @dataProvider data_zip_file_validity
 	 *
 	 * @param string $file     The ZIP file to test.
 	 * @param bool   $expected Whether the ZIP file is expected to be valid.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60398' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_zip_file_validity' )]
 	public function test_zip_file_validity( $file, $expected ) {
 		$zip_file = self::$test_data_dir . $file;
 
@@ -52,7 +52,7 @@ class Tests_Filesystem_WpZipFileIsValid extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_zip_file_validity() {
+	public static function data_zip_file_validity() {
 		return array(
 			'standard zip'           => array( 'archive.zip', true ),
 			'large zip'              => array( 'archive-large.zip', true ),

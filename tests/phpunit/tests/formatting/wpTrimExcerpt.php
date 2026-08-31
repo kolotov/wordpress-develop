@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wp_trim_excerpt
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_trim_excerpt' )]
 class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 	/**
-	 * @ticket 25349
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25349' )]
 	public function test_secondary_loop_respect_more() {
 		$post1 = self::factory()->post->create(
 			array(
@@ -39,8 +39,8 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 25349
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '25349' )]
 	public function test_secondary_loop_respect_nextpage() {
 		$post1 = self::factory()->post->create(
 			array(
@@ -71,19 +71,9 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51042
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51042' )]
 	public function test_should_generate_excerpt_for_empty_values() {
-		if ( PHP_VERSION_ID >= 80100 ) {
-			/*
-			 * For the time being, ignoring PHP 8.1 "null to non-nullable" deprecations coming in
-			 * via hooked in filter functions until a more structural solution to the
-			 * "missing input validation" conundrum has been architected and implemented.
-			 */
-			$this->expectDeprecation();
-			$this->expectDeprecationMessageMatches( '`Passing null to parameter \#[0-9]+ \(\$[^\)]+\) of type [^ ]+ is deprecated`' );
-		}
-
 		$post = self::factory()->post->create(
 			array(
 				'post_content' => 'Post content',
@@ -91,15 +81,39 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 		);
 
 		$this->assertSame( 'Post content', wp_trim_excerpt( '', $post ) );
-		$this->assertSame( 'Post content', wp_trim_excerpt( null, $post ) );
+		$deprecations = array();
+		set_error_handler(
+			static function ( int $severity, string $message ) use ( &$deprecations ): bool {
+				$deprecations[] = compact( 'severity', 'message' );
+				return true;
+			},
+			E_DEPRECATED
+		);
+
+		try {
+			$actual = wp_trim_excerpt( null, $post );
+		} finally {
+			restore_error_handler();
+		}
+
+		$this->assertSame( 'Post content', $actual );
+		$this->assertSame(
+			array(
+				array(
+					'severity' => E_DEPRECATED,
+					'message'  => 'trim(): Passing null to parameter #1 ($string) of type string is deprecated',
+				),
+			),
+			$deprecations
+		);
 		$this->assertSame( 'Post content', wp_trim_excerpt( false, $post ) );
 	}
 
 	/**
 	 * Tests that `wp_trim_excerpt()` unhooks `wp_filter_content_tags()` from 'the_content' filter.
 	 *
-	 * @ticket 56588
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56588' )]
 	public function test_wp_trim_excerpt_unhooks_wp_filter_content_tags() {
 		$post = self::factory()->post->create();
 
@@ -124,8 +138,8 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_trim_excerpt()` doesn't permanently unhook `wp_filter_content_tags()` from 'the_content' filter.
 	 *
-	 * @ticket 56588
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56588' )]
 	public function test_wp_trim_excerpt_should_not_permanently_unhook_wp_filter_content_tags() {
 		$post = self::factory()->post->create();
 
@@ -137,8 +151,8 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_trim_excerpt()` doesn't restore `wp_filter_content_tags()` if it was previously unhooked.
 	 *
-	 * @ticket 56588
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56588' )]
 	public function test_wp_trim_excerpt_does_not_restore_wp_filter_content_tags_if_previously_unhooked() {
 		$post = self::factory()->post->create();
 
@@ -154,8 +168,8 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_trim_excerpt()` does process valid blocks.
 	 *
-	 * @ticket 58682
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58682' )]
 	public function test_wp_trim_excerpt_check_if_block_renders() {
 		$post = self::factory()->post->create(
 			array(
@@ -171,8 +185,8 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_trim_excerpt()` unhooks `do_blocks()` from 'the_content' filter.
 	 *
-	 * @ticket 58682
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58682' )]
 	public function test_wp_trim_excerpt_unhooks_do_blocks() {
 		$post = self::factory()->post->create();
 
@@ -197,8 +211,8 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_trim_excerpt()` doesn't permanently unhook `do_blocks()` from 'the_content' filter.
 	 *
-	 * @ticket 58682
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58682' )]
 	public function test_wp_trim_excerpt_should_not_permanently_unhook_do_blocks() {
 		$post = self::factory()->post->create();
 
@@ -210,8 +224,8 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_trim_excerpt()` doesn't restore `do_blocks()` if it was previously unhooked.
 	 *
-	 * @ticket 58682
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58682' )]
 	public function test_wp_trim_excerpt_does_not_restore_do_blocks_if_previously_unhooked() {
 		$post = self::factory()->post->create();
 

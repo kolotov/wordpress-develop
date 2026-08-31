@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::sanitize_user
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_user' )]
 class Tests_Formatting_SanitizeUser extends WP_UnitTestCase {
 	public function test_strips_html() {
 		$input    = 'Captain <strong>Awesome</strong>';

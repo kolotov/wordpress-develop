@@ -6,17 +6,25 @@
  * Some tests will run in single site as the `_network_option()` functions
  * are available and internally use `_option()` functions as fallbacks.
  *
- * @group option
- * @group ms-option
- * @group multisite
  */
+
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-option' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Option_NetworkOption extends WP_UnitTestCase {
 
 	/**
-	 * @group ms-required
 	 *
-	 * @covers ::add_site_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	public function test_add_network_option_not_available_on_other_network() {
 		$id     = self::factory()->network->create();
 		$option = __FUNCTION__;
@@ -27,10 +35,10 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-required
 	 *
-	 * @covers ::add_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_network_option' )]
 	public function test_add_network_option_available_on_same_network() {
 		$id     = self::factory()->network->create();
 		$option = __FUNCTION__;
@@ -41,10 +49,10 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-required
 	 *
-	 * @covers ::delete_site_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_site_option' )]
 	public function test_delete_network_option_on_only_one_network() {
 		$id     = self::factory()->network->create();
 		$option = __FUNCTION__;
@@ -59,11 +67,11 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Tests that calling delete_network_option() updates nooptions when option deleted.
 	 *
-	 * @ticket 61484
-	 * @ticket 61730
 	 *
-	 * @covers ::delete_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61484' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61730' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_network_option' )]
 	public function test_check_delete_network_option_updates_notoptions() {
 		add_network_option( 1, 'foo', 'value1' );
 
@@ -87,11 +95,11 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22846
-	 * @group ms-excluded
 	 *
-	 * @covers ::add_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22846' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_network_option' )]
 	public function test_add_network_option_is_not_stored_as_autoload_option() {
 		$key = __FUNCTION__;
 
@@ -103,11 +111,11 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22846
-	 * @group ms-excluded
 	 *
-	 * @covers ::update_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22846' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_network_option' )]
 	public function test_update_network_option_is_not_stored_as_autoload_option() {
 		$key = __FUNCTION__;
 
@@ -119,13 +127,13 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_network_id_parameter
 	 *
 	 * @param $network_id
 	 * @param $expected_response
 	 *
-	 * @covers ::add_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_network_id_parameter' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_network_option' )]
 	public function test_add_network_option_network_id_parameter( $network_id, $expected_response ) {
 		$option = rand_str();
 		$value  = rand_str();
@@ -134,20 +142,20 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_network_id_parameter
 	 *
 	 * @param $network_id
 	 * @param $expected_response
 	 *
-	 * @covers ::get_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_network_id_parameter' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_network_option' )]
 	public function test_get_network_option_network_id_parameter( $network_id, $expected_response ) {
 		$option = rand_str();
 
 		$this->assertSame( $expected_response, get_network_option( $network_id, $option, true ) );
 	}
 
-	public function data_network_id_parameter() {
+	public static function data_network_id_parameter() {
 		return array(
 			// Numeric values should always be accepted.
 			array( 1, true ),
@@ -167,13 +175,13 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43506
-	 * @group ms-required
 	 *
-	 * @covers ::get_network_option
-	 * @covers ::wp_cache_get
-	 * @covers ::wp_cache_delete
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43506' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_network_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_get' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_delete' )]
 	public function test_get_network_option_sets_notoptions_if_option_found() {
 		$network_id     = get_current_network_id();
 		$notoptions_key = "$network_id:notoptions";
@@ -195,12 +203,12 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43506
-	 * @group ms-required
 	 *
-	 * @covers ::get_network_option
-	 * @covers ::wp_cache_get
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43506' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_network_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_get' )]
 	public function test_get_network_option_sets_notoptions_if_option_not_found() {
 		$network_id     = get_current_network_id();
 		$notoptions_key = "$network_id:notoptions";
@@ -224,10 +232,10 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Ensure updating network options containing an object do not result in unneeded database calls.
 	 *
-	 * @ticket 44956
 	 *
-	 * @covers ::update_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44956' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_network_option' )]
 	public function test_update_network_option_array_with_object() {
 		$array_w_object = array(
 			'url'       => 'http://src.wordpress-develop.dev/wp-content/uploads/2016/10/cropped-Blurry-Lights.jpg',
@@ -262,10 +270,10 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Tests that calling update_network_option() clears the notoptions cache.
 	 *
-	 * @ticket 61484
 	 *
-	 * @covers ::update_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61484' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_network_option' )]
 	public function test_update_network_option_clears_the_notoptions_cache() {
 		$option_name = 'ticket_61484_option_to_be_created';
 		$cache_key   = is_multisite() ? '1:notoptions' : 'notoptions';
@@ -287,10 +295,10 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Tests that calling add_network_option() clears the notoptions cache.
 	 *
-	 * @ticket 61484
 	 *
-	 * @covers ::add_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61484' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_network_option' )]
 	public function test_add_network_option_clears_the_notoptions_cache() {
 		$option_name = 'ticket_61484_option_to_be_created';
 		$cache_key   = is_multisite() ? '1:notoptions' : 'notoptions';
@@ -312,11 +320,11 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Test adding a previously known notoption returns the correct value.
 	 *
-	 * @ticket 61730
 	 *
-	 * @covers ::add_network_option
-	 * @covers ::delete_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61730' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_network_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_network_option' )]
 	public function test_adding_previous_notoption_returns_correct_value() {
 		$option_name = 'ticket_61730_option_to_be_created';
 
@@ -332,12 +340,12 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Test `get_network_option()` does not use network notoptions cache for single sites.
 	 *
-	 * @ticket 61730
 	 *
-	 * @group ms-excluded
 	 *
-	 * @covers ::get_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61730' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_network_option' )]
 	public function test_get_network_option_does_not_use_network_notoptions_cache_for_single_sites() {
 		get_network_option( 1, 'ticket_61730_notoption' );
 
@@ -352,13 +360,13 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Test `delete_network_option()` does not use network notoptions cache for single sites.
 	 *
-	 * @ticket 61730
-	 * @ticket 61484
 	 *
-	 * @group ms-excluded
 	 *
-	 * @covers ::delete_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61730' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61484' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_network_option' )]
 	public function test_delete_network_option_does_not_use_network_notoptions_cache_for_single_sites() {
 		add_network_option( 1, 'ticket_61730_notoption', 'value' );
 		delete_network_option( 1, 'ticket_61730_notoption' );
@@ -374,12 +382,12 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Test `get_network_option()` does not use single site notoptions cache for networks.
 	 *
-	 * @ticket 61730
 	 *
-	 * @group ms-required
 	 *
-	 * @covers ::get_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61730' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_network_option' )]
 	public function test_get_network_option_does_not_use_single_site_notoptions_cache_for_networks() {
 		$network_notoptions_cache_before     = wp_cache_get( '1:notoptions', 'site-options' );
 		$single_site_notoptions_cache_before = wp_cache_get( 'notoptions', 'options' );
@@ -398,13 +406,13 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Test `delete_network_option()` does not use single site notoptions cache for networks.
 	 *
-	 * @ticket 61730
-	 * @ticket 61484
 	 *
-	 * @group ms-required
 	 *
-	 * @covers ::delete_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61730' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61484' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_network_option' )]
 	public function test_delete_network_option_does_not_use_single_site_notoptions_cache_for_networks() {
 		$network_notoptions_cache_before     = wp_cache_get( '1:notoptions', 'site-options' );
 		$single_site_notoptions_cache_before = wp_cache_get( 'notoptions', 'options' );
@@ -424,12 +432,12 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Assert that the 'pre_site_option' hook is called once per call to get_network_option().
 	 *
-	 * @ticket 56870
 	 *
-	 * @group ms-required
 	 *
-	 * @covers ::get_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56870' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_network_option' )]
 	public function test_get_network_option_should_call_pre_site_option_filter() {
 		$filter = new MockAction();
 
@@ -443,12 +451,12 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 	/**
 	 * Verifies that the global 'pre_site_option' filter short-circuits get_network_option().
 	 *
-	 * @ticket 56870
 	 *
-	 * @group ms-required
 	 *
-	 * @covers ::get_network_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56870' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_network_option' )]
 	public function test_pre_site_option_filter_short_circuits_get_network_option() {
 		$option       = 'ticket_56870_pre_site_option_short_circuit';
 		$network_id   = get_current_network_id();

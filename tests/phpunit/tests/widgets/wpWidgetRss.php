@@ -9,17 +9,17 @@
 /**
  * Test wp-includes/widgets/class-wp-widget-rss.php
  *
- * @group widgets
  */
+#[\PHPUnit\Framework\Attributes\Group( 'widgets' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Widget_RSS::class, 'widget' )]
 class Tests_Widgets_wpWidgetRss extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 53278
-	 * @covers WP_Widget_RSS::widget
-	 * @dataProvider data_url_unhappy_path
 	 *
 	 * @param mixed $url When null, unsets 'url' arg, else, sets to given value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53278' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_url_unhappy_path' )]
 	public function test_url_unhappy_path( $url ) {
 		$widget   = new WP_Widget_RSS();
 		$args     = array(
@@ -42,7 +42,7 @@ class Tests_Widgets_wpWidgetRss extends WP_UnitTestCase {
 		$widget->widget( $args, $instance );
 	}
 
-	public function data_url_unhappy_path() {
+	public static function data_url_unhappy_path() {
 		return array(
 			'when unset'         => array(
 				'url' => null,
@@ -57,13 +57,12 @@ class Tests_Widgets_wpWidgetRss extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53278
-	 * @covers WP_Widget_RSS::widget
-	 * @dataProvider data_url_happy_path
 	 *
 	 * @param mixed  $url      URL argument.
 	 * @param string $expected Expected output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53278' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_url_happy_path' )]
 	public function test_url_happy_path( $url, $expected ) {
 		add_filter( 'pre_http_request', array( $this, 'mocked_rss_response' ) );
 
@@ -90,11 +89,11 @@ class Tests_Widgets_wpWidgetRss extends WP_UnitTestCase {
 		$this->assertStringContainsString( $expected, $actual );
 	}
 
-	public function data_url_happy_path() {
+	public static function data_url_happy_path() {
 		return array(
 			'when url is given' => array(
-				'url' => 'https://wordpress.org/news/feed/',
-				'<section id="widget_rss-5" class="widget widget_rss"><h2><a class="rsswidget rss-widget-feed" href="https://wordpress.org/news/feed/">',
+				'url'      => 'https://wordpress.org/news/feed/',
+				'expected' => '<section id="widget_rss-5" class="widget widget_rss"><h2><a class="rsswidget rss-widget-feed" href="https://wordpress.org/news/feed/">',
 			),
 		);
 	}

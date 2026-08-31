@@ -1,10 +1,11 @@
 <?php
 
 /**
- * @group admin
  *
- * @covers WP_Terms_List_Table
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Terms_List_Table::class )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Terms_List_Table::class, 'handle_row_actions' )]
 class Tests_Admin_WpTermsListTable extends WP_UnitTestCase {
 
 	/**
@@ -56,10 +57,9 @@ class Tests_Admin_WpTermsListTable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Terms_List_Table::handle_row_actions()
 	 *
-	 * @ticket 59336
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59336' )]
 	public function test_handle_row_actions_as_author() {
 		wp_set_current_user( self::$author_id );
 
@@ -72,10 +72,9 @@ class Tests_Admin_WpTermsListTable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_Terms_List_Table::handle_row_actions()
 	 *
-	 * @ticket 59336
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59336' )]
 	public function test_handle_row_actions_as_admin() {
 		wp_set_current_user( self::$admin_id );
 

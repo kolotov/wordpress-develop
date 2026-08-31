@@ -5,11 +5,11 @@
  * @package WordPress\UnitTests
  * @since 5.2.0
  *
- * @group ajax
- * @group privacy
  *
- * @covers ::wp_ajax_wp_privacy_erase_personal_data
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_wp_privacy_erase_personal_data' )]
 class Tests_Ajax_wpAjaxWpPrivacyErasePersonalData extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -247,8 +247,8 @@ class Tests_Ajax_wpAjaxWpPrivacyErasePersonalData extends WP_Ajax_UnitTestCase {
 	 *
 	 * @since 5.2.0
 	 *
-	 * @ticket 43438
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43438' )]
 	public function test_error_when_missing_request_id() {
 		$this->assertNotWPError( self::$request_id );
 
@@ -268,8 +268,8 @@ class Tests_Ajax_wpAjaxWpPrivacyErasePersonalData extends WP_Ajax_UnitTestCase {
 	 *
 	 * @since 5.2.0
 	 *
-	 * @ticket 43438
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43438' )]
 	public function test_error_when_request_id_invalid() {
 		$this->assertNotWPError( self::$request_id );
 
@@ -289,8 +289,8 @@ class Tests_Ajax_wpAjaxWpPrivacyErasePersonalData extends WP_Ajax_UnitTestCase {
 	 *
 	 * @since 5.2.0
 	 *
-	 * @ticket 43438
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43438' )]
 	public function test_error_when_current_user_missing_required_capabilities() {
 		$this->_setRole( 'author' );
 
@@ -306,10 +306,10 @@ class Tests_Ajax_wpAjaxWpPrivacyErasePersonalData extends WP_Ajax_UnitTestCase {
 	/**
 	 * Test requests do not succeed on multisite when the current user is not a network admin.
 	 *
-	 * @ticket 43438
-	 * @group multisite
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43438' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_error_when_current_user_missing_required_capabilities_multisite() {
 		revoke_super_admin( get_current_user_id() );
 
@@ -675,8 +675,8 @@ class Tests_Ajax_wpAjaxWpPrivacyErasePersonalData extends WP_Ajax_UnitTestCase {
 	 *
 	 * @since 5.2.0
 	 *
-	 * @ticket 43438
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43438' )]
 	public function test_success_when_current_user_has_required_capabilities() {
 		$this->assertTrue( current_user_can( 'erase_others_personal_data' ) );
 		$this->assertTrue( current_user_can( 'delete_users' ) );
@@ -698,8 +698,8 @@ class Tests_Ajax_wpAjaxWpPrivacyErasePersonalData extends WP_Ajax_UnitTestCase {
 	 *
 	 * @since 5.2.0
 	 *
-	 * @ticket 43438
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43438' )]
 	public function test_success_when_no_items_to_erase() {
 
 		$this->_make_ajax_call( array( 'page' => 2 ) );

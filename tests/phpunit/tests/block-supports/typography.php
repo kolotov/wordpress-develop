@@ -1,7 +1,12 @@
 <?php
 /**
- * @group block-supports
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+
+
+
+
+
 class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * @var string|null
@@ -64,10 +69,10 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests whether slugs with numbers are kebab cased.
 	 *
-	 * @ticket 54337
 	 *
-	 * @covers ::wp_apply_typography_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54337' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_apply_typography_support' )]
 	public function test_should_kebab_case_font_size_slug_with_numbers() {
 		$this->test_block_name = 'test/font-size-slug-with-numbers';
 		register_block_type(
@@ -100,10 +105,10 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests legacy inline styles for font family.
 	 *
-	 * @ticket 54337
 	 *
-	 * @covers ::wp_apply_typography_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54337' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_apply_typography_support' )]
 	public function test_should_generate_font_family_with_legacy_inline_styles_using_a_value() {
 		$this->test_block_name = 'test/font-family-with-inline-styles-using-value';
 		register_block_type(
@@ -135,10 +140,10 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests skipping serialization.
 	 *
-	 * @ticket 55505
 	 *
-	 * @covers ::wp_apply_typography_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_apply_typography_support' )]
 	public function test_should_skip_serialization_for_typography_block_supports() {
 		$this->test_block_name = 'test/typography-with-skipped-serialization-block-supports';
 		register_block_type(
@@ -183,10 +188,10 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests skipping serialization of individual block supports properties.
 	 *
-	 * @ticket 55505
 	 *
-	 * @covers ::wp_apply_typography_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_apply_typography_support' )]
 	public function test_should_skip_serialization_for_letter_spacing_block_supports() {
 		$this->test_block_name = 'test/letter-spacing-with-individual-skipped-serialization-block-supports';
 		register_block_type(
@@ -221,10 +226,10 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests legacy css var inline styles for font family.
 	 *
-	 * @ticket 54337
 	 *
-	 * @covers ::wp_apply_typography_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54337' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_apply_typography_support' )]
 	public function test_should_generate_css_var_for_font_family_with_legacy_inline_styles() {
 		$this->test_block_name = 'test/font-family-with-inline-styles-using-css-var';
 		register_block_type(
@@ -256,10 +261,10 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests that a classname is generated for font family.
 	 *
-	 * @ticket 54337
 	 *
-	 * @covers ::wp_apply_typography_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54337' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_apply_typography_support' )]
 	public function test_should_generate_classname_for_font_family() {
 		$this->test_block_name = 'test/font-family-with-class';
 		register_block_type(
@@ -291,15 +296,8 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests generating font size values, including fluid formulae, from fontSizes preset.
 	 *
-	 * @ticket 56467
-	 * @ticket 57065
-	 * @ticket 58523
-	 * @ticket 61118
-	 * @ticket 61932
 	 *
-	 * @covers ::wp_get_typography_font_size_value
 	 *
-	 * @dataProvider data_generate_font_size_preset_fixtures
 	 *
 	 * @param array  $font_size_preset {
 	 *      Required. fontSizes preset value as seen in theme.json.
@@ -311,6 +309,13 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 * @param bool   $settings         Theme JSON settings array that overrides any global theme settings.
 	 * @param string $expected_output Expected output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '57065' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58523' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61118' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61932' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_generate_font_size_preset_fixtures' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_typography_font_size_value' )]
 	public function test_wp_get_typography_font_size_value( $font_size_preset, $settings, $expected_output ) {
 		$actual = wp_get_typography_font_size_value( $font_size_preset, $settings );
 
@@ -322,7 +327,7 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_generate_font_size_preset_fixtures() {
+	public static function data_generate_font_size_preset_fixtures() {
 		return array(
 			'returns value when fluid typography is deactivated' => array(
 				'font_size_preset' => array(
@@ -381,48 +386,48 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 				'expected_output'  => '28px',
 			),
 			'returns value when fluid is empty array'    => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size' => '28px',
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => array(),
 					),
 				),
-				'expected_output' => '28px',
+				'expected_output'  => '28px',
 			),
 			'returns clamp value with minViewportWidth override' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size' => '28px',
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => array(
 							'minViewportWidth' => '500px',
 						),
 					),
 				),
-				'expected_output' => 'clamp(17.905px, 1.119rem + ((1vw - 5px) * 0.918), 28px)',
+				'expected_output'  => 'clamp(17.905px, 1.119rem + ((1vw - 5px) * 0.918), 28px)',
 			),
 			'returns clamp value with maxViewportWidth override' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size' => '28px',
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => array(
 							'maxViewportWidth' => '500px',
 						),
 					),
 				),
-				'expected_output' => 'clamp(17.905px, 1.119rem + ((1vw - 3.2px) * 5.608), 28px)',
+				'expected_output'  => 'clamp(17.905px, 1.119rem + ((1vw - 3.2px) * 5.608), 28px)',
 			),
 
 			'returns clamp value with layout.wideSize override' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size' => '28px',
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
@@ -430,7 +435,7 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 						'wideSize' => '500px',
 					),
 				),
-				'expected_output' => 'clamp(17.905px, 1.119rem + ((1vw - 3.2px) * 5.608), 28px)',
+				'expected_output'  => 'clamp(17.905px, 1.119rem + ((1vw - 3.2px) * 5.608), 28px)',
 			),
 			'returns already clamped value'              => array(
 				'font_size_preset' => array(
@@ -469,27 +474,27 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 			),
 
 			'returns clamp value with em min and max units' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size' => '1.75em',
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
 				),
-				'expected_output' => 'clamp(1.119em, 1.119rem + ((1vw - 0.2em) * 0.789), 1.75em)',
+				'expected_output'  => 'clamp(1.119em, 1.119rem + ((1vw - 0.2em) * 0.789), 1.75em)',
 			),
 
 			'returns clamp value for floats'             => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size' => '70.175px',
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
 				),
-				'expected_output' => 'clamp(37.897px, 2.369rem + ((1vw - 3.2px) * 2.522), 70.175px)',
+				'expected_output'  => 'clamp(37.897px, 2.369rem + ((1vw - 3.2px) * 2.522), 70.175px)',
 			),
 
 			'coerces integer to `px` and returns clamp value' => array(
@@ -543,35 +548,35 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 			),
 
 			'returns clamp value where min and max fluid values defined' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size'  => '80px',
 					'fluid' => array(
 						'min' => '70px',
 						'max' => '125px',
 					),
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
 				),
-				'expected_output' => 'clamp(70px, 4.375rem + ((1vw - 3.2px) * 4.297), 125px)',
+				'expected_output'  => 'clamp(70px, 4.375rem + ((1vw - 3.2px) * 4.297), 125px)',
 			),
 
 			'returns clamp value where max is equal to size' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size'  => '7.8125rem',
 					'fluid' => array(
 						'min' => '4.375rem',
 						'max' => '7.8125rem',
 					),
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
 				),
-				'expected_output' => 'clamp(4.375rem, 4.375rem + ((1vw - 0.2rem) * 4.298), 7.8125rem)',
+				'expected_output'  => 'clamp(4.375rem, 4.375rem + ((1vw - 0.2rem) * 4.298), 7.8125rem)',
 			),
 
 			'returns clamp value if min font size is greater than max' => array(
@@ -619,15 +624,15 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 			),
 
 			'returns value when size is equal to lower bounds and no fluid min/max set' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size' => '14px',
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
 				),
-				'expected_output' => '14px',
+				'expected_output'  => '14px',
 			),
 
 			'returns clamp value with different min max units' => array(
@@ -693,33 +698,33 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 			),
 
 			'should not apply lower bound test when only fluid min is set' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size'  => '20px',
 					'fluid' => array(
 						'min' => '12px',
 					),
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
 				),
-				'expected_output' => 'clamp(12px, 0.75rem + ((1vw - 3.2px) * 0.625), 20px)',
+				'expected_output'  => 'clamp(12px, 0.75rem + ((1vw - 3.2px) * 0.625), 20px)',
 			),
 
 			'should not apply lower bound test when only fluid max is set' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size'  => '0.875rem',
 					'fluid' => array(
 						'max' => '20rem',
 					),
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
 				),
-				'expected_output' => 'clamp(0.875rem, 0.875rem + ((1vw - 0.2rem) * 23.906), 20rem)',
+				'expected_output'  => 'clamp(0.875rem, 0.875rem + ((1vw - 0.2rem) * 23.906), 20rem)',
 			),
 
 			'returns clamp value when min and max font sizes are equal' => array(
@@ -739,69 +744,69 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 			),
 
 			'should apply scaled min font size for em values when custom min font size is not set' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size' => '12rem',
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
 				),
-				'expected_output' => 'clamp(5.174rem, 5.174rem + ((1vw - 0.2rem) * 8.533), 12rem)',
+				'expected_output'  => 'clamp(5.174rem, 5.174rem + ((1vw - 0.2rem) * 8.533), 12rem)',
 			),
 
 			'should apply scaled min font size for px values when custom min font size is not set' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size' => '200px',
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
 				),
-				'expected_output' => 'clamp(85.342px, 5.334rem + ((1vw - 3.2px) * 8.958), 200px)',
+				'expected_output'  => 'clamp(85.342px, 5.334rem + ((1vw - 3.2px) * 8.958), 200px)',
 			),
 
 			'should not apply scaled min font size for minimum font size when custom min font size is set' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size'  => '200px',
 					'fluid' => array(
 						'min' => '100px',
 					),
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => true,
 					),
 				),
-				'expected_output' => 'clamp(100px, 6.25rem + ((1vw - 3.2px) * 7.813), 200px)',
+				'expected_output'  => 'clamp(100px, 6.25rem + ((1vw - 3.2px) * 7.813), 200px)',
 			),
 
 			// Individual preset settings override global settings.
 			'should convert individual preset size to fluid if fluid is disabled in global settings' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size'  => '17px',
 					'fluid' => true,
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(),
 				),
-				'expected_output' => 'clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.234), 17px)',
+				'expected_output'  => 'clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.234), 17px)',
 			),
 			'should use individual preset settings if fluid is disabled in global settings' => array(
-				'font_size'       => array(
+				'font_size_preset' => array(
 					'size'  => '17px',
 					'fluid' => array(
 						'min' => '16px',
 						'max' => '26px',
 					),
 				),
-				'settings'        => array(
+				'settings'         => array(
 					'typography' => array(
 						'fluid' => false,
 					),
 				),
-				'expected_output' => 'clamp(16px, 1rem + ((1vw - 3.2px) * 0.781), 26px)',
+				'expected_output'  => 'clamp(16px, 1rem + ((1vw - 3.2px) * 0.781), 26px)',
 			),
 		);
 	}
@@ -809,13 +814,10 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests backwards compatibility for deprecated second argument $should_use_fluid_typography.
 	 *
-	 * @ticket 61118
 	 *
-	 * @covers ::wp_get_typography_font_size_value
 	 *
 	 * @expectedDeprecated wp_get_typography_font_size_value
 	 *
-	 * @dataProvider data_generate_font_size_preset_should_use_fluid_typography_deprecated_fixtures
 	 *
 	 * @param array  $font_size                     {
 	 *     Required. A font size as represented in the fontSizes preset format as seen in theme.json.
@@ -827,6 +829,9 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 * @param bool   $should_use_fluid_typography An override to switch fluid typography "on". Can be used for unit testing.
 	 * @param string $expected_output Expected output of wp_get_typography_font_size_value().
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61118' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_generate_font_size_preset_should_use_fluid_typography_deprecated_fixtures' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_typography_font_size_value' )]
 	public function test_wp_get_typography_font_size_value_should_use_fluid_typography_deprecated( $font_size, $should_use_fluid_typography, $expected_output ) {
 		$actual = wp_get_typography_font_size_value( $font_size, $should_use_fluid_typography );
 
@@ -838,7 +843,7 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_generate_font_size_preset_should_use_fluid_typography_deprecated_fixtures() {
+	public static function data_generate_font_size_preset_should_use_fluid_typography_deprecated_fixtures() {
 		return array(
 			'returns value when fluid typography is deactivated' => array(
 				'font_size'                   => array(
@@ -861,11 +866,8 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 * Tests that theme json settings passed to wp_get_typography_font_size_value
 	 * override global theme settings.
 	 *
-	 * @ticket 61118
 	 *
-	 * @covers ::wp_get_typography_font_size_value
 	 *
-	 * @dataProvider data_generate_should_override_theme_settings_fixtures
 	 *
 	 * @param array  $font_size                     {
 	 *     Required. A font size as represented in the fontSizes preset format as seen in theme.json.
@@ -877,6 +879,9 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 * @param bool   $settings        Theme JSON settings array that overrides any global theme settings.
 	 * @param string $expected_output Expected output of wp_get_typography_font_size_value().
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61118' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_generate_should_override_theme_settings_fixtures' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_typography_font_size_value' )]
 	public function test_should_override_theme_settings( $font_size, $settings, $expected_output ) {
 		switch_theme( 'block-theme-child-with-fluid-typography' );
 		$actual = wp_get_typography_font_size_value( $font_size, $settings );
@@ -889,7 +894,7 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_generate_should_override_theme_settings_fixtures() {
+	public static function data_generate_should_override_theme_settings_fixtures() {
 		return array(
 			'returns clamp value when theme activates fluid typography' => array(
 				'font_size'       => array(
@@ -960,21 +965,21 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 * in inline block supports styles
 	 * when "settings.typography.fluid" is set to true.
 	 *
-	 * @ticket 56467
-	 * @ticket 57065
-	 * @ticket 57529
-	 * @ticket 58522
-	 * @ticket 58523
-	 * @ticket 59048
 	 *
-	 * @covers ::wp_register_typography_support
 	 *
-	 * @dataProvider data_generate_block_supports_font_size_fixtures
 	 *
 	 * @param string $font_size_value The block supports custom font size value.
 	 * @param string $theme_slug      A theme slug corresponding to an available test theme.
 	 * @param string $expected_output Expected value of style property from wp_apply_typography_support().
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '57065' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '57529' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58522' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58523' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59048' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_generate_block_supports_font_size_fixtures' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_typography_support' )]
 	public function test_should_covert_font_sizes_to_fluid_values( $font_size_value, $theme_slug, $expected_output ) {
 		switch_theme( $theme_slug );
 
@@ -1016,7 +1021,7 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_generate_block_supports_font_size_fixtures() {
+	public static function data_generate_block_supports_font_size_fixtures() {
 		return array(
 			'returns value when fluid typography is not active' => array(
 				'font_size_value' => '15px',
@@ -1056,17 +1061,17 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 * is replaced with a fluid value when "settings.typography.fluid" is set to true,
 	 * and the correct block content is generated.
 	 *
-	 * @ticket 56467
-	 * @ticket 57065
-	 * @ticket 58523
 	 *
-	 * @dataProvider data_generate_replace_inline_font_styles_with_fluid_values_fixtures
 	 *
 	 * @param string $block_content               HTML block content.
 	 * @param string $font_size_value             The block supports custom font size value.
 	 * @param bool   $should_use_fluid_typography An override to switch fluid typography "on". Can be used for unit testing.
 	 * @param string $expected_output             Expected value of style property from wp_apply_typography_support().
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '57065' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58523' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_generate_replace_inline_font_styles_with_fluid_values_fixtures' )]
 	public function test_should_replace_inline_font_styles_with_fluid_values( $block_content, $font_size_value, $should_use_fluid_typography, $expected_output ) {
 		if ( $should_use_fluid_typography ) {
 			switch_theme( 'block-theme-child-with-fluid-typography' );
@@ -1094,7 +1099,7 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_generate_replace_inline_font_styles_with_fluid_values_fixtures() {
+	public static function data_generate_replace_inline_font_styles_with_fluid_values_fixtures() {
 		return array(
 			'default_return_content'                       => array(
 				'block_content'               => '<h2 class="has-vivid-red-background-color has-background has-link-color" style="margin-top:var(--wp--preset--spacing--60);font-size:4rem;font-style:normal;font-weight:600;letter-spacing:29px;text-decoration:underline;text-transform:capitalize">This is a heading</h2>',
@@ -1138,15 +1143,15 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests that valid font size values are parsed.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::wp_get_typography_value_and_unit
 	 *
-	 * @dataProvider data_valid_size_wp_get_typography_value_and_unit
 	 *
 	 * @param mixed $raw_value Raw size value to test.
 	 * @param mixed $expected  An expected return value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_size_wp_get_typography_value_and_unit' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_typography_value_and_unit' )]
 	public function test_valid_size_wp_get_typography_value_and_unit( $raw_value, $expected ) {
 		$this->assertSame( $expected, wp_get_typography_value_and_unit( $raw_value ) );
 	}
@@ -1156,7 +1161,7 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_valid_size_wp_get_typography_value_and_unit() {
+	public static function data_valid_size_wp_get_typography_value_and_unit() {
 		return array(
 			'size: 10vh with default units do not match' => array(
 				'raw_value' => '10vh',
@@ -1225,15 +1230,15 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests that invalid font size values are not parsed and trigger incorrect usage.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::wp_get_typography_value_and_unit
 	 *
-	 * @dataProvider data_invalid_size_wp_get_typography_value_and_unit
 	 * @expectedIncorrectUsage wp_get_typography_value_and_unit
 	 *
 	 * @param mixed $raw_value Raw size value to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_size_wp_get_typography_value_and_unit' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_typography_value_and_unit' )]
 	public function test_invalid_size_wp_get_typography_value_and_unit( $raw_value ) {
 		$this->assertNull( wp_get_typography_value_and_unit( $raw_value ) );
 	}
@@ -1243,7 +1248,7 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_invalid_size_wp_get_typography_value_and_unit() {
+	public static function data_invalid_size_wp_get_typography_value_and_unit() {
 		return array(
 			'size: null'  => array( null ),
 			'size: false' => array( false ),
@@ -1255,12 +1260,8 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
 	 * Tests computed font size values.
 	 *
-	 * @ticket 58522
-	 * @ticket 60263
 	 *
-	 * @covers ::wp_get_computed_fluid_typography_value
 	 *
-	 * @dataProvider data_wp_get_computed_fluid_typography_value
 	 *
 	 * @param array  $args {
 	 *      Optional. An associative array of values to calculate a fluid formula for font size. Default is empty array.
@@ -1273,6 +1274,10 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 * }
 	 * @param string $expected_output             Expected value of style property from wp_apply_typography_support().
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58522' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60263' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_computed_fluid_typography_value' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_computed_fluid_typography_value' )]
 	public function test_wp_get_computed_fluid_typography_value( $args, $expected_output ) {
 		$actual = wp_get_computed_fluid_typography_value( $args );
 		$this->assertSame( $expected_output, $actual );
@@ -1283,7 +1288,7 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_get_computed_fluid_typography_value() {
+	public static function data_wp_get_computed_fluid_typography_value() {
 		return array(
 			'returns clamped value with valid args' => array(
 				'args'            => array(

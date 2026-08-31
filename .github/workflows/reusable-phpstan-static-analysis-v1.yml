@@ -10,7 +10,7 @@ on:
         description: 'The PHP version to use.'
         required: false
         type: 'string'
-        default: 'latest'
+        default: '8.5'
 
 # Disable permissions for all available scopes by default.
 # Any needed permissions should be configured at the job level.

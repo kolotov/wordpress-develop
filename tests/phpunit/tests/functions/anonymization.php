@@ -6,26 +6,28 @@
  *
  * @since 4.9.6
  *
- * @group functions
- * @group privacy
  *
- * @covers ::wp_privacy_anonymize_data
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_privacy_anonymize_data' )]
 class Tests_Functions_Anonymization extends WP_UnitTestCase {
 
 	/**
 	 * Tests that wp_privacy_anonymize_ip() properly anonymizes all possible IP address formats.
 	 *
-	 * @dataProvider data_wp_privacy_anonymize_ip
 	 *
-	 * @ticket 41083
-	 * @ticket 43545
 	 *
-	 * @covers ::wp_privacy_anonymize_ip
 	 *
 	 * @param string $raw_ip          Raw IP address.
 	 * @param string $expected_result Expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_privacy_anonymize_ip' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '41083' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '43545' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_privacy_anonymize_ip' )]
 	public function test_wp_privacy_anonymize_ip( $raw_ip, $expected_result ) {
 		$actual_result = wp_privacy_anonymize_data( 'ip', $raw_ip );
 
@@ -46,7 +48,7 @@ class Tests_Functions_Anonymization extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_wp_privacy_anonymize_ip() {
+	public static function data_wp_privacy_anonymize_ip() {
 		return array(
 			// Invalid IP.
 			array(
@@ -172,18 +174,18 @@ class Tests_Functions_Anonymization extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_privacy_anonymize_ip() properly anonymizes all possible IP address formats.
 	 *
-	 * @dataProvider data_wp_privacy_anonymize_ip_with_inet_dependency
 	 *
-	 * @ticket 41083
-	 * @ticket 43545
-	 * @requires function inet_ntop
-	 * @requires function inet_pton
 	 *
-	 * @covers ::wp_privacy_anonymize_ip
 	 *
 	 * @param string $raw_ip          Raw IP address.
 	 * @param string $expected_result Expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_privacy_anonymize_ip_with_inet_dependency' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '41083' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '43545' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'inet_ntop' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'inet_pton' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_privacy_anonymize_ip' )]
 	public function test_wp_privacy_anonymize_ip_with_inet_dependency( $raw_ip, $expected_result ) {
 		$this->test_wp_privacy_anonymize_ip( $raw_ip, $expected_result );
 	}
@@ -200,7 +202,7 @@ class Tests_Functions_Anonymization extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_wp_privacy_anonymize_ip_with_inet_dependency() {
+	public static function data_wp_privacy_anonymize_ip_with_inet_dependency() {
 		return array(
 			// Malformed string with valid IP substring. Sometimes proxies add things like this, or other arbitrary strings.
 			array(
@@ -295,8 +297,8 @@ class Tests_Functions_Anonymization extends WP_UnitTestCase {
 	/**
 	 * Tests text anonymization when a filter is added.
 	 *
-	 * @ticket 44141
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44141' )]
 	public function test_anonymize_with_filter() {
 		add_filter( 'wp_privacy_anonymize_data', array( $this, 'filter_wp_privacy_anonymize_data' ), 10, 3 );
 		$actual_url = wp_privacy_anonymize_data( 'url', 'https://example.com/author/username' );

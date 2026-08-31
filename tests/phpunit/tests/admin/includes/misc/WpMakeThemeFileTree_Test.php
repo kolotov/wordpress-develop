@@ -1,21 +1,18 @@
 <?php
 
-/**
- * @group admin
- *
- * @covers ::wp_make_theme_file_tree
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_make_theme_file_tree' )]
 class Tests_Admin_Includes_Misc_WpMakeThemeFileTree_Test extends WP_UnitTestCase {
 
 	/**
 	 * Tests wp_make_theme_file_tree() with various file structures.
 	 *
-	 * @ticket 65175
-	 * @dataProvider data_wp_make_theme_file_tree
 	 *
 	 * @param array $allowed_files The list of theme files.
 	 * @param array $expected      The expected tree structure.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65175' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_make_theme_file_tree' )]
 	public function test_wp_make_theme_file_tree( $allowed_files, $expected ) {
 		$this->assertSame( $expected, wp_make_theme_file_tree( $allowed_files ) );
 	}
@@ -28,7 +25,7 @@ class Tests_Admin_Includes_Misc_WpMakeThemeFileTree_Test extends WP_UnitTestCase
 	 *     expected:      array<string, string|array>,
 	 * }>
 	 */
-	public function data_wp_make_theme_file_tree(): array {
+	public static function data_wp_make_theme_file_tree(): array {
 		return array(
 			'empty list'         => array(
 				'allowed_files' => array(),

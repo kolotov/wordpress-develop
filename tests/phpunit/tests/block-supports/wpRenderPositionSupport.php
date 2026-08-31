@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group block-supports
  *
- * @covers ::wp_render_position_support
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_position_support' )]
 class Tests_Block_Supports_WpRenderPositionSupport extends WP_UnitTestCase {
 	/**
 	 * @var string|null
@@ -65,11 +65,8 @@ class Tests_Block_Supports_WpRenderPositionSupport extends WP_UnitTestCase {
 	/**
 	 * Tests that position block support works as expected.
 	 *
-	 * @ticket 57618
 	 *
-	 * @covers ::wp_render_position_support
 	 *
-	 * @dataProvider data_position_block_support
 	 *
 	 * @param string $theme_name        The theme to switch to.
 	 * @param string $block_name        The test block name to register.
@@ -78,6 +75,8 @@ class Tests_Block_Supports_WpRenderPositionSupport extends WP_UnitTestCase {
 	 * @param string $expected_wrapper  Expected markup for the block wrapper.
 	 * @param string $expected_styles   Expected styles enqueued by the style engine.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57618' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_position_block_support' )]
 	public function test_position_block_support( $theme_name, $block_name, $position_settings, $position_style, $expected_wrapper, $expected_styles ) {
 		switch_theme( $theme_name );
 		$this->test_block_name = $block_name;
@@ -133,7 +132,7 @@ class Tests_Block_Supports_WpRenderPositionSupport extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_position_block_support() {
+	public static function data_position_block_support() {
 		return array(
 			'sticky position style is applied' => array(
 				'theme_name'        => 'block-theme-child-with-fluid-typography',

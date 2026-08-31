@@ -4,12 +4,12 @@
  *
  * @since 6.9.0
  *
- * @group functions
- * @group ms-required
- * @group multisite
  *
- * @covers ::force_ssl_content
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'force_ssl_content' )]
 class Tests_Functions_ForceSslContent extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -21,11 +21,11 @@ class Tests_Functions_ForceSslContent extends WP_UnitTestCase {
 	/**
 	 * Tests that force_ssl_content() returns expected values based on various inputs.
 	 *
-	 * @dataProvider data_force_ssl_content
 	 *
 	 * @param mixed $input    The input value to test.
 	 * @param bool  $expected The expected result for subsequent calls.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_force_ssl_content' )]
 	public function test_force_ssl_content( $input, $expected ) {
 		// The first call always returns the previous value.
 		$this->assertFalse( force_ssl_content( $input ), 'First call did not return the expected value' );
@@ -39,7 +39,7 @@ class Tests_Functions_ForceSslContent extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_force_ssl_content() {
+	public static function data_force_ssl_content() {
 		return array(
 			'default'          => array( null, false ),
 			'true'             => array( true, true ),

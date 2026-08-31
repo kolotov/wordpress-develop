@@ -1,11 +1,46 @@
 <?php
 
 /**
- * @group image
- * @group media
- * @group upload
  */
+#[\PHPUnit\Framework\Attributes\Group( 'image' )]
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\Group( 'upload' )]
 class Tests_Image_Size extends WP_UnitTestCase {
+	private $content_width_existed;
+
+	private $initial_content_width;
+
+	private $initial_medium_size_w;
+
+	private $initial_medium_size_h;
+
+	public function set_up() {
+		parent::set_up();
+
+		$this->content_width_existed = array_key_exists( 'content_width', $GLOBALS );
+		$this->initial_content_width = $GLOBALS['content_width'] ?? null;
+		$this->initial_medium_size_w = get_option( 'medium_size_w', null );
+		$this->initial_medium_size_h = get_option( 'medium_size_h', null );
+	}
+
+	public function tear_down() {
+		if ( $this->content_width_existed ) {
+			$GLOBALS['content_width'] = $this->initial_content_width;
+		} else {
+			unset( $GLOBALS['content_width'] );
+		}
+
+		foreach ( array( 'medium_size_w', 'medium_size_h' ) as $option ) {
+			$value = 'medium_size_w' === $option ? $this->initial_medium_size_w : $this->initial_medium_size_h;
+			if ( null === $value ) {
+				delete_option( $option );
+			} else {
+				update_option( $option, $value );
+			}
+		}
+
+		parent::tear_down();
+	}
 
 	public function test_constrain_dims_zero() {
 		// No constraint - should have no effect.

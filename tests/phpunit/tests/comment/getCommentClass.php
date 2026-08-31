@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::get_comment_class
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_class' )]
 class Tests_Comment_GetCommentClass extends WP_UnitTestCase {
 	public function test_should_accept_comment_id() {
 		$post_id    = self::factory()->post->create();
@@ -40,8 +40,8 @@ class Tests_Comment_GetCommentClass extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33947
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33947' )]
 	public function test_should_return_an_empty_array_for_invalid_comment_id() {
 		$this->assertSame( array(), get_comment_class( 'foo', 12345 ) );
 	}

@@ -8,27 +8,27 @@
 require_once __DIR__ . '/base.php';
 
 /**
- * @group admin
- * @group filesystem
- * @group filesystem-direct
  *
- * @covers WP_Filesystem_Direct::dirlist
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem-direct' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Filesystem_Direct::class, 'dirlist' )]
 class Tests_Filesystem_WpFilesystemDirect_Dirlist extends WP_Filesystem_Direct_UnitTestCase {
 
 	/**
 	 * Tests that `WP_Filesystem_Direct::dirlist()` returns
 	 * the expected result for a path.
 	 *
-	 * @ticket 57774
 	 *
-	 * @dataProvider data_should_get_dirlist
 	 *
 	 * @param string      $path           The path.
 	 * @param bool        $include_hidden Whether to include hidden files.
 	 * @param bool        $recursive      Whether to recursive into subdirectories.
 	 * @param array|false $expected       The expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_get_dirlist' )]
 	public function test_should_get_dirlist( $path, $include_hidden, $recursive, $expected ) {
 		$actual = self::$filesystem->dirlist( self::$file_structure['test_dir']['path'] . $path, $include_hidden, $recursive );
 
@@ -51,7 +51,7 @@ class Tests_Filesystem_WpFilesystemDirect_Dirlist extends WP_Filesystem_Direct_U
 	 *
 	 * @return array[]
 	 */
-	public function data_should_get_dirlist() {
+	public static function data_should_get_dirlist() {
 		return array(
 			'a directory that exists excluding hidden files' => array(
 				'path'           => '',
@@ -99,8 +99,8 @@ class Tests_Filesystem_WpFilesystemDirect_Dirlist extends WP_Filesystem_Direct_U
 	 * Tests that `WP_Filesystem_Direct::dirlist()` recurses
 	 * into a subdirectory.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_recurse_into_subdirectory() {
 		$actual = self::$filesystem->dirlist( self::$file_structure['test_dir']['path'], true, true );
 
@@ -115,8 +115,8 @@ class Tests_Filesystem_WpFilesystemDirect_Dirlist extends WP_Filesystem_Direct_U
 	 * Tests that `WP_Filesystem_Direct::dirlist()` should not recurse
 	 * into a subdirectory.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_not_recurse_into_subdirectory() {
 
 		$actual = self::$filesystem->dirlist( self::$file_structure['test_dir']['path'], true, false );

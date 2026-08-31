@@ -1,8 +1,7 @@
 <?php
-/**
- * @group dependencies
- * @group scripts
- */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_localize_script' )]
 class Tests_Dependencies_wpLocalizeScript extends WP_UnitTestCase {
 	/**
 	 * @var WP_Scripts
@@ -24,9 +23,8 @@ class Tests_Dependencies_wpLocalizeScript extends WP_UnitTestCase {
 	/**
 	 * Verifies that wp_localize_script() works if global has not been initialized yet.
 	 *
-	 * @ticket 60862
-	 * @covers ::wp_localize_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60862' )]
 	public function test_wp_localize_script_works_before_enqueue_script() {
 		$this->assertTrue(
 			wp_localize_script(
@@ -42,9 +40,8 @@ class Tests_Dependencies_wpLocalizeScript extends WP_UnitTestCase {
 	/**
 	 * Verifies that wp_localize_script() outputs safe JSON whe harmful data is provided.
 	 *
-	 * @ticket 63851
-	 * @covers ::wp_localize_script
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63851' )]
 	public function test_wp_localize_script_outputs_safe_json() {
 		$path     = '/test.js';
 		$base_url = site_url( $path );

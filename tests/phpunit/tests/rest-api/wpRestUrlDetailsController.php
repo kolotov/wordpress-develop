@@ -6,11 +6,22 @@
  * @subpackage REST_API
  * @since 5.9.0
  *
- * @covers WP_REST_URL_Details_Controller
  *
- * @group url-details
- * @group restapi
+
+
  */
+#[\PHPUnit\Framework\Attributes\Group( 'url-details' )]
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+
+
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_URL_Details_Controller::class )]
 class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Testcase {
 
 	/**
@@ -100,20 +111,20 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::register_routes
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
 		$this->assertArrayHasKey( static::REQUEST_ROUTE, $routes );
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::parse_url_details
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'parse_url_details' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
 
@@ -142,10 +153,10 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::permissions_check
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'permissions_check' )]
 	public function test_get_items_fails_for_unauthenticated_user() {
 		wp_set_current_user( 0 );
 
@@ -167,10 +178,10 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::permissions_check
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'permissions_check' )]
 	public function test_get_items_fails_for_user_with_insufficient_permissions() {
 		wp_set_current_user( self::$subscriber_id );
 
@@ -192,14 +203,15 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @dataProvider data_get_items_fails_for_invalid_url
+
 	 *
-	 * @covers WP_REST_URL_Details_Controller::parse_url_details
 	 *
-	 * @ticket 54358
 	 *
 	 * @param mixed $invalid_url Given invalid URL to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_items_fails_for_invalid_url' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'parse_url_details' )]
 	public function test_get_items_fails_for_invalid_url( $invalid_url ) {
 		wp_set_current_user( self::$admin_id );
 
@@ -225,7 +237,7 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	 *
 	 * @return array
 	 */
-	public function data_get_items_fails_for_invalid_url() {
+	public static function data_get_items_fails_for_invalid_url() {
 		return array(
 			'empty string'   => array( '' ),
 			'numeric'        => array( 1234456 ),
@@ -234,10 +246,10 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::parse_url_details
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'parse_url_details' )]
 	public function test_get_items_fails_for_url_which_returns_a_non_200_status_code() {
 		// Force HTTP request to remote site to fail.
 		remove_filter( 'pre_http_request', array( $this, 'mock_success_request_to_remote_url' ), 10 );
@@ -262,10 +274,10 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::parse_url_details
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'parse_url_details' )]
 	public function test_get_items_fails_for_url_which_returns_empty_body_for_success() {
 		// Force HTTP request to remote site to return an empty body in response.
 		remove_filter( 'pre_http_request', array( $this, 'mock_success_request_to_remote_url' ) );
@@ -291,10 +303,10 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::parse_url_details
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'parse_url_details' )]
 	public function test_can_filter_http_request_args_via_filter() {
 		wp_set_current_user( self::$admin_id );
 
@@ -332,10 +344,10 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::parse_url_details
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'parse_url_details' )]
 	public function test_will_return_from_cache_if_populated() {
 		$transient_name = $this->get_transient_name();
 		remove_filter( "pre_site_transient_{$transient_name}", '__return_null' );
@@ -364,10 +376,10 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::parse_url_details
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'parse_url_details' )]
 	public function test_allows_filtering_data_retrieved_for_a_given_url() {
 		add_filter(
 			'rest_prepare_url_details',
@@ -410,10 +422,10 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::parse_url_details
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'parse_url_details' )]
 	public function test_allows_filtering_response() {
 		/*
 		 * Filter the response to known set of values changing only
@@ -453,10 +465,10 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @covers WP_REST_URL_Details_Controller::get_item_schema
 	 *
-	 * @ticket 54358
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
 		wp_set_current_user( self::$admin_id );
 
@@ -480,15 +492,16 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @dataProvider data_get_title
+
 	 *
-	 * @covers WP_REST_URL_Details_Controller::get_title
 	 *
-	 * @ticket 54358
 	 *
 	 * @param string $html     Given HTML string.
 	 * @param string $expected Expected found title.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_title' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'get_title' )]
 	public function test_get_title( $html, $expected ) {
 		$controller = new WP_REST_URL_Details_Controller();
 		$method     = $this->get_reflective_method( 'get_title' );
@@ -505,7 +518,7 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	 *
 	 * @return array
 	 */
-	public function data_get_title() {
+	public static function data_get_title() {
 		return array(
 
 			// Happy path for default.
@@ -551,16 +564,17 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @dataProvider data_get_icon
+
 	 *
-	 * @covers WP_REST_URL_Details_Controller::get_icon
 	 *
-	 * @ticket 54358
 	 *
 	 * @param string $html       Given HTML string.
 	 * @param string $expected   Expected found icon.
 	 * @param string $target_url Optional. Target URL. Default 'https://wordpress.org'.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_icon' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'get_icon' )]
 	public function test_get_icon( $html, $expected, $target_url = 'https://wordpress.org' ) {
 		$controller = new WP_REST_URL_Details_Controller();
 		$method     = $this->get_reflective_method( 'get_icon' );
@@ -578,7 +592,7 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	 *
 	 * @return array
 	 */
-	public function data_get_icon() {
+	public static function data_get_icon() {
 		return array(
 
 			// Happy path for default.
@@ -726,15 +740,16 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @dataProvider data_get_description
+
 	 *
-	 * @covers WP_REST_URL_Details_Controller::get_description
 	 *
-	 * @ticket 54358
 	 *
 	 * @param string $html     Given HTML string.
 	 * @param string $expected Expected found icon.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_description' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'get_description' )]
 	public function test_get_description( $html, $expected ) {
 		$controller = new WP_REST_URL_Details_Controller();
 
@@ -755,7 +770,7 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	 *
 	 * @return array
 	 */
-	public function data_get_description() {
+	public static function data_get_description() {
 		return array(
 
 			// Happy paths.
@@ -877,16 +892,17 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @dataProvider data_get_image
+
 	 *
-	 * @covers WP_REST_URL_Details_Controller::get_image
 	 *
-	 * @ticket 54358
 	 *
 	 * @param string $html       Given HTML string.
 	 * @param string $expected   Expected found image.
 	 * @param string $target_url Optional. Target URL. Default 'https://wordpress.org'.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54358' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_image' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_URL_Details_Controller', 'get_image' )]
 	public function test_get_image( $html, $expected, $target_url = 'https://wordpress.org' ) {
 		$controller = new WP_REST_URL_Details_Controller();
 
@@ -907,7 +923,7 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	 *
 	 * @return array
 	 */
-	public function data_get_image() {
+	public static function data_get_image() {
 		return array(
 
 			// Happy paths.
@@ -1045,43 +1061,43 @@ class Tests_REST_WpRestUrlDetailsController extends WP_Test_REST_Controller_Test
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_context_param() {
 		// Controller does not use get_context_param().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_item() {
 		// Controller does not implement get_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_create_item() {
 		// Controller does not implement create_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_update_item() {
 		// Controller does not implement update_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_delete_item() {
 		// Controller does not implement delete_item().
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_prepare_item() {
 		// Controller does not implement prepare_item().
 	}

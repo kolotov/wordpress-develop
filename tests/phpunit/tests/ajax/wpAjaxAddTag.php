@@ -8,24 +8,25 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 /**
  * Class for testing ajax add tag functionality.
  *
- * @group ajax
  *
- * @covers ::wp_ajax_add_tag
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_add_tag' )]
 class Tests_Ajax_wpAjaxAddTag extends WP_Ajax_UnitTestCase {
 
 	/**
-	 * @dataProvider data_add_tag
 	 *
-	 * @ticket 42937
-	 *
-	 * @covers ::wp_insert_term
 	 *
 	 * @param array                 $post_data Data to populate $_POST.
 	 * @param string                $expected  Expected response.
 	 * @param array|string|callable $callback  Optional. Callback to register to 'term_updated_messages'
 	 *                                         filter. Default empty string (no callback).
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_add_tag' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '42937' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_term' )]
 	public function test_add_tag( array $post_data, $expected, $callback = '' ) {
 		$this->_setRole( 'administrator' );
 
@@ -53,7 +54,7 @@ class Tests_Ajax_wpAjaxAddTag extends WP_Ajax_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_add_tag() {
+	public static function data_add_tag() {
 		return array(
 			'add a category'                        => array(
 				'post_data' => array(
@@ -93,8 +94,8 @@ class Tests_Ajax_wpAjaxAddTag extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42937
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42937' )]
 	public function test_adding_category_without_capability_should_error() {
 		$this->_setRole( 'subscriber' );
 
@@ -111,10 +112,9 @@ class Tests_Ajax_wpAjaxAddTag extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42937
-	 *
-	 * @covers ::wp_insert_term
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42937' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_term' )]
 	public function test_adding_existing_category_should_error() {
 		$this->_setRole( 'administrator' );
 

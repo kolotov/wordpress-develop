@@ -5,10 +5,10 @@
  *
  * @since 6.4.0
  *
- * @group link
  *
- * @covers ::next_posts
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'next_posts' )]
 class Tests_Link_NextPosts extends WP_UnitTestCase {
 
 	/**
@@ -33,8 +33,8 @@ class Tests_Link_NextPosts extends WP_UnitTestCase {
 	/**
 	 * The absence of a deprecation notice on PHP 8.1+ also shows that the issue is resolved.
 	 *
-	 * @ticket 59154
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59154' )]
 	public function test_should_return_empty_string_when_no_next_posts_page_link() {
 		$this->assertSame( '', next_posts( 1, false ) );
 	}

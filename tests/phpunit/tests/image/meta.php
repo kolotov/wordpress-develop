@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @group image
- * @group media
- * @group upload
- * @requires extension gd
- * @requires extension exif
  *
- * @covers ::wp_read_image_metadata
  */
+#[\PHPUnit\Framework\Attributes\Group( 'image' )]
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\Group( 'upload' )]
+#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'gd' )]
+#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'exif' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_read_image_metadata' )]
 class Tests_Image_Meta extends WP_UnitTestCase {
 
 	public static function wpSetUpBeforeClass( WP_UnitTest_Factory $factory ) {
@@ -94,8 +94,8 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 6571
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6571' )]
 	public function test_exif_error() {
 		// https://core.trac.wordpress.org/ticket/6571
 		// This triggers a warning message when reading the Exif block.
@@ -130,8 +130,8 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63895
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63895' )]
 	public function test_iptc_alt() {
 		// Image tests alt text from the IPTC photo metadata standard 2025.1.
 		$out = wp_read_image_metadata( DIR_TESTDATA . '/images/IPTC-PhotometadataRef-Std2025.1.jpg' );
@@ -140,8 +140,8 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 9417
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '9417' )]
 	public function test_utf8_iptc_tags() {
 		// Trilingual UTF-8 text in the ITPC caption-abstract field.
 		$out = wp_read_image_metadata( DIR_TESTDATA . '/images/test-image-iptc.jpg' );
@@ -159,8 +159,8 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 
 
 	/**
-	 * @ticket 33772
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33772' )]
 	public function test_exif_keywords() {
 		$out = wp_read_image_metadata( DIR_TESTDATA . '/images/33772.jpg' );
 
@@ -179,21 +179,22 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_stream
 	 *
-	 * @ticket 52826
-	 * @ticket 52922
 	 *
 	 * @param string $file     Stream's URI.
 	 * @param array  $expected Expected metadata.
 	 */
-	public function test_stream( $file, $expected ) {
-		$actual = wp_read_image_metadata( $file );
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_stream' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '52826' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '52922' )]
+	public function test_stream( $file, $metadata ) {
+		$expected = $metadata;
+		$actual   = wp_read_image_metadata( $file );
 
 		$this->assertSame( $expected, $actual );
 	}
 
-	public function data_stream() {
+	public static function data_stream() {
 		return array(
 			'Orientation only metadata'                => array(
 				'file'     => 'testimagemeta://wp_read_image_metadata/image1.jpg',
@@ -253,8 +254,8 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 54385
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54385' )]
 	public function test_exif_unexpected_data() {
 		// Unexpected Exif data: FNumber is "0/0", aperture should be 0.
 		$out = wp_read_image_metadata( DIR_TESTDATA . '/images/sugarloaf-mountain.jpg' );

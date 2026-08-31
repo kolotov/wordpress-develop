@@ -3,11 +3,11 @@
 /**
  * Tests _unzip_file_pclzip().
  *
- * @group file
- * @group filesystem
  *
- * @covers ::_unzip_file_pclzip
  */
+#[\PHPUnit\Framework\Attributes\Group( 'file' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_unzip_file_pclzip' )]
 class Tests_Filesystem_UnzipFilePclzip extends WP_UnitTestCase {
 
 	/**
@@ -33,8 +33,8 @@ class Tests_Filesystem_UnzipFilePclzip extends WP_UnitTestCase {
 	/**
 	 * Tests that _unzip_file_pclzip() applies "pre_unzip_file" filters.
 	 *
-	 * @ticket 37719
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37719' )]
 	public function test_should_apply_pre_unzip_file_filters() {
 		$filter = new MockAction();
 		add_filter( 'pre_unzip_file', array( $filter, 'filter' ), 10, 2 );
@@ -60,8 +60,8 @@ class Tests_Filesystem_UnzipFilePclzip extends WP_UnitTestCase {
 	/**
 	 * Tests that _unzip_file_pclzip() applies "unzip_file" filters.
 	 *
-	 * @ticket 37719
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37719' )]
 	public function test_should_apply_unzip_file_filters() {
 		$filter = new MockAction();
 		add_filter( 'unzip_file', array( $filter, 'filter' ), 10, 2 );

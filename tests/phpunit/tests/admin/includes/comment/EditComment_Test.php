@@ -1,11 +1,8 @@
 <?php
 
-/**
- * @group admin
- * @group comment
- *
- * @covers ::edit_comment
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'edit_comment' )]
 class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 
 	/**
@@ -67,9 +64,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		return edit_comment();
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_update_comment_parent() {
 		$parent_id  = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
@@ -80,9 +75,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( (string) $parent_id, get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65688
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65688' )]
 	public function test_should_reject_unapproved_parent_for_approved_comment() {
 		$parent_id  = self::factory()->comment->create(
 			array(
@@ -99,9 +92,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( '0', get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65688
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65688' )]
 	public function test_should_reject_unapproved_parent_when_comment_is_approved_in_same_update() {
 		$parent_id  = self::factory()->comment->create(
 			array(
@@ -124,9 +115,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( '0', get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65688
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65688' )]
 	public function test_should_allow_unapproved_parent_when_comment_is_unapproved_in_same_update() {
 		$parent_id  = self::factory()->comment->create(
 			array(
@@ -143,9 +132,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( (string) $parent_id, get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_allow_clearing_comment_parent() {
 		$parent_id  = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 		$comment_id = self::factory()->comment->create(
@@ -161,9 +148,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( '0', get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_reject_parent_on_a_different_post() {
 		$parent_id  = self::factory()->comment->create( array( 'comment_post_ID' => self::$other_post_id ) );
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
@@ -175,9 +160,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( '0', get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_reject_nonexistent_parent() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 
@@ -187,9 +170,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( 'comment_parent_invalid', $result->get_error_code() );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_reject_comment_as_its_own_parent() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 
@@ -199,9 +180,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( 'comment_parent_invalid', $result->get_error_code() );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_reject_child_as_parent() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 		$child_id   = self::factory()->comment->create(
@@ -217,9 +196,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( 'comment_parent_invalid', $result->get_error_code() );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_reject_descendant_as_parent() {
 		$comment_id    = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 		$child_id      = self::factory()->comment->create(
@@ -241,9 +218,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( 'comment_parent_invalid', $result->get_error_code() );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_allow_resubmitting_unchanged_parent() {
 		$parent_id  = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 		$comment_id = self::factory()->comment->create(
@@ -259,9 +234,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( (string) $parent_id, get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_reject_new_parent_when_comment_threading_is_disabled() {
 		update_option( 'thread_comments', 0 );
 
@@ -275,9 +248,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( '0', get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_allow_clearing_parent_when_comment_threading_is_disabled() {
 		update_option( 'thread_comments', 0 );
 
@@ -295,9 +266,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( '0', get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_reject_parent_at_maximum_threading_depth() {
 		update_option( 'thread_comments_depth', 2 );
 
@@ -317,9 +286,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( '0', get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_reject_parent_when_replies_would_exceed_maximum_threading_depth() {
 		update_option( 'thread_comments_depth', 3 );
 
@@ -346,9 +313,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( '0', get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_allow_moving_comment_with_replies_within_maximum_threading_depth() {
 		update_option( 'thread_comments_depth', 3 );
 
@@ -368,9 +333,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 		$this->assertSame( (string) $top_id, get_comment( $comment_id )->comment_parent );
 	}
 
-	/**
-	 * @ticket 65570
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
 	public function test_should_reject_parent_of_a_different_comment_type() {
 		$parent_id  = self::factory()->comment->create(
 			array(
@@ -388,12 +351,12 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65570
 	 *
-	 * @dataProvider data_should_reject_spam_or_trashed_parent
 	 *
 	 * @param string $comment_approved The parent's comment_approved value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65570' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_reject_spam_or_trashed_parent' )]
 	public function test_should_reject_spam_or_trashed_parent( $comment_approved ) {
 		$parent_id  = self::factory()->comment->create(
 			array(
@@ -415,7 +378,7 @@ class Admin_Includes_Comment_EditComment_Test extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_reject_spam_or_trashed_parent() {
+	public static function data_should_reject_spam_or_trashed_parent() {
 		return array(
 			'a spam parent'    => array( 'spam' ),
 			'a trashed parent' => array( 'trash' ),

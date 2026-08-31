@@ -6,9 +6,9 @@
  * @subpackage UnitTests
  * @since 4.8.0
  *
- * @group admin
- * @group community-events
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'community-events' )]
 class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 
 	/**
@@ -64,8 +64,8 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	 *
 	 * @since 4.8.0
 	 *
-	 * @covers WP_Community_Events::get_events
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Community_Events', 'get_events' )]
 	public function test_get_events_bad_response_code() {
 		add_filter( 'pre_http_request', array( $this, '_http_request_bad_response_code' ) );
 
@@ -79,8 +79,8 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	 *
 	 * @since 4.8.0
 	 *
-	 * @covers WP_Community_Events::get_cached_events
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Community_Events', 'get_cached_events' )]
 	public function test_get_cached_events_bad_response_code() {
 		add_filter( 'pre_http_request', array( $this, '_http_request_bad_response_code' ) );
 
@@ -116,8 +116,8 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	 *
 	 * @since 4.8.0
 	 *
-	 * @covers WP_Community_Events::get_events
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Community_Events', 'get_events' )]
 	public function test_get_events_invalid_response() {
 		add_filter( 'pre_http_request', array( $this, '_http_request_invalid_response' ) );
 
@@ -131,8 +131,8 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	 *
 	 * @since 4.8.0
 	 *
-	 * @covers WP_Community_Events::get_cached_events
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Community_Events', 'get_cached_events' )]
 	public function test_get_cached_events_invalid_response() {
 		add_filter( 'pre_http_request', array( $this, '_http_request_invalid_response' ) );
 
@@ -168,8 +168,8 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	 *
 	 * @since 4.8.0
 	 *
-	 * @covers WP_Community_Events::get_events
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Community_Events', 'get_events' )]
 	public function test_get_events_valid_response() {
 		add_filter( 'pre_http_request', array( $this, '_http_request_valid_response' ) );
 
@@ -189,8 +189,8 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	 *
 	 * @since 4.8.0
 	 *
-	 * @covers WP_Community_Events::get_cached_events
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Community_Events', 'get_cached_events' )]
 	public function test_get_cached_events_valid_response() {
 		add_filter( 'pre_http_request', array( $this, '_http_request_valid_response' ) );
 
@@ -295,8 +295,8 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	 *
 	 * @since 5.5.2
 	 *
-	 * @covers WP_Community_Events::trim_events
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Community_Events', 'trim_events' )]
 	public function test_trim_expired_events() {
 		$trim_events = new ReflectionMethod( $this->instance, 'trim_events' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -326,8 +326,8 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	 * @since 4.9.7
 	 * @since 5.5.2 Tests `trim_events()` directly instead of indirectly via `get_events()`.
 	 *
-	 * @covers WP_Community_Events::trim_events
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Community_Events', 'trim_events' )]
 	public function test_trim_events_pin_wordcamp() {
 		$trim_events = new ReflectionMethod( $this->instance, 'trim_events' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -433,8 +433,8 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	 * @since 4.9.7
 	 * @since 5.5.2 Tests `trim_events()` directly instead of indirectly via `get_events()`.
 	 *
-	 * @covers WP_Community_Events::trim_events
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Community_Events', 'trim_events' )]
 	public function test_trim_events_dont_pin_multiple_wordcamps() {
 		$trim_events = new ReflectionMethod( $this->instance, 'trim_events' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -554,16 +554,31 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	/**
 	 * Test that get_unsafe_client_ip() properly anonymizes all possible address formats
 	 *
-	 * @dataProvider data_get_unsafe_client_ip
 	 *
-	 * @ticket 41083
 	 *
-	 * @covers WP_Community_Events::get_unsafe_client_ip
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_unsafe_client_ip' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '41083' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Community_Events', 'get_unsafe_client_ip' )]
 	public function test_get_unsafe_client_ip( $raw_ip, $expected_result ) {
+		$remote_addr_existed       = array_key_exists( 'REMOTE_ADDR', $_SERVER );
+		$original_remote_addr      = $_SERVER['REMOTE_ADDR'] ?? null;
+		$client_ip_existed         = array_key_exists( 'HTTP_CLIENT_IP', $_SERVER );
+		$original_client_ip        = $_SERVER['HTTP_CLIENT_IP'] ?? null;
 		$_SERVER['REMOTE_ADDR']    = 'this should not be used';
 		$_SERVER['HTTP_CLIENT_IP'] = $raw_ip;
 		$actual_result             = WP_Community_Events::get_unsafe_client_ip();
+
+		if ( $remote_addr_existed ) {
+			$_SERVER['REMOTE_ADDR'] = $original_remote_addr;
+		} else {
+			unset( $_SERVER['REMOTE_ADDR'] );
+		}
+		if ( $client_ip_existed ) {
+			$_SERVER['HTTP_CLIENT_IP'] = $original_client_ip;
+		} else {
+			unset( $_SERVER['HTTP_CLIENT_IP'] );
+		}
 
 		$this->assertSame( $expected_result, $actual_result );
 	}
@@ -573,7 +588,7 @@ class Tests_Admin_wpCommunityEvents extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_get_unsafe_client_ip() {
+	public static function data_get_unsafe_client_ip() {
 		return array(
 			// Handle '::' returned from `wp_privacy_anonymize_ip()`.
 			array(

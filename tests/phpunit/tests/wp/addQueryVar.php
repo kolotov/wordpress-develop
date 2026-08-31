@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group wp
  *
- * @covers WP::add_query_var
  */
+#[\PHPUnit\Framework\Attributes\Group( 'wp' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP::class, 'add_query_var' )]
 class Tests_WP_AddQueryVar extends WP_UnitTestCase {
 
 	/**

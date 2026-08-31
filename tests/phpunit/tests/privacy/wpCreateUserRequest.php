@@ -6,9 +6,9 @@
  * @subpackage UnitTests
  * @since 5.2.0
  *
- * @group privacy
- * @covers ::wp_create_user_request
  */
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_create_user_request' )]
 class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Request ID.
@@ -77,8 +77,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Ensure a WP_Error is returned when an invalid email is passed.
 	 *
-	 * @ticket 44707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
 	public function test_invalid_email() {
 		$actual = wp_create_user_request( 'not-a-valid-email', 'export_personal_data' );
 
@@ -89,8 +89,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Ensure a WP_Error is returned when no action is passed.
 	 *
-	 * @ticket 46536
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46536' )]
 	public function test_missing_action() {
 		$actual = wp_create_user_request( self::$registered_user_email, false );
 
@@ -101,9 +101,9 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Ensure a WP_Error is returned when an invalid action is passed.
 	 *
-	 * @ticket 44707
-	 * @ticket 46536
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '46536' )]
 	public function test_invalid_action() {
 		$actual = wp_create_user_request( self::$registered_user_email, 'invalid_action_name' );
 
@@ -114,8 +114,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * When there are incomplete requests for a registered user, a WP_Error should be returned.
 	 *
-	 * @ticket 44707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
 	public function test_failure_due_to_incomplete_registered_user() {
 		// Second request (duplicated).
 		$actual = wp_create_user_request( self::$registered_user_email, 'export_personal_data' );
@@ -127,8 +127,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * When there are incomplete requests for an non-registered user, a WP_Error should be returned.
 	 *
-	 * @ticket 44707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
 	public function test_failure_due_to_incomplete_unregistered_user() {
 		// Update first request.
 		wp_update_post(
@@ -149,8 +149,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Ensure emails are properly sanitized.
 	 *
-	 * @ticket 44707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
 	public function test_sanitized_email() {
 		$actual = wp_create_user_request( 'some(email<withinvalid\characters@local.test', 'export_personal_data' );
 
@@ -165,8 +165,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Ensure action names are properly sanitized.
 	 *
-	 * @ticket 44707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
 	public function test_sanitized_action_name() {
 		$actual = wp_create_user_request( self::$non_registered_user_email, 'export[_person*al_\data' );
 
@@ -181,8 +181,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Test a user request is created successfully for a registered user.
 	 *
-	 * @ticket 44707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
 	public function test_create_request_registered_user() {
 		wp_delete_post( self::$request_id, true );
 
@@ -208,8 +208,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Test a user request is created successfully for an non-registered user.
 	 *
-	 * @ticket 44707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
 	public function test_create_request_unregistered_user() {
 		wp_delete_post( self::$request_id, true );
 
@@ -236,8 +236,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	 * Test that a pre-existing request for the same registered user that is not pending or confirmed status does not
 	 * block a new request.
 	 *
-	 * @ticket 44707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
 	public function test_completed_request_does_not_block_new_request() {
 		// Update first request.
 		wp_update_post(
@@ -263,8 +263,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	 * Test that a pre-existing request for the same non-registered user that is not pending or confirmed status does not
 	 * block a new request.
 	 *
-	 * @ticket 44707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
 	public function test_completed_request_does_not_block_new_request_for_unregistered_user() {
 		wp_update_post(
 			array(
@@ -291,8 +291,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Test that an error from `wp_insert_post()` is returned.
 	 *
-	 * @ticket 44707
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44707' )]
 	public function test_wp_error_returned_from_wp_insert_post() {
 		wp_delete_post( self::$request_id, true );
 
@@ -306,8 +306,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Test that the request has a Pending status by default.
 	 *
-	 * @ticket 43890
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43890' )]
 	public function test_wp_create_user_request_default_pending_status() {
 		$actual = wp_create_user_request( self::$non_registered_user_email, 'export_personal_data' );
 		$post   = get_post( $actual );
@@ -318,8 +318,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Test that the request has a Pending status if the $status param is 'pending'.
 	 *
-	 * @ticket 43890
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43890' )]
 	public function test_wp_create_user_request_pending_status() {
 		$actual = wp_create_user_request( self::$non_registered_user_email, 'export_personal_data', array(), 'pending' );
 		$post   = get_post( $actual );
@@ -330,8 +330,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Test that the request has a Confirmed status if the $status param is 'confirmed'.
 	 *
-	 * @ticket 43890
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43890' )]
 	public function test_wp_create_user_request_confirmed_status() {
 		$actual = wp_create_user_request( self::$non_registered_user_email, 'export_personal_data', array(), 'confirmed' );
 		$post   = get_post( $actual );
@@ -342,8 +342,8 @@ class Tests_Privacy_wpCreateUserRequest extends WP_UnitTestCase {
 	/**
 	 * Test that the request returns a WP_Error if $status isn't 'pending' or 'confirmed'.
 	 *
-	 * @ticket 43890
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43890' )]
 	public function test_wp_create_user_request_wp_error_status() {
 		$actual = wp_create_user_request( self::$non_registered_user_email, 'export_personal_data', array(), 'wrong-status' );
 

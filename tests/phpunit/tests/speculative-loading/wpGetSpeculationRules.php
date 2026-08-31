@@ -7,9 +7,9 @@
  */
 
 /**
- * @group speculative-loading
- * @covers ::wp_get_speculation_rules
  */
+#[\PHPUnit\Framework\Attributes\Group( 'speculative-loading' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_speculation_rules' )]
 class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 
 	private $prefetch_config  = array(
@@ -67,9 +67,9 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests speculation rules output with prefetch for the different eagerness levels.
 	 *
-	 * @ticket 62503
-	 * @dataProvider data_eagerness
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_eagerness' )]
 	public function test_wp_get_speculation_rules_with_prefetch( string $eagerness ) {
 		remove_all_filters( 'wp_speculation_rules_configuration' );
 		add_filter(
@@ -101,9 +101,9 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests speculation rules output with prerender for the different eagerness levels.
 	 *
-	 * @ticket 62503
-	 * @dataProvider data_eagerness
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_eagerness' )]
 	public function test_wp_get_speculation_rules_with_prerender( string $eagerness ) {
 		remove_all_filters( 'wp_speculation_rules_configuration' );
 		add_filter(
@@ -143,8 +143,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that the number of entries included for prefetch configuration is correct.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_prefetch_entries() {
 		add_filter(
 			'wp_speculation_rules_configuration',
@@ -168,8 +168,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that the number of entries included for prerender configuration is correct.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_prerender_entries() {
 		add_filter(
 			'wp_speculation_rules_configuration',
@@ -196,8 +196,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests the default exclude paths and ensures they cannot be altered via filter.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_href_exclude_paths() {
 		add_filter(
 			'wp_speculation_rules_configuration',
@@ -262,8 +262,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests the default exclude paths and ensures they cannot be altered via filter.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_href_exclude_paths_without_pretty_permalinks() {
 		update_option( 'permalink_structure', '' );
 
@@ -299,8 +299,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that exclude paths can be altered specifically based on the mode used.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_href_exclude_paths_with_mode() {
 		// Add filter that adds an exclusion only if the mode is 'prerender'.
 		add_filter(
@@ -378,8 +378,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests filter that explicitly adds non-sequential keys.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_with_filtering_bad_keys() {
 
 		add_filter(
@@ -429,8 +429,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests scenario when the home_url and site_url have different paths.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_different_home_and_site_urls() {
 		add_filter(
 			'site_url',
@@ -485,8 +485,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	 *
 	 * This is mostly an integration test as it is resolved as part of wp_get_speculation_rules_configuration().
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_with_invalid_configuration() {
 		add_filter(
 			'wp_speculation_rules_configuration',
@@ -511,8 +511,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	 *
 	 * This is used to effectively disable the feature.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_with_null() {
 		add_filter( 'wp_speculation_rules_configuration', '__return_null' );
 
@@ -523,8 +523,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that the 'wp_load_speculation_rules' action allows providing additional rules.
 	 *
-	 * @ticket 62503
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62503' )]
 	public function test_wp_get_speculation_rules_with_additional_rules() {
 		$filtered_obj = null;
 		add_action(
@@ -585,8 +585,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	/**
 	 * Tests that an overridden default eagerness is applied to the main document-level rule.
 	 *
-	 * @ticket 65624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65624' )]
 	public function test_wp_get_speculation_rules_with_overridden_default_eagerness(): void {
 		putenv( 'WP_SPECULATIVE_LOADING_DEFAULT_EAGERNESS=moderate' );
 
@@ -606,8 +606,8 @@ class Tests_Speculative_Loading_wpGetSpeculationRules extends WP_UnitTestCase {
 	 * WordPress does not allow 'immediate' for the document-level rules it generates, so allowing it as a default
 	 * would cause the main rule to be rejected, leaving no speculation rules at all.
 	 *
-	 * @ticket 65624
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65624' )]
 	public function test_wp_get_speculation_rules_with_immediate_default_eagerness(): void {
 		putenv( 'WP_SPECULATIVE_LOADING_DEFAULT_EAGERNESS=immediate' );
 

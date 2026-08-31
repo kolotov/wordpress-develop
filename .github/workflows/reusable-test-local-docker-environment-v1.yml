@@ -17,7 +17,7 @@ on:
         description: 'The version of PHP to use, in the format of X.Y'
         required: false
         type: 'string'
-        default: 'latest'
+        default: '8.5'
       db-type:
         description: 'Database type. Valid types are mysql and mariadb'
         required: false
@@ -40,7 +40,7 @@ on:
         default: 'example.org'
 
 env:
-  LOCAL_PHP: ${{ inputs.php == 'latest' && 'latest' || format( '{0}-fpm', inputs.php ) }}
+  LOCAL_PHP: ${{ format( '{0}-fpm', inputs.php ) }}
   LOCAL_DB_TYPE: ${{ inputs.db-type }}
   LOCAL_DB_VERSION: ${{ inputs.db-version }}
   LOCAL_PHP_MEMCACHED: ${{ inputs.memcached }}

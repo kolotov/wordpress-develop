@@ -12,10 +12,10 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  * @subpackage UnitTests
  * @since 3.4.0
  *
- * @group ajax
  *
- * @covers ::wp_ajax_edit_comment
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_edit_comment' )]
 class Tests_Ajax_wpAjaxEditComment extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -81,8 +81,8 @@ class Tests_Ajax_wpAjaxEditComment extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33154
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33154' )]
 	public function test_editor_can_edit_orphan_comments() {
 		global $wpdb;
 
@@ -208,8 +208,8 @@ class Tests_Ajax_wpAjaxEditComment extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39732
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39732' )]
 	public function test_wp_update_comment_data_is_wp_error() {
 		// Become an administrator.
 		$this->_setRole( 'administrator' );

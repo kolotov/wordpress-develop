@@ -3,17 +3,17 @@
 /**
  * Tests for the absint() function.
  *
- * @group functions
  *
- * @covers ::absint
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'absint' )]
 class Tests_Functions_Absint extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 60101
 	 *
-	 * @dataProvider data_absint
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60101' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_absint' )]
 	public function test_absint( $test_value, $expected_value ) {
 		$this->assertSame( $expected_value, absint( $test_value ) );
 	}
@@ -26,7 +26,7 @@ class Tests_Functions_Absint extends WP_UnitTestCase {
 	 *     @type string $expected   Expected return value.
 	 * }
 	 */
-	public function data_absint() {
+	public static function data_absint() {
 		return array(
 			'1 int'                 => array(
 				'test_value'     => 1,

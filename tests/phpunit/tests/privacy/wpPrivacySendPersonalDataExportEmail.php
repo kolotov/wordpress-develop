@@ -6,9 +6,9 @@
  * @subpackage UnitTests
  * @since 4.9.6
  *
- * @group privacy
- * @covers ::wp_privacy_send_personal_data_export_email
  */
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_privacy_send_personal_data_export_email' )]
 class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase {
 	/**
 	 * Request ID.
@@ -115,8 +115,8 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	 * The function should error when the ID passed does not correspond to a user request.
 	 *
 	 * @since 6.7.0
-	 * @ticket 46560
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46560' )]
 	public function test_should_return_wp_error_when_not_a_user_request() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -191,8 +191,8 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	/**
 	 * The email address of the recipient of the personal data export notification should be filterable.
 	 *
-	 * @ticket 46303
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46303' )]
 	public function test_email_address_of_recipient_should_be_filterable() {
 		add_filter( 'wp_privacy_personal_data_email_to', array( $this, 'filter_email_address' ) );
 		wp_privacy_send_personal_data_export_email( self::$request_id );
@@ -217,8 +217,8 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	/**
 	 * The email subject of the personal data export notification should be filterable.
 	 *
-	 * @ticket 46303
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46303' )]
 	public function test_email_subject_should_be_filterable() {
 		add_filter( 'wp_privacy_personal_data_email_subject', array( $this, 'filter_email_subject' ) );
 		wp_privacy_send_personal_data_export_email( self::$request_id );
@@ -271,8 +271,8 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	 *
 	 * @since 5.4.0
 	 *
-	 * @ticket 44501
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44501' )]
 	public function test_email_headers_should_be_filterable() {
 		add_filter( 'wp_privacy_personal_data_email_headers', array( $this, 'modify_email_headers' ) );
 		wp_privacy_send_personal_data_export_email( self::$request_id );
@@ -301,8 +301,8 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	/**
 	 * The email content should be filterable using the $email_data
 	 *
-	 * @ticket 46303
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46303' )]
 	public function test_email_content_should_be_filterable_using_email_data() {
 		add_filter( 'wp_privacy_personal_data_email_content', array( $this, 'modify_email_content_with_email_data' ), 10, 3 );
 		wp_privacy_send_personal_data_export_email( self::$request_id );
@@ -343,9 +343,9 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	 * The function should respect the user locale settings when the site uses the default locale.
 	 *
 	 * @since 5.2.0
-	 * @ticket 46056
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46056' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_personal_data_export_email_in_user_locale() {
 		update_user_meta( self::$request_user->ID, 'locale', 'es_ES' );
 
@@ -361,9 +361,9 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	 * uses the site's default locale, and the user has a different locale.
 	 *
 	 * @since 5.2.0
-	 * @ticket 46056
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46056' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_personal_data_export_email_in_user_locale_when_site_is_not_en_us() {
 		update_option( 'WPLANG', 'es_ES' );
 		switch_to_locale( 'es_ES' );
@@ -383,9 +383,9 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	 * has a different selected locale, and the user uses the site's default locale.
 	 *
 	 * @since 5.2.0
-	 * @ticket 46056
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46056' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_personal_data_export_email_in_user_locale_when_admin_and_site_have_different_locales() {
 		update_option( 'WPLANG', 'es_ES' );
 		switch_to_locale( 'es_ES' );
@@ -405,9 +405,9 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	 * administrator and the user use different locales.
 	 *
 	 * @since 5.2.0
-	 * @ticket 46056
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46056' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_personal_data_export_email_in_user_locale_when_both_have_different_locales_than_site() {
 		update_option( 'WPLANG', 'es_ES' );
 		switch_to_locale( 'es_ES' );
@@ -429,9 +429,9 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	 * administrator does not use the site's locale.
 	 *
 	 * @since 5.2.0
-	 * @ticket 46056
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46056' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_personal_data_export_email_in_site_locale() {
 		update_user_meta( self::$admin_user->ID, 'locale', 'es_ES' );
 		wp_set_current_user( self::$admin_user->ID );
@@ -451,9 +451,9 @@ class Tests_Privacy_wpPrivacySendPersonalDataExportEmail extends WP_UnitTestCase
 	 * unregistered user, and the administrator does not use the site's default locale.
 	 *
 	 * @since 5.2.0
-	 * @ticket 46056
-	 * @group l10n
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46056' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 	public function test_should_send_personal_data_export_email_in_site_locale_when_not_en_us_and_admin_has_different_locale() {
 		update_option( 'WPLANG', 'es_ES' );
 		switch_to_locale( 'es_ES' );

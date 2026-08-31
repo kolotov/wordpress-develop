@@ -1,10 +1,10 @@
 <?php
 /**
- * @group taxonomy
- * @group category
  *
- * @covers ::get_cat_ID
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\Group( 'category' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_cat_ID' )]
 class Tests_Category_GetCatId extends WP_UnitTestCase {
 
 	/**

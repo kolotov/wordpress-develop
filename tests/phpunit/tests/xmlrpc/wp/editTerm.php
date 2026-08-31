@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_editTerm extends WP_XMLRPC_UnitTestCase {
 	protected static $parent_term;
 	protected static $child_term;
@@ -57,8 +57,8 @@ class Tests_XMLRPC_wp_editTerm extends WP_XMLRPC_UnitTestCase {
 	 * struct, the method must return an error instead of attempting to access a string
 	 * offset, which triggers "Cannot access offset of type string on string" on PHP 8+.
 	 *
-	 * @ticket 65682
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65682' )]
 	public function test_invalid_content_struct_should_return_error() {
 		$this->make_user_by_role( 'editor' );
 
@@ -71,8 +71,8 @@ class Tests_XMLRPC_wp_editTerm extends WP_XMLRPC_UnitTestCase {
 	/**
 	 * Ensures a missing content struct is rejected with an insufficient arguments error.
 	 *
-	 * @ticket 65682
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65682' )]
 	public function test_missing_content_struct_should_return_error() {
 		$this->make_user_by_role( 'editor' );
 
@@ -272,8 +272,8 @@ class Tests_XMLRPC_wp_editTerm extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35991' )]
 	public function test_update_term_meta() {
 		register_taxonomy( 'wptests_tax', 'post' );
 
@@ -312,8 +312,8 @@ class Tests_XMLRPC_wp_editTerm extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35991' )]
 	public function test_delete_term_meta() {
 		register_taxonomy( 'wptests_tax', 'post' );
 

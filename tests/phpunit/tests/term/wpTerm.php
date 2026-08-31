@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group taxonomy
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Term_WpTerm extends WP_UnitTestCase {
 	protected static $term_id;
 
@@ -40,8 +40,8 @@ class Tests_Term_WpTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_work_for_numeric_string() {
 		$found = WP_Term::get_instance( (string) self::$term_id );
 
@@ -49,8 +49,8 @@ class Tests_Term_WpTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_fail_for_negative_number() {
 		$found = WP_Term::get_instance( -self::$term_id );
 
@@ -58,8 +58,8 @@ class Tests_Term_WpTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_fail_for_non_numeric_string() {
 		$found = WP_Term::get_instance( 'abc' );
 
@@ -67,8 +67,8 @@ class Tests_Term_WpTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37738
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37738' )]
 	public function test_get_instance_should_succeed_for_float_that_is_equal_to_post_id() {
 		$found = WP_Term::get_instance( 1.0 );
 
@@ -76,8 +76,8 @@ class Tests_Term_WpTerm extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40671
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40671' )]
 	public function test_get_instance_should_respect_taxonomy_when_term_id_is_found_in_cache() {
 		global $wpdb;
 

@@ -1,20 +1,22 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wp_slash
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_slash' )]
 class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 42195
 	 *
-	 * @dataProvider data_wp_slash
 	 *
 	 * @param string $value
 	 * @param string $expected
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42195' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_slash' )]
 	public function test_wp_slash( $value, $expected ) {
 		$this->assertSame( $expected, wp_slash( $value ) );
 	}
@@ -29,7 +31,7 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_wp_slash() {
+	public static function data_wp_slash() {
 		return array(
 			array( 123, 123 ),
 			array( 123.4, 123.4 ),
@@ -54,8 +56,8 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24106
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24106' )]
 	public function test_adds_slashes() {
 		$old = "I can't see, isn't that it?";
 		$new = "I can\'t see, isn\'t that it?";
@@ -66,8 +68,8 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24106
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24106' )]
 	public function test_preserves_original_datatype() {
 
 		$this->assertTrue( wp_slash( true ) );
@@ -92,8 +94,8 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 24106
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24106' )]
 	public function test_add_even_more_slashes() {
 		$old = 'single\\slash double\\\\slash triple\\\\\\slash';
 		$new = 'single\\\\slash double\\\\\\\\slash triple\\\\\\\\\\\\slash';
@@ -105,10 +107,10 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 	/**
 	 * Tests that addslashes_gpc() returns the same result as wp_slash() for strings.
 	 *
-	 * @ticket 64539
-	 * @covers ::addslashes_gpc
 	 * @expectedDeprecated addslashes_gpc
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64539' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_addslashes_gpc_matches_wp_slash_for_strings() {
 		$input = "String with 'quotes' and \"double quotes\"";
 		$this->assertSame( wp_slash( $input ), addslashes_gpc( $input ) );
@@ -117,10 +119,10 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 	/**
 	 * Tests that addslashes_gpc() returns the same result as wp_slash() for arrays.
 	 *
-	 * @ticket 64539
-	 * @covers ::addslashes_gpc
 	 * @expectedDeprecated addslashes_gpc
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64539' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_addslashes_gpc_matches_wp_slash_for_arrays() {
 		$input = array(
 			'field1' => "Value with 'apostrophe'",

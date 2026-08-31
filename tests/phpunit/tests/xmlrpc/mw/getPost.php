@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_mw_getPost extends WP_XMLRPC_UnitTestCase {
 	protected static $post_id;
 
@@ -36,8 +36,8 @@ class Tests_XMLRPC_mw_getPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20336
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20336' )]
 	public function test_invalid_postid() {
 		$result = $this->myxmlrpcserver->mw_getPost( array( 9999, 'author', 'author' ) );
 		$this->assertIXRError( $result );
@@ -90,8 +90,8 @@ class Tests_XMLRPC_mw_getPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_post_thumbnail() {
 		add_theme_support( 'post-thumbnails' );
 

@@ -5,18 +5,14 @@
  * @package    WordPress
  * @subpackage Charset
  *
- * @group      compat
- *
- * @covers ::_wp_utf8_codepoint_span()
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_utf8_codepoint_span' )]
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 class Tests_Compat_wpUtf8CodePointSpan extends WP_UnitTestCase {
 	/**
 	 * Ensures that the span accounts for the requested number of code points.
 	 *
-	 * @dataProvider data_codepoint_spans
 	 *
-	 * @ticket 65483
-	 * @ticket 63863
 	 *
 	 * @param string $text
 	 * @param int    $byte_offset
@@ -24,6 +20,9 @@ class Tests_Compat_wpUtf8CodePointSpan extends WP_UnitTestCase {
 	 * @param int    $expected_span
 	 * @param int    $expected_found
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65483' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63863' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_codepoint_spans' )]
 	public function test_finds_codepoint_spans( string $text, int $byte_offset, int $max_code_points, int $expected_span, int $expected_found ) {
 		$found_code_points = null;
 

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getPage extends WP_XMLRPC_UnitTestCase {
 	protected static $post_id;
 
@@ -29,8 +29,8 @@ class Tests_XMLRPC_wp_getPage extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 20336
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20336' )]
 	public function test_invalid_pageid() {
 		$this->make_user_by_role( 'editor' );
 

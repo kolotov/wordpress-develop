@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::sanitize_key
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_key' )]
 class Tests_Formatting_SanitizeKey extends WP_UnitTestCase {
 
 	/**
-	 * @ticket       54160
-	 * @dataProvider data_sanitize_key
 	 *
 	 * @param string $key      The key to sanitize.
 	 * @param string $expected The expected value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54160' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_key' )]
 	public function test_sanitize_key( $key, $expected ) {
 		$this->assertSame( $expected, sanitize_key( $key ) );
 	}
@@ -23,7 +23,7 @@ class Tests_Formatting_SanitizeKey extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_sanitize_key() {
+	public static function data_sanitize_key() {
 		return array(
 			'an empty string key'            => array(
 				'key'      => '',
@@ -61,12 +61,12 @@ class Tests_Formatting_SanitizeKey extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket       54160
-	 * @dataProvider data_sanitize_key_nonstring_scalar
 	 *
 	 * @param mixed  $key      The key to sanitize.
 	 * @param string $expected The expected value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54160' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_key_nonstring_scalar' )]
 	public function test_sanitize_key_nonstring_scalar( $key, $expected ) {
 		$this->assertSame( $expected, sanitize_key( $key ) );
 	}
@@ -76,7 +76,7 @@ class Tests_Formatting_SanitizeKey extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_sanitize_key_nonstring_scalar() {
+	public static function data_sanitize_key_nonstring_scalar() {
 		return array(
 			'integer type'  => array(
 				'key'      => 0,
@@ -98,12 +98,15 @@ class Tests_Formatting_SanitizeKey extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket       54160
-	 * @dataProvider data_sanitize_key_with_non_scalars
 	 *
-	 * @param mixed $nonscalar_key A non-scalar data type given as a key.
+	 * @param mixed  $key      A non-scalar data type given as a key.
+	 * @param string $expected The expected value.
 	 */
-	public function test_sanitize_key_with_non_scalars( $nonscalar_key ) {
+	#[\PHPUnit\Framework\Attributes\Ticket( '54160' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_key_with_non_scalars' )]
+	public function test_sanitize_key_with_non_scalars( $key, $expected ) {
+		$nonscalar_key = $key;
+
 		add_filter(
 			'sanitize_key',
 			function ( $sanitized_key, $key ) use ( $nonscalar_key ) {
@@ -122,7 +125,7 @@ class Tests_Formatting_SanitizeKey extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_sanitize_key_with_non_scalars() {
+	public static function data_sanitize_key_with_non_scalars() {
 		return array(
 			'array type' => array(
 				'key'      => array( 'key' ),

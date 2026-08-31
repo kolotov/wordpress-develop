@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_editComment extends WP_XMLRPC_UnitTestCase {
 
 	public function test_author_can_edit_own_comment() {

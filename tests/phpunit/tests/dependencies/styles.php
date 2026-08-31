@@ -1,13 +1,24 @@
 <?php
-/**
- * @group dependencies
- * @group scripts
- * @covers ::wp_enqueue_style
- * @covers ::wp_register_style
- * @covers ::wp_print_styles
- * @covers ::wp_style_add_data
- * @covers ::wp_add_inline_style
- */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
+
+
+
+
+
+
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_enqueue_style' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_register_style' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_print_styles' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_style_add_data' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_add_inline_style' )]
 class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	private $old_wp_styles;
 	private $old_wp_scripts;
@@ -54,9 +65,9 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Test versioning
 	 *
-	 * @ticket 11315
-	 * @ticket 64372
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '11315' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64372' )]
 	public function test_wp_enqueue_style() {
 		wp_enqueue_style( 'no-deps-no-version', 'example.com' );
 		wp_enqueue_style( 'no-deps-version', 'example.com', array(), '1.2' );
@@ -82,9 +93,7 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 		$this->assertSame( '', get_echo( 'wp_print_styles' ) );
 	}
 
-	/**
-	 * @ticket 42804
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42804' )]
 	public function test_wp_enqueue_style_with_html5_support_does_not_contain_type_attribute() {
 		add_theme_support( 'html5', array( 'style' ) );
 
@@ -102,10 +111,10 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Test assorted handles to make sure they are output correctly.
 	 *
-	 * @dataProvider data_awkward_handles_are_supported_consistently
 	 *
-	 * @ticket 30036
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30036' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_awkward_handles_are_supported_consistently' )]
 	public function test_awkward_handles_are_supported_consistently( $handle ) {
 		wp_enqueue_style( $handle, 'example.com', array(), null );
 
@@ -119,7 +128,7 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	 *
 	 * @return array<string, string[]>
 	 */
-	public function data_awkward_handles_are_supported_consistently() {
+	public static function data_awkward_handles_are_supported_consistently() {
 		return array(
 			'some spaces'       => array( 'with some spaces' ),
 			'snowman'           => array( 'with-☃-snowman' ),
@@ -133,8 +142,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	 * Test the different protocol references in wp_enqueue_style
 	 *
 	 * @global WP_Styles $wp_styles
-	 * @ticket 16560
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16560' )]
 	public function test_protocols() {
 		// Init.
 		global $wp_styles;
@@ -177,8 +186,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Test if inline styles work
 	 *
-	 * @ticket 24813
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24813' )]
 	public function test_inline_styles() {
 
 		$style  = ".thing {\n";
@@ -201,8 +210,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	 * Test if inline styles work with concatenation
 	 *
 	 * @global WP_Styles $wp_styles
-	 * @ticket 24813
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24813' )]
 	public function test_inline_styles_concat() {
 		global $wp_styles;
 
@@ -228,17 +237,17 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Test normalizing relative links in CSS.
 	 *
-	 * @dataProvider data_normalize_relative_css_links
 	 *
-	 * @ticket 54243
-	 * @ticket 54922
-	 * @ticket 58069
 	 *
-	 * @covers ::_wp_normalize_relative_css_links
 	 *
 	 * @param string $css      Given CSS to test.
 	 * @param string $expected Expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54243' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '54922' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58069' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_normalize_relative_css_links' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_normalize_relative_css_links' )]
 	public function test_normalize_relative_css_links( $css, $expected ) {
 		$this->assertEqualHTML(
 			$expected,
@@ -251,7 +260,7 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_normalize_relative_css_links() {
+	public static function data_normalize_relative_css_links() {
 		return array(
 			'Double quotes, same path'                     => array(
 				'css'      => 'p {background:url( "image0.svg" );}',
@@ -295,8 +304,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Test if multiple inline styles work
 	 *
-	 * @ticket 24813
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24813' )]
 	public function test_multiple_inline_styles() {
 
 		$style1  = ".thing1 {\n";
@@ -325,8 +334,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	 * Test if a plugin doing it the wrong way still works
 	 *
 	 * @expectedIncorrectUsage wp_add_inline_style
-	 * @ticket 24813
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24813' )]
 	public function test_plugin_doing_inline_styles_wrong() {
 
 		$style  = ".thing {\n";
@@ -349,8 +358,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Test to make sure <style> tags aren't output if there are no inline styles.
 	 *
-	 * @ticket 24813
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '24813' )]
 	public function test_unnecessary_style_tags() {
 
 		$expected = "<link rel='stylesheet' id='handle-css' href='http://example.com?ver=1' media='all' />\n";
@@ -378,16 +387,14 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Testing 'wp_register_style' return boolean success/failure value.
 	 *
-	 * @ticket 31126
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31126' )]
 	public function test_wp_register_style() {
 		$this->assertTrue( wp_register_style( 'duplicate-handler', 'http://example.com' ) );
 		$this->assertFalse( wp_register_style( 'duplicate-handler', 'http://example.com' ) );
 	}
 
-	/**
-	 * @ticket 35229
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35229' )]
 	public function test_wp_add_inline_style_for_handle_without_source() {
 		$style = 'a { color: blue; }';
 
@@ -408,16 +415,14 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_styles' ) );
 	}
 
-	/**
-	 * @ticket 35921
-	 * @dataProvider data_styles_with_media
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35921' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_styles_with_media' )]
 	public function test_wp_enqueue_style_with_media( $expected, $media ) {
 		wp_enqueue_style( 'handle', 'http://example.com', array(), 1, $media );
 		$this->assertStringContainsString( $expected, get_echo( 'wp_print_styles' ) );
 	}
 
-	public function data_styles_with_media() {
+	public static function data_styles_with_media() {
 		return array(
 			array(
 				"media='all'",
@@ -449,10 +454,10 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Tests that visual block styles are not be enqueued in the editor when there is not theme support for 'wp-block-styles'.
 	 *
-	 * @ticket 57561
 	 *
-	 * @covers ::wp_enqueue_style
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57561' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_style' )]
 	public function test_block_styles_for_editing_without_theme_support() {
 		// Confirm we are without theme support by default.
 		$this->assertFalse( current_theme_supports( 'wp-block-styles' ) );
@@ -469,8 +474,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	 *
 	 * Visual block styles should always be enqueued when editing to avoid the appearance of a broken editor.
 	 *
-	 * @covers ::wp_common_block_scripts_and_styles
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_common_block_scripts_and_styles' )]
 	public function test_block_styles_for_editing_with_theme_support() {
 		// Override wp_load_classic_theme_block_styles_on_demand().
 		add_filter( 'should_load_separate_core_block_assets', '__return_false' );
@@ -490,8 +495,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	 * Visual block styles should not be enqueued unless a theme opts in.
 	 * This way we avoid style conflicts with existing themes.
 	 *
-	 * @covers ::wp_enqueue_style
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_style' )]
 	public function test_no_block_styles_for_viewing_without_theme_support() {
 		// Confirm we are without theme support by default.
 		$this->assertFalse( current_theme_supports( 'wp-block-styles' ) );
@@ -508,8 +513,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	 *
 	 * Visual block styles should be enqueued when a theme opts in.
 	 *
-	 * @covers ::wp_common_block_scripts_and_styles
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_common_block_scripts_and_styles' )]
 	public function test_block_styles_for_viewing_with_theme_support() {
 		// Override wp_load_classic_theme_block_styles_on_demand().
 		add_filter( 'should_load_separate_core_block_assets', '__return_false' );
@@ -526,10 +531,10 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Tests that the main "style.css" file gets enqueued when the site doesn't opt in to separate core block assets.
 	 *
-	 * @ticket 50263
 	 *
-	 * @covers ::wp_default_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_styles' )]
 	public function test_block_styles_for_viewing_without_split_styles() {
 		add_filter( 'should_load_separate_core_block_assets', '__return_false' );
 		wp_default_styles( $GLOBALS['wp_styles'] );
@@ -543,10 +548,10 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Tests that the "common.css" file gets enqueued when the site opts in to separate core block assets.
 	 *
-	 * @ticket 50263
 	 *
-	 * @covers ::wp_default_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_styles' )]
 	public function test_block_styles_for_viewing_with_split_styles() {
 		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
 		wp_default_styles( $GLOBALS['wp_styles'] );
@@ -560,10 +565,10 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Tests that the design tokens stylesheet is registered in core.
 	 *
-	 * @ticket 65646
 	 *
-	 * @covers ::wp_default_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65646' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_styles' )]
 	public function test_wp_theme_style_is_registered() {
 		wp_default_styles( $GLOBALS['wp_styles'] );
 
@@ -577,10 +582,10 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Tests that wp-components depends on wp-theme so tokens load before component styles.
 	 *
-	 * @ticket 65646
 	 *
-	 * @covers ::wp_default_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65646' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_styles' )]
 	public function test_wp_components_depends_on_wp_theme() {
 		wp_default_styles( $GLOBALS['wp_styles'] );
 
@@ -593,10 +598,10 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	/**
 	 * Tests that wp-edit-blocks loads design tokens before other editor styles.
 	 *
-	 * @ticket 65646
 	 *
-	 * @covers ::wp_default_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65646' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_styles' )]
 	public function test_wp_edit_blocks_depends_on_wp_theme_first() {
 		wp_default_styles( $GLOBALS['wp_styles'] );
 
@@ -606,19 +611,15 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 		$this->assertSame( 0, array_search( 'wp-theme', $deps, true ) );
 	}
 
-	/**
-	 * @ticket 58394
-	 * @ticket 63887
-	 *
-	 * @covers ::wp_maybe_inline_styles
-	 * @covers ::wp_add_inline_style
-	 * @covers ::wp_print_styles
-	 * @covers WP_Styles::do_items
-	 * @covers WP_Styles::do_item
-	 * @covers WP_Styles::print_inline_style
-	 *
-	 * @dataProvider data_provider_test_wp_maybe_inline_styles
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58394' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63887' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_test_wp_maybe_inline_styles' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_maybe_inline_styles' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_add_inline_style' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_print_styles' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Styles', 'do_items' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Styles', 'do_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Styles', 'print_inline_style' )]
 	public function test_wp_maybe_inline_styles( ?string $additional_inline_style, ?int $styles_inline_size_limit ) {
 		$rel_path = 'css/classic-themes.css';
 		$src_url  = includes_url( $rel_path );
@@ -721,11 +722,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @ticket 58394
-	 *
-	 * @covers ::wp_maybe_inline_styles
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_maybe_inline_styles' )]
 	public function test_wp_maybe_inline_styles_dequeue_styles() {
 		$filter = new MockAction();
 		add_filter( 'pre_wp_filesize', array( $filter, 'filter' ) );
@@ -745,10 +743,10 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	 * wp_filesize should be only be called once, as on the second run of wp_maybe_inline_styles,
 	 * src will be set to false and filesize will not be requested.
 	 *
-	 * @ticket 58394
 	 *
-	 * @covers ::wp_maybe_inline_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_maybe_inline_styles' )]
 	public function test_wp_maybe_inline_styles_multiple_runs() {
 		$filter = new MockAction();
 		add_filter( 'pre_wp_filesize', array( $filter, 'filter' ) );
@@ -764,12 +762,12 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58394
-	 * @ticket 64447
 	 *
-	 * @covers ::wp_maybe_inline_styles
 	 * @expectedIncorrectUsage wp_maybe_inline_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58394' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64447' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_maybe_inline_styles' )]
 	public function test_wp_maybe_inline_styles_missing_file() {
 		$filter = new MockAction();
 		add_filter( 'pre_wp_filesize', array( $filter, 'filter' ) );
@@ -786,11 +784,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 		$this->assertSame( 1, $filter->get_call_count(), 'wp_filesize should only be called once' );
 	}
 
-	/**
-	 * @ticket 58394
-	 *
-	 * @covers ::wp_maybe_inline_styles
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_maybe_inline_styles' )]
 	public function test_wp_maybe_inline_styles_no_src() {
 		wp_register_style( 'test-handle', false );
 		wp_style_add_data( 'test-handle', 'path', ABSPATH . WPINC . '/css/classic-themes.css' );
@@ -803,11 +798,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 'after', $GLOBALS['wp_styles']->registered['test-handle']->extra, 'Source of style not should set to after property' );
 	}
 
-	/**
-	 * @ticket 58394
-	 *
-	 * @covers ::wp_maybe_inline_styles
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58394' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_maybe_inline_styles' )]
 	public function test_wp_maybe_inline_styles_no_path() {
 		$url = '/' . WPINC . '/css/classic-themes.css';
 		wp_register_style( 'test-handle', $url );
@@ -820,11 +812,11 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64447
 	 *
-	 * @covers ::wp_maybe_inline_styles
 	 * @expectedIncorrectUsage wp_maybe_inline_styles
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64447' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_maybe_inline_styles' )]
 	public function test_wp_maybe_inline_styles_bad_path_with_file_size_provided() {
 		$style_path = '/css/invalid.css'; // Does not exist.
 
@@ -852,11 +844,8 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 		$this->assertSame( $GLOBALS['wp_styles']->registered[ $handle ]->src, $url );
 	}
 
-	/**
-	 * @ticket 64447
-	 *
-	 * @covers ::wp_maybe_inline_styles
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64447' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_maybe_inline_styles' )]
 	public function test_wp_maybe_inline_styles_good_path_with_zero_file_size_provided() {
 		$style_path = '/css/classic-themes.css';
 
@@ -883,9 +872,7 @@ class Tests_Dependencies_Styles extends WP_UnitTestCase {
 		$this->assertFalse( $GLOBALS['wp_styles']->registered[ $handle ]->src );
 	}
 
-	/**
-	 * @ticket 63887
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63887' )]
 	public function test_source_url_encoding() {
 		$handle = '# test/</style> #';
 		wp_enqueue_style( $handle, '/example.css', array(), '0.0' );
@@ -903,9 +890,7 @@ HTML;
 		$this->assertEqualHTML( $expected, get_echo( 'wp_print_styles' ) );
 	}
 
-	/**
-	 * @ticket 63887
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63887' )]
 	public function test_source_url_with_concat() {
 		global $wp_styles, $wp_version;
 		add_theme_support( 'html5', array( 'style' ) );
@@ -940,9 +925,9 @@ HTML;
 	/**
 	 * Tests that WP_Styles emits a _doing_it_wrong() notice for missing dependencies.
 	 *
-	 * @ticket 64229
-	 * @covers WP_Dependencies::all_deps
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64229' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Dependencies', 'all_deps' )]
 	public function test_wp_style_doing_it_wrong_for_missing_dependencies() {
 		$expected_incorrect_usage = 'WP_Styles::add';
 		$this->setExpectedIncorrectUsage( $expected_incorrect_usage );
@@ -972,15 +957,15 @@ HTML;
 	/**
 	 * Test query string on handle when enqueuing styles directly.
 	 *
-	 * @ticket 64372
 	 *
-	 * @covers WP_Styles::do_item
 	 *
-	 * @dataProvider data_varying_versions_handle_args
 	 *
 	 * @param mixed  $version               Version to pass when enqueuing.
 	 * @param string $expected_query_string Expected query string portion of the style sheet URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_varying_versions_handle_args' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Styles', 'do_item' )]
 	public function test_varying_versions_added_to_handle_args_enqueued_styles( $version, $expected_query_string ) {
 		wp_enqueue_style( 'test-style?qs1=q1&qs2=q2', '/test-style.css', array(), $version );
 		$markup = get_echo( 'wp_print_styles' );
@@ -992,15 +977,15 @@ HTML;
 	/**
 	 * Test query string on handle when registering then enqueuing styles.
 	 *
-	 * @ticket 64372
 	 *
-	 * @covers WP_Styles::do_item
 	 *
-	 * @dataProvider data_varying_versions_handle_args
 	 *
 	 * @param mixed  $version               Version to pass when enqueuing.
 	 * @param string $expected_query_string Expected query string portion of the style sheet URL.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_varying_versions_handle_args' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Styles', 'do_item' )]
 	public function test_varying_versions_added_to_handle_args_registered_then_enqueued_styles( $version, $expected_query_string ) {
 		wp_register_style( 'test-style', '/test-style.css', array(), $version );
 		wp_enqueue_style( 'test-style?qs1=q1&qs2=q2' );
@@ -1013,15 +998,15 @@ HTML;
 	/**
 	 * Tests that duplicate query vars and fragments are preserved in styles.
 	 *
-	 * @ticket 64372
 	 *
-	 * @dataProvider data_duplicate_query_vars_and_fragments_preserved_in_styles
 	 *
 	 * @param string           $src          The stylesheet's source URL.
 	 * @param string|bool|null $ver          The style's version.
 	 * @param string           $expected_url The expected URL.
 	 * @param string           $handle       Optional. The style's registered handle. Default 'test-style'.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_duplicate_query_vars_and_fragments_preserved_in_styles' )]
 	public function test_duplicate_query_vars_and_fragments_preserved_in_styles( string $src, $ver, string $expected_url, string $handle = 'test-style' ): void {
 		wp_enqueue_style( $handle, $src, array(), $ver );
 		$output    = get_echo( 'wp_print_styles' );
@@ -1036,7 +1021,7 @@ HTML;
 	 *
 	 * @return array<string, array{src: string, ver: string|bool|null, expected_url: string, handle?: string}> Data provider.
 	 */
-	public function data_duplicate_query_vars_and_fragments_preserved_in_styles(): array {
+	public static function data_duplicate_query_vars_and_fragments_preserved_in_styles(): array {
 		$ver = get_bloginfo( 'version' );
 
 		return array(
@@ -1082,7 +1067,7 @@ HTML;
 	 *
 	 * @return array[] Data provider.
 	 */
-	public function data_varying_versions_handle_args() {
+	public static function data_varying_versions_handle_args() {
 		$default_version = get_bloginfo( 'version' );
 
 		return array(

@@ -2,16 +2,16 @@
 /**
  * Tests for connector registration companion functions.
  *
- * @group connectors
- * @covers ::wp_is_connector_registered
- * @covers ::wp_get_connector
- * @covers ::wp_get_connectors
  */
+#[\PHPUnit\Framework\Attributes\Group( 'connectors' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_is_connector_registered' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_connector' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_connectors' )]
 class Tests_Connectors_WpRegisterConnector extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 64791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_is_connector_registered_returns_true_for_default() {
 		// Default connectors are registered via wp_connectors_init.
 		$this->assertTrue( wp_is_connector_registered( 'openai' ) );
@@ -20,15 +20,15 @@ class Tests_Connectors_WpRegisterConnector extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_is_connector_registered_returns_false_for_unregistered() {
 		$this->assertFalse( wp_is_connector_registered( 'nonexistent_provider' ) );
 	}
 
 	/**
-	 * @ticket 64791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_get_connector_returns_data_for_default() {
 		$connector = wp_get_connector( 'openai' );
 
@@ -40,8 +40,8 @@ class Tests_Connectors_WpRegisterConnector extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_get_connector_returns_null_for_unregistered() {
 		$this->setExpectedIncorrectUsage( 'WP_Connector_Registry::get_registered' );
 
@@ -51,8 +51,8 @@ class Tests_Connectors_WpRegisterConnector extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64791
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_get_connectors_returns_all_defaults() {
 		$connectors = wp_get_connectors();
 

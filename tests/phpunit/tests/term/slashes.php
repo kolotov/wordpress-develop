@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group term
- * @group slashes
- * @ticket 21767
  */
+#[\PHPUnit\Framework\Attributes\Group( 'term' )]
+#[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '21767' )]
 class Tests_Term_Slashes extends WP_Ajax_UnitTestCase {
 
 	/*

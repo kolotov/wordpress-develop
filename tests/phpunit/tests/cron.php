@@ -3,8 +3,8 @@
 /**
  * Test the cron scheduling functions
  *
- * @group cron
  */
+#[\PHPUnit\Framework\Attributes\Group( 'cron' )]
 class Tests_Cron extends WP_UnitTestCase {
 	/**
 	 * @var array Cron array for testing preflight filters.
@@ -31,8 +31,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_get_schedule
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_schedule' )]
 	public function test_wp_get_schedule_empty() {
 		// Nothing scheduled.
 		$hook = __FUNCTION__;
@@ -40,8 +40,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_schedule_event_single() {
 		// Schedule an event and make sure it's returned by wp_next_scheduled().
 		$hook      = __FUNCTION__;
@@ -56,8 +56,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_schedule_event_single_args() {
 		// Schedule an event with arguments and make sure it's returned by wp_next_scheduled().
 		$hook      = 'event';
@@ -77,8 +77,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_schedule_event
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
 	public function test_schedule_event() {
 		// Schedule an event and make sure it's returned by wp_next_scheduled().
 		$hook      = __FUNCTION__;
@@ -94,8 +94,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_schedule_event
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
 	public function test_schedule_event_args() {
 		// Schedule an event and make sure it's returned by wp_next_scheduled().
 		$hook      = 'event';
@@ -121,10 +121,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	 * The notice that we should not see:
 	 * `Deprecated: Automatic conversion of false to array is deprecated`.
 	 *
-	 * @ticket 53635
 	 *
-	 * @covers ::wp_schedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53635' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
 	public function test_wp_schedule_event_without_cron_option_does_not_throw_deprecation_notice() {
 		delete_option( 'cron' );
 
@@ -143,10 +143,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	 * Tests that a call to wp_schedule_single_event() on a site without any scheduled events
 	 * does not result in the value "false" being added into the cron array.
 	 *
-	 * @ticket 53950
 	 *
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53950' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_wp_schedule_single_event_without_cron_option() {
 		delete_option( 'cron' );
 
@@ -165,8 +165,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_unschedule_event
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_event' )]
 	public function test_unschedule_event() {
 		// Schedule an event and make sure it's returned by wp_next_scheduled().
 		$hook      = __FUNCTION__;
@@ -182,8 +182,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_clear_scheduled_hook
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_clear_scheduled_hook' )]
 	public function test_clear_schedule() {
 		$hook = __FUNCTION__;
 		$args = array( 'arg1' );
@@ -212,8 +212,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_clear_scheduled_hook
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_clear_scheduled_hook' )]
 	public function test_clear_undefined_schedule() {
 		$hook = __FUNCTION__;
 		$args = array( 'arg1' );
@@ -227,8 +227,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_clear_scheduled_hook
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_clear_scheduled_hook' )]
 	public function test_clear_schedule_multiple_args() {
 		$hook = __FUNCTION__;
 		$args = array( 'arg1', 'arg2' );
@@ -256,10 +256,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 10468
 	 *
-	 * @covers ::wp_clear_scheduled_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10468' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_clear_scheduled_hook' )]
 	public function test_clear_schedule_new_args() {
 		$hook       = __FUNCTION__;
 		$args       = array( 'arg1' );
@@ -296,10 +296,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18997
 	 *
-	 * @covers ::wp_unschedule_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18997' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_hook' )]
 	public function test_unschedule_hook() {
 		$hook = __FUNCTION__;
 		$args = array( 'foo' );
@@ -321,8 +321,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_unschedule_hook
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_hook' )]
 	public function test_unschedule_undefined_hook() {
 		$hook           = __FUNCTION__;
 		$unrelated_hook = __FUNCTION__ . '_two';
@@ -342,10 +342,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 6966
 	 *
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6966' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_duplicate_event() {
 		// Duplicate events close together should be skipped.
 		$hook = __FUNCTION__;
@@ -367,10 +367,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 6966
 	 *
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6966' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_not_duplicate_event() {
 		// Duplicate events far apart should work normally.
 		$hook = __FUNCTION__;
@@ -391,8 +391,8 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_not_duplicate_event_reversed() {
 		// Duplicate events far apart should work normally regardless of order.
 		$hook = __FUNCTION__;
@@ -416,11 +416,11 @@ class Tests_Cron extends WP_UnitTestCase {
 	 * Ensure the pre_scheduled_event filter prevents
 	 * modification of the cron_array_option.
 	 *
-	 * @ticket 32656
 	 *
-	 * @covers ::wp_schedule_single_event
-	 * @covers ::wp_schedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32656' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
 	public function test_pre_schedule_event_filter() {
 		$hook = __FUNCTION__;
 		$args = array( 'arg1' );
@@ -472,10 +472,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	 * Ensure the pre_reschedule_event filter prevents
 	 * modification of the cron_array_option.
 	 *
-	 * @ticket 32656
 	 *
-	 * @covers ::wp_reschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32656' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_reschedule_event' )]
 	public function test_pre_reschedule_event_filter() {
 		$hook = __FUNCTION__;
 		$ts1  = strtotime( '+30 minutes' );
@@ -501,10 +501,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	 * Ensure the pre_unschedule_event filter prevents
 	 * modification of the cron_array_option.
 	 *
-	 * @ticket 32656
 	 *
-	 * @covers ::wp_unschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32656' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_event' )]
 	public function test_pre_unschedule_event_filter() {
 		$hook = __FUNCTION__;
 		$ts1  = strtotime( '+30 minutes' );
@@ -527,11 +527,11 @@ class Tests_Cron extends WP_UnitTestCase {
 	 * Ensure the clearing scheduled hooks filter prevents
 	 * modification of the cron_array_option.
 	 *
-	 * @ticket 32656
 	 *
-	 * @covers ::wp_clear_scheduled_hook
-	 * @covers ::wp_unschedule_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32656' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_clear_scheduled_hook' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_hook' )]
 	public function test_pre_clear_scheduled_hook_filters() {
 		$hook = __FUNCTION__;
 		$ts1  = strtotime( '+30 minutes' );
@@ -561,11 +561,11 @@ class Tests_Cron extends WP_UnitTestCase {
 	 * Ensure the preflight hooks for scheduled events
 	 * return a filtered value as expected.
 	 *
-	 * @ticket 32656
 	 *
-	 * @covers ::wp_get_scheduled_event
-	 * @covers ::wp_next_scheduled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32656' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_scheduled_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_next_scheduled' )]
 	public function test_pre_scheduled_event_hooks() {
 		add_filter( 'pre_get_scheduled_event', array( $this, 'filter_pre_scheduled_event_hooks' ) );
 
@@ -598,10 +598,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	 * When no timestamp is specified, the next event should be returned.
 	 * When a timestamp is specified, a particular event should be returned.
 	 *
-	 * @ticket 45976
 	 *
-	 * @covers ::wp_get_scheduled_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45976' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_scheduled_event' )]
 	public function test_get_scheduled_event_singles() {
 		$hook    = __FUNCTION__;
 		$args    = array( 'arg1' );
@@ -643,10 +643,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	 * When no timestamp is specified, the next event should be returned.
 	 * When a timestamp is specified, a particular event should be returned.
 	 *
-	 * @ticket 45976
 	 *
-	 * @covers ::wp_get_scheduled_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45976' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_scheduled_event' )]
 	public function test_get_scheduled_event_recurring() {
 		$hook     = __FUNCTION__;
 		$args     = array( 'arg1' );
@@ -689,10 +689,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	/**
 	 * Ensure wp_get_scheduled_event() returns false when expected.
 	 *
-	 * @ticket 45976
 	 *
-	 * @covers ::wp_get_scheduled_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45976' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_scheduled_event' )]
 	public function test_get_scheduled_event_false() {
 		$hook = __FUNCTION__;
 		$args = array( 'arg1' );
@@ -715,10 +715,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	/**
 	 * Ensure any past event counts as a duplicate.
 	 *
-	 * @ticket 44818
 	 *
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44818' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_duplicate_past_event() {
 		$hook = __FUNCTION__;
 		$args = array( 'arg1' );
@@ -744,10 +744,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	/**
 	 * Ensure any near future event counts as a duplicate.
 	 *
-	 * @ticket 44818
 	 *
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44818' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_duplicate_near_future_event() {
 		$hook = __FUNCTION__;
 		$args = array( 'arg1' );
@@ -773,10 +773,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	/**
 	 * Duplicate future events are disallowed.
 	 *
-	 * @ticket 44818
 	 *
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44818' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_duplicate_future_event() {
 		$hook = __FUNCTION__;
 		$args = array( 'arg1' );
@@ -799,10 +799,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	/**
 	 * Future events are allowed.
 	 *
-	 * @ticket 44818
 	 *
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44818' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_not_duplicate_future_event() {
 		$hook = __FUNCTION__;
 		$args = array( 'arg1' );
@@ -819,13 +819,13 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_schedule_single_event
-	 * @covers ::wp_schedule_event
-	 * @covers ::wp_reschedule_event
-	 * @covers ::wp_unschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_reschedule_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_event' )]
 	public function test_invalid_timestamp_for_event_returns_error() {
 		$single_event      = wp_schedule_single_event( -50, 'hook', array(), true );
 		$event             = wp_schedule_event( -50, 'daily', 'hook', array(), true );
@@ -846,11 +846,11 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_schedule_event
-	 * @covers ::wp_reschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_reschedule_event' )]
 	public function test_invalid_recurrence_for_event_returns_error() {
 		$event             = wp_schedule_event( time(), 'invalid', 'hook', array(), true );
 		$rescheduled_event = wp_reschedule_event( time(), 'invalid', 'hook', array(), true );
@@ -863,12 +863,12 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_schedule_single_event
-	 * @covers ::wp_schedule_event
-	 * @covers ::wp_reschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_reschedule_event' )]
 	public function test_disallowed_event_returns_false_when_wp_error_is_set_to_false() {
 		add_filter( 'schedule_event', '__return_false' );
 
@@ -882,12 +882,12 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_schedule_single_event
-	 * @covers ::wp_schedule_event
-	 * @covers ::wp_reschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_reschedule_event' )]
 	public function test_disallowed_event_returns_error_when_wp_error_is_set_to_true() {
 		add_filter( 'schedule_event', '__return_false' );
 
@@ -906,12 +906,12 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_schedule_single_event
-	 * @covers ::wp_schedule_event
-	 * @covers ::wp_reschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_reschedule_event' )]
 	public function test_schedule_short_circuit_with_error_returns_false_when_wp_error_is_set_to_false() {
 		$return_error = function ( $pre, $event, $wp_error ) {
 			$this->assertFalse( $wp_error );
@@ -938,12 +938,12 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_schedule_single_event
-	 * @covers ::wp_schedule_event
-	 * @covers ::wp_reschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_reschedule_event' )]
 	public function test_schedule_short_circuit_with_error_returns_error_when_wp_error_is_set_to_true() {
 		$return_error = function ( $pre, $event, $wp_error ) {
 			$this->assertTrue( $wp_error );
@@ -975,12 +975,12 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_schedule_single_event
-	 * @covers ::wp_schedule_event
-	 * @covers ::wp_reschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_reschedule_event' )]
 	public function test_schedule_short_circuit_with_false_returns_false_when_wp_error_is_set_to_false() {
 		// Add filters which return false:
 		add_filter( 'pre_schedule_event', '__return_false' );
@@ -998,12 +998,12 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_schedule_single_event
-	 * @covers ::wp_schedule_event
-	 * @covers ::wp_reschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_reschedule_event' )]
 	public function test_schedule_short_circuit_with_false_returns_error_when_wp_error_is_set_to_true() {
 		// Add filters which return false:
 		add_filter( 'pre_schedule_event', '__return_false' );
@@ -1026,12 +1026,12 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57271
 	 *
-	 * @dataProvider data_wp_reschedule_event_works_with_args
 	 *
-	 * @covers ::wp_reschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57271' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_reschedule_event_works_with_args' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_reschedule_event' )]
 	public function test_wp_reschedule_event_works_with_args( array $args ) {
 		$time = time();
 
@@ -1053,7 +1053,7 @@ class Tests_Cron extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_reschedule_event_works_with_args() {
+	public static function data_wp_reschedule_event_works_with_args() {
 		return array(
 			'indexed'     => array(
 				array(
@@ -1073,11 +1073,11 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 * @expectedDeprecated wp_clear_scheduled_hook
 	 *
-	 * @covers ::wp_clear_scheduled_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_clear_scheduled_hook' )]
 	public function test_deprecated_argument_usage_of_wp_clear_scheduled_hook() {
 		$return_pre = function ( $pre, $hook, $args, $wp_error ) {
 			$this->assertSame( array( 1, 2, 3 ), $args );
@@ -1094,10 +1094,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_clear_scheduled_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_clear_scheduled_hook' )]
 	public function test_clear_scheduled_hook_returns_default_pre_filter_error_when_wp_error_is_set_to_true() {
 		add_filter( 'pre_unschedule_event', '__return_false' );
 
@@ -1117,10 +1117,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_clear_scheduled_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_clear_scheduled_hook' )]
 	public function test_clear_scheduled_hook_returns_custom_pre_filter_error_when_wp_error_is_set_to_true() {
 		$return_error = function ( $pre, $timestamp, $hook, $args, $wp_error ) {
 			$this->assertTrue( $wp_error );
@@ -1152,10 +1152,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_unschedule_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_hook' )]
 	public function test_unschedule_short_circuit_with_error_returns_false_when_wp_error_is_set_to_false() {
 		$return_error = function ( $pre, $hook, $wp_error ) {
 			$this->assertFalse( $wp_error );
@@ -1177,10 +1177,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_unschedule_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_hook' )]
 	public function test_unschedule_short_circuit_with_error_returns_error_when_wp_error_is_set_to_true() {
 		$return_error = function ( $pre, $hook, $wp_error ) {
 			$this->assertTrue( $wp_error );
@@ -1203,10 +1203,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_unschedule_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_hook' )]
 	public function test_unschedule_short_circuit_with_false_returns_false_when_wp_error_is_set_to_false() {
 		// Add a filter which returns false:
 		add_filter( 'pre_unschedule_hook', '__return_false' );
@@ -1219,10 +1219,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_unschedule_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_hook' )]
 	public function test_unschedule_short_circuit_with_false_returns_error_when_wp_error_is_set_to_true() {
 		// Add a filter which returns false:
 		add_filter( 'pre_unschedule_hook', '__return_false' );
@@ -1236,10 +1236,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_schedule_single_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_single_event' )]
 	public function test_cron_array_error_is_returned_when_scheduling_single_event() {
 		// Force update_option() to fail by setting the new value to match the existing:
 		add_filter(
@@ -1258,10 +1258,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_schedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_schedule_event' )]
 	public function test_cron_array_error_is_returned_when_scheduling_event() {
 		// Force update_option() to fail by setting the new value to match the existing:
 		add_filter(
@@ -1280,10 +1280,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_unschedule_hook
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_hook' )]
 	public function test_cron_array_error_is_returned_when_unscheduling_hook() {
 		// Schedule a valid event:
 		$event = wp_schedule_event( strtotime( '+1 hour' ), 'daily', 'hook', array(), true );
@@ -1306,10 +1306,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 49961
 	 *
-	 * @covers ::wp_unschedule_event
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unschedule_event' )]
 	public function test_cron_array_error_is_returned_when_unscheduling_event() {
 		// Schedule a valid event:
 		$event = wp_schedule_event( strtotime( '+1 hour' ), 'daily', 'hook', array(), true );
@@ -1332,10 +1332,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63858
 	 *
-	 * @covers ::wp_cron
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63858' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cron' )]
 	public function test_wp_cron_before_shutdown() {
 		remove_all_actions( 'shutdown' );
 		wp_cron();
@@ -1343,10 +1343,10 @@ class Tests_Cron extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63858
 	 *
-	 * @covers ::wp_cron
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63858' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cron' )]
 	public function test_wp_cron_already_at_shutdown() {
 		remove_all_actions( 'shutdown' );
 		add_action( 'shutdown', 'wp_cron' );

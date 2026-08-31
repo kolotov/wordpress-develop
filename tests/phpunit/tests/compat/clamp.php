@@ -1,17 +1,16 @@
 <?php
 
 /**
- * @group compat
- *
- * @covers ::clamp
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'clamp' )]
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 class Tests_Compat_clamp extends WP_UnitTestCase {
 
 	/**
 	 * Tests that clamp() is always available (either from PHP or WP).
 	 *
-	 * @ticket 65143
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65143' )]
 	public function test_clamp_availability(): void {
 		$this->assertTrue( function_exists( 'clamp' ) );
 	}
@@ -19,15 +18,15 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	/**
 	 * Tests clamp().
 	 *
-	 * @ticket 65143
 	 *
-	 * @dataProvider data_clamp
 	 *
 	 * @param mixed $expected The expected clamped value.
 	 * @param mixed $value    The value to clamp.
 	 * @param mixed $min      The minimum bound.
 	 * @param mixed $max      The maximum bound.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65143' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_clamp' )]
 	public function test_clamp( $expected, $value, $min, $max ): void {
 		$this->assertSame( $expected, clamp( $value, $min, $max ) );
 	}
@@ -37,7 +36,7 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ expected: mixed, value: mixed, min: mixed, max: mixed }>
 	 */
-	public function data_clamp(): array {
+	public static function data_clamp(): array {
 		return array(
 			'integer within range'           => array(
 				'expected' => 5,
@@ -183,15 +182,15 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	/**
 	 * Tests clamp() with DateTimeImmutable.
 	 *
-	 * @ticket 65143
 	 *
-	 * @dataProvider data_clamp_datetime
 	 *
 	 * @param DateTimeImmutable $expected The expected clamped value.
 	 * @param DateTimeImmutable $value    The value to clamp.
 	 * @param DateTimeImmutable $min      The minimum bound.
 	 * @param DateTimeImmutable $max      The maximum bound.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65143' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_clamp_datetime' )]
 	public function test_clamp_with_datetime( DateTimeImmutable $expected, DateTimeImmutable $value, DateTimeImmutable $min, DateTimeImmutable $max ): void {
 		$this->assertEquals( $expected, clamp( $value, $min, $max ) );
 	}
@@ -201,7 +200,7 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ expected: DateTimeImmutable, value: DateTimeImmutable, min: DateTimeImmutable, max: DateTimeImmutable }>
 	 */
-	public function data_clamp_datetime(): array {
+	public static function data_clamp_datetime(): array {
 		return array(
 			'within range' => array(
 				'expected' => new DateTimeImmutable( '2025-01-15' ),
@@ -233,15 +232,15 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	 * at the same time, in which case PHP returns `$max`, since it checks the upper bound
 	 * first. These expectations are taken from PHP's own clamp() tests.
 	 *
-	 * @ticket 65143
 	 *
-	 * @dataProvider data_clamp_with_null_bound
 	 *
 	 * @param mixed $expected The expected clamped value.
 	 * @param mixed $value    The value to clamp.
 	 * @param mixed $min      The minimum bound.
 	 * @param mixed $max      The maximum bound.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65143' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_clamp_with_null_bound' )]
 	public function test_clamp_with_null_bound( $expected, $value, $min, $max ): void {
 		$this->assertSame( $expected, clamp( $value, $min, $max ) );
 	}
@@ -251,7 +250,7 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ expected: mixed, value: mixed, min: mixed, max: mixed }>
 	 */
-	public function data_clamp_with_null_bound(): array {
+	public static function data_clamp_with_null_bound(): array {
 		return array(
 			// The upper bound is checked before the lower bound, so $max wins when both compare as exceeded.
 			'null max, both bounds exceeded'  => array(
@@ -305,13 +304,13 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	 * A null $max is coerced to bool for the comparison, so it is smaller than any truthy
 	 * $min. These expectations are taken from PHP's own clamp() tests.
 	 *
-	 * @ticket 65143
 	 *
-	 * @dataProvider data_clamp_throws_for_null_max
 	 *
 	 * @param mixed $value The value to clamp.
 	 * @param mixed $min   The minimum bound.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65143' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_clamp_throws_for_null_max' )]
 	public function test_clamp_throws_for_null_max( $value, $min ): void {
 		$this->expectException( $this->value_error_class() );
 		$this->expectExceptionMessage( 'clamp(): Argument #2 ($min) must be smaller than or equal to argument #3 ($max)' );
@@ -324,7 +323,7 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ value: mixed, min: mixed }>
 	 */
-	public function data_clamp_throws_for_null_max(): array {
+	public static function data_clamp_throws_for_null_max(): array {
 		return array(
 			'value below min' => array(
 				'value' => -9999,
@@ -340,8 +339,8 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	/**
 	 * Tests that clamp() throws when $min is NAN.
 	 *
-	 * @ticket 65143
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65143' )]
 	public function test_clamp_throws_for_nan_min(): void {
 		$this->expectException( $this->value_error_class() );
 		$this->expectExceptionMessage( 'clamp(): Argument #2 ($min) must not be NAN' );
@@ -352,8 +351,8 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	/**
 	 * Tests that clamp() throws when $max is NAN.
 	 *
-	 * @ticket 65143
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65143' )]
 	public function test_clamp_throws_for_nan_max(): void {
 		$this->expectException( $this->value_error_class() );
 		$this->expectExceptionMessage( 'clamp(): Argument #3 ($max) must not be NAN' );
@@ -364,8 +363,8 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	/**
 	 * Tests that clamp() throws when $min is greater than $max.
 	 *
-	 * @ticket 65143
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65143' )]
 	public function test_clamp_throws_when_min_greater_than_max(): void {
 		$this->expectException( $this->value_error_class() );
 		$this->expectExceptionMessage( 'clamp(): Argument #2 ($min) must be smaller than or equal to argument #3 ($max)' );
@@ -376,8 +375,8 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	/**
 	 * Tests that clamp() throws when $min is INF and $max is finite.
 	 *
-	 * @ticket 65143
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65143' )]
 	public function test_clamp_throws_when_inf_min_greater_than_max(): void {
 		$this->expectException( $this->value_error_class() );
 		$this->expectExceptionMessage( 'clamp(): Argument #2 ($min) must be smaller than or equal to argument #3 ($max)' );
@@ -388,8 +387,8 @@ class Tests_Compat_clamp extends WP_UnitTestCase {
 	/**
 	 * Tests that clamp() with a NAN value returns NAN (no exception).
 	 *
-	 * @ticket 65143
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65143' )]
 	public function test_clamp_with_nan_value_returns_nan(): void {
 		$result = clamp( NAN, 0, 10 );
 		$this->assertNan( $result );

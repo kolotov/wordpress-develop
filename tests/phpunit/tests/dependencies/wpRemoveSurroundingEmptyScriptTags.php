@@ -3,11 +3,11 @@
 /**
  * Test wp_remove_surrounding_empty_script_tags().
  *
- * @group dependencies
- * @group scripts
- * @ticket 58664
- * @covers ::wp_remove_surrounding_empty_script_tags
  */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '58664' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_remove_surrounding_empty_script_tags' )]
 class Tests_Dependencies_wpRemoveSurroundingEmptyScriptTags extends WP_UnitTestCase {
 
 	/**
@@ -15,7 +15,7 @@ class Tests_Dependencies_wpRemoveSurroundingEmptyScriptTags extends WP_UnitTestC
 	 *
 	 * @return array
 	 */
-	public function get_data_to_test_wp_remove_surrounding_empty_script_tags() {
+	public static function get_data_to_test_wp_remove_surrounding_empty_script_tags() {
 		$error_js = 'console.error("Function wp_remove_surrounding_empty_script_tags() used incorrectly in PHP. Expected string to start with script tag (without attributes) and end with script tag, with optional whitespace.")';
 		return array(
 			'basic_case'            => array(
@@ -59,12 +59,12 @@ class Tests_Dependencies_wpRemoveSurroundingEmptyScriptTags extends WP_UnitTestC
 	/**
 	 * Test scenarios for wp_remove_surrounding_empty_script_tags().
 	 *
-	 * @dataProvider get_data_to_test_wp_remove_surrounding_empty_script_tags
 	 *
 	 * @param string $input                 Input.
 	 * @param string $expected              Expected.
 	 * @param bool   $expect_doing_it_wrong Whether input is _doing_it_wrong().
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'get_data_to_test_wp_remove_surrounding_empty_script_tags' )]
 	public function test_wp_remove_surrounding_empty_script_tags( $input, $expected, $expect_doing_it_wrong ) {
 		if ( $expect_doing_it_wrong ) {
 			$this->setExpectedIncorrectUsage( 'wp_remove_surrounding_empty_script_tags' );

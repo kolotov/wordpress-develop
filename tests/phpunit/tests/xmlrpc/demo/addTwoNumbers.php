@@ -3,21 +3,21 @@
 /**
  * Tests for the XML-RPC demo.addTwoNumbers method.
  *
- * @group xmlrpc
  *
- * @covers wp_xmlrpc_server::addTwoNumbers
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( wp_xmlrpc_server::class, 'addTwoNumbers' )]
 class Tests_XMLRPC_demo_addTwoNumbers extends WP_XMLRPC_UnitTestCase {
 
 	/**
 	 * Tests that addTwoNumbers returns the correct sum for valid integer inputs.
 	 *
-	 * @dataProvider data_valid_integers
 	 *
 	 * @param int $a        First number.
 	 * @param int $b        Second number.
 	 * @param int $expected Expected sum.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_integers' )]
 	public function test_add_two_numbers_with_valid_integers( $a, $b, $expected ) {
 		$result = $this->myxmlrpcserver->addTwoNumbers( array( $a, $b ) );
 
@@ -30,7 +30,7 @@ class Tests_XMLRPC_demo_addTwoNumbers extends WP_XMLRPC_UnitTestCase {
 	 *
 	 * @return array<string, int[]>
 	 */
-	public function data_valid_integers(): array {
+	public static function data_valid_integers(): array {
 		return array(
 			'two positive integers'         => array( 3, 5, 8 ),
 			'positive and negative integer' => array( 10, -3, 7 ),
@@ -45,12 +45,12 @@ class Tests_XMLRPC_demo_addTwoNumbers extends WP_XMLRPC_UnitTestCase {
 	/**
 	 * Tests that addTwoNumbers returns an error when invalid types are passed.
 	 *
-	 * @dataProvider data_invalid_arguments
 	 *
 	 * @param mixed  $a       First argument.
 	 * @param mixed  $b       Second argument.
 	 * @param string $message Description of the test case.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_arguments' )]
 	public function test_add_two_numbers_with_invalid_arguments( $a, $b, $message ) {
 		$result = $this->myxmlrpcserver->addTwoNumbers( array( $a, $b ) );
 
@@ -68,7 +68,7 @@ class Tests_XMLRPC_demo_addTwoNumbers extends WP_XMLRPC_UnitTestCase {
 	 *
 	 * @return array<string, array<mixed>>
 	 */
-	public function data_invalid_arguments(): array {
+	public static function data_invalid_arguments(): array {
 		return array(
 			'first argument is string'          => array( 'abc', 5, 'Should fail when first argument is a string.' ),
 			'second argument is string'         => array( 3, 'abc', 'Should fail when second argument is a string.' ),
@@ -126,11 +126,11 @@ class Tests_XMLRPC_demo_addTwoNumbers extends WP_XMLRPC_UnitTestCase {
 	/**
 	 * Tests that addTwoNumbers returns an error when too many arguments are passed.
 	 *
-	 * @dataProvider data_too_many_arguments
 	 *
 	 * @param array  $args    Arguments to pass to addTwoNumbers.
 	 * @param string $message Description of the test case.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_too_many_arguments' )]
 	public function test_add_two_numbers_with_too_many_arguments( $args, $message ) {
 		$result = $this->myxmlrpcserver->addTwoNumbers( $args );
 
@@ -148,7 +148,7 @@ class Tests_XMLRPC_demo_addTwoNumbers extends WP_XMLRPC_UnitTestCase {
 	 *
 	 * @return array<string, array<mixed>>
 	 */
-	public function data_too_many_arguments(): array {
+	public static function data_too_many_arguments(): array {
 		return array(
 			'three arguments' => array( array( 3, 5, 100 ), 'Should fail with three arguments.' ),
 			'four arguments'  => array( array( 10, 20, 30, 40 ), 'Should fail with four arguments.' ),

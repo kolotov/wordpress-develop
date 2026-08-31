@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @group pluggable
  *
- * @covers ::wp_rand
  */
+#[\PHPUnit\Framework\Attributes\Group( 'pluggable' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_rand' )]
 class Tests_Pluggable_wpRand extends WP_UnitTestCase {
 
 	/**
 	 * Tests that wp_rand() returns a non-negative integer for both positive and negative input.
 	 *
-	 * @ticket 55194
-	 * @dataProvider data_wp_rand_should_return_a_non_negative_integer
 	 *
 	 * @param int $min Lower limit for the generated number.
 	 * @param int $max Upper limit for the generated number.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55194' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_rand_should_return_a_non_negative_integer' )]
 	public function test_wp_rand_should_return_a_non_negative_integer( $min, $max ) {
 		$this->assertGreaterThanOrEqual(
 			0,
@@ -35,7 +35,7 @@ class Tests_Pluggable_wpRand extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_rand_should_return_a_non_negative_integer() {
+	public static function data_wp_rand_should_return_a_non_negative_integer() {
 		return array(
 			'1 and 99'       => array(
 				'min' => 1,
@@ -67,12 +67,12 @@ class Tests_Pluggable_wpRand extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_rand() returns zero when `$min` and `$max` are zero.
 	 *
-	 * @ticket 55194
-	 * @dataProvider data_wp_rand_should_return_zero_when_min_and_max_are_zero
 	 *
 	 * @param mixed $min Lower limit for the generated number.
 	 * @param mixed $max Upper limit for the generated number.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55194' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_rand_should_return_zero_when_min_and_max_are_zero' )]
 	public function test_wp_rand_should_return_zero_when_min_and_max_are_zero( $min, $max ) {
 		$this->assertSame( 0, wp_rand( $min, $max ) );
 	}
@@ -82,7 +82,7 @@ class Tests_Pluggable_wpRand extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_rand_should_return_zero_when_min_and_max_are_zero() {
+	public static function data_wp_rand_should_return_zero_when_min_and_max_are_zero() {
 		return array(
 			'min and max as 0'      => array(
 				'min' => 0,

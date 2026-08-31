@@ -2,8 +2,14 @@
 /**
  * Test WP_Block_Templates_Registry class.
  *
- * @coversDefaultClass WP_Block_Templates_Registry
  */
+
+
+
+
+
+
+
 class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 
 	/**
@@ -17,13 +23,23 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 		self::$registry = WP_Block_Templates_Registry::get_instance();
 	}
 
+	public function tear_down() {
+		foreach ( array_keys( self::$registry->get_all_registered() ) as $template_name ) {
+			if ( str_starts_with( $template_name, 'test-plugin//' ) ) {
+				self::$registry->unregister( $template_name );
+			}
+		}
+
+		parent::tear_down();
+	}
+
 	/**
 	 * Tests that register() returns the registered template.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'register' )]
 	public function test_register_template() {
 		// Register a valid template.
 		$template_name = 'test-plugin//test-template';
@@ -37,10 +53,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that register() returns an error if template name is not a string.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'register' )]
 	public function test_register_template_invalid_name() {
 		// Try to register a template with invalid name (non-string).
 		$template_name = array( 'invalid-template-name' );
@@ -57,10 +73,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	 * Tests that register() returns an error if template name contains
 	 * uppercase characters.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'register' )]
 	public function test_register_template_invalid_name_uppercase() {
 		// Try to register a template with uppercase characters in the name.
 		$template_name = 'test-plugin//Invalid-Template-Name';
@@ -76,10 +92,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that register() returns an error if template name has no prefix.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'register' )]
 	public function test_register_template_no_prefix() {
 		// Try to register a template without a namespace.
 		$this->setExpectedIncorrectUsage( 'WP_Block_Templates_Registry::register' );
@@ -93,10 +109,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that register() returns an error if template already exists.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'register' )]
 	public function test_register_template_already_exists() {
 		// Register the template for the first time.
 		$template_name = 'test-plugin//duplicate-template';
@@ -116,10 +132,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that get_all_registered() returns all registered templates.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::get_all_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'get_all_registered' )]
 	public function test_get_all_registered() {
 		$template_name_1 = 'test-plugin//template-1';
 		$template_name_2 = 'test-plugin//template-2';
@@ -140,10 +156,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that get_registered() returns the correct registered template.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'get_registered' )]
 	public function test_get_registered() {
 		$template_name = 'test-plugin//registered-template';
 		$args          = array(
@@ -173,10 +189,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that get_by_slug() returns the correct template by slug.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::get_by_slug
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'get_by_slug' )]
 	public function test_get_by_slug() {
 		$slug          = 'slug-template';
 		$template_name = 'test-plugin//' . $slug;
@@ -197,10 +213,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that get_by_query() returns the correct templates based on the query.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::get_by_query
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'get_by_query' )]
 	public function test_get_by_query() {
 		$template_name_1 = 'test-plugin//query-template-1';
 		$template_name_2 = 'test-plugin//query-template-2';
@@ -230,10 +246,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that is_registered() correctly identifies registered templates.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::is_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'is_registered' )]
 	public function test_is_registered() {
 		$template_name = 'test-plugin//is-registered-template';
 		$args          = array(
@@ -248,10 +264,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63957
 	 *
-	 * @covers ::is_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63957' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'is_registered' )]
 	public function test_is_registered_with_null_template_name() {
 		$this->assertFalse( self::$registry->is_registered( null ) );
 	}
@@ -259,10 +275,10 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests that unregister() correctly unregisters a registered template.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers ::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Templates_Registry', 'unregister' )]
 	public function test_unregister() {
 		$template_name = 'test-plugin//unregister-template';
 		$args          = array(
@@ -273,7 +289,7 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 
 		$unregistered_template = self::$registry->unregister( $template_name );
 
-		$this->assertEquals( $template, $unregistered_template, 'Unregistered template should be the same as the registered one.' );
+		$this->assertSame( $template, $unregistered_template, 'Unregistered template should be the same as the registered one.' );
 		$this->assertFalse( self::$registry->is_registered( $template_name ), 'Template should not be registered after unregistering.' );
 	}
 
@@ -305,14 +321,14 @@ class Tests_Block_Templates_wpBlockTemplatesRegistry extends WP_UnitTestCase {
 	/**
 	 * Tests template name validation with various inputs.
 	 *
-	 * @ticket 62523
 	 *
-	 * @dataProvider data_template_name_validation
 	 *
 	 * @param string $template_name The template name to test.
 	 * @param bool   $expected      Expected validation result.
 	 * @param string $message       Test assertion message.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62523' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_template_name_validation' )]
 	public function test_template_name_validation( $template_name, $expected, $message ) {
 		$result = self::$registry->register( $template_name, array() );
 

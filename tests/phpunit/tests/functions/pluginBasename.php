@@ -3,11 +3,11 @@
 /**
  * Tests for plugin_basename()
  *
- * @group functions
- * @group plugins
  *
- * @covers ::plugin_basename
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'plugin_basename' )]
 class Tests_Functions_PluginBasename extends WP_UnitTestCase {
 
 	/**
@@ -36,8 +36,8 @@ class Tests_Functions_PluginBasename extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29154
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29154' )]
 	public function test_return_correct_basename_for_symlinked_plugins() {
 		global $wp_plugin_paths;
 
@@ -50,8 +50,8 @@ class Tests_Functions_PluginBasename extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28441
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28441' )]
 	public function test_return_correct_basename_for_symlinked_plugins_with_path_conflicts() {
 		global $wp_plugin_paths;
 

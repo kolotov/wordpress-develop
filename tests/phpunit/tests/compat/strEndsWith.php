@@ -1,30 +1,30 @@
 <?php
 
 /**
- * @group compat
  *
- * @covers ::str_ends_with
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'str_ends_with' )]
 class Tests_Compat_StrEndsWith extends WP_UnitTestCase {
 
 	/**
 	 * Test that str_ends_with() is always available (either from PHP or WP).
 	 *
-	 * @ticket 54377
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54377' )]
 	public function test_str_ends_with_availability() {
 		$this->assertTrue( function_exists( 'str_ends_with' ) );
 	}
 
 	/**
-	 * @dataProvider data_str_ends_with
 	 *
-	 * @ticket 54377
 	 *
 	 * @param bool   $expected Whether or not `$haystack` is expected to end with `$needle`.
 	 * @param string $haystack The string to search in.
 	 * @param string $needle   The substring to search for at the end of `$haystack`.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_str_ends_with' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '54377' )]
 	public function test_str_ends_with( $expected, $haystack, $needle ) {
 		$this->assertSame( $expected, str_ends_with( $haystack, $needle ) );
 	}
@@ -34,7 +34,7 @@ class Tests_Compat_StrEndsWith extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_str_ends_with() {
+	public static function data_str_ends_with() {
 		return array(
 			'empty needle'              => array(
 				'expected' => true,

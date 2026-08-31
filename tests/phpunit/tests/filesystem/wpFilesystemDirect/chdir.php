@@ -8,24 +8,24 @@
 require_once __DIR__ . '/base.php';
 
 /**
- * @group admin
- * @group filesystem
- * @group filesystem-direct
  *
- * @covers WP_Filesystem_Direct::chdir
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem-direct' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Filesystem_Direct::class, 'chdir' )]
 class Tests_Filesystem_WpFilesystemDirect_Chdir extends WP_Filesystem_Direct_UnitTestCase {
 
 	/**
 	 * Tests that `WP_Filesystem_Direct::chdir()`
 	 * returns false for a path that does not exist.
 	 *
-	 * @ticket 57774
 	 *
-	 * @dataProvider data_should_fail_to_change_directory
 	 *
 	 * @param string $path The path.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_fail_to_change_directory' )]
 	public function test_should_fail_to_change_directory( $path ) {
 		$original_cwd = self::$filesystem->cwd();
 		$path         = wp_normalize_path( realpath( self::$file_structure['test_dir']['path'] ) ) . $path;
@@ -52,7 +52,7 @@ class Tests_Filesystem_WpFilesystemDirect_Chdir extends WP_Filesystem_Direct_Uni
 	 *
 	 * @return array[]
 	 */
-	public function data_should_fail_to_change_directory() {
+	public static function data_should_fail_to_change_directory() {
 		return array(
 			'a file that exists'              => array(
 				'path' => 'a_file_that_exists.txt',
@@ -70,8 +70,8 @@ class Tests_Filesystem_WpFilesystemDirect_Chdir extends WP_Filesystem_Direct_Uni
 	 * Tests that `WP_Filesystem_Direct::chdir()` changes to
 	 * an existing directory.
 	 *
-	 * @ticket 57774
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
 	public function test_should_change_directory() {
 		$original_cwd = self::$filesystem->cwd();
 		$path         = wp_normalize_path( realpath( self::$file_structure['test_dir']['path'] ) );

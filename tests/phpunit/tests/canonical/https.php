@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group canonical
- * @group rewrite
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'canonical' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Canonical_HTTPS extends WP_Canonical_UnitTestCase {
 
 	/**
@@ -36,8 +36,8 @@ class Tests_Canonical_HTTPS extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27954
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27954' )]
 	public function test_http_request_with_http_home() {
 		$redirect = redirect_canonical( $this->http, false );
 
@@ -45,8 +45,8 @@ class Tests_Canonical_HTTPS extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27954
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27954' )]
 	public function test_https_request_with_http_home() {
 		$redirect = redirect_canonical( $this->https, false );
 
@@ -54,8 +54,8 @@ class Tests_Canonical_HTTPS extends WP_Canonical_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27954
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27954' )]
 	public function test_https_request_with_https_home() {
 		add_filter( 'home_url', array( $this, 'set_https' ) );
 

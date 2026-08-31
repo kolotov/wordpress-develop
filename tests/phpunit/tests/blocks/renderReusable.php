@@ -6,8 +6,8 @@
  * @subpackage Blocks
  * @since 5.0.0
  *
- * @group blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 class Tests_Blocks_RenderReusable extends WP_UnitTestCase {
 	/**
 	 * Fake user ID.
@@ -89,8 +89,8 @@ class Tests_Blocks_RenderReusable extends WP_UnitTestCase {
 	/**
 	 * Make sure that a synced pattern can be rendered twice in a row.
 	 *
-	 * @ticket 52364
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52364' )]
 	public function test_render_subsequent() {
 		$parsed_block = array(
 			'blockName' => 'core/block',

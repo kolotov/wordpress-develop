@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getTerm extends WP_XMLRPC_UnitTestCase {
 
 	protected static $term_id;
@@ -100,8 +100,8 @@ class Tests_XMLRPC_wp_getTerm extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35991
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35991' )]
 	public function test_get_term_meta() {
 		$this->make_user_by_role( 'editor' );
 

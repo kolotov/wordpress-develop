@@ -1,16 +1,13 @@
 <phpunit
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/9.2/phpunit.xsd"
-		bootstrap="includes/bootstrap.php"
+		xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/13.3/phpunit.xsd"
+		bootstrap="includes/bootstrap-phpunit13.php"
 		backupGlobals="false"
 		colors="true"
 		beStrictAboutTestsThatDoNotTestAnything="true"
 		beStrictAboutOutputDuringTests="true"
 		failOnRisky="true"
-		convertErrorsToExceptions="true"
-		convertWarningsToExceptions="true"
-		convertNoticesToExceptions="true"
-		convertDeprecationsToExceptions="true"
+		cacheDirectory="../../.phpunit.cache-multisite"
 		>
 	<php>
 		<const name="WP_TESTS_MULTISITE" value="1" />
@@ -20,11 +17,24 @@
 		<!-- Default test suite to run all tests. -->
 		<testsuite name="default">
 			<directory suffix=".php">tests</directory>
-			<exclude>tests/rest-api/rest-autosaves-controller.php</exclude>
+			<exclude>tests/rest-api/WP_Test_REST_Autosaves_Controller.php</exclude>
+			<exclude>tests/admin/plugin-dependencies/base.php</exclude>
+			<exclude>tests/block-templates/base.php</exclude>
+			<exclude>tests/filesystem/base.php</exclude>
+			<exclude>tests/filesystem/wpFilesystemDirect/base.php</exclude>
+			<exclude>tests/fonts/font-face/base.php</exclude>
+			<exclude>tests/fonts/font-face/wp-font-face-tests-dataset.php</exclude>
+			<exclude>tests/fonts/font-library/wpFontLibrary/base.php</exclude>
+			<exclude>tests/http/base.php</exclude>
+			<exclude>tests/image/base.php</exclude>
+			<exclude>tests/image/resize.php</exclude>
+			<exclude>tests/media/testcase-adjacent-image-link.php</exclude>
+			<exclude>tests/rest-api/rest-test-controller.php</exclude>
+			<exclude>tests/theme/base.php</exclude>
 		</testsuite>
 		<!-- Sets the DOING_AUTOSAVE constant, so needs to be run last. -->
 		<testsuite name="restapi-autosave">
-			<file>tests/rest-api/rest-autosaves-controller.php</file>
+			<file>tests/rest-api/WP_Test_REST_Autosaves_Controller.php</file>
 		</testsuite>
 	</testsuites>
 	<groups>
@@ -33,14 +43,16 @@
 			<group>ms-files</group>
 			<group>ms-excluded</group>
 			<group>external-http</group>
+			<group>external-object-cache</group>
 			<group>oembed-headers</group>
 			<group>html-api-web-platform-tests</group>
 		</exclude>
 	</groups>
-	<filter>
-		<whitelist addUncoveredFilesFromWhitelist="true">
+	<source>
+		<include>
 			<directory suffix=".php">../../src</directory>
-			<exclude>
+		</include>
+		<exclude>
 				<!-- Third party library exclusions. -->
 				<directory suffix=".php">../../src/wp-includes/ID3</directory>
 				<directory suffix=".php">../../src/wp-includes/IXR</directory>
@@ -70,10 +82,9 @@
 				<file>../../src/wp-includes/ms-deprecated.php</file>
 				<file>../../src/wp-includes/pluggable-deprecated.php</file>
 				<file>../../src/wp-includes/rss.php</file>
-			</exclude>
-		</whitelist>
-	</filter>
+		</exclude>
+	</source>
 	<logging>
-		<log type="junit" target="build/logs/junit.xml" />
+		<junit outputFile="build/logs/junit.xml" />
 	</logging>
 </phpunit>

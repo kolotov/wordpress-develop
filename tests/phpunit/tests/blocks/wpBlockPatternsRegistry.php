@@ -6,8 +6,14 @@
  * @subpackage Blocks
  * @since 6.4.0
  *
- * @group blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+
+
+
+
+
+
 class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 
 	/**
@@ -60,12 +66,12 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject missing pattern name.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Patterns_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
 	public function test_missing_name() {
 		$name     = null;
 		$settings = array(
@@ -80,12 +86,12 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject non-string name.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Patterns_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
 	public function test_invalid_non_string_name() {
 		$name     = 123;
 		$settings = array(
@@ -100,12 +106,12 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should missing title.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Patterns_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
 	public function test_missing_title() {
 		$name     = 'test/pattern';
 		$settings = array(
@@ -119,12 +125,12 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject non-string title.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Patterns_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
 	public function test_invalid_non_string_title() {
 		$name     = 'test/pattern';
 		$settings = array(
@@ -139,12 +145,12 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject missing content.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Patterns_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
 	public function test_missing_content() {
 		$name     = 'Test Pattern';
 		$settings = array(
@@ -158,12 +164,12 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should reject non-string content.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
 	 *
 	 * @expectedIncorrectUsage WP_Block_Patterns_Registry::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
 	public function test_invalid_non_string_content() {
 		$name     = 'Test Pattern';
 		$settings = array(
@@ -178,10 +184,10 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should accept valid pattern.
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
 	 *
-	 * @ticket 59476
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
 	public function test_register_block_pattern() {
 		$name     = 'test/pattern';
 		$settings = array(
@@ -196,12 +202,12 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Unregistering should fail if a pattern is not registered.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::unregister
 	 *
 	 * @expectedIncorrectUsage WP_Block_Patterns_Registry::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'unregister' )]
 	public function test_unregister_not_registered_block() {
 		$success = $this->registry->unregister( 'test/unregistered' );
 		$this->assertFalse( $success );
@@ -210,10 +216,10 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should unregister existing patterns.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::unregister
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'unregister' )]
 	public function test_unregister_block_pattern() {
 		$name     = 'test/pattern';
 		$settings = array(
@@ -229,11 +235,11 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should find all registered patterns.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
-	 * @covers WP_Block_Patterns_Registry::get_all_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'get_all_registered' )]
 	public function test_get_all_registered() {
 		$pattern_one = array(
 			'title'   => 'Pattern One',
@@ -270,11 +276,11 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should not find pattern that's not registered.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
-	 * @covers WP_Block_Patterns_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'get_registered' )]
 	public function test_get_registered_rejects_unknown_pattern_name() {
 		$pattern_one = array(
 			'title'   => 'Pattern One',
@@ -295,11 +301,11 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should find registered pattern by name.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
-	 * @covers WP_Block_Patterns_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'get_registered' )]
 	public function test_get_registered() {
 		$pattern_one = array(
 			'title'   => 'Pattern One',
@@ -328,11 +334,11 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should insert a theme attribute into Template Part blocks in registered patterns.
 	 *
-	 * @ticket 59583
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
-	 * @covers WP_Block_Patterns_Registry::get_all_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59583' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'get_all_registered' )]
 	public function test_get_all_registered_includes_theme_attribute() {
 		$test_pattern = array(
 			'title'   => 'Test Pattern',
@@ -351,13 +357,13 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should insert hooked blocks into registered patterns.
 	 *
-	 * @ticket 59476
-	 * @ticket 60008
-	 * @ticket 60506
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
-	 * @covers WP_Block_Patterns_Registry::get_all_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60008' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'get_all_registered' )]
 	public function test_get_all_registered_includes_hooked_blocks() {
 		register_block_type(
 			'tests/my-block',
@@ -401,11 +407,11 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should insert a theme attribute into Template Part blocks in registered patterns.
 	 *
-	 * @ticket 59583
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
-	 * @covers WP_Block_Patterns_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59583' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'get_registered' )]
 	public function test_get_registered_includes_theme_attribute() {
 		$test_pattern = array(
 			'title'   => 'Test Pattern',
@@ -424,13 +430,13 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should insert hooked blocks into registered patterns.
 	 *
-	 * @ticket 59476
-	 * @ticket 60008
-	 * @ticket 60506
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
-	 * @covers WP_Block_Patterns_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60008' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'get_registered' )]
 	public function test_get_registered_includes_hooked_blocks() {
 		register_block_type(
 			'tests/my-block',
@@ -460,11 +466,11 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should return false for pattern that's not registered.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
-	 * @covers WP_Block_Patterns_Registry::is_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'is_registered' )]
 	public function test_is_registered_for_unknown_pattern() {
 		$pattern = $this->registry->is_registered( 'test/one' );
 		$this->assertFalse( $pattern );
@@ -473,11 +479,11 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Should return true if pattern is registered.
 	 *
-	 * @ticket 59476
 	 *
-	 * @covers WP_Block_Patterns_Registry::register
-	 * @covers WP_Block_Patterns_Registry::is_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59476' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'is_registered' )]
 	public function test_is_registered_for_known_pattern() {
 		$pattern_one = array(
 			'title'   => 'Pattern One',
@@ -492,10 +498,10 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Ensures theme patterns are registered on init.
 	 *
-	 * @ticket 59723
 	 *
-	 * @covers ::_register_theme_block_patterns
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59723' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_register_theme_block_patterns' )]
 	public function test_register_theme_block_patterns_on_init() {
 		// This test needs to use access static class properties.
 		$registry = WP_Block_Patterns_Registry::get_instance();
@@ -522,10 +528,10 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Ensures theme patterns are not registered when no themes are active and valid.
 	 *
-	 * @ticket 59723
 	 *
-	 * @covers ::_register_theme_block_patterns
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59723' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_register_theme_block_patterns' )]
 	public function test_register_theme_block_patterns_on_init_skipped_during_install() {
 		// This test needs to use access static class properties.
 		$registry = WP_Block_Patterns_Registry::get_instance();
@@ -556,10 +562,10 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Ensures theme patterns are lazy loaded.
 	 *
-	 * @ticket 59532
 	 *
-	 * @covers WP_Block_Patterns_Registry::get_all_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59532' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'get_all_registered' )]
 	public function test_lazy_loading_block_patterns_get_all_registered() {
 		// This test needs to use access static class properties.
 		$registry = WP_Block_Patterns_Registry::get_instance();
@@ -610,10 +616,10 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	/**
 	 * Ensures theme patterns are lazy loaded.
 	 *
-	 * @ticket 59532
 	 *
-	 * @covers WP_Block_Patterns_Registry::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59532' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Patterns_Registry', 'get_registered' )]
 	public function test_lazy_loading_block_patterns_get_registered() {
 		// This test needs to use access static class properties.
 		$registry = WP_Block_Patterns_Registry::get_instance();
@@ -697,8 +703,8 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 63957
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63957' )]
 	public function test_is_registered_with_null_pattern_name() {
 		$this->assertFalse( $this->registry->is_registered( null ) );
 	}

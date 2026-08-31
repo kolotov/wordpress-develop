@@ -7,11 +7,43 @@
  *
  * @since 6.5.0
  *
- * @group script-modules
  */
+#[\PHPUnit\Framework\Attributes\Group( 'script-modules' )]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Tests_Script_Modules_WpScriptModules extends WP_UnitTestCase {
 
-	protected WP_Script_Modules $original_script_modules;
+	protected ?WP_Script_Modules $original_script_modules;
 
 	protected string $original_wp_version;
 
@@ -144,8 +176,8 @@ class Tests_Script_Modules_WpScriptModules extends WP_UnitTestCase {
 	/**
 	 * Test wp_script_modules().
 	 *
-	 * @covers ::wp_script_modules()
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_script_modules' )]
 	public function test_wp_script_modules() {
 		$this->assertSame( $this->script_modules, wp_script_modules() );
 	}
@@ -153,13 +185,13 @@ class Tests_Script_Modules_WpScriptModules extends WP_UnitTestCase {
 	/**
 	 * Test wp_register_script_module() with empty ID.
 	 *
-	 * @ticket 63486
 	 *
 	 * @expectedIncorrectUsage WP_Script_Modules::register
 	 *
-	 * @covers ::wp_register_script_module
-	 * @covers WP_Script_Modules::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
 	public function test_register_with_empty_id() {
 		wp_register_script_module( '', '/null-and-void.js' );
 		$this->assertArrayNotHasKey( '', $this->get_registered_script_modules( wp_script_modules() ) );
@@ -168,13 +200,13 @@ class Tests_Script_Modules_WpScriptModules extends WP_UnitTestCase {
 	/**
 	 * Test wp_enqueue_script_module() with empty ID.
 	 *
-	 * @ticket 63486
 	 *
 	 * @expectedIncorrectUsage WP_Script_Modules::enqueue
 	 *
-	 * @covers ::wp_enqueue_script_module
-	 * @covers WP_Script_Modules::enqueue
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
 	public function test_enqueue_with_empty_id() {
 		wp_enqueue_script_module( '', '/null-and-void.js' );
 		$this->assertArrayNotHasKey( '', $this->get_registered_script_modules( wp_script_modules() ) );
@@ -186,27 +218,27 @@ class Tests_Script_Modules_WpScriptModules extends WP_UnitTestCase {
 	 *
 	 * This ensures that the global function aliases pass all the same parameters as the class methods.
 	 *
-	 * @ticket 56313
-	 * @ticket 63486
 	 *
-	 * @dataProvider data_test_register_and_enqueue_script_module
 	 *
-	 * @covers ::wp_register_script_module()
-	 * @covers WP_Script_Modules::register()
-	 * @covers ::wp_enqueue_script_module()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers ::wp_dequeue_script_module()
-	 * @covers WP_Script_Modules::dequeue()
-	 * @covers ::wp_deregister_script_module()
-	 * @covers WP_Script_Modules::deregister()
-	 * @covers WP_Script_Modules::get_queue()
-	 * @covers WP_Script_Modules::get_marked_for_enqueue()
-	 * @covers WP_Script_Modules::set_fetchpriority()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_import_map()
-	 * @covers WP_Script_Modules::print_script_module_preloads()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_test_register_and_enqueue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_dequeue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'dequeue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_deregister_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'deregister' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_queue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_marked_for_enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_fetchpriority' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_import_map' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
 	public function test_comprehensive_methods( bool $use_global_function, bool $only_enqueue ) {
 		global $wp_version;
 		$wp_version = '99.9.9';
@@ -476,7 +508,7 @@ class Tests_Script_Modules_WpScriptModules extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array{ use_global_function: bool, only_enqueue: bool }>
 	 */
-	public function data_test_register_and_enqueue_script_module(): array {
+	public static function data_test_register_and_enqueue_script_module(): array {
 		$data = array();
 
 		foreach ( array( true, false ) as $use_global_function ) {
@@ -496,16 +528,16 @@ class Tests_Script_Modules_WpScriptModules extends WP_UnitTestCase {
 	/**
 	 * Tests that a script module gets enqueued correctly after being registered.
 	 *
-	 * @ticket 56313
-	 * @ticket 63486
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
-	 * @covers WP_Script_Modules::set_fetchpriority()
-	 * @covers WP_Script_Modules::set_in_footer()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_fetchpriority' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_in_footer' )]
 	public function test_wp_enqueue_script_module() {
 		$this->script_modules->register( 'foo', '/foo.js' );
 		$this->script_modules->register(
@@ -542,14 +574,14 @@ class Tests_Script_Modules_WpScriptModules extends WP_UnitTestCase {
 	/**
 	 * Tests that no script is printed for a script without a src.
 	 *
-	 * @ticket 63486
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
-	 * @covers WP_Script_Modules::get_src()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_src' )]
 	public function test_wp_enqueue_script_module_with_empty_src() {
 		wp_enqueue_script_module( 'with-src', '/src.js', array(), null );
 		wp_register_script_module( 'without-src', '' );
@@ -585,15 +617,15 @@ HTML;
 	/**
 	* Tests that a script module can be dequeued after being enqueued.
 	*
-	* @ticket 56313
-	* @ticket 63486
 	*
-	* @covers WP_Script_Modules::register()
-	* @covers WP_Script_Modules::enqueue()
-	* @covers WP_Script_Modules::dequeue()
-	* @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	* @covers WP_Script_Modules::print_enqueued_script_modules()
 	*/
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'dequeue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
 	public function test_wp_dequeue_script_module() {
 		$this->script_modules->register( 'foo', '/foo.js' );
 		$this->script_modules->register( 'bar', '/bar.js' );
@@ -614,13 +646,12 @@ HTML;
 	 * after being enqueued, and that will be removed
 	 * from the enqueue list too.
 	 *
-	 * @ticket 60463
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::deregister()
-	 * @covers WP_Script_Modules::get_enqueued_script_modules()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60463' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'deregister' )]
 	public function test_wp_deregister_script_module() {
 		$this->script_modules->register( 'foo', '/foo.js' );
 		$this->script_modules->register( 'bar', '/bar.js' );
@@ -640,11 +671,10 @@ HTML;
 	 * if it has not been registered before, causing
 	 * no errors.
 	 *
-	 * @ticket 60463
 	 *
-	 * @covers WP_Script_Modules::deregister()
-	 * @covers WP_Script_Modules::get_enqueued_script_modules()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60463' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'deregister' )]
 	public function test_wp_deregister_unexistent_script_module() {
 		$this->script_modules->deregister( 'unexistent' );
 		$enqueued_script_modules = $this->get_enqueued_script_modules();
@@ -658,13 +688,12 @@ HTML;
 	 * if it has been deregistered previously, causing
 	 * no errors.
 	 *
-	 * @ticket 60463
 	 *
-	 * @covers WP_Script_Modules::get_enqueued_script_modules()
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::deregister()
-	 * @covers WP_Script_Modules::enqueue()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60463' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'deregister' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
 	public function test_wp_deregister_already_deregistered_script_module() {
 		$this->script_modules->register( 'foo', '/foo.js' );
 		$this->script_modules->enqueue( 'foo' );
@@ -685,14 +714,14 @@ HTML;
 	* Tests that a script module can be enqueued before it is registered, and will
 	* be handled correctly once registered.
 	*
-	* @ticket 56313
-	* @ticket 63486
 	*
-	* @covers WP_Script_Modules::register()
-	* @covers WP_Script_Modules::enqueue()
-	* @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	* @covers WP_Script_Modules::print_enqueued_script_modules()
 	*/
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
 	public function test_wp_enqueue_script_module_works_before_register() {
 		$this->script_modules->enqueue( 'foo' );
 		$this->script_modules->register( 'foo', '/foo.js' );
@@ -710,15 +739,15 @@ HTML;
 	 * Tests that a script module can be dequeued before it is registered and
 	 * ensures that it is not enqueued after registration.
 	 *
-	 * @ticket 56313
-	 * @ticket 63486
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::dequeue()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'dequeue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
 	public function test_wp_dequeue_script_module_works_before_register() {
 		$this->script_modules->enqueue( 'foo' );
 		$this->script_modules->enqueue( 'bar' );
@@ -737,12 +766,12 @@ HTML;
 	 * Tests that dependencies for a registered module are added to the import map
 	 * when the script module is enqueued.
 	 *
-	 * @ticket 56313
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_import_map()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_import_map' )]
 	public function test_wp_import_map_dependencies() {
 		$this->script_modules->register( 'foo', '/foo.js', array( 'dep' ) );
 		$this->script_modules->register( 'dep', '/dep.js' );
@@ -760,12 +789,12 @@ HTML;
 	 * Tests that dependencies are not duplicated in the import map when multiple
 	 * script modules require the same dependency.
 	 *
-	 * @ticket 56313
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_import_map()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_import_map' )]
 	public function test_wp_import_map_no_duplicate_dependencies() {
 		$this->script_modules->register( 'foo', '/foo.js', array( 'dep' ) );
 		$this->script_modules->register( 'bar', '/bar.js', array( 'dep' ) );
@@ -783,12 +812,12 @@ HTML;
 	 * Tests that all recursive dependencies (both static and dynamic) are
 	 * included in the import map.
 	 *
-	 * @ticket 56313
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_import_map()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_import_map' )]
 	public function test_wp_import_map_recursive_dependencies() {
 		$this->script_modules->register(
 			'foo',
@@ -834,12 +863,12 @@ HTML;
 	 * Tests that the import map is not printed at all if there are no
 	 * dependencies.
 	 *
-	 * @ticket 56313
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_import_map()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_import_map' )]
 	public function test_wp_import_map_doesnt_print_if_no_dependencies() {
 		$this->script_modules->register( 'foo', '/foo.js' ); // No deps.
 		$this->script_modules->enqueue( 'foo' );
@@ -853,12 +882,12 @@ HTML;
 	 * Tests that only static dependencies are preloaded and dynamic ones are
 	 * excluded.
 	 *
-	 * @ticket 56313
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_script_module_preloads()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
 	public function test_wp_enqueue_preloaded_static_dependencies() {
 		$this->script_modules->register(
 			'foo',
@@ -909,12 +938,12 @@ HTML;
 	/**
 	 * Tests that static dependencies of dynamic dependencies are not preloaded.
 	 *
-	 * @ticket 56313
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_script_module_preloads()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
 	public function test_wp_dont_preload_static_dependencies_of_dynamic_dependencies() {
 		$this->script_modules->register(
 			'foo',
@@ -946,12 +975,12 @@ HTML;
 	/**
 	 * Tests that preloaded dependencies don't include enqueued script modules.
 	 *
-	 * @ticket 56313
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_script_module_preloads()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
 	public function test_wp_preloaded_dependencies_filter_enqueued_script_modules() {
 		$this->script_modules->register(
 			'foo',
@@ -977,12 +1006,12 @@ HTML;
 	 * Tests that enqueued script modules with dependants correctly add both the
 	 * script module and its dependencies to the import map.
 	 *
-	 * @ticket 56313
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_import_map()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_import_map' )]
 	public function test_wp_enqueued_script_modules_with_dependants_add_import_map() {
 		$this->script_modules->register(
 			'foo',
@@ -1008,10 +1037,10 @@ HTML;
 	 * Tests the functionality of the `get_src` method to ensure
 	 * proper URLs with version strings are returned.
 	 *
-	 * @ticket 56313
 	 *
-	 * @covers WP_Script_Modules::get_src()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_src' )]
 	public function test_get_src() {
 		$get_src = new ReflectionMethod( $this->script_modules, 'get_src' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -1079,17 +1108,17 @@ HTML;
 	 * Tests that the correct version is propagated to the import map, enqueued
 	 * script modules and preloaded script modules.
 	 *
-	 * @ticket 56313
-	 * @ticket 63486
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_import_map()
-	 * @covers WP_Script_Modules::print_script_module_preloads()
-	 * @covers WP_Script_Modules::get_version_query_string()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_import_map' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_src' )]
 	public function test_version_is_propagated_correctly() {
 		$this->script_modules->register(
 			'foo',
@@ -1119,13 +1148,13 @@ HTML;
 	 * Tests that a script module is not registered when calling enqueue without a
 	 * valid src.
 	 *
-	 * @ticket 56313
-	 * @ticket 63486
 	 *
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
 	public function test_wp_enqueue_script_module_doesnt_register_without_a_valid_src() {
 		$this->script_modules->enqueue( 'foo' );
 
@@ -1139,13 +1168,13 @@ HTML;
 	 * Tests that a script module is registered when calling enqueue with a valid
 	 * src.
 	 *
-	 * @ticket 56313
-	 * @ticket 63486
 	 *
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
 	public function test_wp_enqueue_script_module_registers_with_valid_src() {
 		$this->script_modules->enqueue( 'foo', '/foo.js' );
 
@@ -1160,13 +1189,13 @@ HTML;
 	 * Tests that a script module is registered when calling enqueue with a valid
 	 * src the second time.
 	 *
-	 * @ticket 56313
-	 * @ticket 63486
 	 *
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
 	public function test_wp_enqueue_script_module_registers_with_valid_src_the_second_time() {
 		$this->script_modules->enqueue( 'foo' ); // Not valid src.
 
@@ -1188,15 +1217,15 @@ HTML;
 	 * Tests that a script module is registered with all the params when calling
 	 * enqueue.
 	 *
-	 * @ticket 56313
-	 * @ticket 63486
 	 *
-	 * @covers WP_Script_Modules::register()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_import_map()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56313' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_import_map' )]
 	public function test_wp_enqueue_script_module_registers_all_params() {
 		$this->script_modules->enqueue( 'foo', '/foo.js', array( 'dep' ), '1.0', array( 'fetchpriority' => 'low' ) );
 		$this->script_modules->register( 'dep', '/dep.js' );
@@ -1211,9 +1240,7 @@ HTML;
 		$this->assertStringStartsWith( '/dep.js', $import_map['dep'] );
 	}
 
-	/**
-	 * @ticket 61510
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61510' )]
 	public function test_print_script_module_data_prints_enqueued_module_data() {
 		$this->script_modules->enqueue( '@test/module', '/example.js' );
 		add_action(
@@ -1235,9 +1262,7 @@ HTML;
 		$this->assertEqualHTML( $expected, $actual );
 	}
 
-	/**
-	 * @ticket 61510
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61510' )]
 	public function test_print_script_module_data_prints_dependency_module_data() {
 		$this->script_modules->register( '@test/dependency', '/dependency.js' );
 		$this->script_modules->enqueue( '@test/module', '/example.js', array( '@test/dependency' ) );
@@ -1260,9 +1285,7 @@ HTML;
 		$this->assertEqualHTML( $expected, $actual );
 	}
 
-	/**
-	 * @ticket 61510
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61510' )]
 	public function test_print_script_module_data_does_not_print_nondependency_module_data() {
 		$this->script_modules->register( '@test/other', '/dependency.js' );
 		$this->script_modules->enqueue( '@test/module', '/example.js' );
@@ -1279,9 +1302,7 @@ HTML;
 		$this->assertSame( '', $actual );
 	}
 
-	/**
-	 * @ticket 61510
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61510' )]
 	public function test_print_script_module_data_does_not_print_empty_data() {
 		$this->script_modules->enqueue( '@test/module', '/example.js' );
 		add_action(
@@ -1297,13 +1318,13 @@ HTML;
 	}
 
 	/**
-	 * @ticket 61510
 	 *
-	 * @dataProvider data_special_chars_script_encoding
 	 * @param string $input    Raw input string.
 	 * @param string $expected Expected output string.
 	 * @param string $charset  Blog charset option.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61510' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_special_chars_script_encoding' )]
 	public function test_print_script_module_data_encoding( $input, $expected, $charset ) {
 		add_filter(
 			'pre_option_blog_charset',
@@ -1385,11 +1406,11 @@ HTML;
 	}
 
 	/**
-	 * @ticket 61510
 	 *
-	 * @dataProvider data_invalid_script_module_data
 	 * @param mixed $data Data to return in filter.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61510' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_script_module_data' )]
 	public function test_print_script_module_data_does_not_print_invalid_data( $data ) {
 		$this->script_modules->enqueue( '@test/module', '/example.js' );
 		add_action(
@@ -1409,7 +1430,7 @@ HTML;
 	 *
 	 * @return array<string, array{fetchpriority: string}>
 	 */
-	public function data_provider_fetchpriority_values(): array {
+	public static function data_provider_fetchpriority_values(): array {
 		return array(
 			'auto' => array( 'fetchpriority' => 'auto' ),
 			'low'  => array( 'fetchpriority' => 'low' ),
@@ -1420,15 +1441,15 @@ HTML;
 	/**
 	 * Tests that valid fetchpriority values are correctly added to the registered module.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers WP_Script_Modules::register
-	 * @covers WP_Script_Modules::set_fetchpriority
 	 *
-	 * @dataProvider data_provider_fetchpriority_values
 	 *
 	 * @param string $fetchpriority The fetchpriority value to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_fetchpriority_values' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_fetchpriority' )]
 	public function test_fetchpriority_values( string $fetchpriority ) {
 		$this->script_modules->register( 'test-script', '/test-script.js', array(), null, array( 'fetchpriority' => $fetchpriority ) );
 		$registered_modules = $this->get_registered_script_modules( $this->script_modules );
@@ -1447,13 +1468,13 @@ HTML;
 	/**
 	 * Tests ways of setting in_footer.
 	 *
-	 * @ticket 63486
-	 * @ticket 63486
 	 *
-	 * @covers ::wp_register_script_module
-	 * @covers ::wp_enqueue_script_module
-	 * @covers WP_Script_Modules::set_in_footer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_in_footer' )]
 	public function test_in_footer_methods() {
 		wp_register_script_module( 'default', '/default.js', array(), null );
 		wp_enqueue_script_module( 'default' );
@@ -1505,11 +1526,11 @@ HTML;
 	/**
 	 * Tests that a script module with an invalid fetchpriority value gets a value of auto.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers WP_Script_Modules::register
 	 * @expectedIncorrectUsage WP_Script_Modules::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
 	public function test_register_script_module_having_fetchpriority_with_invalid_value() {
 		$this->script_modules->register( 'foo', '/foo.js', array(), false, array( 'fetchpriority' => 'silly' ) );
 		$registered_modules = $this->get_registered_script_modules( $this->script_modules );
@@ -1521,11 +1542,11 @@ HTML;
 	/**
 	 * Tests that a script module with an invalid fetchpriority value type gets a value of auto.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers WP_Script_Modules::register
 	 * @expectedIncorrectUsage WP_Script_Modules::register
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
 	public function test_register_script_module_having_fetchpriority_with_invalid_value_type() {
 		$this->script_modules->register( 'foo', '/foo.js', array(), false, array( 'fetchpriority' => array( 'WHY AM I NOT A STRING???' ) ) );
 		$registered_modules = $this->get_registered_script_modules( $this->script_modules );
@@ -1537,12 +1558,12 @@ HTML;
 	/**
 	 * Tests that a setting the fetchpriority for script module with an invalid value is ignored so that it remains auto.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers WP_Script_Modules::register
-	 * @covers WP_Script_Modules::set_fetchpriority
 	 * @expectedIncorrectUsage WP_Script_Modules::set_fetchpriority
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_fetchpriority' )]
 	public function test_set_fetchpriority_with_invalid_value() {
 		$this->script_modules->register( 'foo', '/foo.js' );
 		$this->script_modules->set_fetchpriority( 'foo', 'silly' );
@@ -1555,7 +1576,7 @@ HTML;
 	 *
 	 * @return array<string, array{enqueues: string[], expected: array}>
 	 */
-	public function data_provider_to_test_fetchpriority_bumping(): array {
+	public static function data_provider_to_test_fetchpriority_bumping(): array {
 		return array(
 			'enqueue_bajo'          => array(
 				'enqueues' => array( 'bajo' ),
@@ -1653,16 +1674,16 @@ HTML;
 	/**
 	 * Tests a higher fetchpriority on a dependent script module causes the fetchpriority of a dependency script module to be bumped.
 	 *
-	 * @ticket 61734
 	 *
-	 * @covers WP_Script_Modules::print_enqueued_script_modules
-	 * @covers WP_Script_Modules::get_dependents
-	 * @covers WP_Script_Modules::get_recursive_dependents
-	 * @covers WP_Script_Modules::get_highest_fetchpriority
-	 * @covers WP_Script_Modules::print_script_module_preloads
 	 *
-	 * @dataProvider data_provider_to_test_fetchpriority_bumping
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_to_test_fetchpriority_bumping' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_dependents' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_recursive_dependents' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_highest_fetchpriority' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
 	public function test_fetchpriority_bumping( array $enqueues, array $expected ) {
 		$this->script_modules->register(
 			'dyno',
@@ -1724,15 +1745,15 @@ HTML;
 	/**
 	 * Tests bumping fetchpriority with complex dependency graph.
 	 *
-	 * @ticket 61734
 	 * @link https://github.com/WordPress/wordpress-develop/pull/9770#issuecomment-3280065818
 	 *
-	 * @covers WP_Script_Modules::print_enqueued_script_modules
-	 * @covers WP_Script_Modules::get_dependents
-	 * @covers WP_Script_Modules::get_recursive_dependents
-	 * @covers WP_Script_Modules::get_highest_fetchpriority
-	 * @covers WP_Script_Modules::print_script_module_preloads
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_dependents' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_recursive_dependents' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_highest_fetchpriority' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
 	public function test_fetchpriority_bumping_a_to_z() {
 		wp_register_script_module( 'a', '/a.js', array( 'b' ), null, array( 'fetchpriority' => 'low' ) );
 		wp_register_script_module( 'b', '/b.js', array( 'c' ), null, array( 'fetchpriority' => 'auto' ) );
@@ -1767,15 +1788,15 @@ HTML;
 	/**
 	 * Tests bumping fetchpriority with complex dependency graph.
 	 *
-	 * @ticket 61734
 	 * @link https://github.com/WordPress/wordpress-develop/pull/9770#issuecomment-3284266884
 	 *
-	 * @covers WP_Script_Modules::print_enqueued_script_modules
-	 * @covers WP_Script_Modules::get_dependents
-	 * @covers WP_Script_Modules::get_recursive_dependents
-	 * @covers WP_Script_Modules::get_highest_fetchpriority
-	 * @covers WP_Script_Modules::print_script_module_preloads
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_dependents' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_recursive_dependents' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_highest_fetchpriority' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
 	public function test_fetchpriority_propagation() {
 		// The high fetchpriority for this module will be disregarded because its enqueued dependent has a non-high priority.
 		wp_register_script_module( 'a', '/a.js', array( 'd', 'e' ), null, array( 'fetchpriority' => 'high' ) );
@@ -1814,13 +1835,13 @@ HTML;
 	/**
 	 * Tests that default script modules are printed as expected.
 	 *
-	 * @ticket 63486
 	 *
-	 * @covers ::wp_default_script_modules
-	 * @covers WP_Script_Modules::print_script_module_preloads
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules
-	 * @covers WP_Script_Modules::print_enqueued_script_modules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
 	public function test_default_script_modules() {
 		wp_default_script_modules();
 		wp_enqueue_script_module( '@wordpress/a11y' );
@@ -1860,10 +1881,10 @@ HTML;
 	 * otherwise the import map points to a non-existent file under
 	 * SCRIPT_DEBUG. The exceptions below must mirror that special case.
 	 *
-	 * @ticket 65664
 	 *
-	 * @covers ::wp_default_script_modules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65664' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_script_modules' )]
 	public function test_default_script_module_files_exist() {
 		$assets_file = ABSPATH . WPINC . '/assets/script-modules-packages.php';
 		if ( ! file_exists( $assets_file ) ) {
@@ -1897,12 +1918,12 @@ HTML;
 	/**
 	 * Tests expected priority is used when a dependent is registered but not enqueued.
 	 *
-	 * @ticket 64429
 	 *
-	 * @covers ::wp_default_script_modules
-	 * @covers WP_Script_Modules::print_enqueued_script_modules
-	 * @covers WP_Script_Modules::get_highest_fetchpriority
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64429' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_highest_fetchpriority' )]
 	public function test_priority_of_dependency_for_non_enqueued_dependent() {
 		wp_default_script_modules();
 		wp_register_script_module( 'not-enqueued', 'https://example.com/not-enqueued.js', array( '@wordpress/a11y' ), null, array( 'priority' => 'high' ) );
@@ -1918,10 +1939,10 @@ HTML;
 	/**
 	 * Tests that a dependent with high priority for default script modules with a low fetch priority are printed as expected.
 	 *
-	 * @covers ::wp_default_script_modules
-	 * @covers WP_Script_Modules::print_script_module_preloads
-	 * @covers WP_Script_Modules::print_enqueued_script_modules
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
 	public function test_dependent_of_default_script_modules() {
 		wp_default_script_modules();
 		wp_enqueue_script_module(
@@ -1954,10 +1975,10 @@ HTML;
 	 * inlined WASM with no debugging value, so the registration should
 	 * always point to the .min.js variants.
 	 *
-	 * @ticket 64734
 	 *
-	 * @covers ::wp_default_script_modules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64734' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_default_script_modules' )]
 	public function test_vips_script_modules_always_use_minified_paths() {
 		wp_default_script_modules();
 		wp_enqueue_script_module( '@wordpress/vips/loader' );
@@ -1993,12 +2014,12 @@ HTML;
 	/**
 	 * Tests that manipulating the queue works as expected.
 	 *
-	 * @ticket 63676
 	 *
-	 * @covers WP_Script_Modules::get_queue
-	 * @covers WP_Script_Modules::queue
-	 * @covers WP_Script_Modules::dequeue
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63676' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_queue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'dequeue' )]
 	public function test_direct_queue_manipulation() {
 		$this->script_modules->register( 'foo', '/foo.js' );
 		$this->script_modules->register( 'bar', '/bar.js' );
@@ -2066,10 +2087,10 @@ HTML;
 	/**
 	 * Tests that script modules identified as dependencies of classic scripts are included in the import map.
 	 *
-	 * @ticket 61500
 	 *
-	 * @covers WP_Script_Modules::get_import_map
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61500' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_import_map' )]
 	public function test_included_module_appears_in_importmap() {
 		$this->script_modules->register( 'dependency', '/dep.js' );
 		$this->script_modules->register( 'example', '/example.js', array( 'dependency' ) );
@@ -2109,10 +2130,10 @@ HTML;
 	/**
 	 * Tests that dynamic dependencies of enqueued script modules are included in the import map.
 	 *
-	 * @ticket 61500
 	 *
-	 * @covers WP_Script_Modules::get_import_map
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61500' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_import_map' )]
 	public function test_import_map_includes_dynamic_dependencies_of_enqueued_modules() {
 		$this->script_modules->register( 'dependency-of-enqueued', '/dependency-of-enqueued.js' );
 		$this->script_modules->enqueue(
@@ -2140,10 +2161,10 @@ HTML;
 	/**
 	 * Tests that script module dependencies of enqueued classic scripts (including transitive ones) are included in the import map.
 	 *
-	 * @ticket 61500
 	 *
-	 * @covers WP_Script_Modules::get_import_map
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61500' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_import_map' )]
 	public function test_import_map_includes_dependencies_of_classic_scripts_recursive() {
 		$this->script_modules->register( 'classic-transitive-dependency', '/classic-transitive-dependency.js' );
 		$this->script_modules->register( 'dependency-of-not-enqueued', '/dependency-of-not-enqueued.js' );
@@ -2188,10 +2209,10 @@ HTML;
 	/**
 	 * Tests that WP_Scripts emits a _doing_it_wrong() notice for missing script module dependencies.
 	 *
-	 * @ticket 61500
-	 * @ticket 64229
-	 * @covers WP_Script_Modules::get_import_map
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61500' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64229' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_import_map' )]
 	public function test_wp_scripts_doing_it_wrong_for_missing_script_module_dependencies() {
 		$expected_incorrect_usage = 'WP_Scripts::add_data';
 		$this->setExpectedIncorrectUsage( $expected_incorrect_usage );
@@ -2240,24 +2261,24 @@ HTML;
 	 *
 	 * This ensures that the global function aliases pass all the same parameters as the class methods.
 	 *
-	 * @ticket 63486
 	 *
-	 * @dataProvider data_test_register_and_enqueue_script_module
 	 *
-	 * @covers ::wp_register_script_module()
-	 * @covers WP_Script_Modules::register()
-	 * @covers ::wp_enqueue_script_module()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers ::wp_dequeue_script_module()
-	 * @covers WP_Script_Modules::dequeue()
-	 * @covers ::wp_deregister_script_module()
-	 * @covers WP_Script_Modules::deregister()
-	 * @covers WP_Script_Modules::set_fetchpriority()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_import_map()
-	 * @covers WP_Script_Modules::print_script_module_preloads()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_test_register_and_enqueue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_dequeue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'dequeue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_deregister_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'deregister' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_fetchpriority' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_import_map' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
 	public function test_script_module_printing_and_dependency_ordering( bool $use_global_function, bool $only_enqueue ) {
 		global $wp_version;
 		$wp_version = '99.9.9';
@@ -2550,25 +2571,25 @@ HTML;
 	/**
 	 * Tests various ways of printing and dependency ordering of script modules.
 	 *
-	 * @ticket 63486
 	 *
-	 * @dataProvider data_test_register_and_enqueue_script_module
 	 *
-	 * @covers ::wp_register_script_module()
-	 * @covers WP_Script_Modules::register()
-	 * @covers ::wp_enqueue_script_module()
-	 * @covers WP_Script_Modules::enqueue()
-	 * @covers ::wp_dequeue_script_module()
-	 * @covers WP_Script_Modules::dequeue()
-	 * @covers ::wp_deregister_script_module()
-	 * @covers WP_Script_Modules::deregister()
-	 * @covers WP_Script_Modules::set_fetchpriority()
-	 * @covers WP_Script_Modules::print_head_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_enqueued_script_modules()
-	 * @covers WP_Script_Modules::print_import_map()
-	 * @covers WP_Script_Modules::print_script_module_preloads()
 	 */
-	public function test_static_import_dependency_with_dynamic_imports_depending_on_static_import_dependency() {
+	#[\PHPUnit\Framework\Attributes\Ticket( '63486' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_test_register_and_enqueue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'register' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'enqueue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_dequeue_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'dequeue' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_deregister_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'deregister' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_fetchpriority' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_head_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_enqueued_script_modules' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_import_map' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_preloads' )]
+	public function test_static_import_dependency_with_dynamic_imports_depending_on_static_import_dependency( bool $use_global_function, bool $only_enqueue ) {
 		$get_dependency = function ( string $id, string $import ): array {
 			return compact( 'id', 'import' );
 		};
@@ -2609,9 +2630,9 @@ HTML;
 	/**
 	 * Tests that a missing script module dependency triggers a _doing_it_wrong() notice.
 	 *
-	 * @ticket 64229
-	 * @covers WP_Script_Modules::sort_item_dependencies
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64229' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'sort_item_dependencies' )]
 	public function test_missing_script_module_dependency_triggers_incorrect_usage() {
 		$expected_incorrect_usage = 'WP_Script_Modules::register';
 		$this->setExpectedIncorrectUsage( $expected_incorrect_usage );
@@ -2637,10 +2658,10 @@ HTML;
 	/**
 	 * Tests that set_translations() returns false for unregistered module.
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers WP_Script_Modules::set_translations
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_translations' )]
 	public function test_set_translations_returns_false_for_unregistered_module() {
 		$result = $this->script_modules->set_translations( 'unregistered-module', 'default' );
 		$this->assertFalse( $result );
@@ -2649,10 +2670,10 @@ HTML;
 	/**
 	 * Tests that set_translations() returns true for registered module.
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers WP_Script_Modules::set_translations
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_translations' )]
 	public function test_set_translations_returns_true_for_registered_module() {
 		$this->script_modules->register( 'test-module', '/test-module.js' );
 		$result = $this->script_modules->set_translations( 'test-module', 'test-domain' );
@@ -2662,11 +2683,11 @@ HTML;
 	/**
 	 * Tests that wp_set_script_module_translations() wrapper works.
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers ::wp_set_script_module_translations
-	 * @covers WP_Script_Modules::set_translations
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_set_script_module_translations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_translations' )]
 	public function test_wp_set_script_module_translations_wrapper() {
 		wp_register_script_module( 'test-module', '/test-module.js' );
 		$result = wp_set_script_module_translations( 'test-module', 'test-domain' );
@@ -2676,11 +2697,11 @@ HTML;
 	/**
 	 * Tests that wp_set_script_module_translations() returns false for unregistered module.
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers ::wp_set_script_module_translations
-	 * @covers WP_Script_Modules::set_translations
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_set_script_module_translations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_translations' )]
 	public function test_wp_set_script_module_translations_returns_false_for_unregistered() {
 		$result = wp_set_script_module_translations( 'unregistered-module', 'default' );
 		$this->assertFalse( $result );
@@ -2689,10 +2710,10 @@ HTML;
 	/**
 	 * Tests that get_registered() returns null for unregistered module.
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers WP_Script_Modules::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_registered' )]
 	public function test_get_registered_returns_null_for_unregistered_module() {
 		$result = $this->script_modules->get_registered( 'unregistered-module' );
 		$this->assertNull( $result );
@@ -2701,10 +2722,10 @@ HTML;
 	/**
 	 * Tests that get_registered() returns correct src for registered module.
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers WP_Script_Modules::get_registered
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'get_registered' )]
 	public function test_get_registered_returns_array_for_registered_module() {
 		$this->script_modules->register( 'test-module', '/test-module.js' );
 		$result = $this->script_modules->get_registered( 'test-module' );
@@ -2719,10 +2740,10 @@ HTML;
 	/**
 	 * Tests that print_script_module_translations() outputs nothing when no translations are set.
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers WP_Script_Modules::print_script_module_translations
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_translations' )]
 	public function test_print_script_module_translations_outputs_nothing_when_no_translations() {
 		$this->script_modules->register( 'test-module', '/test-module.js' );
 		$this->script_modules->enqueue( 'test-module' );
@@ -2735,10 +2756,10 @@ HTML;
 	/**
 	 * Tests that print_script_module_translations() outputs nothing for non-enqueued modules.
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers WP_Script_Modules::print_script_module_translations
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_translations' )]
 	public function test_print_script_module_translations_outputs_nothing_for_non_enqueued() {
 		$this->script_modules->register( 'test-module', '/test-module.js' );
 		$this->script_modules->set_translations( 'test-module', 'default' );
@@ -2752,11 +2773,11 @@ HTML;
 	 * Tests that print_script_module_translations() auto-detects translations
 	 * for enqueued modules without requiring an explicit set_translations() call.
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers WP_Script_Modules::print_script_module_translations
-	 * @covers ::load_script_module_textdomain
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_translations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_script_module_textdomain' )]
 	public function test_print_script_module_translations_outputs_set_locale_data() {
 		$this->script_modules->register( 'test-module', '/wp-includes/js/test-module.js' );
 		$this->script_modules->enqueue( 'test-module' );
@@ -2818,11 +2839,11 @@ HTML;
 	 * Tests that print_script_module_translations() also outputs translations
 	 * for dependencies of enqueued modules (not just directly enqueued ones).
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers WP_Script_Modules::print_script_module_translations
-	 * @covers ::load_script_module_textdomain
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_translations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_script_module_textdomain' )]
 	public function test_print_script_module_translations_includes_dependencies() {
 		$this->script_modules->register( 'dep-module', '/wp-includes/js/dep-module.js' );
 		$this->script_modules->register( 'main-module', '/wp-includes/js/main-module.js', array( 'dep-module' ) );
@@ -2881,11 +2902,11 @@ HTML;
 	/**
 	 * Tests that set_translations() can override the auto-detected text domain.
 	 *
-	 * @ticket 65015
 	 *
-	 * @covers WP_Script_Modules::print_script_module_translations
-	 * @covers WP_Script_Modules::set_translations
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'print_script_module_translations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Script_Modules', 'set_translations' )]
 	public function test_print_script_module_translations_respects_set_translations_override() {
 		$this->script_modules->register( 'test-module', '/wp-includes/js/test-module.js' );
 		$this->script_modules->enqueue( 'test-module' );

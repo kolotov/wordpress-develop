@@ -1,22 +1,19 @@
 <?php
 
-/**
- * @group admin
- *
- * @covers ::wp_admin_viewport_meta
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_admin_viewport_meta' )]
 class Tests_Admin_Includes_Misc_WpAdminViewportMeta_Test extends WP_UnitTestCase {
 
 	/**
 	 * Tests wp_admin_viewport_meta() output.
 	 *
-	 * @dataProvider data_wp_admin_viewport_meta
 	 *
-	 * @ticket 65187
 	 *
 	 * @param string|null $filter_value The value to return from the filter, or null if no filter.
 	 * @param string      $expected     The expected output string.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65187' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_admin_viewport_meta' )]
 	public function test_wp_admin_viewport_meta( $filter_value, $expected ) {
 		if ( null !== $filter_value ) {
 			add_filter(
@@ -39,7 +36,7 @@ class Tests_Admin_Includes_Misc_WpAdminViewportMeta_Test extends WP_UnitTestCase
 	 *     expected:     string,
 	 * }>
 	 */
-	public function data_wp_admin_viewport_meta(): array {
+	public static function data_wp_admin_viewport_meta(): array {
 		return array(
 			'default value'          => array(
 				'filter_value' => null,

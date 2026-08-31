@@ -1,10 +1,30 @@
 <?php
 /**
- * @group media
  *
- * @covers ::get_post_galleries
  */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_galleries' )]
 class Tests_Media_GetPostGalleries extends WP_UnitTestCase {
+	private $global_post_existed;
+
+	private $initial_global_post;
+
+	public function set_up() {
+		parent::set_up();
+
+		$this->global_post_existed = array_key_exists( 'post', $GLOBALS );
+		$this->initial_global_post = $GLOBALS['post'] ?? null;
+	}
+
+	public function tear_down() {
+		if ( $this->global_post_existed ) {
+			$GLOBALS['post'] = $this->initial_global_post;
+		} else {
+			unset( $GLOBALS['post'] );
+		}
+
+		parent::tear_down();
+	}
 
 	const IMG_META = array(
 		'width'  => 100,
@@ -15,8 +35,8 @@ class Tests_Media_GetPostGalleries extends WP_UnitTestCase {
 	/**
 	 * Tests that an empty array is returned for a post that does not exist.
 	 *
-	 * @ticket 43826
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
 	public function test_returns_empty_array_with_non_existent_post() {
 		$galleries = get_post_galleries( 99999, false );
 		$this->assertEmpty( $galleries );
@@ -25,8 +45,8 @@ class Tests_Media_GetPostGalleries extends WP_UnitTestCase {
 	/**
 	 * Tests that an empty array is returned for a post that has no gallery.
 	 *
-	 * @ticket 43826
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
 	public function test_returns_empty_array_with_post_with_no_gallery() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -41,13 +61,13 @@ class Tests_Media_GetPostGalleries extends WP_UnitTestCase {
 	/**
 	 * Tests that only galleries are returned.
 	 *
-	 * @dataProvider data_returns_only_galleries
 	 *
-	 * @ticket 55203
 	 *
 	 * @param string $content The content of the post.
 	 * @param string $needle  The content of a non-gallery block.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_returns_only_galleries' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55203' )]
 	public function test_returns_only_galleries( $content, $needle ) {
 		$image_id = self::factory()->attachment->create_object(
 			array(
@@ -83,7 +103,7 @@ class Tests_Media_GetPostGalleries extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_returns_only_galleries() {
+	public static function data_returns_only_galleries() {
 		$gallery = '
 		<!-- wp:gallery {"linkTo":"none","className":"columns-2"} -->
 		<figure
@@ -118,10 +138,10 @@ class Tests_Media_GetPostGalleries extends WP_UnitTestCase {
 	 * Tests that no srcs are returned for a shortcode gallery
 	 * in a post with no attached images.
 	 *
-	 * @ticket 39304
 	 *
-	 * @group shortcode
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39304' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'shortcode' )]
 	public function test_returns_no_srcs_with_shortcode_in_post_with_no_attached_images() {
 		// Set up an unattached image.
 		self::factory()->attachment->create_object(
@@ -167,10 +187,10 @@ class Tests_Media_GetPostGalleries extends WP_UnitTestCase {
 	 * Tests that no srcs are returned for a gallery block
 	 * in a post with no attached images.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_returns_no_srcs_with_block_in_post_with_no_attached_images() {
 		// Set up an unattached image.
 		self::factory()->attachment->create_object(
@@ -225,10 +245,10 @@ class Tests_Media_GetPostGalleries extends WP_UnitTestCase {
 	 * Tests that no srcs are returned for a gallery block v2
 	 * in a post with no attached images.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_returns_no_srcs_with_block_v2_in_post_with_no_attached_images() {
 		// Set up an unattached image.
 		$image_id = self::factory()->attachment->create_object(
@@ -304,10 +324,10 @@ BLOB;
 	/**
 	 * Tests that HTML is returned for a shortcode gallery.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group shortcode
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'shortcode' )]
 	public function test_returns_html_with_shortcode_gallery() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -358,10 +378,10 @@ BLOB;
 	/**
 	 * Tests that HTML is returned for a block gallery.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_returns_html_with_block_gallery() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -421,10 +441,10 @@ BLOB;
 	/**
 	 * Tests that HTML is returned for a block gallery v2.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_returns_html_with_block_gallery_v2() {
 		$image_id = self::factory()->attachment->create_object(
 			array(
@@ -490,10 +510,10 @@ BLOB;
 	 * Tests that the global post object does not override
 	 * a provided post ID with a shortcode gallery.
 	 *
-	 * @ticket 39304
 	 *
-	 * @group shortcode
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39304' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'shortcode' )]
 	public function test_respects_post_id_with_shortcode_gallery() {
 		$global_post_id = self::factory()->post->create(
 			array(
@@ -549,10 +569,10 @@ BLOB;
 	 * Tests that the global post object does not override
 	 * a provided post ID with a block gallery.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group block
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'block' )]
 	public function test_respects_post_id_with_block_gallery() {
 		$ids      = array();
 		$imgs     = array();
@@ -642,10 +662,10 @@ BLOB;
 	 * Tests that the global post object does not override
 	 * a provided post ID with a block gallery v2.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group block
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'block' )]
 	public function test_respects_post_id_with_block_gallery_v2() {
 		$attachment_id  = self::factory()->attachment->create_object(
 			'image1.jpg',
@@ -737,10 +757,10 @@ BLOB;
 	 * Tests that the gallery only contains images specified in
 	 * the shortcode's id attribute.
 	 *
-	 * @ticket 39304
 	 *
-	 * @group shortcode
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39304' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'shortcode' )]
 	public function test_respects_shortcode_id_attribute() {
 		$post_id     = self::factory()->post->create(
 			array(
@@ -813,11 +833,11 @@ BLOB;
 	 * Tests that galleries only contain images specified in the
 	 * id attribute of their respective shortcode and block.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group blocks
-	 * @group shortcode
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'shortcode' )]
 	public function test_respects_shortcode_and_block_id_attributes() {
 		/*
 		 * Test the get_post_galleries() function in `$html = false` mode,
@@ -876,11 +896,11 @@ BLOB;
 	 * Tests that galleries contain the additional attributes
 	 * specified for their respective shortcode and block.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group blocks
-	 * @group shortcode
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'shortcode' )]
 	public function test_respects_additional_shortcode_and_block_attributes() {
 		/*
 		 * Test attributes returned by get_post_galleries() function in `$html = false` mode,
@@ -942,10 +962,10 @@ BLOB;
 	 * Tests that srcs are retrieved from the HTML of a block gallery
 	 * that has no JSON blob.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_returns_srcs_from_html_with_block_with_no_json_blob() {
 		// Set up an unattached image.
 		$image_id = self::factory()->attachment->create_object(
@@ -1015,10 +1035,10 @@ BLOB;
 	 * Tests that srcs are returned for a block gallery nested within
 	 * other blocks.
 	 *
-	 * @ticket 43826
 	 *
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_returns_srcs_with_nested_block_gallery() {
 		$post_id  = self::factory()->post->create(
 			array(

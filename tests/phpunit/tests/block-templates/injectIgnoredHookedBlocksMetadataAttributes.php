@@ -3,9 +3,9 @@
 require_once __DIR__ . '/base.php';
 
 /**
- * @group block-templates
- * @covers ::inject_ignored_hooked_blocks_metadata_attributes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-templates' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'inject_ignored_hooked_blocks_metadata_attributes' )]
 class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends WP_Block_Templates_UnitTestCase {
 
 	/**
@@ -23,8 +23,8 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 60754
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60754' )]
 	public function test_hooked_block_types_filter_with_newly_created_template() {
 		$action = new MockAction();
 		add_filter( 'hooked_block_types', array( $action, 'filter' ), 10, 4 );
@@ -90,9 +90,9 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 60754
-	 * @ticket 60854
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60754' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60854' )]
 	public function test_hooked_block_types_filter_with_newly_created_template_part() {
 		$action = new MockAction();
 		add_filter( 'hooked_block_types', array( $action, 'filter' ), 10, 4 );
@@ -177,8 +177,8 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 60754
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60754' )]
 	public function test_hooked_block_types_filter_with_existing_template_file() {
 		$action = new MockAction();
 		add_filter( 'hooked_block_types', array( $action, 'filter' ), 10, 4 );
@@ -258,9 +258,9 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 60754
-	 * @ticket 60854
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60754' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60854' )]
 	public function test_hooked_block_types_filter_with_existing_template_part_file() {
 		$action = new MockAction();
 		add_filter( 'hooked_block_types', array( $action, 'filter' ), 10, 4 );
@@ -359,8 +359,8 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 60754
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60754' )]
 	public function test_hooked_block_types_filter_with_existing_template_post() {
 		$action = new MockAction();
 		add_filter( 'hooked_block_types', array( $action, 'filter' ), 10, 4 );
@@ -435,9 +435,9 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 60754
-	 * @ticket 60854
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60754' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60854' )]
 	public function test_hooked_block_types_filter_with_existing_template_part_post() {
 		$action = new MockAction();
 		add_filter( 'hooked_block_types', array( $action, 'filter' ), 10, 4 );
@@ -534,8 +534,8 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 60671
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60671' )]
 	public function test_inject_ignored_hooked_blocks_metadata_attributes_into_template() {
 		register_block_type(
 			'tests/hooked-block',
@@ -562,8 +562,8 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 60671
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60671' )]
 	public function test_inject_ignored_hooked_blocks_metadata_attributes_into_template_part() {
 		register_block_type(
 			'tests/hooked-block',
@@ -590,8 +590,8 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 60854
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60854' )]
 	public function test_inject_ignored_hooked_blocks_metadata_attributes_into_template_part_postmeta() {
 		register_block_type(
 			'tests/hooked-block',
@@ -623,8 +623,8 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 61550
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61550' )]
 	public function test_inject_ignored_hooked_blocks_metadata_attributes_into_template_with_no_changes_to_post_content() {
 		register_block_type(
 			'tests/hooked-block',
@@ -651,8 +651,8 @@ class Tests_Block_Templates_InjectIgnoredHookedBlocksMetadataAttributes extends 
 	}
 
 	/**
-	 * @ticket 61550
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61550' )]
 	public function test_inject_ignored_hooked_blocks_metadata_attributes_into_template_part_with_no_changes_to_post_content() {
 		register_block_type(
 			'tests/hooked-block',

@@ -3,9 +3,9 @@
 /**
  * Test the has_filters method of WP_Hook
  *
- * @group hooks
- * @covers WP_Hook::has_filters
  */
+#[\PHPUnit\Framework\Attributes\Group( 'hooks' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Hook::class, 'has_filters' )]
 class Tests_Hooks_HasFilters extends WP_UnitTestCase {
 
 	public function test_has_filters_with_callback() {

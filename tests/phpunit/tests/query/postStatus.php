@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Query_PostStatus extends WP_UnitTestCase {
 	public static $editor_user_id;
 	public static $author_user_id;
@@ -458,8 +458,8 @@ class Tests_Query_PostStatus extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48653
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48653' )]
 	public function test_single_post_with_nonexisting_status_should_not_be_shown_for_user_who_cannot_edit_others_posts() {
 		register_post_type( 'foo_pt' );
 		register_post_status( 'foo_ps', array( 'public' => true ) );
@@ -483,8 +483,8 @@ class Tests_Query_PostStatus extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48653
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48653' )]
 	public function test_single_post_with_nonexisting_status_should_be_shown_for_user_who_can_edit_others_posts() {
 		register_post_type( 'foo_pt' );
 		register_post_status( 'foo_ps', array( 'public' => true ) );
@@ -508,8 +508,8 @@ class Tests_Query_PostStatus extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29167
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29167' )]
 	public function test_specific_post_should_be_returned_if_trash_is_one_of_the_requested_post_statuses() {
 		$p1 = self::factory()->post->create( array( 'post_status' => 'trash' ) );
 		$p2 = self::factory()->post->create( array( 'post_status' => 'publish' ) );
@@ -525,9 +525,9 @@ class Tests_Query_PostStatus extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48556
-	 * @ticket 13509
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48556' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '13509' )]
 	public function test_non_singular_queries_using_post_type_any_should_respect_post_type_read_private_posts_cap() {
 		$post_ids = self::$post_ids;
 
@@ -554,9 +554,9 @@ class Tests_Query_PostStatus extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48556
-	 * @ticket 13509
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48556' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '13509' )]
 	public function test_non_singular_queries_using_multiple_post_type_should_respect_post_type_read_private_posts_cap() {
 		wp_set_current_user( 0 );
 

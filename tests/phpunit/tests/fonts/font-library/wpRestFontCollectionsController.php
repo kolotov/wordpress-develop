@@ -6,12 +6,18 @@
  * @subpackage REST_API
  * @since 6.5.0
  *
- * @group restapi
- * @group fonts
- * @group font-library
+
+
+
  *
- * @coversDefaultClass WP_REST_Font_Collections_Controller
  */
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'font-library' )]
 class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller_Testcase {
 	protected static $admin_id;
 	protected static $editor_id;
@@ -54,8 +60,8 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @covers WP_REST_Font_Collections_Controller::register_routes
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Collections_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
 		$this->assertCount( 1, $routes['/wp/v2/font-collections'], 'Rest server has not the collections path initialized.' );
@@ -66,8 +72,8 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @covers WP_REST_Font_Collections_Controller::get_items
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Collections_Controller', 'get_items' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/font-collections' );
@@ -78,12 +84,13 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @dataProvider data_readable_http_methods
-	 * @covers WP_REST_Font_Collections_Controller::get_items
-	 * @ticket 56481
+
 	 *
 	 * @param string $method The HTTP method to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_readable_http_methods' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Collections_Controller', 'get_items' )]
 	public function test_get_items_should_only_return_valid_collections( $method ) {
 		$this->setExpectedIncorrectUsage( 'WP_Font_Collection::load_from_json' );
 
@@ -116,8 +123,8 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @covers WP_REST_Font_Collections_Controller::get_item
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Collections_Controller', 'get_item' )]
 	public function test_get_item() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/font-collections/mock-col-slug' );
@@ -140,11 +147,12 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @dataProvider data_readable_http_methods
-	 * @ticket 56481
+
 	 *
 	 * @param string $method The HTTP method to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_readable_http_methods' )]
 	public function test_get_item_should_allow_adding_headers_via_filter( $method ) {
 		$hook_name = 'rest_prepare_font_collection';
 		$filter    = new MockAction();
@@ -188,12 +196,13 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @dataProvider data_readable_http_methods
-	 * @covers WP_REST_Font_Collections_Controller::get_item
-	 * @ticket 56481
+
 	 *
 	 * @param string $method The HTTP method to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_readable_http_methods' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Collections_Controller', 'get_item' )]
 	public function test_get_item_invalid_slug( $method ) {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( $method, '/wp/v2/font-collections/non-existing-collection' );
@@ -202,12 +211,13 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @dataProvider data_readable_http_methods
-	 * @covers WP_REST_Font_Collections_Controller::get_item
-	 * @ticket 56481
+
 	 *
 	 * @param string $method The HTTP method to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_readable_http_methods' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Collections_Controller', 'get_item' )]
 	public function test_get_item_invalid_collection( $method ) {
 		$this->setExpectedIncorrectUsage( 'WP_Font_Collection::load_from_json' );
 
@@ -230,12 +240,13 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 	}
 
 	/**
-	 * @dataProvider data_readable_http_methods
-	 * @covers WP_REST_Font_Collections_Controller::get_item
-	 * @ticket 56481
+
 	 *
 	 * @param string $method The HTTP method to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_readable_http_methods' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Collections_Controller', 'get_item' )]
 	public function test_get_item_invalid_id_permission( $method ) {
 		$request = new WP_REST_Request( $method, '/wp/v2/font-collections/mock-col-slug' );
 
@@ -248,40 +259,20 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 		$this->assertErrorResponse( 'rest_cannot_read', $response, 403 );
 	}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
-	public function test_context_param() {
-		// Controller does not use get_context_param().
-	}
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function test_context_param() {}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
-	public function test_create_item() {
-		// Controller does not use test_create_item().
-	}
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function test_create_item() {}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
-	public function test_update_item() {
-		// Controller does not use test_update_item().
-	}
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function test_update_item() {}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
-	public function test_delete_item() {
-		// Controller does not use test_delete_item().
-	}
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function test_delete_item() {}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
-	public function test_prepare_item() {
-		// Controller does not use test_prepare_item().
-	}
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function test_prepare_item() {}
 
 	public function test_get_item_schema() {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/font-collections' );

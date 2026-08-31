@@ -1,8 +1,12 @@
 <?php
 
 /**
- * @group option
  */
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_SiteTransient extends WP_UnitTestCase {
 
 	public function set_up() {
@@ -14,10 +18,10 @@ class Tests_Option_SiteTransient extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_site_transient
-	 * @covers ::set_site_transient
-	 * @covers ::delete_site_transient
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_site_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_site_transient' )]
 	public function test_the_basics() {
 		$key    = 'key1';
 		$value  = 'value1';
@@ -35,10 +39,10 @@ class Tests_Option_SiteTransient extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_site_transient
-	 * @covers ::set_site_transient
-	 * @covers ::delete_site_transient
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_site_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_site_transient' )]
 	public function test_serialized_data() {
 		$key   = __FUNCTION__;
 		$value = array(
@@ -56,12 +60,12 @@ class Tests_Option_SiteTransient extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22846
-	 * @group ms-excluded
 	 *
-	 * @covers ::set_site_transient
-	 * @covers ::wp_load_alloptions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22846' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_site_transient' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_set_site_transient_is_not_stored_as_autoload_option() {
 		$key = 'not_autoloaded';
 
@@ -75,10 +79,10 @@ class Tests_Option_SiteTransient extends WP_UnitTestCase {
 	/**
 	 * Ensure site transients are stored in the options table on single site installations.
 	 *
-	 * @group ms-excluded
 	 *
-	 * @covers ::set_site_transient
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_site_transient' )]
 	public function test_site_transient_stored_in_options_on_single_site() {
 		global $wpdb;
 		$key   = 'test_site_transient_stored_in_options_on_single_site';
@@ -105,10 +109,10 @@ class Tests_Option_SiteTransient extends WP_UnitTestCase {
 	/**
 	 * Ensure site transients are stored in the sitemeta table on multisite.
 	 *
-	 * @group ms-required
 	 *
-	 * @covers ::set_site_transient
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_site_transient' )]
 	public function test_site_transients_stored_in_site_meta_on_ms() {
 		global $wpdb;
 		$key   = 'test_site_transient_stored_in_site_meta_on_ms';
@@ -135,10 +139,10 @@ class Tests_Option_SiteTransient extends WP_UnitTestCase {
 	/**
 	 * Ensure site transients are not stored in the options table on multisite.
 	 *
-	 * @group ms-required
 	 *
-	 * @covers ::set_site_transient
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_site_transient' )]
 	public function test_site_transients_not_stored_in_options_table_on_ms() {
 		global $wpdb;
 		$key   = 'test_site_transients_not_stored_in_options_table_on_ms';

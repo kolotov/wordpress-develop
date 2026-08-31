@@ -1,15 +1,19 @@
 <?php
 /**
- * @group comment
  *
- * @covers ::get_comment_author_email_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_author_email_link' )]
 class Tests_Comment_GetCommentAuthorEmailLink extends WP_UnitTestCase {
 
 	public static $comment;
+	private $original_comment;
+	private $comment_existed;
 
 	public function set_up() {
 		parent::set_up();
+		$this->comment_existed  = array_key_exists( 'comment', $GLOBALS );
+		$this->original_comment = $GLOBALS['comment'] ?? null;
 
 		// Fake the 'comment' global.
 		$GLOBALS['comment'] = self::$comment;
@@ -19,7 +23,11 @@ class Tests_Comment_GetCommentAuthorEmailLink extends WP_UnitTestCase {
 	}
 
 	public function tear_down() {
-		unset( $GLOBALS['comment'] );
+		if ( $this->comment_existed ) {
+			$GLOBALS['comment'] = $this->original_comment;
+		} else {
+			unset( $GLOBALS['comment'] );
+		}
 		parent::tear_down();
 	}
 
@@ -38,8 +46,8 @@ class Tests_Comment_GetCommentAuthorEmailLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36571
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36571' )]
 	public function test_all_parameters() {
 		unset( $GLOBALS['comment'] );
 
@@ -86,8 +94,8 @@ class Tests_Comment_GetCommentAuthorEmailLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36571
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36571' )]
 	public function test_comment_param_should_override_global() {
 		$comment = self::factory()->comment->create_and_get(
 			array(

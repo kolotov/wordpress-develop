@@ -1,30 +1,30 @@
 <?php
 
 /**
- * @group compat
  *
- * @covers ::array_all
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'array_all' )]
 class Test_Compat_arrayAll extends WP_UnitTestCase {
 
 	/**
 	 * Test that array_all() is always available (either from PHP or WP).
 	 *
-	 * @ticket 62558
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62558' )]
 	public function test_array_all_availability() {
 		$this->assertTrue( function_exists( 'array_all' ) );
 	}
 
 	/**
-	 * @dataProvider data_array_all
 	 *
-	 * @ticket 62558
 	 *
 	 * @param bool $expected The expected value.
 	 * @param array $arr The array.
 	 * @param callable $callback The callback.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_array_all' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62558' )]
 	public function test_array_all( bool $expected, array $arr, callable $callback ) {
 		$this->assertSame( $expected, array_all( $arr, $callback ) );
 	}
@@ -34,7 +34,7 @@ class Test_Compat_arrayAll extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_array_all(): array {
+	public static function data_array_all(): array {
 		return array(
 			'empty array'   => array(
 				'expected' => true,

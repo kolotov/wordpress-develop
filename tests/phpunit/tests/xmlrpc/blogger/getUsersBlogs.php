@@ -1,16 +1,14 @@
 <?php
 
 /**
- * @group xmlrpc
- * @group user
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_XMLRPC_blogger_getUsersBlogs extends WP_XMLRPC_UnitTestCase {
 
-	/**
-	 * @ticket 65536
-	 * @group ms-required
-	 * @group multisite
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65536' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	public function test_multisite_argument_parsing() {
 		$subscriber_id = $this->make_user_by_role( 'subscriber' );
 

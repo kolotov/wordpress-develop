@@ -1,29 +1,29 @@
 <?php
 
 /**
- * @group compat
  *
- * @covers ::array_is_list
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'array_is_list' )]
 class Tests_Compat_arrayIsList extends WP_UnitTestCase {
 
 	/**
 	 * Test that array_is_list() is always available (either from PHP or WP).
 	 *
-	 * @ticket 55105
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55105' )]
 	public function test_array_is_list_availability() {
 		$this->assertTrue( function_exists( 'array_is_list' ) );
 	}
 
 	/**
-	 * @dataProvider data_array_is_list
 	 *
-	 * @ticket 55105
 	 *
 	 * @param bool  $expected Whether the array is a list.
 	 * @param array $arr      The array.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_array_is_list' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55105' )]
 	public function test_array_is_list( $expected, $arr ) {
 		$this->assertSame( $expected, array_is_list( $arr ) );
 	}
@@ -33,7 +33,7 @@ class Tests_Compat_arrayIsList extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_array_is_list() {
+	public static function data_array_is_list() {
 		return array(
 			'empty array'                   => array(
 				'expected' => true,

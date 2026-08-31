@@ -1,22 +1,24 @@
 <?php
 
 /**
- * @group ms-required
- * @group multisite
  *
- * @covers ::wpmu_validate_user_signup
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wpmu_validate_user_signup' )]
 class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_user_name
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_user_name' )]
 	public function test_user_name( $user_name, $error_message ) {
 		$v = wpmu_validate_user_signup( $user_name, 'foo@example.com' );
 		$this->assertContains( 'user_name', $v['errors']->get_error_codes(), $error_message );
 	}
 
-	public function data_user_name() {
+	public static function data_user_name() {
 		return array(
 			array( 'contains spaces', 'User names with spaces are not allowed.' ),
 			array( 'ContainsCaps', 'User names with capital letters are not allowed.' ),
@@ -133,8 +135,8 @@ class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43232
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43232' )]
 	public function test_should_not_fail_for_data_used_by_a_deleted_user() {
 		global $wpdb;
 
@@ -194,8 +196,8 @@ class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43667
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43667' )]
 	public function test_signup_nonce_check() {
 		$original_php_self       = $_SERVER['PHP_SELF'];
 		$_SERVER['PHP_SELF']     = '/wp-signup.php';
@@ -209,8 +211,8 @@ class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43667
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43667' )]
 	public function test_signup_nonce_check_invalid() {
 		$original_php_self       = $_SERVER['PHP_SELF'];
 		$_SERVER['PHP_SELF']     = '/wp-signup.php';
@@ -226,10 +228,10 @@ class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 	/**
 	 * Ensure that wp_ensure_editable_role does not throw an exception when the role is editable.
 	 *
-	 * @ticket 43251
 	 *
-	 * @covers ::wp_ensure_editable_role
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43251' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_ensure_editable_role' )]
 	public function test_wp_ensure_editable_role_allows_editable_roles() {
 		$role = get_role( 'editor' );
 		$this->assertInstanceOf( 'WP_Role', $role, 'The editor role should exist.' );
@@ -239,10 +241,10 @@ class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 	/**
 	 * Ensure that wp_ensure_editable_role throws an exception for non-existent roles.
 	 *
-	 * @ticket 43251
 	 *
-	 * @covers ::wp_ensure_editable_role
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43251' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_ensure_editable_role' )]
 	public function test_wp_ensure_editable_role_does_not_allow_non_existent_role() {
 		$this->expectException( 'WPDieException' );
 		$role = get_role( 'non-existent-role' );
@@ -253,10 +255,10 @@ class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 	/**
 	 * Ensure that wp_ensure_editable_role throws an exception for roles that are not editable.
 	 *
-	 * @ticket 43251
 	 *
-	 * @covers ::wp_ensure_editable_role
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43251' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_ensure_editable_role' )]
 	public function test_wp_ensure_editable_role_does_not_allow_uneditable_roles() {
 		add_filter(
 			'editable_roles',

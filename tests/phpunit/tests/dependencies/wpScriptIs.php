@@ -3,12 +3,12 @@
 /**
  * Test wp_script_is().
  *
- * @group dependencies
- * @group scripts
  *
- * @covers ::wp_script_is
- * @covers WP_Scripts::query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_script_is' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Dependencies::class, 'query' )]
 class Tests_Dependencies_WpScriptIs extends WP_UnitTestCase {
 	private static $wp_scripts;
 	private static $wp_scripts_was_set = false;
@@ -46,10 +46,10 @@ class Tests_Dependencies_WpScriptIs extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_script_handles
 	 *
 	 * @param string $handle Script handle to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_script_handles' )]
 	public function test_script_is_enqueued( $handle ) {
 		// Test set up.
 		wp_enqueue_script( $handle );
@@ -58,10 +58,10 @@ class Tests_Dependencies_WpScriptIs extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_script_handles
 	 *
 	 * @param string $handle Script handle to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_script_handles' )]
 	public function test_script_is_not_enqueued( $handle ) {
 		$this->assertFalse( wp_script_is( $handle ), "Script `{$handle}` should not be enqueued when test starts" );
 	}
@@ -71,7 +71,7 @@ class Tests_Dependencies_WpScriptIs extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_script_handles() {
+	public static function data_script_handles() {
 		return array(
 			array( 'heartbeat' ),
 			array( 'jquery' ),
@@ -82,13 +82,13 @@ class Tests_Dependencies_WpScriptIs extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28404
 	 *
-	 * @dataProvider data_deps_are_enqueued
 	 *
 	 * @param string   $handle Script handle.
 	 * @param string[] $deps   The deps to test for the given script handle.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28404' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_deps_are_enqueued' )]
 	public function test_deps_are_enqueued( $handle, $deps ) {
 		// Check the deps are not enqueued before enqueuing.
 		$this->assertFalse( wp_script_is( $handle ), 'Script `jquery-ui-accordion` should not be enqueued when test starts' );
@@ -111,7 +111,7 @@ class Tests_Dependencies_WpScriptIs extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_deps_are_enqueued() {
+	public static function data_deps_are_enqueued() {
 		return array(
 			'jquery: 1 level of deps'                 => array(
 				'handle' => 'jquery',
@@ -167,13 +167,13 @@ class Tests_Dependencies_WpScriptIs extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28404
 	 *
-	 * @dataProvider data_non_deps_should_not_enqueue
 	 *
 	 * @param string   $handle   Script handle.
 	 * @param string[] $not_deps The handles that are not deps of the given script handle.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28404' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_non_deps_should_not_enqueue' )]
 	public function test_non_deps_are_not_enqueued( $handle, $not_deps ) {
 		// Check the deps are not enqueued before enqueuing.
 		$this->assertFalse( wp_script_is( $handle ), "Script `{$handle}` should not be enqueued when test starts" );
@@ -194,7 +194,7 @@ class Tests_Dependencies_WpScriptIs extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_non_deps_should_not_enqueue() {
+	public static function data_non_deps_should_not_enqueue() {
 		return array(
 			'imagesloaded: no dependencies' => array(
 				'handle'   => 'imagesloaded',

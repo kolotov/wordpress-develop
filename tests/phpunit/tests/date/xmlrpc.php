@@ -1,12 +1,15 @@
 <?php
 
 /**
- * @group date
- * @group datetime
- * @group xmlrpc
  *
- * @covers IXR_Date
  */
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
+
 class Tests_Date_XMLRPC extends WP_XMLRPC_UnitTestCase {
 
 	/**
@@ -20,10 +23,9 @@ class Tests_Date_XMLRPC extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30429
-	 *
-	 * @covers wp_xmlrpc_server::mw_newPost
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30429' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_newPost' )]
 	public function test_date_new_post() {
 		$timezone = 'Europe/Helsinki';
 		update_option( 'timezone_string', $timezone );
@@ -140,10 +142,9 @@ class Tests_Date_XMLRPC extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30429
-	 *
-	 * @covers wp_xmlrpc_server::mw_editPost
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30429' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_editPost' )]
 	public function test_date_edit_post() {
 		$timezone = 'Europe/Helsinki';
 		update_option( 'timezone_string', $timezone );
@@ -209,10 +210,9 @@ class Tests_Date_XMLRPC extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30429
-	 *
-	 * @covers wp_xmlrpc_server::wp_editComment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30429' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'wp_editComment' )]
 	public function test_date_edit_comment() {
 		$timezone = 'Europe/Helsinki';
 		update_option( 'timezone_string', $timezone );

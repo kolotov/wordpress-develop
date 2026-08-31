@@ -8,25 +8,25 @@
 require_once __DIR__ . '/base.php';
 
 /**
- * @group admin
- * @group filesystem
- * @group filesystem-direct
  *
- * @covers WP_Filesystem_Direct::touch
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem-direct' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Filesystem_Direct::class, 'touch' )]
 class Tests_Filesystem_WpFilesystemDirect_Touch extends WP_Filesystem_Direct_UnitTestCase {
 
 	/**
 	 * Tests that `WP_Filesystem_Direct::touch()` creates a file.
 	 *
-	 * @ticket 57774
 	 *
-	 * @dataProvider data_should_create_file
 	 *
 	 * @param string $file  The file path.
 	 * @param int    $mtime The modified time to set.
 	 * @param int    $atime The accessed time to set.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57774' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_create_file' )]
 	public function test_should_create_file( $file, $mtime, $atime ) {
 		$file = str_replace( 'TEST_DATA', self::$file_structure['test_dir']['path'], $file );
 
@@ -71,7 +71,7 @@ class Tests_Filesystem_WpFilesystemDirect_Touch extends WP_Filesystem_Direct_Uni
 	 *
 	 * @return array[]
 	 */
-	public function data_should_create_file() {
+	public static function data_should_create_file() {
 		return array(
 			'default mtime or atime'      => array(
 				'file'  => 'TEST_DATA/file-to-create.txt',

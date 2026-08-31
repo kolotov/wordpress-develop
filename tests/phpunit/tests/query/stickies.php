@@ -3,9 +3,9 @@
 /**
  * Tests related to sticky functionality in WP_Query.
  *
- * @group query
- * @covers WP_Query::get_posts
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Query::class, 'get_posts' )]
 class Tests_Query_Stickies extends WP_UnitTestCase {
 	public static $posts = array();
 
@@ -107,8 +107,8 @@ class Tests_Query_Stickies extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36907
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36907' )]
 	public function test_stickies_should_obey_parameters_from_the_main_query() {
 		$filter = new MockAction();
 		add_filter( 'posts_pre_query', array( $filter, 'filter' ), 10, 2 );
@@ -128,8 +128,8 @@ class Tests_Query_Stickies extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36907
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36907' )]
 	public function test_stickies_should_limit_query() {
 		$sticky_count = 6;
 		$post_date    = gmdate( 'Y-m-d H:i:s', time() - 10000 );

@@ -3,10 +3,10 @@
 /**
  * Tests for WP native customizations added to the Text_Diff::check() method.
  *
- * @group diff
  *
- * @covers Text_Diff::_check
  */
+#[\PHPUnit\Framework\Attributes\Group( 'diff' )]
+#[\PHPUnit\Framework\Attributes\CoversNothing]
 final class Text_Diff_Check_Test extends WP_UnitTestCase {
 
 	const FILE_A = array(

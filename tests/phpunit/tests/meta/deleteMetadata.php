@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group meta
  */
+#[\PHPUnit\Framework\Attributes\Group( 'meta' )]
 class Tests_Meta_DeleteMetadata extends WP_UnitTestCase {
 	public function test_all_metas_for_key_should_be_deleted_when_no_meta_value_is_provided() {
 		$vals = array( '0', '1', '2' );
@@ -33,8 +33,8 @@ class Tests_Meta_DeleteMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32224
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32224' )]
 	public function test_with_falsey_meta_value_should_not_delete_all_meta() {
 		$vals = array( '0', '1', '2' );
 		foreach ( $vals as $val ) {
@@ -51,10 +51,10 @@ class Tests_Meta_DeleteMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32224
 	 *
 	 * This is a backwards compatibility quirk.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32224' )]
 	public function test_meta_value_should_be_ignored_when_empty_string() {
 		$vals = array( '0', '1', '2', '' );
 		foreach ( $vals as $val ) {
@@ -69,8 +69,8 @@ class Tests_Meta_DeleteMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32224
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32224' )]
 	public function test_meta_value_should_be_ignored_when_null() {
 		$vals = array( '0', '1', '2', '' );
 		foreach ( $vals as $val ) {
@@ -85,8 +85,8 @@ class Tests_Meta_DeleteMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32224
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32224' )]
 	public function test_meta_value_should_be_ignored_when_false() {
 		$vals = array( '0', '1', '2', '' );
 		foreach ( $vals as $val ) {
@@ -101,8 +101,8 @@ class Tests_Meta_DeleteMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35797
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35797' )]
 	public function test_delete_all_should_only_invalidate_cache_for_objects_matching_meta_value() {
 		$p1 = 1234;
 		$p2 = 5678;
@@ -124,8 +124,8 @@ class Tests_Meta_DeleteMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35797
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35797' )]
 	public function test_delete_all_should_invalidate_cache_for_all_objects_with_meta_key_when_meta_value_is_not_provided() {
 		$p1 = 1234;
 		$p2 = 5678;
@@ -146,8 +146,8 @@ class Tests_Meta_DeleteMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43561
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43561' )]
 	public function test_object_id_is_int_inside_delete_post_meta() {
 		$post_id = self::factory()->post->create();
 		$meta_id = add_metadata( 'post', $post_id, 'my_key', 'my_value' );

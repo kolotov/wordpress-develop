@@ -3,13 +3,19 @@
 /**
  * Test WP_List_Util class.
  *
- * @group functions
  */
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 
 	/**
-	 * @covers WP_List_Util::get_input
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'get_input' )]
 	public function test_wp_list_util_get_input() {
 		$input = array( 'foo', 'bar' );
 		$util  = new WP_List_Util( $input );
@@ -18,8 +24,8 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_List_Util::get_output
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'get_output' )]
 	public function test_wp_list_util_get_output_immediately() {
 		$input = array( 'foo', 'bar' );
 		$util  = new WP_List_Util( $input );
@@ -28,8 +34,8 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers WP_List_Util::get_output
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'get_output' )]
 	public function test_wp_list_util_get_output() {
 		$expected = array(
 			(object) array(
@@ -54,12 +60,8 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55300
 	 *
-	 * @dataProvider data_wp_list_util_pluck
 	 *
-	 * @covers WP_List_Util::pluck
-	 * @covers ::wp_list_pluck
 	 *
 	 * @param array  $target_array The array to create the list from.
 	 * @param string $target_key   The key to pluck.
@@ -67,6 +69,10 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	 * @param string $index_key    Optional. Field from the element to use as keys for the new array.
 	 *                             Default null.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55300' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_list_util_pluck' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'pluck' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_list_pluck' )]
 	public function test_wp_list_util_pluck( $target_array, $target_key, $expected, $index_key = null ) {
 		$util   = new WP_List_Util( $target_array );
 		$actual = $util->pluck( $target_key, $index_key );
@@ -89,7 +95,7 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_list_util_pluck() {
+	public static function data_wp_list_util_pluck() {
 		return array(
 			'simple'        => array(
 				'target_array' => array(
@@ -111,17 +117,17 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_list_pluck() throws _doing_it_wrong() with invalid input.
 	 *
-	 * @ticket 56650
 	 *
-	 * @dataProvider data_wp_list_pluck_should_throw_doing_it_wrong_with_invalid_input
 	 *
-	 * @covers WP_List_Util::pluck
-	 * @covers ::wp_list_pluck
 	 *
 	 * @expectedIncorrectUsage WP_List_Util::pluck
 	 *
 	 * @param array $input An invalid input array.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56650' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_list_pluck_should_throw_doing_it_wrong_with_invalid_input' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'pluck' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_list_pluck' )]
 	public function test_wp_list_pluck_should_throw_doing_it_wrong_with_invalid_input( $input ) {
 		$this->assertSame( array(), wp_list_pluck( $input, 'a_field' ) );
 	}
@@ -129,17 +135,17 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_list_pluck() throws _doing_it_wrong() with an index key and invalid input.
 	 *
-	 * @ticket 56650
 	 *
-	 * @dataProvider data_wp_list_pluck_should_throw_doing_it_wrong_with_invalid_input
 	 *
-	 * @covers WP_List_Util::pluck
-	 * @covers ::wp_list_pluck
 	 *
 	 * @expectedIncorrectUsage WP_List_Util::pluck
 	 *
 	 * @param array $input An invalid input array.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56650' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_list_pluck_should_throw_doing_it_wrong_with_invalid_input' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'pluck' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_list_pluck' )]
 	public function test_wp_list_pluck_should_throw_doing_it_wrong_with_index_key_and_invalid_input( $input ) {
 		$this->assertSame( array(), wp_list_pluck( $input, 'a_field', 'an_index_key' ) );
 	}
@@ -149,7 +155,7 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_list_pluck_should_throw_doing_it_wrong_with_invalid_input() {
+	public static function data_wp_list_pluck_should_throw_doing_it_wrong_with_invalid_input() {
 		return array(
 			'int[] 0'                   => array( array( 0 ) ),
 			'int[] 1'                   => array( array( 1 ) ),
@@ -168,11 +174,11 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55300
 	 *
-	 * @covers WP_List_Util::sort
-	 * @covers ::wp_list_sort
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55300' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'sort' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_list_sort' )]
 	public function test_wp_list_util_sort_simple() {
 		$expected     = array(
 			1 => 'one',
@@ -204,16 +210,8 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55300
 	 *
-	 * @dataProvider data_wp_list_util_sort_string_arrays
-	 * @dataProvider data_wp_list_util_sort_int_arrays
-	 * @dataProvider data_wp_list_util_sort_arrays_of_arrays
-	 * @dataProvider data_wp_list_util_sort_object_arrays
-	 * @dataProvider data_wp_list_util_sort_non_existent_orderby_fields
 	 *
-	 * @covers WP_List_Util::sort
-	 * @covers ::wp_list_sort
 	 *
 	 * @param array  $expected      The expected array.
 	 * @param array  $target_array  The array to create a list from.
@@ -224,6 +222,14 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	 *                              is a string. Default 'ASC'.
 	 * @param bool   $preserve_keys Optional. Whether to preserve keys. Default false.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55300' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_list_util_sort_string_arrays' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_list_util_sort_int_arrays' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_list_util_sort_arrays_of_arrays' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_list_util_sort_object_arrays' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_list_util_sort_non_existent_orderby_fields' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'sort' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_list_sort' )]
 	public function test_wp_list_util_sort( $expected, $target_array, $orderby = array(), $order = 'ASC', $preserve_keys = false ) {
 		$util   = new WP_List_Util( $target_array );
 		$actual = $util->sort( $orderby, $order, $preserve_keys );
@@ -246,7 +252,7 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_list_util_sort_string_arrays() {
+	public static function data_wp_list_util_sort_string_arrays() {
 		return array(
 			'string[], no keys, no ordering'     => array(
 				'expected'     => array( 'four', 'two', 'three', 'one' ),
@@ -322,7 +328,7 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_list_util_sort_int_arrays() {
+	public static function data_wp_list_util_sort_int_arrays() {
 		return array(
 			'int[], no keys, no ordering'     => array(
 				'expected'     => array( 4, 2, 3, 1 ),
@@ -398,7 +404,7 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_list_util_sort_arrays_of_arrays() {
+	public static function data_wp_list_util_sort_arrays_of_arrays() {
 		return array(
 			'array[], no keys, no ordering'     => array(
 				'expected'     => array(
@@ -774,7 +780,7 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_list_util_sort_object_arrays() {
+	public static function data_wp_list_util_sort_object_arrays() {
 		return array(
 			'object[], no keys, no ordering'     => array(
 				'expected'     => array(
@@ -1007,7 +1013,7 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_list_util_sort_non_existent_orderby_fields() {
+	public static function data_wp_list_util_sort_non_existent_orderby_fields() {
 		return array(
 			'int[], int keys, $orderby a non-existent field, $order = ASC and $preserve_keys = false' => array(
 				'expected'      => array( 4, 2, 3, 1 ),
@@ -1142,7 +1148,7 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 				'order'         => 'ASC',
 				'preserve_keys' => false,
 			),
-			'object[], string keys, $orderby a non-existent field, $order = DESC and $preserve_keys = true' => array(
+			'object[], string keys, non-existent orderby provider, $order = DESC and $preserve_keys = true' => array(
 				'expected'      => array(
 					'four'  => (object) array( 'value' => 'four' ),
 					'two'   => (object) array( 'value' => 'two' ),

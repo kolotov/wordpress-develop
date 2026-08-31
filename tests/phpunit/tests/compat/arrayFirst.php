@@ -1,29 +1,27 @@
 <?php
 
 /**
- * @group compat
  *
- * @covers ::array_first
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'array_first' )]
 class Tests_Compat_arrayFirst extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 63853
-	 *
-	 * Test that array_first() is always available (either from PHP or WP).
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63853' )]
 	public function test_array_first_availability(): void {
 		$this->assertTrue( function_exists( 'array_first' ) );
 	}
 
 	/**
-	 * @ticket 63853
 	 *
-	 * @dataProvider data_array_first
 	 *
 	 * @param mixed $expected The value extracted from the given array.
 	 * @param array $arr      The array to get the first value from.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63853' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_array_first' )]
 	public function test_array_first( $expected, $arr ): void {
 		$this->assertSame( $expected, array_first( $arr ) );
 	}
@@ -34,7 +32,7 @@ class Tests_Compat_arrayFirst extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_array_first(): array {
+	public static function data_array_first(): array {
 		$obj = new \stdClass();
 		return array(
 			'string values'        => array(
@@ -78,8 +76,8 @@ class Tests_Compat_arrayFirst extends WP_UnitTestCase {
 	/**
 	 * Test that array_first() returns the pointer is not the first element.
 	 *
-	 * @ticket 63853
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63853' )]
 	public function test_array_first_with_end_pointer() {
 		$arr = array(
 			'key1' => 'val1',

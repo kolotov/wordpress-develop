@@ -2,10 +2,10 @@
 /**
  * Test wp_prime_network_option_caches().
  *
- * @group option
  *
- * @covers ::wp_prime_network_option_caches
  */
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_prime_network_option_caches' )]
 class Tests_Option_WpPrimeNetworkOptionCaches extends WP_UnitTestCase {
 
 	/**
@@ -27,8 +27,8 @@ class Tests_Option_WpPrimeNetworkOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_prime_network_option_caches() primes multiple options.
 	 *
-	 * @ticket 61053
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61053' )]
 	public function test_wp_prime_network_option_caches() {
 		// Create some options to prime.
 		$network_id = get_current_network_id();
@@ -93,8 +93,8 @@ class Tests_Option_WpPrimeNetworkOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Tests that running wp_prime_network_option_caches() twice does not requery options.
 	 *
-	 * @ticket 61053
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61053' )]
 	public function test_wp_prime_network_option_caches_run_twice() {
 		// Create some options to prime.
 		$network_id = get_current_network_id();
@@ -152,8 +152,8 @@ class Tests_Option_WpPrimeNetworkOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_prime_network_option_caches() handles a mix of primed and unprimed options.
 	 *
-	 * @ticket 61053
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61053' )]
 	public function test_wp_prime_network_option_caches_handles_a_mix_of_primed_and_unprimed_options() {
 		// Create some options to prime.
 		$options_to_prime = array(
@@ -224,10 +224,10 @@ class Tests_Option_WpPrimeNetworkOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Test prime options on a different network.
 	 *
-	 * @group ms-required
 	 *
-	 * @ticket 61053
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61053' )]
 	public function test_wp_prime_network_option_caches_no_exists_cache() {
 		$options_to_prime = array(
 			'option1',
@@ -246,10 +246,10 @@ class Tests_Option_WpPrimeNetworkOptionCaches extends WP_UnitTestCase {
 	/**
 	 * Test prime options on a different network.
 	 *
-	 * @group ms-required
 	 *
-	 * @ticket 61053
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61053' )]
 	public function test_wp_prime_network_option_caches_multiple_networks() {
 		$network_id  = get_current_network_id();
 		$cache_group = 'site-options';

@@ -6,8 +6,10 @@
  * @subpackage Blocks
  * @since 5.5.0
  *
- * @group blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+
+
 class Tests_Blocks_RenderBlock extends WP_UnitTestCase {
 
 	/**
@@ -47,11 +49,11 @@ class Tests_Blocks_RenderBlock extends WP_UnitTestCase {
 	 * Tests that a block which provides context makes that context available to
 	 * its inner blocks.
 	 *
-	 * @ticket 49927
 	 *
-	 * @covers ::register_block_type
-	 * @covers ::render_block
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'render_block' )]
 	public function test_provides_block_context() {
 		$provided_context = array();
 
@@ -119,11 +121,11 @@ class Tests_Blocks_RenderBlock extends WP_UnitTestCase {
 	 * Tests that a block can receive default-provided context through
 	 * render_block.
 	 *
-	 * @ticket 49927
 	 *
-	 * @covers ::register_block_type
-	 * @covers ::render_block
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'render_block' )]
 	public function test_provides_default_context() {
 		global $post;
 
@@ -157,11 +159,11 @@ class Tests_Blocks_RenderBlock extends WP_UnitTestCase {
 	/**
 	 * Tests that default block context can be filtered.
 	 *
-	 * @ticket 49927
 	 *
-	 * @covers ::register_block_type
-	 * @covers ::render_block
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'render_block' )]
 	public function test_default_context_is_filterable() {
 		$provided_context = array();
 
@@ -196,8 +198,8 @@ class Tests_Blocks_RenderBlock extends WP_UnitTestCase {
 	/**
 	 * Tests the behavior of the 'render_block_context' filter based on the location of the filtered block.
 	 *
-	 * @ticket 62046
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62046' )]
 	public function test_render_block_context_inner_blocks() {
 		$provided_context = array();
 
@@ -262,8 +264,8 @@ HTML
 	/**
 	 * Tests that the 'render_block_context' filter arbitrary context.
 	 *
-	 * @ticket 62046
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62046' )]
 	public function test_render_block_context_allowed_context() {
 		$provided_context = array();
 

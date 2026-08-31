@@ -1,9 +1,12 @@
 <?php
 
 /**
- * @group post
- * @group revision
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'revision' )]
+
+
+
 class Tests_Post_Revisions extends WP_UnitTestCase {
 
 	const POST_TYPE = 'test-revision';
@@ -21,9 +24,9 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Note: Test needs reviewing when #16215 is fixed because I'm not sure the test current tests the "correct" behavior
 	 *
-	 * @ticket 20982
-	 * @ticket 16215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '20982' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '16215' )]
 	public function test_revision_restore_updates_edit_last_post_meta() {
 		// Create a post as Author.
 		wp_set_current_user( self::$author_user_id );
@@ -64,9 +67,9 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 7392
-	 * @ticket 9843
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '7392' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '9843' )]
 	public function test_revision_dont_save_revision_if_unchanged() {
 		$post    = get_default_post_to_edit( 'post', true );
 		$post_id = $post->ID;
@@ -134,9 +137,9 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 7392
-	 * @ticket 9843
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '7392' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '9843' )]
 	public function test_revision_force_save_revision_even_if_unchanged() {
 		add_filter( 'wp_save_post_revision_check_for_changes', '__return_false' );
 
@@ -210,8 +213,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests the Caps used in the action=view case of wp-admin/revision.php
 	 *
-	 * @ticket 16847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16847' )]
 	public function test_revision_view_caps_post() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -245,8 +248,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests the Caps used in the action=restore case of wp-admin/revision.php
 	 *
-	 * @ticket 16847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16847' )]
 	public function test_revision_restore_caps_post() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -276,8 +279,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests the Caps used in the action=diff case of wp-admin/revision.php
 	 *
-	 * @ticket 16847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16847' )]
 	public function test_revision_diff_caps_post() {
 		$post_id = self::factory()->post->create(
 			array(
@@ -314,8 +317,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests the Caps used in the action=view case of wp-admin/revision.php with a CPT with Custom Capabilities
 	 *
-	 * @ticket 16847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16847' )]
 	public function test_revision_view_caps_cpt() {
 		register_post_type(
 			self::POST_TYPE,
@@ -356,8 +359,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests the Caps used in the action=restore case of wp-admin/revision.php
 	 *
-	 * @ticket 16847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16847' )]
 	public function test_revision_restore_caps_cpt() {
 		register_post_type(
 			self::POST_TYPE,
@@ -402,8 +405,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests the Caps used in the action=restore case of wp-admin/revision.php
 	 *
-	 * @ticket 16847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16847' )]
 	public function test_revision_restore_caps_before_publish() {
 		register_post_type(
 			self::POST_TYPE,
@@ -462,8 +465,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests the Caps used in the action=diff case of wp-admin/revision.php
 	 *
-	 * @ticket 16847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16847' )]
 	public function test_revision_diff_caps_cpt() {
 		register_post_type(
 			self::POST_TYPE,
@@ -507,8 +510,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26042
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26042' )]
 	public function test_wp_get_post_revisions_should_order_by_post_date() {
 		global $wpdb;
 
@@ -543,8 +546,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 26042
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26042' )]
 	public function test_wp_get_post_revisions_should_order_by_ID_when_post_date_matches() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -578,8 +581,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51550
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51550' )]
 	public function test_wp_revisions_to_keep_filter() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -603,8 +606,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51550
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51550' )]
 	public function test_wp_post_type_revisions_to_keep_filter() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -641,8 +644,8 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Verifies that trying to create a revision with an invalid ID returns a WP_Error.
 	 *
-	 * @ticket 30009
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30009' )]
 	public function test_wp_save_post_revision_error() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -658,10 +661,10 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_latest_revision_id_and_total_count() returns the latest revision ID and total count.
 	 *
-	 * @covers ::wp_get_latest_revision_id_and_total_count
-	 * @ticket 55857
-	 * @dataProvider data_wp_get_post_revisions_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55857' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_post_revisions_url' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_latest_revision_id_and_total_count' )]
 	public function test_wp_get_latest_revision_id_and_total_count( $revisions ) {
 		$post_id = self::factory()->post->create();
 		for ( $i = 0; $i < $revisions; ++$i ) {
@@ -693,9 +696,9 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_latest_revision_id_and_total_count() returns a WP_Error when no revisions exist.
 	 *
-	 * @covers ::wp_get_latest_revision_id_and_total_count
-	 * @ticket 55857
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55857' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_latest_revision_id_and_total_count' )]
 	public function test_wp_get_latest_revision_id_and_total_count_no_revisions() {
 		$revision = wp_get_latest_revision_id_and_total_count( null );
 
@@ -713,14 +716,14 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_post_revisions_url() returns the revisions URL.
 	 *
-	 * @ticket 39062
 	 *
-	 * @dataProvider data_wp_get_post_revisions_url
 	 *
-	 * @covers ::wp_get_post_revisions_url
 	 *
 	 * @param int $revisions The number of revisions to create.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39062' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_post_revisions_url' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_post_revisions_url' )]
 	public function test_wp_get_post_revisions_url( $revisions ) {
 		wp_set_current_user( self::$admin_user_id );
 
@@ -761,14 +764,14 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	 * Tests that wp_get_post_revisions_url() returns the revisions URL
 	 * when passed a WP_Post object.
 	 *
-	 * @ticket 39062
 	 *
-	 * @dataProvider data_wp_get_post_revisions_url
 	 *
-	 * @covers ::wp_get_post_revisions_url
 	 *
 	 * @param int $revisions The number of revisions to create.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39062' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_post_revisions_url' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_post_revisions_url' )]
 	public function test_wp_get_post_revisions_url_with_post_object( $revisions ) {
 		wp_set_current_user( self::$admin_user_id );
 
@@ -810,7 +813,7 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_get_post_revisions_url() {
+	public static function data_wp_get_post_revisions_url() {
 		return array(
 			'one revision'       => array( 'revisions' => 1 ),
 			'multiple revisions' => array( 'revisions' => 2 ),
@@ -820,10 +823,10 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_post_revisions_url() returns NULL when a post does not exist.
 	 *
-	 * @ticket 39062
 	 *
-	 * @covers ::wp_get_post_revisions_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39062' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_post_revisions_url' )]
 	public function test_wp_get_post_revisions_url_returns_null_when_post_does_not_exist() {
 		wp_set_current_user( self::$admin_user_id );
 		$post_id = 99999;
@@ -833,10 +836,10 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_post_revisions_url() returns NULL when there are no revisions.
 	 *
-	 * @ticket 39062
 	 *
-	 * @covers ::wp_get_post_revisions_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39062' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_post_revisions_url' )]
 	public function test_wp_get_post_revisions_url_returns_null_with_no_revisions() {
 		wp_set_current_user( self::$admin_user_id );
 		$post_id = self::factory()->post->create( array( 'post_title' => 'Some Post' ) );
@@ -846,10 +849,10 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_get_post_revisions_url() returns NULL when revisions are disabled.
 	 *
-	 * @ticket 39062
 	 *
-	 * @covers ::wp_get_post_revisions_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39062' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_post_revisions_url' )]
 	public function test_wp_get_post_revisions_url_returns_null_with_revisions_disabled() {
 		wp_set_current_user( self::$admin_user_id );
 
@@ -876,10 +879,10 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	 * This test should protect the original revision, send the rest to be checked against wp_revisions_to_keep(),
 	 * and result in two revisions: The latest revision, and the original.
 	 *
-	 * @ticket 57320
 	 *
-	 * @covers ::wp_save_post_revision
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57320' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_save_post_revision' )]
 	public function test_wp_save_post_revision_should_respect_revisions_before_deletion_filter() {
 		$post_id = self::factory()->post->create( array( 'post_title' => 'Test 57320' ) );
 
@@ -932,9 +935,9 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64314
-	 * @covers ::wp_save_post_revision
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64314' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_save_post_revision' )]
 	public function test_wp_save_post_revision_with_array_post_meta() {
 		// This filter is true by default, but this is explicitly to test looking for differences among non-scalar fields.
 		add_filter( 'wp_save_post_revision_check_for_changes', '__return_true' );

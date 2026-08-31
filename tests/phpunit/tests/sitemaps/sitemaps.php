@@ -13,8 +13,8 @@
 /**
  * Core sitemaps test cases.
  *
- * @group sitemaps
  */
+#[\PHPUnit\Framework\Attributes\Group( 'sitemaps' )]
 class Tests_Sitemaps_Sitemaps extends WP_UnitTestCase {
 
 	/**
@@ -194,8 +194,8 @@ class Tests_Sitemaps_Sitemaps extends WP_UnitTestCase {
 	/**
 	 * Test sitemap index entries with public and private custom post types.
 	 *
-	 * @ticket 50607
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50607' )]
 	public function test_get_sitemap_entries_not_publicly_queryable_post_types() {
 		register_post_type(
 			'non_queryable_cpt',
@@ -336,8 +336,8 @@ class Tests_Sitemaps_Sitemaps extends WP_UnitTestCase {
 	/**
 	 * Tests getting a URL list for a private custom post type.
 	 *
-	 * @ticket 50607
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50607' )]
 	public function test_get_url_list_cpt_not_publicly_queryable() {
 		$post_type = 'non_queryable_cpt';
 
@@ -450,8 +450,8 @@ class Tests_Sitemaps_Sitemaps extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50643
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50643' )]
 	public function test_sitemaps_enabled() {
 		$before = wp_sitemaps_get_server()->sitemaps_enabled();
 		add_filter( 'wp_sitemaps_enabled', '__return_false' );
@@ -463,10 +463,10 @@ class Tests_Sitemaps_Sitemaps extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50643
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50643' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 	public function test_disable_sitemap_should_return_404() {
 		add_filter( 'wp_sitemaps_enabled', '__return_false' );
 
@@ -480,10 +480,10 @@ class Tests_Sitemaps_Sitemaps extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 50643
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50643' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 	public function test_empty_url_list_should_return_404() {
 		wp_register_sitemap_provider( 'foo', new WP_Sitemaps_Empty_Test_Provider( 'foo' ) );
 

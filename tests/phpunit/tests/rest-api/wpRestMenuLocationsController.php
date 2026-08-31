@@ -6,10 +6,17 @@
  * @subpackage REST_API
  * @since 5.9.0
  *
- * @group restapi
+
  *
- * @coversDefaultClass WP_REST_Menu_Locations_Controller
  */
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+
+
+
+
+
+
+
 class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_Testcase {
 
 	/**
@@ -54,9 +61,9 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::register_routes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
 		$this->assertArrayHasKey( '/wp/v2/menu-locations', $routes );
@@ -66,9 +73,9 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_context_param
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_context_param' )]
 	public function test_context_param() {
 		// Collection.
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/menu-locations' );
@@ -86,9 +93,9 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_items' )]
 	public function test_get_items() {
 		$menus = array( 'primary', 'secondary' );
 		$this->register_nav_menu_locations( array( 'primary', 'secondary' ) );
@@ -106,9 +113,9 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item' )]
 	public function test_get_item() {
 		$menu = 'primary';
 		$this->register_nav_menu_locations( array( $menu ) );
@@ -121,9 +128,9 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * @ticket 54304
-	 * @covers ::get_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54304' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_items' )]
 	public function test_get_items_filter() {
 		$menus = array( 'primary', 'secondary' );
 		$this->register_nav_menu_locations( array( 'primary', 'secondary' ) );
@@ -144,9 +151,9 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * @ticket 54304
-	 * @covers ::get_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54304' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item' )]
 	public function test_get_item_filter() {
 		$menu = 'primary';
 		$this->register_nav_menu_locations( array( $menu ) );
@@ -160,9 +167,9 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item' )]
 	public function test_get_item_invalid() {
 		$menu = 'primary';
 		$this->register_nav_menu_locations( array( $menu ) );
@@ -174,46 +181,22 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 		$this->assertErrorResponse( 'rest_menu_location_invalid', $response, 404 );
 	}
 
-	/**
-	 * The create_item() method does not exist for menu locations.
-	 *
-	 * @doesNotPerformAssertions
-	 */
-	public function test_create_item() {
-		// Controller does not implement create_item().
-	}
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function test_create_item() {}
+
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function test_update_item() {}
+
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function test_delete_item() {}
+
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+	public function test_prepare_item() {}
 
 	/**
-	 * The update_item() method does not exist for menu locations.
-	 *
-	 * @doesNotPerformAssertions
 	 */
-	public function test_update_item() {
-		// Controller does not implement update_item().
-	}
-
-	/**
-	 * The delete_item() method does not exist for menu locations.
-	 *
-	 * @doesNotPerformAssertions
-	 */
-	public function test_delete_item() {
-		// Controller does not implement delete_item().
-	}
-
-	/**
-	 * The prepare_item() method does not exist for menu locations.
-	 *
-	 * @doesNotPerformAssertions
-	 */
-	public function test_prepare_item() {
-		// Controller does not implement prepare_item().
-	}
-
-	/**
-	 * @ticket 40878
-	 * @covers ::get_item_schema
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
 		wp_set_current_user( self::$admin_id );
 		$request    = new WP_REST_Request( 'OPTIONS', '/wp/v2/menu-locations' );
@@ -228,10 +211,10 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_items
-	 * @covers ::get_items_permissions_check
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_items' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_items_permissions_check' )]
 	public function test_get_items_menu_location_context_without_permission() {
 		wp_set_current_user( 0 );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/menu-locations' );
@@ -241,10 +224,10 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * @ticket 40878
-	 * @covers ::get_item
-	 * @covers ::get_item_permissions_check
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item_permissions_check' )]
 	public function test_get_item_menu_location_context_without_permission() {
 		$menu = 'primary';
 		$this->register_nav_menu_locations( array( $menu ) );

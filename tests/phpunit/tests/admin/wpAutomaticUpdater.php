@@ -1,11 +1,8 @@
 <?php
 
-/**
- * @group admin
- * @group upgrade
- *
- * @covers WP_Automatic_Updater
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'upgrade' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Automatic_Updater::class )]
 class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	/**
 	 * An instance of WP_Automatic_Updater.
@@ -44,16 +41,16 @@ class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	 * Tests that `WP_Automatic_Updater::send_plugin_theme_email()` appends
 	 * plugin URLs.
 	 *
-	 * @ticket 53049
 	 *
-	 * @covers WP_Automatic_Updater::send_plugin_theme_email
 	 *
-	 * @dataProvider data_send_plugin_theme_email_should_append_plugin_urls
 	 *
 	 * @param string[] $urls       The URL(s) to search for. Must not be empty.
 	 * @param object[] $successful An array of successful plugin update objects.
 	 * @param object[] $failed     An array of failed plugin update objects.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53049' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_send_plugin_theme_email_should_append_plugin_urls' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Automatic_Updater', 'send_plugin_theme_email' )]
 	public function test_send_plugin_theme_email_should_append_plugin_urls( $urls, $successful, $failed ) {
 		add_filter(
 			'wp_mail',
@@ -87,7 +84,7 @@ class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_send_plugin_theme_email_should_append_plugin_urls() {
+	public static function data_send_plugin_theme_email_should_append_plugin_urls() {
 		return array(
 			'successful updates, the current version and the plugin url'       => array(
 				'urls'       => array( 'http://example.org/successful-plugin' ),
@@ -312,16 +309,16 @@ class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	 * Tests that `WP_Automatic_Updater::send_plugin_theme_email()` does not
 	 * append plugin URLs.
 	 *
-	 * @ticket 53049
 	 *
-	 * @covers WP_Automatic_Updater::send_plugin_theme_email
 	 *
-	 * @dataProvider data_send_plugin_theme_email_should_not_append_plugin_urls
 	 *
 	 * @param string[] $urls       The URL(s) to search for. Must not be empty.
 	 * @param object[] $successful An array of successful plugin update objects.
 	 * @param object[] $failed     An array of failed plugin update objects.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53049' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_send_plugin_theme_email_should_not_append_plugin_urls' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Automatic_Updater', 'send_plugin_theme_email' )]
 	public function test_send_plugin_theme_email_should_not_append_plugin_urls( $urls, $successful, $failed ) {
 		add_filter(
 			'wp_mail',
@@ -355,7 +352,7 @@ class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_send_plugin_theme_email_should_not_append_plugin_urls() {
+	public static function data_send_plugin_theme_email_should_not_append_plugin_urls() {
 		return array(
 			'successful updates, the current version, but no plugin url'    => array(
 				'urls'       => array( 'http://example.org/successful-plugin' ),
@@ -580,10 +577,10 @@ class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	 * Tests that `WP_Automatic_Updater::is_allowed_dir()` returns true
 	 * when the `open_basedir` directive is not set.
 	 *
-	 * @ticket 42619
 	 *
-	 * @covers WP_Automatic_Updater::is_allowed_dir
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42619' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Automatic_Updater', 'is_allowed_dir' )]
 	public function test_is_allowed_dir_should_return_true_if_open_basedir_is_not_set() {
 		$this->assertTrue( self::$updater->is_allowed_dir( ABSPATH ) );
 	}
@@ -599,13 +596,13 @@ class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	 * "Serialization of 'Closure' is not allowed" when running in
 	 * a separate process.
 	 *
-	 * @ticket 42619
 	 *
-	 * @covers WP_Automatic_Updater::is_allowed_dir
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42619' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Automatic_Updater', 'is_allowed_dir' )]
 	public function test_is_allowed_dir_should_return_true_if_open_basedir_is_set_and_path_is_allowed() {
 		// The repository for PHPUnit and test suite resources.
 		$abspath_parent      = trailingslashit( dirname( ABSPATH ) );
@@ -634,13 +631,13 @@ class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	 * "Serialization of 'Closure' is not allowed" when running in
 	 * a separate process.
 	 *
-	 * @ticket 42619
 	 *
-	 * @covers WP_Automatic_Updater::is_allowed_dir
 	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42619' )]
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+	#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Automatic_Updater', 'is_allowed_dir' )]
 	public function test_is_allowed_dir_should_return_false_if_open_basedir_is_set_and_path_is_not_allowed() {
 		// The repository for PHPUnit and test suite resources.
 		$abspath_parent      = trailingslashit( dirname( ABSPATH ) );
@@ -662,16 +659,16 @@ class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	 * Tests that `WP_Automatic_Updater::is_allowed_dir()` throws `_doing_it_wrong()`
 	 * when an invalid `$dir` argument is provided.
 	 *
-	 * @ticket 42619
 	 *
-	 * @covers WP_Automatic_Updater::is_allowed_dir
 	 *
 	 * @expectedIncorrectUsage WP_Automatic_Updater::is_allowed_dir
 	 *
-	 * @dataProvider data_is_allowed_dir_should_throw_doing_it_wrong_with_invalid_dir
 	 *
 	 * @param mixed $dir The directory to check.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42619' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_allowed_dir_should_throw_doing_it_wrong_with_invalid_dir' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Automatic_Updater', 'is_allowed_dir' )]
 	public function test_is_allowed_dir_should_throw_doing_it_wrong_with_invalid_dir( $dir ) {
 		$this->assertFalse( self::$updater->is_allowed_dir( $dir ) );
 	}
@@ -681,7 +678,7 @@ class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_is_allowed_dir_should_throw_doing_it_wrong_with_invalid_dir() {
+	public static function data_is_allowed_dir_should_throw_doing_it_wrong_with_invalid_dir() {
 		return array(
 			// Type checks and boolean comparisons.
 			'null'                              => array( 'dir' => null ),
@@ -714,22 +711,21 @@ class Tests_Admin_WpAutomaticUpdater extends WP_UnitTestCase {
 	 * Tests that `WP_Automatic_Updater::is_vcs_checkout()` returns `false`
 	 * when none of the checked directories are allowed.
 	 *
-	 * @ticket 58563
 	 *
-	 * @covers WP_Automatic_Updater::is_vcs_checkout
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58563' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Automatic_Updater', 'is_vcs_checkout' )]
 	public function test_is_vcs_checkout_should_return_false_when_no_directories_are_allowed() {
-		$updater_mock = $this->getMockBuilder( 'WP_Automatic_Updater' )
-			// Note: setMethods() is deprecated in PHPUnit 9, but still supported.
-			->setMethods( array( 'is_allowed_dir' ) )
-			->getMock();
+		$updater_mock = $this->getStubBuilder( 'WP_Automatic_Updater' )
+			->onlyMethods( array( 'is_allowed_dir' ) )
+			->getStub();
 
 		/*
 		 * As none of the directories should be allowed, simply mocking `WP_Automatic_Updater`
 		 * and forcing `::is_allowed_dir()` to return `false` removes the need to run the test
 		 * in a separate process due to setting the `open_basedir` PHP directive.
 		 */
-		$updater_mock->expects( $this->any() )->method( 'is_allowed_dir' )->willReturn( false );
+		$updater_mock->method( 'is_allowed_dir' )->willReturn( false );
 
 		$this->assertFalse( $updater_mock->is_vcs_checkout( get_temp_dir() ) );
 	}

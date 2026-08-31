@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group admin
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 
 	private static $options;
@@ -24,6 +24,7 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 		$sitemeta = self::$sitemeta;
 
 		require_once ABSPATH . 'wp-admin/includes/schema.php';
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 		$charset_collate  = $wpdb->get_charset_collate();
 		$max_index_length = 191;
@@ -88,9 +89,9 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44893
-	 * @dataProvider data_populate_options
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44893' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_populate_options' )]
 	public function test_populate_options( $options, $expected ) {
 		global $wpdb;
 
@@ -113,7 +114,7 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 		$this->assertSame( $expected, $results );
 	}
 
-	public function data_populate_options() {
+	public static function data_populate_options() {
 		return array(
 			array(
 				array(),
@@ -180,8 +181,8 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 	/**
 	 * Ensures that deprecated timezone strings set as a default in a translation are handled correctly.
 	 *
-	 * @ticket 56468
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56468' )]
 	public function test_populate_options_when_locale_uses_deprecated_timezone_string() {
 		global $wpdb;
 
@@ -219,11 +220,11 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44896
-	 * @group multisite
-	 * @group ms-required
-	 * @dataProvider data_populate_site_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44896' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_populate_site_meta' )]
 	public function test_populate_site_meta( $meta, $expected ) {
 		global $wpdb;
 
@@ -244,7 +245,7 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 		$this->assertSame( $expected, $results );
 	}
 
-	public function data_populate_site_meta() {
+	public static function data_populate_site_meta() {
 		return array(
 			array(
 				array(),
@@ -264,10 +265,10 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44895
-	 * @group multisite
-	 * @dataProvider data_populate_network_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44895' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_populate_network_meta' )]
 	public function test_populate_network_meta( $meta, $expected ) {
 		global $wpdb;
 
@@ -292,7 +293,7 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 		$this->assertSame( $expected, $results );
 	}
 
-	public function data_populate_network_meta() {
+	public static function data_populate_network_meta() {
 		return array(
 			array(
 				array(),

@@ -7,14 +7,15 @@
  *
  * @since 5.3.3
  *
- * @group blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+
 class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	/**
 	 * Ensure there are no issues with special character encoding.
 	 *
-	 * @ticket 63917
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63917' )]
 	public function test_attribute_encoding() {
 		$block = array(
 			'blockName'    => 'test',
@@ -36,12 +37,12 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_serialize_identity_from_parsed
 	 *
 	 * @param string $original Original block markup.
 	 *
-	 * @ticket 63917
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_serialize_identity_from_parsed' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63917' )]
 	public function test_serialize_identity_from_parsed( $original ) {
 		$blocks = parse_blocks( $original );
 
@@ -91,13 +92,13 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	 * @see https://github.com/WordPress/wordpress-develop/pull/9558
 	 * @see https://github.com/WordPress/gutenberg/pull/71291
 	 *
-	 * @ticket 63917
 	 *
-	 * @dataProvider data_serialize_compatible_forms
 	 *
 	 * @param string $before Previous serialization form.
 	 * @param string $after  New serialization form.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63917' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_serialize_compatible_forms' )]
 	public function test_older_serialization_is_compatible( string $before, string $after ) {
 		$this->assertNotSame( $before, $after, 'The same serialization should not be provided for before and after.' );
 		$blocks = parse_blocks( $before );
@@ -127,11 +128,11 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59327
-	 * @ticket 59412
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59327' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59412' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_pre_callback_modifies_current_block() {
 		$markup = "<!-- wp:outer --><!-- wp:inner {\"key\":\"value\"} -->Example.<!-- /wp:inner -->\n\nExample.\n\n<!-- wp:void /--><!-- /wp:outer -->";
 		$blocks = parse_blocks( $markup );
@@ -145,10 +146,10 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59669
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59669' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_post_callback_modifies_current_block() {
 		$markup = "<!-- wp:outer --><!-- wp:inner {\"key\":\"value\"} -->Example.<!-- /wp:inner -->\n\nExample.\n\n<!-- wp:void /--><!-- /wp:outer -->";
 		$blocks = parse_blocks( $markup );
@@ -168,10 +169,10 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_pre_callback_prepends_to_inner_block() {
 		$markup = "<!-- wp:outer --><!-- wp:inner {\"key\":\"value\"} -->Example.<!-- /wp:inner -->\n\nExample.\n\n<!-- wp:void /--><!-- /wp:outer -->";
 		$blocks = parse_blocks( $markup );
@@ -185,10 +186,10 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_post_callback_appends_to_inner_block() {
 		$markup = "<!-- wp:outer --><!-- wp:inner {\"key\":\"value\"} -->Example.<!-- /wp:inner -->\n\nExample.\n\n<!-- wp:void /--><!-- /wp:outer -->";
 		$blocks = parse_blocks( $markup );
@@ -210,10 +211,10 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_pre_callback_prepends_to_child_blocks() {
 		$markup = "<!-- wp:outer --><!-- wp:inner {\"key\":\"value\"} -->Example.<!-- /wp:inner -->\n\nExample.\n\n<!-- wp:void /--><!-- /wp:outer -->";
 		$blocks = parse_blocks( $markup );
@@ -227,10 +228,10 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_post_callback_appends_to_child_blocks() {
 		$markup = "<!-- wp:outer --><!-- wp:inner {\"key\":\"value\"} -->Example.<!-- /wp:inner -->\n\nExample.\n\n<!-- wp:void /--><!-- /wp:outer -->";
 		$blocks = parse_blocks( $markup );
@@ -258,10 +259,10 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_pre_callback_prepends_if_prev_block() {
 		$markup = "<!-- wp:outer --><!-- wp:inner {\"key\":\"value\"} -->Example.<!-- /wp:inner -->\n\nExample.\n\n<!-- wp:void /--><!-- /wp:outer -->";
 		$blocks = parse_blocks( $markup );
@@ -275,10 +276,10 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_post_callback_appends_if_prev_block() {
 		$markup = "<!-- wp:outer --><!-- wp:inner {\"key\":\"value\"} -->Example.<!-- /wp:inner -->\n\nExample.\n\n<!-- wp:void /--><!-- /wp:outer -->";
 		$blocks = parse_blocks( $markup );
@@ -306,15 +307,15 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59327
-	 * @ticket 59412
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 *
-	 * @dataProvider data_serialize_identity_from_parsed
 	 *
 	 * @param string $original Original block markup.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59327' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59412' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_serialize_identity_from_parsed' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_identity_from_parsed( $original ) {
 		$blocks = parse_blocks( $original );
 
@@ -324,10 +325,10 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_do_not_insert_in_void_block() {
 		$markup = '<!-- wp:void /-->';
 		$blocks = parse_blocks( $markup );
@@ -342,10 +343,10 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59313
 	 *
-	 * @covers ::traverse_and_serialize_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_do_not_insert_in_empty_parent_block() {
 		$markup = '<!-- wp:outer --><div class="wp-block-outer"></div><!-- /wp:outer -->';
 		$blocks = parse_blocks( $markup );

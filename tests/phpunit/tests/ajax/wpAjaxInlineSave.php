@@ -8,17 +8,17 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 /**
  * Testing Quick Edit AJAX functionality.
  *
- * @group ajax
  *
- * @covers ::wp_ajax_inline_save
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'edit_post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_inline_save' )]
 class Tests_Ajax_wpAjaxInlineSave extends WP_Ajax_UnitTestCase {
 
 	/**
-	 * @ticket 26948
 	 *
-	 * @covers ::edit_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26948' )]
 	public function test_dont_process_terms_if_taxonomy_does_not_allow_show_on_quick_edit() {
 		register_taxonomy(
 			'wptests_tax_1',
@@ -91,10 +91,9 @@ class Tests_Ajax_wpAjaxInlineSave extends WP_Ajax_UnitTestCase {
 	/**
 	 * When updating a draft in quick edit mode, it should not set the publish date of the post if the date passed is unchanged.
 	 *
-	 * @ticket 19907
 	 *
-	 * @covers ::edit_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19907' )]
 	public function test_quick_edit_draft_should_not_set_publish_date() {
 		// Become an administrator.
 		$this->_setRole( 'administrator' );
@@ -148,10 +147,9 @@ class Tests_Ajax_wpAjaxInlineSave extends WP_Ajax_UnitTestCase {
 	/**
 	 * When updating a draft in quick edit mode, it should set the publish date of the post if there is a new date set.
 	 *
-	 * @ticket 59125
 	 *
-	 * @covers ::edit_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59125' )]
 	public function test_quick_edit_draft_should_set_publish_date() {
 		// Become an administrator.
 		$this->_setRole( 'administrator' );

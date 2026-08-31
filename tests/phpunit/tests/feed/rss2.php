@@ -6,8 +6,9 @@
  * we're using a real XML parser, this confirms that the feed is valid, well formed,
  * and contains the right stuff.
  *
- * @group feed
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'feed' )]
 class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	public static $user_id;
 	public static $posts;
@@ -163,8 +164,8 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	/**
 	 * Test that translated feeds have a valid listed date.
 	 *
-	 * @ticket 39141
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39141' )]
 	public function test_channel_pubdate_element_translated() {
 		$original_locale = $GLOBALS['wp_locale'];
 		/* @var WP_Locale $locale */
@@ -277,8 +278,8 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 9134
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '9134' )]
 	public function test_items_comments_closed() {
 		add_filter( 'comments_open', '__return_false' );
 
@@ -314,8 +315,8 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	 * Check to make sure we are rendering feed templates for the home feed.
 	 * e.g. https://example.com/feed/
 	 *
-	 * @ticket 30210
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30210' )]
 	public function test_valid_home_feed_endpoint() {
 		// An example of a valid home feed endpoint.
 		$this->go_to( 'feed/' );
@@ -342,8 +343,8 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	 * Check to make sure we are rendering feed templates for the taxonomy feeds.
 	 * e.g. https://example.com/category/foo/feed/
 	 *
-	 * @ticket 30210
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30210' )]
 	public function test_valid_taxonomy_feed_endpoint() {
 		// An example of an valid taxonomy feed endpoint.
 		$this->go_to( 'category/foo/feed/' );
@@ -370,8 +371,8 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	 * Check to make sure we are rendering feed templates for the main comment feed.
 	 * e.g. https://example.com/comments/feed/
 	 *
-	 * @ticket 30210
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30210' )]
 	public function test_valid_main_comment_feed_endpoint() {
 		// Generate a bunch of comments.
 		foreach ( self::$posts as $post ) {
@@ -403,8 +404,8 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	 * Check to make sure we are rendering feed templates for the date archive feeds.
 	 * e.g. https://example.com/2003/05/27/feed/
 	 *
-	 * @ticket 30210
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30210' )]
 	public function test_valid_archive_feed_endpoint() {
 		// An example of an valid date archive feed endpoint.
 		$this->go_to( '2003/05/27/feed/' );
@@ -431,8 +432,8 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	 * Check to make sure we are rendering feed templates for single post comment feeds.
 	 * e.g. https://example.com/2003/05/27/post-name/feed/
 	 *
-	 * @ticket 30210
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30210' )]
 	public function test_valid_single_post_comment_feed_endpoint() {
 		// An example of an valid date archive feed endpoint.
 		$this->go_to( get_post_comments_feed_link( self::$posts[0] ) );
@@ -459,8 +460,8 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	 * Check to make sure we are rendering feed templates for the search archive feeds.
 	 * e.g. https://example.com/?s=Lorem&feed=rss
 	 *
-	 * @ticket 30210
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30210' )]
 	public function test_valid_search_feed_endpoint() {
 		// An example of an valid search feed endpoint.
 		$this->go_to( '?s=Lorem&feed=rss' );
@@ -486,10 +487,10 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	/**
 	 * Test <rss> element has correct last build date.
 	 *
-	 * @ticket 4575
 	 *
-	 * @dataProvider data_get_feed_build_date
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '4575' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_feed_build_date' )]
 	public function test_get_feed_build_date( $url, $element ) {
 		$this->go_to( $url );
 		$feed = $this->do_rss2();
@@ -502,7 +503,7 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	}
 
 
-	public function data_get_feed_build_date() {
+	public static function data_get_feed_build_date() {
 		return array(
 			array( '/?feed=rss2', 'rss' ),
 			array( '/?feed=commentsrss2', 'rss' ),
@@ -513,10 +514,10 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	 * Test that the Last-Modified is a post's date when a more recent comment exists,
 	 * but the "withcomments=1" query var is not passed.
 	 *
-	 * @ticket 47968
 	 *
-	 * @covers WP::send_headers
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47968' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP', 'send_headers' )]
 	public function test_feed_last_modified_should_be_a_post_date_when_withcomments_is_not_passed() {
 		$last_week = gmdate( 'Y-m-d H:i:s', strtotime( '-1 week' ) );
 		$yesterday = gmdate( 'Y-m-d H:i:s', strtotime( '-1 day' ) );
@@ -552,10 +553,10 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	 * Test that the Last-Modified is a comment's date when a more recent comment exists,
 	 * and the "withcomments=1" query var is passed.
 	 *
-	 * @ticket 47968
 	 *
-	 * @covers WP::send_headers
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47968' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP', 'send_headers' )]
 	public function test_feed_last_modified_should_be_the_date_of_a_comment_that_is_the_latest_update_when_withcomments_is_passed() {
 		$last_week = gmdate( 'Y-m-d H:i:s', strtotime( '-1 week' ) );
 		$yesterday = gmdate( 'Y-m-d H:i:s', strtotime( '-1 day' ) );
@@ -591,10 +592,10 @@ class Tests_Feed_RSS2 extends WP_UnitTestCase {
 	 * Test that the Last-Modified is the latest post's date when an earlier post and comment exist,
 	 * and the "withcomments=1" query var is passed.
 	 *
-	 * @ticket 47968
 	 *
-	 * @covers WP::send_headers
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47968' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP', 'send_headers' )]
 	public function test_feed_last_modified_should_be_the_date_of_a_post_that_is_the_latest_update_when_withcomments_is_passed() {
 		$last_week = gmdate( 'Y-m-d H:i:s', strtotime( '-1 week' ) );
 		$yesterday = gmdate( 'Y-m-d H:i:s', strtotime( '-1 day' ) );

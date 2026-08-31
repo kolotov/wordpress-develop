@@ -9,10 +9,10 @@
 /**
  * Test Atom Syndication Format.
  *
- * @requires extension xml
  *
- * @covers AtomParser::parse
  */
+#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'xml' )]
+#[\PHPUnit\Framework\Attributes\CoversNothing]
 final class AtomParser_Parse_Test extends WP_UnitTestCase {
 
 	/**

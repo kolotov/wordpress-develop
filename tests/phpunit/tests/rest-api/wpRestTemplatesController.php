@@ -5,10 +5,24 @@
  * @package WordPress
  * @subpackage REST API
  *
- * @covers WP_REST_Templates_Controller
  *
- * @group restapi
+
  */
+#[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
+
+
+
+
+
+
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Templates_Controller::class )]
 class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testcase {
 	/**
 	 * @var int
@@ -99,10 +113,10 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::register_routes
-	 * @ticket 54596
-	 * @ticket 56467
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54596' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
 		$this->assertArrayHasKey(
@@ -123,8 +137,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::get_context_param
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_context_param' )]
 	public function test_context_param() {
 		// Collection.
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/templates' );
@@ -141,8 +155,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::get_items
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_items' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/templates' );
@@ -177,10 +191,10 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 56481
 	 *
-	 * @covers WP_REST_Templates_Controller::get_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_items' )]
 	public function test_get_items_should_return_no_response_body_for_head_requests() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'HEAD', '/wp/v2/templates' );
@@ -190,11 +204,11 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @dataProvider data_head_request_with_specified_fields_returns_success_response
-	 * @ticket 56481
 	 *
 	 * @param string $path The path to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_head_request_with_specified_fields_returns_success_response' )]
 	public function test_head_request_with_specified_fields_returns_success_response( $path ) {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'HEAD', $path );
@@ -221,8 +235,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::get_items
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_items' )]
 	public function test_get_items_editor() {
 		wp_set_current_user( self::$editor_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/templates' );
@@ -257,8 +271,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::get_items
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_items' )]
 	public function test_get_items_no_permission_subscriber() {
 		wp_set_current_user( self::$subscriber_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/templates' );
@@ -267,8 +281,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::get_items
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_items' )]
 	public function test_get_items_no_permission() {
 		wp_set_current_user( 0 );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/templates' );
@@ -277,8 +291,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::get_item
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_item' )]
 	public function test_get_item() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/templates/default//my_template' );
@@ -315,11 +329,11 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 56481
 	 *
-	 * @covers WP_REST_Templates_Controller::get_item
-	 * @covers WP_REST_Templates_Controller::prepare_item_for_response
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'prepare_item_for_response' )]
 	public function test_get_item_should_return_no_response_body_for_head_requests() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'HEAD', '/wp/v2/templates/default//my_template' );
@@ -329,8 +343,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::get_item
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_item' )]
 	public function test_get_item_editor() {
 		wp_set_current_user( self::$editor_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/templates/default//my_template' );
@@ -367,8 +381,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::get_item
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_item' )]
 	public function test_get_item_subscriber() {
 		wp_set_current_user( self::$subscriber_id );
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/templates/default//my_template' );
@@ -377,9 +391,10 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 54507
-	 * @dataProvider data_get_item_works_with_a_single_slash
+
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54507' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_item_works_with_a_single_slash' )]
 	public function test_get_item_works_with_a_single_slash( $endpoint_url ) {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'GET', $endpoint_url );
@@ -416,7 +431,7 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 		);
 	}
 
-	public function data_get_item_works_with_a_single_slash() {
+	public static function data_get_item_works_with_a_single_slash() {
 		return array(
 			array( '/wp/v2/templates/default/my_template' ),
 			array( '/wp/v2/templates/default//my_template' ),
@@ -424,14 +439,14 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @dataProvider data_get_item_with_valid_theme_dirname
-	 * @covers WP_REST_Templates_Controller::get_item
-	 * @ticket 54596
 	 *
 	 * @param string $theme_dir Theme directory to test.
 	 * @param string $template  Template to test.
 	 * @param array  $args      Arguments to create the 'wp_template" post.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54596' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_item_with_valid_theme_dirname' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_item' )]
 	public function test_get_item_with_valid_theme_dirname( $theme_dir, $template, array $args ) {
 		wp_set_current_user( self::$admin_id );
 		switch_theme( $theme_dir );
@@ -485,7 +500,7 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	 *
 	 * @return array
 	 */
-	public function data_get_item_with_valid_theme_dirname() {
+	public static function data_get_item_with_valid_theme_dirname() {
 		$theme_root_dir = DIR_TESTDATA . '/themedir1/';
 		return array(
 			'template parts: parent theme'                => array(
@@ -594,10 +609,10 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	/**
 	 * Tests that get_item() returns plugin-registered templates.
 	 *
-	 * @ticket 61804
 	 *
-	 * @covers WP_REST_Templates_Controller::get_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61804' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_item' )]
 	public function test_get_item_from_registry() {
 		wp_set_current_user( self::$admin_id );
 
@@ -642,9 +657,9 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	 * A file-backed template has no publication or modification date, which should
 	 * be exposed as `null` rather than the `false` returned by `mysql_to_rfc3339()`.
 	 *
-	 * @ticket 65728
-	 * @covers WP_REST_Templates_Controller::prepare_item_for_response
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65728' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'prepare_item_for_response' )]
 	public function test_get_item_dates_are_null_for_file_backed_template() {
 		wp_set_current_user( self::$admin_id );
 		switch_theme( 'block-theme' );
@@ -659,9 +674,10 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 54507
-	 * @dataProvider data_sanitize_template_id
+
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54507' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_template_id' )]
 	public function test_sanitize_template_id( $input_id, $sanitized_id ) {
 		$endpoint = new WP_REST_Templates_Controller( 'wp_template' );
 		$this->assertSame(
@@ -670,7 +686,7 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 		);
 	}
 
-	public function data_sanitize_template_id() {
+	public static function data_sanitize_template_id() {
 		return array(
 			array( 'tt1-blocks/index', 'tt1-blocks//index' ),
 			array( 'tt1-blocks//index', 'tt1-blocks//index' ),
@@ -681,9 +697,9 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 54422
-	 * @covers WP_REST_Templates_Controller::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54422' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'create_item' )]
 	public function test_create_item() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'POST', '/wp/v2/templates' );
@@ -735,10 +751,10 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 54680
-	 * @covers WP_REST_Templates_Controller::create_item
-	 * @covers WP_REST_Templates_Controller::get_item_schema
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54680' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'create_item' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_item_schema' )]
 	public function test_create_item_with_numeric_slug() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'POST', '/wp/v2/templates' );
@@ -789,9 +805,9 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 54422
-	 * @covers WP_REST_Templates_Controller::create_item
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54422' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'create_item' )]
 	public function test_create_item_raw() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'POST', '/wp/v2/templates' );
@@ -863,8 +879,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::update_item
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'update_item' )]
 	public function test_update_item() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'PUT', '/wp/v2/templates/default//my_template' );
@@ -880,8 +896,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::update_item
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'update_item' )]
 	public function test_update_item_raw() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'PUT', '/wp/v2/templates/default//my_template' );
@@ -897,8 +913,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::delete_item
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'delete_item' )]
 	public function test_delete_item() {
 		// Set up template post.
 		$args    = array(
@@ -926,8 +942,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::delete_item
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'delete_item' )]
 	public function test_delete_item_skip_trash() {
 		// Set up template post.
 		$args    = array(
@@ -956,8 +972,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @covers WP_REST_Templates_Controller::delete_item
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'delete_item' )]
 	public function test_delete_item_fail() {
 		wp_set_current_user( self::$admin_id );
 		$request  = new WP_REST_Request( 'DELETE', '/wp/v2/templates/justrandom//template' );
@@ -966,8 +982,8 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @doesNotPerformAssertions
 	 */
+	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_prepare_item() {
 		// Controller does not implement prepare_item().
 	}
@@ -991,9 +1007,9 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 54422
-	 * @covers WP_REST_Templates_Controller::get_item_schema
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54422' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
 		$request    = new WP_REST_Request( 'OPTIONS', '/wp/v2/templates' );
 		$response   = rest_get_server()->dispatch( $request );
@@ -1035,13 +1051,13 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @dataProvider data_create_item_with_is_wp_suggestion
-	 * @ticket 56467
-	 * @covers WP_REST_Templates_Controller::create_item
 	 *
 	 * @param array $body_params Data set to test.
 	 * @param array $expected    Expected results.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_create_item_with_is_wp_suggestion' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'create_item' )]
 	public function test_create_item_with_is_wp_suggestion( array $body_params, array $expected ) {
 		// Set up the user.
 		$body_params['author'] = self::$admin_id;
@@ -1070,7 +1086,7 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	 *
 	 * @return array
 	 */
-	public function data_create_item_with_is_wp_suggestion() {
+	public static function data_create_item_with_is_wp_suggestion() {
 		$expected = array(
 			'id'             => 'default//page-rigas',
 			'theme'          => 'default',
@@ -1126,9 +1142,9 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 56467
-	 * @covers WP_REST_Templates_Controller::get_template_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_template_fallback' )]
 	public function test_get_template_fallback() {
 		wp_set_current_user( self::$admin_id );
 		switch_theme( 'block-theme' );
@@ -1155,23 +1171,24 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 60909
-	 * @covers WP_REST_Templates_Controller::get_template_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60909' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'get_template_fallback' )]
 	public function test_get_template_fallback_not_found() {
 		wp_set_current_user( self::$admin_id );
 		$request = new WP_REST_Request( 'GET', '/wp/v2/templates/lookup' );
 		$request->set_param( 'slug', 'not-found' );
 		$response = rest_get_server()->dispatch( $request );
 		$data     = $response->get_data();
-		$this->assertEquals( new stdClass(), $data, 'Response should be an empty object when a fallback template is not found.' );
+		$this->assertInstanceOf( stdClass::class, $data, 'Response should be an object when a fallback template is not found.' );
+		$this->assertSame( array(), get_object_vars( $data ), 'Response object should have no properties when a fallback template is not found.' );
 	}
 
 	/**
-	 * @ticket 57851
 	 *
-	 * @covers WP_REST_Templates_Controller::prepare_item_for_database
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57851' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'prepare_item_for_database' )]
 	public function test_prepare_item_for_database() {
 		$endpoint = new WP_REST_Templates_Controller( 'wp_template_part' );
 
@@ -1210,11 +1227,11 @@ class Tests_REST_WpRestTemplatesController extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * @ticket 60671
 	 *
-	 * @covers WP_REST_Templates_Controller::prepare_item_for_database
-	 * @covers inject_ignored_hooked_blocks_metadata_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60671' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Templates_Controller', 'prepare_item_for_database' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'inject_ignored_hooked_blocks_metadata_attributes' )]
 	public function test_prepare_item_for_database_injects_hooked_block() {
 		register_block_type(
 			'tests/hooked-block',

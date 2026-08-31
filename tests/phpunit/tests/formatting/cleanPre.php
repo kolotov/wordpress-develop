@@ -4,11 +4,11 @@
  * The clean_pre() removes paragraph and line break
  * tags within `<pre>` elements as part of wpautop().
  *
- * @group formatting
  * @expectedDeprecated clean_pre
  *
- * @covers ::clean_pre
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Formatting_CleanPre extends WP_UnitTestCase {
 
 	public function test_removes_self_closing_br_with_space() {

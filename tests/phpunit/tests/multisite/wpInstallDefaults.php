@@ -4,14 +4,14 @@
  * Saving network settings without altering starter content ( first page, post, and comment ) shouldn't affect
  * the way it is added to new sites.
  *
- * @group ms-required
- * @group ms-site
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_wpInstallDefaults extends WP_UnitTestCase {
 	/**
-	 * @ticket 40036
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40036' )]
 	public function test_option_should_not_be_empty_by_default() {
 		$blog_id = self::factory()->blog->create();
 
@@ -29,8 +29,8 @@ class Tests_Multisite_wpInstallDefaults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40036
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40036' )]
 	public function test_empty_option_should_fall_back_to_default() {
 		/*
 		 * Update first_page / first_comment options,
@@ -55,8 +55,8 @@ class Tests_Multisite_wpInstallDefaults extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40036
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40036' )]
 	public function test_non_default_option_values() {
 		/*
 		 * Update first_page / first_comment options,

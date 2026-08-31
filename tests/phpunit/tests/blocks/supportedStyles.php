@@ -6,8 +6,9 @@
  * @subpackage Blocks
  * @since 5.6.0
  *
- * @group blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+
 class Tests_Blocks_SupportedStyles extends WP_UnitTestCase {
 
 	/**
@@ -30,10 +31,19 @@ class Tests_Blocks_SupportedStyles extends WP_UnitTestCase {
 	 */
 	private $registered_block_names = array();
 
+	private $original_block_to_render;
+
+	public function set_up() {
+		parent::set_up();
+		$this->original_block_to_render = WP_Block_Supports::$block_to_render;
+	}
+
 	/**
 	 * Tear down each test method.
 	 */
 	public function tear_down() {
+		WP_Block_Supports::$block_to_render = $this->original_block_to_render;
+
 		while ( ! empty( $this->registered_block_names ) ) {
 			$block_name = array_pop( $this->registered_block_names );
 			unregister_block_type( $block_name );
@@ -753,16 +763,16 @@ class Tests_Blocks_SupportedStyles extends WP_UnitTestCase {
 	 * Ensures that style, class, id, and aria-label attributes are correctly merged or overridden
 	 * in get_block_wrapper_attributes().
 	 *
-	 * @ticket 64603
-	 * @covers ::get_block_wrapper_attributes
 	 *
-	 * @dataProvider data_get_block_wrapper_attributes_merge_or_override
 	 *
 	 * @param array<string, mixed>  $block_type_settings
 	 * @param array<string, mixed>  $block_attrs
 	 * @param array<string, string> $extra_attributes
 	 * @param string                $expected_attribute
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64603' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_block_wrapper_attributes_merge_or_override' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_block_wrapper_attributes' )]
 	public function test_get_block_wrapper_attributes_merge_and_override( array $block_type_settings, array $block_attrs, array $extra_attributes, string $expected_attribute ): void {
 		$block_name          = 'core/example';
 		$block_type_settings = array_merge(
@@ -800,7 +810,7 @@ class Tests_Blocks_SupportedStyles extends WP_UnitTestCase {
 	 *      expected_attribute: string
 	 *  }> Array of test cases.
 	 */
-	public function data_get_block_wrapper_attributes_merge_or_override(): array {
+	public static function data_get_block_wrapper_attributes_merge_or_override(): array {
 		return array(
 			'extra style attributes are merged with block values' => array(
 				'block_type_settings' => array(

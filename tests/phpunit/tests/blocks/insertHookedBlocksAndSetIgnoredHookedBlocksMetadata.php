@@ -7,11 +7,11 @@
  *
  * @since 6.6.0
  *
- * @group blocks
- * @group block-hooks
  *
- * @covers ::insert_hooked_blocks_and_set_ignored_hooked_blocks_metadata
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\Group( 'block-hooks' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'insert_hooked_blocks_and_set_ignored_hooked_blocks_metadata' )]
 class Tests_Blocks_InsertHookedBlocksAndSetIgnoredHookedBlocksMetadata extends WP_UnitTestCase {
 	const ANCHOR_BLOCK_TYPE       = 'tests/anchor-block';
 	const HOOKED_BLOCK_TYPE       = 'tests/hooked-block';
@@ -25,7 +25,6 @@ class Tests_Blocks_InsertHookedBlocksAndSetIgnoredHookedBlocksMetadata extends W
 	);
 
 	/**
-	 * @ticket 59574
 	 */
 	private static function create_block_template_object() {
 		$template              = new WP_Block_Template();
@@ -41,8 +40,8 @@ class Tests_Blocks_InsertHookedBlocksAndSetIgnoredHookedBlocksMetadata extends W
 	}
 
 	/**
-	 * @ticket 59574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59574' )]
 	public function test_insert_hooked_blocks_and_set_ignored_hooked_blocks_metadata_returns_correct_markup_and_sets_metadata() {
 		$anchor_block = array(
 			'blockName' => self::ANCHOR_BLOCK_TYPE,
@@ -62,8 +61,8 @@ class Tests_Blocks_InsertHookedBlocksAndSetIgnoredHookedBlocksMetadata extends W
 	}
 
 	/**
-	 * @ticket 59574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59574' )]
 	public function test_insert_hooked_blocks_and_set_ignored_hooked_blocks_metadata_if_block_is_ignored() {
 		$anchor_block = array(
 			'blockName' => 'tests/anchor-block',
@@ -88,8 +87,8 @@ class Tests_Blocks_InsertHookedBlocksAndSetIgnoredHookedBlocksMetadata extends W
 	}
 
 	/**
-	 * @ticket 59574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59574' )]
 	public function test_insert_hooked_blocks_and_set_ignored_hooked_blocks_metadata_if_other_block_is_ignored() {
 		$anchor_block = array(
 			'blockName' => 'tests/anchor-block',
@@ -119,8 +118,8 @@ class Tests_Blocks_InsertHookedBlocksAndSetIgnoredHookedBlocksMetadata extends W
 	}
 
 	/**
-	 * @ticket 59574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59574' )]
 	public function test_insert_hooked_blocks_and_set_ignored_hooked_blocks_metadata_filter_can_suppress_hooked_block() {
 		$anchor_block = array(
 			'blockName'    => self::ANCHOR_BLOCK_TYPE,
@@ -160,8 +159,8 @@ class Tests_Blocks_InsertHookedBlocksAndSetIgnoredHookedBlocksMetadata extends W
 	}
 
 	/**
-	 * @ticket 59574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59574' )]
 	public function test_insert_hooked_blocks_and_set_ignored_hooked_blocks_metadata_added_by_context_aware_filter() {
 		$anchor_block = array(
 			'blockName' => 'tests/anchor-block',
@@ -203,8 +202,8 @@ class Tests_Blocks_InsertHookedBlocksAndSetIgnoredHookedBlocksMetadata extends W
 	}
 
 	/**
-	 * @ticket 59574
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59574' )]
 	public function test_insert_hooked_blocks_and_set_ignored_hooked_blocks_metadata_for_block_suppressed_by_filter() {
 		$anchor_block = array(
 			'blockName' => 'tests/anchor-block',

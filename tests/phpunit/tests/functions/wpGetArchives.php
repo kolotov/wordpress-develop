@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group functions
  *
- * @covers ::wp_get_archives
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_archives' )]
 class Tests_Functions_wpGetArchives extends WP_UnitTestCase {
 	protected static $post_ids;
 	protected $month_url;
@@ -181,8 +181,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 21596
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21596' )]
 	public function test_wp_get_archives_post_type() {
 		register_post_type( 'taco', array( 'public' => true ) );
 
@@ -206,8 +206,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 64304
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64304' )]
 	public function test_wp_get_archives_args_filter() {
 		// Test that the filter can modify the limit argument.
 		add_filter(

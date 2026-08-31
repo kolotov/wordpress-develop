@@ -12,10 +12,12 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  * @subpackage UnitTests
  * @since 3.4.0
  *
- * @group ajax
  *
- * @covers ::wp_ajax_delete_comment
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_delete_comment' )]
 class Tests_Ajax_wpAjaxDeleteComment extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -60,7 +62,6 @@ class Tests_Ajax_wpAjaxDeleteComment extends WP_Ajax_UnitTestCase {
 	 *
 	 * Expects test to pass.
 	 *
-	 * @covers ::_wp_ajax_delete_comment_response
 	 *
 	 * @param WP_Comment $comment Comment object.
 	 * @param string     $action  Action: 'trash', 'untrash', etc.
@@ -269,8 +270,8 @@ class Tests_Ajax_wpAjaxDeleteComment extends WP_Ajax_UnitTestCase {
 	/**
 	 * Deletes a comment as an administrator (expects success).
 	 *
-	 * @covers ::_wp_ajax_delete_comment_response
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_ajax_delete_comment_response' )]
 	public function test_ajax_comment_trash_actions_as_administrator() {
 		// Test trash/untrash.
 		$this->_test_as_admin( self::$comments[0], 'trash' );
@@ -303,8 +304,8 @@ class Tests_Ajax_wpAjaxDeleteComment extends WP_Ajax_UnitTestCase {
 	/**
 	 * Deletes a comment with no ID.
 	 *
-	 * @covers ::_wp_ajax_delete_comment_response
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_ajax_delete_comment_response' )]
 	public function test_ajax_trash_comment_no_id() {
 		// Test trash/untrash.
 		$this->_test_as_admin( self::$comments[0], 'trash' );

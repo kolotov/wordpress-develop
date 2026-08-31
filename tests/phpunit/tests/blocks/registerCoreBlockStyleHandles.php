@@ -8,10 +8,12 @@
  *
  * @since 6.3.0
  *
- * @group blocks
  *
- * @covers ::register_core_block_style_handles
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'register_core_block_style_handles' )]
 class Tests_Blocks_registerCoreBlockStyleHandles extends WP_UnitTestCase {
 
 	/**
@@ -52,16 +54,16 @@ class Tests_Blocks_registerCoreBlockStyleHandles extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58528
 	 *
-	 * @dataProvider data_block_data
 	 *
-	 * @covers ::register_core_block_style_handles
-	 * @covers ::wp_should_load_separate_core_block_assets
 	 *
 	 * @param string $name   The block name.
 	 * @param array  $schema The block's schema.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58528' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_block_data' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_core_block_style_handles' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_should_load_separate_core_block_assets' )]
 	public function test_wp_should_load_separate_core_block_assets_false( $name, $schema ) {
 		add_filter( 'should_load_separate_core_block_assets', '__return_false' );
 		$this->assertFalse( wp_should_load_separate_core_block_assets(), 'Core blocks are not expected to load separate assets' );
@@ -79,16 +81,16 @@ class Tests_Blocks_registerCoreBlockStyleHandles extends WP_UnitTestCase {
 
 
 	/**
-	 * @ticket 58528
 	 *
-	 * @dataProvider data_block_data
 	 *
-	 * @covers ::register_core_block_style_handles
-	 * @covers ::wp_should_load_separate_core_block_assets
 	 *
 	 * @param string $name   The block name.
 	 * @param array  $schema The block's schema.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58528' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_block_data' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_core_block_style_handles' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_should_load_separate_core_block_assets' )]
 	public function test_wp_should_load_separate_core_block_assets_true( $name, $schema ) {
 		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
 		$this->assertTrue( wp_should_load_separate_core_block_assets(), 'Core assets are expected to load separately' );
@@ -115,13 +117,13 @@ class Tests_Blocks_registerCoreBlockStyleHandles extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58560
 	 *
-	 * @dataProvider data_block_data
 	 *
 	 * @param string $name The block name.
 	 */
-	public function test_wp_should_load_separate_core_block_assets_current_theme_supports( $name ) {
+	#[\PHPUnit\Framework\Attributes\Ticket( '58560' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_block_data' )]
+	public function test_wp_should_load_separate_core_block_assets_current_theme_supports( $name, $schema ) {
 		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
 		add_theme_support( 'wp-block-styles' );
 		register_core_block_style_handles();
@@ -142,13 +144,13 @@ class Tests_Blocks_registerCoreBlockStyleHandles extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 59715
 	 *
-	 * @dataProvider data_block_data
 	 *
 	 * @param string $name The block name.
 	 */
-	public function test_register_core_block_style_handles_should_load_rtl_stylesheets_for_rtl_text_direction( $name ) {
+	#[\PHPUnit\Framework\Attributes\Ticket( '59715' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_block_data' )]
+	public function test_register_core_block_style_handles_should_load_rtl_stylesheets_for_rtl_text_direction( $name, $schema ) {
 		global $wp_locale;
 
 		$orig_text_dir             = $wp_locale->text_direction;
@@ -175,7 +177,7 @@ class Tests_Blocks_registerCoreBlockStyleHandles extends WP_UnitTestCase {
 		}
 	}
 
-	public function data_block_data() {
+	public static function data_block_data() {
 		$core_blocks_meta = require ABSPATH . WPINC . '/blocks/blocks-json.php';
 
 		// Remove this blocks for now, as they are registered elsewhere.

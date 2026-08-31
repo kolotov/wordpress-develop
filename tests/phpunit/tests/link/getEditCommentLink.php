@@ -1,9 +1,9 @@
 <?php
 /**
- * @group link
- * @group comment
- * @covers ::get_edit_comment_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_edit_comment_link' )]
 class Tests_Link_GetEditCommentLink extends WP_UnitTestCase {
 
 	public static $comment_id;
@@ -49,8 +49,8 @@ class Tests_Link_GetEditCommentLink extends WP_UnitTestCase {
 	 *
 	 * The expected result should include HTML entities.
 	 *
-	 * @ticket 61727
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61727' )]
 	public function test_get_edit_comment_link_display_context() {
 		$comment_id   = self::$comment_id;
 		$expected_url = admin_url( 'comment.php?action=editcomment&amp;c=' . $comment_id );
@@ -64,8 +64,8 @@ class Tests_Link_GetEditCommentLink extends WP_UnitTestCase {
 	 *
 	 * The expected result should not include HTML entities.
 	 *
-	 * @ticket 61727
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61727' )]
 	public function test_get_edit_comment_link_url_context() {
 		$comment_id   = self::$comment_id;
 		$expected_url = admin_url( 'comment.php?action=editcomment&c=' . $comment_id );
@@ -77,8 +77,8 @@ class Tests_Link_GetEditCommentLink extends WP_UnitTestCase {
 	/**
 	 * Tests that get_edit_comment_link() returns nothing if the comment ID is invalid.
 	 *
-	 * @ticket 61727
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61727' )]
 	public function test_get_edit_comment_link_invalid_comment() {
 		$comment_id         = 12345;
 		$actual_url_display = get_edit_comment_link( $comment_id, 'display' );
@@ -104,8 +104,8 @@ class Tests_Link_GetEditCommentLink extends WP_UnitTestCase {
 	/**
 	 * Tests that the 'get_edit_comment_link' filter works as expected, including the additional parameters.
 	 *
-	 * @ticket 61727
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61727' )]
 	public function test_get_edit_comment_link_filter() {
 		$comment_id           = self::$comment_id;
 		$expected_url_display = admin_url( 'comment-test.php?context=display' );
@@ -131,8 +131,8 @@ class Tests_Link_GetEditCommentLink extends WP_UnitTestCase {
 	/**
 	 * Tests that the 'get_edit_comment_link' filter receives the comment ID, even when a comment object is passed.
 	 *
-	 * @ticket 61727
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61727' )]
 	public function test_get_edit_comment_link_filter_uses_id() {
 		// Add a filter just to catch the $comment_id filter parameter value.
 		$comment_id_filter_param = null;

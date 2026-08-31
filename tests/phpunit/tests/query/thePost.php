@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group query
- * @covers WP_Query::the_post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Query::class, 'the_post' )]
 class Tests_Query_ThePost extends WP_UnitTestCase {
 
 	/**
@@ -51,8 +51,8 @@ class Tests_Query_ThePost extends WP_UnitTestCase {
 	/**
 	 * Ensure custom 'fields' values are respected.
 	 *
-	 * @ticket 56992
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56992' )]
 	public function test_wp_query_respects_custom_fields_values() {
 		global $wpdb;
 		add_filter(
@@ -86,8 +86,8 @@ class Tests_Query_ThePost extends WP_UnitTestCase {
 	/**
 	 * Ensure custom 'fields' populates the global post in the loop.
 	 *
-	 * @ticket 56992
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56992' )]
 	public function test_wp_query_with_custom_fields_value_populates_the_global_post() {
 		global $wpdb;
 		add_filter(
@@ -110,7 +110,7 @@ class Tests_Query_ThePost extends WP_UnitTestCase {
 				'fields'    => 'custom',
 				'post_type' => 'page',
 				'post__in'  => self::$page_child_ids,
-				'orderby'   => 'id',
+				'orderby'   => 'ID',
 				'order'     => 'ASC',
 			)
 		);
@@ -131,13 +131,13 @@ class Tests_Query_ThePost extends WP_UnitTestCase {
 	/**
 	 * Ensure that a secondary loop populates the global post completely regardless of the fields parameter.
 	 *
-	 * @ticket 56992
 	 *
-	 * @dataProvider data_the_loop_fields
 	 *
 	 * @param string $fields Fields parameter for use in the query.
 	 */
-	public function test_the_loop_populates_the_global_post_completely( $fields ) {
+	#[\PHPUnit\Framework\Attributes\Ticket( '56992' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_the_loop_fields' )]
+	public function test_the_loop_populates_the_global_post_completely( $fields, $expected_query_count ) {
 		$query = new WP_Query(
 			array(
 				'fields'    => $fields,
@@ -165,13 +165,13 @@ class Tests_Query_ThePost extends WP_UnitTestCase {
 	/**
 	 * Ensure that a secondary loop primes the post cache completely regardless of the fields parameter.
 	 *
-	 * @ticket 56992
 	 *
-	 * @dataProvider data_the_loop_fields
 	 *
 	 * @param string $fields           Fields parameter for use in the query.
 	 * @param int    $expected_queries Expected number of queries when starting the loop.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56992' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_the_loop_fields' )]
 	public function test_the_loop_primes_the_post_cache( $fields, $expected_queries ) {
 		$query = new WP_Query(
 			array(
@@ -211,13 +211,13 @@ class Tests_Query_ThePost extends WP_UnitTestCase {
 	/**
 	 * Ensure that a secondary loop primes the author cache completely regardless of the fields parameter.
 	 *
-	 * @ticket 56992
 	 *
-	 * @dataProvider data_the_loop_fields
 	 *
 	 * @param string $fields           Fields parameter for use in the query.
 	 * @param int    $expected_queries Expected number of queries when starting the loop.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56992' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_the_loop_fields' )]
 	public function test_the_loop_primes_the_author_cache( $fields, $expected_queries ) {
 		$query = new WP_Query(
 			array(
@@ -263,7 +263,7 @@ class Tests_Query_ThePost extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_the_loop_fields() {
+	public static function data_the_loop_fields() {
 		return array(
 			'all fields'                => array( 'all', 2 ),
 			'all fields (empty fields)' => array( '', 2 ),
@@ -275,8 +275,8 @@ class Tests_Query_ThePost extends WP_UnitTestCase {
 	/**
 	 * Ensure draft content is shown for post previews and permalinks for logged in users.
 	 *
-	 * @ticket 56992
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56992' )]
 	public function test_post_preview_links_draft_posts() {
 		$user_id = self::$author_ids[0];
 		wp_set_current_user( $user_id );
@@ -321,8 +321,8 @@ class Tests_Query_ThePost extends WP_UnitTestCase {
 	/**
 	 * Ensure autosave content is shown for post previews.
 	 *
-	 * @ticket 56992
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56992' )]
 	public function test_post_preview_links_autosaves() {
 		$user_id = self::$author_ids[0];
 		wp_set_current_user( $user_id );

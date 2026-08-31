@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group l10n
- * @group i18n
  *
- * @covers ::get_locale
  */
+#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
+#[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_locale' )]
 class Tests_L10n_GetLocale extends WP_UnitTestCase {
 	public function test_should_respect_locale_global() {
 		global $locale;
@@ -20,8 +20,8 @@ class Tests_L10n_GetLocale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_local_option_should_take_precedence_on_multisite() {
 		global $locale;
 		$old_locale = $locale;
@@ -37,8 +37,8 @@ class Tests_L10n_GetLocale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_network_option_should_be_fallback_on_multisite() {
 		global $locale;
 		$old_locale = $locale;
@@ -53,8 +53,8 @@ class Tests_L10n_GetLocale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_option_should_be_respected_on_nonmultisite() {
 		global $locale;
 		$old_locale = $locale;

@@ -4,11 +4,11 @@
  *
  * Tests for post meta revisioning.
  *
- * @group post
- * @group revision
- * @group meta
- * @group meta-revisions
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'revision' )]
+#[\PHPUnit\Framework\Attributes\Group( 'meta' )]
+#[\PHPUnit\Framework\Attributes\Group( 'meta-revisions' )]
 class Tests_Post_MetaRevisions extends WP_UnitTestCase {
 
 	/**
@@ -31,10 +31,10 @@ class Tests_Post_MetaRevisions extends WP_UnitTestCase {
 	 *
 	 * @param string $expected The expected value after storing & retrieving.
 	 *
-	 * @group revision
-	 * @group slashed
-	 * @dataProvider slashed_data_provider
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'revision' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'slashed' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'slashed_data_provider' )]
 	public function test_revisions_stores_meta_values_with_slashes( $passed, $expected ) {
 		// Set up a new post.
 		$post_id = $this->factory->post->create();
@@ -86,7 +86,7 @@ class Tests_Post_MetaRevisions extends WP_UnitTestCase {
 	/**
 	 * Provide data for the slashed data tests.
 	 */
-	public function slashed_data_provider() {
+	public static function slashed_data_provider() {
 		return array(
 			array(
 				'some\text',
@@ -110,8 +110,8 @@ class Tests_Post_MetaRevisions extends WP_UnitTestCase {
 	/**
 	 * Test the revisions system for storage of meta values.
 	 *
-	 * @group revision
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'revision' )]
 	public function test_revisions_stores_meta_values() {
 		/*
 		 * Set Up.
@@ -569,8 +569,8 @@ class Tests_Post_MetaRevisions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_register_post_meta_supports_revisions
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_post_meta_supports_revisions' )]
 	public function test_register_post_meta_supports_revisions( $post_type, $meta_key, $args, $expected_is_revisioned ) {
 		register_post_meta( $post_type, $meta_key, $args );
 
@@ -604,7 +604,7 @@ class Tests_Post_MetaRevisions extends WP_UnitTestCase {
 		$GLOBALS['wp_meta_keys'] = array();
 	}
 
-	public function data_register_post_meta_supports_revisions() {
+	public static function data_register_post_meta_supports_revisions() {
 		return array(
 			array( 'post', 'registered_key1', array( 'single' => true ), false ),
 			array(
@@ -646,8 +646,8 @@ class Tests_Post_MetaRevisions extends WP_UnitTestCase {
 	/**
 	 * Test post meta revisioning with a custom post type, as well as the "page" post type.
 	 *
-	 * @dataProvider page_post_type_data_provider
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'page_post_type_data_provider' )]
 	public function test_revisions_stores_meta_values_page_and_cpt( $passed, $expected, $post_type, $supports_revisions = false ) {
 
 		// If the post type doesn't exist, create it, potentially supporting revisions.
@@ -699,7 +699,7 @@ class Tests_Post_MetaRevisions extends WP_UnitTestCase {
 	/**
 	 * Provide data for the page post type tests.
 	 */
-	public function page_post_type_data_provider() {
+	public static function page_post_type_data_provider() {
 		return array(
 			array(
 				'Test string',

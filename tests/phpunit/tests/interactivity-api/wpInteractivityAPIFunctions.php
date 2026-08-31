@@ -8,8 +8,11 @@
  *
  * @since 6.5.0
  *
- * @group interactivity-api
  */
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'interactivity-api' )]
 class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCase {
 	/**
 	 * Set up.
@@ -67,10 +70,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	/**
 	 * Tests processing of a single interactive block.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_of_single_interactive_block() {
 		$post_content    = '<!-- wp:test/interactive-block { "block": 1 } /-->';
 		$rendered_blocks = do_blocks( $post_content );
@@ -83,10 +86,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 * Tests processing of multiple interactive blocks in parallel along with a
 	 * non-interactive block.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_of_multiple_interactive_blocks_in_parallel() {
 		$post_content    = '
 			<!-- wp:test/interactive-block { "block": 1 } /-->
@@ -109,10 +112,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	/**
 	 * Tests processing of an interactive block inside a non-interactive block.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_of_interactive_block_inside_non_interactive_block() {
 		$post_content    = '
 			<!-- wp:test/non-interactive-block { "block": 1 } -->
@@ -129,10 +132,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 * Tests processing of multiple interactive blocks nested inside a
 	 * non-interactive block.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_of_multiple_interactive_blocks_inside_non_interactive_block() {
 		$post_content    = '
 			<!-- wp:test/non-interactive-block { "block": 1 } -->
@@ -152,10 +155,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 * Tests processing of a single interactive block directive nested inside
 	 * multiple non-interactive blocks.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_of_interactive_block_inside_multiple_non_interactive_block() {
 		$post_content    = '
 			<!-- wp:test/non-interactive-block { "block": 1 } -->
@@ -177,10 +180,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 * Tests processing of directives for an interactive block containing a
 	 * non-interactive block without directives.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_of_interactive_block_containing_non_interactive_block_without_directives() {
 		$post_content    = '
 			<!-- wp:test/interactive-block { "block": 1 } -->
@@ -199,10 +202,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 * Tests processing of directives for an interactive block containing a
 	 * non-interactive block with directives.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_of_interactive_block_containing_non_interactive_block_with_directives() {
 		$post_content    = '
 			<!-- wp:test/interactive-block { "block": 1 } -->
@@ -222,10 +225,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 * interactive and non-interactive blocks, checking proper propagation of
 	 * context.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_of_interactive_block_containing_nested_interactive_and_non_interactive_blocks() {
 		$post_content    = '
 			<!-- wp:test/interactive-block { "block": 1 } -->
@@ -275,10 +278,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 * This ensures that nested blocks do not trigger additional processing of the
 	 * same directives, leading to incorrect behavior or performance issues.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_only_process_the_root_interactive_blocks() {
 		$class                = new ReflectionClass( 'WP_Interactivity_API' );
 		$directive_processors = $class->getProperty( 'directive_processors' );
@@ -318,10 +321,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	/**
 	 * Tests that directives are server side processing even if the $parsed_block variable is edited by a filter.
 	 *
-	 * @ticket 60743
 	 *
-	 * @covers ::wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60743' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_when_block_is_filtered() {
 		register_block_type(
 			'test/custom-directive-block',
@@ -354,14 +357,14 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 * Tests that wp_interactivity_data_wp_context function correctly converts different array
 	 * structures to a JSON string.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers       wp_interactivity_data_wp_context
-	 * @dataProvider data_wp_interactivity_data_wp_context_with_different_arrays
 	 *
 	 * @param array  $context  Context to encode.
 	 * @param string $expected Expected function output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_interactivity_data_wp_context_with_different_arrays' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_data_wp_context' )]
 	public function test_wp_interactivity_data_wp_context_with_different_arrays( $context, $expected ) {
 		$this->assertSame( $expected, wp_interactivity_data_wp_context( $context ) );
 	}
@@ -371,7 +374,7 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 *
 	 * @return array
 	 */
-	public function data_wp_interactivity_data_wp_context_with_different_arrays() {
+	public static function data_wp_interactivity_data_wp_context_with_different_arrays() {
 		return array(
 			'empty array'                                  => array(
 				'context'  => array(),
@@ -400,15 +403,15 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 * Tests that wp_interactivity_data_wp_context function correctly converts different array
 	 * structures to a JSON string and adds a namespace.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers       wp_interactivity_data_wp_context
-	 * @dataProvider data_wp_interactivity_data_wp_context_with_different_arrays_and_a_namespace
 	 *
 	 * @param array  $context  Context to encode.
 	 * @param string $store    Store namespace.
 	 * @param string $expected Expected function output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_interactivity_data_wp_context_with_different_arrays_and_a_namespace' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_data_wp_context' )]
 	public function test_wp_interactivity_data_wp_context_with_different_arrays_and_a_namespace( $context, $store, $expected ) {
 		$this->assertSame( $expected, wp_interactivity_data_wp_context( $context, $store ) );
 	}
@@ -418,7 +421,7 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 *
 	 * @return array
 	 */
-	public function data_wp_interactivity_data_wp_context_with_different_arrays_and_a_namespace() {
+	public static function data_wp_interactivity_data_wp_context_with_different_arrays_and_a_namespace() {
 		return array(
 			'empty array'                                  => array(
 				'context'  => array(),
@@ -453,14 +456,14 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 * properly escaped in the JSON-encoded string to prevent potential XSS
 	 * attacks.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers       wp_interactivity_data_wp_context
-	 * @dataProvider data_wp_interactivity_data_wp_context_with_json_flags
 	 *
 	 * @param array  $context  Context to encode.
 	 * @param string $expected Expected function output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_interactivity_data_wp_context_with_json_flags' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_data_wp_context' )]
 	public function test_wp_interactivity_data_wp_context_with_json_flags( $context, $expected ) {
 		$this->assertSame( $expected, wp_interactivity_data_wp_context( $context ) );
 	}
@@ -470,7 +473,7 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	 *
 	 * @return array
 	 */
-	public function data_wp_interactivity_data_wp_context_with_json_flags() {
+	public static function data_wp_interactivity_data_wp_context_with_json_flags() {
 		return array(
 			'value contains <> brackets'        => array(
 				'context'  => array( 'tag' => '<foo>' ),
@@ -494,10 +497,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	/**
 	 * Tests that directives processing of tags that don't visit closer tag work.
 	 *
-	 * @ticket 60746
 	 *
-	 * @covers ::wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60746' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_directives_in_tags_that_dont_visit_closer_tag() {
 		register_block_type(
 			'test/custom-directive-block',
@@ -521,10 +524,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	/**
 	 * Tests that context from void tags is not propagated to next tags.
 	 *
-	 * @ticket 60768
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60768' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_context_directive_in_void_tags() {
 		register_block_type(
 			'test/custom-directive-block',
@@ -562,10 +565,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	/**
 	 * Tests that namespace from void tags is not propagated to next tags.
 	 *
-	 * @ticket 60768
 	 *
-	 * @covers wp_interactivity_process_directives_of_interactive_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60768' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_process_interactive_directive_in_void_tags() {
 		wp_interactivity_state(
 			'void',
@@ -596,10 +599,10 @@ class Tests_Interactivity_API_wpInteractivityAPIFunctions extends WP_UnitTestCas
 	/**
 	 * Tests interactivity_process_directives filter.
 	 *
-	 * @ticket 61185
 	 *
-	 * @covers wp_interactivity_process_directives
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61185' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_process_directives' )]
 	public function test_not_processing_directives_filter() {
 		wp_interactivity_state(
 			'dont-process',

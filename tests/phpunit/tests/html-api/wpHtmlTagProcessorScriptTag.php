@@ -5,21 +5,20 @@
  * @package WordPress
  * @subpackage HTML-API
  *
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Tag_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlTagProcessorScriptTag extends WP_UnitTestCase {
 	/**
-	 * @ticket 64419
 	 *
-	 * @covers ::get_script_content_type()
 	 *
-	 * @dataProvider data_get_script_content_type
 	 *
 	 * @param string      $html         HTML containing a script tag.
 	 * @param string|null $content_type Inferred content type of SCRIPT element.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64419' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_script_content_type' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_script_content_type' )]
 	public function test_get_script_content_type( string $html, ?string $content_type ) {
 		$processor = new WP_HTML_Tag_Processor( $html );
 		$processor->next_tag();
@@ -146,10 +145,10 @@ class Tests_HtmlApi_WpHtmlTagProcessorScriptTag extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64419
 	 *
-	 * @covers ::get_script_content_type()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64419' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_script_content_type' )]
 	public function test_get_script_content_type_returns_null_before_finding_tags() {
 		$processor = new WP_HTML_Tag_Processor( 'Just some text' );
 		$processor->next_token();
@@ -161,10 +160,10 @@ class Tests_HtmlApi_WpHtmlTagProcessorScriptTag extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64419
 	 *
-	 * @covers ::get_script_content_type()
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64419' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_script_content_type' )]
 	public function test_get_script_content_type_returns_null_for_non_html_namespace() {
 		$processor = new WP_HTML_Tag_Processor( '<script></script>' );
 		$processor->change_parsing_namespace( 'svg' );

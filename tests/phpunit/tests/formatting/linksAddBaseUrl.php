@@ -3,17 +3,17 @@
 /**
  * Tests for the links_add_base_url() function.
  *
- * @group formatting
  *
- * @covers ::links_add_base_url
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'links_add_base_url' )]
 class Tests_Formatting_LinksAddBaseUrl extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 60389
 	 *
-	 * @dataProvider data_links_add_base_url
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60389' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_links_add_base_url' )]
 	public function test_links_add_base_url( $content, $base, $attrs, $expected ) {
 		if ( is_null( $attrs ) ) {
 			$this->assertSame( $expected, links_add_base_url( $content, $base ) );
@@ -34,7 +34,7 @@ class Tests_Formatting_LinksAddBaseUrl extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_links_add_base_url() {
+	public static function data_links_add_base_url() {
 		return array(
 			'https'           => array(
 				'content'  => '<a href="url" />',

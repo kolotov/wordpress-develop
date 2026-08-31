@@ -1,10 +1,9 @@
 <?php
 /**
  * Tests for _wp_connectors_get_connector_script_module_data().
- *
- * @group connectors
- * @covers ::_wp_connectors_get_connector_script_module_data
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_connectors_get_connector_script_module_data' )]
+#[\PHPUnit\Framework\Attributes\Group( 'connectors' )]
 class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitTestCase {
 
 	const CONNECTOR_ID             = 'wp_test_application_password_connector';
@@ -65,8 +64,8 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_exposes_application_password_metadata_without_credentials(): void {
 		update_option(
 			self::CREDENTIALS_SETTING_NAME,
@@ -90,8 +89,8 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_is_not_connected_when_one_credential_is_missing(): void {
 		update_option(
 			self::CREDENTIALS_SETTING_NAME,
@@ -107,8 +106,8 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_environment_variable_credentials_mark_connector_connected(): void {
 		$this->register_connector( array( 'env_var_name' => self::CREDENTIALS_ENV_VAR_NAME ) );
 		putenv( self::CREDENTIALS_ENV_VAR_NAME . '=remote-user:abcd efgh ijkl mnop 1234' );
@@ -123,8 +122,8 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_constant_credentials_mark_connector_connected(): void {
 		if ( ! defined( 'WP_TESTS_CONNECTOR_REMOTE_CREDENTIALS_CONSTANT' ) ) {
 			define( 'WP_TESTS_CONNECTOR_REMOTE_CREDENTIALS_CONSTANT', 'remote-user:abcd efgh ijkl mnop 1234' );
@@ -139,8 +138,8 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_environment_variable_takes_precedence_over_database(): void {
 		$this->register_connector( array( 'env_var_name' => self::CREDENTIALS_ENV_VAR_NAME ) );
 		putenv( self::CREDENTIALS_ENV_VAR_NAME . '=env-user:env-password' );
@@ -158,8 +157,8 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_malformed_environment_variable_credentials_fall_back_to_database(): void {
 		$this->setExpectedIncorrectUsage( 'wp_connectors_get_application_password_credentials' );
 
@@ -181,8 +180,8 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_malformed_environment_variable_credentials_without_fallback_are_not_connected(): void {
 		$this->setExpectedIncorrectUsage( 'wp_connectors_get_application_password_credentials' );
 
@@ -197,8 +196,8 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 	}
 
 	/**
-	 * @ticket 64850
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_environment_variable_password_may_contain_colons(): void {
 		$this->register_connector( array( 'env_var_name' => self::CREDENTIALS_ENV_VAR_NAME ) );
 		putenv( self::CREDENTIALS_ENV_VAR_NAME . '=remote-user:pass:with:colons' );

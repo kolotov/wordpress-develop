@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-24.04
     if: |
       (
-        github.repository == 'WordPress/wordpress-develop' || (
+        github.repository == 'kolotov/wordpress-develop' || (
           github.event_name == 'pull_request' && (
             ! github.event.repository.private ||
             ! github.event.pull_request.draft ||
@@ -145,7 +145,8 @@ jobs:
       actions: read
       contents: read
     needs: [ performance ]
-    if: ${{ github.repository == 'WordPress/wordpress-develop' && github.event_name != 'pull_request' && always() }}
+    # Send Slack notifications for non-pull-request runs in this fork.
+    if: ${{ github.repository == 'kolotov/wordpress-develop' && github.event_name != 'pull_request' && always() }}
     with:
       calling_status: ${{ contains( needs.*.result, 'cancelled' ) && 'cancelled' || contains( needs.*.result, 'failure' ) && 'failure' || 'success' }}
     secrets:
@@ -161,6 +162,7 @@ jobs:
     permissions:
       actions: write
     needs: [ slack-notifications ]
+    # Upstream automatic reruns remain disabled in this fork.
     if: |
       always() &&
       github.repository == 'WordPress/wordpress-develop' &&

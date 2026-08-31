@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group link
- * @group comment
- * @covers ::get_previous_comments_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_previous_comments_link' )]
 class Tests_Link_GetPreviousCommentsLink extends WP_UnitTestCase {
 
 	public function test_page_should_respect_value_of_cpage_query_var() {
@@ -37,8 +37,8 @@ class Tests_Link_GetPreviousCommentsLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60806
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60806' )]
 	public function test_page_should_respect_value_of_page_argument() {
 		$p = self::factory()->post->create();
 		$this->go_to( get_permalink( $p ) );

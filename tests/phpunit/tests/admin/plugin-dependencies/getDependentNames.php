@@ -7,22 +7,19 @@
 
 require_once __DIR__ . '/base.php';
 
-/**
- * @group admin
- * @group plugins
- *
- * @covers WP_Plugin_Dependencies::get_dependent_names
- * @covers WP_Plugin_Dependencies::get_plugins
- * @covers WP_Plugin_Dependencies::convert_to_slug
- * @covers WP_Plugin_Dependencies::get_dependents
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependent_names' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_plugins' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'convert_to_slug' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_dependents' )]
 class Tests_Admin_WPPluginDependencies_GetDependentNames extends WP_PluginDependencies_UnitTestCase {
 
 	/**
 	 * Tests that dependent names are retrieved.
 	 *
-	 * @ticket 22316
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_get_dependent_names() {
 		$this->set_property_value(
 			'plugins',
@@ -49,8 +46,8 @@ class Tests_Admin_WPPluginDependencies_GetDependentNames extends WP_PluginDepend
 	/**
 	 * Tests that dependent names are sorted.
 	 *
-	 * @ticket 22316
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_sort_dependent_names() {
 		$this->set_property_value(
 			'plugins',

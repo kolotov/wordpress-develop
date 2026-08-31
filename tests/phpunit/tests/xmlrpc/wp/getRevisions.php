@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getRevisions extends WP_XMLRPC_UnitTestCase {
 
 	public function test_invalid_username_password() {
@@ -57,8 +57,8 @@ class Tests_XMLRPC_wp_getRevisions extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 22687
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22687' )]
 	public function test_revision_count_for_auto_draft_post_creation() {
 		$this->make_user_by_role( 'editor' );
 

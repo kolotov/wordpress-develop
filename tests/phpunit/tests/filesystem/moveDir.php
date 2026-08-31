@@ -3,11 +3,11 @@
 /**
  * Tests move_dir().
  *
- * @group file
- * @group filesystem
  *
- * @covers ::move_dir
  */
+#[\PHPUnit\Framework\Attributes\Group( 'file' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'move_dir' )]
 class Tests_Filesystem_MoveDir extends WP_UnitTestCase {
 
 	/**
@@ -115,15 +115,15 @@ class Tests_Filesystem_MoveDir extends WP_UnitTestCase {
 	/**
 	 * Tests that move_dir() returns a WP_Error object.
 	 *
-	 * @ticket 57375
 	 *
-	 * @dataProvider data_should_return_wp_error
 	 *
 	 * @param string $from      The source directory path.
 	 * @param string $to        The destination directory path.
 	 * @param bool   $overwrite Whether to overwrite the destination directory.
 	 * @param string $expected  The expected WP_Error code.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57375' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_return_wp_error' )]
 	public function test_should_return_wp_error( $from, $to, $overwrite, $expected ) {
 		global $wp_filesystem;
 
@@ -162,7 +162,7 @@ class Tests_Filesystem_MoveDir extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_return_wp_error() {
+	public static function data_should_return_wp_error() {
 		return array(
 			'$overwrite is false and $to exists' => array(
 				'from'      => 'existing_from',
@@ -206,14 +206,14 @@ class Tests_Filesystem_MoveDir extends WP_UnitTestCase {
 	/**
 	 * Tests that move_dir() successfully moves a directory.
 	 *
-	 * @ticket 57375
 	 *
-	 * @dataProvider data_should_move_directory
 	 *
 	 * @param string $from      The source directory path.
 	 * @param string $to        The destination directory path.
 	 * @param bool   $overwrite Whether to overwrite the destination directory.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57375' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_move_directory' )]
 	public function test_should_move_directory( $from, $to, $overwrite ) {
 		global $wp_filesystem;
 
@@ -262,7 +262,7 @@ class Tests_Filesystem_MoveDir extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_move_directory() {
+	public static function data_should_move_directory() {
 		return array(
 			'$overwrite is false and $to does not exist' => array(
 				'from'      => 'existing_from',
@@ -281,8 +281,8 @@ class Tests_Filesystem_MoveDir extends WP_UnitTestCase {
 	 * Tests that `move_dir()` returns a WP_Error object when overwriting
 	 * is enabled, the destination exists, but cannot be deleted.
 	 *
-	 * @ticket 57375
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57375' )]
 	public function test_should_return_wp_error_when_overwriting_is_enabled_the_destination_exists_but_cannot_be_deleted() {
 		global $wp_filesystem;
 		$wpfilesystem_backup = $wp_filesystem;

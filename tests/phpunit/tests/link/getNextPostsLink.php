@@ -5,10 +5,10 @@
  *
  * @since 6.2.0
  *
- * @group link
  *
- * @covers ::get_next_posts_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_next_posts_link' )]
 class Tests_Link_GetNextPostsLink extends WP_UnitTestCase {
 
 	/**
@@ -33,8 +33,8 @@ class Tests_Link_GetNextPostsLink extends WP_UnitTestCase {
 	/**
 	 * Tests that the 'next_posts_link_attributes' filter is applied correctly.
 	 *
-	 * @ticket 55751
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55751' )]
 	public function test_get_next_posts_link_should_apply_next_posts_link_attributes_filter() {
 		$filter = new MockAction();
 		add_filter( 'next_posts_link_attributes', array( &$filter, 'filter' ) );

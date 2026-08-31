@@ -1,27 +1,31 @@
 <?php
 
 /**
- * @group l10n
- * @group i18n
  *
- * @covers ::load_script_textdomain
  */
+#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
+#[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'load_script_textdomain' )]
 class Tests_L10n_LoadScriptTextdomain extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 45528
-	 * @ticket 46336
-	 * @ticket 46387
-	 * @ticket 49145
-	 * @ticket 60891
-	 * @ticket 62016
 	 *
-	 * @dataProvider data_resolve_relative_path
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45528' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '46336' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '46387' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '49145' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60891' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62016' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_resolve_relative_path' )]
 	public function test_resolve_relative_path( $translation_path, $handle, $src, $textdomain, $filter = array() ) {
+		global $wp_scripts;
+		$wp_scripts = new WP_Scripts();
+
 		if ( ! empty( $filter ) ) {
 			add_filter( $filter[0], $filter[1], 10, $filter[2] ?? 1 );
 		}
+		wp_deregister_script( $handle );
 		wp_enqueue_script( $handle, $src, array(), null );
 
 		$expected = file_get_contents( DIR_TESTDATA . $translation_path );
@@ -161,8 +165,8 @@ class Tests_L10n_LoadScriptTextdomain extends WP_UnitTestCase {
 	 * The notice that we should not see:
 	 * `Deprecated: rtrim(): Passing null to parameter #1 ($string) of type string is deprecated`.
 	 *
-	 * @ticket 55967
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55967' )]
 	public function test_does_not_throw_deprecation_notice_for_rtrim_with_default_parameters() {
 		$handle = 'test-example-root';
 		$src    = '/wp-includes/js/script.js';
@@ -178,8 +182,8 @@ class Tests_L10n_LoadScriptTextdomain extends WP_UnitTestCase {
 	 * `load_script_translations( false, ... )` instead of falling through
 	 * to the relative-path computation.
 	 *
-	 * @ticket 65015
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
 	public function test_unparseable_src_returns_false(): void {
 		$handle = 'test-unparseable-src';
 		$src    = 'http:///example';
@@ -202,8 +206,8 @@ class Tests_L10n_LoadScriptTextdomain extends WP_UnitTestCase {
 	 * via the fallback path. Asserting on the recorded `$file` arguments pins
 	 * the test to the intended branch.
 	 *
-	 * @ticket 65015
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
 	public function test_unparseable_content_url_returns_false(): void {
 		$handle = 'test-unparseable-content-url';
 		$src    = '/wp-includes/js/script.js';
@@ -237,8 +241,8 @@ class Tests_L10n_LoadScriptTextdomain extends WP_UnitTestCase {
 	 * short-circuits via the `! is_string( $relative )` guard rather than
 	 * falling through to string functions like `str_ends_with()` and `md5()`.
 	 *
-	 * @ticket 65015
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
 	public function test_non_string_relative_path_filter_returns_false(): void {
 		$handle = 'test-non-string-relative-path';
 		$src    = '/wp-includes/js/script.js';
@@ -256,8 +260,8 @@ class Tests_L10n_LoadScriptTextdomain extends WP_UnitTestCase {
 	 * function. The result is reached via the regular fallback path
 	 * (no host/path match) rather than an early return.
 	 *
-	 * @ticket 65015
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65015' )]
 	public function test_src_without_path_component_does_not_warn(): void {
 		$handle = 'test-src-without-path';
 		$src    = 'https://example.com';

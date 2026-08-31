@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group l10n
- * @group i18n
  */
+#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
+#[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
 class Tests_L10n extends WP_UnitTestCase {
 
 	/**
@@ -27,10 +27,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35961
 	 *
-	 * @covers ::_n_noop
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_n_noop' )]
 	public function test_n_noop() {
 		$text_domain   = 'text-domain';
 		$nooped_plural = _n_noop( '%s post', '%s posts', $text_domain );
@@ -42,10 +42,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35961
 	 *
-	 * @covers ::_nx_noop
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35961' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_nx_noop' )]
 	public function test_nx_noop() {
 		$text_domain   = 'text-domain';
 		$nooped_plural = _nx_noop( '%s post', '%s posts', 'my-context', $text_domain );
@@ -58,10 +58,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35073
 	 *
-	 * @covers ::before_last_bar
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35073' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'before_last_bar' )]
 	public function test_before_last_bar() {
 		$this->assertSame( 'no-bar-at-all', before_last_bar( 'no-bar-at-all' ) );
 		$this->assertSame( 'before-last-bar', before_last_bar( 'before-last-bar|after-bar' ) );
@@ -69,10 +69,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35950
 	 *
-	 * @covers ::get_available_languages
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35950' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_available_languages' )]
 	public function test_get_available_languages() {
 		$array = get_available_languages();
 		$this->assertIsArray( $array );
@@ -94,13 +94,13 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35284
-	 * @ticket 60554
 	 *
-	 * @covers ::wp_get_installed_translations
-	 * @covers ::wp_get_pomo_file_data
-	 * @covers ::wp_get_l10n_php_file_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35284' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60554' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_installed_translations' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_pomo_file_data' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_l10n_php_file_data' )]
 	public function test_wp_get_installed_translations_for_core() {
 		$installed_translations = wp_get_installed_translations( 'core' );
 		$this->assertIsArray( $installed_translations );
@@ -127,10 +127,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35284
 	 *
-	 * @covers ::wp_get_pomo_file_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35284' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_pomo_file_data' )]
 	public function test_wp_get_pomo_file_data() {
 		$file  = DIR_TESTDATA . '/pomo/empty.po';
 		$array = wp_get_pomo_file_data( $file );
@@ -155,10 +155,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::the_excerpt
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_excerpt' )]
 	public function test_length_of_excerpt_should_be_counted_by_words() {
 		global $post;
 
@@ -181,10 +181,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::the_excerpt
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_excerpt' )]
 	public function test_length_of_excerpt_should_be_counted_by_chars() {
 		global $post;
 
@@ -207,10 +207,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::the_excerpt
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_excerpt' )]
 	public function test_length_of_excerpt_should_be_counted_by_chars_in_japanese() {
 		global $post;
 
@@ -233,10 +233,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::the_excerpt_rss
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_excerpt_rss' )]
 	public function test_length_of_excerpt_rss_should_be_counted_by_words() {
 		global $post;
 
@@ -259,10 +259,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::the_excerpt_rss
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'the_excerpt_rss' )]
 	public function test_length_of_excerpt_rss_should_be_counted_by_chars() {
 		global $post;
 
@@ -286,10 +286,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::wp_dashboard_recent_drafts
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_dashboard_recent_drafts' )]
 	public function test_length_of_draft_should_be_counted_by_words() {
 		require_once ABSPATH . 'wp-admin/includes/dashboard.php';
 
@@ -325,10 +325,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::wp_dashboard_recent_drafts
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_dashboard_recent_drafts' )]
 	public function test_length_of_draft_should_be_counted_by_chars() {
 		require_once ABSPATH . 'wp-admin/includes/dashboard.php';
 
@@ -364,10 +364,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::wp_dashboard_recent_drafts
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_dashboard_recent_drafts' )]
 	public function test_length_of_draft_should_be_counted_by_chars_in_japanese() {
 		require_once ABSPATH . 'wp-admin/includes/dashboard.php';
 
@@ -403,10 +403,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::get_comment_excerpt
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_excerpt' )]
 	public function test_length_of_comment_excerpt_should_be_counted_by_words() {
 		switch_to_locale( 'en_US' );
 
@@ -423,10 +423,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::get_comment_excerpt
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_excerpt' )]
 	public function test_length_of_comment_excerpt_should_be_counted_by_chars() {
 		switch_to_locale( 'ja_JP' );
 
@@ -443,10 +443,10 @@ class Tests_L10n extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 *
-	 * @covers ::get_comment_excerpt
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_excerpt' )]
 	public function test_length_of_comment_excerpt_should_be_counted_by_chars_in_Japanese() {
 		switch_to_locale( 'ja_JP' );
 

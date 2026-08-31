@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group post
- * @group template
  *
- * @covers ::get_post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post' )]
 class Tests_Post_GetPost extends WP_UnitTestCase {
 
 	private static int $post_id;
@@ -33,8 +33,8 @@ class Tests_Post_GetPost extends WP_UnitTestCase {
 	/**
 	 * Tests that the global $post is returned.
 	 *
-	 * @ticket 64238
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64238' )]
 	public function test_get_post_global(): void {
 		global $post;
 		$post = $this->get_test_post_instance();
@@ -51,14 +51,14 @@ class Tests_Post_GetPost extends WP_UnitTestCase {
 	/**
 	 * Tests inputs and outputs.
 	 *
-	 * @ticket 64238
-	 * @dataProvider data_provider_to_test_get_post
 	 *
 	 * @param callable(): mixed      $input       Input to get_post.
 	 * @param string                 $output      The required return type.
 	 * @param string                 $filter      Type of filter to apply.
 	 * @param callable(): (int|null) $expected_id Expected ID of the returned post, or null if expecting null.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64238' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_to_test_get_post' )]
 	public function test_get_post( callable $input, string $output, string $filter, callable $expected_id ): void {
 		$input_val       = $input();
 		$expected_id_val = $expected_id();
@@ -95,12 +95,12 @@ class Tests_Post_GetPost extends WP_UnitTestCase {
 	/**
 	 * Tests that sanitize_post() is called as expected.
 	 *
-	 * @ticket 64238
-	 * @dataProvider data_provider_to_test_get_post_sanitization
 	 *
 	 * @param string $filter   Type of filter to apply.
 	 * @param string $expected Expected sanitized post title.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64238' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_to_test_get_post_sanitization' )]
 	public function test_get_post_sanitization( string $filter, string $expected ): void {
 		$post = get_post( self::$post_id, OBJECT, $filter );
 
@@ -117,7 +117,7 @@ class Tests_Post_GetPost extends WP_UnitTestCase {
 	 *     expected: string,
 	 * }>
 	 */
-	public function data_provider_to_test_get_post_sanitization(): array {
+	public static function data_provider_to_test_get_post_sanitization(): array {
 		return array(
 			'Raw filter'       => array(
 				'filter'   => 'raw',
@@ -152,7 +152,7 @@ class Tests_Post_GetPost extends WP_UnitTestCase {
 	 *     expected_id: Closure(): (int|null),
 	 * }>
 	 */
-	public function data_provider_to_test_get_post(): array {
+	public static function data_provider_to_test_get_post(): array {
 		return array(
 			'Valid ID'                             => array(
 				'input'       => fn() => self::$post_id,
@@ -161,7 +161,7 @@ class Tests_Post_GetPost extends WP_UnitTestCase {
 				'expected_id' => fn() => self::$post_id,
 			),
 			'WP_Post instance'                     => array(
-				'input'       => fn() => $this->get_test_post_instance(),
+				'input'       => fn() => self::get_test_post_instance(),
 				'output'      => OBJECT,
 				'filter'      => 'raw',
 				'expected_id' => fn() => self::$post_id,
@@ -283,9 +283,11 @@ class Tests_Post_GetPost extends WP_UnitTestCase {
 	 *
 	 * @return WP_Post Post object.
 	 */
-	private function get_test_post_instance(): WP_Post {
+	private static function get_test_post_instance(): WP_Post {
 		$post = WP_Post::get_instance( self::$post_id );
-		$this->assertInstanceOf( WP_Post::class, $post );
+		if ( ! $post instanceof WP_Post ) {
+			throw new RuntimeException( 'Expected the test post fixture to resolve to a WP_Post instance.' );
+		}
 		return $post;
 	}
 }

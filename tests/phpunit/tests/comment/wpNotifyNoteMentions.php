@@ -3,11 +3,14 @@
 /**
  * Tests for note mention notifications.
  *
- * @group comment
- * @group notes
  *
- * @covers ::wp_notify_note_mentions
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\Group( 'notes' )]
+
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_notify_note_mentions' )]
 class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 
 	/**
@@ -137,10 +140,10 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 *
-	 * @covers ::wp_get_note_mentioned_user_ids
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_note_mentioned_user_ids' )]
 	public function test_parses_mentioned_user_ids() {
 		$content = '<p>Hi <span class="wp-note-mention user-5">@Jane</span> and '
 			. '<span class="wp-note-mention user-9">@Bob</span>.</p>';
@@ -149,10 +152,10 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 *
-	 * @covers ::wp_get_note_mentioned_user_ids
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_note_mentioned_user_ids' )]
 	public function test_ignores_non_mentions_and_deduplicates() {
 		$content = '<p><span class="user-7">not a mention</span> '
 			. '<a class="wp-note-mention user-7" href="#">an anchor, not a chip</a> '
@@ -164,10 +167,10 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 *
-	 * @covers ::wp_send_note_notification
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_send_note_notification' )]
 	public function test_mentioned_user_is_emailed() {
 		$note = $this->insert_note(
 			'Ping ' . $this->get_mention_markup( self::$mentioned->ID ),
@@ -180,10 +183,10 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 *
-	 * @covers ::wp_send_note_notification
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_send_note_notification' )]
 	public function test_email_contains_context_and_editor_link() {
 		/*
 		 * The editor link comes from get_edit_post_link(), which is scoped to
@@ -218,10 +221,10 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	 * The editor link is composed for the recipient, not for whoever happens to
 	 * be current, so it survives contexts with no logged-in user such as WP-Cron.
 	 *
-	 * @ticket 65639
 	 *
-	 * @covers ::wp_send_note_notification
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_send_note_notification' )]
 	public function test_editor_link_is_built_for_the_recipient() {
 		wp_set_current_user( 0 );
 
@@ -244,10 +247,10 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 *
-	 * @covers ::wp_send_note_notification
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_send_note_notification' )]
 	public function test_email_is_sent_as_plain_text() {
 		$note = $this->insert_note(
 			$this->get_mention_markup( self::$mentioned->ID ),
@@ -265,10 +268,10 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	 * exactly once for the plain text email. Decoding twice resolves entities
 	 * the author meant to be read literally.
 	 *
-	 * @ticket 65639
 	 *
-	 * @covers ::wp_send_note_notification
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_send_note_notification' )]
 	public function test_email_subject_decodes_the_post_title_once() {
 		// Stored form of the literal title "Tom &amp; Jerry".
 		add_filter(
@@ -294,10 +297,10 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	 * Note content is stored as HTML, so markup is stripped before entities are
 	 * decoded. Decoding first would turn escaped text into tags and strip it.
 	 *
-	 * @ticket 65639
 	 *
-	 * @covers ::wp_send_note_notification
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_send_note_notification' )]
 	public function test_email_keeps_escaped_markup_in_the_note_text() {
 		$note = $this->insert_note(
 			'<p>Use &lt;code&gt; tags ' . $this->get_mention_markup( self::$mentioned->ID ) . '</p>',
@@ -311,8 +314,8 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_author_is_not_notified_about_their_own_note() {
 		$note = $this->insert_note(
 			'Note to ' . $this->get_mention_markup( self::$commenter->ID, '@Me' ),
@@ -325,8 +328,8 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_post_author_is_left_to_the_postauthor_notification() {
 		$note = $this->insert_note(
 			'Hey ' . $this->get_mention_markup( self::$post_author->ID, '@Author' ),
@@ -344,8 +347,8 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_mentioned_user_without_note_access_is_not_emailed() {
 		$subscriber = self::factory()->user->create_and_get( array( 'role' => 'subscriber' ) );
 		$this->assertInstanceOf( WP_User::class, $subscriber );
@@ -365,8 +368,8 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_mentioning_a_nonexistent_user_sends_nothing() {
 		$note = $this->insert_note(
 			'Ghost ' . $this->get_mention_markup( 999999, '@Ghost' ),
@@ -379,8 +382,8 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_no_notifications_when_disabled() {
 		update_option( 'wp_notes_notify', 0 );
 
@@ -395,8 +398,8 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65639
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_editing_a_note_does_not_renotify() {
 		$note = $this->insert_note(
 			'Ping ' . $this->get_mention_markup( self::$mentioned->ID ),
@@ -415,8 +418,8 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	 * This exercises the `rest_insert_comment` wiring (hook name, priority and
 	 * argument count), which the direct calls above bypass.
 	 *
-	 * @ticket 65639
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_rest_note_creation_triggers_mention_email() {
 		wp_set_current_user( self::$commenter->ID );
 
@@ -434,8 +437,8 @@ class Tests_Comment_WpNotifyNoteMentions extends WP_UnitTestCase {
 	/**
 	 * Updating a note through the REST endpoint must not re-notify.
 	 *
-	 * @ticket 65639
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65639' )]
 	public function test_rest_note_update_does_not_renotify() {
 		$note = $this->insert_note(
 			'Ping ' . $this->get_mention_markup( self::$mentioned->ID ),

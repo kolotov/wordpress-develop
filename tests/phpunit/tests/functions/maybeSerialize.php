@@ -3,17 +3,18 @@
 /**
  * Tests for `maybe_serialize()` and `maybe_unserialize()`.
  *
- * @group functions
  *
- * @covers ::maybe_serialize
- * @covers ::maybe_unserialize
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'maybe_serialize' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'maybe_unserialize' )]
 class Tests_Functions_MaybeSerialize extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_is_not_serialized
 	 */
-	public function test_maybe_serialize( $value ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_not_serialized' )]
+	public function test_maybe_serialize( $data, $expected ) {
+		$value = $data;
 		if ( is_array( $value ) || is_object( $value ) ) {
 			$expected = serialize( $value );
 		} else {
@@ -24,19 +25,22 @@ class Tests_Functions_MaybeSerialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_is_serialized
 	 */
-	public function test_maybe_serialize_with_double_serialization( $value ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_serialized' )]
+	public function test_maybe_serialize_with_double_serialization( $data, $expected ) {
+		$value    = $data;
 		$expected = serialize( $value );
 
 		$this->assertSame( $expected, maybe_serialize( $value ) );
 	}
 
 	/**
-	 * @dataProvider data_is_serialized
-	 * @dataProvider data_is_not_serialized
 	 */
-	public function test_maybe_unserialize( $value, $is_serialized ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_serialized' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_not_serialized' )]
+	public function test_maybe_unserialize( $data, $expected ) {
+		$value         = $data;
+		$is_serialized = $expected;
 		if ( $is_serialized ) {
 			$expected = unserialize( trim( $value ) );
 		} else {
@@ -55,7 +59,7 @@ class Tests_Functions_MaybeSerialize extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_is_serialized() {
+	public static function data_is_serialized() {
 		return array(
 			'serialized empty array'            => array(
 				'data'     => serialize( array() ),
@@ -123,7 +127,7 @@ class Tests_Functions_MaybeSerialize extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_is_not_serialized() {
+	public static function data_is_not_serialized() {
 		return array(
 			'an empty array'                             => array(
 				'data'     => array(),
@@ -209,8 +213,8 @@ class Tests_Functions_MaybeSerialize extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_serialize_deserialize_objects
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_serialize_deserialize_objects' )]
 	public function test_deserialize_request_utility_filtered_iterator_objects( $value ) {
 		$serialized = maybe_serialize( $value );
 
@@ -233,7 +237,7 @@ class Tests_Functions_MaybeSerialize extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_serialize_deserialize_objects() {
+	public static function data_serialize_deserialize_objects() {
 		return array(
 			'filtered iterator using md5'  => array(
 				new WpOrg\Requests\Utility\FilteredIterator( array( 1 ), 'md5' ),

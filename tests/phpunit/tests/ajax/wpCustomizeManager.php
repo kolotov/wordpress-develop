@@ -6,8 +6,13 @@
  * @subpackage UnitTests
  * @since 4.3.0
  *
- * @group ajax
  */
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
 class Tests_Ajax_wpCustomizeManager extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -103,10 +108,10 @@ class Tests_Ajax_wpCustomizeManager extends WP_Ajax_UnitTestCase {
 	/**
 	 * Test WP_Customize_Manager::save().
 	 *
-	 * @ticket 30937
 	 *
-	 * @covers WP_Customize_Manager::save
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30937' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Manager', 'save' )]
 	public function test_save_failures() {
 		global $wp_customize;
 		$wp_customize = new WP_Customize_Manager();
@@ -271,10 +276,10 @@ class Tests_Ajax_wpCustomizeManager extends WP_Ajax_UnitTestCase {
 	/**
 	 * Test WP_Customize_Manager::save().
 	 *
-	 * @ticket 30937
 	 *
-	 * @covers WP_Customize_Manager::save
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30937' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Manager', 'save' )]
 	public function test_save_success_publish_create() {
 		$wp_customize = $this->set_up_valid_state();
 
@@ -301,10 +306,10 @@ class Tests_Ajax_wpCustomizeManager extends WP_Ajax_UnitTestCase {
 	/**
 	 * Test WP_Customize_Manager::save().
 	 *
-	 * @ticket 30937
 	 *
-	 * @covers WP_Customize_Manager::save
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30937' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Manager', 'save' )]
 	public function test_save_success_publish_edit() {
 		$uuid = wp_generate_uuid4();
 
@@ -341,10 +346,10 @@ class Tests_Ajax_wpCustomizeManager extends WP_Ajax_UnitTestCase {
 	/**
 	 * Test WP_Customize_Manager::save().
 	 *
-	 * @ticket 38943
 	 *
-	 * @covers WP_Customize_Manager::save
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38943' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Manager', 'save' )]
 	public function test_success_save_post_date() {
 		$uuid         = wp_generate_uuid4();
 		$post_id      = self::factory()->post->create(
@@ -440,10 +445,10 @@ class Tests_Ajax_wpCustomizeManager extends WP_Ajax_UnitTestCase {
 	/**
 	 * Test WP_Customize_Manager::save().
 	 *
-	 * @ticket 39896
 	 *
-	 * @covers WP_Customize_Manager::save
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39896' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Manager', 'save' )]
 	public function test_save_autosave() {
 		$uuid = wp_generate_uuid4();
 
@@ -487,10 +492,10 @@ class Tests_Ajax_wpCustomizeManager extends WP_Ajax_UnitTestCase {
 	/**
 	 * Test request for trashing a changeset.
 	 *
-	 * @ticket 39896
 	 *
-	 * @covers WP_Customize_Manager::handle_changeset_trash_request
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39896' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Manager', 'handle_changeset_trash_request' )]
 	public function test_handle_changeset_trash_request() {
 		$uuid         = wp_generate_uuid4();
 		$wp_customize = $this->set_up_valid_state( $uuid );
@@ -576,10 +581,10 @@ class Tests_Ajax_wpCustomizeManager extends WP_Ajax_UnitTestCase {
 	/**
 	 * Test request for dismissing autosave changesets.
 	 *
-	 * @ticket 39896
-	 * @covers WP_Customize_Manager::handle_dismiss_autosave_or_lock_request
-	 * @covers WP_Customize_Manager::dismiss_user_auto_draft_changesets
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39896' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Manager', 'handle_dismiss_autosave_or_lock_request' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Manager', 'dismiss_user_auto_draft_changesets' )]
 	public function test_handle_dismiss_autosave_or_lock_request() {
 		$uuid          = wp_generate_uuid4();
 		$wp_customize  = $this->set_up_valid_state( $uuid );
@@ -725,9 +730,9 @@ class Tests_Ajax_wpCustomizeManager extends WP_Ajax_UnitTestCase {
 	/**
 	 * Test request for retrieving installed themes.
 	 *
-	 * @ticket 54549
-	 * @covers WP_Customize_Manager::handle_load_themes_request
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54549' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Manager', 'handle_load_themes_request' )]
 	public function test_wp_ajax_customize_load_themes_action() {
 		$arguments = array(
 			'changeset_uuid'     => false,

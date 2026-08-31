@@ -2,8 +2,8 @@
 
 class Tests_Term_CategoryExists extends WP_UnitTestCase {
 	/**
-	 * @ticket 30975
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30975' )]
 	public function test_category_exists_should_return_only_top_level_categories_when_parent_is_0() {
 		$c1 = self::factory()->category->create();
 		$c2 = self::factory()->category->create(
@@ -24,8 +24,8 @@ class Tests_Term_CategoryExists extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30975
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30975' )]
 	public function test_category_exists_should_select_oldest_matching_category_when_no_parent_is_specified_1() {
 		// Foo child of c1 is created first.
 		$c1 = self::factory()->category->create();
@@ -47,8 +47,8 @@ class Tests_Term_CategoryExists extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30975
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30975' )]
 	public function test_category_exists_should_select_oldest_matching_category_when_no_parent_is_specified_2() {
 		// Top-level Foo is created first.
 		$c1 = self::factory()->category->create();
@@ -70,8 +70,8 @@ class Tests_Term_CategoryExists extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30975
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30975' )]
 	public function test_category_exists_should_respect_nonempty_parent() {
 		$c1 = self::factory()->category->create();
 		$c2 = self::factory()->category->create(

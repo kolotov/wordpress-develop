@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group l10n
- * @group i18n
  *
- * @covers ::get_user_locale
  */
+#[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
+#[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_user_locale' )]
 class Tests_L10n_GetUserLocale extends WP_UnitTestCase {
 	protected $user_id;
 
@@ -91,8 +91,8 @@ class Tests_L10n_GetUserLocale extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @group ms-required
 	 */
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_user_locale_is_same_across_network() {
 		$user_locale = get_user_locale();
 

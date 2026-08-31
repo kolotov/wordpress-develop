@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group comment
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 class Tests_Comment extends WP_UnitTestCase {
 	protected static $user_id;
 	protected static $post_id;
@@ -33,8 +33,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_update_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_comment' )]
 	public function test_wp_update_comment() {
 		$post  = self::factory()->post->create_and_get(
 			array(
@@ -177,10 +177,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30627
 	 *
-	 * @covers ::wp_update_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30627' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_comment' )]
 	public function test_wp_update_comment_updates_comment_type() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 
@@ -196,10 +196,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36784
 	 *
-	 * @covers ::wp_update_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36784' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_comment' )]
 	public function test_wp_update_comment_updates_comment_meta() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 
@@ -217,10 +217,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30307
 	 *
-	 * @covers ::wp_update_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30307' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_comment' )]
 	public function test_wp_update_comment_updates_user_id() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 
@@ -236,10 +236,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34954
 	 *
-	 * @covers ::wp_update_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34954' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_comment' )]
 	public function test_wp_update_comment_with_no_post_id() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => 0 ) );
 
@@ -259,10 +259,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39732
 	 *
-	 * @covers ::wp_update_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39732' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_comment' )]
 	public function test_wp_update_comment_returns_false_for_invalid_comment_or_post_id() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 
@@ -284,10 +284,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 39732
 	 *
-	 * @covers ::wp_update_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39732' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_comment' )]
 	public function test_wp_update_comment_is_wp_error() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 
@@ -314,8 +314,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_approved_comments
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_approved_comments' )]
 	public function test_get_approved_comments() {
 		$ca1 = self::factory()->comment->create(
 			array(
@@ -371,10 +371,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30412
 	 *
-	 * @covers ::get_approved_comments
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30412' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_approved_comments' )]
 	public function test_get_approved_comments_with_post_id_0_should_return_empty_array() {
 		$ca1 = self::factory()->comment->create(
 			array(
@@ -391,11 +391,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	/**
 	 * Tests that get_cancel_comment_reply_link() returns the expected value.
 	 *
-	 * @ticket 53962
 	 *
-	 * @dataProvider data_get_cancel_comment_reply_link
 	 *
-	 * @covers ::get_cancel_comment_reply_link
 	 *
 	 * @param string        $text       Text to display for cancel reply link.
 	 *                                  If empty, defaults to 'Click here to cancel reply'.
@@ -405,6 +402,9 @@ class Tests_Comment extends WP_UnitTestCase {
 	 *                                  or null not to create a comment.
 	 * @param string        $expected   The expected reply link.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53962' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_cancel_comment_reply_link' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_cancel_comment_reply_link' )]
 	public function test_get_cancel_comment_reply_link( $text, $post, $replytocom, $expected ) {
 		if ( 'POST_ID' === $post ) {
 			$post = self::$post_id;
@@ -426,7 +426,7 @@ class Tests_Comment extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_cancel_comment_reply_link() {
+	public static function data_get_cancel_comment_reply_link() {
 		return array(
 			'text as empty string, a valid post ID and an approved comment'    => array(
 				'text'       => '',
@@ -470,10 +470,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	/**
 	 * Tests that comment_form_title() outputs the author of an approved comment.
 	 *
-	 * @ticket 53962
 	 *
-	 * @covers ::comment_form_title
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53962' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'comment_form_title' )]
 	public function test_should_output_the_author_of_an_approved_comment() {
 		// Must be set for `comment_form_title()`.
 		$_GET['replytocom'] = $this->create_comment_with_approval_status( true );
@@ -507,15 +507,15 @@ class Tests_Comment extends WP_UnitTestCase {
 	/**
 	 * Tests that get_comment_id_fields() allows replying to an approved comment.
 	 *
-	 * @ticket 53962
 	 *
-	 * @dataProvider data_should_allow_reply_to_an_approved_comment
 	 *
-	 * @covers ::get_comment_id_fields
 	 *
 	 * @param string $comment_post The post of the comment.
 	 *                             Accepts 'POST', 'NEW_POST', 'POST_ID' and 'NEW_POST_ID'.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53962' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_allow_reply_to_an_approved_comment' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_id_fields' )]
 	public function test_should_allow_reply_to_an_approved_comment( $comment_post ) {
 		// Must be set for `get_comment_id_fields()`.
 		$_GET['replytocom'] = $this->create_comment_with_approval_status( true );
@@ -538,7 +538,7 @@ class Tests_Comment extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_allow_reply_to_an_approved_comment() {
+	public static function data_should_allow_reply_to_an_approved_comment() {
 		return array(
 			'a post ID'        => array( 'comment_post' => 'POST_ID' ),
 			'a WP_Post object' => array( 'comment_post' => 'POST' ),
@@ -549,16 +549,16 @@ class Tests_Comment extends WP_UnitTestCase {
 	 * Tests that get_comment_id_fields() returns an empty string
 	 * when the post cannot be retrieved.
 	 *
-	 * @ticket 53962
 	 *
-	 * @dataProvider data_non_existent_posts
 	 *
-	 * @covers ::get_comment_id_fields
 	 *
 	 * @param bool  $replytocom   Whether to create an approved (true) or unapproved (false) comment.
 	 * @param int   $comment_post The post of the comment.
 	 *
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53962' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_non_existent_posts' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_id_fields' )]
 	public function test_should_return_empty_string( $replytocom, $comment_post ) {
 		if ( is_bool( $replytocom ) ) {
 			$replytocom = $this->create_comment_with_approval_status( $replytocom );
@@ -575,17 +575,17 @@ class Tests_Comment extends WP_UnitTestCase {
 	/**
 	 * Tests that comment_form_title() does not output the author.
 	 *
-	 * @ticket 53962
 	 *
-	 * @covers ::comment_form_title
 	 *
-	 * @dataProvider data_parent_comments
-	 * @dataProvider data_non_existent_posts
 	 *
 	 * @param bool   $replytocom   Whether to create an approved (true) or unapproved (false) comment.
 	 * @param string $comment_post The post of the comment.
 	 *                             Accepts 'POST', 'NEW_POST', 'POST_ID' and 'NEW_POST_ID'.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53962' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_parent_comments' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_non_existent_posts' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'comment_form_title' )]
 	public function test_should_not_output_the_author( $replytocom, $comment_post ) {
 		if ( is_bool( $replytocom ) ) {
 			$replytocom = $this->create_comment_with_approval_status( $replytocom );
@@ -618,7 +618,7 @@ class Tests_Comment extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_non_existent_posts() {
+	public static function data_non_existent_posts() {
 		return array(
 			'an unapproved comment and a non-existent post ID' => array(
 				'replytocom'   => false,
@@ -635,17 +635,17 @@ class Tests_Comment extends WP_UnitTestCase {
 	 * Tests that get_comment_id_fields() does not allow replies when
 	 * the comment does not have a parent post.
 	 *
-	 * @ticket 53962
 	 *
-	 * @covers ::get_comment_id_fields
 	 *
-	 * @dataProvider data_parent_comments
 	 *
 	 * @param mixed  $replytocom   Whether to create an approved (true) or unapproved (false) comment,
 	 *                             or an invalid comment ID.
 	 * @param string $comment_post The post of the comment.
 	 *                             Accepts 'POST', 'NEW_POST', 'POST_ID' and 'NEW_POST_ID'.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53962' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_parent_comments' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_id_fields' )]
 	public function test_should_not_allow_reply( $replytocom, $comment_post ) {
 		if ( is_bool( $replytocom ) ) {
 			$replytocom = $this->create_comment_with_approval_status( $replytocom );
@@ -678,7 +678,7 @@ class Tests_Comment extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_parent_comments() {
+	public static function data_parent_comments() {
 		return array(
 			'an unapproved parent comment (ID)'      => array(
 				'replytocom'   => false,
@@ -735,11 +735,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	/**
 	 * Tests that _get_comment_reply_id() returns the expected value.
 	 *
-	 * @ticket 53962
 	 *
-	 * @dataProvider data_get_comment_reply_id
 	 *
-	 * @covers ::_get_comment_reply_id
 	 *
 	 * @param int|bool|null $replytocom A comment ID (int), whether to generate an approved (true) or unapproved (false) comment,
 	 *                                  or null not to create a comment.
@@ -747,6 +744,9 @@ class Tests_Comment extends WP_UnitTestCase {
 	 *                                  Accepts 'POST_ID', 'POST', or an integer post ID.
 	 * @param int           $expected   The expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53962' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_comment_reply_id' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_get_comment_reply_id' )]
 	public function test_get_comment_reply_id( $replytocom, $post, $expected ) {
 		if ( false === $replytocom ) {
 			unset( $_GET['replytocom'] );
@@ -772,7 +772,7 @@ class Tests_Comment extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_comment_reply_id() {
+	public static function data_get_comment_reply_id() {
 		return array(
 			'no comment ID set ($_GET["replytocom"])'     => array(
 				'replytocom' => false,
@@ -813,10 +813,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 14279
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14279' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_new_comment_respects_dates() {
 		$data = array(
 			'comment_post_ID'      => self::$post_id,
@@ -838,10 +838,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 14601
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14601' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_new_comment_respects_author_ip() {
 		$data = array(
 			'comment_post_ID'      => self::$post_id,
@@ -861,10 +861,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 14601
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14601' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_new_comment_respects_author_ip_empty_string() {
 		$data = array(
 			'comment_post_ID'      => self::$post_id,
@@ -884,10 +884,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 14601
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14601' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_new_comment_respects_comment_agent() {
 		$data = array(
 			'comment_post_ID'      => self::$post_id,
@@ -908,10 +908,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 14601
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14601' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_new_comment_should_trim_provided_comment_agent_to_254_chars() {
 		$data = array(
 			'comment_post_ID'      => self::$post_id,
@@ -932,10 +932,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 14601
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14601' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_new_comment_respects_comment_agent_empty_string() {
 		$data = array(
 			'comment_post_ID'      => self::$post_id,
@@ -956,8 +956,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_new_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_new_comment_respects_comment_field_lengths() {
 		$data = array(
 			'comment_post_ID'      => self::$post_id,
@@ -978,10 +978,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 56244
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56244' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_new_comment_sends_all_expected_parameters_to_preprocess_comment_filter() {
 		$user = get_userdata( self::$user_id );
 		wp_set_current_user( $user->ID );
@@ -1026,10 +1026,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32566
 	 *
-	 * @covers ::wp_notify_moderator
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32566' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_notify_moderator' )]
 	public function test_wp_notify_moderator_should_not_throw_notice_when_post_author_is_0() {
 		$p = self::factory()->post->create(
 			array(
@@ -1047,8 +1047,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_new_comment_notify_postauthor
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_postauthor' )]
 	public function test_wp_new_comment_notify_postauthor_should_send_email_when_comment_is_approved() {
 		$c = self::factory()->comment->create(
 			array(
@@ -1061,8 +1061,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_new_comment_notify_postauthor
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_postauthor' )]
 	public function test_wp_new_comment_notify_postauthor_should_not_send_email_when_comment_is_unapproved() {
 		$c = self::factory()->comment->create(
 			array(
@@ -1076,10 +1076,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33587
 	 *
-	 * @covers ::wp_new_comment_notify_postauthor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33587' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_postauthor' )]
 	public function test_wp_new_comment_notify_postauthor_should_not_send_email_when_comment_has_been_marked_as_spam() {
 		$c = self::factory()->comment->create(
 			array(
@@ -1093,10 +1093,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35006
 	 *
-	 * @covers ::wp_new_comment_notify_postauthor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35006' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_postauthor' )]
 	public function test_wp_new_comment_notify_postauthor_should_not_send_email_when_comment_has_been_trashed() {
 		$c = self::factory()->comment->create(
 			array(
@@ -1110,10 +1110,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64217
 	 *
-	 * @covers ::wp_new_comment_notify_postauthor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64217' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_postauthor' )]
 	public function test_wp_new_comment_notify_postauthor_filter_should_receive_false_for_unapproved_comment(): void {
 		$c = self::factory()->comment->create(
 			array(
@@ -1137,10 +1137,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64217
 	 *
-	 * @covers ::wp_new_comment_notify_postauthor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64217' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_postauthor' )]
 	public function test_wp_new_comment_notify_postauthor_filter_should_override_unapproved_comment(): void {
 		$c = self::factory()->comment->create(
 			array(
@@ -1158,10 +1158,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64217
 	 *
-	 * @covers ::wp_new_comment_notify_postauthor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64217' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_postauthor' )]
 	public function test_wp_new_comment_notify_postauthor_should_not_send_email_for_invalid_comment(): void {
 		$filter = new MockAction();
 		add_filter( 'notify_post_author', array( $filter, 'filter' ) );
@@ -1174,10 +1174,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64217
 	 *
-	 * @covers ::wp_new_comment_notify_postauthor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64217' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_postauthor' )]
 	public function test_wp_new_comment_notify_postauthor_filter_should_receive_truthy_default_for_unapproved_note(): void {
 		$c = self::factory()->comment->create(
 			array(
@@ -1201,10 +1201,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64217
 	 *
-	 * @covers ::wp_new_comment_notify_postauthor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64217' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_postauthor' )]
 	public function test_wp_new_comment_notify_postauthor_filter_should_receive_option_value_for_approved_comment(): void {
 		$c = self::factory()->comment->create(
 			array(
@@ -1226,10 +1226,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43805
 	 *
-	 * @covers ::wp_new_comment_notify_postauthor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43805' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_postauthor' )]
 	public function test_wp_new_comment_notify_postauthor_content_should_include_link_to_parent() {
 		$c1 = self::factory()->comment->create(
 			array(
@@ -1252,10 +1252,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 43805
 	 *
-	 * @covers ::wp_new_comment_notify_moderator
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43805' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment_notify_moderator' )]
 	public function test_wp_new_comment_notify_moderator_content_should_include_link_to_parent() {
 		$c1 = self::factory()->comment->create(
 			array(
@@ -1290,10 +1290,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 12431
 	 *
-	 * @covers ::get_comment_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12431' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_meta' )]
 	public function test_wp_new_comment_with_meta() {
 		$c = self::factory()->comment->create(
 			array(
@@ -1309,10 +1309,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 8071
 	 *
-	 * @covers WP_Comment::get_children
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '8071' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Comment', 'get_children' )]
 	public function test_wp_comment_get_children_should_fill_children() {
 		$c1 = self::factory()->comment->create(
 			array(
@@ -1371,10 +1371,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27571
 	 *
-	 * @covers ::get_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27571' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment' )]
 	public function test_post_properties_should_be_lazyloaded() {
 		$c = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 
@@ -1424,10 +1424,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 761
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '761' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_notify_moderator_filter_moderation_notify_option_true_filter_false() {
 		$comment_data = $this->setup_notify_comment();
 
@@ -1447,10 +1447,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 761
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '761' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_notify_moderator_filter_moderation_notify_option_false_filter_true() {
 		$comment_data = $this->setup_notify_comment();
 
@@ -1470,10 +1470,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 761
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '761' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_notify_post_author_filter_comments_notify_option_true_filter_false() {
 
 		$comment_data = $this->setup_notify_comment();
@@ -1494,10 +1494,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 761
 	 *
-	 * @covers ::wp_new_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '761' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_new_comment' )]
 	public function test_wp_notify_post_author_filter_comments_notify_option_false_filter_true() {
 		$comment_data = $this->setup_notify_comment();
 
@@ -1602,8 +1602,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::_close_comments_for_old_post
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_close_comments_for_old_post' )]
 	public function test_close_comments_for_old_post() {
 		update_option( 'close_comments_for_old_posts', true );
 		// Close comments more than one day old.
@@ -1620,8 +1620,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::_close_comments_for_old_post
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_close_comments_for_old_post' )]
 	public function test_close_comments_for_old_post_undated_draft() {
 		$draft_id             = self::factory()->post->create(
 			array(
@@ -1635,10 +1635,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35276
 	 *
-	 * @covers ::wp_update_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35276' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_comment' )]
 	public function test_wp_update_comment_author_id_and_agent() {
 
 		$default_data = array(
@@ -1675,8 +1675,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_get_comment_fields_max_lengths
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_comment_fields_max_lengths' )]
 	public function test_wp_get_comment_fields_max_lengths() {
 		$expected = array(
 			'comment_author'       => 245,
@@ -1695,8 +1695,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_update_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_update_comment' )]
 	public function test_update_should_invalidate_comment_cache() {
 		global $wpdb;
 
@@ -1718,8 +1718,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_trash_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_trash_comment' )]
 	public function test_trash_should_invalidate_comment_cache() {
 		global $wpdb;
 
@@ -1735,8 +1735,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_untrash_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_untrash_comment' )]
 	public function test_untrash_should_invalidate_comment_cache() {
 		global $wpdb;
 
@@ -1754,8 +1754,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_spam_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_spam_comment' )]
 	public function test_spam_should_invalidate_comment_cache() {
 		global $wpdb;
 
@@ -1771,8 +1771,8 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_unspam_comment
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_unspam_comment' )]
 	public function test_unspam_should_invalidate_comment_cache() {
 		global $wpdb;
 
@@ -1792,10 +1792,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	/**
 	 * Tests that trashing a top-level note also trashes all direct child notes.
 	 *
-	 * @ticket 64240
-	 * @covers ::wp_trash_comment
-	 * @dataProvider data_comment_approved_statuses
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64240' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_comment_approved_statuses' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_trash_comment' )]
 	public function test_wp_trash_comment_trashes_child_notes( $approved_status ) {
 		// Create a parent note (top-level, comment_parent=0).
 		$parent_note = self::factory()->comment->create(
@@ -1850,7 +1850,7 @@ class Tests_Comment extends WP_UnitTestCase {
 	/**
 	 * Data provider for test_wp_trash_comment_trashes_child_notes.
 	 */
-	public function data_comment_approved_statuses() {
+	public static function data_comment_approved_statuses() {
 		return array(
 			array( '1' ),
 			array( '0' ),
@@ -1860,9 +1860,9 @@ class Tests_Comment extends WP_UnitTestCase {
 	/**
 	 * Tests that trashing a regular comment does NOT trash its children.
 	 *
-	 * @ticket 64240
-	 * @covers ::wp_trash_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64240' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_trash_comment' )]
 	public function test_wp_trash_comment_does_not_trash_child_comments() {
 		// Create a parent comment (default type='comment').
 		$parent_comment = self::factory()->comment->create(
@@ -1907,9 +1907,9 @@ class Tests_Comment extends WP_UnitTestCase {
 	/**
 	 * Tests that trashing a child note does not affect parent or siblings.
 	 *
-	 * @ticket 64240
-	 * @covers ::wp_trash_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64240' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_trash_comment' )]
 	public function test_wp_trash_comment_child_note_does_not_affect_parent_or_siblings() {
 		// Create a parent note.
 		$parent_note = self::factory()->comment->create(
@@ -1966,9 +1966,9 @@ class Tests_Comment extends WP_UnitTestCase {
 	/**
 	 * Tests that only top-level notes trigger child deletion.
 	 *
-	 * @ticket 64240
-	 * @covers ::wp_trash_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64240' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_trash_comment' )]
 	public function test_wp_trash_comment_only_top_level_notes_trigger_child_deletion() {
 		// Create a parent note.
 		$parent_note = self::factory()->comment->create(
@@ -2014,10 +2014,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61244
 	 *
-	 * @covers ::get_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61244' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment' )]
 	public function test_get_comment_filter() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 
@@ -2030,10 +2030,10 @@ class Tests_Comment extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 64898
 	 *
-	 * @covers ::get_comment
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment' )]
 	public function test_get_comment_should_only_treat_numeric_values_as_comment_ids(): void {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$post_id ) );
 		$this->assertIsInt( $comment_id );

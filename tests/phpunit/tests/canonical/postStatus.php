@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group canonical
- * @group rewrite
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'canonical' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Canonical_PostStatus extends WP_Canonical_UnitTestCase {
 
 	/**
@@ -214,8 +214,6 @@ class Tests_Canonical_PostStatus extends WP_Canonical_UnitTestCase {
 	/**
 	 * Test canonical redirect does not reveal private posts presence.
 	 *
-	 * @ticket 5272
-	 * @dataProvider data_canonical_redirects_to_plain_permalinks
 	 *
 	 * @param string $post_key  Post key used for creating fixtures.
 	 * @param string $user_role User role.
@@ -223,6 +221,8 @@ class Tests_Canonical_PostStatus extends WP_Canonical_UnitTestCase {
 	 * @param string $expected  Expected URL.
 	 * @param string $enable_attachment_pages Whether to enable attachment pages. Default true.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5272' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_canonical_redirects_to_plain_permalinks' )]
 	public function test_canonical_redirects_to_plain_permalinks( $post_key, $user_role, $requested, $expected, $enable_attachment_pages = true ) {
 		if ( $enable_attachment_pages ) {
 			update_option( 'wp_attachment_pages_enabled', 1 );
@@ -250,7 +250,7 @@ class Tests_Canonical_PostStatus extends WP_Canonical_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_canonical_redirects_to_plain_permalinks() {
+	public static function data_canonical_redirects_to_plain_permalinks() {
 		$data              = array();
 		$all_user_list     = array( 'anon', 'subscriber', 'content_author', 'editor' );
 		$select_allow_list = array( 'content_author', 'editor' );
@@ -840,8 +840,6 @@ class Tests_Canonical_PostStatus extends WP_Canonical_UnitTestCase {
 	/**
 	 * Test canonical redirect does not reveal private slugs.
 	 *
-	 * @ticket 5272
-	 * @dataProvider data_canonical_redirects_to_pretty_permalinks
 	 *
 	 * @param string $post_key  Post key used for creating fixtures.
 	 * @param string $user_role User role.
@@ -849,6 +847,8 @@ class Tests_Canonical_PostStatus extends WP_Canonical_UnitTestCase {
 	 * @param string $expected  Expected URL.
 	 * @param string $enable_attachment_pages Whether to enable attachment pages. Default true.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '5272' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_canonical_redirects_to_pretty_permalinks' )]
 	public function test_canonical_redirects_to_pretty_permalinks( $post_key, $user_role, $requested, $expected, $enable_attachment_pages = true ) {
 		if ( $enable_attachment_pages ) {
 			update_option( 'wp_attachment_pages_enabled', 1 );
@@ -881,7 +881,7 @@ class Tests_Canonical_PostStatus extends WP_Canonical_UnitTestCase {
 	 *     @type string $expected  Expected URL.
 	 * }
 	 */
-	public function data_canonical_redirects_to_pretty_permalinks() {
+	public static function data_canonical_redirects_to_pretty_permalinks() {
 		$data              = array();
 		$all_user_list     = array( 'anon', 'subscriber', 'content_author', 'editor' );
 		$select_allow_list = array( 'content_author', 'editor' );

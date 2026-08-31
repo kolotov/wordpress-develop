@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wp_trim_words
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_trim_words' )]
 class Tests_Formatting_wpTrimWords extends WP_UnitTestCase {
 
 	/**
@@ -38,8 +38,8 @@ class Tests_Formatting_wpTrimWords extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 18726
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18726' )]
 	public function test_strips_script_and_style_content() {
 		$trimmed = 'This text contains. It should go.';
 
@@ -56,8 +56,8 @@ class Tests_Formatting_wpTrimWords extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
 	public function test_trims_to_20_counted_by_chars() {
 		switch_to_locale( 'ja_JP' );
 		$expected = substr( $this->long_text, 0, 20 ) . '&hellip;';
@@ -67,8 +67,8 @@ class Tests_Formatting_wpTrimWords extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44541
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44541' )]
 	public function test_trims_to_20_counted_by_chars_with_double_width_chars() {
 		switch_to_locale( 'ja_JP' );
 		$text     = str_repeat( 'あ', 100 );
@@ -79,8 +79,8 @@ class Tests_Formatting_wpTrimWords extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47867' )]
 	public function test_works_with_non_numeric_num_words() {
 		$this->assertSame( '', wp_trim_words( $this->long_text, '', '' ) );
 		$this->assertSame( '', wp_trim_words( $this->long_text, 'abc', '' ) );

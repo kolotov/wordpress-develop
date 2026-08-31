@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @group query
- * @covers ::generate_postdata
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'generate_postdata' )]
 class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_setup_by_id() {
 		$p    = self::factory()->post->create_and_get();
 		$data = generate_postdata( $p->ID );
@@ -16,8 +16,8 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_setup_by_fake_post() {
 		$fake     = new stdClass();
 		$fake->ID = 98765;
@@ -28,8 +28,8 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_setup_by_postish_object() {
 		$p = self::factory()->post->create();
 
@@ -41,8 +41,8 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_authordata() {
 		$u    = self::factory()->user->create_and_get();
 		$p    = self::factory()->post->create_and_get(
@@ -57,8 +57,8 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_currentday() {
 		$p    = self::factory()->post->create_and_get(
 			array(
@@ -82,8 +82,8 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_single_page() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -98,8 +98,8 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_multi_page() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -114,8 +114,8 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_nextpage_at_start_of_content() {
 		$post = self::factory()->post->create_and_get(
 			array(
@@ -130,8 +130,8 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42814
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_trim_nextpage_linebreaks() {
 		$post = self::factory()->post->create_and_get(
 			array(

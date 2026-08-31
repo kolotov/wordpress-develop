@@ -3,10 +3,10 @@
 /**
  * Test wp_list_pluck().
  *
- * @group functions
  *
- * @covers ::wp_list_pluck
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_list_pluck' )]
 class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 	public $object_list = array();
 	public $array_list  = array();
@@ -76,8 +76,8 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28666
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28666' )]
 	public function test_wp_list_pluck_index_key() {
 		$list = wp_list_pluck( $this->array_list, 'name', 'id' );
 		$this->assertSame(
@@ -91,8 +91,8 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28666
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28666' )]
 	public function test_wp_list_pluck_object_index_key() {
 		$list = wp_list_pluck( $this->object_list, 'name', 'id' );
 		$this->assertSame(
@@ -106,8 +106,8 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28666
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28666' )]
 	public function test_wp_list_pluck_missing_index_key() {
 		$list = wp_list_pluck( $this->array_list, 'name', 'nonexistent' );
 		$this->assertSame(
@@ -121,8 +121,8 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28666
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28666' )]
 	public function test_wp_list_pluck_partial_missing_index_key() {
 		$array_list = $this->array_list;
 		unset( $array_list['bar']['id'] );
@@ -138,8 +138,8 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28666
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28666' )]
 	public function test_wp_list_pluck_mixed_index_key() {
 		$mixed_list        = $this->array_list;
 		$mixed_list['bar'] = (object) $mixed_list['bar'];
@@ -155,8 +155,8 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16895
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16895' )]
 	public function test_wp_list_pluck_containing_references() {
 		$ref_list = array(
 			& $this->object_list['foo'],
@@ -180,8 +180,8 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16895
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16895' )]
 	public function test_wp_list_pluck_containing_references_keys() {
 		$ref_list = array(
 			& $this->object_list['foo'],
@@ -205,13 +205,13 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_wp_list_pluck
 	 *
 	 * @param array      $input_list List of objects or arrays.
 	 * @param int|string $field      Field from the object to place instead of the entire object
 	 * @param int|string $index_key  Field from the object to use as keys for the new array.
 	 * @param array      $expected   Expected result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_list_pluck' )]
 	public function test_wp_list_pluck( $input_list, $field, $index_key, $expected ) {
 		$this->assertSameSetsWithIndex( $expected, wp_list_pluck( $input_list, $field, $index_key ) );
 	}
@@ -221,7 +221,7 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_list_pluck() {
+	public static function data_wp_list_pluck() {
 		return array(
 			'arrays'                         => array(
 				array(

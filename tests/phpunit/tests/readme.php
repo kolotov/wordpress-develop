@@ -3,13 +3,13 @@
  * Validate recommended versions for dependencies referenced in `readme.html`,
  * based on external site support pages.
  *
- * @group external-http
  */
+#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 class Tests_Readme extends WP_UnitTestCase {
 
 	/**
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_readme_php_version() {
 		// This test is designed to only run on trunk.
 		$this->skipOnAutomatedBranches();
@@ -26,8 +26,8 @@ class Tests_Readme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_readme_mysql_version() {
 		// This test is designed to only run on trunk.
 		$this->skipOnAutomatedBranches();
@@ -62,8 +62,8 @@ class Tests_Readme extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @coversNothing
 	 */
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_readme_mariadb_version() {
 		// This test is designed to only run on trunk.
 		$this->skipOnAutomatedBranches();

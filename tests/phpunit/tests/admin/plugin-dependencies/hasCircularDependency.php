@@ -7,21 +7,18 @@
 
 require_once __DIR__ . '/base.php';
 
-/**
- * @group admin
- * @group plugins
- *
- * @covers WP_Plugin_Dependencies::has_circular_dependency
- * @covers WP_Plugin_Dependencies::get_circular_dependencies
- * @covers WP_Plugin_Dependencies::check_for_circular_dependencies
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'has_circular_dependency' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'get_circular_dependencies' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'check_for_circular_dependencies' )]
 class Tests_Admin_WPPluginDependencies_HasCircularDependency extends WP_PluginDependencies_UnitTestCase {
 
 	/**
 	 * Tests that false is returned if Plugin Dependencies has not been initialized.
 	 *
-	 * @ticket 60457
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60457' )]
 	public function test_should_return_false_before_initialization() {
 		$this->set_property_value(
 			'plugins',
@@ -58,13 +55,13 @@ class Tests_Admin_WPPluginDependencies_HasCircularDependency extends WP_PluginDe
 	/**
 	 * Tests that a plugin with a circular dependency will return true.
 	 *
-	 * @ticket 22316
 	 *
-	 * @dataProvider data_circular_dependencies
 	 *
 	 * @param string  $plugin_to_check The plugin file of the plugin to check.
 	 * @param array[] $plugins         An array of plugins.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_circular_dependencies' )]
 	public function test_should_return_true_when_a_plugin_has_circular_dependency( $plugin_to_check, $plugins ) {
 		$this->set_property_value( 'plugins', $plugins );
 		self::$instance::initialize();
@@ -77,7 +74,7 @@ class Tests_Admin_WPPluginDependencies_HasCircularDependency extends WP_PluginDe
 	 *
 	 * @return array[]
 	 */
-	public function data_circular_dependencies() {
+	public static function data_circular_dependencies() {
 		return array(
 			'a plugin that depends on itself' => array(
 				'plugin_to_check' => 'dependency/dependency.php',
@@ -145,8 +142,8 @@ class Tests_Admin_WPPluginDependencies_HasCircularDependency extends WP_PluginDe
 	/**
 	 * Tests that a plugin with no circular dependencies will return false.
 	 *
-	 * @ticket 22316
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
 	public function test_should_return_false_when_a_plugin_has_no_circular_dependency() {
 		$this->set_property_value(
 			'plugins',

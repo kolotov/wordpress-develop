@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group compat
  *
- * @covers Services_JSON
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Compat_jsonEncodeDecode extends WP_UnitTestCase {
 
 	public function test_json_encode_decode() {

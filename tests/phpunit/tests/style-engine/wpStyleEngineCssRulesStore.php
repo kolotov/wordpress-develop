@@ -6,22 +6,28 @@
  * @subpackage StyleEngine
  * @since 6.1.0
  *
- * @group style-engine
+
  */
 
 /**
  * Tests for registering, storing and retrieving a collection of CSS Rules (a store).
  *
- * @coversDefaultClass WP_Style_Engine_CSS_Rules_Store
  */
+#[\PHPUnit\Framework\Attributes\Group( 'style-engine' )]
+
+
+
+
+
+
 class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 	/**
 	 * Tests creating a new store on instantiation.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::__construct
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rules_Store', 'get_store' )]
 	public function test_should_create_new_store_on_instantiation() {
 		$new_pancakes_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'pancakes-with-strawberries' );
 
@@ -31,10 +37,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 	/**
 	 * Tests that a `$store_name` argument is required and no store will be created without one.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_store
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rules_Store', 'get_store' )]
 	public function test_should_not_create_store_without_a_store_name() {
 		$not_a_store = WP_Style_Engine_CSS_Rules_Store::get_store( '' );
 
@@ -52,10 +58,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 	/**
 	 * Tests returning a previously created store when the same selector key is passed.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_store
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rules_Store', 'get_store' )]
 	public function test_should_return_existing_store() {
 		$new_fish_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'fish-n-chips' );
 		$selector       = '.haddock';
@@ -72,10 +78,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 	/**
 	 * Tests returning all previously created stores.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_stores
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rules_Store', 'get_stores' )]
 	public function test_should_get_all_existing_stores() {
 		$burrito_store    = WP_Style_Engine_CSS_Rules_Store::get_store( 'burrito' );
 		$quesadilla_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'quesadilla' );
@@ -92,10 +98,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 	/**
 	 * Tests that all previously created stores are deleted.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::remove_all_stores
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rules_Store', 'remove_all_stores' )]
 	public function test_should_remove_all_stores() {
 		$dolmades_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'dolmades' );
 		$tzatziki_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'tzatziki' );
@@ -121,10 +127,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 	/**
 	 * Tests adding rules to an existing store.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::add_rule
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rules_Store', 'add_rule' )]
 	public function test_should_add_rule_to_existing_store() {
 		$new_pie_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'meat-pie' );
 		$selector      = '.wp-block-sauce a:hover';
@@ -150,10 +156,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 	/**
 	 * Tests that all stored rule objects are returned.
 	 *
-	 * @ticket 56467
 	 *
-	 * @covers ::get_all_rules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rules_Store', 'get_all_rules' )]
 	public function test_should_get_all_rule_objects_for_a_store() {
 		$new_pizza_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'pizza-with-mozzarella' );
 		$selector        = '.wp-block-anchovies a:hover';
@@ -183,10 +189,10 @@ class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 	/**
 	 * Tests adding rules group keys to store.
 	 *
-	 * @ticket 61099
 	 *
-	 * @covers ::add_rule
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61099' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Style_Engine_CSS_Rules_Store', 'add_rule' )]
 	public function test_should_store_as_concatenated_rules_groups_and_selector() {
 		$store_one      = WP_Style_Engine_CSS_Rules_Store::get_store( 'one' );
 		$store_one_rule = $store_one->add_rule( '.tony', '.one' );

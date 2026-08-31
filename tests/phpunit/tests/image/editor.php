@@ -5,9 +5,9 @@ require_once __DIR__ . '/base.php';
 /**
  * Test the WP_Image_Editor base class
  *
- * @group image
- * @group media
  */
+#[\PHPUnit\Framework\Attributes\Group( 'image' )]
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
 class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	public $editor_engine = 'WP_Image_Editor_Mock';
 
@@ -23,11 +23,21 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 		parent::set_up();
 	}
 
+	public function tear_down() {
+		remove_filter( 'wp_editor_set_quality', array( $this, 'return_integer_100' ) );
+		remove_filter( 'wp_editor_set_quality', array( $this, 'image_editor_change_quality' ), 10 );
+		remove_filter( 'jpeg_quality', array( $this, 'return_integer_95' ) );
+		remove_filter( 'image_editor_output_format', array( $this, 'image_editor_output_formats' ) );
+		WP_Image_Editor_Mock::$load_return = true;
+
+		parent::tear_down();
+	}
+
 	/**
 	 * Test wp_get_image_editor() where load returns true
 	 *
-	 * @ticket 6821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
 	public function test_get_editor_load_returns_true() {
 		$editor = wp_get_image_editor( DIR_TESTDATA . '/images/canola.jpg' );
 
@@ -37,8 +47,8 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	/**
 	 * Test wp_get_image_editor() where load returns false
 	 *
-	 * @ticket 6821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
 	public function test_get_editor_load_returns_false() {
 		WP_Image_Editor_Mock::$load_return = new WP_Error();
 
@@ -66,8 +76,8 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	/**
 	 * Test test_quality
 	 *
-	 * @ticket 6821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
 	public function test_set_quality() {
 
 		// Get an editor.
@@ -110,8 +120,8 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	/**
 	 * Test test_quality when converting image
 	 *
-	 * @ticket 6821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
 	public function test_set_quality_with_image_conversion() {
 		$editor = wp_get_image_editor( DIR_TESTDATA . '/images/test-image.png' );
 		$editor->set_mime_type( 'image/png' ); // Ensure mime-specific filters act properly.
@@ -201,8 +211,8 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	/**
 	 * Test generate_filename
 	 *
-	 * @ticket 6821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
 	public function test_generate_filename() {
 
 		// Get an editor.
@@ -242,8 +252,8 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	/**
 	 * Test get_size
 	 *
-	 * @ticket 6821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
 	public function test_get_size() {
 
 		$editor = wp_get_image_editor( DIR_TESTDATA . '/images/canola.jpg' );
@@ -268,8 +278,8 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	/**
 	 * Test get_suffix
 	 *
-	 * @ticket 6821
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
 	public function test_get_suffix() {
 		$editor = wp_get_image_editor( DIR_TESTDATA . '/images/canola.jpg' );
 
@@ -293,10 +303,10 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	/**
 	 * Test wp_get_webp_info.
 	 *
-	 * @ticket 35725
-	 * @dataProvider data_wp_get_webp_info
 	 *
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35725' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_webp_info' )]
 	public function test_wp_get_webp_info( $file, $expected ) {
 		$file_data = wp_get_webp_info( $file );
 		$this->assertSame( $expected, $file_data );
@@ -305,7 +315,7 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	/**
 	 * Data provider for test_wp_get_webp_info().
 	 */
-	public function data_wp_get_webp_info() {
+	public static function data_wp_get_webp_info() {
 		return array(
 			// Standard JPEG.
 			array(
@@ -367,13 +377,13 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	/**
 	 * Test wp_get_avif_info.
 	 *
-	 * @ticket 51228
 	 *
-	 * @dataProvider data_wp_get_avif_info
 	 *
 	 * @param string $file     The path to the AVIF file for testing.
 	 * @param array  $expected The expected AVIF file information.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51228' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_avif_info' )]
 	public function test_wp_get_avif_info( $file, $expected ) {
 		$file_data = wp_get_avif_info( $file );
 		$this->assertSame( $expected, $file_data );
@@ -382,7 +392,7 @@ class Tests_Image_Editor extends WP_Image_UnitTestCase {
 	/**
 	 * Data provider for test_wp_get_avif_info().
 	 */
-	public function data_wp_get_avif_info() {
+	public static function data_wp_get_avif_info() {
 		return array(
 			// Standard JPEG.
 			array(

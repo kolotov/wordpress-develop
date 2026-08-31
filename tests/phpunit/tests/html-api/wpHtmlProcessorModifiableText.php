@@ -4,10 +4,9 @@
  *
  * @package WordPress
  * @subpackage HTML-API
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlProcessorModifiableText extends WP_UnitTestCase {
 	/**
 	 * TEXTAREA elements ignore the first newline in their content.
@@ -17,13 +16,13 @@ class Tests_HtmlApi_WpHtmlProcessorModifiableText extends WP_UnitTestCase {
 	 * TEXTAREA are treated as atomic tags by the tag processor, so `set_modifiable_text()`
 	 * is called directly on the TEXTAREA token.
 	 *
-	 * @ticket 64609
 	 *
-	 * @dataProvider data_modifiable_text_special_textarea
 	 *
 	 * @param string $set_text         Text to set.
 	 * @param string $expected_html    Expected HTML output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64609' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_modifiable_text_special_textarea' )]
 	public function test_modifiable_text_special_textarea( string $set_text, string $expected_html ): void {
 		$processor = WP_HTML_Processor::create_fragment( '<textarea></textarea>' );
 		$processor->next_token();
@@ -75,11 +74,11 @@ class Tests_HtmlApi_WpHtmlProcessorModifiableText extends WP_UnitTestCase {
 	 * This includes atomic-like foreign elements (`<svg><textarea>`) as well as arbitrary HTML
 	 * elements (`<div>`).
 	 *
-	 * @ticket 64751
-	 * @dataProvider data_set_modifiable_fails_non_atomic_tags
 	 *
 	 * @expectedIncorrectUsage WP_HTML_Tag_Processor::set_modifiable_text
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64751' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_set_modifiable_fails_non_atomic_tags' )]
 	public function test_set_modifiable_fails_non_atomic_tags(
 		string $html,
 		string $target_tag

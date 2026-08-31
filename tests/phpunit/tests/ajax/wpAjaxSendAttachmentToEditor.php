@@ -7,10 +7,12 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 /**
  * Testing Ajax attachment handling.
  *
- * @group ajax
  *
- * @covers ::wp_ajax_send_attachment_to_editor
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_send_attachment_to_editor' )]
 class Tests_Ajax_wpAjaxSendAttachmentToEditor extends WP_Ajax_UnitTestCase {
 
 	/**
@@ -45,10 +47,9 @@ class Tests_Ajax_wpAjaxSendAttachmentToEditor extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36578
-	 *
-	 * @covers ::get_image_send_to_editor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36578' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_image_send_to_editor' )]
 	public function test_wp_ajax_send_attachment_to_editor_should_return_an_image() {
 		// Become an administrator.
 		$this->_setRole( 'administrator' );
@@ -89,9 +90,9 @@ class Tests_Ajax_wpAjaxSendAttachmentToEditor extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36578
-	 * @group ms-excluded
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36578' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_wp_ajax_send_attachment_to_editor_should_return_a_link() {
 		// Become an administrator.
 		$this->_setRole( 'administrator' );

@@ -6,10 +6,10 @@
  * @subpackage UnitTests
  * @since 5.2.0
  *
- * @group privacy
- * @covers ::wp_privacy_generate_personal_data_export_file
- * @requires extension zip
  */
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_privacy_generate_personal_data_export_file' )]
+#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'zip' )]
 class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestCase {
 	/**
 	 * An Export Request ID
@@ -142,10 +142,21 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 			}
 		}
 
-		foreach ( $files as $file ) {
-			if ( is_dir( $file ) ) {
-				rmdir( $file );
+		$glob_directories = glob( self::$exports_dir . '*', GLOB_ONLYDIR );
+		$directories      = array_merge(
+			array_filter( $files, 'is_dir' ),
+			$glob_directories ? $glob_directories : array()
+		);
+		$directories = array_unique( array_map( 'untrailingslashit', $directories ) );
+		usort(
+			$directories,
+			static function ( string $left, string $right ): int {
+				return strlen( $right ) <=> strlen( $left );
 			}
+		);
+
+		foreach ( $directories as $directory ) {
+			rmdir( $directory );
 		}
 
 		rmdir( self::$exports_dir );
@@ -156,8 +167,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 	/**
 	 * When a remove request ID is passed to the export function an error should be displayed.
 	 *
-	 * @ticket 44233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
 	public function test_rejects_remove_requests() {
 		$request_id = wp_create_user_request( 'removal-requester@example.com', 'remove_personal_data' );
 
@@ -169,8 +180,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 	/**
 	 * When an invalid request ID is passed an error should be displayed.
 	 *
-	 * @ticket 44233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
 	public function test_invalid_request_id() {
 		$this->expectException( 'WPDieException' );
 		$this->expectOutputString( '{"success":false,"data":"Invalid request ID when generating personal data export file."}' );
@@ -180,8 +191,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 	/**
 	 * When the request post title is not a valid email an error should be displayed.
 	 *
-	 * @ticket 44233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
 	public function test_rejects_requests_with_bad_email_addresses() {
 		$request_id = wp_create_user_request( 'bad-email-requester@example.com', 'export_personal_data' );
 
@@ -200,8 +211,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 	/**
 	 * When the export directory fails to be created an error should be displayed.
 	 *
-	 * @ticket 44233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
 	public function test_detect_cannot_create_folder() {
 		// Create a file with the folder name to ensure the function cannot create a folder.
 		touch( untrailingslashit( self::$exports_dir ) );
@@ -212,12 +223,12 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 	}
 
 	/**
-	 * @ticket 51423
 	 *
-	 * @dataProvider data_export_data_grouped_invalid_type
 	 *
 	 * @param mixed $groups '_export_data_grouped' post meta value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51423' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_export_data_grouped_invalid_type' )]
 	public function test_doing_it_wrong_for_export_data_grouped_invalid_type( $groups ) {
 		update_post_meta( self::$export_request_id, '_export_data_grouped', $groups );
 
@@ -226,7 +237,7 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 		wp_privacy_generate_personal_data_export_file( self::$export_request_id );
 	}
 
-	public function data_export_data_grouped_invalid_type() {
+	public static function data_export_data_grouped_invalid_type() {
 		return array(
 			array( 10 ),
 			array( 'WordPress' ),
@@ -283,8 +294,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 	/**
 	 * Test that an index.php file can be added to the export directory.
 	 *
-	 * @ticket 44233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
 	public function test_creates_index_in_export_folder() {
 		$this->expectOutputString( '' );
 		wp_privacy_generate_personal_data_export_file( self::$export_request_id );
@@ -295,8 +306,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 	/**
 	 * Test that an export file is successfully created.
 	 *
-	 * @ticket 44233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
 	public function test_can_succeed() {
 		wp_privacy_generate_personal_data_export_file( self::$export_request_id );
 
@@ -306,15 +317,15 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 	/**
 	 * Test the export HTML file has all the expected parts.
 	 *
-	 * @ticket 44233
-	 * @ticket 46894
-	 * @ticket 51423
 	 *
-	 * @dataProvider data_contents
 	 *
 	 * @param mixed    $groups           '_export_data_grouped' post meta value.
 	 * @param string[] $expected_content Optional. Expected content. Use "html" key for this test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '46894' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '51423' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_contents' )]
 	public function test_html_contents( $groups, array $expected_content = array() ) {
 		// Set the _doing_it_wrong assertion.
 		if ( ! is_array( $groups ) ) {
@@ -348,15 +359,15 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 	/**
 	 * Test the export JSON file has all the expected parts.
 	 *
-	 * @ticket 49029
-	 * @ticket 46894
-	 * @ticket 51423
 	 *
-	 * @dataProvider data_contents
 	 *
 	 * @param mixed    $groups           '_export_data_grouped' post meta value.
 	 * @param string[] $expected_content Optional. Expected content. Use "json" key for this test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '49029' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '46894' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '51423' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_contents' )]
 	public function test_json_contents( $groups, array $expected_content = array() ) {
 		// Set the _doing_it_wrong assertion.
 		if ( ! is_array( $groups ) ) {
@@ -448,7 +459,7 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 		return str_replace( '{{TIMESTAMP}}', $timestamp, $expected_content );
 	}
 
-	public function data_contents() {
+	public static function data_contents() {
 		return array(
 			// Unhappy path.
 			'should contain null when integer'           => array(
@@ -633,8 +644,8 @@ class Tests_Privacy_wpPrivacyGeneratePersonalDataExportFile extends WP_UnitTestC
 	/**
 	 * Test should generate JSON error when JSON encoding fails.
 	 *
-	 * @ticket 52892
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52892' )]
 	public function test_should_generate_json_error_when_json_encoding_fails() {
 		add_filter( 'get_post_metadata', array( $this, 'filter_export_data_grouped_metadata' ), 10, 3 );
 

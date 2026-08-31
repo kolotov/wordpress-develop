@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group rewrite
- * @ticket 33920
- * @covers wp_old_slug_redirect
  */
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '33920' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_old_slug_redirect' )]
 class Tests_Rewrite_OldSlugRedirect extends WP_UnitTestCase {
 	protected $old_slug_redirect_url;
 
@@ -56,8 +56,8 @@ class Tests_Rewrite_OldSlugRedirect extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36723
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36723' )]
 	public function test_old_slug_redirect_cache() {
 		$old_permalink = user_trailingslashit( get_permalink( self::$post_id ) );
 
@@ -82,8 +82,8 @@ class Tests_Rewrite_OldSlugRedirect extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36723
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36723' )]
 	public function test_old_slug_redirect_cache_invalidation() {
 		$old_permalink = user_trailingslashit( get_permalink( self::$post_id ) );
 
@@ -182,8 +182,8 @@ class Tests_Rewrite_OldSlugRedirect extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 35031
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35031' )]
 	public function test_old_slug_doesnt_redirect_when_reused() {
 		$old_permalink = user_trailingslashit( get_permalink( self::$post_id ) );
 

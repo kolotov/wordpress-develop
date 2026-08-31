@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group date
- * @group datetime
- * @group functions
  *
- * @covers ::mysql2date
  */
+#[\PHPUnit\Framework\Attributes\Group( 'date' )]
+#[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'mysql2date' )]
 class Tests_Date_mysql2date extends WP_UnitTestCase {
 
 	public function tear_down() {
@@ -20,23 +20,23 @@ class Tests_Date_mysql2date extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28310
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_mysql2date_returns_false_with_no_date() {
 		$this->assertFalse( mysql2date( 'F j, Y H:i:s', '' ) );
 	}
 
 	/**
-	 * @ticket 28310
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_mysql2date_returns_gmt_or_unix_timestamp() {
 		$this->assertSame( 441013392, mysql2date( 'G', '1983-12-23 07:43:12' ) );
 		$this->assertSame( 441013392, mysql2date( 'U', '1983-12-23 07:43:12' ) );
 	}
 
 	/**
-	 * @ticket 28992
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28992' )]
 	public function test_mysql2date_should_format_time() {
 		$timezone = 'Europe/Helsinki';
 		update_option( 'timezone_string', $timezone );
@@ -49,8 +49,8 @@ class Tests_Date_mysql2date extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28992
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28992' )]
 	public function test_mysql2date_should_format_time_with_changed_time_zone() {
 		$timezone = 'Europe/Helsinki';
 		// phpcs:ignore WordPress.DateTime.RestrictedFunctions.timezone_change_date_default_timezone_set
@@ -67,8 +67,8 @@ class Tests_Date_mysql2date extends WP_UnitTestCase {
 	/**
 	 * Ensures that deprecated timezone strings are handled correctly.
 	 *
-	 * @ticket 56468
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56468' )]
 	public function test_mysql2date_should_format_time_with_deprecated_time_zone() {
 		$timezone = 'America/Buenos_Aires'; // This timezone was deprecated pre-PHP 5.6.
 		update_option( 'timezone_string', $timezone );
@@ -81,8 +81,8 @@ class Tests_Date_mysql2date extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28992
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28992' )]
 	public function test_mysql2date_should_return_wp_timestamp() {
 		$timezone = 'Europe/Helsinki';
 		update_option( 'timezone_string', $timezone );
@@ -95,8 +95,8 @@ class Tests_Date_mysql2date extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 28992
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '28992' )]
 	public function test_mysql2date_should_return_unix_timestamp_for_gmt_time() {
 		$timezone = 'Europe/Helsinki';
 		update_option( 'timezone_string', $timezone );

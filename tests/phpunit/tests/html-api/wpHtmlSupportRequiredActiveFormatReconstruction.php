@@ -8,17 +8,16 @@
  *
  * @since 6.5.0
  *
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlSupportRequiredActiveFormatReconstruction extends WP_UnitTestCase {
 	/**
 	 * Ensures that active formats are properly reconstructed when visiting text nodes,
 	 * verifying that the proper breadcrumbs are maintained when scanning through HTML.
 	 *
-	 * @ticket 60455
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60455' )]
 	public function test_reconstructs_active_formats_on_text_nodes() {
 		$processor = WP_HTML_Processor::create_fragment( '<p><b>One<p><source>Two<source>' );
 

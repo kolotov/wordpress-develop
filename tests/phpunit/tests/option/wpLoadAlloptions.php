@@ -2,8 +2,11 @@
 /**
  * Test wp_load_alloptions().
  *
- * @group option
  */
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 	protected $alloptions = null;
 
@@ -13,17 +16,17 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_cache_get
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_get' )]
 	public function test_if_alloptions_is_cached() {
 		$this->assertNotEmpty( wp_cache_get( 'alloptions', 'options' ) );
 	}
 
 	/**
-	 * @ticket 42441
 	 *
-	 * @covers ::wp_load_alloptions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_default_and_yes() {
 		add_option( 'foo', 'bar' );
 		add_option( 'bar', 'foo', '', true );
@@ -33,10 +36,10 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42441
 	 *
-	 * @covers ::wp_load_alloptions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_default_and_no() {
 		add_option( 'foo', 'bar' );
 		add_option( 'bar', 'foo', '', false );
@@ -46,19 +49,19 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @depends test_if_alloptions_is_cached
 	 *
-	 * @covers ::wp_cache_delete
 	 */
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_if_alloptions_is_cached' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_delete' )]
 	public function test_if_cached_alloptions_is_deleted() {
 		$this->assertTrue( wp_cache_delete( 'alloptions', 'options' ) );
 	}
 
 	/**
-	 * @depends test_if_alloptions_is_cached
 	 *
-	 * @covers ::wp_load_alloptions
 	 */
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_if_alloptions_is_cached' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_if_alloptions_are_retrieved_from_cache() {
 		$before = get_num_queries();
 		wp_load_alloptions();
@@ -69,10 +72,10 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @depends test_if_cached_alloptions_is_deleted
 	 *
-	 * @covers ::wp_load_alloptions
 	 */
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_if_cached_alloptions_is_deleted' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_if_alloptions_are_retrieved_from_database() {
 		// Delete the existing cache first.
 		wp_cache_delete( 'alloptions', 'options' );
@@ -86,10 +89,10 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @depends test_if_cached_alloptions_is_deleted
 	 *
-	 * @covers ::wp_load_alloptions
 	 */
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_if_cached_alloptions_is_deleted' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_filter_pre_cache_alloptions_is_called() {
 		$temp = wp_installing();
 
@@ -114,10 +117,10 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @depends test_if_alloptions_is_cached
 	 *
-	 * @covers ::wp_load_alloptions
 	 */
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_if_alloptions_is_cached' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_filter_pre_cache_alloptions_is_not_called() {
 		$temp = wp_installing();
 
@@ -147,10 +150,10 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 	/**
 	 * Tests that `$alloptions` can be filtered with a custom value, short circuiting `wp_load_alloptions()`.
 	 *
-	 * @ticket 56045
 	 *
-	 * @covers ::wp_load_alloptions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56045' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_filter_pre_wp_load_alloptions_filter_is_called() {
 		$filter = new MockAction();
 

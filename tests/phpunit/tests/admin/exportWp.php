@@ -1,15 +1,13 @@
 <?php
 
 /**
- * @group admin
- * @group export
  *
- * @covers ::export_wp
- *
- * Tests run in a separate process to prevent "headers already sent" error.
- * @runTestsInSeparateProcesses
- * @preserveGlobalState disabled
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'export' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'export_wp' )]
+#[\PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses]
+#[\PHPUnit\Framework\Attributes\PreserveGlobalState( false )]
 class Tests_Admin_ExportWp extends WP_UnitTestCase {
 	/**
 	 * Post IDs for posts, pages, and attachments.
@@ -89,9 +87,7 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_should_include_attachments
 	 *
-	 * @ticket 17379
 	 *
 	 * @param array $args            Arguments to pass to export_wp().
 	 * @param array $expected {
@@ -105,6 +101,8 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 	 *     }
 	 *     @type array $ids A list of self::$post_ids keys.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_include_attachments' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '17379' )]
 	public function test_should_include_attachments( array $args, array $expected ) {
 		$this->populate_args_post_authors( $args, $expected['ids'] );
 
@@ -130,7 +128,7 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_should_include_attachments() {
+	public static function data_should_include_attachments() {
 		return array(
 			'for all content'           => array(
 				'args'     => array(
@@ -292,8 +290,8 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61244
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61244' )]
 	public function test_export_wp_should_not_include_empty_comments_when_filtered() {
 		$post_id = self::factory()->post->create( array( 'post_title' => 'Test Post' ) );
 		self::factory()->comment->create_post_comments( $post_id, 3 );
@@ -312,8 +310,8 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61244
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61244' )]
 	public function test_export_wp_includes_comments_when_not_filtered() {
 		$post_id       = self::factory()->post->create( array( 'post_title' => 'Test Post' ) );
 		$comment_count = 3;
@@ -327,8 +325,8 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 	/**
 	 * Tests that export handles posts with NULL postmeta values without fatal errors.
 	 *
-	 * @ticket 64347
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64347' )]
 	public function test_export_with_null_postmeta_values() {
 		global $wpdb;
 
@@ -388,8 +386,8 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 	/**
 	 * Tests that export handles comments with NULL values without fatal errors.
 	 *
-	 * @ticket 64347
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64347' )]
 	public function test_export_with_null_comment_values() {
 		global $wpdb;
 
@@ -431,8 +429,8 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 	/**
 	 * Tests that export handles term meta with NULL values without fatal errors.
 	 *
-	 * @ticket 64347
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64347' )]
 	public function test_export_with_null_term_meta_values() {
 		global $wpdb;
 
@@ -478,8 +476,8 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 	/**
 	 * Ensure that posts types with 'can_export' set to false are not included in the export.
 	 *
-	 * @ticket 64964
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64964' )]
 	public function test_export_does_not_include_excluded_post_types() {
 		register_post_type(
 			'wpexport_excluded',

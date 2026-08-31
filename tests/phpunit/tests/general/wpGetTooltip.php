@@ -2,19 +2,19 @@
 /**
  * Test wp_get_tooltip().
  *
- * @group general
- * @group template
- * @group tooltip
  *
- * @covers ::wp_get_tooltip
  */
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\Group( 'tooltip' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_tooltip' )]
 class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 
 	/**
 	 * Tests that an empty content value returns an empty string.
 	 *
-	 * @ticket 55343
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55343' )]
 	public function test_wp_get_tooltip_returns_empty_string_without_content() {
 		$this->assertSame( '', wp_get_tooltip( '' ) );
 		$this->assertSame( '', wp_get_tooltip( '   ' ) );
@@ -23,8 +23,8 @@ class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 	/**
 	 * Tests that the markup contains the expected accessible structure.
 	 *
-	 * @ticket 55343
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55343' )]
 	public function test_wp_get_tooltip_returns_accessible_markup() {
 		$tooltip = wp_get_tooltip( 'Helpful text.', array( 'id' => 'my-tip' ) );
 
@@ -57,8 +57,8 @@ class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 	/**
 	 * Tests that content is escaped.
 	 *
-	 * @ticket 55343
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55343' )]
 	public function test_wp_get_tooltip_escapes_content() {
 		$html = wp_get_tooltip( '<script>alert(1)</script>' );
 
@@ -69,8 +69,8 @@ class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 	/**
 	 * Tests that custom markup that does not contain valid control markup is ignored.
 	 *
-	 * @ticket 55343
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55343' )]
 	public function test_wp_get_tooltip_ignores_invalid_markup() {
 		$html = wp_get_tooltip(
 			'Helpful text.',
@@ -86,8 +86,8 @@ class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 	/**
 	 * Tests that custom button markup is retained, and has required attributes.
 	 *
-	 * @ticket 55343
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55343' )]
 	public function test_wp_get_tooltip_has_custom_button_markup() {
 		$html = wp_get_tooltip(
 			'Helpful text.',
@@ -113,8 +113,8 @@ class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 	/**
 	 * Tests that the accessible labels are output and escaped in attributes.
 	 *
-	 * @ticket 55343
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55343' )]
 	public function test_wp_get_tooltip_outputs_labels() {
 		$html = wp_get_toggletip(
 			'Helpful text.',
@@ -131,8 +131,8 @@ class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 	/**
 	 * Tests that a custom icon class and wrapper class are applied.
 	 *
-	 * @ticket 55343
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55343' )]
 	public function test_wp_get_tooltip_applies_icon_and_class() {
 		$html = wp_get_tooltip(
 			'Helpful text.',
@@ -150,8 +150,8 @@ class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 	 * Tests that a generated ID is used when none is supplied, and that the
 	 * popovertarget matches the bubble ID.
 	 *
-	 * @ticket 55343
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55343' )]
 	public function test_wp_get_toggletip_generates_unique_id() {
 		$args = array(
 			'label'       => 'About this field',
@@ -171,12 +171,12 @@ class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 	 * inside a paragraph (or other phrasing context) without the parser closing
 	 * the enclosing element and leaving a stray empty paragraph behind.
 	 *
-	 * @ticket 65660
 	 *
-	 * @dataProvider data_tooltip_types
 	 *
 	 * @param string $type The tooltip type, 'tooltip' or 'toggletip'.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65660' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_tooltip_types' )]
 	public function test_wp_get_tooltip_markup_is_phrasing_content( $type ) {
 		$html = ( 'toggletip' === $type )
 			? wp_get_toggletip( 'Helpful text.', array( 'id' => 'my-tip' ) )
@@ -194,8 +194,8 @@ class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 	 * Tests that the toggletip popover preserves dialog semantics and focus
 	 * handling after moving away from the native dialog element.
 	 *
-	 * @ticket 65660
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65660' )]
 	public function test_wp_get_toggletip_bubble_uses_dialog_role_and_autofocus() {
 		$html = wp_get_toggletip( 'Helpful text.', array( 'id' => 'my-tip' ) );
 
@@ -211,7 +211,7 @@ class Tests_General_wpGetTooltip extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_tooltip_types() {
+	public static function data_tooltip_types() {
 		return array(
 			'tooltip'   => array( 'tooltip' ),
 			'toggletip' => array( 'toggletip' ),

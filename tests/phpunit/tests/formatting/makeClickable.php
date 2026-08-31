@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::make_clickable
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'make_clickable' )]
 class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	public function test_mailto_xss() {
 		$in = 'testzzz@"STYLE="behavior:url(\'#default#time2\')"onBegin="alert(\'refresh-XSS\')"';
@@ -12,10 +12,10 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_valid_mailto
 	 *
 	 * @param string $email Email to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_mailto' )]
 	public function test_valid_mailto( $email ) {
 		$this->assertSame( '<a href="mailto:' . $email . '">' . $email . '</a>', make_clickable( $email ) );
 	}
@@ -25,7 +25,7 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_valid_mailto() {
+	public static function data_valid_mailto() {
 		return array(
 			array( 'foo@example.com' ),
 			array( 'foo.bar@example.com' ),
@@ -36,10 +36,10 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_invalid_mailto
 	 *
 	 * @param string $email Email to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_mailto' )]
 	public function test_invalid_mailto( $email ) {
 		$this->assertSame( $email, make_clickable( $email ) );
 	}
@@ -49,7 +49,7 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_invalid_mailto() {
+	public static function data_invalid_mailto() {
 		return array(
 			array( 'foo' ),
 			array( 'foo@' ),
@@ -61,17 +61,17 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 4570
-	 * @ticket 10990
-	 * @ticket 11211
-	 * @ticket 14993
-	 * @ticket 16892
 	 *
-	 * @dataProvider data_urls
 	 *
 	 * @param string $text     Content to test.
 	 * @param string $expected Expected results.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '4570' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '10990' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '11211' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '14993' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '16892' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_urls' )]
 	public function test_urls( $text, $expected ) {
 		$this->assertSame( $expected, make_clickable( $text ) );
 	}
@@ -81,7 +81,7 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_urls() {
+	public static function data_urls() {
 		return array(
 			// Does not link trailing periods, commas, and (semi-)colons in URLs with protocol (i.e. http://wordpress.org).
 			'URL only'                                   => array(
@@ -438,8 +438,8 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16892
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16892' )]
 	public function test_no_segfault() {
 		$in  = str_repeat( 'http://example.com/2011/03/18/post-title/', 256 );
 		$out = make_clickable( $in );
@@ -447,8 +447,8 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 19028
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19028' )]
 	public function test_line_break_in_existing_clickable_link() {
 		$html = "<a
 				  href='mailto:someone@example.com'>someone@example.com</a>";
@@ -456,14 +456,14 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 30162
-	 * @dataProvider data_script_and_style_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30162' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_script_and_style_tags' )]
 	public function test_dont_link_script_and_style_tags( $tag ) {
 		$this->assertSame( $tag, make_clickable( $tag ) );
 	}
 
-	public function data_script_and_style_tags() {
+	public static function data_script_and_style_tags() {
 		return array(
 			array(
 				'<script>http://wordpress.org</script>',
@@ -481,10 +481,10 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 48022
-	 * @ticket 56444
-	 * @dataProvider data_add_rel_ugc_in_comments
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '48022' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56444' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_add_rel_ugc_in_comments' )]
 	public function test_add_rel_ugc_in_comments( $content, $expected ) {
 		$comment_id = self::factory()->comment->create(
 			array(
@@ -499,7 +499,7 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 		$this->assertStringContainsString( $expected, make_clickable( $comment_text ) );
 	}
 
-	public function data_add_rel_ugc_in_comments() {
+	public static function data_add_rel_ugc_in_comments() {
 		$home_url_http  = set_url_scheme( home_url(), 'http' );
 		$home_url_https = set_url_scheme( home_url(), 'https' );
 

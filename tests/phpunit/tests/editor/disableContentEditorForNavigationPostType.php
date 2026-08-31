@@ -1,9 +1,9 @@
 <?php
 /**
- * @group editor
  *
- * @covers ::_disable_content_editor_for_navigation_post_type
  */
+#[\PHPUnit\Framework\Attributes\Group( 'editor' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_disable_content_editor_for_navigation_post_type' )]
 class Tests_Editor_DisableContentEditorForNavigationPostType extends WP_UnitTestCase {
 	const NAVIGATION_POST_TYPE = 'wp_navigation';
 
@@ -13,8 +13,8 @@ class Tests_Editor_DisableContentEditorForNavigationPostType extends WP_UnitTest
 	}
 
 	/**
-	 * @ticket 56266
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56266' )]
 	public function test_should_disable() {
 		$post = $this->create_post( static::NAVIGATION_POST_TYPE );
 
@@ -26,11 +26,11 @@ class Tests_Editor_DisableContentEditorForNavigationPostType extends WP_UnitTest
 	}
 
 	/**
-	 * @dataProvider data_should_not_disable
-	 * @ticket       56266
 	 *
 	 * @param string $post_type Post type to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_disable' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56266' )]
 	public function test_should_not_disable( $post_type ) {
 		$post = $this->create_post( $post_type );
 
@@ -44,7 +44,7 @@ class Tests_Editor_DisableContentEditorForNavigationPostType extends WP_UnitTest
 	 *
 	 * @return array
 	 */
-	public function data_should_not_disable() {
+	public static function data_should_not_disable() {
 		return array(
 			'post'             => array( 'post' ),
 			'page'             => array( 'page' ),
@@ -59,11 +59,11 @@ class Tests_Editor_DisableContentEditorForNavigationPostType extends WP_UnitTest
 	}
 
 	/**
-	 * @dataProvider data_should_not_change_post_type_support
-	 * @ticket       56266
 	 *
 	 * @param string $post_type Post type to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_change_post_type_support' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56266' )]
 	public function test_should_not_change_post_type_support( $post_type ) {
 		$post = $this->create_post( $post_type );
 
@@ -81,7 +81,7 @@ class Tests_Editor_DisableContentEditorForNavigationPostType extends WP_UnitTest
 	 *
 	 * @return array
 	 */
-	public function data_should_not_change_post_type_support() {
+	public static function data_should_not_change_post_type_support() {
 		return array(
 			'post'                => array( 'post' ),
 			'page'                => array( 'page' ),

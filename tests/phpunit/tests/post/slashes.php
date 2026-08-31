@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group post
- * @group slashes
- * @ticket 21767
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '21767' )]
 class Tests_Post_Slashes extends WP_UnitTestCase {
 
 	/*
@@ -143,8 +143,8 @@ class Tests_Post_Slashes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27550
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27550' )]
 	public function test_wp_trash_untrash() {
 		$post    = array(
 			'post_title'   => self::SLASH_1,

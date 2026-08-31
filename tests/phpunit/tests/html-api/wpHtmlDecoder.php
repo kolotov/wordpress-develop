@@ -7,10 +7,9 @@
  */
 
 /**
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Decoder
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	/**
 	 * Original LC_CTYPE locale.
@@ -64,13 +63,13 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	/**
 	 * Ensures proper decoding of edge cases.
 	 *
-	 * @ticket 61072
 	 *
-	 * @dataProvider data_edge_cases
 	 *
 	 * @param $raw_text_node Raw input text.
 	 * @param $decoded_value The expected decoded text result.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61072' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_edge_cases' )]
 	public function test_edge_cases( $raw_text_node, $decoded_value ) {
 		$this->assertSame(
 			$decoded_value,
@@ -88,8 +87,8 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	/**
 	 * Ensures that character references followed by NULL bytes do not emit native PHP errors.
 	 *
-	 * @ticket 65372
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
 	public function test_character_reference_with_null_byte_does_not_emit_native_errors() {
 		$errors = array();
 		set_error_handler(
@@ -118,13 +117,13 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	 * bytes; in the Tag Processor that responsibility falls on the methods
 	 * which read values out of the input document.
 	 *
-	 * @ticket 65372
 	 *
-	 * @dataProvider data_null_code_points
 	 *
 	 * @param string $raw_value     Raw attribute value.
 	 * @param string $decoded_value The expected decoded attribute value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_null_code_points' )]
 	public function test_null_code_points_in_attribute_values( string $raw_value, string $decoded_value ): void {
 		$this->assertSame(
 			$decoded_value,
@@ -150,13 +149,13 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	/**
 	 * Ensures unmatched named character references leave the by-ref match length unchanged.
 	 *
-	 * @ticket 65372
 	 *
-	 * @dataProvider data_unmatched_named_character_references
 	 *
 	 * @param string $context       Decoder context.
 	 * @param string $raw_text_node Raw text containing an unmatched named character reference.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unmatched_named_character_references' )]
 	public function test_unmatched_named_character_reference_does_not_set_match_byte_length( $context, $raw_text_node ): void {
 		$match_byte_length = 'sentinel';
 		$this->assertNull(
@@ -183,10 +182,10 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	/**
 	 * Ensures semicolonless legacy references decode before non-ASCII UTF-8 bytes in attributes.
 	 *
-	 * @dataProvider data_semicolonless_attribute_behaviors
 	 *
-	 * @ticket 65372
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_semicolonless_attribute_behaviors' )]
 	public function test_semicolonless_legacy_reference_before_multibyte_attribute_follower( string $encoded_attribute_value, string $expected, string $expected_decode, int $expected_byte_length ): void {
 		if ( null !== self::$problematic_lc_ctype ) {
 			setlocale( LC_CTYPE, self::$problematic_lc_ctype );
@@ -236,12 +235,12 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	/**
 	 * Ensures ambiguous ampersand is recognized with trailing ASCII alphanumerics.
 	 *
-	 * @dataProvider data_semicolonless_attribute_character_reference_no_decode_followers
 	 *
-	 * @ticket 65372
 	 *
 	 * @param string $raw_attribute Raw attribute value with an ambiguous legacy reference follower.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_semicolonless_attribute_character_reference_no_decode_followers' )]
 	public function test_ascii_alphanumeric_attribute_follower_is_ambiguous( string $raw_attribute ): void {
 		$this->assertSame(
 			$raw_attribute,
@@ -292,13 +291,13 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	/**
 	 * Ensures proper detection of attribute prefixes ignoring ASCII case.
 	 *
-	 * @ticket 61072
 	 *
-	 * @dataProvider data_case_variants_of_attribute_prefixes
 	 *
 	 * @param string $attribute_value Raw attribute value from HTML string.
 	 * @param string $search_string   Prefix contained in encoded attribute value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61072' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_case_variants_of_attribute_prefixes' )]
 	public function test_detects_ascii_case_insensitive_attribute_prefixes( $attribute_value, $search_string ) {
 		$this->assertTrue(
 			WP_HTML_Decoder::attribute_starts_with( $attribute_value, $search_string, 'ascii-case-insensitive' ),
@@ -349,9 +348,7 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	/**
 	 * Ensures that `attribute_starts_with` checks the full search string.
 	 *
-	 * @ticket 65372
 	 *
-	 * @dataProvider data_attribute_starts_with_search_string_boundaries
 	 *
 	 * @param string $attribute_value  Raw attribute value from HTML string.
 	 * @param string $search_string    Prefix contained or not contained in encoded attribute value.
@@ -359,6 +356,8 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	 *                                 'ascii-case-insensitive' or 'case-sensitive'.
 	 * @param bool   $is_match         Whether the search string is a prefix for the attribute value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attribute_starts_with_search_string_boundaries' )]
 	public function test_attribute_starts_with_checks_search_string_boundaries(
 		string $attribute_value,
 		string $search_string,
@@ -462,9 +461,7 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	/**
 	 * Ensures that `attribute_starts_with` respects the case sensitivity argument.
 	 *
-	 * @ticket 61072
 	 *
-	 * @dataProvider data_attributes_with_prefix_and_case_sensitive_match
 	 *
 	 * @param string $attribute_value  Raw attribute value from HTML string.
 	 * @param string $search_string    Prefix contained or not contained in encoded attribute value.
@@ -473,6 +470,8 @@ class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	 * @param bool   $is_match         Whether the search string is a prefix for the attribute value,
 	 *                                 given the case sensitivity setting.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61072' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attributes_with_prefix_and_case_sensitive_match' )]
 	public function test_attribute_starts_with_heeds_case_sensitivity( $attribute_value, $search_string, $case_sensitivity, $is_match ) {
 		if ( $is_match ) {
 			$this->assertTrue(

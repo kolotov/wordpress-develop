@@ -3,10 +3,10 @@
 /**
  * Tests specific to the filtering of `WP_Theme::get_allowed()` and related functions.
  *
- * @group ms-required
- * @group multisite
- * @group themes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'themes' )]
 class Tests_Theme_wpThemeGetAllowedFilters extends WP_UnitTestCase {
 	/**
 	 * @var array List of themes allowed before filters are applied.

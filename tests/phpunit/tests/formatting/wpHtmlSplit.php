@@ -1,22 +1,24 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::wp_html_split
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_html_split' )]
 class Tests_Formatting_wpHtmlSplit extends WP_UnitTestCase {
 
 	/**
 	 * Basic functionality goes here.
 	 *
-	 * @dataProvider data_basic_features
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_basic_features' )]
 	public function test_basic_features( $input, $output ) {
 		return $this->assertSame( $output, wp_html_split( $input ) );
 	}
 
-	public function data_basic_features() {
+	public static function data_basic_features() {
 		return array(
 			array(
 				'abcd efgh',
@@ -40,17 +42,16 @@ class Tests_Formatting_wpHtmlSplit extends WP_UnitTestCase {
 	/**
 	 * Automated performance testing of the main regex.
 	 *
-	 * @dataProvider data_whole_posts
-	 *
-	 * @covers ::get_html_split_regex
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_whole_posts' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_html_split_regex' )]
 	public function test_pcre_performance( $input ) {
 		$regex  = get_html_split_regex();
 		$result = benchmark_pcre_backtracking( $regex, $input, 'split' );
 		return $this->assertLessThan( 200, $result );
 	}
 
-	public function data_whole_posts() {
+	public static function data_whole_posts() {
 		require_once DIR_TESTDATA . '/formatting/whole-posts.php';
 		return data_whole_posts();
 	}

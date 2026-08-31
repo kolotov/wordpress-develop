@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group query
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Query_NoFoundRows extends WP_UnitTestCase {
 	public function test_no_found_rows_default() {
 		$q = new WP_Query(
@@ -70,8 +70,8 @@ class Tests_Query_NoFoundRows extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29552
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29552' )]
 	public function test_no_found_rows_default_with_nopaging_true() {
 		$p = self::factory()->post->create();
 
@@ -87,8 +87,8 @@ class Tests_Query_NoFoundRows extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29552
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29552' )]
 	public function test_no_found_rows_default_with_postsperpage_minus1() {
 		$p = self::factory()->post->create();
 

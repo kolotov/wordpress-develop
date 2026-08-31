@@ -1,10 +1,13 @@
 <?php
 
 /**
- * @group pluggable
- * @group formatting
- * @group redirect
  */
+#[\PHPUnit\Framework\Attributes\Group( 'pluggable' )]
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\Group( 'redirect' )]
+
+
+
 class Tests_Formatting_Redirect extends WP_UnitTestCase {
 	public function set_up() {
 		parent::set_up();
@@ -16,22 +19,22 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44317
 	 *
-	 * @dataProvider data_wp_redirect_bad_status_code
 	 *
-	 * @covers ::wp_redirect
 	 *
 	 * @param string $location The path or URL to redirect to.
 	 * @param int    $status   HTTP response status code to use.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44317' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_redirect_bad_status_code' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_redirect' )]
 	public function test_wp_redirect_bad_status_code( $location, $status ) {
 		$this->expectException( 'WPDieException' );
 
 		wp_redirect( $location, $status );
 	}
 
-	public function data_wp_redirect_bad_status_code() {
+	public static function data_wp_redirect_bad_status_code() {
 		return array(
 			// Tests for bad arguments.
 			array( '/wp-admin', 404 ),
@@ -44,8 +47,8 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::wp_sanitize_redirect
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_redirect' )]
 	public function test_wp_sanitize_redirect() {
 		$this->assertSame( 'http://example.com/watchthelinefeedgo', wp_sanitize_redirect( 'http://example.com/watchthelinefeed%0Ago' ) );
 		$this->assertSame( 'http://example.com/watchthelinefeedgo', wp_sanitize_redirect( 'http://example.com/watchthelinefeed%0ago' ) );
@@ -63,28 +66,28 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36998
 	 *
-	 * @covers ::wp_sanitize_redirect
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36998' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_redirect' )]
 	public function test_wp_sanitize_redirect_should_encode_spaces() {
 		$this->assertSame( 'http://example.com/test%20spaces', wp_sanitize_redirect( 'http://example.com/test%20spaces' ) );
 		$this->assertSame( 'http://example.com/test%20spaces%20in%20url', wp_sanitize_redirect( 'http://example.com/test spaces in url' ) );
 	}
 
 	/**
-	 * @dataProvider data_wp_validate_redirect_valid_url
 	 *
-	 * @covers ::wp_validate_redirect
 	 *
 	 * @param string $url      Redirect requested.
 	 * @param string $expected Expected destination.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_validate_redirect_valid_url' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_validate_redirect' )]
 	public function test_wp_validate_redirect_valid_url( $url, $expected ) {
 		$this->assertSame( $expected, wp_validate_redirect( $url ) );
 	}
 
-	public function data_wp_validate_redirect_valid_url() {
+	public static function data_wp_validate_redirect_valid_url() {
 		return array(
 			array( 'http://example.com', 'http://example.com' ),
 			array( 'http://example.com/', 'http://example.com/' ),
@@ -101,18 +104,18 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_wp_validate_redirect_invalid_url
 	 *
-	 * @covers ::wp_validate_redirect
 	 *
 	 * @param string       $url      Redirect requested.
 	 * @param string|false $expected Optional. Expected destination. Default false.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_validate_redirect_invalid_url' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_validate_redirect' )]
 	public function test_wp_validate_redirect_invalid_url( $url, $expected = false ) {
 		$this->assertSame( $expected, wp_validate_redirect( $url, false ) );
 	}
 
-	public function data_wp_validate_redirect_invalid_url() {
+	public static function data_wp_validate_redirect_invalid_url() {
 		return array(
 			// parse_url() fails.
 			array( '', '' ),
@@ -181,15 +184,15 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 47980
-	 * @dataProvider data_wp_validate_redirect_relative_url
 	 *
-	 * @covers ::wp_validate_redirect
 	 *
 	 * @param string $current_uri Current URI (i.e. path and query string only).
 	 * @param string $url         Redirect requested.
 	 * @param string $expected    Expected destination.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '47980' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_validate_redirect_relative_url' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_validate_redirect' )]
 	public function test_wp_validate_redirect_relative_url( $current_uri, $url, $expected ) {
 		// Backup the global.
 		$unset = false;
@@ -221,7 +224,7 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 	 *      string Expected destination.
 	 * }
 	 */
-	public function data_wp_validate_redirect_relative_url() {
+	public static function data_wp_validate_redirect_relative_url() {
 		return array(
 			array(
 				'/',

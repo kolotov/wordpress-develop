@@ -1,7 +1,9 @@
 <?php
 /**
- * @group block-supports
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+
+
 class Tests_Block_Supports_Anchor extends WP_UnitTestCase {
 	/**
 	 * @var string
@@ -16,14 +18,14 @@ class Tests_Block_Supports_Anchor extends WP_UnitTestCase {
 	/**
 	 * Tests that anchor block support attribute registration works as expected.
 	 *
-	 * @covers ::wp_register_anchor_support
 	 *
-	 * @dataProvider data_wp_register_anchor_support
 	 *
 	 * @param bool                                      $support  Anchor block support configuration.
 	 * @param array<string, array<string, string>>|null $value    Attributes array for the block.
 	 * @param array<string, array<string, string>>      $expected Expected attributes for the block.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_register_anchor_support' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_register_anchor_support' )]
 	public function test_wp_register_anchor_support( bool $support, ?array $value, array $expected ) {
 		register_block_type(
 			self::TEST_BLOCK_NAME,
@@ -46,14 +48,14 @@ class Tests_Block_Supports_Anchor extends WP_UnitTestCase {
 	/**
 	 * Tests that anchor block support is applied as expected.
 	 *
-	 * @covers ::wp_apply_anchor_support
 	 *
-	 * @dataProvider data_wp_apply_anchor_support
 	 *
 	 * @param bool                                 $support  Anchor block support configuration.
 	 * @param mixed                                $value    Anchor value for attribute object.
 	 * @param array<string, array<string, string>> $expected Expected anchor block support output.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_apply_anchor_support' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_apply_anchor_support' )]
 	public function test_wp_apply_anchor_support( bool $support, $value, array $expected ) {
 		register_block_type(
 			self::TEST_BLOCK_NAME,
@@ -75,7 +77,7 @@ class Tests_Block_Supports_Anchor extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array<string, mixed>>
 	 */
-	public function data_wp_register_anchor_support(): array {
+	public static function data_wp_register_anchor_support(): array {
 		return array(
 			'anchor attribute is registered when block supports anchor' => array(
 				'support'  => true,
@@ -130,7 +132,7 @@ class Tests_Block_Supports_Anchor extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array<string, mixed>>
 	 */
-	public function data_wp_apply_anchor_support(): array {
+	public static function data_wp_apply_anchor_support(): array {
 		return array(
 			'anchor id attribute is applied'          => array(
 				'support'  => true,

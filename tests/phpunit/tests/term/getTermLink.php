@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group taxonomy
- * @covers ::get_term_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_term_link' )]
 class Tests_Term_GetTermLink extends WP_UnitTestCase {
 
 	public static $terms;
@@ -143,8 +143,8 @@ class Tests_Term_GetTermLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 52882
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52882' )]
 	public function test_taxonomy_with_rewrite_false_and_custom_permalink_structure() {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
 
@@ -247,13 +247,13 @@ class Tests_Term_GetTermLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_term_link_filter_should_receive_term_object
 	 *
-	 * @ticket 50225
 	 *
 	 * @param string $taxonomy Taxonomy being tested.
 	 * @param bool   $use_id   Whether to pass term ID or term object to `get_term_link()`.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_term_link_filter_should_receive_term_object' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50225' )]
 	public function test_term_link_filter_should_receive_term_object( $taxonomy, $use_id ) {
 		$term = $this->get_term( $taxonomy, $use_id );
 
@@ -274,7 +274,7 @@ class Tests_Term_GetTermLink extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_term_link_filter_should_receive_term_object() {
+	public static function data_term_link_filter_should_receive_term_object() {
 		return array(
 			'category passing term_id'              => array(
 				'taxonomy' => 'category',
@@ -304,12 +304,12 @@ class Tests_Term_GetTermLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_get_term_feed_link_should_use_term_taxonomy_when_term_id_is_passed
 	 *
-	 * @ticket 50225
 	 *
 	 * @param string $taxonomy Taxonomy being tested.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_term_feed_link_should_use_term_taxonomy_when_term_id_is_passed' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50225' )]
 	public function test_get_term_feed_link_should_use_term_taxonomy_when_term_id_is_passed( $taxonomy ) {
 		$term = $this->get_term( $taxonomy, true );
 
@@ -325,9 +325,9 @@ class Tests_Term_GetTermLink extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_get_term_feed_link_should_use_term_taxonomy_when_term_id_is_passed() {
+	public static function data_get_term_feed_link_should_use_term_taxonomy_when_term_id_is_passed() {
 		$taxonomies = array( 'category', 'post_tag', 'wptests_tax' );
 
-		return $this->text_array_to_dataprovider( $taxonomies );
+		return self::text_array_to_dataprovider( $taxonomies );
 	}
 }

@@ -3,12 +3,12 @@
 /**
  * Tests for the get_main_site_id() function.
  *
- * @group ms-required
- * @group ms-site
- * @group multisite
  *
- * @covers ::get_main_site_id
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_main_site_id' )]
 class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 
 	protected static $network_ids;
@@ -70,15 +70,15 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_on_main_site_returns_self() {
 		$this->assertSame( get_current_blog_id(), get_main_site_id() );
 	}
 
 	/**
-	 * @ticket 29684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_returns_main_site_in_switched_context() {
 		$main_site_id  = get_current_blog_id();
 		$other_site_id = self::$site_ids['www.w.org/'];
@@ -91,8 +91,8 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 55802
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55802' )]
 	public function test_get_main_site_id_with_different_network_cache_id() {
 		$this->assertSame( self::$site_ids['wordpress.org/'], get_main_site_id( self::$network_ids['wordpress.org/'] ), 'Main blog id needs to match blog id of wordpress.org/' );
 		$this->assertSame( self::$site_ids['wordpress.org/'], (int) get_network_option( self::$network_ids['wordpress.org/'], 'main_site' ), 'Network option needs to match blog id of wordpress.org/' );
@@ -102,29 +102,29 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_with_different_network_returns_correct_id() {
 		$this->assertSame( self::$site_ids['wordpress.org/'], get_main_site_id( self::$network_ids['wordpress.org/'] ) );
 	}
 
 	/**
-	 * @ticket 29684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_on_network_without_site_returns_0() {
 		$this->assertSame( 0, get_main_site_id( self::$network_ids['wp.org/'] ) );
 	}
 
 	/**
-	 * @ticket 29684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_on_invalid_network_returns_0() {
 		$this->assertSame( 0, get_main_site_id( 333 ) );
 	}
 
 	/**
-	 * @ticket 29684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_filtered() {
 		add_filter( 'pre_get_main_site_id', array( $this, 'filter_get_main_site_id' ) );
 		$result = get_main_site_id();
@@ -137,8 +137,8 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 29684
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_filtered_depending_on_network() {
 		add_filter( 'pre_get_main_site_id', array( $this, 'filter_get_main_site_id_depending_on_network' ), 10, 2 );
 		$result = get_main_site_id( self::$network_ids['wordpress.org/'] );
@@ -156,8 +156,8 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41936
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41936' )]
 	public function test_get_main_site_id_with_property_value() {
 		global $current_site;
 
@@ -172,8 +172,8 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 41936
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '41936' )]
 	public function test_get_main_site_id_filtered_with_property_value() {
 		global $current_site;
 

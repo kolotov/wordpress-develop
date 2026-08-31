@@ -7,11 +7,11 @@
  *
  * @since 6.4.0
  *
- * @group fonts
- * @group fontface
  *
- * @covers WP_Font_Face_Resolver::get_fonts_from_theme_json
  */
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'fontface' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Font_Face_Resolver::class, 'get_fonts_from_theme_json' )]
 class Tests_Fonts_WPFontFaceResolver_GetFontsFromThemeJson extends WP_Font_Face_UnitTestCase {
 	const FONTS_THEME = 'fonts-block-theme';
 
@@ -38,8 +38,8 @@ class Tests_Fonts_WPFontFaceResolver_GetFontsFromThemeJson extends WP_Font_Face_
 	}
 
 	/**
-	 * @ticket 60605
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60605' )]
 	public function test_should_return_all_fonts_from_all_theme_origins() {
 		switch_theme( static::FONTS_THEME );
 
@@ -63,13 +63,13 @@ class Tests_Fonts_WPFontFaceResolver_GetFontsFromThemeJson extends WP_Font_Face_
 	}
 
 	/**
-	 * @dataProvider data_should_replace_src_file_placeholder
 	 *
 	 * @param string $font_name  Font's name.
 	 * @param string $font_weight Font's weight.
 	 * @param string $font_style  Font's style.
 	 * @param string $expected   Expected src.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_replace_src_file_placeholder' )]
 	public function test_should_replace_src_file_placeholder( $font_name, $font_weight, $font_style, $expected ) {
 		switch_theme( static::FONTS_THEME );
 
@@ -99,7 +99,7 @@ class Tests_Fonts_WPFontFaceResolver_GetFontsFromThemeJson extends WP_Font_Face_
 	 *
 	 * @return array
 	 */
-	public function data_should_replace_src_file_placeholder() {
+	public static function data_should_replace_src_file_placeholder() {
 		return array(
 			// Theme's theme.json.
 			'DM Sans: 400 normal'              => array(
@@ -142,11 +142,11 @@ class Tests_Fonts_WPFontFaceResolver_GetFontsFromThemeJson extends WP_Font_Face_
 	}
 
 	/**
-	 * @dataProvider data_should_get_font_family_name
 	 *
 	 * @param array  $fonts         Fonts to test.
 	 * @param string $expected_name Expected font-family name.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_get_font_family_name' )]
 	public function test_should_get_font_family_name( $fonts, $expected_name ) {
 		switch_theme( static::FONTS_THEME );
 
@@ -180,7 +180,7 @@ class Tests_Fonts_WPFontFaceResolver_GetFontsFromThemeJson extends WP_Font_Face_
 	 *
 	 * @return array
 	 */
-	public function data_should_get_font_family_name() {
+	public static function data_should_get_font_family_name() {
 		$font_face = array(
 			array(
 				'fontFamily'  => 'DM Sans',

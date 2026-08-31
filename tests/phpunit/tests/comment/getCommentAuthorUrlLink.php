@@ -1,13 +1,30 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::get_comment_author_url_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_author_url_link' )]
 class Tests_Comment_GetCommentAuthorUrlLink extends WP_UnitTestCase {
 
 	protected static $comments = array();
+	private $original_comment;
+	private $comment_existed;
+
+	public function set_up() {
+		parent::set_up();
+		$this->comment_existed  = array_key_exists( 'comment', $GLOBALS );
+		$this->original_comment = $GLOBALS['comment'] ?? null;
+	}
+
+	public function tear_down() {
+		if ( $this->comment_existed ) {
+			$GLOBALS['comment'] = $this->original_comment;
+		} else {
+			unset( $GLOBALS['comment'] );
+		}
+		parent::tear_down();
+	}
 
 	public static function wpSetUpBeforeClass( WP_UnitTest_Factory $factory ) {
 		unset( $GLOBALS['comment'] );

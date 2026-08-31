@@ -1,10 +1,7 @@
 <?php
 
-/**
- * @group admin
- *
- * @covers WP_Plugins_List_Table
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_Plugins_List_Table::class )]
 class Tests_Admin_wpPluginsListTable extends WP_UnitTestCase {
 	/**
 	 * @var WP_Plugins_List_Table
@@ -79,11 +76,8 @@ class Tests_Admin_wpPluginsListTable extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 * @ticket 42066
-	 *
-	 * @covers WP_Plugins_List_Table::get_views
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42066' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugins_List_Table', 'get_views' )]
 	public function test_get_views_should_return_views_by_default() {
 		global $totals;
 
@@ -127,16 +121,17 @@ class Tests_Admin_wpPluginsListTable extends WP_UnitTestCase {
 	 *
 	 * The 'ms-excluded' group is added as $this->show_autoupdates is already set to false for multisite.
 	 *
-	 * @ticket 54309
-	 * @group ms-excluded
 	 *
-	 * @covers WP_Plugins_List_Table::__construct()
 	 *
-	 * @dataProvider data_status_mustuse_and_dropins
 	 *
 	 * @param string $status The value for $_REQUEST['plugin_status'].
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54309' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_status_mustuse_and_dropins' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugins_List_Table', '__construct' )]
 	public function test_construct_should_not_set_show_autoupdates_to_false_for_mustuse_and_dropins( $status ) {
+		$status_existed            = array_key_exists( 'plugin_status', $_REQUEST );
 		$original_status           = $_REQUEST['plugin_status'] ?? null;
 		$_REQUEST['plugin_status'] = $status;
 
@@ -157,7 +152,11 @@ class Tests_Admin_wpPluginsListTable extends WP_UnitTestCase {
 			$show_autoupdates->setAccessible( false );
 		}
 
-		$_REQUEST['plugin_status'] = $original_status;
+		if ( $status_existed ) {
+			$_REQUEST['plugin_status'] = $original_status;
+		} else {
+			unset( $_REQUEST['plugin_status'] );
+		}
 
 		$this->assertTrue( $actual );
 	}
@@ -166,14 +165,14 @@ class Tests_Admin_wpPluginsListTable extends WP_UnitTestCase {
 	 * Tests that WP_Plugins_List_Table::get_columns() does not add
 	 * the auto-update column when not viewing Must-Use or Drop-in plugins.
 	 *
-	 * @ticket 54309
 	 *
-	 * @covers WP_Plugins_List_Table::get_columns
 	 *
-	 * @dataProvider data_status_mustuse_and_dropins
 	 *
 	 * @param string $test_status The value for the global $status variable.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54309' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_status_mustuse_and_dropins' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugins_List_Table', 'get_columns' )]
 	public function test_get_columns_should_not_add_the_autoupdates_column_when_viewing_mustuse_or_dropins( $test_status ) {
 		global $status;
 
@@ -197,10 +196,10 @@ class Tests_Admin_wpPluginsListTable extends WP_UnitTestCase {
 	 * the auto-update column when the 'plugins_auto_update_enabled'
 	 * filter returns false.
 	 *
-	 * @ticket 54309
 	 *
-	 * @covers WP_Plugins_List_Table::get_columns
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54309' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugins_List_Table', 'get_columns' )]
 	public function test_get_columns_should_not_add_the_autoupdates_column_when_plugin_auto_update_is_disabled() {
 		global $status;
 
@@ -223,14 +222,14 @@ class Tests_Admin_wpPluginsListTable extends WP_UnitTestCase {
 	 * Tests that WP_Plugins_List_Table::single_row() does not output the
 	 * 'Auto-updates' column for Must-Use or Drop-in plugins.
 	 *
-	 * @ticket 54309
 	 *
-	 * @covers WP_Plugins_List_Table::single_row
 	 *
-	 * @dataProvider data_status_mustuse_and_dropins
 	 *
 	 * @param string $test_status The value for the global $status variable.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54309' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_status_mustuse_and_dropins' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugins_List_Table', 'single_row' )]
 	public function test_single_row_should_not_add_the_autoupdates_column_for_mustuse_or_dropins( $test_status ) {
 		global $status;
 
@@ -255,8 +254,7 @@ class Tests_Admin_wpPluginsListTable extends WP_UnitTestCase {
 
 		// Mock WP_Plugins_List_Table
 		$list_table_mock = $this->getMockBuilder( 'WP_Plugins_List_Table' )
-			// Note: setMethods() is deprecated in PHPUnit 9, but still supported.
-			->setMethods( array( 'get_column_info' ) )
+			->onlyMethods( array( 'get_column_info' ) )
 			->getMock();
 
 		// Force the return value of the get_column_info() method.
@@ -291,7 +289,7 @@ class Tests_Admin_wpPluginsListTable extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_status_mustuse_and_dropins() {
+	public static function data_status_mustuse_and_dropins() {
 		return array(
 			'Must-Use' => array( 'mustuse' ),
 			'Drop-ins' => array( 'dropins' ),
@@ -302,10 +300,10 @@ class Tests_Admin_wpPluginsListTable extends WP_UnitTestCase {
 	 * Tests that WP_Plugins_List_Table::prepare_items()
 	 * applies 'plugins_list' filters.
 	 *
-	 * @ticket 57278
 	 *
-	 * @covers WP_Plugins_List_Table::prepare_items
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57278' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugins_List_Table', 'prepare_items' )]
 	public function test_plugins_list_filter() {
 		global $status, $s;
 

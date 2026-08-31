@@ -7,17 +7,14 @@
  *
  * @since 6.7.0
  *
- * @group blocks
- * @group block-hooks
  *
- * @covers ::apply_block_hooks_to_content
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\Group( 'block-hooks' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'apply_block_hooks_to_content' )]
 class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 	/**
 	 * Set up.
-	 *
-	 * @ticket 61902.
-	 * @ticket 63287.
 	 */
 	public static function wpSetUpBeforeClass() {
 		register_block_type(
@@ -53,8 +50,6 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 
 	/**
 	 * Tear down.
-	 *
-	 * @ticket 61902.
 	 */
 	public static function wpTearDownAfterClass() {
 		$registry = WP_Block_Type_Registry::get_instance();
@@ -65,8 +60,9 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63287' )]
 	public function test_apply_block_hooks_to_content_sets_theme_attribute_on_template_part_block() {
 		$context          = new WP_Block_Template();
 		$context->content = '<!-- wp:template-part /-->';
@@ -79,9 +75,9 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61902
-	 * @ticket 63287
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63287' )]
 	public function test_apply_block_hooks_to_content_inserts_hooked_block() {
 		$context          = new WP_Block_Template();
 		$context->content = '<!-- wp:post-content /-->';
@@ -94,9 +90,9 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61074
-	 * @ticket 63287
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61074' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63287' )]
 	public function test_apply_block_hooks_to_content_with_context_set_to_null() {
 		$content = '<!-- wp:post-content /-->';
 
@@ -115,8 +111,8 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
 	public function test_apply_block_hooks_to_content_respect_multiple_false() {
 		$context          = new WP_Block_Template();
 		$context->content = '<!-- wp:tests/hooked-block-with-multiple-false /--><!-- wp:tests/other-anchor-block /-->';
@@ -129,8 +125,8 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
 	public function test_apply_block_hooks_to_content_respect_multiple_false_after_inserting_once() {
 		$context          = new WP_Block_Template();
 		$context->content = '<!-- wp:tests/other-anchor-block /--><!-- wp:tests/other-block /--><!-- wp:tests/other-anchor-block /-->';
@@ -143,8 +139,8 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
 	public function test_apply_block_hooks_to_content_respect_multiple_false_with_filter() {
 		$filter = function ( $hooked_block_types, $relative_position, $anchor_block_type ) {
 			if ( 'tests/yet-another-anchor-block' === $anchor_block_type && 'after' === $relative_position ) {
@@ -168,8 +164,8 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61902
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
 	public function test_apply_block_hooks_to_content_respect_multiple_false_after_inserting_once_with_filter() {
 		$filter = function ( $hooked_block_types, $relative_position, $anchor_block_type ) {
 			if ( 'tests/yet-another-anchor-block' === $anchor_block_type && 'after' === $relative_position ) {

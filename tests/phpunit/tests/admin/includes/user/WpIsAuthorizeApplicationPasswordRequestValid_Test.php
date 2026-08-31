@@ -1,25 +1,22 @@
 <?php
 
-/**
- * @group admin
- * @group user
- *
- * @covers ::wp_is_authorize_application_password_request_valid
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'user' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_is_authorize_application_password_request_valid' )]
 class Admin_Includes_User_WpIsAuthorizeApplicationPasswordRequestValid_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test redirect URLs for application password authorization requests.
 	 *
-	 * @ticket 42790
-	 * @ticket 52617
 	 *
-	 * @dataProvider data_is_authorize_application_password_request_valid
 	 *
 	 * @param array  $request             The request data to validate.
 	 * @param string $expected_error_code The expected error code, empty if no error is expected.
 	 * @param string $env                 The environment type. Defaults to 'production'.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42790' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '52617' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_authorize_application_password_request_valid' )]
 	public function test_is_authorize_application_password_request_valid( $request, $expected_error_code, $env = 'production' ) {
 		putenv( "WP_ENVIRONMENT_TYPE=$env" );
 
@@ -35,7 +32,7 @@ class Admin_Includes_User_WpIsAuthorizeApplicationPasswordRequestValid_Test exte
 		}
 	}
 
-	public function data_is_authorize_application_password_request_valid() {
+	public static function data_is_authorize_application_password_request_valid() {
 		$environment_types = array( 'local', 'development', 'staging', 'production' );
 
 		$datasets = array();

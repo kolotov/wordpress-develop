@@ -3,17 +3,17 @@
 /**
  * Tests for the behavior of `wp_cache_set_multiple_salted()`
  *
- * @group functions
- * @group cache
  *
- * @covers ::wp_cache_set_salted
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_cache_set_salted' )]
 class Tests_Functions_wpCacheSetMultipleSalted extends WP_UnitTestCase {
 	/**
 	 * Test that wp_cache_set_multiple_salted sets multiple query data correctly.
 	 *
-	 * @ticket 59592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59592' )]
 	public function test_wp_cache_set_multiple_salted() {
 		$cache_group  = 'query_data';
 		$last_changed = wp_cache_get_last_changed( 'query_data' );
@@ -42,8 +42,8 @@ class Tests_Functions_wpCacheSetMultipleSalted extends WP_UnitTestCase {
 	/**
 	 * Test that wp_cache_set_multiple_salted sets multiple query data with a salt.
 	 *
-	 * @ticket 59592
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59592' )]
 	public function test_wp_cache_set_multiple_salted_array() {
 		$cache_group  = 'query_data';
 		$last_changed = array(

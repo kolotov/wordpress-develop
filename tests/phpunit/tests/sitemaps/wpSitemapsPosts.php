@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group sitemaps
  */
+#[\PHPUnit\Framework\Attributes\Group( 'sitemaps' )]
 class Tests_Sitemaps_wpSitemapsPosts extends WP_UnitTestCase {
 
 	/**
@@ -10,8 +10,8 @@ class Tests_Sitemaps_wpSitemapsPosts extends WP_UnitTestCase {
 	 *
 	 * Ensures that an entry is added even if there are no pages.
 	 *
-	 * @ticket 50571
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50571' )]
 	public function test_get_sitemap_entries_homepage() {
 		update_option( 'show_on_front', 'posts' );
 
@@ -80,8 +80,8 @@ class Tests_Sitemaps_wpSitemapsPosts extends WP_UnitTestCase {
 	/**
 	 * Tests that sticky posts are not moved to the front of the first page of the post sitemap.
 	 *
-	 * @ticket 55633
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55633' )]
 	public function test_posts_sticky_posts_not_moved_to_front() {
 		$factory = self::factory();
 

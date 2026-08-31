@@ -11,8 +11,8 @@ on:
       - '.github/workflows/reusable-prepare-gutenberg.yml'
       - 'tools/gutenberg/**'
       - 'package*.json'
-      - '.nvmrc'
-      - 'docker-compose.yml'
+      - 'composer.*'
+      - 'tools/phpunit13/**'
       - 'phpunit.xml.dist'
       - 'tests/phpunit/multisite.xml'
   pull_request:
@@ -24,8 +24,8 @@ on:
       - '.github/workflows/reusable-prepare-gutenberg.yml'
       - 'tools/gutenberg/**'
       - 'package*.json'
-      - '.nvmrc'
-      - 'docker-compose.yml'
+      - 'composer.*'
+      - 'tools/phpunit13/**'
       - 'phpunit.xml.dist'
       - 'tests/phpunit/multisite.xml'
   # Once daily at 00:00 UTC.
@@ -45,10 +45,6 @@ concurrency:
 # Any needed permissions should be configured at the job level.
 permissions: {}
 
-env:
-  LOCAL_PHP_MEMCACHED: false
-  PUPPETEER_SKIP_DOWNLOAD: true
-
 jobs:
   # Downloads and verifies the Gutenberg build once for all coverage jobs.
   prepare-gutenberg:
@@ -56,7 +52,7 @@ jobs:
     uses: ./.github/workflows/reusable-prepare-gutenberg.yml
     permissions:
       contents: read
-    if: ${{ github.repository == 'WordPress/wordpress-develop' }}
+    if: ${{ github.repository == 'kolotov/wordpress-develop' }}
 
   #
   # Creates a PHPUnit test jobs for generating code coverage reports.
@@ -67,15 +63,16 @@ jobs:
     needs: prepare-gutenberg
     permissions:
       contents: read
-    if: ${{ github.repository == 'WordPress/wordpress-develop' }}
+      packages: read
+    if: ${{ github.repository == 'kolotov/wordpress-develop' }}
     strategy:
       fail-fast: false
       matrix:
         multisite: [ false, true ]
         coverage-report: [ true ]
     with:
-      php: '8.3'
       multisite: ${{ matrix.multisite }}
+      phpunit-config: ${{ matrix.multisite && 'tests/phpunit/multisite.xml' || 'phpunit.xml.dist' }}
       coverage-report: ${{ matrix.coverage-report }}
       gutenberg-artifact: ${{ needs.prepare-gutenberg.result != 'skipped' }}
       gutenberg-sha: ${{ needs.prepare-gutenberg.outputs.gutenberg-sha }}
@@ -89,7 +86,8 @@ jobs:
       actions: read
       contents: read
     needs: [ prepare-gutenberg, test-coverage-report ]
-    if: ${{ github.repository == 'WordPress/wordpress-develop' && github.event_name != 'pull_request' && always() }}
+    # Send Slack notifications for non-pull-request runs in this fork.
+    if: ${{ github.repository == 'kolotov/wordpress-develop' && github.event_name != 'pull_request' && always() }}
     with:
       calling_status: ${{ contains( needs.*.result, 'cancelled' ) && 'cancelled' || contains( needs.*.result, 'failure' ) && 'failure' || 'success' }}
     secrets:
@@ -105,6 +103,7 @@ jobs:
     permissions:
       actions: write
     needs: [ slack-notifications ]
+    # Upstream automatic reruns remain disabled in this fork.
     if: |
       always() &&
       github.repository == 'WordPress/wordpress-develop' &&

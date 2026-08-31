@@ -1,12 +1,13 @@
 <?php
 
 /**
- * @group admin
- * @group ms-required
- * @group network-admin
  *
- * @covers WP_MS_Users_List_Table
  */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'network-admin' )]
+#[\PHPUnit\Framework\Attributes\CoversClass( WP_MS_Users_List_Table::class )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_MS_Users_List_Table::class, 'get_views' )]
 class Tests_Multisite_wpMsUsersListTable extends WP_UnitTestCase {
 	protected static $site_ids;
 
@@ -89,10 +90,9 @@ class Tests_Multisite_wpMsUsersListTable extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42066
 	 *
-	 * @covers WP_MS_Users_List_Table::get_views
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42066' )]
 	public function test_get_views_should_return_views_by_default() {
 		$all   = get_user_count();
 		$super = count( get_super_admins() );

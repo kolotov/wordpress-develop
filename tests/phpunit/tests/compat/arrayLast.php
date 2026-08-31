@@ -1,29 +1,27 @@
 <?php
 
 /**
- * @group compat
  *
- * @covers ::array_last
  */
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'array_last' )]
 class Tests_Compat_arrayLast extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 63853
-	 *
-	 * Test that array_last() is always available (either from PHP or WP).
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63853' )]
 	public function test_array_last_availability(): void {
 		$this->assertTrue( function_exists( 'array_last' ) );
 	}
 
 	/**
-	 * @ticket 63853
 	 *
-	 * @dataProvider data_array_last
 	 *
 	 * @param mixed $expected The expected last value.
 	 * @param array $arr      The array to get the last value from.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63853' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_array_last' )]
 	public function test_array_last( $expected, $arr ): void {
 		$this->assertSame( $expected, array_last( $arr ) );
 	}
@@ -33,7 +31,7 @@ class Tests_Compat_arrayLast extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_array_last(): array {
+	public static function data_array_last(): array {
 		$obj = new \stdClass();
 		return array(
 			'string values'          => array(

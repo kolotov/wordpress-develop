@@ -1,10 +1,12 @@
 <?php
 
 /**
- * @group block-supports
  *
- * @covers ::wp_render_elements_support_styles
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_elements_support_styles' )]
 class Tests_Block_Supports_WpRenderElementsSupportStyles extends WP_UnitTestCase {
 	/**
 	 * @var string|null
@@ -20,18 +22,18 @@ class Tests_Block_Supports_WpRenderElementsSupportStyles extends WP_UnitTestCase
 	/**
 	 * Tests that elements block support generates appropriate styles.
 	 *
-	 * @ticket 59555
-	 * @ticket 60557
-	 * @ticket 65538
 	 *
-	 * @covers ::wp_render_elements_support_styles
 	 *
-	 * @dataProvider data_elements_block_support_styles
 	 *
 	 * @param mixed  $color_settings  The color block support settings used for elements support.
 	 * @param mixed  $elements_styles The elements styles within the block attributes.
 	 * @param string $expected_styles Expected styles enqueued by the style engine.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59555' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60557' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '65538' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_elements_block_support_styles' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_elements_support_styles' )]
 	public function test_elements_block_support_styles( $color_settings, $elements_styles, $expected_styles ) {
 		$this->test_block_name = 'test/element-block-supports';
 
@@ -73,10 +75,10 @@ class Tests_Block_Supports_WpRenderElementsSupportStyles extends WP_UnitTestCase
 	 * Tests that identical blocks with different elements styles
 	 * generate distinct class names to avoid CSS cascade conflicts.
 	 *
-	 * @ticket 65435
 	 *
-	 * @covers ::wp_get_elements_class_name
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65435' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_elements_class_name' )]
 	public function test_elements_block_support_styles_with_duplicate_blocks(): void {
 		$this->test_block_name = 'test/element-block-supports';
 
@@ -130,7 +132,7 @@ class Tests_Block_Supports_WpRenderElementsSupportStyles extends WP_UnitTestCase
 	 *
 	 * @return array
 	 */
-	public function data_elements_block_support_styles() {
+	public static function data_elements_block_support_styles() {
 		$color_styles    = array(
 			'text'       => 'var:preset|color|vivid-red',
 			'background' => '#fff',

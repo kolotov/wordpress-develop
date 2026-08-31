@@ -1,17 +1,30 @@
 <?php
 
-/**
- * @group image
- * @group media
- * @group upload
- */
+#[\PHPUnit\Framework\Attributes\Group( 'image' )]
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\Group( 'upload' )]
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Tests_Image_Functions extends WP_UnitTestCase {
+	private $initial_medium_crop;
 
 	/**
 	 * Includes the required files.
 	 */
 	public function set_up() {
 		parent::set_up();
+		$this->initial_medium_crop = get_option( 'medium_crop', null );
 
 		require_once ABSPATH . WPINC . '/class-wp-image-editor.php';
 		require_once ABSPATH . WPINC . '/class-wp-image-editor-gd.php';
@@ -27,12 +40,26 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 		}
 	}
 
+	public function tear_down() {
+		if ( null === $this->initial_medium_crop ) {
+			delete_option( 'medium_crop' );
+		} else {
+			update_option( 'medium_crop', $this->initial_medium_crop );
+		}
+
+		remove_image_size( 'test-size' );
+		remove_filter( 'fallback_intermediate_image_sizes', array( $this, 'filter_fallback_intermediate_image_sizes' ), 10 );
+		WP_Image_Editor_Mock::$save_return = array();
+
+		parent::tear_down();
+	}
+
 	/**
 	 * Gets the available image editor engine classes.
 	 *
 	 * @return string[] Available image editor classes; empty array when none are available.
 	 */
-	private function get_image_editor_engine_classes() {
+	private static function get_image_editor_engine_classes() {
 		$classes = array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
 
 		foreach ( $classes as $key => $class ) {
@@ -50,8 +77,8 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_image_editor_engine_classes() {
-		return $this->text_array_to_dataprovider( $this->get_image_editor_engine_classes() );
+	public static function data_image_editor_engine_classes() {
+		return self::text_array_to_dataprovider( self::get_image_editor_engine_classes() );
 	}
 
 	/**
@@ -73,13 +100,13 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_file_is_valid_image_positive
 	 *
-	 * @covers ::file_is_valid_image
-	 * @covers ::wp_getimagesize
 	 *
 	 * @param string $file File name.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_file_is_valid_image_positive' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'file_is_valid_image' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_getimagesize' )]
 	public function test_file_is_valid_image_positive( $file ) {
 		$this->assertTrue(
 			file_is_valid_image( DIR_TESTDATA . '/images/' . $file ),
@@ -92,7 +119,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_file_is_valid_image_positive() {
+	public static function data_file_is_valid_image_positive() {
 		// These are all image files recognized by PHP.
 		$files = array(
 			'test-image-cmyk.jpg',
@@ -117,17 +144,17 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 			'avif-transparent.avif',
 		);
 
-		return $this->text_array_to_dataprovider( $files );
+		return self::text_array_to_dataprovider( $files );
 	}
 
 	/**
-	 * @dataProvider data_file_is_valid_image_negative
 	 *
-	 * @covers ::file_is_valid_image
-	 * @covers ::wp_getimagesize
 	 *
 	 * @param string $file File name.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_file_is_valid_image_negative' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'file_is_valid_image' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_getimagesize' )]
 	public function test_file_is_valid_image_negative( $file ) {
 		$this->assertFalse(
 			file_is_valid_image( DIR_TESTDATA . '/images/' . $file ),
@@ -140,7 +167,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_file_is_valid_image_negative() {
+	public static function data_file_is_valid_image_negative() {
 		// These are actually image files but aren't recognized or usable by PHP.
 		$files = array(
 			'test-image.pct',
@@ -148,16 +175,16 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 			'test-image.sgi',
 		);
 
-		return $this->text_array_to_dataprovider( $files );
+		return self::text_array_to_dataprovider( $files );
 	}
 
 	/**
-	 * @dataProvider data_file_is_displayable_image_positive
 	 *
-	 * @covers ::file_is_displayable_image
 	 *
 	 * @param string $file File name.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_file_is_displayable_image_positive' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'file_is_displayable_image' )]
 	public function test_file_is_displayable_image_positive( $file ) {
 		$this->assertTrue(
 			file_is_displayable_image( DIR_TESTDATA . '/images/' . $file ),
@@ -170,7 +197,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_file_is_displayable_image_positive() {
+	public static function data_file_is_displayable_image_positive() {
 		// These are all usable in typical web browsers.
 		$files = array(
 			'test-image.gif',
@@ -201,16 +228,16 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 			$files[] = 'avif-transparent.avif';
 		}
 
-		return $this->text_array_to_dataprovider( $files );
+		return self::text_array_to_dataprovider( $files );
 	}
 
 	/**
-	 * @dataProvider data_file_is_displayable_image_negative
 	 *
-	 * @covers ::file_is_displayable_image
 	 *
 	 * @param string $file File name.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_file_is_displayable_image_negative' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'file_is_displayable_image' )]
 	public function test_file_is_displayable_image_negative( $file ) {
 		$this->assertFalse(
 			file_is_displayable_image( DIR_TESTDATA . '/images/' . $file ),
@@ -223,7 +250,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_file_is_displayable_image_negative() {
+	public static function data_file_is_displayable_image_negative() {
 		// These are image files but aren't suitable for web pages because of compatibility or size issues.
 		$files = array(
 			// 'test-image-cmyk.jpg',      Allowed in r9727.
@@ -240,20 +267,16 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 			'test-image.heic',
 		);
 
-		return $this->text_array_to_dataprovider( $files );
+		return self::text_array_to_dataprovider( $files );
 	}
 
-	/**
-	 * @ticket 50833
-	 * @requires extension gd
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50833' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'gd' )]
 	public function test_is_gd_image_valid_types() {
 		$this->assertTrue( is_gd_image( imagecreate( 5, 5 ) ) );
 	}
 
-	/**
-	 * @ticket 50833
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50833' )]
 	public function test_is_gd_image_invalid_types() {
 		$this->assertFalse( is_gd_image( new stdClass() ) );
 		$this->assertFalse( is_gd_image( array() ) );
@@ -267,15 +290,15 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests wp_save_image_file() and mime types.
 	 *
-	 * @dataProvider data_wp_save_image_file
 	 *
-	 * @ticket 6821
-	 * @covers ::wp_save_image_file
-	 * @requires extension fileinfo
 	 *
 	 * @param string $class_name Name of the image editor engine class to be tested.
 	 * @param string $mime_type  The mime type to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_save_image_file' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'fileinfo' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_save_image_file' )]
 	public function test_wp_save_image_file( $class_name, $mime_type ) {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
 
@@ -314,8 +337,8 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_save_image_file() {
-		$classes = $this->get_image_editor_engine_classes();
+	public static function data_wp_save_image_file() {
+		$classes = self::get_image_editor_engine_classes();
 
 		// Mime types.
 		$mime_types = array(
@@ -346,12 +369,12 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests that wp_save_image_file() throws a deprecated argument notice when passed a GD resource.
 	 *
-	 * @ticket 6821
 	 * @expectedDeprecated wp_save_image_file
-	 * @requires function imagejpeg
 	 *
-	 * @covers ::wp_save_image_file
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_save_image_file' )]
 	public function test_wp_save_image_file_deprecated_argument_with_gd_resource() {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
 
@@ -372,10 +395,10 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests that `wp_image_editor()` applies 'image_edit_thumbnails_separately' filters.
 	 *
-	 * @ticket 53161
 	 *
-	 * @covers ::wp_image_editor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53161' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_image_editor' )]
 	public function test_wp_image_editor_should_apply_image_edit_thumbnails_separately_filters() {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
 
@@ -398,15 +421,15 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 * Tests that `wp_image_editor()` conditionally outputs markup for editing thumbnails separately
 	 * based on the result of applying 'image_edit_thumbnails_separately' filters.
 	 *
-	 * @ticket 53161
 	 *
-	 * @covers ::wp_image_editor
 	 *
-	 * @dataProvider data_wp_image_editor_should_respect_image_edit_thumbnails_separately_filters
 	 *
 	 * @param string $callback The name of the callback for the 'image_edit_thumbnails_separately' hook.
 	 * @param bool   $expected Whether the markup should be output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53161' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_image_editor_should_respect_image_edit_thumbnails_separately_filters' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_image_editor' )]
 	public function test_wp_image_editor_should_respect_image_edit_thumbnails_separately_filters( $callback, $expected ) {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
 
@@ -441,7 +464,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_image_editor_should_respect_image_edit_thumbnails_separately_filters() {
+	public static function data_wp_image_editor_should_respect_image_edit_thumbnails_separately_filters() {
 		return array(
 			'true'  => array(
 				'callback' => '__return_true',
@@ -457,15 +480,15 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests that a passed mime type overrides the extension in the filename when saving an image.
 	 *
-	 * @dataProvider data_image_editor_engine_classes
 	 *
-	 * @ticket 6821
-	 * @covers WP_Image_Editor::get_mime_type
-	 * @covers WP_Image_Editor::get_output_format
-	 * @requires extension fileinfo
 	 *
 	 * @param string $class_name Name of the image editor engine class to be tested.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_image_editor_engine_classes' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'fileinfo' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Image_Editor', 'get_mime_type' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Image_Editor', 'get_output_format' )]
 	public function test_mime_overrides_filename_when_saving_an_image( $class_name ) {
 		$img    = new $class_name( DIR_TESTDATA . '/images/canola.jpg' );
 		$loaded = $img->load();
@@ -491,17 +514,17 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests that mime types are correctly inferred from file extensions when saving an image.
 	 *
-	 * @dataProvider data_inferred_mime_types_when_saving_an_image
 	 *
-	 * @ticket 6821
-	 * @covers WP_Image_Editor::get_mime_type
-	 * @covers WP_Image_Editor::get_output_format
-	 * @requires extension fileinfo
 	 *
 	 * @param string $class_name Name of the image editor engine class to be tested.
 	 * @param string $extension  File extension.
 	 * @param string $mime_type  The mime type to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_inferred_mime_types_when_saving_an_image' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '6821' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'fileinfo' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Image_Editor', 'get_mime_type' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Image_Editor', 'get_output_format' )]
 	public function test_inferred_mime_types_when_saving_an_image( $class_name, $extension, $mime_type ) {
 		$img    = new $class_name( DIR_TESTDATA . '/images/canola.jpg' );
 		$loaded = $img->load();
@@ -538,8 +561,8 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_inferred_mime_types_when_saving_an_image() {
-		$classes = $this->get_image_editor_engine_classes();
+	public static function data_inferred_mime_types_when_saving_an_image() {
+		$classes = self::get_image_editor_engine_classes();
 
 		// Mime types.
 		$mime_types = array(
@@ -570,10 +593,10 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests that the deprecated wp_load_image() function fails when loading a directory.
 	 *
-	 * @ticket 17814
-	 * @covers ::wp_load_image
 	 * @expectedDeprecated wp_load_image
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17814' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_wp_load_image_should_fail_with_error_message_when_loading_a_directory() {
 		$editor = wp_load_image( DIR_TESTDATA );
 		$this->assertIsString( $editor );
@@ -582,9 +605,9 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests that the wp_get_image_editor() function fails when loading a directory.
 	 *
-	 * @ticket 17814
-	 * @covers ::wp_get_image_editor
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17814' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_image_editor' )]
 	public function test_wp_get_image_editor_should_fail_with_wp_error_object_when_loading_a_directory() {
 		$editor = wp_get_image_editor( DIR_TESTDATA );
 		$this->assertInstanceOf( 'WP_Error', $editor );
@@ -593,14 +616,14 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests that the load() method in an image editor class fails when loading a directory.
 	 *
-	 * @dataProvider data_image_editor_engine_classes
 	 *
-	 * @ticket 17814
-	 * @covers WP_Image_Editor_GD::load
-	 * @covers WP_Image_Editor_Imagick::load
 	 *
 	 * @param string $class_name Name of the image editor engine class to be tested.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_image_editor_engine_classes' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '17814' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Image_Editor_GD', 'load' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Image_Editor_Imagick', 'load' )]
 	public function test_image_editor_classes_should_fail_with_wp_error_object_when_loading_a_directory( $class_name ) {
 		$editor = new $class_name( DIR_TESTDATA );
 		$loaded = $editor->load();
@@ -609,10 +632,8 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 		$this->assertSame( 'error_loading_image', $loaded->get_error_code(), 'Error code from WP_Error did not match expectation.' );
 	}
 
-	/**
-	 * @covers ::wp_crop_image
-	 * @requires function imagejpeg
-	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_crop_image' )]
 	public function test_wp_crop_image_with_file() {
 		$file = wp_crop_image(
 			DIR_TESTDATA . '/images/canola.jpg',
@@ -635,11 +656,9 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 		unlink( $file );
 	}
 
-	/**
-	 * @covers ::wp_crop_image
-	 * @requires function imagejpeg
-	 * @requires extension openssl
-	 */
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'openssl' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_crop_image' )]
 	public function test_wp_crop_image_with_url() {
 		$file = wp_crop_image(
 			'https://s.w.org/screenshots/3.9/dashboard.png',
@@ -669,9 +688,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 		unlink( $file );
 	}
 
-	/**
-	 * @covers ::wp_crop_image
-	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_crop_image' )]
 	public function test_wp_crop_image_should_fail_with_wp_error_object_if_file_does_not_exist() {
 		$file = wp_crop_image(
 			DIR_TESTDATA . '/images/canoladoesnotexist.jpg',
@@ -685,27 +702,37 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 		$this->assertInstanceOf( 'WP_Error', $file );
 	}
 
-	/**
-	 * @covers ::wp_crop_image
-	 * @requires extension openssl
-	 */
+	#[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'openssl' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_crop_image' )]
 	public function test_wp_crop_image_should_fail_with_wp_error_object_if_url_does_not_exist() {
-		$file = wp_crop_image(
-			'https://wordpress.org/screenshots/3.9/canoladoesnotexist.jpg',
-			0,
-			0,
-			100,
-			100,
-			100,
-			100
+		$url      = 'https://wordpress.org/screenshots/3.9/canoladoesnotexist.jpg';
+		$warnings = array();
+
+		set_error_handler(
+			static function ( int $severity, string $message ) use ( &$warnings ): bool {
+				if ( E_WARNING !== $severity ) {
+					return false;
+				}
+
+				$warnings[] = $message;
+				return true;
+			},
+			E_WARNING
 		);
+
+		try {
+			$file = wp_crop_image( $url, 0, 0, 100, 100, 100, 100 );
+		} finally {
+			restore_error_handler();
+		}
+
 		$this->assertInstanceOf( 'WP_Error', $file );
+		$this->assertCount( 1, $warnings );
+		$this->assertStringContainsString( 'file_get_contents(' . $url . ')', $warnings[0] );
 	}
 
-	/**
-	 * @ticket 23325
-	 * @covers ::wp_crop_image
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23325' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_crop_image' )]
 	public function test_wp_crop_image_should_fail_with_wp_error_object_if_there_was_an_error_on_saving() {
 		WP_Image_Editor_Mock::$save_return = new WP_Error();
 
@@ -730,10 +757,8 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 		WP_Image_Editor_Mock::$save_return = array();
 	}
 
-	/**
-	 * @ticket 55403
-	 * @covers ::wp_crop_image
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55403' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_crop_image' )]
 	public function test_wp_crop_image_should_return_correct_file_extension_if_output_format_was_modified() {
 		add_filter(
 			'image_editor_output_format',
@@ -758,9 +783,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 		unlink( $file );
 	}
 
-	/**
-	 * @ticket 31050
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31050' )]
 	public function test_wp_generate_attachment_metadata_pdf() {
 		if ( ! wp_image_editor_supports( array( 'mime_type' => 'application/pdf' ) ) ) {
 			$this->markTestSkipped( 'Rendering PDFs is not supported on this system.' );
@@ -835,8 +858,8 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests crop setting for PDF.
 	 *
-	 * @ticket 43226
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43226' )]
 	public function test_crop_setting_for_pdf() {
 		if ( ! wp_image_editor_supports( array( 'mime_type' => 'application/pdf' ) ) ) {
 			$this->markTestSkipped( 'Rendering PDFs is not supported on this system.' );
@@ -910,9 +933,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 * @ticket 39231
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39231' )]
 	public function test_fallback_intermediate_image_sizes() {
 		if ( ! wp_image_editor_supports( array( 'mime_type' => 'application/pdf' ) ) ) {
 			$this->markTestSkipped( 'Rendering PDFs is not supported on this system.' );
@@ -978,8 +999,8 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	/**
 	 * Tests that PDF preview does not overwrite existing JPEG.
 	 *
-	 * @ticket 39875
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39875' )]
 	public function test_pdf_preview_doesnt_overwrite_existing_jpeg() {
 		if ( ! wp_image_editor_supports( array( 'mime_type' => 'application/pdf' ) ) ) {
 			$this->markTestSkipped( 'Rendering PDFs is not supported on this system.' );
@@ -1038,11 +1059,11 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 * @param mixed     $fraction The fraction to convert.
 	 * @param int|float $expect   The expected result.
 	 *
-	 * @ticket 54385
-	 * @dataProvider data_wp_exif_frac2dec
 	 *
-	 * @covers ::wp_exif_frac2dec
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54385' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_exif_frac2dec' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_exif_frac2dec' )]
 	public function test_wp_exif_frac2dec( $fraction, $expect ) {
 		$this->assertSame( $expect, wp_exif_frac2dec( $fraction ) );
 	}
@@ -1052,7 +1073,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_wp_exif_frac2dec() {
+	public static function data_wp_exif_frac2dec() {
 		return array(
 			'invalid input: null'              => array(
 				'fraction' => null,

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @group formatting
- * @group slashes
  *
- * @covers ::stripslashes_deep
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'stripslashes_deep' )]
 class Tests_Formatting_StripslashesDeep extends WP_UnitTestCase {
 	/**
-	 * @ticket 18026
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '18026' )]
 	public function test_preserves_original_datatype() {
 
 		$this->assertTrue( stripslashes_deep( true ) );

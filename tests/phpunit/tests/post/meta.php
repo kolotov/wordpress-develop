@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group post
- * @group meta
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'meta' )]
 class Tests_Post_Meta extends WP_UnitTestCase {
 
 	private $last_register_meta_call = array(
@@ -228,8 +228,8 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 12860
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12860' )]
 	public function test_funky_post_meta() {
 		$classy          = new StdClass();
 		$classy->ID      = 1;
@@ -249,9 +249,9 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38323
-	 * @dataProvider data_register_post_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_register_post_meta' )]
 	public function test_register_post_meta( $post_type, $meta_key, $args ) {
 		add_filter( 'register_meta_args', array( $this, 'filter_register_meta_args_set_last_register_meta_call' ), 10, 4 );
 
@@ -267,7 +267,7 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 		$this->assertSame( $args, $this->last_register_meta_call['args'] );
 	}
 
-	public function data_register_post_meta() {
+	public static function data_register_post_meta() {
 		return array(
 			array( 'post', 'registered_key1', array( 'single' => true ) ),
 			array( 'page', 'registered_key2', array() ),
@@ -284,9 +284,9 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38323
-	 * @dataProvider data_unregister_post_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unregister_post_meta' )]
 	public function test_unregister_post_meta( $post_type, $meta_key ) {
 		global $wp_meta_keys;
 
@@ -301,7 +301,7 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 		$this->assertEmpty( $actual );
 	}
 
-	public function data_unregister_post_meta() {
+	public static function data_unregister_post_meta() {
 		return array(
 			array( 'post', 'registered_key1' ),
 			array( 'page', 'registered_key2' ),
@@ -310,8 +310,8 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44467
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	public function test_add_metadata_sets_posts_last_changed() {
 		$post_id = self::factory()->post->create();
 
@@ -322,8 +322,8 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44467
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	public function test_update_metadata_sets_posts_last_changed() {
 		$post_id = self::factory()->post->create();
 
@@ -334,8 +334,8 @@ class Tests_Post_Meta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44467
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
 	public function test_delete_metadata_sets_posts_last_changed() {
 		$post_id = self::factory()->post->create();
 

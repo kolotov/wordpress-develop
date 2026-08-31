@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group post
  *
- * @covers ::wp_untrash_post
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_untrash_post' )]
 class Tests_Post_WpUntrashPost extends WP_UnitTestCase {
 	/**
 	 * @var WP_Post
@@ -27,10 +27,9 @@ class Tests_Post_WpUntrashPost extends WP_UnitTestCase {
 	 * Tests that wp_untrash_post() returns a WP_Post object,
 	 * removes post meta for an untrashed post and sets it to a 'Draft'.
 	 *
-	 * @ticket 58392
 	 *
-	 * @covers ::wp_untrash_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58392' )]
 	public function test_untrash_post() {
 		$result = wp_untrash_post( $this->trashed_post->ID );
 
@@ -59,10 +58,9 @@ class Tests_Post_WpUntrashPost extends WP_UnitTestCase {
 	 * Tests that wp_untrash_post() applies 'pre_untrash_post' filters
 	 * and passes the expected values to callbacks.
 	 *
-	 * @ticket 58392
 	 *
-	 * @covers ::wp_untrash_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58392' )]
 	public function test_pre_untrash_post_hook() {
 		add_filter(
 			'pre_untrash_post',
@@ -86,10 +84,9 @@ class Tests_Post_WpUntrashPost extends WP_UnitTestCase {
 	 * Tests that wp_untrash_post() triggers the 'untrash_post' action
 	 * and passes the expected values to callbacks.
 	 *
-	 * @ticket 58392
 	 *
-	 * @covers ::wp_untrash_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58392' )]
 	public function test_untrash_post_hook() {
 		add_action(
 			'untrash_post',
@@ -110,10 +107,9 @@ class Tests_Post_WpUntrashPost extends WP_UnitTestCase {
 	 * Tests that wp_untrash_post() triggers the 'untrashed_post' action
 	 * and passes the expected values to callbacks.
 	 *
-	 * @ticket 58392
 	 *
-	 * @covers ::wp_untrash_post
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58392' )]
 	public function test_untrashed_post_hook() {
 		add_action(
 			'untrashed_post',

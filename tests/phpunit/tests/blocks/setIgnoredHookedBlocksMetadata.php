@@ -7,12 +7,12 @@
  *
  * @since 6.5.0
  *
- * @group blocks
- * @group block-hooks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\Group( 'block-hooks' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'set_ignored_hooked_blocks_metadata' )]
 class Tests_Blocks_SetIgnoredHookedBlocksMetadata extends WP_UnitTestCase {
 	/**
-	 * @ticket 60506
 	 */
 	private static function create_block_template_object() {
 		$template              = new WP_Block_Template();
@@ -28,10 +28,9 @@ class Tests_Blocks_SetIgnoredHookedBlocksMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60506
 	 *
-	 * @covers ::set_ignored_hooked_blocks_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
 	public function test_set_ignored_hooked_blocks_metadata() {
 		$anchor_block = array(
 			'blockName' => 'tests/anchor-block',
@@ -48,10 +47,9 @@ class Tests_Blocks_SetIgnoredHookedBlocksMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60506
 	 *
-	 * @covers ::set_ignored_hooked_blocks_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
 	public function test_set_ignored_hooked_blocks_metadata_retains_existing_items() {
 		$anchor_block = array(
 			'blockName' => 'tests/anchor-block',
@@ -76,10 +74,9 @@ class Tests_Blocks_SetIgnoredHookedBlocksMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60506
 	 *
-	 * @covers ::set_ignored_hooked_blocks_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
 	public function test_set_ignored_hooked_blocks_metadata_for_block_added_by_filter() {
 		$anchor_block = array(
 			'blockName' => 'tests/anchor-block',
@@ -107,10 +104,9 @@ class Tests_Blocks_SetIgnoredHookedBlocksMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60506
 	 *
-	 * @covers ::set_ignored_hooked_blocks_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
 	public function test_set_ignored_hooked_blocks_metadata_for_block_added_by_context_aware_filter() {
 		$anchor_block = array(
 			'blockName' => 'tests/anchor-block',
@@ -146,10 +142,9 @@ class Tests_Blocks_SetIgnoredHookedBlocksMetadata extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60580
 	 *
-	 * @covers ::set_ignored_hooked_blocks_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60580' )]
 	public function test_set_ignored_hooked_blocks_metadata_for_block_suppressed_by_filter() {
 		$anchor_block = array(
 			'blockName' => 'tests/anchor-block',

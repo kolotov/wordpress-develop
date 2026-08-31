@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group option
  */
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_Option extends WP_UnitTestCase {
 
 	public function __return_foo() {
@@ -10,11 +10,11 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_option
-	 * @covers ::add_option
-	 * @covers ::update_option
-	 * @covers ::delete_option
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
 	public function test_the_basics() {
 		$key    = 'key1';
 		$key2   = 'key2';
@@ -41,10 +41,10 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_option
-	 * @covers ::add_option
-	 * @covers ::delete_option
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
 	public function test_default_option_filter() {
 		$value = 'value';
 
@@ -71,11 +71,11 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 31047
 	 *
-	 * @covers ::get_option
-	 * @covers ::add_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31047' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
 	public function test_add_option_should_respect_default_option_filter() {
 		add_filter( 'default_option_doesnotexist', array( $this, '__return_foo' ) );
 		$added = add_option( 'doesnotexist', 'bar' );
@@ -88,10 +88,10 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	/**
 	 * Assert that the 'pre_option' hook is called once per call to get_option().
 	 *
-	 * @ticket 37930
 	 *
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37930' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_get_option_should_call_pre_option_filter() {
 		$filter = new MockAction();
 
@@ -103,10 +103,10 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58277
 	 *
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58277' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_get_option_notoptions_cache() {
 		$notoptions = array(
 			'invalid' => true,
@@ -121,10 +121,10 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58277
 	 *
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58277' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_get_option_notoptions_set_cache() {
 		get_option( 'invalid' );
 
@@ -140,11 +140,11 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_option
-	 * @covers ::add_option
-	 * @covers ::delete_option
-	 * @covers ::update_option
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_serialized_data() {
 		$key   = __FUNCTION__;
 		$value = array(
@@ -162,53 +162,53 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23289
 	 *
-	 * @dataProvider data_bad_option_names
 	 *
 	 * @param mixed $option_name Option name.
 	 *
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23289' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_bad_option_names' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_get_option_bad_option_name( $option_name ) {
 		$this->assertFalse( get_option( $option_name ) );
 	}
 
 	/**
-	 * @ticket 23289
 	 *
-	 * @dataProvider data_bad_option_names
 	 *
 	 * @param mixed $option_name Option name.
 	 *
-	 * @covers ::add_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23289' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_bad_option_names' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
 	public function test_add_option_bad_option_name( $option_name ) {
 		$this->assertFalse( add_option( $option_name, '' ) );
 	}
 
 	/**
-	 * @ticket 23289
 	 *
-	 * @dataProvider data_bad_option_names
 	 *
 	 * @param mixed $option_name Option name.
 	 *
-	 * @covers ::update_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23289' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_bad_option_names' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_update_option_bad_option_name( $option_name ) {
 		$this->assertFalse( update_option( $option_name, '' ) );
 	}
 
 	/**
-	 * @ticket 23289
 	 *
-	 * @dataProvider data_bad_option_names
 	 *
 	 * @param mixed $option_name Option name.
 	 *
-	 * @covers ::delete_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23289' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_bad_option_names' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
 	public function test_delete_option_bad_option_name( $option_name ) {
 		$this->assertFalse( delete_option( $option_name ) );
 	}
@@ -218,7 +218,7 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_bad_option_names() {
+	public static function data_bad_option_names() {
 		return array(
 			'empty string'        => array( '' ),
 			'string 0'            => array( '0' ),
@@ -231,53 +231,53 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53635
 	 *
-	 * @dataProvider data_valid_but_undesired_option_names
 	 *
 	 * @param mixed $option_name Option name.
 	 *
-	 * @covers ::get_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53635' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_but_undesired_option_names' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_get_option_valid_but_undesired_option_names( $option_name ) {
 		$this->assertFalse( get_option( $option_name ) );
 	}
 
 	/**
-	 * @ticket 53635
 	 *
-	 * @dataProvider data_valid_but_undesired_option_names
 	 *
 	 * @param mixed $option_name Option name.
 	 *
-	 * @covers ::add_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53635' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_but_undesired_option_names' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
 	public function test_add_option_valid_but_undesired_option_names( $option_name ) {
 		$this->assertTrue( add_option( $option_name, '' ) );
 	}
 
 	/**
-	 * @ticket 53635
 	 *
-	 * @dataProvider data_valid_but_undesired_option_names
 	 *
 	 * @param mixed $option_name Option name.
 	 *
-	 * @covers ::update_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53635' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_but_undesired_option_names' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_update_option_valid_but_undesired_option_names( $option_name ) {
 		$this->assertTrue( update_option( $option_name, '' ) );
 	}
 
 	/**
-	 * @ticket 53635
 	 *
-	 * @dataProvider data_valid_but_undesired_option_names
 	 *
 	 * @param mixed $option_name Option name.
 	 *
-	 * @covers ::delete_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53635' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_valid_but_undesired_option_names' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
 	public function test_delete_option_valid_but_undesired_option_names( $option_name ) {
 		$this->assertFalse( delete_option( $option_name ) );
 	}
@@ -287,7 +287,7 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_valid_but_undesired_option_names() {
+	public static function data_valid_but_undesired_option_names() {
 		return array(
 			'string 123'   => array( '123' ),
 			'integer 123'  => array( 123 ),
@@ -299,20 +299,20 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 23289
 	 *
-	 * @covers ::delete_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23289' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
 	public function test_special_option_name_alloption() {
 		$this->expectException( 'WPDieException' );
 		delete_option( 'alloptions' );
 	}
 
 	/**
-	 * @ticket 23289
 	 *
-	 * @covers ::delete_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23289' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
 	public function test_special_option_name_notoptions() {
 		$this->expectException( 'WPDieException' );
 		delete_option( 'notoptions' );
@@ -321,11 +321,11 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	/**
 	 * Options should be autoloaded unless they were added with "no" or `false`.
 	 *
-	 * @ticket 31119
-	 * @dataProvider data_option_autoloading
 	 *
-	 * @covers ::add_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31119' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_option_autoloading' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
 	public function test_option_autoloading( $name, $autoload_value, $expected ) {
 		global $wpdb;
 		$added = add_option( $name, 'Autoload test', '', $autoload_value );
@@ -340,7 +340,7 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_option_autoloading() {
+	public static function data_option_autoloading() {
 		return array(
 			// Supported values.
 			array( 'autoload_true', true, 'on' ),
@@ -359,12 +359,12 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42441
 	 *
-	 * @covers ::update_option
 	 *
-	 * @dataProvider data_option_autoloading_large_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_option_autoloading_large_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_update_option_autoloading_large_option( $autoload, $expected ) {
 		global $wpdb;
 		$name = 'foo';
@@ -378,7 +378,7 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual->autoload );
 	}
 
-	public function data_option_autoloading_large_option() {
+	public static function data_option_autoloading_large_option() {
 		return array(
 			'on'    => array(
 				'autoload' => 'on',
@@ -416,10 +416,10 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 42441
 	 *
-	 * @covers ::update_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_update_option_autoloading_small_option_auto() {
 		global $wpdb;
 
@@ -437,10 +437,10 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	 *
 	 * This ensures that no stale data is served in case the option is deleted after.
 	 *
-	 * @ticket 51352
 	 *
-	 * @covers ::update_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51352' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_update_option_with_autoload_change_no_to_yes() {
 		add_option( 'foo', 'value1', '', false );
 		update_option( 'foo', 'value2', true );
@@ -453,10 +453,10 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	 *
 	 * This ensures that no stale data is served in case the option is deleted after.
 	 *
-	 * @ticket 51352
 	 *
-	 * @covers ::update_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51352' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_update_option_with_autoload_change_yes_to_no() {
 		add_option( 'foo', 'value1', '', true );
 		update_option( 'foo', 'value2', false );
@@ -467,10 +467,10 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	/**
 	 * Tests that calling delete_option() updates notoptions when option deleted.
 	 *
-	 * @ticket 61484
 	 *
-	 * @covers ::delete_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61484' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
 	public function test_check_delete_option_updates_notoptions() {
 		add_option( 'foo', 'value1' );
 
@@ -489,10 +489,10 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	/**
 	 * Tests that calling update_option() clears the notoptions cache.
 	 *
-	 * @ticket 61484
 	 *
-	 * @covers ::update_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61484' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_update_option_clears_the_notoptions_cache() {
 		$option_name = 'ticket_61484_option_to_be_created';
 		$notoptions  = wp_cache_get( 'notoptions', 'options' );
@@ -512,10 +512,10 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	/**
 	 * Tests that calling add_option() clears the notoptions cache.
 	 *
-	 * @ticket 61484
 	 *
-	 * @covers ::add_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61484' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
 	public function test_add_option_clears_the_notoptions_cache() {
 		$option_name = 'ticket_61484_option_to_be_created';
 		$notoptions  = wp_cache_get( 'notoptions', 'options' );
@@ -535,24 +535,20 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	/**
 	 * Test that get_option() does not hit the external cache multiple times for the same option.
 	 *
-	 * @ticket 62692
 	 *
-	 * @covers ::get_option
 	 *
-	 * @dataProvider data_get_option_does_not_hit_the_external_cache_multiple_times_for_the_same_option
 	 *
 	 * @param int    $expected_connections Expected number of connections to the memcached server.
 	 * @param bool   $option_exists        Whether the option should be set. Default true.
 	 * @param string $autoload             Whether the option should be auto loaded. Default true.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62692' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'external-object-cache' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_option_does_not_hit_the_external_cache_multiple_times_for_the_same_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_get_option_does_not_hit_the_external_cache_multiple_times_for_the_same_option( $expected_connections, $option_exists = true, $autoload = true ) {
-		if ( ! wp_using_ext_object_cache() ) {
-			$this->markTestSkipped( 'This test requires an external object cache.' );
-		}
-
-		if ( false === $this->helper_object_cache_stats_cmd_get() ) {
-			$this->markTestSkipped( 'This test requires access to the number of get requests to the external object cache.' );
-		}
+		$this->assertTrue( wp_using_ext_object_cache() );
+		$this->assertIsInt( $this->helper_object_cache_stats_cmd_get() );
 
 		if ( $option_exists ) {
 			add_option( 'ticket-62692', 'value', '', $autoload );
@@ -577,7 +573,7 @@ class Tests_Option_Option extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_option_does_not_hit_the_external_cache_multiple_times_for_the_same_option() {
+	public static function data_get_option_does_not_hit_the_external_cache_multiple_times_for_the_same_option() {
 		return array(
 			'exists, autoload'       => array( 1, true, true ),
 			'exists, not autoloaded' => array( 3, true, false ),

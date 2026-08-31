@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group ms-required
- * @group ms-site
- * @group multisite
  *
- * @covers ::update_blog_details
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'update_blog_details' )]
 class Tests_Multisite_UpdateBlogDetails extends WP_UnitTestCase {
 
 	/**
@@ -55,8 +55,8 @@ class Tests_Multisite_UpdateBlogDetails extends WP_UnitTestCase {
 	 * @param string $flag_value '0' or '1'. The value of the flag being set.
 	 * @param string $hook       The hook expected to fire for the flag name and flag combination.
 	 *
-	 * @dataProvider data_flag_hooks
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_flag_hooks' )]
 	public function test_update_blog_details_flag_action( $flag, $flag_value, $hook ) {
 		$test_action_counter = new MockAction();
 
@@ -84,7 +84,7 @@ class Tests_Multisite_UpdateBlogDetails extends WP_UnitTestCase {
 		$this->assertSame( 1, $test_action_counter->get_call_count() );
 	}
 
-	public function data_flag_hooks() {
+	public static function data_flag_hooks() {
 		return array(
 			array( 'spam', '0', 'make_ham_blog' ),
 			array( 'spam', '1', 'make_spam_blog' ),
@@ -101,8 +101,8 @@ class Tests_Multisite_UpdateBlogDetails extends WP_UnitTestCase {
 	 * When the path for a site is updated with update_blog_details(), the final path
 	 * should have a leading and trailing slash.
 	 *
-	 * @dataProvider data_single_directory_path
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_single_directory_path' )]
 	public function test_update_blog_details_single_directory_path( $path, $expected ) {
 		update_blog_details( 1, array( 'path' => $path ) );
 		$site = get_site( 1 );
@@ -110,7 +110,7 @@ class Tests_Multisite_UpdateBlogDetails extends WP_UnitTestCase {
 		$this->assertSame( $expected, $site->path );
 	}
 
-	public function data_single_directory_path() {
+	public static function data_single_directory_path() {
 		return array(
 			array( 'my_path', '/my_path/' ),
 			array( 'my_path//', '/my_path/' ),

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group link
- * @covers ::get_edit_term_link
  */
+#[\PHPUnit\Framework\Attributes\Group( 'link' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_edit_term_link' )]
 class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 
 	public static $terms;
@@ -68,8 +68,8 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32786
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32786' )]
 	public function test_get_edit_term_link_invalid_id() {
 		$term1 = self::factory()->term->create(
 			array(
@@ -83,24 +83,24 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 32786
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32786' )]
 	public function test_get_edit_term_link_empty_id() {
 		$actual = get_edit_term_link( '', 'wptests_tax' );
 		$this->assertNull( $actual );
 	}
 
 	/**
-	 * @ticket 32786
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32786' )]
 	public function test_get_edit_term_link_bad_tax() {
 		$actual = get_edit_term_link( '', 'bad_tax' );
 		$this->assertNull( $actual );
 	}
 
 	/**
-	 * @ticket 35922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35922' )]
 	public function test_taxonomy_should_not_be_required() {
 		$t = self::factory()->term->create(
 			array(
@@ -110,12 +110,12 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 		);
 
 		$actual = get_edit_term_link( $t );
-		$this->assertNotNull( $actual );
+		$this->assertIsString( $actual );
 	}
 
 	/**
-	 * @ticket 35922
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35922' )]
 	public function test_cap_check_should_use_correct_taxonomy_when_taxonomy_is_not_specified() {
 		register_taxonomy(
 			'wptests_tax_subscriber',
@@ -137,18 +137,18 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 		wp_set_current_user( self::$user_ids['subscriber'] );
 
 		$actual = get_edit_term_link( $t );
-		$this->assertNotNull( $actual );
+		$this->assertIsString( $actual );
 	}
 
 	/**
-	 * @dataProvider data_get_edit_term_link
 	 *
-	 * @ticket 50225
 	 *
 	 * @param string $taxonomy Taxonomy being tested.
 	 * @param bool   $use_id   Whether to pass term ID or term object to `get_edit_term_link()`.
 	 * @param string $expected Expected part of admin URL for the edit link.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_edit_term_link' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50225' )]
 	public function test_get_edit_term_link_should_return_the_link_for_permitted_user( $taxonomy, $use_id, $expected ) {
 		$term = $this->get_term( $taxonomy, $use_id );
 
@@ -160,14 +160,14 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_get_edit_term_link
 	 *
-	 * @ticket 50225
 	 *
 	 * @param string $taxonomy Taxonomy being tested.
 	 * @param bool   $use_id   Whether to pass term ID or term object to `get_edit_term_link()`.
 	 */
-	public function test_get_edit_term_link_should_return_null_for_denied_user( $taxonomy, $use_id ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_edit_term_link' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50225' )]
+	public function test_get_edit_term_link_should_return_null_for_denied_user( $taxonomy, $use_id, $expected ) {
 		wp_set_current_user( self::$user_ids['subscriber'] );
 		$term = $this->get_term( $taxonomy, $use_id );
 
@@ -175,14 +175,14 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_get_edit_term_link
 	 *
-	 * @ticket 50225
 	 *
 	 * @param string $taxonomy Taxonomy being tested.
 	 * @param bool   $use_id   Whether to pass term ID or term object to `get_edit_term_link()`.
 	 */
-	public function test_get_edit_term_link_filter_should_receive_term_id( $taxonomy, $use_id ) {
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_edit_term_link' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50225' )]
+	public function test_get_edit_term_link_filter_should_receive_term_id( $taxonomy, $use_id, $expected ) {
 		$term = $this->get_term( $taxonomy, $use_id );
 
 		add_filter(
@@ -202,7 +202,7 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_get_edit_term_link() {
+	public static function data_get_edit_term_link() {
 		return array(
 			'category passing term_id'              => array(
 				'taxonomy' => 'category',
@@ -240,8 +240,8 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 	/**
 	 * Checks that `get_edit_term_link()` produces the correct URL when called without taxonomy.
 	 *
-	 * @ticket 61726
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61726' )]
 	public function test_get_edit_term_link_without_taxonomy() {
 		$term = $this->get_term( 'wptests_tax', true );
 

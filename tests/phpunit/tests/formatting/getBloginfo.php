@@ -1,16 +1,18 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::get_bloginfo
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_bloginfo' )]
 class Tests_Formatting_GetBloginfo extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_get_bloginfo_language
-	 * @ticket 28303
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_bloginfo_language' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '28303' )]
 	public function test_get_bloginfo_language( $test_locale, $expected ) {
 		global $locale;
 
@@ -22,7 +24,7 @@ class Tests_Formatting_GetBloginfo extends WP_UnitTestCase {
 		$locale = $old_locale;
 	}
 
-	public function data_get_bloginfo_language() {
+	public static function data_get_bloginfo_language() {
 		return array(
 			// Locale, language code.
 			array( 'en_US', 'en-US' ),
@@ -36,10 +38,10 @@ class Tests_Formatting_GetBloginfo extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 27942
 	 *
-	 * @covers ::sanitize_option
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '27942' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_option' )]
 	public function test_bloginfo_sanitize_option() {
 		$old_values = array(
 			'blogname'        => get_option( 'blogname' ),

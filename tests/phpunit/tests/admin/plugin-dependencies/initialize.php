@@ -7,23 +7,20 @@
 
 require_once __DIR__ . '/base.php';
 
-/**
- * @group admin
- * @group plugins
- *
- * @covers WP_Plugin_Dependencies::initialize
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
+#[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'initialize' )]
 class Tests_Admin_WPPluginDependencies_Initialize extends WP_PluginDependencies_UnitTestCase {
 
 	/**
 	 * Tests that initialization runs only once.
 	 *
-	 * @ticket 60457
 	 *
-	 * @dataProvider data_static_properties_set_during_initialization
 	 *
 	 * @param string $property_name The name of the property to check.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60457' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_static_properties_set_during_initialization' )]
 	public function test_should_only_initialize_once( $property_name ) {
 		$this->assertFalse(
 			$this->get_property_value( 'initialized' ),
@@ -62,7 +59,7 @@ class Tests_Admin_WPPluginDependencies_Initialize extends WP_PluginDependencies_
 	 *
 	 * @return array[]
 	 */
-	public function data_static_properties_set_during_initialization() {
+	public static function data_static_properties_set_during_initialization() {
 		/*
 		 * This does not include 'dependency_api_data' as it is only set
 		 * on certain pages. This is tested later.
@@ -80,17 +77,17 @@ class Tests_Admin_WPPluginDependencies_Initialize extends WP_PluginDependencies_
 	/**
 	 * Tests that `$dependency_api_data` is set on certain screens.
 	 *
-	 * @ticket 22316
 	 *
-	 * @covers WP_Plugin_Dependencies::get_dependency_api_data
-	 * @covers WP_Plugin_Dependencies::get_plugins
 	 *
-	 * @dataProvider data_screens
 	 *
 	 * @global string $pagenow The filename of the current screen.
 	 *
 	 * @param string $screen The screen file.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_screens' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugin_Dependencies', 'get_dependency_api_data' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugin_Dependencies', 'get_plugins' )]
 	public function test_should_set_dependency_api_data_on_certain_screens( $screen ) {
 		global $pagenow;
 
@@ -117,7 +114,7 @@ class Tests_Admin_WPPluginDependencies_Initialize extends WP_PluginDependencies_
 	 *
 	 * @return array[]
 	 */
-	public function data_screens() {
+	public static function data_screens() {
 		return array(
 			'plugins.php'        => array(
 				'screen' => 'plugins.php',
@@ -131,10 +128,10 @@ class Tests_Admin_WPPluginDependencies_Initialize extends WP_PluginDependencies_
 	/**
 	 * Tests that `$dependency_api_data` is not set by default.
 	 *
-	 * @ticket 22316
 	 *
-	 * @covers WP_Plugin_Dependencies::get_dependency_api_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugin_Dependencies', 'get_dependency_api_data' )]
 	public function test_should_not_set_dependency_api_data() {
 		self::$instance::initialize();
 
@@ -146,16 +143,16 @@ class Tests_Admin_WPPluginDependencies_Initialize extends WP_PluginDependencies_
 	/**
 	 * Tests that dependency slugs are loaded and sanitized.
 	 *
-	 * @ticket 22316
 	 *
-	 * @covers WP_Plugin_Dependencies::read_dependencies_from_plugin_headers
-	 * @covers WP_Plugin_Dependencies::sanitize_dependency_slugs
 	 *
-	 * @dataProvider data_should_sanitize_slugs
 	 *
 	 * @param string $requires_plugins The unsanitized dependency slug(s).
 	 * @param array  $expected         Optional. The sanitized dependency slug(s). Default empty array.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_sanitize_slugs' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugin_Dependencies', 'read_dependencies_from_plugin_headers' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugin_Dependencies', 'sanitize_dependency_slugs' )]
 	public function test_initialize_should_load_and_sanitize_dependency_slugs_from_plugin_headers( $requires_plugins, $expected = array() ) {
 		$this->set_property_value( 'plugins', array( 'dependent/dependent.php' => array( 'RequiresPlugins' => $requires_plugins ) ) );
 		self::$instance->initialize();
@@ -167,7 +164,7 @@ class Tests_Admin_WPPluginDependencies_Initialize extends WP_PluginDependencies_
 	 *
 	 * @return array[]
 	 */
-	public function data_should_sanitize_slugs() {
+	public static function data_should_sanitize_slugs() {
 		return array(
 			// Valid slugs.
 			'one dependency'                         => array(
@@ -270,11 +267,11 @@ class Tests_Admin_WPPluginDependencies_Initialize extends WP_PluginDependencies_
 	/**
 	 * Tests that dependent files are loaded and slugified.
 	 *
-	 * @ticket 22316
 	 *
-	 * @covers WP_Plugin_Dependencies::read_dependencies_from_plugin_headers
-	 * @covers WP_Plugin_Dependencies::convert_to_slug
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22316' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugin_Dependencies', 'read_dependencies_from_plugin_headers' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Plugin_Dependencies', 'convert_to_slug' )]
 	public function test_should_slugify_dependent_files() {
 		$plugins = get_plugins();
 

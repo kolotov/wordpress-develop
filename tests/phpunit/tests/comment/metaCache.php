@@ -1,7 +1,13 @@
 <?php
 /**
- * @group comment
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+
+
+
+
+
+
 class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	protected $i       = 0;
 	protected $queries = 0;
@@ -15,10 +21,10 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16894
 	 *
-	 * @covers ::update_comment_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16894' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_comment_meta' )]
 	public function test_update_comment_meta_cache_should_default_to_lazy_loading() {
 		$p           = self::factory()->post->create( array( 'post_status' => 'publish' ) );
 		$comment_ids = self::factory()->comment->create_post_comments( $p, 3 );
@@ -48,10 +54,10 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57801
 	 *
-	 * @covers ::wp_lazyload_comment_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57801' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_lazyload_comment_meta' )]
 	public function test_update_comment_meta_cache_should_default_to_lazy_loading_fields_id() {
 		$p           = self::factory()->post->create( array( 'post_status' => 'publish' ) );
 		$comment_ids = self::factory()->comment->create_post_comments( $p, 3 );
@@ -82,10 +88,10 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16894
 	 *
-	 * @covers ::update_comment_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16894' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_comment_meta' )]
 	public function test_update_comment_meta_cache_true() {
 		$p           = self::factory()->post->create( array( 'post_status' => 'publish' ) );
 		$comment_ids = self::factory()->comment->create_post_comments( $p, 3 );
@@ -115,10 +121,10 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 57801
 	 *
-	 * @covers ::update_comment_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57801' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_comment_meta' )]
 	public function test_update_comment_meta_cache_true_multiple() {
 		$posts           = self::factory()->post->create_many( 3 );
 		$all_comment_ids = array();
@@ -153,10 +159,10 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16894
 	 *
-	 * @covers ::update_comment_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16894' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_comment_meta' )]
 	public function test_update_comment_meta_cache_false() {
 		$p           = self::factory()->post->create( array( 'post_status' => 'publish' ) );
 		$comment_ids = self::factory()->comment->create_post_comments( $p, 3 );
@@ -181,10 +187,10 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 16894
 	 *
-	 * @covers ::get_comment_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '16894' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_meta' )]
 	public function test_comment_meta_should_be_lazy_loaded_for_all_comments_in_comments_template() {
 		$p           = self::factory()->post->create( array( 'post_status' => 'publish' ) );
 		$comment_ids = self::factory()->comment->create_post_comments( $p, 3 );
@@ -216,11 +222,11 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34047
 	 *
-	 * @covers ::get_comment_meta
-	 * @covers ::wp_lazyload_comment_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34047' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_meta' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_lazyload_comment_meta' )]
 	public function test_comment_meta_should_be_lazy_loaded_in_comment_feed_queries() {
 		$posts = self::factory()->post->create_many( 2, array( 'post_status' => 'publish' ) );
 
@@ -265,11 +271,11 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 34047
 	 *
-	 * @covers ::get_comment_meta
-	 * @covers ::wp_lazyload_comment_meta
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34047' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_comment_meta' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_lazyload_comment_meta' )]
 	public function test_comment_meta_should_be_lazy_loaded_in_single_post_comment_feed_queries() {
 		$posts = self::factory()->post->create_many( 2, array( 'post_status' => 'publish' ) );
 
@@ -315,10 +321,10 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44467
 	 *
-	 * @covers ::add_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_metadata' )]
 	public function test_add_metadata_sets_comments_last_changed() {
 		$comment_id = self::factory()->comment->create();
 
@@ -329,10 +335,10 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44467
 	 *
-	 * @covers ::update_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_metadata' )]
 	public function test_update_metadata_sets_comments_last_changed() {
 		$comment_id = self::factory()->comment->create();
 
@@ -343,10 +349,10 @@ class Tests_Comment_MetaCache extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 44467
 	 *
-	 * @covers ::delete_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44467' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_metadata' )]
 	public function test_delete_metadata_sets_comments_last_changed() {
 		$comment_id = self::factory()->comment->create();
 

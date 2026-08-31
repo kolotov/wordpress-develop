@@ -3,17 +3,17 @@
 /**
  * Tests for the _wp_mysql_week() function.
  *
- * @group functions
  *
- * @covers ::_wp_mysql_week
  */
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_mysql_week' )]
 class Tests_Functions_WpMysqlWeek extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 59931
 	 *
-	 * @dataProvider data_wp_mysql_week
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59931' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_mysql_week' )]
 	public function test_wp_mysql_week( $date, $start_of_week, $expected_sql ) {
 
 		add_filter(
@@ -29,7 +29,7 @@ class Tests_Functions_WpMysqlWeek extends WP_UnitTestCase {
 	/**
 	 * @return array[]
 	 */
-	public function data_wp_mysql_week() {
+	public static function data_wp_mysql_week() {
 		return array(
 			array( '1969-12-25', 0, 'WEEK( col_name, 0 )' ),
 			array( '1969-12-25', 1, 'WEEK( col_name, 1 )' ),

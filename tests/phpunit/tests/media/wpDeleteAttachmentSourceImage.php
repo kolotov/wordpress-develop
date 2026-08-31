@@ -3,9 +3,9 @@
 /**
  * Tests that wp_delete_attachment_files() removes the 'source_image' companion file.
  *
- * @group media
- * @covers ::wp_delete_attachment_files
  */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_delete_attachment_files' )]
 class Tests_Media_wpDeleteAttachmentSourceImage extends WP_UnitTestCase {
 
 	public function tear_down(): void {
@@ -14,9 +14,7 @@ class Tests_Media_wpDeleteAttachmentSourceImage extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 * @ticket 64915
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64915' )]
 	public function test_deletes_companion_file_recorded_in_metadata_source_image(): void {
 		$attachment_id = self::factory()->attachment->create_upload_object( DIR_TESTDATA . '/images/canola.jpg' );
 		$this->assertIsInt( $attachment_id );
@@ -43,9 +41,7 @@ class Tests_Media_wpDeleteAttachmentSourceImage extends WP_UnitTestCase {
 		$this->assertFileDoesNotExist( $heic_path, 'Companion file should be deleted alongside the attachment.' );
 	}
 
-	/**
-	 * @ticket 64915
-	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64915' )]
 	public function test_noop_when_metadata_source_image_is_missing(): void {
 		$attachment_id = self::factory()->attachment->create_upload_object( DIR_TESTDATA . '/images/canola.jpg' );
 		$this->assertIsInt( $attachment_id );
@@ -65,8 +61,8 @@ class Tests_Media_wpDeleteAttachmentSourceImage extends WP_UnitTestCase {
 	 * Guards against $metadata['source_image'] holding a non-string value (e.g.
 	 * the array form some flows write). Regression coverage for GB #78128.
 	 *
-	 * @ticket 64915
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64915' )]
 	public function test_noop_when_metadata_source_image_is_not_a_string(): void {
 		$attachment_id = self::factory()->attachment->create_upload_object( DIR_TESTDATA . '/images/canola.jpg' );
 		$this->assertIsInt( $attachment_id );

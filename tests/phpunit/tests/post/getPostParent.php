@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @group post
- * @group template
  *
- * @covers ::get_post_parent
- * @covers ::has_post_parent
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_parent' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'has_post_parent' )]
 class Tests_Post_GetPostParent extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 33045
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33045' )]
 	public function test_get_post_parent() {
 		$post = array(
 			'post_status' => 'publish',
@@ -41,8 +41,8 @@ class Tests_Post_GetPostParent extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 33045
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33045' )]
 	public function test_has_post_parent() {
 		$post = array(
 			'post_status' => 'publish',

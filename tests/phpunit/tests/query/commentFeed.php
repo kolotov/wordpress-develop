@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group query
- * @group comments
- * @group feeds
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\Group( 'comments' )]
+#[\PHPUnit\Framework\Attributes\Group( 'feeds' )]
 class Tests_Query_CommentFeed extends WP_UnitTestCase {
 	public static string $post_type = 'post';
 
@@ -29,8 +29,8 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36904
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36904' )]
 	public function test_archive_comment_feed() {
 		add_filter( 'split_the_query', '__return_false' );
 		$q1   = new WP_Query();
@@ -54,8 +54,8 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36904
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36904' )]
 	public function test_archive_comment_feed_invalid_cache() {
 		$q1   = new WP_Query();
 		$args = array(
@@ -87,8 +87,8 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65613
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65613' )]
 	public function test_main_comment_feed_should_exclude_notes(): void {
 		$note_id = self::factory()->comment->create(
 			array(
@@ -115,8 +115,8 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65613
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65613' )]
 	public function test_archive_comment_feed_should_exclude_notes(): void {
 		$note_id = self::factory()->comment->create(
 			array(
@@ -144,8 +144,8 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65613
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65613' )]
 	public function test_single_comment_feed_should_exclude_notes(): void {
 		$post = get_post( self::$post_ids[0] );
 		$this->assertInstanceOf( WP_Post::class, $post );
@@ -177,8 +177,8 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 36904
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36904' )]
 	public function test_single_comment_feed() {
 		$post = get_post( self::$post_ids[0] );
 

@@ -1,8 +1,8 @@
 <?php
 /**
- * @group dependencies
- * @group scripts
  */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
 class Tests_Dependencies extends WP_UnitTestCase {
 	public function test_add() {
 		$dep = new WP_Dependencies();
@@ -108,8 +108,8 @@ class Tests_Dependencies extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 21741
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '21741' )]
 	public function test_query_and_registered_enqueued() {
 		$dep = new WP_Dependencies();
 
@@ -154,7 +154,7 @@ class Tests_Dependencies extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_provider_get_etag() {
+	public static function data_provider_get_etag() {
 		return array(
 			'should accept one dependency'              => array(
 				'load'               => array(
@@ -174,17 +174,17 @@ class Tests_Dependencies extends WP_UnitTestCase {
 	/**
 	 * Tests get_etag method for WP_Scripts.
 	 *
-	 * @ticket 58433
-	 * @ticket 61485
 	 *
-	 * @covers WP_Dependencies::get_etag
 	 *
-	 * @dataProvider data_provider_get_etag
 	 *
 	 * @param array  $load               List of scripts to load.
 	 * @param string $hash_source_string Hash source string.
 	 * @param string $expected           Expected etag.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58433' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61485' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_get_etag' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Dependencies', 'get_etag' )]
 	public function test_get_etag_scripts( $load, $hash_source_string, $expected ) {
 		global $wp_version;
 		// Modify global to avoid tests needing to change with each new version of WordPress.
@@ -208,17 +208,17 @@ class Tests_Dependencies extends WP_UnitTestCase {
 	/**
 	 * Tests get_etag method for WP_Styles.
 	 *
-	 * @ticket 58433
-	 * @ticket 61485
 	 *
-	 * @covers WP_Dependencies::get_etag
 	 *
-	 * @dataProvider data_provider_get_etag
 	 *
 	 * @param array  $load               List of styles to load.
 	 * @param string $hash_source_string Hash source string.
 	 * @param string $expected           Expected etag.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58433' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61485' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_get_etag' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Dependencies', 'get_etag' )]
 	public function test_get_etag_styles( $load, $hash_source_string, $expected ) {
 		global $wp_version;
 		// Modify global to avoid tests needing to change with each new version of WordPress.

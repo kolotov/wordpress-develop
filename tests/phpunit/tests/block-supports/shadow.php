@@ -1,9 +1,9 @@
 <?php
 /**
- * @group block-supports
  *
- * @covers ::wp_apply_shadow_support
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_apply_shadow_support' )]
 class Tests_Block_Supports_Shadow extends WP_UnitTestCase {
 	/**
 	 * @var string|null
@@ -51,14 +51,14 @@ class Tests_Block_Supports_Shadow extends WP_UnitTestCase {
 	/**
 	 * Tests the generation of shadow block support styles.
 	 *
-	 * @ticket 60784
 	 *
-	 * @dataProvider data_generate_shadow_fixtures
 	 *
 	 * @param boolean|array $support Shadow block support configuration.
 	 * @param string        $value   Shadow style value for style attribute object.
 	 * @param array         $expected       Expected shadow block support styles.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60784' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_generate_shadow_fixtures' )]
 	public function test_wp_apply_shadow_support( $support, $value, $expected ) {
 		$block_type  = self::register_shadow_block_with_support(
 			'test/shadow-block',
@@ -75,7 +75,7 @@ class Tests_Block_Supports_Shadow extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_generate_shadow_fixtures() {
+	public static function data_generate_shadow_fixtures() {
 		return array(
 			'with no styles'               => array(
 				'support'  => true,

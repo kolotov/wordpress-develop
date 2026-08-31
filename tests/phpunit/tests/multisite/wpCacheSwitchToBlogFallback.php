@@ -11,13 +11,14 @@
  * the extracted fallback implementation. This ensures tests run against the
  * actual production code rather than duplicating logic.
  *
- * @group ms-required
- * @group ms-site
- * @group multisite
- * @group cache
  *
- * @covers ::wp_cache_switch_to_blog_fallback
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'cache' )]
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_cache_switch_to_blog_fallback' )]
 class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 
 	/**
@@ -110,8 +111,8 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * The function should always exist in WordPress, either from the persistent
 	 * cache drop-in or from the fallback in cache-compat.php.
 	 *
-	 * @ticket 23290
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
 	public function test_wp_cache_switch_to_blog_function_exists() {
 
 		// The wrapper function should always be available.
@@ -131,9 +132,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * The fallback reinitializes the cache object. This test verifies the cache
 	 * continues to work after reinitialization.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_cache_remains_functional_after_fallback() {
 
 		// Set some cache data before switching.
@@ -155,9 +156,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * When the cache object exists with global_groups configuration, the fallback should
 	 * preserve that configuration rather than discarding it.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_restores_global_groups_from_cache_object() {
 		global $wp_object_cache;
 
@@ -186,9 +187,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * When the cache object doesn't have a global_groups property, the fallback
 	 * should provide the WordPress default global groups rather than failing.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_uses_default_global_groups_when_unavailable() {
 		global $wp_object_cache;
 
@@ -250,9 +251,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 *
 	 * This test verifies that groups remain usable after fallback.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_preserves_non_persistent_groups_configuration() {
 		global $wp_object_cache;
 
@@ -287,9 +288,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	/**
 	 * Test that wp_cache_switch_to_blog_fallback() uses default non-persistent groups when unavailable.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_uses_default_non_persistent_groups_when_unavailable() {
 		global $wp_object_cache;
 
@@ -325,9 +326,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * Verifies the fallback path in switch_to_blog() works correctly
 	 * by actually switching between blogs and calling the fallback.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_fallback_integration_with_switch_to_blog() {
 		$original_blog_id = get_current_blog_id();
 		$new_blog_id      = self::factory()->blog->create();
@@ -359,9 +360,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	/**
 	 * Test that wp_cache_switch_to_blog_fallback() handles empty cache gracefully.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_handles_empty_cache_gracefully() {
 		global $wp_object_cache;
 
@@ -385,9 +386,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * The fallback reinitializes the cache, which clears non-persistent group data.
 	 * This test verifies that non-global groups are still usable after reinitialization.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_non_global_groups_remain_writable_after_fallback() {
 
 		// Set cache data in various non-global groups.
@@ -426,8 +427,8 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * This tests the scenario where a plugin adds many custom global groups,
 	 * ensuring they're all preserved after the fallback.
 	 *
-	 * @ticket 23290
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
 	public function test_preserves_many_custom_global_groups() {
 
 		// Add multiple custom global groups.
@@ -465,9 +466,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * Edge case where global_groups exists but is empty, which differs from
 	 * the property not existing at all.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_handles_empty_global_groups_array() {
 		global $wp_object_cache;
 
@@ -488,9 +489,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * This is the core issue from ticket #23290 - ensuring non-persistent groups
 	 * aren't lost when using the fallback path in switch_to_blog().
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_preserves_both_global_and_non_persistent_groups() {
 
 		// Add a custom global group.
@@ -523,9 +524,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	/**
 	 * Test fallback in a realistic blog switching scenario.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_realistic_blog_switching_scenario() {
 		$blog_id_1 = get_current_blog_id();
 		$blog_id_2 = self::factory()->blog->create();
@@ -564,9 +565,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * Verifies that non-global cache groups maintain blog-specific prefixing
 	 * after the fallback reinitialization.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_blog_specific_cache_keys_after_fallback() {
 
 		// Set data in a non-global group (which should be blog-specific).
@@ -590,9 +591,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * The fallback attempts to restore non-persistent group configuration.
 	 * This test verifies that groups which had data before fallback can be used again afterward.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_previously_used_groups_remain_available_after_fallback() {
 		global $wp_object_cache;
 
@@ -633,9 +634,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * support, custom non-persistent groups added by plugins would be lost because the function
 	 * would use hardcoded defaults instead of preserving the existing configuration.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_ticket_23290_non_persistent_groups_are_maintained() {
 
 		// Simulate a plugin adding a custom non-persistent group by populating the cache.
@@ -661,9 +662,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * Both switch_to_blog() and restore_current_blog() can use the fallback,
 	 * so verify the restore path also works correctly.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_restore_current_blog_with_fallback() {
 
 		$original_blog_id = get_current_blog_id();
@@ -695,9 +696,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	/**
 	 * Test multiple nested blog switches and restores.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_nested_blog_switches_with_fallback() {
 
 		$original_blog_id = get_current_blog_id();
@@ -734,9 +735,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * Stress test verifying the fallback maintains consistency when called
 	 * multiple times in quick succession.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_consistency_across_rapid_fallback_calls() {
 		global $wp_object_cache;
 
@@ -762,9 +763,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * The fallback uses function_exists() checks before calling wp_cache_add_global_groups().
 	 * This test verifies the fallback doesn't error out (in case a drop-in lacks this function).
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_fallback_works_when_wp_cache_add_global_groups_may_not_exist() {
 		global $wp_object_cache;
 
@@ -798,9 +799,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * The fallback uses function_exists() checks before calling wp_cache_add_non_persistent_groups().
 	 * This test verifies the fallback doesn't error out (in case a drop-in lacks this function).
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_fallback_works_when_wp_cache_add_non_persistent_groups_may_not_exist() {
 		global $wp_object_cache;
 
@@ -831,9 +832,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * This test verifies that transients continue to work after the cache fallback,
 	 * even though their data is cleared (like other non-global cache groups).
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_transients_work_after_fallback() {
 
 		// Set a transient before fallback.
@@ -863,9 +864,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * Site transients use the 'site-transient' cache group, which is in global_groups.
 	 * This means site transients persist across the cache reinitialization during fallback.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_site_transients_work_after_fallback() {
 
 		// Set a site transient before fallback.
@@ -898,9 +899,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * Transients have expiration times. This test verifies that expiration
 	 * still works correctly after the cache fallback.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_transient_expiration_after_fallback() {
 
 		// Set a transient that expires immediately (0 seconds).
@@ -933,9 +934,9 @@ class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 	 * Regular cache data in non-global groups is cleared, but site transients
 	 * (in the global 'site-transient' group) persist.
 	 *
-	 * @ticket 23290
-	 * @covers ::wp_cache_switch_to_blog_fallback
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23290' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_switch_to_blog_fallback' )]
 	public function test_cache_and_transients_integration_after_fallback() {
 
 		// Set both regular cache data and a site transient.

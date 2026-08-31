@@ -1,17 +1,16 @@
 <?php
 
 /**
- * @group compat
- *
- * @covers ::mb_ord
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'mb_ord' )]
+#[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 class Tests_Compat_mbOrd extends WP_UnitTestCase {
 	/**
 	 * Ensures that the mb_ord() polyfill matches the behavior of mb_ord()
 	 * for the supported UTF-8 encoding.
 	 *
-	 * @ticket 65342
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65342' )]
 	public function test_mb_ord_polyfill_matches_spec() {
 		for ( $code_point = 0; $code_point <= 0x10FFFF; $code_point++ ) {
 			/*

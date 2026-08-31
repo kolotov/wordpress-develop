@@ -4,8 +4,8 @@
  *
  * @package WordPress
  *
- * @group customize
  */
+#[\PHPUnit\Framework\Attributes\Group( 'customize' )]
 class Test_WP_Customize_Partial extends WP_UnitTestCase {
 
 	/**

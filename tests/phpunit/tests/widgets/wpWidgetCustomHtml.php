@@ -9,8 +9,8 @@
 /**
  * Test wp-includes/widgets/class-wp-widget-custom-html.php
  *
- * @group widgets
  */
+#[\PHPUnit\Framework\Attributes\Group( 'widgets' )]
 class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 
 	/**
@@ -43,8 +43,8 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	/**
 	 * Test construct.
 	 *
-	 * @covers WP_Widget_Custom_HTML::__construct
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Custom_HTML', '__construct' )]
 	public function test_construct() {
 		$widget = new WP_Widget_Custom_HTML();
 		$this->assertSame( 'custom_html', $widget->id_base );
@@ -57,8 +57,8 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	/**
 	 * Test enqueue_admin_scripts method.
 	 *
-	 * @covers WP_Widget_Custom_HTML::_register
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Custom_HTML', '_register' )]
 	public function test__register() {
 		set_current_screen( 'widgets.php' );
 		$widget = new WP_Widget_Custom_HTML();
@@ -72,8 +72,8 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	/**
 	 * Test widget method.
 	 *
-	 * @covers WP_Widget_Custom_HTML::widget
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Custom_HTML', 'widget' )]
 	public function test_widget() {
 		$widget  = new WP_Widget_Custom_HTML();
 		$content = "<i>Custom HTML</i>\n\n<b>CODE</b>\nLast line.<u>unclosed";
@@ -161,8 +161,8 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	/**
 	 * Test update method.
 	 *
-	 * @covers WP_Widget_Custom_HTML::update
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Custom_HTML', 'update' )]
 	public function test_update() {
 		$widget   = new WP_Widget_Custom_HTML();
 		$instance = array(
@@ -237,8 +237,8 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	/**
 	 * Test enqueue_admin_scripts method. Condition: logged_in, syntax_highlighting is on.
 	 *
-	 * @covers WP_Widget_Custom_HTML::enqueue_admin_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Custom_HTML', 'enqueue_admin_scripts' )]
 	public function test_enqueue_admin_scripts_when_logged_in_and_syntax_highlighting_on() {
 		$user = self::factory()->user->create();
 		wp_set_current_user( $user );
@@ -257,8 +257,8 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	/**
 	 * Test enqueue_admin_scripts method. Condition: logged_in, syntax_highlighting is off.
 	 *
-	 * @covers WP_Widget_Custom_HTML::enqueue_admin_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Custom_HTML', 'enqueue_admin_scripts' )]
 	public function test_enqueue_admin_scripts_when_logged_in_and_syntax_highlighting_off() {
 		$user = self::factory()->user->create();
 		wp_set_current_user( $user );
@@ -278,8 +278,8 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	/**
 	 * Test render_control_template_scripts method.
 	 *
-	 * @covers WP_Widget_Custom_HTML::render_control_template_scripts
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Custom_HTML', 'render_control_template_scripts' )]
 	public function test_render_control_template_scripts() {
 		ob_start();
 		WP_Widget_Custom_HTML::render_control_template_scripts();
@@ -291,8 +291,8 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	/**
 	 * Test add_help_text method.
 	 *
-	 * @covers WP_Widget_Custom_HTML::add_help_text
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Widget_Custom_HTML', 'add_help_text' )]
 	public function test_add_help_text() {
 		set_current_screen( 'widgets.php' );
 		WP_Widget_Custom_HTML::add_help_text();
@@ -304,8 +304,8 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	/**
 	 * Ensure that rel="noopener" is not added to links without a target.
 	 *
-	 * @ticket 46421
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46421' )]
 	public function test_render_links_without_target() {
 		$widget = new WP_Widget_Custom_HTML();
 

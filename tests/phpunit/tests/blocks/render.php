@@ -6,8 +6,8 @@
  * @subpackage Blocks
  * @since 5.0.0
  *
- * @group blocks
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 class Tests_Blocks_Render extends WP_UnitTestCase {
 	/**
 	 * The location of the fixtures to test with.
@@ -49,8 +49,8 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45109
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_do_blocks_removes_comments() {
 		$original_html = file_get_contents( DIR_TESTDATA . '/blocks/do-blocks-original.html' );
 		$expected_html = file_get_contents( DIR_TESTDATA . '/blocks/do-blocks-expected.html' );
@@ -61,8 +61,8 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45109
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_the_content() {
 		add_shortcode( 'someshortcode', array( $this, 'handle_shortcode' ) );
 
@@ -88,8 +88,8 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45495
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45495' )]
 	public function test_nested_calls_to_the_content() {
 		register_block_type(
 			'core/test',
@@ -150,8 +150,8 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45290
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45290' )]
 	public function test_blocks_arent_autopeed() {
 		$expected_content = 'test';
 		$test_content     = "<!-- wp:fake/block -->\n$expected_content\n<!-- /wp:fake/block -->";
@@ -181,9 +181,9 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45109
 	 */
-	public function data_do_block_test_filenames() {
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
+	public static function data_do_block_test_filenames() {
 		self::$fixtures_dir = DIR_TESTDATA . '/blocks/fixtures';
 
 		$fixture_filenames = array_merge(
@@ -193,22 +193,17 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 
 		$fixture_filenames = array_values(
 			array_unique(
-				array_map(
-					array( $this, 'clean_fixture_filename' ),
-					$fixture_filenames
-				)
+				array_map( array( self::class, 'clean_fixture_filename' ), $fixture_filenames )
 			)
 		);
 
-		return array_map(
-			array( $this, 'pass_parser_fixture_filenames' ),
-			$fixture_filenames
-		);  }
+		return array_map( array( self::class, 'pass_parser_fixture_filenames' ), $fixture_filenames );
+	}
 
 	/**
-	 * @dataProvider data_do_block_test_filenames
-	 * @ticket 45109
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_do_block_test_filenames' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_do_block_output( $html_filename, $server_html_filename ) {
 		$html_path        = self::$fixtures_dir . '/' . $html_filename;
 		$server_html_path = self::$fixtures_dir . '/' . $server_html_filename;
@@ -242,8 +237,8 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 53148
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53148' )]
 	public function test_render_field_in_block_json() {
 		$result = register_block_type(
 			DIR_TESTDATA . '/blocks/notice'
@@ -255,8 +250,8 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 
 
 	/**
-	 * @ticket 45109
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_dynamic_block_rendering() {
 		$settings = array(
 			'render_callback' => array(
@@ -290,8 +285,8 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 62114
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62114' )]
 	public function test_dynamic_block_with_default_attributes() {
 		$settings = array(
 			'attributes'      => array(
@@ -340,8 +335,8 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45109
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_global_post_persistence() {
 		global $post;
 
@@ -383,8 +378,8 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 45109
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_dynamic_block_renders_string() {
 		$settings = array(
 			'render_callback' => array(
@@ -476,7 +471,7 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	 * @param string $filename The filename to clean.
 	 * @return string The cleaned fixture name.
 	 */
-	protected function clean_fixture_filename( $filename ) {
+	protected static function clean_fixture_filename( $filename ) {
 		$filename = wp_basename( $filename );
 		$filename = preg_replace( '/\..+$/', '', $filename );
 		return $filename;
@@ -490,7 +485,7 @@ class Tests_Blocks_Render extends WP_UnitTestCase {
 	 * @param string $filename The cleaned fixture name.
 	 * @return array The input and expected output filenames for that fixture.
 	 */
-	protected function pass_parser_fixture_filenames( $filename ) {
+	protected static function pass_parser_fixture_filenames( $filename ) {
 		return array(
 			"$filename.html",
 			"$filename.server.html",

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::esc_xml
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'esc_xml' )]
 class Tests_Formatting_EscXml extends WP_UnitTestCase {
 	/**
 	 * Test basic escaping
 	 *
-	 * @dataProvider data_esc_xml_basics
 	 *
 	 * @param string $source   The source string to be escaped.
 	 * @param string $expected The expected escaped value of `$source`.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_esc_xml_basics' )]
 	public function test_esc_xml_basics( $source, $expected ) {
 		$actual = esc_xml( $source );
 		$this->assertSame( $expected, $actual );
@@ -27,7 +27,7 @@ class Tests_Formatting_EscXml extends WP_UnitTestCase {
 	 *     @type string $expected The expected escaped value of `$source`.
 	 * }
 	 */
-	public function data_esc_xml_basics() {
+	public static function data_esc_xml_basics() {
 		return array(
 			// Simple string.
 			array(
@@ -84,11 +84,11 @@ class Tests_Formatting_EscXml extends WP_UnitTestCase {
 	/**
 	 * Test that CDATA Sections are not escaped.
 	 *
-	 * @dataProvider data_ignores_cdata_sections
 	 *
 	 * @param string $source   The source string to be escaped.
 	 * @param string $expected The expected escaped value of `$source`.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ignores_cdata_sections' )]
 	public function test_ignores_cdata_sections( $source, $expected ) {
 		$actual = esc_xml( $source );
 		$this->assertSame( $expected, $actual );
@@ -102,7 +102,7 @@ class Tests_Formatting_EscXml extends WP_UnitTestCase {
 	 *     @type string $expected The expected escaped value of `$source`.
 	 * }
 	 */
-	public function data_ignores_cdata_sections() {
+	public static function data_ignores_cdata_sections() {
 		return array(
 			// basic CDATA Section containing chars that would otherwise be escaped if not in a CDATA Section
 			// not to mention the CDATA Section markup itself :-)

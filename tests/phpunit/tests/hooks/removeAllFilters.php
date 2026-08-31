@@ -3,9 +3,9 @@
 /**
  * Test the remove_all_filters method of WP_Hook
  *
- * @group hooks
- * @covers WP_Hook::remove_all_filters
  */
+#[\PHPUnit\Framework\Attributes\Group( 'hooks' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Hook::class, 'remove_all_filters' )]
 class Tests_Hooks_RemoveAllFilters extends WP_UnitTestCase {
 
 	public function test_remove_all_filters() {

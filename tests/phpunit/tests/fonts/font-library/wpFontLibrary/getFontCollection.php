@@ -5,11 +5,11 @@
  * @package WordPress
  * @subpackage Font Library
  *
- * @group fonts
- * @group font-library
  *
- * @covers WP_Font_Library::get_font_collection
  */
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'font-library' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Font_Library::class, 'get_font_collection' )]
 class Tests_Fonts_WpFontLibrary_GetFontCollection extends WP_Font_Library_UnitTestCase {
 
 	public function test_should_get_font_collection() {

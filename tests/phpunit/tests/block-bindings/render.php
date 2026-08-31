@@ -6,9 +6,12 @@
  * @subpackage Blocks
  * @since 6.5.0
  *
- * @group blocks
- * @group block-bindings
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\Group( 'block-bindings' )]
+
+
+
 class WP_Block_Bindings_Render extends WP_UnitTestCase {
 
 	const SOURCE_NAME  = 'test/source';
@@ -78,7 +81,7 @@ class WP_Block_Bindings_Render extends WP_UnitTestCase {
 		unregister_block_type( 'test/block' );
 	}
 
-	public function data_update_block_with_value_from_source() {
+	public static function data_update_block_with_value_from_source() {
 		return array(
 			'paragraph block' => array(
 				'content',
@@ -136,12 +139,12 @@ HTML
 	/**
 	 * Test if the block content is updated with the value returned by the source.
 	 *
-	 * @ticket 60282
 	 *
-	 * @covers ::register_block_bindings_source
 	 *
-	 * @dataProvider data_update_block_with_value_from_source
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_update_block_with_value_from_source' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_bindings_source' )]
 	public function test_update_block_with_value_from_source( $bound_attribute, $block_content, $expected_result ) {
 		$get_value_callback = function () {
 			return 'test source value';
@@ -180,7 +183,7 @@ HTML
 		);
 	}
 
-	public function data_different_get_value_callbacks() {
+	public static function data_different_get_value_callbacks() {
 		return array(
 			'pass arguments to source'        => array(
 				function ( $source_args, $block_instance, $attribute_name ) {
@@ -207,15 +210,15 @@ HTML
 	/**
 	 * Test passing arguments to the source.
 	 *
-	 * @ticket 60282
-	 * @ticket 60651
-	 * @ticket 61385
-	 * @ticket 63840
 	 *
-	 * @covers ::register_block_bindings_source
 	 *
-	 * @dataProvider data_different_get_value_callbacks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60651' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61385' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '63840' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_different_get_value_callbacks' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_bindings_source' )]
 	public function test_different_get_value_callbacks( $get_value_callback, $expected ) {
 		register_block_bindings_source(
 			self::SOURCE_NAME,
@@ -244,11 +247,11 @@ HTML;
 	/**
 	 * Tests passing `uses_context` as argument to the source.
 	 *
-	 * @ticket 60525
-	 * @ticket 61642
 	 *
-	 * @covers ::register_block_bindings_source
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60525' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61642' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_bindings_source' )]
 	public function test_passing_uses_context_to_source() {
 		$get_value_callback = function ( $source_args, $block_instance ) {
 			$this->assertArrayNotHasKey(
@@ -302,11 +305,11 @@ HTML;
 	 *
 	 * Furthermore tests if the caption attribute is correctly processed.
 	 *
-	 * @ticket 60282
-	 * @ticket 64031
 	 *
-	 * @covers ::register_block_bindings_source
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60282' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64031' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_bindings_source' )]
 	public function test_update_block_with_value_from_source_image_placeholder() {
 		$get_value_callback = function ( $source_args, $block_instance, $attribute_name ) {
 			if ( 'url' === $attribute_name ) {
@@ -355,11 +358,11 @@ HTML;
 	 * Tests if the `__default` attribute is replaced with real attributes for
 	 * pattern overrides.
 	 *
-	 * @ticket 61333
-	 * @ticket 62069
 	 *
-	 * @covers WP_Block::process_block_bindings
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61333' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62069' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block', 'process_block_bindings' )]
 	public function test_default_binding_for_pattern_overrides() {
 		$block_content = <<<HTML
 <!-- wp:test/block {"metadata":{"bindings":{"__default":{"source":"core/pattern-overrides"}},"name":"Test"}} -->
@@ -392,8 +395,8 @@ HTML;
 	/**
 	 * Tests that filter `block_bindings_source_value` is applied.
 	 *
-	 * @ticket 61181
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61181' )]
 	public function test_filter_block_bindings_source_value() {
 		register_block_bindings_source(
 			self::SOURCE_NAME,
@@ -441,7 +444,7 @@ HTML;
 	 *
 	 * @return array[]
 	 */
-	public function data_rich_text_binding_preserves_nested_inner_blocks() {
+	public static function data_rich_text_binding_preserves_nested_inner_blocks() {
 		$child_list = self::build_list_block(
 			array(
 				self::build_list_item_block( 'Nested child' ),
@@ -608,12 +611,12 @@ HTML
 	 * Tests that binding a List Item block's rich text preserves nested List
 	 * inner blocks rendered inside the same `<li>` element.
 	 *
-	 * @ticket 65406
 	 *
-	 * @covers WP_Block::render
 	 *
-	 * @dataProvider data_rich_text_binding_preserves_nested_inner_blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65406' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_rich_text_binding_preserves_nested_inner_blocks' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block', 'render' )]
 	public function test_rich_text_binding_preserves_nested_inner_blocks( $block_content, $bound_value, $expected_rendered_block, $removed_strings, $preserved_strings ) {
 		register_block_bindings_source(
 			self::SOURCE_NAME,
@@ -666,10 +669,10 @@ HTML
 	 * rich text and an inner block share the same element, and confirms the inner
 	 * block is preserved exactly as it is for `core/list-item`.
 	 *
-	 * @ticket 65406
 	 *
-	 * @covers WP_Block::render
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65406' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block', 'render' )]
 	public function test_rich_text_binding_preserves_inner_blocks_for_any_block() {
 		register_block_type(
 			'test/rich-text-with-inner-blocks',
@@ -747,10 +750,10 @@ HTML;
 	 * invalidate the inner-block offsets used to preserve the nested list when
 	 * `content` is replaced afterwards.
 	 *
-	 * @ticket 65406
 	 *
-	 * @covers WP_Block::render
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65406' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block', 'render' )]
 	public function test_pattern_overrides_binding_preserves_nested_inner_blocks() {
 		$block_content = <<<HTML
 <!-- wp:list -->
@@ -809,10 +812,10 @@ HTML;
 	 * is left in place. The result is an incomplete replacement, never broken
 	 * structure, and the nested inner block is still preserved.
 	 *
-	 * @ticket 65406
 	 *
-	 * @covers WP_Block::render
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65406' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block', 'render' )]
 	public function test_rich_text_binding_with_inner_block_before_text() {
 		$block_content = <<<HTML
 <!-- wp:list -->

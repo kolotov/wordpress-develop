@@ -2,9 +2,9 @@
 /**
  * Tests for the `wp_add_id3_tag_data()` function.
  *
- * @group media
- * @covers ::wp_add_id3_tag_data
  */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_add_id3_tag_data' )]
 class Tests_Media_WpAddId3TagData extends WP_UnitTestCase {
 
 	/**
@@ -18,8 +18,8 @@ class Tests_Media_WpAddId3TagData extends WP_UnitTestCase {
 	/**
 	 * Test that wp_add_id3_tag_data handles non-string data without fatal error.
 	 *
-	 * @ticket 63529
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63529' )]
 	public function test_wp_add_id3_tag_data_handles_non_string_data() {
 		$metadata = array();
 

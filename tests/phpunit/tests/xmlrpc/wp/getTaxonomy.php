@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @group xmlrpc
  */
+#[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getTaxonomy extends WP_XMLRPC_UnitTestCase {
 
 	public function test_invalid_username_password() {
@@ -62,8 +62,8 @@ class Tests_XMLRPC_wp_getTaxonomy extends WP_XMLRPC_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 51493
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51493' )]
 	public function test_taxonomy_with_menu_field_specified() {
 		$this->make_user_by_role( 'editor' );
 

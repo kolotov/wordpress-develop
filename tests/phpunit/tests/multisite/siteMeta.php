@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @group ms-required
- * @group ms-site
- * @group multisite
- * @group meta
- * @ticket 37923
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'meta' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '37923' )]
 class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 
 	protected static $site_id;
@@ -252,8 +252,8 @@ class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58185
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58185' )]
 	public function test_lazy_load_site_meta() {
 		if ( ! is_site_meta_supported() ) {
 			$this->markTestSkipped( 'Test only runs with the blogmeta database table installed.' );
@@ -287,8 +287,8 @@ class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 58185
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58185' )]
 	public function test_lazy_load_site_meta_fields_id() {
 		if ( ! is_site_meta_supported() ) {
 			$this->markTestSkipped( 'Test only runs with the blogmeta database table installed.' );
@@ -343,8 +343,8 @@ class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40229
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40229' )]
 	public function test_add_site_meta_should_bust_get_sites_cache() {
 		if ( ! is_site_meta_supported() ) {
 			$this->markTestSkipped( 'Test only runs with the blogmeta database table installed.' );
@@ -385,8 +385,8 @@ class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40229
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40229' )]
 	public function test_update_site_meta_should_bust_get_sites_cache() {
 		if ( ! is_site_meta_supported() ) {
 			$this->markTestSkipped( 'Test only runs with the blogmeta database table installed.' );
@@ -428,8 +428,8 @@ class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 40229
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40229' )]
 	public function test_delete_site_meta_should_bust_get_sites_cache() {
 		if ( ! is_site_meta_supported() ) {
 			$this->markTestSkipped( 'Test only runs with the blogmeta database table installed.' );

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group general
- * @group template
- * @ticket 34292
- * @covers ::wp_resource_hints
  */
+#[\PHPUnit\Framework\Attributes\Group( 'general' )]
+#[\PHPUnit\Framework\Attributes\Group( 'template' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '34292' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_resource_hints' )]
 class Tests_General_wpResourceHints extends WP_UnitTestCase {
 	private $old_wp_scripts;
 	private $old_wp_styles;
@@ -58,8 +58,8 @@ class Tests_General_wpResourceHints extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37652
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37652' )]
 	public function test_preconnect() {
 		$expected = "<link rel='preconnect' href='//wordpress.org' />\n" .
 					"<link rel='preconnect' href='https://make.wordpress.org' />\n" .
@@ -167,8 +167,8 @@ class Tests_General_wpResourceHints extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37385
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37385' )]
 	public function test_dns_prefetch_scripts_does_not_include_registered_only() {
 		$expected   = '';
 		$unexpected = "<link rel='dns-prefetch' href='//wordpress.org' />\n";
@@ -184,8 +184,8 @@ class Tests_General_wpResourceHints extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37502
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37502' )]
 	public function test_deregistered_scripts_are_ignored() {
 		$expected = '';
 
@@ -197,8 +197,8 @@ class Tests_General_wpResourceHints extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 37652
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37652' )]
 	public function test_malformed_urls() {
 		$expected = '';
 
@@ -232,8 +232,8 @@ class Tests_General_wpResourceHints extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 38121
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38121' )]
 	public function test_custom_attributes() {
 		$expected = "<link rel='preconnect' href='https://make.wordpress.org' />\n" .
 					"<link crossorigin as='image' pr='0.5' href='https://example.com/foo.jpeg' rel='prefetch' />\n" .

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group media
- * @group shortcode
  */
+#[\PHPUnit\Framework\Attributes\Group( 'media' )]
+#[\PHPUnit\Framework\Attributes\Group( 'shortcode' )]
 class Tests_Media extends WP_UnitTestCase {
 
 	const CAPTION           = 'A simple caption.';
@@ -116,10 +116,10 @@ CAP;
 	 * `infinite_scrolling` personal option, and the
 	 * `media_library_infinite_scrolling` filter takes precedence over both.
 	 *
-	 * @ticket 65564
 	 *
-	 * @covers ::wp_enqueue_media
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65564' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_media' )]
 	public function test_wp_enqueue_media_infinite_scrolling_precedence() {
 		$user_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
 		wp_set_current_user( $user_id );
@@ -178,16 +178,16 @@ CAP;
 	}
 
 	/**
-	 * @ticket 33981
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33981' )]
 	public function test_img_caption_shortcode_with_empty_params_but_content() {
 		$result = img_caption_shortcode( array(), self::CAPTION );
 		$this->assertSame( self::CAPTION, $result );
 	}
 
 	/**
-	 * @ticket 33981
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33981' )]
 	public function test_img_caption_shortcode_short_circuit_filter() {
 		add_filter( 'img_caption_shortcode', array( $this, 'return_alt_caption' ) );
 
@@ -203,8 +203,8 @@ CAP;
 	}
 
 	/**
-	 * @ticket 33981
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33981' )]
 	public function test_img_caption_shortcode_empty_width() {
 		$result = img_caption_shortcode(
 			array(
@@ -216,8 +216,8 @@ CAP;
 	}
 
 	/**
-	 * @ticket 33981
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33981' )]
 	public function test_img_caption_shortcode_empty_caption() {
 		$result = img_caption_shortcode(
 			array(
@@ -228,8 +228,8 @@ CAP;
 	}
 
 	/**
-	 * @ticket 33981
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33981' )]
 	public function test_img_caption_shortcode_empty_caption_and_content() {
 		$result = img_caption_shortcode(
 			array(
@@ -354,8 +354,8 @@ CAP;
 	}
 
 	/**
-	 * @ticket 34595
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34595' )]
 	public function test_img_caption_shortcode_has_aria_describedby() {
 		$result = img_caption_shortcode(
 			array(
@@ -375,10 +375,10 @@ CAP;
 	 * times on a page, each figure and figcaption should receive a unique ID to
 	 * maintain HTML validity and accessibility.
 	 *
-	 * @ticket 65315
 	 *
-	 * @covers ::img_caption_shortcode
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65315' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'img_caption_shortcode' )]
 	public function test_img_caption_shortcode_unique_ids_per_instance(): void {
 		/*
 		 * Important: The id part of this must be unique among unit tests, or else the test will fail due to
@@ -485,8 +485,8 @@ CAP;
 	}
 
 	/**
-	 * @ticket 23776
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23776' )]
 	public function test_autoembed_empty() {
 		global $wp_embed;
 
@@ -497,10 +497,10 @@ CAP;
 	}
 
 	/**
-	 * @ticket 23776
 	 *
-	 * @group external-http
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '23776' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test_autoembed_no_paragraphs_around_urls() {
 		global $wp_embed;
 
@@ -520,7 +520,7 @@ EOF;
 		$this->assertSame( $content, $result );
 	}
 
-	public function data_autoembed() {
+	public static function data_autoembed() {
 		return array(
 
 			// Should embed.
@@ -578,8 +578,8 @@ https://w.org</a>',
 	}
 
 	/**
-	 * @dataProvider data_autoembed
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_autoembed' )]
 	public function test_autoembed( $content, $result = null ) {
 		$wp_embed = new Test_Autoembed();
 
@@ -638,8 +638,8 @@ https://w.org</a>',
 	}
 
 	/**
-	 * @ticket 38965
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '38965' )]
 	public function test_wp_prepare_attachment_for_js_without_image_sizes() {
 		// Create the attachment post.
 		$id = wp_insert_attachment(
@@ -675,14 +675,14 @@ https://w.org</a>',
 	 * nor to carry dimensions when it is, and reading it unconditionally raises "Undefined array
 	 * key" warnings.
 	 *
-	 * @ticket 65748
 	 *
-	 * @dataProvider data_wp_prepare_attachment_for_js_unusable_full_size
 	 *
-	 * @covers ::wp_prepare_attachment_for_js
 	 *
 	 * @param array<string, mixed> $sizes Value to store as the `sizes` metadata.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_prepare_attachment_for_js_unusable_full_size' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_prepare_attachment_for_js' )]
 	public function test_wp_prepare_attachment_for_js_with_an_unusable_full_size( array $sizes ) {
 		$id = $this->create_pdf_attachment( $sizes );
 
@@ -700,10 +700,10 @@ https://w.org</a>',
 	/**
 	 * Tests that a usable `full` entry in the `sizes` metadata is still exposed.
 	 *
-	 * @ticket 65748
 	 *
-	 * @covers ::wp_prepare_attachment_for_js
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65748' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_prepare_attachment_for_js' )]
 	public function test_wp_prepare_attachment_for_js_with_a_usable_full_size() {
 		$id = $this->create_pdf_attachment(
 			array(
@@ -741,7 +741,7 @@ https://w.org</a>',
 	 *
 	 * @return array<non-empty-string, array{ 0: array<string, mixed> }>
 	 */
-	public function data_wp_prepare_attachment_for_js_unusable_full_size(): array {
+	public static function data_wp_prepare_attachment_for_js_unusable_full_size(): array {
 		return array(
 			'no full size'            => array(
 				array(
@@ -820,13 +820,13 @@ https://w.org</a>',
 	 * When the stored value cannot be normalized, it should be treated as missing so that the
 	 * filesystem fallback runs instead.
 	 *
-	 * @ticket 65686
 	 *
-	 * @dataProvider data_wp_prepare_attachment_for_js_filesize
 	 *
 	 * @param mixed            $filesize The `filesize` value stored in the attachment metadata.
 	 * @param int<0, max>|null $expected The expected `filesizeInBytes` value, or null if it should not be set.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65686' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_prepare_attachment_for_js_filesize' )]
 	public function test_wp_prepare_attachment_for_js_filesize( $filesize, ?int $expected ) {
 		$id = self::factory()->attachment->create_object(
 			array(
@@ -867,7 +867,7 @@ https://w.org</a>',
 	 *
 	 * @return array<non-falsy-string, array{ filesize: mixed, expected: int<0, max>|null }>
 	 */
-	public function data_wp_prepare_attachment_for_js_filesize(): array {
+	public static function data_wp_prepare_attachment_for_js_filesize(): array {
 		return array(
 			'an integer'                  => array(
 				'filesize' => 12345,
@@ -931,12 +931,12 @@ https://w.org</a>',
 	/**
 	 * Tests that an unusable `filesize` in the attachment metadata falls back to the size of the file.
 	 *
-	 * @ticket 65686
 	 *
-	 * @dataProvider data_wp_prepare_attachment_for_js_filesize_falls_back_to_the_file
 	 *
 	 * @param mixed $filesize The `filesize` value stored in the attachment metadata.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65686' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_prepare_attachment_for_js_filesize_falls_back_to_the_file' )]
 	public function test_wp_prepare_attachment_for_js_filesize_falls_back_to_the_file( $filesize ) {
 		$id = self::factory()->attachment->create_upload_object( DIR_TESTDATA . '/images/canola.jpg' );
 		$this->assertIsInt( $id );
@@ -962,7 +962,7 @@ https://w.org</a>',
 	 *
 	 * @return array<non-falsy-string, array{ filesize: mixed }>
 	 */
-	public function data_wp_prepare_attachment_for_js_filesize_falls_back_to_the_file(): array {
+	public static function data_wp_prepare_attachment_for_js_filesize_falls_back_to_the_file(): array {
 		return array(
 			'a value smaller than a byte' => array( 'filesize' => 0.5 ),
 			'zero'                        => array( 'filesize' => 0 ),
@@ -977,9 +977,9 @@ https://w.org</a>',
 	}
 
 	/**
-	 * @ticket 19067
 	 * @expectedDeprecated wp_convert_bytes_to_hr
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '19067' )]
 	public function test_wp_convert_bytes_to_hr() {
 		$kb = 1024;
 		$mb = $kb * 1024;
@@ -1016,8 +1016,8 @@ https://w.org</a>',
 	}
 
 	/**
-	 * @ticket 22960
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22960' )]
 	public function test_get_attached_images() {
 		$post_id       = self::factory()->post->create();
 		$attachment_id = self::factory()->attachment->create_object(
@@ -1034,8 +1034,8 @@ https://w.org</a>',
 	}
 
 	/**
-	 * @ticket 22960
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22960' )]
 	public function test_post_galleries_images() {
 		$ids1      = array();
 		$ids1_srcs = array();
@@ -1085,8 +1085,8 @@ BLOB;
 	}
 
 	/**
-	 * @ticket 22960
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22960' )]
 	public function test_post_gallery_images() {
 		$ids1      = array();
 		$ids1_srcs = array();
@@ -1136,9 +1136,9 @@ BLOB;
 	}
 
 	/**
-	 * @ticket 43826
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_block_post_gallery_images() {
 		// Similar to test_post_gallery_images but with blocks instead of shortcodes
 		$ids      = array();
@@ -1174,9 +1174,9 @@ BLOB;
 	}
 
 	/**
-	 * @ticket 43826
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_block_post_gallery_images_json() {
 		// Similar to test_block_post_gallery_images, with IDs in the json blob
 		$ids      = array();
@@ -1212,9 +1212,9 @@ BLOB;
 	}
 
 	/**
-	 * @ticket 43826
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_mixed_post_gallery_images() {
 		// Similar to test_post_gallery_images but with a shortcode and a block in the same post
 		$ids      = array();
@@ -1255,9 +1255,9 @@ BLOB;
 	}
 
 	/**
-	 * @ticket 43826
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_block_inner_post_gallery_images() {
 		// Make sure get_post_gallery_images() works with gallery blocks that are nested inside something else
 		$ids      = array();
@@ -1298,9 +1298,9 @@ BLOB;
 	}
 
 	/**
-	 * @ticket 43826
-	 * @group blocks
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43826' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 	public function test_block_post_gallery_innerblock_images() {
 		// Make sure get_post_gallery_images() works with new version of gallery block with nested image blocks.
 		$ids      = array();
@@ -1424,15 +1424,15 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 35367
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35367' )]
 	public function test_wp_audio_shortcode_with_empty_params() {
 		$this->assertNull( wp_audio_shortcode( array() ) );
 	}
 
 	/**
-	 * @ticket 35367
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35367' )]
 	public function test_wp_audio_shortcode_with_bad_attr() {
 		$this->assertSame(
 			'<a class="wp-embedded-audio" href="https://example.com/foo.php">https://example.com/foo.php</a>',
@@ -1445,8 +1445,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 35367
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35367' )]
 	public function test_wp_audio_shortcode_attributes() {
 		$actual = wp_audio_shortcode(
 			array(
@@ -1528,17 +1528,17 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 35367
-	 * @depends test_video_shortcode_body
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35367' )]
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_video_shortcode_body' )]
 	public function test_wp_video_shortcode_with_empty_params() {
 		$this->assertNull( wp_video_shortcode( array() ) );
 	}
 
 	/**
-	 * @ticket 35367
-	 * @depends test_video_shortcode_body
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35367' )]
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_video_shortcode_body' )]
 	public function test_wp_video_shortcode_with_bad_attr() {
 		$this->assertSame(
 			'<a class="wp-embedded-video" href="https://example.com/foo.php">https://example.com/foo.php</a>',
@@ -1551,10 +1551,10 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 35367
-	 * @ticket 54788
-	 * @depends test_video_shortcode_body
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35367' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '54788' )]
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_video_shortcode_body' )]
 	public function test_wp_video_shortcode_attributes() {
 		$actual = wp_video_shortcode(
 			array(
@@ -1597,9 +1597,9 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 40866
-	 * @depends test_video_shortcode_body
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40866' )]
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_video_shortcode_body' )]
 	public function test_wp_video_shortcode_youtube_remove_feature() {
 		$actual = wp_video_shortcode(
 			array(
@@ -1611,9 +1611,9 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 40866
-	 * @depends test_video_shortcode_body
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40866' )]
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_video_shortcode_body' )]
 	public function test_wp_video_shortcode_youtube_force_ssl() {
 		$actual = wp_video_shortcode(
 			array(
@@ -1625,9 +1625,9 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 40866
-	 * @depends test_video_shortcode_body
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40866' )]
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_video_shortcode_body' )]
 	public function test_wp_video_shortcode_vimeo_force_ssl_remove_query_args() {
 		$actual = wp_video_shortcode(
 			array(
@@ -1640,9 +1640,9 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 40977
-	 * @depends test_video_shortcode_body
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40977' )]
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_video_shortcode_body' )]
 	public function test_wp_video_shortcode_vimeo_adds_loop() {
 		$actual = wp_video_shortcode(
 			array(
@@ -1654,9 +1654,9 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 40977
-	 * @depends test_video_shortcode_body
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '40977' )]
+	#[\PHPUnit\Framework\Attributes\Depends( 'test_video_shortcode_body' )]
 	public function test_wp_video_shortcode_vimeo_force_adds_loop_true() {
 		$actual = wp_video_shortcode(
 			array(
@@ -1669,8 +1669,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 26768
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26768' )]
 	public function test_add_image_size() {
 		$_wp_additional_image_sizes = wp_get_additional_image_sizes();
 
@@ -1690,8 +1690,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 26768
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26768' )]
 	public function test_remove_image_size() {
 		add_image_size( 'test-size', 200, 600 );
 		$this->assertTrue( has_image_size( 'test-size' ) );
@@ -1700,8 +1700,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 26951
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '26951' )]
 	public function test_has_image_size() {
 		add_image_size( 'test-size', 200, 600 );
 		$this->assertTrue( has_image_size( 'test-size' ) );
@@ -1711,8 +1711,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 30346
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '30346' )]
 	public function test_attachment_url_to_postid() {
 		$image_path    = '2014/11/' . self::IMG_NAME;
 		$attachment_id = self::factory()->attachment->create_object(
@@ -1729,8 +1729,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 33109
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33109' )]
 	public function test_attachment_url_to_postid_with_different_scheme() {
 		$image_path    = '2014/11/' . self::IMG_NAME;
 		$attachment_id = self::factory()->attachment->create_object(
@@ -1747,8 +1747,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 39768
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '39768' )]
 	public function test_attachment_url_to_postid_should_be_case_sensitive() {
 		$image_path_lower_case    = '2014/11/' . self::IMG_NAME;
 		$attachment_id_lower_case = self::factory()->attachment->create_object(
@@ -1794,8 +1794,8 @@ VIDEO;
 	/**
 	 * Test short-circuiting the attachment_url_to_postid filter.
 	 *
-	 * @ticket 61383
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61383' )]
 	public function test_attachment_url_to_postid_short_circuit_filter_prevents_db_queries() {
 		$image_path    = '2014/11/' . self::IMG_NAME;
 		$attachment_id = self::factory()->attachment->create_object(
@@ -1824,8 +1824,8 @@ VIDEO;
 	/**
 	 * Test short-circuiting the attachment_url_to_postid filter with a not found result.
 	 *
-	 * @ticket 61383
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61383' )]
 	public function test_attachment_url_to_postid_short_circuit_filter_when_attachment_does_not_exist() {
 		add_filter( 'pre_attachment_url_to_postid', '__return_zero' );
 
@@ -1838,8 +1838,8 @@ VIDEO;
 	/**
 	 * Test short-circuiting the attachment_url_to_postid filter with a proceed result.
 	 *
-	 * @ticket 61383
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61383' )]
 	public function test_attachment_url_to_postid_short_circuit_filter_should_proceed_if_filter_returns_null() {
 		$image_path    = '2014/11/' . self::IMG_NAME;
 		$attachment_id = self::factory()->attachment->create_object(
@@ -1866,8 +1866,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 31044
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '31044' )]
 	public function test_attachment_url_to_postid_with_empty_url() {
 		$post_id = attachment_url_to_postid( '' );
 		$this->assertIsInt( $post_id );
@@ -1875,8 +1875,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 22768
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22768' )]
 	public function test_media_handle_upload_sets_post_excerpt() {
 		$iptc_file = DIR_TESTDATA . '/images/test-image-iptc.jpg';
 
@@ -1914,8 +1914,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 37989
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37989' )]
 	public function test_media_handle_upload_expected_titles() {
 		$test_file = DIR_TESTDATA . '/images/test-image.jpg';
 
@@ -1953,8 +1953,8 @@ VIDEO;
 	}
 
 	/**
-	 * @ticket 33016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33016' )]
 	public function test_multiline_cdata() {
 		global $wp_embed;
 
@@ -1970,8 +1970,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33016' )]
 	public function test_multiline_comment() {
 		global $wp_embed;
 
@@ -1987,10 +1987,10 @@ EOF;
 
 
 	/**
-	 * @ticket 33016
 	 *
-	 * @group external-http
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33016' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test_multiline_comment_with_embeds() {
 		$content = <<<EOF
 Start.
@@ -2022,8 +2022,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33016
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33016' )]
 	public function filter_wp_embed_shortcode_custom( $content, $url ) {
 		if ( 'https://www.example.com/?video=1' === $url ) {
 			$content = '@embed URL was replaced@';
@@ -2032,10 +2032,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33016
 	 *
-	 * @group external-http
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33016' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test_oembed_explicit_media_link() {
 		global $wp_embed;
 		add_filter( 'embed_maybe_make_link', array( $this, 'filter_wp_embed_shortcode_custom' ), 10, 2 );
@@ -2071,8 +2071,8 @@ EOF;
 	/**
 	 * Tests the default output of `wp_get_attachment_image()`.
 	 *
-	 * @ticket 34635
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34635' )]
 	public function test_wp_get_attachment_image_defaults() {
 		$image    = image_downsize( self::$large_id, 'thumbnail' );
 		$expected = sprintf(
@@ -2086,8 +2086,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50801
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50801' )]
 	public function test_wp_get_attachment_image_filter_output() {
 		$image    = image_downsize( self::$large_id, 'thumbnail' );
 		$expected = 'Override wp_get_attachment_image';
@@ -2104,8 +2104,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 14110
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14110' )]
 	public function test_wp_get_attachment_image_filter_with_width_height() {
 		$mock_action = new MockAction();
 		add_filter( 'wp_get_attachment_image_attributes', array( $mock_action, 'filter' ) );
@@ -2118,8 +2118,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 14110
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14110' )]
 	public function test_wp_get_attachment_image_filter_change_width_height() {
 		add_filter(
 			'wp_get_attachment_image_attributes',
@@ -2135,8 +2135,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 14110
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '14110' )]
 	public function test_wp_get_attachment_image_filter_unset_width_height() {
 		add_filter(
 			'wp_get_attachment_image_attributes',
@@ -2153,8 +2153,8 @@ EOF;
 	/**
 	 * Test that `wp_get_attachment_image` doesn't overwrite an already valid user-provided width and height.
 	 *
-	 * @ticket 63714
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63714' )]
 	public function test_wp_get_attachment_image_not_overwrite_user_provided_width_height() {
 		$img = wp_get_attachment_image(
 			self::$large_id,
@@ -2173,8 +2173,8 @@ EOF;
 	/**
 	 * Test that `wp_get_attachment_image()` returns a proper alt value.
 	 *
-	 * @ticket 34635
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34635' )]
 	public function test_wp_get_attachment_image_with_alt() {
 		// Add test alt metadata.
 		update_post_meta( self::$large_id, '_wp_attachment_image_alt', 'Some very clever alt text', true );
@@ -2194,8 +2194,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33878
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33878' )]
 	public function test_wp_get_attachment_image_url() {
 		$this->assertFalse( wp_get_attachment_image_url( 0 ) );
 
@@ -2215,8 +2215,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 12235
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12235' )]
 	public function test_wp_get_attachment_caption() {
 		$this->assertFalse( wp_get_attachment_caption( 0 ) );
 
@@ -2239,8 +2239,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 12235
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '12235' )]
 	public function test_wp_get_attachment_caption_empty() {
 		$post_id       = self::factory()->post->create();
 		$attachment_id = self::factory()->attachment->create_object(
@@ -2293,9 +2293,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_calculate_image_srcset() {
 		$_wp_additional_image_sizes = wp_get_additional_image_sizes();
 
@@ -2341,9 +2341,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_calculate_image_srcset_no_date_uploads() {
 		$_wp_additional_image_sizes = wp_get_additional_image_sizes();
 
@@ -2402,9 +2402,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_calculate_image_srcset_with_edits() {
 		// For this test we're going to mock metadata changes from an edit.
 		// Start by getting the attachment metadata.
@@ -2438,9 +2438,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35106
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35106' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_calculate_image_srcset_with_absolute_path_in_meta() {
 		$_wp_additional_image_sizes = wp_get_additional_image_sizes();
 
@@ -2490,9 +2490,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 61690
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61690' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_calculate_image_srcset_with_relative_content_url() {
 		$_SERVER['HTTPS'] = 'on';
 
@@ -2515,8 +2515,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
 	public function test_wp_calculate_image_srcset_false() {
 		$sizes = wp_calculate_image_srcset( array( 400, 300 ), 'file.png', array() );
 
@@ -2525,9 +2525,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_calculate_image_srcset_no_width() {
 		$image_url  = wp_get_attachment_image_url( self::$large_id, 'medium' );
 		$image_meta = wp_get_attachment_metadata( self::$large_id );
@@ -2541,9 +2541,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 34955
-	 * @ticket 33641
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34955' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
 	public function test_wp_calculate_image_srcset_ratio_variance() {
 		// Mock data for this test.
 		$size_array = array( 218, 300 );
@@ -2590,9 +2590,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35108
-	 * @ticket 33641
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35108' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
 	public function test_wp_calculate_image_srcset_include_src() {
 		// Mock data for this test.
 		$size_array = array( 2000, 1000 );
@@ -2640,8 +2640,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35480
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35480' )]
 	public function test_wp_calculate_image_srcset_corrupted_image_meta() {
 		$size_array = array( 300, 150 );
 		$image_src  = 'http://' . WP_TESTS_DOMAIN . '/wp-content/uploads/2015/12/test-300x150.png';
@@ -2713,9 +2713,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 36549
-	 * @ticket 33641
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36549' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
 	public function test_wp_calculate_image_srcset_with_spaces_in_filenames() {
 		// Mock data for this test.
 		$image_src  = 'http://' . WP_TESTS_DOMAIN . '/wp-content/uploads/2015/12/test image-300x150.png';
@@ -2761,9 +2761,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_get_attachment_image_srcset() {
 		$_wp_additional_image_sizes = wp_get_additional_image_sizes();
 
@@ -2801,8 +2801,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
 	public function test_wp_get_attachment_image_srcset_single_srcset() {
 		$image_meta = wp_get_attachment_metadata( self::$large_id );
 		$size_array = array( 150, 150 );
@@ -2816,8 +2816,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
 	public function test_wp_get_attachment_image_srcset_invalidsize() {
 		$image_meta    = wp_get_attachment_metadata( self::$large_id );
 		$invalid_size  = 'nailthumb';
@@ -2832,8 +2832,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
 	public function test_wp_get_attachment_image_sizes() {
 		// Test sizes against the default WP sizes.
 		$intermediates = array( 'thumbnail', 'medium', 'medium_large', 'large' );
@@ -2852,9 +2852,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_calculate_image_sizes() {
 		// Test sizes against the default WP sizes.
 		$intermediates = array( 'thumbnail', 'medium', 'medium_large', 'large' );
@@ -2876,9 +2876,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_filter_content_tags_srcset_sizes() {
 		$image_meta = wp_get_attachment_metadata( self::$large_id );
 		$size_array = $this->get_image_size_array_from_meta( $image_meta, 'medium' );
@@ -2968,9 +2968,9 @@ EOF;
 	 * the 'src' attribute manually. To avoid incorrect images
 	 * being displayed, ensure we don't add attributes in this case.
 	 *
-	 * @ticket 34898
-	 * @ticket 33641
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34898' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
 	public function test_wp_filter_content_tags_srcset_sizes_wrong() {
 		$img = get_image_tag( self::$large_id, '', '', '', 'medium' );
 		$img = wp_img_tag_add_loading_optimization_attrs( $img, 'test' );
@@ -2982,8 +2982,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
 	public function test_wp_filter_content_tags_srcset_sizes_with_preexisting_srcset() {
 		// Generate HTML and add a dummy srcset attribute.
 		$img = get_image_tag( self::$large_id, '', '', '', 'medium' );
@@ -2995,8 +2995,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 55347
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55347' )]
 	public function test_wp_filter_content_tags_has_filter() {
 		$filter = new MockAction();
 		add_filter( 'wp_content_img_tag', array( &$filter, 'filter' ) );
@@ -3007,9 +3007,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 55510
-	 * @covers ::wp_filter_content_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55510' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_filter_content_tags' )]
 	public function test_wp_filter_content_tags_handles_duplicate_img_and_iframe_tags_once() {
 		$img     = get_image_tag( self::$large_id, '', '', '', 'large' );
 		$iframe  = '<iframe src="https://www.example.com" width="640" height="360"></iframe>';
@@ -3030,9 +3030,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 55510
-	 * @covers ::wp_filter_content_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55510' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_filter_content_tags' )]
 	public function test_wp_filter_content_tags_filter_with_identical_image_tags_custom_attributes() {
 		$img     = get_image_tag( self::$large_id, '', '', '', 'large' );
 		$img     = str_replace( '<img ', '<img srcset="custom" sizes="custom" loading="custom" decoding="custom"', $img );
@@ -3050,9 +3050,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 55510
-	 * @covers ::wp_filter_content_tags
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '55510' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_filter_content_tags' )]
 	public function test_wp_filter_content_tags_filter_with_identical_image_tags_disabled_core_filters() {
 		$img     = get_image_tag( self::$large_id, '', '', '', 'large' );
 		$content = "$img\n$img";
@@ -3074,9 +3074,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 33641
-	 * @ticket 34528
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '34528' )]
 	public function test_wp_calculate_image_srcset_animated_gifs() {
 		// Mock meta for an animated gif.
 		$image_meta = array(
@@ -3118,10 +3118,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35045
-	 * @ticket 33641
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35045' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_filter_content_tags_schemes() {
 		// Disable lazy loading attribute to not add the 'auto' keyword to the `sizes` attribute.
 		add_filter( 'wp_img_tag_add_loading_attr', '__return_false' );
@@ -3173,9 +3173,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 34945
-	 * @ticket 33641
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '34945' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '33641' )]
 	public function test_wp_get_attachment_image_with_https_on() {
 		// Mock meta for the image.
 		$image_meta = array(
@@ -3219,8 +3219,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 36084
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36084' )]
 	public function test_get_image_send_to_editor_defaults() {
 		$id      = self::$large_id;
 		$caption = '';
@@ -3246,8 +3246,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 36084
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36084' )]
 	public function test_get_image_send_to_editor_defaults_with_optional_params() {
 		$id      = self::$large_id;
 		$caption = 'A test caption.';
@@ -3282,8 +3282,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 36084
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36084' )]
 	public function test_get_image_send_to_editor_defaults_no_caption_no_rel() {
 		$id      = self::$large_id;
 		$caption = '';
@@ -3323,12 +3323,12 @@ EOF;
 	 * The test checks if the image size that is added in the filter is
 	 * used in the output of `wp_get_attachment_image()`.
 	 *
-	 * @ticket 36246
-	 * @requires function imagejpeg
 	 *
-	 * @covers ::wp_get_attachment_image
-	 * @covers ::wp_get_attachment_metadata
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '36246' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_attachment_image' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_attachment_metadata' )]
 	public function test_wp_get_attachment_image_should_use_wp_get_attachment_metadata() {
 		add_filter( 'wp_get_attachment_metadata', array( $this, 'filter_36246' ), 10, 2 );
 
@@ -3362,8 +3362,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50679
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50679' )]
 	public function test_wp_get_attachment_metadata_should_return_false_if_no_attachment() {
 		$post_id = self::factory()->post->create();
 		$data    = wp_get_attachment_metadata( $post_id );
@@ -3371,8 +3371,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 37813
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '37813' )]
 	public function test_return_type_when_inserting_attachment_with_error_in_data() {
 		$data = array(
 			'post_status'  => 'publish',
@@ -3390,8 +3390,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35218
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35218' )]
 	public function test_wp_get_media_creation_timestamp_video_asf() {
 		$metadata = array(
 			'fileformat' => 'asf',
@@ -3406,8 +3406,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35218
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35218' )]
 	public function test_wp_get_media_creation_timestamp_video_matroska() {
 		$metadata = array(
 			'fileformat' => 'matroska',
@@ -3424,8 +3424,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35218
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35218' )]
 	public function test_wp_get_media_creation_timestamp_video_quicktime() {
 		$metadata = array(
 			'fileformat' => 'quicktime',
@@ -3444,8 +3444,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35218
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35218' )]
 	public function test_wp_get_media_creation_timestamp_video_webm() {
 		$metadata = array(
 			'fileformat' => 'webm',
@@ -3467,8 +3467,8 @@ EOF;
 	 * This MP4 video file has an AAC audio track, so it can be used to test
 	 *`wp_read_audio_metadata()`.
 	 *
-	 * @ticket 42017
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '42017' )]
 	public function test_wp_read_audio_metadata_adds_creation_date_with_mp4() {
 		$video    = DIR_TESTDATA . '/uploads/small-video.mp4';
 		$metadata = wp_read_audio_metadata( $video );
@@ -3477,8 +3477,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35218
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35218' )]
 	public function test_wp_read_video_metadata_adds_creation_date_with_quicktime() {
 		$video    = DIR_TESTDATA . '/uploads/small-video.mov';
 		$metadata = wp_read_video_metadata( $video );
@@ -3487,8 +3487,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35218
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35218' )]
 	public function test_wp_read_video_metadata_adds_creation_date_with_mp4() {
 		$video    = DIR_TESTDATA . '/uploads/small-video.mp4';
 		$metadata = wp_read_video_metadata( $video );
@@ -3497,8 +3497,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35218
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35218' )]
 	public function test_wp_read_video_metadata_adds_creation_date_with_mkv() {
 		$video    = DIR_TESTDATA . '/uploads/small-video.mkv';
 		$metadata = wp_read_video_metadata( $video );
@@ -3507,8 +3507,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 35218
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '35218' )]
 	public function test_wp_read_video_metadata_adds_creation_date_with_webm() {
 		$video    = DIR_TESTDATA . '/uploads/small-video.webm';
 		$metadata = wp_read_video_metadata( $video );
@@ -3517,8 +3517,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 10752
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10752' )]
 	public function test_media_handle_upload_uses_post_parent_for_directory_date() {
 		$iptc_file = DIR_TESTDATA . '/images/test-image-iptc.jpg';
 
@@ -3563,8 +3563,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 10752
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '10752' )]
 	public function test_media_handle_upload_ignores_page_parent_for_directory_date() {
 		$iptc_file = DIR_TESTDATA . '/images/test-image-iptc.jpg';
 
@@ -3615,9 +3615,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50367
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50367' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_filter_content_tags_width_height() {
 		$image_meta = wp_get_attachment_metadata( self::$large_id );
 		$size_array = $this->get_image_size_array_from_meta( $image_meta, 'medium' );
@@ -3675,12 +3675,12 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50367
-	 * @ticket 50756
-	 * @ticket 58235
-	 * @requires function imagejpeg
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50367' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50756' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_wp_filter_content_tags_loading_lazy() {
 		$image_meta = wp_get_attachment_metadata( self::$large_id );
 		$size_array = $this->get_image_size_array_from_meta( $image_meta, 'medium' );
@@ -3758,10 +3758,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50756
-	 * @ticket 58235
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50756' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
 	public function test_wp_filter_content_tags_loading_lazy_opted_in() {
 		$img         = get_image_tag( self::$large_id, '', '', '', 'medium' );
 		$lazy_img    = wp_img_tag_add_loading_optimization_attrs( $img, 'test' );
@@ -3789,9 +3789,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50756
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50756' )]
 	public function test_wp_filter_content_tags_loading_lazy_opted_out() {
 		$img    = get_image_tag( self::$large_id, '', '', '', 'medium' );
 		$iframe = '<iframe src="https://www.example.com" width="640" height="360"></iframe>';
@@ -3817,12 +3817,12 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50367
 	 *
 	 * @expectedDeprecated wp_img_tag_add_loading_attr
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50367' )]
 	public function test_wp_img_tag_add_loading_attr() {
 		$img = '<img src="example.png" alt=" width="300" height="225" />';
 		$img = wp_img_tag_add_loading_attr( $img, 'test' );
@@ -3831,12 +3831,12 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50367
 	 *
 	 * @expectedDeprecated wp_img_tag_add_loading_attr
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50367' )]
 	public function test_wp_img_tag_add_loading_attr_without_src() {
 		$img = '<img alt=" width="300" height="225" />';
 		$img = wp_img_tag_add_loading_attr( $img, 'test' );
@@ -3845,12 +3845,12 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50367
 	 *
 	 * @expectedDeprecated wp_img_tag_add_loading_attr
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50367' )]
 	public function test_wp_img_tag_add_loading_attr_with_single_quotes() {
 		$img = "<img src='example.png' alt=' width='300' height='225' />";
 		$img = wp_img_tag_add_loading_attr( $img, 'test' );
@@ -3863,9 +3863,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50425
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50425' )]
 	public function test_wp_img_tag_add_loading_attr_opt_out() {
 		$img = '<img src="example.png" alt=" width="300" height="225" />';
 		add_filter( 'wp_img_tag_add_loading_attr', '__return_false' );
@@ -3876,10 +3876,10 @@ EOF;
 	/**
 	 * Test that decoding="async" is not applied to img tags with single quotes.
 	 *
-	 * @ticket 56969
 	 *
 	 * @expectedDeprecated wp_img_tag_add_decoding_attr
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56969' )]
 	public function test_wp_img_tag_add_decoding_attr_with_single_quotes() {
 		$img = "<img src='example.png' alt='' width='300' height='225' />";
 		$img = wp_img_tag_add_decoding_attr( $img, 'test' );
@@ -3889,8 +3889,8 @@ EOF;
 	/**
 	 * Test that decoding="async" is not applied to img tags inside JSON.
 	 *
-	 * @ticket 56969
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56969' )]
 	public function test_decoding_async_not_applied_to_json() {
 		$content = '{"image": "<img src=\"example.png\" alt=\"\" width=\"300\" height=\"225\" />"}';
 		$content = wp_filter_content_tags( $content );
@@ -3898,8 +3898,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50756
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50756' )]
 	public function test_wp_iframe_tag_add_loading_attr() {
 		$iframe = '<iframe src="https://www.example.com" width="640" height="360"></iframe>';
 		$iframe = wp_iframe_tag_add_loading_attr( $iframe, 'test' );
@@ -3908,8 +3908,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50756
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50756' )]
 	public function test_wp_iframe_tag_add_loading_attr_without_src() {
 		$iframe = '<iframe width="640" height="360"></iframe>';
 		$iframe = wp_iframe_tag_add_loading_attr( $iframe, 'test' );
@@ -3918,8 +3918,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50756
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50756' )]
 	public function test_wp_iframe_tag_add_loading_attr_with_single_quotes() {
 		$iframe = "<iframe src='https://www.example.com' width='640' height='360'></iframe>";
 		$iframe = wp_iframe_tag_add_loading_attr( $iframe, 'test' );
@@ -3932,8 +3932,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50756
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50756' )]
 	public function test_wp_iframe_tag_add_loading_attr_opt_out() {
 		$iframe = '<iframe src="https://www.example.com" width="640" height="360"></iframe>';
 		add_filter( 'wp_iframe_tag_add_loading_attr', '__return_false' );
@@ -3943,9 +3943,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 52768
-	 * @ticket 58773
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '52768' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58773' )]
 	public function test_wp_iframe_tag_add_loading_attr_include_wp_embed() {
 		$iframe   = '<iframe src="https://www.example.com" width="640" height="360"></iframe>';
 		$fallback = '<blockquote>Fallback content.</blockquote>';
@@ -3956,9 +3956,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50425
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50425' )]
 	public function test_wp_get_attachment_image_loading() {
 		$img = wp_get_attachment_image( self::$large_id );
 
@@ -3966,9 +3966,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50425
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50425' )]
 	public function test_wp_get_attachment_image_loading_opt_out() {
 		add_filter( 'wp_lazy_loading_enabled', '__return_false' );
 		$img = wp_get_attachment_image( self::$large_id );
@@ -3978,9 +3978,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50425
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50425' )]
 	public function test_wp_get_attachment_image_loading_opt_out_individual() {
 		// The default is already tested above, the filter below ensures that
 		// lazy-loading is definitely enabled globally for images.
@@ -3993,11 +3993,11 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_attachment_image
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_attachment_image' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_attachment_image_fetchpriority_not_present_by_default() {
 		$img = wp_get_attachment_image( self::$large_id );
 
@@ -4005,11 +4005,11 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_attachment_image
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_attachment_image' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_attachment_image_fetchpriority_high_when_not_lazy_loaded() {
 		$img = wp_get_attachment_image( self::$large_id, 'large', false, array( 'loading' => false ) );
 
@@ -4017,13 +4017,13 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @dataProvider data_provider_fetchpriority_values
 	 *
-	 * @covers ::wp_get_attachment_image
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_fetchpriority_values' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_attachment_image' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_attachment_image_fetchpriority_original_value_respected( $value ) {
 		$img = wp_get_attachment_image(
 			self::$large_id,
@@ -4043,16 +4043,16 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_provider_fetchpriority_values() {
+	public static function data_provider_fetchpriority_values() {
 		return self::text_array_to_dataprovider( array( 'high', 'low', 'auto' ) );
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_attachment_image
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_attachment_image' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_attachment_image_fetchpriority_stripped_when_false() {
 		$img = wp_get_attachment_image(
 			self::$large_id,
@@ -4068,11 +4068,11 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_attachment_image
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_attachment_image' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_attachment_image_fetchpriority_high_prevents_lazy_loading() {
 		$img = wp_get_attachment_image( self::$large_id, 'large', false, array( 'fetchpriority' => 'high' ) );
 
@@ -4080,12 +4080,12 @@ EOF;
 	}
 
 	/**
-	 * @ticket 57086
 	 *
-	 * @dataProvider data_wp_get_attachment_image_decoding_attr
 	 *
-	 * @covers ::wp_get_attachment_image
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57086' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_attachment_image_decoding_attr' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_attachment_image' )]
 	public function test_wp_get_attachment_image_decoding_attr( $decoding, $expected ) {
 		if ( 'no value' === $decoding ) {
 			$image = wp_get_attachment_image( self::$large_id, 'thumbnail', false, array() );
@@ -4105,7 +4105,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_get_attachment_image_decoding_attr() {
+	public static function data_wp_get_attachment_image_decoding_attr() {
 		return array(
 			'default'     => array(
 				'decoding' => 'no value',
@@ -4151,14 +4151,14 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50425
-	 * @ticket 50756
-	 * @dataProvider data_wp_lazy_loading_enabled_tag_name_defaults
 	 *
 	 * @param string $tag_name Tag name.
 	 * @param bool   $expected Expected return value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50425' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50756' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_lazy_loading_enabled_tag_name_defaults' )]
 	public function test_wp_lazy_loading_enabled_tag_name_defaults( $tag_name, $expected ) {
 		if ( $expected ) {
 			$this->assertTrue( wp_lazy_loading_enabled( $tag_name, 'the_content' ) );
@@ -4167,7 +4167,7 @@ EOF;
 		}
 	}
 
-	public function data_wp_lazy_loading_enabled_tag_name_defaults() {
+	public static function data_wp_lazy_loading_enabled_tag_name_defaults() {
 		return array(
 			'img => true'            => array( 'img', true ),
 			'iframe => true'         => array( 'iframe', true ),
@@ -4176,14 +4176,14 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50425
-	 * @ticket 53463
-	 * @ticket 53675
-	 * @dataProvider data_wp_lazy_loading_enabled_context_defaults
 	 *
 	 * @param string $context  Function context.
 	 * @param bool   $expected Expected return value.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50425' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '53463' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '53675' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_lazy_loading_enabled_context_defaults' )]
 	public function test_wp_lazy_loading_enabled_context_defaults( $context, $expected ) {
 		if ( $expected ) {
 			$this->assertTrue( wp_lazy_loading_enabled( 'img', $context ) );
@@ -4192,7 +4192,7 @@ EOF;
 		}
 	}
 
-	public function data_wp_lazy_loading_enabled_context_defaults() {
+	public static function data_wp_lazy_loading_enabled_context_defaults() {
 		return array(
 			'wp_get_attachment_image => true' => array( 'wp_get_attachment_image', true ),
 			'the_content => true'             => array( 'the_content', true ),
@@ -4206,8 +4206,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50543
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50543' )]
 	public function test_wp_image_file_matches_image_meta() {
 		$image_meta       = wp_get_attachment_metadata( self::$large_id );
 		$image_src_full   = wp_get_attachment_image_url( self::$large_id, 'full' );
@@ -4218,8 +4218,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50543
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50543' )]
 	public function test_wp_image_file_matches_image_meta_no_subsizes() {
 		$image_meta = wp_get_attachment_metadata( self::$large_id );
 		$image_src  = wp_get_attachment_image_url( self::$large_id, 'full' );
@@ -4230,8 +4230,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50543
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50543' )]
 	public function test_wp_image_file_matches_image_meta_invalid_meta() {
 		$image_meta = ''; // Attachment is not an image.
 		$image_src  = self::IMG_URL;
@@ -4240,8 +4240,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50543
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50543' )]
 	public function test_wp_image_file_matches_image_meta_different_meta() {
 		$image_meta = wp_get_attachment_metadata( self::$large_id );
 		$image_src  = self::IMG_URL; // Different image.
@@ -4250,8 +4250,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 50543
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '50543' )]
 	public function test_wp_image_file_matches_image_meta_original_image() {
 		$image_meta = wp_get_attachment_metadata( self::$large_id );
 		$image_src  = wp_get_original_image_url( self::$large_id );
@@ -4260,8 +4260,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 22101
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '22101' )]
 	public function test_gallery_shortcode_when_is_feed_true() {
 
 		$this->go_to( '/?feed=rss2' );
@@ -4296,14 +4296,14 @@ EOF;
 	/**
 	 * Test attachment permalinks based on parent post status.
 	 *
-	 * @dataProvider data_attachment_permalinks_based_on_parent_status
-	 * @ticket 51776
 	 *
 	 * @param string $post_key     Post as keyed in the shared fixture array.
 	 * @param string $expected_url Expected permalink.
 	 * @param bool   $expected_404 Whether the page is expected to return a 404 result.
 	 *
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '51776' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attachment_permalinks_based_on_parent_status' )]
 	public function test_attachment_permalinks_based_on_parent_status( $post_key, $expected_url, $expected_404 ) {
 		$this->set_permalink_structure( '/%postname%' );
 		$post = get_post( self::$post_ids[ $post_key ] );
@@ -4333,7 +4333,7 @@ EOF;
 	 *     $type bool   $expected_404 Whether the page is expected to return a 404 result.
 	 * }
 	 */
-	public function data_attachment_permalinks_based_on_parent_status() {
+	public static function data_attachment_permalinks_based_on_parent_status() {
 		return array(
 			array( 'draft-attachment', '/?attachment_id=%ID%', true ),
 			array( 'publish-attachment', '/publish-post/publish-attachment', false ),
@@ -4346,17 +4346,17 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_attr_default() returns the expected loading attribute value.
 	 *
-	 * @ticket 53675
-	 * @ticket 56930
 	 *
-	 * @covers ::wp_get_loading_attr_default
 	 *
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default
 	 *
 	 * @param string $context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53675' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56930' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_wp_get_loading_attr_default( $context ) {
 		// Return 'lazy' by default.
 		$this->assertSame( 'lazy', wp_get_loading_attr_default( 'test' ) );
@@ -4404,7 +4404,7 @@ EOF;
 	/**
 	 * @return array<int, array{ 0: string }>
 	 */
-	public function data_wp_get_loading_attr_default(): array {
+	public static function data_wp_get_loading_attr_default(): array {
 		return array(
 			array( 'the_content' ),
 			array( 'the_post_thumbnail' ),
@@ -4412,10 +4412,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 53675
-	 * @ticket 58235
-	 * @ticket 58892
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53675' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58892' )]
 	public function test_wp_omit_loading_attr_threshold_filter() {
 		// Using a smaller image here.
 		$attr = array(
@@ -4457,13 +4457,13 @@ EOF;
 	}
 
 	/**
-	 * @ticket 53675
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_filter_content_tags
-	 * @covers ::wp_img_tag_add_loading_optimization_attrs
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53675' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_filter_content_tags' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_loading_optimization_attrs' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_filter_content_tags_with_loading_optimization_attrs() {
 		add_filter( 'wp_img_tag_add_decoding_attr', '__return_false' );
 		$img1         = get_image_tag( self::$large_id, '', '', '', 'large' );
@@ -4500,8 +4500,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 53675
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53675' )]
 	public function test_wp_omit_loading_attr_threshold() {
 		$this->reset_omit_loading_attr_filter();
 
@@ -4524,16 +4524,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_attr_default() returns the expected loading attribute value before loop but after get_header if not main query.
 	 *
-	 * @ticket 58211
 	 *
-	 * @covers ::wp_get_loading_attr_default
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_wp_get_loading_attr_default_before_loop_if_not_main_query( $context ) {
 		global $wp_query;
 
@@ -4548,16 +4548,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_attr_default() returns the expected loading attribute value before loop but after get_header in main query but header was not called.
 	 *
-	 * @ticket 58211
 	 *
-	 * @covers ::wp_get_loading_attr_default
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_wp_get_loading_attr_default_before_loop_in_main_query_but_header_not_called( $context ) {
 		global $wp_query;
 
@@ -4571,16 +4571,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_attr_default() returns the expected loading attribute value before loop but after get_header for main query.
 	 *
-	 * @ticket 58211
 	 *
-	 * @covers ::wp_get_loading_attr_default
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_wp_get_loading_attr_default_before_loop_if_main_query( $context ) {
 		global $wp_query;
 
@@ -4594,16 +4594,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_attr_default() returns the expected loading attribute value after get_header and after loop.
 	 *
-	 * @ticket 58211
 	 *
-	 * @covers ::wp_get_loading_attr_default
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_wp_get_loading_attr_default_after_loop( $context ) {
 		global $wp_query;
 
@@ -4621,16 +4621,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_attr_default() returns the expected loading attribute if no loop.
 	 *
-	 * @ticket 58211
 	 *
-	 * @covers ::wp_get_loading_attr_default
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_wp_get_loading_attr_default_no_loop( $context ) {
 		global $wp_query;
 
@@ -4650,7 +4650,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_get_loading_attr_default_before_and_no_loop() {
+	public static function data_wp_get_loading_attr_default_before_and_no_loop() {
 		return array(
 			array( 'wp_get_attachment_image' ),
 			array( 'the_post_thumbnail' ),
@@ -4661,14 +4661,14 @@ EOF;
 	 * Tests that wp_filter_content_tags() does not add loading="lazy" to the first
 	 * image in the loop when using a block theme.
 	 *
-	 * @ticket 56930
-	 * @ticket 58548
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_filter_content_tags
-	 * @covers ::wp_img_tag_add_loading_optimization_attrs
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56930' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58548' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_filter_content_tags' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_loading_optimization_attrs' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_filter_content_tags_does_not_lazy_load_first_image_in_block_theme() {
 		global $_wp_current_template_id, $_wp_current_template_content, $wp_query, $wp_the_query, $post;
 
@@ -4711,14 +4711,14 @@ EOF;
 	 * Tests that wp_filter_content_tags() does not add loading="lazy"
 	 * to the featured image when using a block theme.
 	 *
-	 * @ticket 56930
-	 * @ticket 58548
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_filter_content_tags
-	 * @covers ::wp_img_tag_add_loading_optimization_attrs
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56930' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58548' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_filter_content_tags' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_loading_optimization_attrs' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_filter_content_tags_does_not_lazy_load_first_featured_image_in_block_theme() {
 		global $_wp_current_template_id, $_wp_current_template_content, $wp_query, $wp_the_query, $post;
 
@@ -4781,13 +4781,13 @@ EOF;
 	 * Tests that wp_filter_content_tags() does not add loading="lazy" to images
 	 * in a "Header" template part.
 	 *
-	 * @ticket 56930
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_filter_content_tags
-	 * @covers ::wp_img_tag_add_loading_optimization_attrs
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56930' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_filter_content_tags' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_loading_optimization_attrs' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_filter_content_tags_does_not_lazy_load_images_in_header() {
 		global $_wp_current_template_id, $_wp_current_template_content;
 
@@ -4837,13 +4837,13 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58089
-	 * @ticket 58235
-	 * @ticket 58892
 	 *
-	 * @covers ::wp_filter_content_tags
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58089' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58892' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_filter_content_tags' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_filter_content_tags_does_not_apply_loading_optimization_to_special_images_within_the_content() {
 		global $wp_query, $wp_the_query;
 
@@ -4901,16 +4901,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_attr_default() returns 'lazy' for special contexts when they're used outside of 'the_content' filter.
 	 *
-	 * @ticket 58089
 	 *
-	 * @covers ::wp_get_loading_attr_default
 	 *
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 *
-	 * @dataProvider data_special_contexts_for_the_content_wp_get_loading_attr_default
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58089' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_special_contexts_for_the_content_wp_get_loading_attr_default' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_wp_get_loading_attr_default_should_return_lazy_for_special_contexts_outside_of_the_content( $context ) {
 		$this->assertSame( 'lazy', wp_get_loading_attr_default( $context ) );
 	}
@@ -4918,16 +4918,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_attr_default() returns false for special contexts when they're used within 'the_content' filter.
 	 *
-	 * @ticket 58089
 	 *
-	 * @covers ::wp_get_loading_attr_default
 	 *
 	 * @expectedDeprecated wp_get_loading_attr_default
 	 *
-	 * @dataProvider data_special_contexts_for_the_content_wp_get_loading_attr_default
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58089' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_special_contexts_for_the_content_wp_get_loading_attr_default' )]
+	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_wp_get_loading_attr_default_should_return_false_for_special_contexts_within_the_content( $context ) {
 		remove_all_filters( 'the_content' );
 
@@ -4948,7 +4948,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_special_contexts_for_the_content() {
+	public static function data_special_contexts_for_the_content() {
 		return array(
 			'widget_media_image'      => array( 'context' => 'widget_media_image' ),
 			'the_post_thumbnail'      => array( 'context' => 'the_post_thumbnail' ),
@@ -4961,7 +4961,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_special_contexts_for_the_content_wp_get_loading_attr_default() {
+	public static function data_special_contexts_for_the_content_wp_get_loading_attr_default() {
 		return array(
 			'the_post_thumbnail'      => array( 'context' => 'the_post_thumbnail' ),
 			'wp_get_attachment_image' => array( 'context' => 'wp_get_attachment_image' ),
@@ -4971,17 +4971,17 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() returns the expected loading attribute value.
 	 *
-	 * @ticket 53675
-	 * @ticket 56930
-	 * @ticket 58235
-	 * @ticket 58892
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default
 	 *
 	 * @param string $context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53675' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '56930' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58892' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes( string $context ): void {
 		$attr = $this->get_width_height_for_high_priority();
 
@@ -5110,14 +5110,14 @@ EOF;
 	 * previously got `fetchpriority=high` now initially has `fetchpriority=auto`. This causes the initial lazy-loaded
 	 * image to be bumped down one.
 	 *
-	 * @ticket 64823
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default
 	 *
 	 * @param string $context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64823' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_with_fetchpriority_auto_for_lcp_candidate( string $context ): void {
 		$attr = $this->get_width_height_for_high_priority();
 
@@ -5245,14 +5245,14 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() returns fetchpriority=high and increases the count for arbitrary contexts in the main loop.
 	 *
-	 * @ticket 58894
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_optimization_attributes_arbitrary_contexts
 	 *
 	 * @param string $context Context for the element for which the loading optimization attribute is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58894' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_optimization_attributes_arbitrary_contexts' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_with_arbitrary_contexts_in_main_loop( $context ) {
 		$attr = $this->get_width_height_for_high_priority();
 
@@ -5295,14 +5295,14 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() does not return lazy loading attributes when arbitrary contexts are used before the main query loop.
 	 *
-	 * @ticket 58894
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_optimization_attributes_arbitrary_contexts
 	 *
 	 * @param string $context Context for the element for which the loading optimization attribute is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58894' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_optimization_attributes_arbitrary_contexts' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_with_arbitrary_contexts_before_main_query_loop( $context ) {
 		$attr = $this->get_width_height_for_high_priority();
 
@@ -5349,7 +5349,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_get_loading_optimization_attributes_arbitrary_contexts() {
+	public static function data_wp_get_loading_optimization_attributes_arbitrary_contexts() {
 		return array(
 			array( 'wp_get_attachment_image' ),
 			array( 'something_completely_arbitrary' ),
@@ -5359,10 +5359,10 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() returns empty array for arbitrary context.
 	 *
-	 * @ticket 58894
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58894' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_should_return_empty_array_for_any_arbitrary_context() {
 		remove_all_filters( 'the_content' );
 
@@ -5381,14 +5381,14 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58894
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_optimization_attributes_header_context
 	 *
 	 * @param string $context The context for the header.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58894' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_optimization_attributes_header_context' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_header_contexts( $context ) {
 		$attr = $this->get_width_height_for_high_priority();
 
@@ -5417,7 +5417,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_get_loading_optimization_attributes_header_context() {
+	public static function data_wp_get_loading_optimization_attributes_header_context() {
 		return array(
 			array( 'template_part_' . WP_TEMPLATE_PART_AREA_HEADER ),
 			array( 'get_header_image_tag' ),
@@ -5425,10 +5425,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58894
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58894' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_loading_optimization_force_header_contexts_filter() {
 		$attr = $this->get_width_height_for_high_priority();
 
@@ -5454,16 +5454,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() returns the expected loading attribute value before loop but after get_header if not main query.
 	 *
-	 * @ticket 58211
-	 * @ticket 58235
-	 * @ticket 58892
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58892' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_before_loop_if_not_main_query( $context ) {
 		global $wp_query;
 
@@ -5488,16 +5488,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() returns the expected loading attribute value before loop but after get_header in main query but header was not called.
 	 *
-	 * @ticket 58211
-	 * @ticket 58235
-	 * @ticket 58892
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58892' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_before_loop_in_main_query_but_header_not_called( $context ) {
 		global $wp_query;
 
@@ -5521,15 +5521,15 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() returns the expected loading attribute value before loop but after get_header for main query.
 	 *
-	 * @ticket 58211
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_before_loop_if_main_query( $context ) {
 		global $wp_query;
 
@@ -5555,16 +5555,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() returns the expected loading attribute value after get_header and after loop.
 	 *
-	 * @ticket 58211
-	 * @ticket 58235
-	 * @ticket 58892
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58892' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_after_loop( $context ) {
 		global $wp_query;
 
@@ -5590,16 +5590,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() returns the expected loading attribute if no loop.
 	 *
-	 * @ticket 58211
-	 * @ticket 58235
-	 * @ticket 58892
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58892' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_no_loop( $context ) {
 		global $wp_query;
 
@@ -5625,16 +5625,16 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() returns 'lazy' for special contexts when they're used outside of 'the_content' filter.
 	 *
-	 * @ticket 58089
-	 * @ticket 58235
-	 * @ticket 58892
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_special_contexts_for_the_content
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58089' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58892' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_special_contexts_for_the_content' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_should_return_lazy_for_special_contexts_outside_of_the_content( $context ) {
 		$attr = $this->get_width_height_for_high_priority();
 		$this->assertSameSetsWithIndex(
@@ -5649,15 +5649,15 @@ EOF;
 	/**
 	 * Tests that wp_get_loading_optimization_attributes() does not modify any attributes for special contexts when they're used within 'the_content' filter.
 	 *
-	 * @ticket 58089
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_special_contexts_for_the_content
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58089' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_special_contexts_for_the_content' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_should_not_modify_images_for_special_contexts_within_the_content( $context ) {
 		remove_all_filters( 'the_content' );
 
@@ -5678,10 +5678,10 @@ EOF;
 	/**
 	 * Tests to cover the decoding attribute within wp_get_loading_optimization_attributes().
 	 *
-	 * @ticket 58892
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58892' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_decoding_attribute() {
 
 		$this->assertSameSetsWithIndex(
@@ -5724,10 +5724,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50367
-	 * @ticket 58235
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50367' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
 	public function test_wp_img_tag_add_loading_optimization_attrs() {
 		$img = '<img src="example.png" alt=" width="300" height="225" />';
 		$img = wp_img_tag_add_loading_optimization_attrs( $img, 'test' );
@@ -5736,10 +5736,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 44427
-	 * @ticket 50367
-	 * @ticket 58235
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44427' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '50367' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
 	public function test_wp_img_tag_add_loading_optimization_attrs_without_src() {
 		$img = '<img alt="" width="300" height="225" />';
 		$img = wp_img_tag_add_loading_optimization_attrs( $img, 'test' );
@@ -5750,10 +5750,10 @@ EOF;
 	/**
 	 * Tests that the content media count is not affected by `the_excerpt()` calls for posts that contain images.
 	 *
-	 * @ticket 56588
 	 *
-	 * @covers ::wp_trim_excerpt
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56588' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_trim_excerpt' )]
 	public function test_the_excerpt_does_not_affect_content_media_count() {
 		global $wp_query, $wp_the_query;
 
@@ -5797,11 +5797,11 @@ EOF;
 	 * Printing the excerpt for a post that contains images in its content prior to its featured image should result in
 	 * that featured image not being lazy-loaded, since the images in the post content aren't displayed in the excerpt.
 	 *
-	 * @ticket 56588
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_trim_excerpt
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56588' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_trim_excerpt' )]
 	public function test_the_excerpt_does_not_affect_omit_lazy_loading_logic() {
 		global $wp_query, $wp_the_query;
 
@@ -5860,11 +5860,11 @@ EOF;
 	 * avoid double processing. They should instead only be processed together with any other images as part of the
 	 * content, to correctly count the original sequencing of those images.
 	 *
-	 * @ticket 58853
 	 *
-	 * @covers ::wp_filter_content_tags
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58853' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_filter_content_tags' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_filter_content_tags_handles_shortcode_image_together_with_the_content() {
 		global $wp_query, $wp_the_query;
 
@@ -5957,11 +5957,11 @@ EOF;
 	 * avoid double processing. They should instead only be processed together with any other images as part of the
 	 * content, to correctly count the original sequencing of those images.
 	 *
-	 * @ticket 58853
 	 *
-	 * @covers ::wp_filter_content_tags
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58853' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_filter_content_tags' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_filter_content_tags_handles_shortcode_images_also_in_blocks_within_the_content() {
 		global $wp_query, $wp_the_query;
 
@@ -6130,8 +6130,8 @@ EOF;
 	 * Test that generated files with the `image_editor_output_format` applied use the correct
 	 * quality level based on their mime type.
 	 *
-	 * @ticket 56442
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56442' )]
 	public function test_quality_with_image_conversion_file_sizes() {
 		add_filter( 'image_editor_output_format', array( $this, 'image_editor_output_jpeg' ) );
 		$temp_dir = get_temp_dir();
@@ -6183,12 +6183,12 @@ EOF;
 	/**
 	 * Test AVIF quality filters.
 	 *
-	 * @ticket 61614
 	 *
 	 * Temporarily disabled until we can figure out why it fails on the Trixie based PHP container.
 	 * See https://core.trac.wordpress.org/ticket/63932.
-	 * @requires PHP < 8.3
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61614' )]
+	#[\PHPUnit\Framework\Attributes\RequiresPhp( '< 8.3.0' )]
 	public function test_quality_with_avif_conversion_file_sizes() {
 		$temp_dir = get_temp_dir();
 		$file     = $temp_dir . '/33772.jpg';
@@ -6232,8 +6232,8 @@ EOF;
 	/**
 	 * Test that the `wp_editor_set_quality` filter includes the dimensions in the `$dims` parameter.
 	 *
-	 * @ticket 54648
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '54648' )]
 	public function test_wp_editor_set_quality_includes_dimensions() {
 		// Before loading an image, set up the callback filter with the assertions.
 		add_filter( 'wp_editor_set_quality', array( $this, 'assert_dimensions_in_wp_editor_set_quality' ), 10, 3 );
@@ -6277,8 +6277,8 @@ EOF;
 	/**
 	 * Test that an image size isn't generated if it matches the original image size.
 	 *
-	 * @ticket 57370
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57370' )]
 	public function test_wp_generate_attachment_metadata_doesnt_generate_sizes_for_150_square_image() {
 		$temp_dir = get_temp_dir();
 		$file     = $temp_dir . '/test-square-150.jpg';
@@ -6317,10 +6317,10 @@ EOF;
 	/**
 	 * Tests that `wp_get_attachment_image()` uses the correct default context.
 	 *
-	 * @ticket 58212
 	 *
-	 * @covers ::wp_get_attachment_image
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58212' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_attachment_image' )]
 	public function test_wp_get_attachment_image_context_filter_default() {
 		$last_context = '';
 		$this->track_last_attachment_image_context( $last_context );
@@ -6332,10 +6332,10 @@ EOF;
 	/**
 	 * Tests that `wp_get_attachment_image()` allows overriding the context via filter.
 	 *
-	 * @ticket 58212
 	 *
-	 * @covers ::wp_get_attachment_image
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58212' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_attachment_image' )]
 	public function test_wp_get_attachment_image_context_filter_value_is_passed_correctly() {
 		$last_context = '';
 		$this->track_last_attachment_image_context( $last_context );
@@ -6355,17 +6355,17 @@ EOF;
 	/**
 	 * Tests tag restriction for `wp_get_loading_optimization_attributes()`.
 	 *
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_optimization_attributes_min_required_attrs
 	 *
 	 * @param string $tag_name The tag name.
 	 * @param string $attr Element attributes.
 	 * @param array  $expected Expected return value.
 	 * @param string $message Message to display if the test fails.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_optimization_attributes_min_required_attrs' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_min_required_attrs( $tag_name, $attr, $expected, $message ) {
 		$context = 'the_post_thumbnail';
 		$this->assertSame( wp_get_loading_optimization_attributes( $tag_name, $attr, $context ), $expected, $message );
@@ -6376,7 +6376,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_get_loading_optimization_attributes_min_required_attrs() {
+	public static function data_wp_get_loading_optimization_attributes_min_required_attrs() {
 		return array(
 			'img_with_min_attrs' => array(
 				'img',
@@ -6412,16 +6412,16 @@ EOF;
 	/**
 	 * Tests tag restriction for `wp_get_loading_optimization_attributes()`.
 	 *
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_optimization_attributes_check_allowed_tags
 	 *
 	 * @param string $tag_name The tag name.
 	 * @param array  $expected Expected return value.
 	 * @param string $message Message to display if the test fails.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_optimization_attributes_check_allowed_tags' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_check_allowed_tags( $tag_name, $expected, $message ) {
 		$attr    = $this->get_width_height_for_high_priority();
 		$context = 'the_post_thumbnail';
@@ -6433,7 +6433,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_wp_get_loading_optimization_attributes_check_allowed_tags() {
+	public static function data_wp_get_loading_optimization_attributes_check_allowed_tags() {
 		return array(
 			'img'    => array(
 				'img',
@@ -6460,10 +6460,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_skip_for_block_template() {
 		$attr = $this->get_width_height_for_high_priority();
 
@@ -6476,10 +6476,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_header_block_template() {
 		$attr = $this->get_width_height_for_high_priority();
 
@@ -6495,12 +6495,12 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
-	 * @ticket 58892
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 * @expectedIncorrectUsage wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58892' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_incorrect_loading_attrs() {
 		$attr                  = $this->get_width_height_for_high_priority();
 		$attr['loading']       = 'lazy';
@@ -6518,10 +6518,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_if_loading_attr_present() {
 		$attr            = $this->get_width_height_for_high_priority();
 		$attr['loading'] = 'eager';
@@ -6540,10 +6540,10 @@ EOF;
 	/**
 	 * Tests that wp_img_tag_add_loading_optimization_attrs() passes the 'src' attribute to wp_get_loading_optimization_attributes().
 	 *
-	 * @ticket 61436
 	 *
-	 * @covers ::wp_img_tag_add_loading_optimization_attrs
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61436' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_loading_optimization_attrs' )]
 	public function test_wp_img_tag_add_loading_optimization_attrs_passes_src() {
 		add_filter(
 			'wp_get_loading_optimization_attributes',
@@ -6574,10 +6574,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_low_res_image() {
 		$attr = array(
 			'width'   => 100,
@@ -6598,11 +6598,11 @@ EOF;
 	/**
 	 * Tests that the `do_shortcode` context results in a lazy-loaded image by default.
 	 *
-	 * @ticket 58681
-	 * @ticket 58853
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58681' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '58853' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_in_shortcodes() {
 		$attr = $this->get_width_height_for_high_priority();
 
@@ -6621,14 +6621,14 @@ EOF;
 	 * Tests that the `do_shortcode` context does not result in loading optimization changes when used within a content
 	 * blob.
 	 *
-	 * @ticket 58853
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_get_filters_with_do_shortcode_callback
 	 *
 	 * @param string $filter_name The name of the filter to hook.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58853' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_filters_with_do_shortcode_callback' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_in_shortcodes_within_content_blob( $filter_name ) {
 		$result = null;
 
@@ -6656,7 +6656,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_get_filters_with_do_shortcode_callback() {
+	public static function data_get_filters_with_do_shortcode_callback() {
 		return self::text_array_to_dataprovider(
 			array(
 				'the_content',
@@ -6667,8 +6667,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58681
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58681' )]
 	public function test_content_rendering_with_shortcodes() {
 		// The gallery shortcode will dynamically create image markup that should be optimized.
 		$content = "[gallery ids='" . self::$large_id . "' size='large']";
@@ -6683,8 +6683,8 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58681
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58681' )]
 	public function test_content_rendering_with_shortcodes_nested() {
 		global $wp_query;
 
@@ -6721,12 +6721,12 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_maybe_add_fetchpriority_high_attr
 	 *
-	 * @dataProvider data_wp_maybe_add_fetchpriority_high_attr
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_maybe_add_fetchpriority_high_attr' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_maybe_add_fetchpriority_high_attr' )]
 	public function test_wp_maybe_add_fetchpriority_high_attr( array $loading_attrs, string $tag_name, array $attr, ?string $expected_fetchpriority, bool $expected_high_priority_element_flag ): void {
 		$loading_attrs = wp_maybe_add_fetchpriority_high_attr( $loading_attrs, $tag_name, $attr );
 
@@ -6750,12 +6750,12 @@ EOF;
 	 *     4: bool,
 	 * }>
 	 */
-	public function data_wp_maybe_add_fetchpriority_high_attr(): array {
+	public static function data_wp_maybe_add_fetchpriority_high_attr(): array {
 		return array(
 			'small image'                         => array(
 				array(),
 				'img',
-				$this->get_insufficient_width_height_for_high_priority(),
+				self::get_insufficient_width_height_for_high_priority(),
 				null,
 				true,
 			),
@@ -6763,7 +6763,7 @@ EOF;
 				array(),
 				'img',
 				array_merge(
-					$this->get_insufficient_width_height_for_high_priority(),
+					self::get_insufficient_width_height_for_high_priority(),
 					array( 'fetchpriority' => 'auto' )
 				),
 				null,
@@ -6772,7 +6772,7 @@ EOF;
 			'large image'                         => array(
 				array(),
 				'img',
-				$this->get_width_height_for_high_priority(),
+				self::get_width_height_for_high_priority(),
 				'high',
 				false,
 			),
@@ -6780,7 +6780,7 @@ EOF;
 				array(),
 				'img',
 				array_merge(
-					$this->get_width_height_for_high_priority(),
+					self::get_width_height_for_high_priority(),
 					array( 'fetchpriority' => 'auto' )
 				),
 				null,
@@ -6792,14 +6792,14 @@ EOF;
 					'decoding' => 'async',
 				),
 				'img',
-				$this->get_width_height_for_high_priority(),
+				self::get_width_height_for_high_priority(),
 				null,
 				true,
 			),
 			'image with loading=eager'            => array(
 				array( 'loading' => 'eager' ),
 				'img',
-				$this->get_width_height_for_high_priority(),
+				self::get_width_height_for_high_priority(),
 				'high',
 				false,
 			),
@@ -6807,7 +6807,7 @@ EOF;
 				array(),
 				'img',
 				array_merge(
-					$this->get_insufficient_width_height_for_high_priority(),
+					self::get_insufficient_width_height_for_high_priority(),
 					array( 'fetchpriority' => 'high' )
 				),
 				'high',
@@ -6817,7 +6817,7 @@ EOF;
 				array(),
 				'img',
 				array_merge(
-					$this->get_insufficient_width_height_for_high_priority(),
+					self::get_insufficient_width_height_for_high_priority(),
 					array( 'fetchpriority' => 'low' )
 				),
 				null,
@@ -6826,7 +6826,7 @@ EOF;
 			'non-image element'                   => array(
 				array(),
 				'video',
-				$this->get_width_height_for_high_priority(),
+				self::get_width_height_for_high_priority(),
 				null,
 				true,
 			),
@@ -6834,10 +6834,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58235
 	 *
-	 * @covers ::wp_maybe_add_fetchpriority_high_attr
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58235' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_maybe_add_fetchpriority_high_attr' )]
 	public function test_wp_maybe_add_fetchpriority_high_attr_min_priority_filter() {
 		$attr = array(
 			'width'  => 50,
@@ -6861,10 +6861,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58635
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58635' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_header_block_template_increase_media_count() {
 		$attr = $this->get_width_height_for_high_priority();
 		wp_get_loading_optimization_attributes( 'img', $attr, 'template_part_' . WP_TEMPLATE_PART_AREA_HEADER );
@@ -6874,10 +6874,10 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58635
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58635' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_header_image_tag_increase_media_count() {
 		$attr = $this->get_width_height_for_high_priority();
 		wp_get_loading_optimization_attributes( 'img', $attr, 'get_header_image_tag' );
@@ -6887,14 +6887,14 @@ EOF;
 	}
 
 	/**
-	 * @ticket 58635
 	 *
-	 * @covers ::wp_get_loading_optimization_attributes
 	 *
-	 * @dataProvider data_wp_get_loading_attr_default_before_and_no_loop
 	 *
 	 * @param string $context Context for the element for which the `loading` attribute value is requested.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58635' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_optimization_attributes' )]
 	public function test_wp_get_loading_optimization_attributes_image_before_loop_increase_media_count( $context ) {
 		global $wp_query;
 
@@ -6912,8 +6912,8 @@ EOF;
 	/**
 	 * Tests for pre_wp_get_loading_optimization_attributes filter.
 	 *
-	 * @ticket 58893
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58893' )]
 	public function test_pre_wp_get_loading_optimization_attributes_filter() {
 		add_filter(
 			'pre_wp_get_loading_optimization_attributes',
@@ -6985,8 +6985,8 @@ EOF;
 	/**
 	 * Tests for wp_get_loading_optimization_attributes filter.
 	 *
-	 * @ticket 58893
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58893' )]
 	public function test_wp_get_loading_optimization_attributes_filter() {
 		$attr = $this->get_width_height_for_high_priority();
 
@@ -7046,8 +7046,8 @@ EOF;
 	/**
 	 * Test WebP lossless quality is handled correctly.
 	 *
-	 * @ticket 60291
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60291' )]
 	public function test_set_quality_webp_lossless() {
 		// Get a new editor to test that lossless WebP images are handled correctly.
 		$editor = wp_get_image_editor( DIR_TESTDATA . '/images/webp-lossless.webp' );
@@ -7073,8 +7073,8 @@ EOF;
 	/**
 	 * Test generated markup for an image with lazy loading gets auto-sizes.
 	 *
-	 * @ticket 61847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61847' )]
 	public function test_image_with_lazy_loading_has_auto_sizes() {
 		$this->assertStringContainsString(
 			'sizes="auto, ',
@@ -7086,8 +7086,8 @@ EOF;
 	/**
 	 * Test generated markup for an image without lazy loading does not get auto-sizes.
 	 *
-	 * @ticket 61847
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61847' )]
 	public function test_image_without_lazy_loading_does_not_have_auto_sizes() {
 		$this->assertStringNotContainsString(
 			'sizes="auto, ',
@@ -7099,9 +7099,9 @@ EOF;
 	/**
 	 * Test generated markup for an image with no width does not get auto-sizes.
 	 *
-	 * @ticket 61847
-	 * @ticket 62413
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61847' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62413' )]
 	public function test_image_without_width_does_not_have_auto_sizes() {
 		// Disable automatic width calculation.
 		add_filter(
@@ -7129,10 +7129,10 @@ EOF;
 	/**
 	 * Test content filtered markup with lazy loading gets auto-sizes.
 	 *
-	 * @ticket 61847
 	 *
-	 * @covers ::wp_img_tag_add_auto_sizes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_auto_sizes' )]
 	public function test_content_image_with_lazy_loading_has_auto_sizes() {
 		// Force lazy loading attribute.
 		add_filter( 'wp_img_tag_add_loading_attr', '__return_true' );
@@ -7147,10 +7147,10 @@ EOF;
 	/**
 	 * Test content filtered markup without lazy loading does not get auto-sizes.
 	 *
-	 * @ticket 61847
 	 *
-	 * @covers ::wp_img_tag_add_auto_sizes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61847' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_auto_sizes' )]
 	public function test_content_image_without_lazy_loading_does_not_have_auto_sizes() {
 		// Disable lazy loading attribute.
 		add_filter( 'wp_img_tag_add_loading_attr', '__return_false' );
@@ -7165,11 +7165,11 @@ EOF;
 	/**
 	 * Test content filtered markup with lazy loading does not get auto-sizes when disabled.
 	 *
-	 * @ticket 61847
-	 * @ticket 62413
 	 *
-	 * @covers ::wp_img_tag_add_auto_sizes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61847' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62413' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_auto_sizes' )]
 	public function test_content_image_does_not_have_auto_sizes_when_disabled() {
 		// Force lazy loading attribute.
 		add_filter( 'wp_img_tag_add_loading_attr', '__return_true' );
@@ -7186,11 +7186,11 @@ EOF;
 	/**
 	 * Test generated image markup with lazy loading does not get auto-sizes when disabled.
 	 *
-	 * @ticket 61847
-	 * @ticket 62413
 	 *
-	 * @covers ::wp_img_tag_add_auto_sizes
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61847' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62413' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_auto_sizes' )]
 	public function test_generated_image_does_not_have_auto_sizes_when_disabled() {
 		// Disable auto-sizes attribute.
 		add_filter( 'wp_img_tag_add_auto_sizes', '__return_false' );
@@ -7205,16 +7205,16 @@ EOF;
 	/**
 	 * Test generated markup for an image with 'auto' keyword already present in sizes does not receive it again.
 	 *
-	 * @ticket 61847
 	 *
-	 * @covers ::wp_img_tag_add_auto_sizes
-	 * @covers ::wp_sizes_attribute_includes_valid_auto
 	 *
-	 * @dataProvider data_image_with_existing_auto_sizes
 	 *
 	 * @param string $initial_sizes      The initial sizes attribute to test.
 	 * @param bool   $expected_processed Whether the auto sizes should be processed or not.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61847' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_image_with_existing_auto_sizes' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_auto_sizes' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sizes_attribute_includes_valid_auto' )]
 	public function test_image_with_existing_auto_sizes_is_not_processed_again( string $initial_sizes, bool $expected_processed ) {
 		$image_tag = wp_get_attachment_image(
 			self::$large_id,
@@ -7244,16 +7244,16 @@ EOF;
 	/**
 	 * Test content filtered markup with 'auto' keyword already present in sizes does not receive it again.
 	 *
-	 * @ticket 61847
 	 *
-	 * @covers ::wp_img_tag_add_auto_sizes
-	 * @covers ::wp_sizes_attribute_includes_valid_auto
 	 *
-	 * @dataProvider data_image_with_existing_auto_sizes
 	 *
 	 * @param string $initial_sizes      The initial sizes attribute to test.
 	 * @param bool   $expected_processed Whether the auto sizes should be processed or not.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61847' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_image_with_existing_auto_sizes' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_auto_sizes' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sizes_attribute_includes_valid_auto' )]
 	public function test_content_image_with_existing_auto_sizes_is_not_processed_again( string $initial_sizes, bool $expected_processed ) {
 		// Force lazy loading attribute.
 		add_filter( 'wp_img_tag_add_loading_attr', '__return_true' );
@@ -7290,7 +7290,7 @@ EOF;
 	 *
 	 * @return array<string, mixed[]> Arguments for the test scenarios.
 	 */
-	public function data_image_with_existing_auto_sizes() {
+	public static function data_image_with_existing_auto_sizes() {
 		return array(
 			'not present'                 => array(
 				'(max-width: 1024px) 100vw, 1024px',
@@ -7348,7 +7348,7 @@ EOF;
 	 *
 	 * @return array<string, array>
 	 */
-	public function data_provider_data_provider_to_test_wp_enqueue_img_auto_sizes_contain_css_fix(): array {
+	public static function data_provider_data_provider_to_test_wp_enqueue_img_auto_sizes_contain_css_fix(): array {
 		return array(
 			'default'                     => array(
 				'set_up'   => null,
@@ -7404,11 +7404,11 @@ EOF;
 	/**
 	 * Tests that IMG auto-sizes CSS fix is enqueued (and printed) when expected.
 	 *
-	 * @covers ::wp_enqueue_img_auto_sizes_contain_css_fix
-	 * @ticket 62731
 	 *
-	 * @dataProvider data_provider_data_provider_to_test_wp_enqueue_img_auto_sizes_contain_css_fix
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62731' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_data_provider_to_test_wp_enqueue_img_auto_sizes_contain_css_fix' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_enqueue_img_auto_sizes_contain_css_fix' )]
 	public function test_wp_enqueue_img_auto_sizes_contain_css_fix( ?Closure $set_up, bool $expected, ?string $expected_deprecated = null ): void {
 		// These files are created as part of the build process, but the unit tests don't run the build prior to running unit tests on GHA.
 		self::touch( ABSPATH . WPINC . '/css/dist/block-library/style.css' );
@@ -7458,7 +7458,7 @@ EOF;
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function data_provider_to_test_wp_img_tag_add_auto_sizes() {
+	public static function data_provider_to_test_wp_img_tag_add_auto_sizes() {
 		return array(
 			'expected_with_single_quoted_attributes'       => array(
 				'input'    => "<img width='300' height='225' src='https://example.com/foo-300x225.jpg' srcset='https://example.com/foo-300x225.jpg 300w, https://example.com/foo-1024x768.jpg 1024w, https://example.com/foo-768x576.jpg 768w, https://example.com/foo-1536x1152.jpg 1536w, https://example.com/foo-2048x1536.jpg 2048w' sizes='(max-width: 650px) 100vw, 650px' loading='lazy'>",
@@ -7508,15 +7508,15 @@ EOF;
 	}
 
 	/**
-	 * @ticket 61847
 	 *
-	 * @covers ::wp_img_tag_add_auto_sizes
 	 *
-	 * @dataProvider data_provider_to_test_wp_img_tag_add_auto_sizes
 	 *
 	 * @param string $input    The input HTML string.
 	 * @param string $expected The expected output HTML string.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61847' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_to_test_wp_img_tag_add_auto_sizes' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_auto_sizes' )]
 	public function test_wp_img_tag_add_auto_sizes( string $input, string $expected ) {
 		$this->assertSame(
 			$expected,
@@ -7528,13 +7528,13 @@ EOF;
 	/**
 	 * Ensure an HEIC image is converted to a JPEG.
 	 *
-	 * @ticket 62305
-	 * @ticket 62359
 	 *
-	 * @dataProvider data_image_converted_to_other_format_has_correct_filename
 	 *
 	 * @param bool $apply_big_image_size_threshold True if filter needs to apply, otherwise false.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62305' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62359' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_image_converted_to_other_format_has_correct_filename' )]
 	public function test_heic_image_upload_is_converted_to_jpeg( bool $apply_big_image_size_threshold ) {
 		$temp_dir      = get_temp_dir();
 		$file          = $temp_dir . '/test-image.heic';
@@ -7570,13 +7570,13 @@ EOF;
 	/**
 	 * Ensure a JPEG is converted to WebP when applied via a filter.
 	 *
-	 * @ticket 62305
-	 * @ticket 62359
 	 *
-	 * @dataProvider data_image_converted_to_other_format_has_correct_filename
 	 *
 	 * @param bool $apply_big_image_size_threshold True if filter needs to apply, otherwise false.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62305' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '62359' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_image_converted_to_other_format_has_correct_filename' )]
 	public function test_jpeg_image_converts_to_webp_when_filtered( bool $apply_big_image_size_threshold ) {
 		$temp_dir      = get_temp_dir();
 		$file          = $temp_dir . '/33772.jpg';
@@ -7617,7 +7617,7 @@ EOF;
 	 *
 	 * @return array[]
 	 */
-	public function data_image_converted_to_other_format_has_correct_filename() {
+	public static function data_image_converted_to_other_format_has_correct_filename() {
 		return array(
 			'do not scale image' => array( false ),
 			'scale image'        => array( true ),
@@ -7742,7 +7742,7 @@ EOF;
 	 *
 	 * @return array{ width: int, height: int } Associative array with 'width' and 'height' keys.
 	 */
-	private function get_width_height_for_high_priority(): array {
+	private static function get_width_height_for_high_priority(): array {
 		/*
 		 * The product of width * height must be >50000 to qualify for high priority image.
 		 * 300 * 200 = 60000
@@ -7758,7 +7758,7 @@ EOF;
 	 *
 	 * @return array{ width: int, height: int } Associative array with 'width' and 'height' keys.
 	 */
-	private function get_insufficient_width_height_for_high_priority(): array {
+	private static function get_insufficient_width_height_for_high_priority(): array {
 		/*
 		 * The product of width * height must be >50000 to qualify for high priority image.
 		 * 200 * 100 = 20000
@@ -7770,9 +7770,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 65262
-	 * @covers ::wp_get_image_encode_quality
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65262' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_image_encode_quality' )]
 	public function test_wp_get_image_encode_quality_defaults() {
 		// JPEG (and any non-WebP) defaults to 82, WebP to 86.
 		$this->assertSame( 82, wp_get_image_encode_quality( 'image/jpeg' ) );
@@ -7781,9 +7781,9 @@ EOF;
 	}
 
 	/**
-	 * @ticket 65262
-	 * @covers ::wp_get_image_encode_quality
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65262' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_image_encode_quality' )]
 	public function test_wp_get_image_encode_quality_applies_wp_editor_set_quality() {
 		$filter = static function ( $quality, $mime_type, $size ) {
 			return ( ! empty( $size['width'] ) && $size['width'] <= 300 ) ? 55 : $quality;
@@ -7803,9 +7803,9 @@ EOF;
 	 * The legacy jpeg_quality filter must apply for JPEG output only, matching
 	 * WP_Image_Editor::set_quality().
 	 *
-	 * @ticket 65262
-	 * @covers ::wp_get_image_encode_quality
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65262' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_image_encode_quality' )]
 	public function test_wp_get_image_encode_quality_applies_jpeg_quality() {
 		$filter = static function () {
 			return 70;
@@ -7825,9 +7825,9 @@ EOF;
 	/**
 	 * Out-of-range filtered values fall back to the default; 0 squashes to 1.
 	 *
-	 * @ticket 65262
-	 * @covers ::wp_get_image_encode_quality
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65262' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_image_encode_quality' )]
 	public function test_wp_get_image_encode_quality_clamps_out_of_range() {
 		$too_high = static function () {
 			return 150;

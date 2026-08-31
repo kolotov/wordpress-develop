@@ -3,21 +3,21 @@
 /**
  * Tests for `is_serialized()`.
  *
- * @ticket 53299
  *
- * @group functions
  *
- * @covers ::is_serialized
  */
+#[\PHPUnit\Framework\Attributes\Ticket( '53299' )]
+#[\PHPUnit\Framework\Attributes\Group( 'functions' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'is_serialized' )]
 class Tests_Functions_IsSerialized extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_is_serialized
-	 * @dataProvider data_is_not_serialized
 	 *
 	 * @param mixed $data     Data value to test.
 	 * @param bool  $expected Expected function result.
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_serialized' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_not_serialized' )]
 	public function test_is_serialized( $data, $expected ) {
 		$this->assertSame( $expected, is_serialized( $data ) );
 	}
@@ -27,7 +27,7 @@ class Tests_Functions_IsSerialized extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_is_serialized() {
+	public static function data_is_serialized() {
 		return array(
 			'serialized empty array'            => array(
 				'data'     => serialize( array() ),
@@ -99,7 +99,7 @@ class Tests_Functions_IsSerialized extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_is_not_serialized() {
+	public static function data_is_not_serialized() {
 		return array(
 			'an empty array'                             => array(
 				'data'     => array(),
@@ -185,9 +185,9 @@ class Tests_Functions_IsSerialized extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 46570
-	 * @dataProvider data_is_serialized_should_return_true_for_large_floats
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '46570' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_serialized_should_return_true_for_large_floats' )]
 	public function test_is_serialized_should_return_true_for_large_floats( $value ) {
 		$this->assertTrue( is_serialized( $value ) );
 	}
@@ -197,7 +197,7 @@ class Tests_Functions_IsSerialized extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_is_serialized_should_return_true_for_large_floats() {
+	public static function data_is_serialized_should_return_true_for_large_floats() {
 		return array(
 			array( serialize( 1.7976931348623157E+308 ) ),
 			array( serialize( array( 1.7976931348623157E+308, 1.23e50 ) ) ),
@@ -205,8 +205,8 @@ class Tests_Functions_IsSerialized extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 17375
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '17375' )]
 	public function test_no_new_serializable_types() {
 		$this->assertFalse( is_serialized( 'C:16:"Serialized_Class":6:{a:0:{}}' ) );
 	}

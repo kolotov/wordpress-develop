@@ -8,10 +8,9 @@
  *
  * @since 6.5.0
  *
- * @group html-api
  *
- * @coversDefaultClass WP_HTML_Processor
  */
+#[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTestCase {
 	/*******************************************************************
 	 * RULES FOR "IN BODY" MODE
@@ -20,8 +19,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	/**
 	 * Ensures that an opening LI element implicitly closes an open LI element.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_li_closes_open_li() {
 		$processor = WP_HTML_Processor::create_fragment( '<li><li><li target>' );
 
@@ -47,8 +46,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	/**
 	 * Ensures that an opening LI element implicitly closes other open elements with optional closing tags.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_li_generates_implied_end_tags_inside_open_li() {
 		$processor = WP_HTML_Processor::create_fragment( '<li><li><div><li target>' );
 
@@ -74,8 +73,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	/**
 	 * Ensures that when closing tags with optional tag closers, an opening LI tag doesn't close beyond a special boundary.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_li_generates_implied_end_tags_inside_open_li_but_stopping_at_special_tags() {
 		$processor = WP_HTML_Processor::create_fragment( '<li><li><blockquote><li target>' );
 
@@ -101,8 +100,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	/**
 	 * Ensures that an opening LI closes an open P in button scope.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_li_in_li_closes_p_in_button_scope() {
 		$processor = WP_HTML_Processor::create_fragment( '<li><li><p><button><p><li target>' );
 
@@ -130,8 +129,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	 *
 	 * Note that a DD closes an open DD and also an open DT.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_dd_closes_open_dd() {
 		$processor = WP_HTML_Processor::create_fragment( '<dd><dd><dd target>' );
 
@@ -159,8 +158,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	 *
 	 * Note that a DD closes an open DD and also an open DT.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_dd_closes_open_dt() {
 		$processor = WP_HTML_Processor::create_fragment( '<dt><dt><dd target>' );
 
@@ -186,8 +185,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	/**
 	 * Ensures that an opening DD implicitly closes open elements with optional closing tags.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_dd_generates_implied_end_tags_inside_open_dd() {
 		$processor = WP_HTML_Processor::create_fragment( '<dd><dd><div><dd target>' );
 
@@ -214,8 +213,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	 * Ensures that an opening DD implicitly closes open elements with optional closing tags,
 	 * but doesn't close beyond a special boundary.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_dd_generates_implied_end_tags_inside_open_dd_but_stopping_at_special_tags() {
 		$processor = WP_HTML_Processor::create_fragment( '<dd><dd><blockquote><dd target>' );
 
@@ -241,8 +240,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	/**
 	 * Ensures that an opening DD inside a DD closes a P in button scope.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_dd_in_dd_closes_p_in_button_scope() {
 		$processor = WP_HTML_Processor::create_fragment( '<dd><dd><p><button><p><dd target>' );
 
@@ -268,8 +267,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	/**
 	 * Ensures that an opening DT closes an open DT element.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_dt_closes_open_dt() {
 		$processor = WP_HTML_Processor::create_fragment( '<dt><dt><dt target>' );
 
@@ -295,8 +294,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	/**
 	 * Ensures that an opening DT closes an open DD.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_dt_closes_open_dd() {
 		$processor = WP_HTML_Processor::create_fragment( '<dd><dd><dt target>' );
 
@@ -322,8 +321,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	/**
 	 * Ensures that an opening DT implicitly closes open elements with optional closing tags.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_dt_generates_implied_end_tags_inside_open_dt() {
 		$processor = WP_HTML_Processor::create_fragment( '<dt><dt><div><dt target>' );
 
@@ -350,8 +349,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	 * Ensures that an opening DT implicitly closes open elements with optional closing tags,
 	 * but doesn't close beyond a special boundary.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_dt_generates_implied_end_tags_inside_open_dt_but_stopping_at_special_tags() {
 		$processor = WP_HTML_Processor::create_fragment( '<dt><dt><blockquote><dt target>' );
 
@@ -377,8 +376,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	/**
 	 * Ensures that an opening DT inside a DT closes a P in button scope.
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_in_body_dt_in_dt_closes_p_in_button_scope() {
 		$processor = WP_HTML_Processor::create_fragment( '<dt><dt><p><button><p><dt target>' );
 
@@ -405,8 +404,8 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRulesListElements extends WP_UnitTest
 	 * Ensures that an unexpected LI doesn't close more elements than it should, that it doesn't
 	 * close open LI elements that are beyond a special element (in this case, the UL).
 	 *
-	 * @ticket 60215
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60215' )]
 	public function test_unexpected_li_close_tag_is_properly_contained() {
 		$processor = WP_HTML_Processor::create_fragment( '<ul><li><ul></li><li target>a</li></ul></li></ul>' );
 

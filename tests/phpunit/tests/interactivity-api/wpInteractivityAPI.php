@@ -7,10 +7,24 @@
  *
  * @since 6.5.0
  *
- * @group interactivity-api
  *
- * @coversDefaultClass WP_Interactivity_API
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'interactivity-api' )]
 class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Instance of WP_Interactivity_API.
@@ -78,11 +92,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the state and config methods return an empty array at the
 	 * beginning.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::state
-	 * @covers ::config
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'state' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'config' )]
 	public function test_state_and_config_should_be_empty() {
 		$this->assertSame( array(), $this->interactivity->state( 'myPlugin' ) );
 		$this->assertSame( array(), $this->interactivity->config( 'myPlugin' ) );
@@ -92,11 +106,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the state and config methods can change the state and
 	 * configuration.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::state
-	 * @covers ::config
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'state' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'config' )]
 	public function test_state_and_config_can_be_changed() {
 		$state  = array(
 			'a'      => 1,
@@ -112,11 +126,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that different initial states and configurations can be merged.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::state
-	 * @covers ::config
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'state' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'config' )]
 	public function test_state_and_config_can_be_merged() {
 		$this->interactivity->state( 'myPlugin', array( 'a' => 1 ) );
 		$this->interactivity->state( 'myPlugin', array( 'b' => 2 ) );
@@ -152,11 +166,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that existing keys in the initial state and configuration can be
 	 * overwritten.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::state
-	 * @covers ::config
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'state' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'config' )]
 	public function test_state_and_config_existing_props_can_be_overwritten() {
 		$this->interactivity->state( 'myPlugin', array( 'a' => 1 ) );
 		$this->interactivity->state( 'myPlugin', array( 'a' => 2 ) );
@@ -177,11 +191,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that existing indexed arrays in the initial state and configuration
 	 * are replaced, not merged.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::state
-	 * @covers ::config
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'state' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'config' )]
 	public function test_state_and_config_existing_indexed_arrays_are_replaced() {
 		$this->interactivity->state( 'myPlugin', array( 'a' => array( 1, 2 ) ) );
 		$this->interactivity->state( 'myPlugin', array( 'a' => array( 3, 4 ) ) );
@@ -202,9 +216,9 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the wp-interactivity-data script is not printed if both state
 	 * and config are empty.
 	 *
-	 * @ticket 60356
-	 * @ticket 61512
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61512' )]
 	public function test_state_and_config_dont_print_when_empty() {
 		$filter = $this->get_script_data_filter_result();
 
@@ -214,13 +228,13 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Test that the print_client_interactivity_data is deprecated and produces no output.
 	 *
-	 * @ticket 60356
-	 * @ticket 61512
 	 *
-	 * @covers ::print_client_interactivity_data
 	 *
 	 * @expectedDeprecated WP_Interactivity_API::print_client_interactivity_data
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61512' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'print_client_interactivity_data' )]
 	public function test_config_not_printed_when_empty() {
 		$this->interactivity->print_client_interactivity_data();
 		$this->expectOutputString( '' );
@@ -229,10 +243,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Test that the deprecated register_script_modules method is deprecated but does not throw.
 	 *
-	 * @ticket 60647
 	 *
 	 * @expectedDeprecated WP_Interactivity_API::register_script_modules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60647' )]
 	public function test_register_script_modules_deprecated() {
 		$this->interactivity->register_script_modules();
 	}
@@ -264,9 +278,9 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that the state is not included in client data if it's empty.
 	 *
-	 * @ticket 60356
-	 * @ticket 61512
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61512' )]
 	public function test_state_not_printed_when_empty() {
 		$filter = $this->get_script_data_filter_result(
 			function () {
@@ -280,9 +294,9 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that empty state objects are pruned from printed data.
 	 *
-	 * @ticket 60761
-	 * @ticket 61512
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60761' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61512' )]
 	public function test_state_not_printed_when_empty_array() {
 		$filter = $this->get_script_data_filter_result(
 			function () {
@@ -297,9 +311,9 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that data consisting of only empty state objects is not printed.
 	 *
-	 * @ticket 60761
-	 * @ticket 61512
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60761' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61512' )]
 	public function test_state_not_printed_when_only_empty_arrays() {
 		$filter = $this->get_script_data_filter_result(
 			function () {
@@ -313,9 +327,9 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that nested empty state objects are printed correctly.
 	 *
-	 * @ticket 60761
-	 * @ticket 61512
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60761' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61512' )]
 	public function test_state_printed_correctly_with_nested_empty_array() {
 		$filter = $this->get_script_data_filter_result(
 			function () {
@@ -329,8 +343,8 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that derived state props invoked during directive evaluation are
 	 * serialized correctly.
 	 *
-	 * @ticket 63898
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63898' )]
 	public function test_invoked_derived_state_props_are_serialized() {
 		$returns_whatever = function () {
 			return 'whatever';
@@ -455,9 +469,9 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that empty config objects are pruned from printed data.
 	 *
-	 * @ticket 60761
-	 * @ticket 61512
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60761' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61512' )]
 	public function test_config_not_printed_when_empty_array() {
 		$filter = $this->get_script_data_filter_result(
 			function () {
@@ -472,9 +486,9 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that data consisting of only empty config objects is not printed.
 	 *
-	 * @ticket 60761
-	 * @ticket 61512
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60761' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61512' )]
 	public function test_config_not_printed_when_only_empty_arrays() {
 		$filter = $this->get_script_data_filter_result(
 			function () {
@@ -488,9 +502,9 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that nested empty config objects are printed correctly.
 	 *
-	 * @ticket 60761
-	 * @ticket 61512
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60761' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61512' )]
 	public function test_config_printed_correctly_with_nested_empty_array() {
 		$filter = $this->get_script_data_filter_result(
 			function () {
@@ -505,10 +519,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Test that calling state without a namespace arg returns the state data
 	 * for the current namespace in the internal namespace stack.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::state
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'state' )]
 	public function test_state_without_namespace() {
 		$this->set_internal_namespace_stack( 'myPlugin' );
 
@@ -525,11 +539,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Test that passing state data without a valid namespace does nothing and
 	 * just returns an empty array.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::state
 	 * @expectedIncorrectUsage WP_Interactivity_API::state
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'state' )]
 	public function test_state_with_data_and_invalid_namespace() {
 		$this->set_internal_namespace_stack( 'myPlugin' );
 
@@ -545,11 +559,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Test that calling state with an empty string as namespace is not allowed.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::state
 	 * @expectedIncorrectUsage WP_Interactivity_API::state
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'state' )]
 	public function test_state_with_empty_string_as_namespace() {
 		$this->set_internal_namespace_stack( 'myPlugin' );
 
@@ -566,11 +580,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that calling state without namespace outside of
 	 * `process_directives` execution is not allowed.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::state
 	 * @expectedIncorrectUsage WP_Interactivity_API::state
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'state' )]
 	public function test_state_without_namespace_outside_directive_processing() {
 		$this->assertSame(
 			array(),
@@ -582,10 +596,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Test that `get_context` returns the latest context value for the given
 	 * namespace.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::get_context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'get_context' )]
 	public function test_get_context_with_namespace() {
 		$this->set_internal_namespace_stack( 'myPlugin' );
 		$this->set_internal_context_stack(
@@ -612,10 +626,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Test that `get_context` uses the current namespace in the internal
 	 * namespace stack when the parameter is omitted.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::get_context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'get_context' )]
 	public function test_get_context_without_namespace() {
 		$this->set_internal_namespace_stack( 'myPlugin' );
 		$this->set_internal_context_stack(
@@ -638,10 +652,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Test that `get_context` returns an empty array when the context stack is
 	 * empty.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::get_context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'get_context' )]
 	public function test_get_context_with_empty_context_stack() {
 		$this->set_internal_namespace_stack( 'myPlugin' );
 		$this->set_internal_context_stack();
@@ -656,10 +670,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Test that `get_context` returns an empty array if the given namespace is
 	 * not defined.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::get_context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'get_context' )]
 	public function test_get_context_with_undefined_namespace() {
 		$this->set_internal_namespace_stack( 'myPlugin' );
 		$this->set_internal_context_stack(
@@ -680,11 +694,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Test that `get_context` should not be called with an empty string.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::get_context
 	 * @expectedIncorrectUsage WP_Interactivity_API::get_context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'get_context' )]
 	public function test_get_context_with_empty_namespace() {
 		$this->set_internal_namespace_stack( 'myPlugin' );
 		$this->set_internal_context_stack(
@@ -707,11 +721,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that `get_context` should not be called outside of
 	 * `process_directives` execution.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::get_context
 	 * @expectedIncorrectUsage WP_Interactivity_API::get_context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'get_context' )]
 	public function test_get_context_outside_of_directive_processing() {
 		$context = $this->interactivity->get_context();
 		$this->assertSame( array(), $context );
@@ -720,10 +734,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests extracting directive values from different string formats.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::extract_directive_value
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'extract_directive_value' )]
 	public function test_extract_directive_value() {
 		$extract_directive_value = new ReflectionMethod( $this->interactivity, 'extract_directive_value' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -785,10 +799,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests extracting directive values with empty or invalid input.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::extract_directive_value
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'extract_directive_value' )]
 	public function test_extract_directive_value_empty_values() {
 		$extract_directive_value = new ReflectionMethod( $this->interactivity, 'extract_directive_value' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -821,10 +835,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests extracting directive values from invalid JSON strings.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::extract_directive_value
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'extract_directive_value' )]
 	public function test_extract_directive_value_invalid_json() {
 		$extract_directive_value = new ReflectionMethod( $this->interactivity, 'extract_directive_value' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -844,11 +858,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests the ability to extract prefix and suffix from a directive attribute
 	 * name.
 	 *
-	 * @ticket 64106
-	 * @ticket 64898
 	 *
-	 * @covers ::parse_directive_name
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64106' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'parse_directive_name' )]
 	public function test_parse_directive_name() {
 		$parse_directive_name = new ReflectionMethod( $this->interactivity, 'parse_directive_name' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -1009,11 +1023,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests the ability to get the valid entries of a specific directive in an HTML element.
 	 *
-	 * @ticket 64106
-	 * @ticket 64898
 	 *
-	 * @covers ::get_directive_entries
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64106' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64898' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'get_directive_entries' )]
 	public function test_get_directive_entries() {
 		$get_directive_entries = new ReflectionMethod( $this->interactivity, 'get_directive_entries' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -1251,10 +1265,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the `process_directives` method doesn't change the HTML if it
 	 * doesn't contain directives.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::process_directives
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_do_nothing_without_directives() {
 		$html           = '<div>Inner content here</div>';
 		$processed_html = $this->interactivity->process_directives( $html );
@@ -1269,10 +1283,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the `process_directives` method changes the HTML if it contains
 	 * directives.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::process_directives
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_changes_html_with_balanced_tags() {
 		$this->interactivity->state( 'myPlugin', array( 'id' => 'some-id' ) );
 		$html           = '<div data-wp-bind--id="myPlugin::state.id">Inner content</div>';
@@ -1285,10 +1299,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests how `process_directives` handles HTML with unknown directives.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::process_directives
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_doesnt_fail_with_unknown_directives() {
 		$html           = '<div data-wp-unknown="">Text</div>';
 		$processed_html = $this->interactivity->process_directives( $html );
@@ -1298,10 +1312,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that directives are processed in the correct order.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::process_directives
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_process_the_directives_in_the_correct_order() {
 		$html           = '
 			<div
@@ -1326,14 +1340,14 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the `process_directives` returns the same HTML if it contains
 	 * unbalanced tags.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::process_directives
 	 *
-	 * @dataProvider data_html_with_unbalanced_tags
 	 *
 	 * @param string $html HTML containing unbalanced tags and also a directive.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_html_with_unbalanced_tags' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_doesnt_change_html_if_contains_unbalanced_tags( $html ) {
 		$this->interactivity->state( 'myPlugin', array( 'id' => 'some-id' ) );
 
@@ -1366,9 +1380,9 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the `process_directives` handles self-closing BR tags without
 	 * causing fatal errors and processes directives correctly.
 	 *
-	 * @ticket 63891
-	 * @covers ::process_directives
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '63891' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_handles_br_self_closing_tags_with_invalid_closers() {
 		$this->interactivity->state(
 			'myPlugin',
@@ -1390,10 +1404,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that the `process_directives` process the HTML outside a SVG tag.
 	 *
-	 * @ticket 60517
 	 *
-	 * @covers ::process_directives
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60517' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_changes_html_if_contains_svgs() {
 		$this->interactivity->state(
 			'myPlugin',
@@ -1421,11 +1435,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the `process_directives` does not process the HTML
 	 * inside SVG tags.
 	 *
-	 * @ticket 60517
 	 *
-	 * @covers ::process_directives
 	 * @expectedIncorrectUsage WP_Interactivity_API_Directives_Processor::skip_to_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60517' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_does_not_change_inner_html_in_svgs() {
 		$this->interactivity->state(
 			'myPlugin',
@@ -1451,11 +1465,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the `process_directives` process the HTML outside the
 	 * MathML tag.
 	 *
-	 * @ticket 60517
 	 *
-	 * @covers ::process_directives
 	 * @expectedIncorrectUsage WP_Interactivity_API::_process_directives
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60517' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_change_html_if_contains_math() {
 		$this->interactivity->state(
 			'myPlugin',
@@ -1486,12 +1500,12 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the `process_directives` does not process the HTML
 	 * inside MathML tags.
 	 *
-	 * @ticket 60517
 	 *
-	 * @covers ::process_directives
 	 * @expectedIncorrectUsage WP_Interactivity_API::_process_directives
 	 * @expectedIncorrectUsage WP_Interactivity_API_Directives_Processor::skip_to_tag_closer
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60517' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_does_not_change_inner_html_in_math() {
 		$this->interactivity->state(
 			'myPlugin',
@@ -1547,10 +1561,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests that the `evaluate` method operates correctly for valid expressions.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::evaluate
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
 	public function test_evaluate_value() {
 		$obj       = new stdClass();
 		$obj->prop = 'object property';
@@ -1638,10 +1652,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the `evaluate` method operates correctly when used with the
 	 * negation operator (!).
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::evaluate
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
 	public function test_evaluate_value_negation() {
 		$this->interactivity->state( 'myPlugin', array( 'key' => 'myPlugin-state' ) );
 		$this->interactivity->state( 'otherPlugin', array( 'key' => 'otherPlugin-state' ) );
@@ -1691,10 +1705,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that the `evaluate` method operates correctly when used with the
 	 * negation operator (!) with non-existent paths.
 	 *
-	 * @ticket 62374
 	 *
-	 * @covers ::evaluate
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62374' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
 	public function test_evaluate_value_negation_non_existent_path() {
 		$this->interactivity->state( 'myPlugin', array() );
 		$this->interactivity->state( 'otherPlugin', array() );
@@ -1743,10 +1757,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests the `evaluate` method with non-existent paths.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::evaluate
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
 	public function test_evaluate_non_existent_path() {
 		$this->interactivity->state( 'myPlugin', array( 'key' => 'myPlugin-state' ) );
 		$this->interactivity->state( 'otherPlugin', array( 'key' => 'otherPlugin-state' ) );
@@ -1811,10 +1825,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests the `evaluate` method for retrieving nested values.
 	 *
-	 * @ticket 60356
 	 *
-	 * @covers ::evaluate
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60356' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
 	public function test_evaluate_nested_value() {
 		$this->interactivity->state(
 			'myPlugin',
@@ -1877,11 +1891,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests the `evaluate` method for non valid namespace values.
 	 *
-	 * @ticket 61044
 	 *
-	 * @covers ::evaluate
 	 * @expectedIncorrectUsage WP_Interactivity_API::evaluate
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61044' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
 	public function test_evaluate_unvalid_namespaces() {
 		$this->set_internal_context_stack( array() );
 		$this->set_internal_namespace_stack();
@@ -1914,12 +1928,12 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests the `evaluate` method for derived state functions.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::evaluate
-	 * @covers wp_interactivity_state
-	 * @covers wp_interactivity_get_context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_state' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_get_context' )]
 	public function test_evaluate_derived_state() {
 		$this->interactivity->state(
 			'myPlugin',
@@ -1958,12 +1972,12 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests the `evaluate` method for derived state functions accessing a
 	 * different namespace.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::evaluate
-	 * @covers wp_interactivity_state
-	 * @covers wp_interactivity_get_context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_state' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_get_context' )]
 	public function test_evaluate_derived_state_accessing_different_namespace() {
 		$this->interactivity->state(
 			'myPlugin',
@@ -2006,12 +2020,12 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests the `evaluate` method for derived state functions defined in a
 	 * different namespace.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::evaluate
-	 * @covers wp_interactivity_state
-	 * @covers wp_interactivity_get_context
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_state' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_get_context' )]
 	public function test_evaluate_derived_state_defined_in_different_namespace() {
 		$this->interactivity->state( 'myPlugin', array( 'key' => 'myPlugin-state' ) );
 		$this->interactivity->state(
@@ -2053,11 +2067,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests the `evaluate` method for derived state functions that throw.
 	 *
-	 * @ticket 61037
 	 *
-	 * @covers ::evaluate
 	 * @expectedIncorrectUsage WP_Interactivity_API::evaluate
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61037' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
 	public function test_evaluate_derived_state_that_throws() {
 		$this->interactivity->state(
 			'myPlugin',
@@ -2082,10 +2096,10 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests the `evaluate` method for derived state intermediate values.
 	 *
-	 * @ticket 61741
 	 *
-	 * @covers ::evaluate
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61741' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'evaluate' )]
 	public function test_evaluate_derived_state_intermediate() {
 		$this->interactivity->state(
 			'myPlugin',
@@ -2110,8 +2124,8 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	/**
 	 * Tests the `kebab_to_camel_case` method.
 	 *
-	 * @covers ::kebab_to_camel_case
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'kebab_to_camel_case' )]
 	public function test_kebab_to_camel_case() {
 		$method = new ReflectionMethod( $this->interactivity, 'kebab_to_camel_case' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -2135,11 +2149,11 @@ class Tests_Interactivity_API_WpInteractivityAPI extends WP_UnitTestCase {
 	 * Tests that `wp_interactivity_get_element` returns an array with the
 	 * current element's attributes.
 	 *
-	 * @ticket 62136
 	 *
-	 * @covers wp_interactivity_get_element
-	 * @covers ::process_directives
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62136' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_get_element' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_get_element_returns_current_element_representation() {
 		/*
 		 * The global WP_Interactivity_API instance is momentarily replaced to
@@ -2191,11 +2205,11 @@ HTML;
 	 * Tests that the attributes returned by `wp_interactivity_get_element` are
 	 * those originally present before directives are processed.
 	 *
-	 * @ticket 62136
 	 *
-	 * @covers wp_interactivity_get_element
-	 * @covers ::process_directives
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62136' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_get_element' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_get_element_returns_original_attributes_only() {
 		/*
 		 * The global WP_Interactivity_API instance is momentarily replaced to
@@ -2255,11 +2269,11 @@ HTML;
 	 * Tests that `wp_interactivity_get_element` should not be called outside of
 	 * `process_directives` execution.
 	 *
-	 * @ticket 62136
 	 *
-	 * @covers wp_interactivity_get_element
 	 * @expectedIncorrectUsage WP_Interactivity_API::get_element
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62136' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_interactivity_get_element' )]
 	public function test_get_element_outside_of_directive_processing() {
 		$element = $this->interactivity->get_element();
 		$this->assertNull( $element );
@@ -2268,16 +2282,16 @@ HTML;
 	/**
 	 * Verify behavior of .length directive access.
 	 *
-	 * @ticket 62582
 	 *
-	 * @covers ::process_directives
 	 *
-	 * @dataProvider data_length_directives
 	 *
 	 * @param mixed $value     The property value.
 	 * @param string $expected The expected property length as a string,
 	 *                         or "" if no length is expected.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62582' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_length_directives' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'process_directives' )]
 	public function test_process_directives_string_array_length( $value, string $expected ) {
 		$this->interactivity->state(
 			'myPlugin',
@@ -2312,8 +2326,8 @@ HTML;
 	/**
 	 * Ensures that directives with invalid attribute names are ignored.
 	 *
-	 * @ticket 62426
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '62426' )]
 	public function test_invalid_directive_names_are_ignored() {
 		$html = <<<HTML
 			<div data-wp-interactive="test" data-wp-context='{ "t": true }'>
@@ -2333,11 +2347,11 @@ HTML;
 	 * Tests that add_client_navigation_support_to_script_module marks a
 	 * script module for client navigation.
 	 *
-	 * @ticket 64122
 	 *
-	 * @covers WP_Interactivity_API::add_client_navigation_support_to_script_module
-	 * @covers WP_Interactivity_API::add_load_on_client_navigation_attribute_to_script_modules
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64122' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'add_client_navigation_support_to_script_module' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Interactivity_API', 'add_load_on_client_navigation_attribute_to_script_modules' )]
 	public function test_add_client_navigation_support_to_script_module() {
 		$this->interactivity->add_client_navigation_support_to_script_module( 'marked-module' );
 

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group comment
- * @covers ::pingback
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'pingback' )]
 class Tests_Comment_Pingback extends WP_UnitTestCase {
 
 	protected static $post_id;

@@ -3,11 +3,11 @@
 /**
  * Tests wp_opcache_invalidate_directory().
  *
- * @group file
- * @group filesystem
  *
- * @covers ::wp_opcache_invalidate_directory
  */
+#[\PHPUnit\Framework\Attributes\Group( 'file' )]
+#[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_opcache_invalidate_directory' )]
 class Tests_Filesystem_WpOpcacheInvalidateDirectory extends WP_UnitTestCase {
 
 	/**
@@ -28,20 +28,38 @@ class Tests_Filesystem_WpOpcacheInvalidateDirectory extends WP_UnitTestCase {
 	 * Tests that wp_opcache_invalidate_directory() returns a WP_Error object
 	 * when the $dir argument invalid.
 	 *
-	 * @ticket 57375
 	 *
-	 * @dataProvider data_should_trigger_error_with_invalid_dir
 	 *
 	 * @param mixed $dir An invalid directory path.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57375' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_trigger_error_with_invalid_dir' )]
 	public function test_should_trigger_error_with_invalid_dir( $dir ) {
-		$this->expectError();
-		$this->expectErrorMessage(
-			'<code>wp_opcache_invalidate_directory()</code> expects a non-empty string.',
-			'The expected error was not triggered.'
+		$errors = array();
+		set_error_handler(
+			static function ( int $severity, string $message ) use ( &$errors ): bool {
+				$errors[] = compact( 'severity', 'message' );
+				return true;
+			},
+			E_USER_NOTICE
 		);
 
-		wp_opcache_invalidate_directory( $dir );
+		try {
+			wp_opcache_invalidate_directory( $dir );
+		} finally {
+			restore_error_handler();
+		}
+
+		$this->assertSame(
+			array(
+				array(
+					'severity' => E_USER_NOTICE,
+					'message'  => '<code>wp_opcache_invalidate_directory()</code> expects a non-empty string.',
+				),
+			),
+			$errors,
+			'The expected error was not triggered with the exact severity and message.'
+		);
 	}
 
 	/**
@@ -49,7 +67,7 @@ class Tests_Filesystem_WpOpcacheInvalidateDirectory extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_trigger_error_with_invalid_dir() {
+	public static function data_should_trigger_error_with_invalid_dir() {
 		return array(
 			'an empty string'                => array( '' ),
 			'a string with spaces'           => array( '   ' ),
@@ -78,12 +96,12 @@ class Tests_Filesystem_WpOpcacheInvalidateDirectory extends WP_UnitTestCase {
 	 * Tests that wp_opcache_invalidate_directory() does not trigger an error
 	 * with a valid directory.
 	 *
-	 * @ticket 57375
 	 *
-	 * @dataProvider data_should_not_trigger_error_wp_opcache_valid_directory
 	 *
 	 * @param string $dir A directory path.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57375' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_trigger_error_wp_opcache_valid_directory' )]
 	public function test_should_not_trigger_error_wp_opcache_valid_directory( $dir ) {
 		$this->assertNull( wp_opcache_invalidate_directory( $dir ) );
 	}
@@ -93,7 +111,7 @@ class Tests_Filesystem_WpOpcacheInvalidateDirectory extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_should_not_trigger_error_wp_opcache_valid_directory() {
+	public static function data_should_not_trigger_error_wp_opcache_valid_directory() {
 		return array(
 			'an existing directory'    => array( DIR_TESTDATA ),
 			'a non-existent directory' => array( 'non_existent_directory' ),

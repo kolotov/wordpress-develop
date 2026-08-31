@@ -6,9 +6,9 @@
  * @subpackage UnitTests
  * @since 5.2.0
  *
- * @group privacy
- * @covers ::wp_privacy_process_personal_data_export_page
  */
+#[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_privacy_process_personal_data_export_page' )]
 class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCase {
 	/**
 	 * Request ID.
@@ -264,12 +264,12 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	/**
 	 * Ensure the correct errors are returned when exporter responses are incorrect.
 	 *
-	 * @ticket 44233
 	 *
-	 * @dataProvider data_wp_privacy_process_personal_data_export_page
 	 *
 	 * @param string|array $expected_response The response from the personal data exporter for the given test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_privacy_process_personal_data_export_page' )]
 	public function test_wp_privacy_process_personal_data_export_page( $expected_response ) {
 		$actual_response = wp_privacy_process_personal_data_export_page(
 			$expected_response,
@@ -295,7 +295,7 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	 *     }
 	 * }
 	 */
-	public function data_wp_privacy_process_personal_data_export_page() {
+	public static function data_wp_privacy_process_personal_data_export_page() {
 		return array(
 			// Response is not an array.
 			array(
@@ -340,7 +340,7 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	 *     }
 	 * }
 	 */
-	public function data_send_as_email_options() {
+	public static function data_send_as_email_options() {
 		return array(
 			array(
 				true,
@@ -354,12 +354,12 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	/**
 	 * The function should send a JSON error when receiving an invalid request ID.
 	 *
-	 * @ticket 44233
 	 *
-	 * @dataProvider data_send_as_email_options
 	 *
 	 * @param bool $send_as_email Whether the final results of the export should be emailed to the user.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_send_as_email_options' )]
 	public function test_send_error_when_invalid_request_id( $send_as_email ) {
 		$response           = array(
 			'done' => true,
@@ -384,12 +384,12 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	/**
 	 * The function should send a JSON error when the request has an invalid action name.
 	 *
-	 * @ticket 44233
 	 *
-	 * @dataProvider data_send_as_email_options
 	 *
 	 * @param bool $send_as_email Whether the final results of the export should be emailed to the user.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_send_as_email_options' )]
 	public function test_send_error_when_invalid_request_action_name( $send_as_email ) {
 		$response = array(
 			'done' => true,
@@ -416,12 +416,12 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	/**
 	 * The function should store export raw data until the export finishes. Then the meta key should be deleted.
 	 *
-	 * @ticket 44233
 	 *
-	 * @dataProvider data_send_as_email_options
 	 *
 	 * @param bool $send_as_email Whether the final results of the export should be emailed to the user.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_send_as_email_options' )]
 	public function test_raw_data_post_meta( $send_as_email ) {
 		$this->assertEmpty( get_post_meta( self::$request_id, '_export_data_raw', true ) );
 
@@ -456,12 +456,12 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	 * The function should add `_export_data_grouped` post meta for the request, only available
 	 * when personal data export file is generated.
 	 *
-	 * @ticket 44233
 	 *
-	 * @dataProvider data_send_as_email_options
 	 *
 	 * @param bool $send_as_email Whether the final results of the export should be emailed to the user.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_send_as_email_options' )]
 	public function test_add_post_meta_with_groups_data_only_available_when_export_file_generated( $send_as_email ) {
 		// Adds post meta when processing data, given the first exporter on the first page and send as email.
 		wp_privacy_process_personal_data_export_page(
@@ -495,8 +495,8 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	/**
 	 * When mail delivery fails, the function should send a JSON error on the last page of the last exporter.
 	 *
-	 * @ticket 44233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
 	public function test_send_error_on_last_page_of_last_exporter_when_mail_delivery_fails() {
 		// Cause `wp_mail()` to return false, to simulate mail delivery failure. Filter removed in tearDown.
 		add_filter( 'wp_mail_from', '__return_empty_string' );
@@ -519,8 +519,8 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	 * The function should return the response, containing the export file URL, when not sent as email
 	 * for the last exporter on the last page.
 	 *
-	 * @ticket 44233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
 	public function test_return_response_with_export_file_url_when_not_sent_as_email_for_last_exporter_on_last_page() {
 		update_post_meta( self::$request_id, '_export_file_name', self::$export_file_name );
 
@@ -545,8 +545,8 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	 * The function should return the response, not containing the export file URL, when sent as email
 	 * for the last exporter on the last page.
 	 *
-	 * @ticket 44233
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
 	public function test_return_response_without_export_file_url_when_sent_as_email_for_last_exporter_on_last_page() {
 		update_post_meta( self::$request_id, '_export_file_name', self::$export_file_name );
 
@@ -569,9 +569,7 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	/**
 	 * Test that request statuses are properly transitioned.
 	 *
-	 * @ticket 44233
 	 *
-	 * @dataProvider data_export_page_status_transitions
 	 *
 	 * @param string $expected_status The expected post status after calling the function.
 	 * @param string $response_page   The exporter page to pass. Options are 'first' and 'last'. Default 'first'.
@@ -580,6 +578,8 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	 * @param bool   $send_as_email   If the response should be sent as an email.
 	 * @param string $exporter_key    The slug (key) of the exporter to pass.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '44233' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_export_page_status_transitions' )]
 	public function test_request_status_transitions_correctly( $expected_status, $response_page, $exporter_index, $page_index, $send_as_email, $exporter_key ) {
 		if ( 'first' === $response_page ) {
 			$response_page = self::$response_first_page;
@@ -634,7 +634,7 @@ class Tests_Privacy_wpPrivacyProcessPersonalDataExportPage extends WP_UnitTestCa
 	 *     }
 	 * }
 	 */
-	public function data_export_page_status_transitions() {
+	public static function data_export_page_status_transitions() {
 		return array(
 			// Mark the request as completed for the last exporter on the last page, with email.
 			array(

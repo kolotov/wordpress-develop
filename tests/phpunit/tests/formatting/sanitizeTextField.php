@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::sanitize_text_field
- * @covers ::sanitize_textarea_field
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_text_field' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_textarea_field' )]
 class Tests_Formatting_SanitizeTextField extends WP_UnitTestCase {
 
 	/**
-	 * @ticket 32257
-	 * @dataProvider data_sanitize_text_field
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32257' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_text_field' )]
 	public function test_sanitize_text_field( $str, $expected ) {
 		if ( is_array( $expected ) ) {
 			$expected_oneline   = $expected['oneline'];
@@ -24,7 +24,7 @@ class Tests_Formatting_SanitizeTextField extends WP_UnitTestCase {
 		$this->assertSameIgnoreEOL( $expected_multiline, sanitize_textarea_field( $str ) );
 	}
 
-	public function data_sanitize_text_field() {
+	public static function data_sanitize_text_field() {
 		return array(
 			array(
 				'оРангутанг', // Ensure UTF-8 text is safe. The Р is D0 A0 and A0 is the non-breaking space.
@@ -145,8 +145,8 @@ class Tests_Formatting_SanitizeTextField extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60357
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60357' )]
 	public function test_sanitize_text_field_filter() {
 		$filter = new MockAction();
 		add_filter( 'sanitize_text_field', array( $filter, 'filter' ) );
@@ -156,8 +156,8 @@ class Tests_Formatting_SanitizeTextField extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60357
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60357' )]
 	public function test_sanitize_textarea_field_filter() {
 		$filter = new MockAction();
 		add_filter( 'sanitize_textarea_field', array( $filter, 'filter' ) );

@@ -3,21 +3,21 @@
 /**
  * Tests for wp_convert_hr_to_bytes().
  *
- * @group load
  *
- * @covers ::wp_convert_hr_to_bytes
  */
+#[\PHPUnit\Framework\Attributes\Group( 'load' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_convert_hr_to_bytes' )]
 class Tests_Load_wpConvertHrToBytes extends WP_UnitTestCase {
 	/**
 	 * Tests converting (PHP ini) byte values to integer byte values.
 	 *
-	 * @ticket 32075
 	 *
-	 * @dataProvider data_wp_convert_hr_to_bytes
 	 *
 	 * @param int|string $value    The value passed to wp_convert_hr_to_bytes().
 	 * @param int        $expected The expected output of wp_convert_hr_to_bytes().
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '32075' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_convert_hr_to_bytes' )]
 	public function test_wp_convert_hr_to_bytes( $value, $expected ) {
 		$this->assertSame( $expected, wp_convert_hr_to_bytes( $value ) );
 	}
@@ -32,7 +32,7 @@ class Tests_Load_wpConvertHrToBytes extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_wp_convert_hr_to_bytes() {
+	public static function data_wp_convert_hr_to_bytes() {
 		$array = array(
 			// Integer input.
 			array( -1, -1 ), // = no memory limit.

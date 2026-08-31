@@ -9,13 +9,13 @@
 /**
  * Test cases for the search columns feature.
  *
- * @group query
- * @group search
  *
- * @covers WP_Query::parse_search
  *
  * @since 6.2.0
  */
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\Group( 'search' )]
+#[\PHPUnit\Framework\Attributes\CoversMethod( WP_Query::class, 'parse_search' )]
 class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * The post ID of the first fixture post.
@@ -77,8 +77,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search uses default search columns when search columns are empty.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_use_default_search_columns_when_empty_search_columns() {
 		$q = new WP_Query(
 			array(
@@ -97,8 +97,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports the `post_title` search column.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_post_title_search_column() {
 		$q = new WP_Query(
 			array(
@@ -114,8 +114,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports the `post_excerpt` search column.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_post_excerpt_search_column() {
 		$q = new WP_Query(
 			array(
@@ -131,8 +131,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports the `post_content` search column.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_post_content_search_column() {
 		$q = new WP_Query(
 			array(
@@ -147,8 +147,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports the `post_title` and `post_excerpt` search columns together.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_post_title_and_post_excerpt_search_columns() {
 		$q = new WP_Query(
 			array(
@@ -164,8 +164,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports the `post_title` and `post_content` search columns together.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_post_title_and_post_content_search_columns() {
 		$q = new WP_Query(
 			array(
@@ -181,8 +181,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports the `post_excerpt` and `post_content` search columns together.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_post_excerpt_and_post_content_search_columns() {
 		$q = new WP_Query(
 			array(
@@ -198,8 +198,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports the `post_title`, `post_excerpt` and `post_content` search columns together.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_post_title_and_post_excerpt_and_post_content_search_columns() {
 		$q = new WP_Query(
 			array(
@@ -215,8 +215,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search uses default search columns when using a non-existing search column.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_use_default_search_columns_when_using_non_existing_search_column() {
 		$q = new WP_Query(
 			array(
@@ -235,8 +235,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search ignores a non-existing search column when used together with a supported one.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_ignore_non_existing_search_column_when_used_with_supported_one() {
 		$q = new WP_Query(
 			array(
@@ -252,8 +252,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports search columns when searching multiple terms.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_search_columns_when_searching_multiple_terms() {
 		$q = new WP_Query(
 			array(
@@ -269,8 +269,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports search columns when searching for a sentence.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_search_columns_when_sentence_true() {
 		$q = new WP_Query(
 			array(
@@ -287,8 +287,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports search columns when searching for a sentence.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_search_columns_when_sentence_false() {
 		$q = new WP_Query(
 			array(
@@ -305,8 +305,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search supports search columns when using term exclusion.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_s_should_support_search_columns_when_searching_with_term_exclusion() {
 		$q = new WP_Query(
 			array(
@@ -322,8 +322,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search columns is filterable with the `post_search_columns` filter.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_search_columns_should_be_filterable() {
 		add_filter( 'post_search_columns', array( $this, 'post_supported_search_column' ), 10, 3 );
 		$q = new WP_Query(
@@ -352,8 +352,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search columns ignores non-supported search columns from the `post_search_columns` filter.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_search_columns_should_not_be_filterable_with_non_supported_search_columns() {
 		add_filter( 'post_search_columns', array( $this, 'post_non_supported_search_column' ), 10, 3 );
 		$q = new WP_Query(
@@ -383,8 +383,8 @@ class Tests_Query_SearchColumns extends WP_UnitTestCase {
 	/**
 	 * Tests that search columns ignores non-existing search columns from the `post_search_columns` filter.
 	 *
-	 * @ticket 43867
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '43867' )]
 	public function test_search_columns_should_not_be_filterable_with_non_existing_search_column() {
 		add_filter( 'post_search_columns', array( $this, 'post_non_existing_search_column' ), 10, 3 );
 		$q = new WP_Query(

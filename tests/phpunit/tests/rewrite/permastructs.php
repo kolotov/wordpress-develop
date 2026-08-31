@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @group rewrite
  *
- * @covers ::add_permastruct
- * @covers ::remove_permastruct
  */
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'add_permastruct' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'remove_permastruct' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
 class Tests_Rewrite_Permastructs extends WP_UnitTestCase {
 
 	public function set_up() {

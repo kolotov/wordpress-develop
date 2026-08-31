@@ -3,19 +3,22 @@
 /**
  * Test the block WP_Duotone class.
  *
- * @group block-supports
  *
- * @coversDefaultClass WP_Duotone
  */
+
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+
+
+
 
 class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	/**
 	 * Tests whether the duotone preset class is added to the block.
 	 *
-	 * @ticket 58555
 	 *
-	 * @covers ::render_duotone_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58555' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Duotone', 'render_duotone_support' )]
 	public function test_render_duotone_support_preset() {
 		$block         = array(
 			'blockName' => 'core/image',
@@ -30,10 +33,10 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	/**
 	 * Tests whether the duotone unset class is added to the block.
 	 *
-	 * @ticket 58555
 	 *
-	 * @covers ::render_duotone_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '58555' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Duotone', 'render_duotone_support' )]
 	public function test_render_duotone_support_css() {
 		$block         = array(
 			'blockName' => 'core/image',
@@ -48,8 +51,8 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	/**
 	 * Tests whether the duotone custom class is added to the block.
 	 *
-	 * @covers ::render_duotone_support
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Duotone', 'render_duotone_support' )]
 	public function test_render_duotone_support_custom() {
 		$block         = array(
 			'blockName' => 'core/image',
@@ -62,10 +65,10 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 65576
 	 *
-	 * @covers ::restore_image_outer_container
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65576' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Duotone', 'restore_image_outer_container' )]
 	public function test_restore_image_outer_container_moves_duotone_class_to_wrapper_in_classic_theme() {
 		switch_theme( 'default' );
 
@@ -78,9 +81,9 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	/**
 	 * Tests whether the slug is extracted from the attribute.
 	 *
-	 * @dataProvider data_get_slug_from_attribute
-	 * @covers ::get_slug_from_attribute
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_slug_from_attribute' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Duotone', 'get_slug_from_attribute' )]
 	public function test_get_slug_from_attribute( $data_attr, $expected ) {
 
 		$reflection = new ReflectionMethod( 'WP_Duotone', 'get_slug_from_attribute' );
@@ -96,7 +99,7 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	 *
 	 * @return array[].
 	 */
-	public function data_get_slug_from_attribute() {
+	public static function data_get_slug_from_attribute() {
 		return array(
 			'pipe-slug'                       => array( 'var:preset|duotone|blue-orange', 'blue-orange' ),
 			'css-var'                         => array( 'var(--wp--preset--duotone--blue-orange)', 'blue-orange' ),
@@ -117,10 +120,10 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	 * empty. This is needed to make the CSS output stable across paginations for
 	 * features like the enhanced pagination of the Query block.
 	 *
-	 * @ticket 59694
 	 *
-	 * @covers ::render_duotone_support
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59694' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Duotone', 'render_duotone_support' )]
 	public function test_css_declarations_are_generated_even_with_empty_block_content() {
 		$block    = array(
 			'blockName' => 'core/image',
@@ -128,37 +131,26 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 		);
 		$wp_block = new WP_Block( $block );
 
-		/*
-		 * Handling to access the static WP_Duotone::$block_css_declarations property.
-		 *
-		 * Why is an instance needed?
-		 * WP_Duotone is a static class by design, meaning it only contains static properties and methods.
-		 * In production, it should not be instantiated. However, as of PHP 8.3, ReflectionProperty::setValue()
-		 * needs an object.
-		 */
-		$wp_duotone                      = new WP_Duotone();
 		$block_css_declarations_property = new ReflectionProperty( 'WP_Duotone', 'block_css_declarations' );
 		if ( PHP_VERSION_ID < 80100 ) {
 			$block_css_declarations_property->setAccessible( true );
 		}
 		$previous_value = $block_css_declarations_property->getValue();
-		$block_css_declarations_property->setValue( $wp_duotone, array() );
+		$block_css_declarations_property->setValue( null, array() );
 
-		WP_Duotone::render_duotone_support( '', $block, $wp_block );
-		$actual = $block_css_declarations_property->getValue();
-
-		// Reset the property.
-		$block_css_declarations_property->setValue( $wp_duotone, $previous_value );
-		if ( PHP_VERSION_ID < 80100 ) {
-			$block_css_declarations_property->setAccessible( false );
+		try {
+			WP_Duotone::render_duotone_support( '', $block, $wp_block );
+			$actual = $block_css_declarations_property->getValue();
+		} finally {
+			$block_css_declarations_property->setValue( null, $previous_value );
 		}
 
 		$this->assertNotEmpty( $actual );
 	}
 
 	/**
-	 * @dataProvider data_is_preset
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_preset' )]
 	public function test_is_preset( $data_attr, $expected ) {
 		$reflection = new ReflectionMethod( 'WP_Duotone', 'is_preset' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -173,7 +165,7 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	 *
 	 * @return array[].
 	 */
-	public function data_is_preset() {
+	public static function data_is_preset() {
 		return array(
 			'pipe-slug'                       => array( 'var:preset|duotone|blue-orange', true ),
 			'css-var'                         => array( 'var(--wp--preset--duotone--blue-orange)', true ),
@@ -186,9 +178,9 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_colord_parse_hue
-	 * @ticket 59496
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_colord_parse_hue' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '59496' )]
 	public function test_colord_parse_hue( $value, $unit, $expected ) {
 		$reflection = new ReflectionMethod( 'WP_Duotone', 'colord_parse_hue' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -203,7 +195,7 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	 *
 	 * @return array[].
 	 */
-	public function data_colord_parse_hue() {
+	public static function data_colord_parse_hue() {
 		return array(
 			'deg-angle-unit'                => array( 120, 'deg', 120.0 ),
 			'grad-angle-unit'               => array( 120, 'grad', 108.0 ),

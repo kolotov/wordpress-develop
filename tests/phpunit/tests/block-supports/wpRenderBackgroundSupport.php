@@ -1,9 +1,11 @@
 <?php
 /**
- * @group block-supports
  *
- * @covers ::wp_render_background_support
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+
+
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_background_support' )]
 class Tests_Block_Supports_WpRenderBackgroundSupport extends WP_UnitTestCase {
 	/**
 	 * @var string|null
@@ -64,16 +66,8 @@ class Tests_Block_Supports_WpRenderBackgroundSupport extends WP_UnitTestCase {
 	/**
 	 * Tests that background image block support works as expected.
 	 *
-	 * @ticket 59357
-	 * @ticket 60175
-	 * @ticket 61123
-	 * @ticket 61720
-	 * @ticket 61858
-	 * @ticket 64974
 	 *
-	 * @covers ::wp_render_background_support
 	 *
-	 * @dataProvider data_background_block_support
 	 *
 	 * @param string $theme_name          The theme to switch to.
 	 * @param string $block_name          The test block name to register.
@@ -82,6 +76,14 @@ class Tests_Block_Supports_WpRenderBackgroundSupport extends WP_UnitTestCase {
 	 * @param string $expected_wrapper    Expected markup for the block wrapper.
 	 * @param string $wrapper             Existing markup for the block wrapper.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '59357' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '60175' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61123' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61720' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '61858' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '64974' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_background_block_support' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_background_support' )]
 	public function test_background_block_support( $theme_name, $block_name, $background_settings, $background_style, $expected_wrapper, $wrapper ) {
 		switch_theme( $theme_name );
 		$this->test_block_name = $block_name;
@@ -124,7 +126,7 @@ class Tests_Block_Supports_WpRenderBackgroundSupport extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_background_block_support() {
+	public static function data_background_block_support() {
 		return array(
 			'background image style is applied'      => array(
 				'theme_name'          => 'block-theme-child-with-fluid-typography',
@@ -293,14 +295,14 @@ class Tests_Block_Supports_WpRenderBackgroundSupport extends WP_UnitTestCase {
 	 * combined with a url() background image (in either order), survive
 	 * sanitization.
 	 *
-	 * @ticket 64974
 	 *
-	 * @covers ::safecss_filter_attr
 	 *
-	 * @dataProvider data_background_gradient_values_pass_kses
 	 *
 	 * @param string $css The CSS declaration to test.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64974' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_background_gradient_values_pass_kses' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'safecss_filter_attr' )]
 	public function test_background_gradient_values_pass_kses( $css ) {
 		$result = safecss_filter_attr( $css );
 		$this->assertNotEmpty( $result, "Expected CSS to be allowed: $css" );
@@ -312,7 +314,7 @@ class Tests_Block_Supports_WpRenderBackgroundSupport extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_background_gradient_values_pass_kses() {
+	public static function data_background_gradient_values_pass_kses() {
 		return array(
 			'gradient first with rgb colors'     => array(
 				'background-image: linear-gradient(135deg, rgb(255,0,0) 0%, rgb(0,0,255) 100%), url(https://example.com/image.jpg)',

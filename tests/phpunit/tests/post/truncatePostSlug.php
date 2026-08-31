@@ -1,24 +1,24 @@
 <?php
 
 /**
- * @group post
  *
- * @covers ::_truncate_post_slug
  */
+#[\PHPUnit\Framework\Attributes\Group( 'post' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_truncate_post_slug' )]
 class Tests_Post_TruncatePostSlug extends WP_UnitTestCase {
 
 	/**
 	 * Tests that _truncate_post_slug() correctly truncates slugs.
 	 *
-	 * @ticket 56868
 	 *
-	 * @dataProvider data_truncate_post_slug_should_truncate
 	 *
 	 * @param string $slug     The slug to truncate.
 	 * @param int    $length   Max length of the slug.
 	 * @param string $expected The expected truncated slug.
 	 * @param string $message  Test feedback message.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '56868' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_truncate_post_slug_should_truncate' )]
 	public function test_truncate_post_slug_should_truncate( $slug, $length, $expected, $message ) {
 		$this->assertSame( $expected, _truncate_post_slug( $slug, $length ), $message );
 	}
@@ -28,7 +28,7 @@ class Tests_Post_TruncatePostSlug extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_truncate_post_slug_should_truncate() {
+	public static function data_truncate_post_slug_should_truncate() {
 		return array(
 			'a slug that is too long'                      => array(
 				'slug'     => 'truncated slug',

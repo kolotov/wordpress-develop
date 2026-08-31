@@ -6,9 +6,9 @@
  * These tests filter `get_space_allowed` and `pre_get_space_used` in
  * most cases as those are tested elsewhere.
  *
- * @group ms-required
- * @group multisite
  */
+#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
+#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_UploadIsUserOverQuota extends WP_UnitTestCase {
 
 	public function set_up() {

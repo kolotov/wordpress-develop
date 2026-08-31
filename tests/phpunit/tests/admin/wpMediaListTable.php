@@ -1,8 +1,6 @@
 <?php
 
-/**
- * @group admin
- */
+#[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	/**
 	 * A list table for testing.
@@ -128,18 +126,16 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	 * Note: This does not test the actual functioning of the WP_Media_List_Table::prepare_items() method.
 	 * It just and only tests for/against the PHP warning.
 	 *
-	 * @ticket 53949
-	 * @covers WP_Media_List_Table::prepare_items
-	 * @group cron
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '53949' )]
+	#[\PHPUnit\Framework\Attributes\Group( 'cron' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Media_List_Table', 'prepare_items' )]
 	public function test_prepare_items_without_cron_option_does_not_throw_warning() {
 		global $wp_query;
 
-		// Note: setMethods() is deprecated in PHPUnit 9, but still supported.
 		$mock = $this->getMockBuilder( WP_Media_List_Table::class )
 			->disableOriginalConstructor()
-			->disallowMockingUnknownTypes()
-			->setMethods( array( 'set_pagination_args' ) )
+			->onlyMethods( array( 'set_pagination_args' ) )
 			->getMock();
 
 		$mock->expects( $this->once() )
@@ -160,11 +156,8 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	 * Tests that `WP_Media_List_Table::_get_row_actions()` only includes an action
 	 * in certain scenarios.
 	 *
-	 * @ticket 57893
 	 *
-	 * @covers WP_Media_List_Table::_get_row_actions
 	 *
-	 * @dataProvider data_get_row_actions_should_include_action
 	 *
 	 * @param string    $action   The action that should be included.
 	 * @param string    $role     The role of the current user.
@@ -173,6 +166,9 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	 * @param bool|null $detached Whether the attachment filter is currently 'detached',
 	 *                            or `null` to leave as-is.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57893' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_row_actions_should_include_action' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Media_List_Table', '_get_row_actions' )]
 	public function test_get_row_actions_should_include_action( $action, $role, $trash, $detached ) {
 		if ( 'admin' === $role ) {
 			wp_set_current_user( self::$admin );
@@ -206,7 +202,7 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_row_actions_should_include_action() {
+	public static function data_get_row_actions_should_include_action() {
 		return array(
 			'"edit" while not on "trash"'  => array(
 				'action'   => 'edit',
@@ -245,11 +241,8 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	 * Tests that `WP_Media_List_Table::_get_row_actions()` does not include an action
 	 * in certain scenarios.
 	 *
-	 * @ticket 57893
 	 *
-	 * @covers WP_Media_List_Table::_get_row_actions
 	 *
-	 * @dataProvider data_get_row_actions_should_not_include_action
 	 *
 	 * @param string    $action   The action that should not be included.
 	 * @param string    $role     The role of the current user.
@@ -258,6 +251,9 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	 * @param bool|null $detached Whether the attachment filter is currently 'detached',
 	 *                            or `null` to leave as-is.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57893' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_row_actions_should_not_include_action' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Media_List_Table', '_get_row_actions' )]
 	public function test_get_row_actions_should_not_include_action( $action, $role, $trash, $detached ) {
 		if ( 'admin' === $role ) {
 			wp_set_current_user( self::$admin );
@@ -291,7 +287,7 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function data_get_row_actions_should_not_include_action() {
+	public static function data_get_row_actions_should_not_include_action() {
 		return array(
 			'"edit" while on "trash"'               => array(
 				'action'   => 'edit',
@@ -360,10 +356,10 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	 * Tests that `WP_Media_List_Table::_get_row_actions()` does not include the 'view' action
 	 * when a permalink is not available.
 	 *
-	 * @ticket 57893
 	 *
-	 * @covers WP_Media_List_Table::_get_row_actions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57893' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Media_List_Table', '_get_row_actions' )]
 	public function test_get_row_actions_should_not_include_view_without_a_permalink() {
 		self::set_is_trash( false );
 
@@ -386,10 +382,10 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	/**
 	 * Tests that `WP_Media_List_Table::_get_row_actions()` includes the 'copy' action.
 	 *
-	 * @ticket 57893
 	 *
-	 * @covers WP_Media_List_Table::_get_row_actions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57893' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Media_List_Table', '_get_row_actions' )]
 	public function test_get_row_actions_should_include_copy() {
 		self::set_is_trash( false );
 
@@ -410,10 +406,10 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	 * Tests that `WP_Media_List_Table::_get_row_actions()` does not include the 'copy' action
 	 * when an attachment URL is not available.
 	 *
-	 * @ticket 57893
 	 *
-	 * @covers WP_Media_List_Table::_get_row_actions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57893' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Media_List_Table', '_get_row_actions' )]
 	public function test_get_row_actions_should_not_include_copy_without_an_attachment_url() {
 		self::set_is_trash( false );
 
@@ -436,10 +432,10 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	/**
 	 * Tests that `WP_Media_List_Table::_get_row_actions()` includes the 'download' action.
 	 *
-	 * @ticket 57893
 	 *
-	 * @covers WP_Media_List_Table::_get_row_actions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57893' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Media_List_Table', '_get_row_actions' )]
 	public function test_get_row_actions_should_include_download() {
 		$_get_row_actions = new ReflectionMethod( self::$list_table, '_get_row_actions' );
 		if ( PHP_VERSION_ID < 80100 ) {
@@ -458,10 +454,10 @@ class Tests_Admin_wpMediaListTable extends WP_UnitTestCase {
 	 * Tests that `WP_Media_List_Table::_get_row_actions()` does not include the 'download' action
 	 * when an attachment URL is not available.
 	 *
-	 * @ticket 57893
 	 *
-	 * @covers WP_Media_List_Table::_get_row_actions
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '57893' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Media_List_Table', '_get_row_actions' )]
 	public function test_get_row_actions_should_not_include_download_without_an_attachment_url() {
 		// Ensure the attachment URL is `false`.
 		add_filter( 'wp_get_attachment_url', '__return_false', 10, 0 );

@@ -28,7 +28,7 @@ on:
         description: 'The PHP version to use.'
         required: false
         type: 'string'
-        default: 'latest'
+        default: '8.5'
       memcached:
         description: 'Whether to enable memcached.'
         required: false
@@ -66,7 +66,7 @@ env:
 
   LOCAL_DIR: ${{ inputs.LOCAL_DIR }}
   LOCAL_PHP_MEMCACHED: ${{ inputs.memcached }}
-  LOCAL_PHP: ${{ inputs.php-version }}${{ 'latest' != inputs.php-version && '-fpm' || '' }}
+  LOCAL_PHP: ${{ inputs.php-version }}-fpm
   LOCAL_MULTISITE: ${{ inputs.multisite }}
 
 # Disable permissions for all available scopes by default.

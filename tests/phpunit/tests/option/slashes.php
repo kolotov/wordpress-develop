@@ -1,10 +1,13 @@
 <?php
 
 /**
- * @group option
- * @group slashes
- * @ticket 21767
  */
+
+
+
+#[\PHPUnit\Framework\Attributes\Group( 'option' )]
+#[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
+#[\PHPUnit\Framework\Attributes\Ticket( '21767' )]
 class Tests_Option_Slashes extends WP_UnitTestCase {
 
 	/*
@@ -23,9 +26,9 @@ class Tests_Option_Slashes extends WP_UnitTestCase {
 	/**
 	 * Tests the model function that expects un-slashed data
 	 *
-	 * @covers ::add_option
-	 * @covers ::get_option
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_add_option() {
 		add_option( 'slash_test_1', self::SLASH_1 );
 		add_option( 'slash_test_2', self::SLASH_2 );
@@ -41,10 +44,10 @@ class Tests_Option_Slashes extends WP_UnitTestCase {
 	/**
 	 * Tests the model function that expects un-slashed data
 	 *
-	 * @covers ::add_option
-	 * @covers ::update_option
-	 * @covers ::get_option
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_update_option() {
 		add_option( 'slash_test_5', 'foo' );
 

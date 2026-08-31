@@ -25,6 +25,12 @@ abstract class WP_Image_UnitTestCase extends WP_UnitTestCase {
 		add_filter( 'wp_image_editors', array( $this, 'setEngine' ), 10, 2 );
 	}
 
+	public function tear_down() {
+		remove_filter( 'wp_image_editors', array( $this, 'setEngine' ), 10 );
+
+		parent::tear_down();
+	}
+
 	/**
 	 * Override the image editor engine
 	 *

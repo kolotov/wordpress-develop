@@ -1,25 +1,24 @@
 <?php
 
 /**
- * @group block-supports
  *
- * @covers ::wp_render_custom_css_class_name
  */
+#[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_custom_css_class_name' )]
 class Tests_Block_Supports_WpRenderCustomCssClassName extends WP_UnitTestCase {
 
 	/**
 	 * Tests that the custom CSS class name is applied to block content.
 	 *
-	 * @ticket 64544
 	 *
-	 * @covers ::wp_render_custom_css_class_name
 	 *
-	 * @dataProvider data_adds_class_to_content
 	 *
 	 * @param string $block_content  The rendered block content.
 	 * @param array  $block          The block data.
 	 * @param string $expected_class The expected class in the output.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64544' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_adds_class_to_content' )]
 	public function test_adds_class_to_content( $block_content, $block, $expected_class ) {
 		$result = wp_render_custom_css_class_name( $block_content, $block );
 
@@ -40,7 +39,7 @@ class Tests_Block_Supports_WpRenderCustomCssClassName extends WP_UnitTestCase {
 	 *     expected_class: string,
 	 * }>
 	 */
-	public function data_adds_class_to_content(): array {
+	public static function data_adds_class_to_content(): array {
 		return array(
 			'class is added to block content'           => array(
 				'block_content'  => '<div class="wp-block-paragraph">Test content</div>',
@@ -78,10 +77,9 @@ class Tests_Block_Supports_WpRenderCustomCssClassName extends WP_UnitTestCase {
 	/**
 	 * Tests that existing classes are preserved when the custom CSS class is added.
 	 *
-	 * @ticket 64544
 	 *
-	 * @covers ::wp_render_custom_css_class_name
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64544' )]
 	public function test_preserves_existing_classes() {
 		$block_content = '<div class="existing-class another-class">Test content</div>';
 		$block         = array(
@@ -101,15 +99,14 @@ class Tests_Block_Supports_WpRenderCustomCssClassName extends WP_UnitTestCase {
 	/**
 	 * Tests that block content is returned unchanged when no custom CSS class should be applied.
 	 *
-	 * @ticket 64544
 	 *
-	 * @covers ::wp_render_custom_css_class_name
 	 *
-	 * @dataProvider data_returns_unchanged_content
 	 *
 	 * @param string $block_content The rendered block content.
 	 * @param array  $block         The block data.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '64544' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_returns_unchanged_content' )]
 	public function test_returns_unchanged_content( $block_content, $block ) {
 		$result = wp_render_custom_css_class_name( $block_content, $block );
 
@@ -121,7 +118,7 @@ class Tests_Block_Supports_WpRenderCustomCssClassName extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_returns_unchanged_content() {
+	public static function data_returns_unchanged_content() {
 		return array(
 			'no custom CSS class in attrs'  => array(
 				'block_content' => '<div class="wp-block-paragraph">Test content</div>',

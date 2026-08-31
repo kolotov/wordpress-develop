@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @group formatting
  *
- * @covers ::get_url_in_content
  */
+#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_url_in_content' )]
 class Tests_Formatting_GetUrlInContent extends WP_UnitTestCase {
 
 	/**
 	 * Tests the get_url_in_content() function.
 	 *
-	 * @dataProvider data_get_url_in_content
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_url_in_content' )]
 	public function test_get_url_in_content( $input, $expected ) {
 		$this->assertSame( $expected, get_url_in_content( $input ) );
 	}
@@ -26,7 +26,7 @@ class Tests_Formatting_GetUrlInContent extends WP_UnitTestCase {
 	 *     }
 	 * }
 	 */
-	public function data_get_url_in_content() {
+	public static function data_get_url_in_content() {
 		return array(
 			array( // Empty content.
 				'',

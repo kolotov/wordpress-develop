@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @group canonical
- * @group rewrite
- * @group query
  *
- * @covers ::strip_fragment_from_url
  */
+#[\PHPUnit\Framework\Attributes\Group( 'canonical' )]
+#[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
+#[\PHPUnit\Framework\Attributes\Group( 'query' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'strip_fragment_from_url' )]
 class Tests_Canonical_StripFragmentFromUrl extends WP_UnitTestCase {
 
 	/**
-	 * @dataProvider data_strip_fragment_from_url
-	 * @ticket 55333
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_strip_fragment_from_url' )]
+	#[\PHPUnit\Framework\Attributes\Ticket( '55333' )]
 	public function test_strip_fragment_from_url( $test_url, $expected ) {
 		$this->assertSame( $expected, strip_fragment_from_url( $test_url ) );
 	}
@@ -27,7 +27,7 @@ class Tests_Canonical_StripFragmentFromUrl extends WP_UnitTestCase {
 	 *     @type string $1 The expected canonical URL.
 	 * }
 	 */
-	public function data_strip_fragment_from_url() {
+	public static function data_strip_fragment_from_url() {
 		return array(
 			array( '//example.com', '//example.com' ),
 			array( 'http://example.com', 'http://example.com' ),

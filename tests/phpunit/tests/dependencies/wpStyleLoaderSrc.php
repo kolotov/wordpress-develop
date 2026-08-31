@@ -3,11 +3,11 @@
 /**
  * Test wp_style_loader_src().
  *
- * @group dependencies
- * @group scripts
  *
- * @covers ::wp_style_loader_src
  */
+#[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
+#[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_style_loader_src' )]
 class Tests_Dependencies_wpStyleLoaderSrc extends WP_UnitTestCase {
 
 	/**
@@ -18,8 +18,8 @@ class Tests_Dependencies_wpStyleLoaderSrc extends WP_UnitTestCase {
 	 * `Warning: Trying to access array offset on null`.
 	 * `Warning: Attempt to read property "url" on null`.
 	 *
-	 * @ticket 61302
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61302' )]
 	public function test_without_wp_admin_css_colors_global() {
 		$this->assertFalse( wp_style_loader_src( '', 'colors' ) );
 	}

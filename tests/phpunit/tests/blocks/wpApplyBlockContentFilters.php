@@ -5,10 +5,10 @@
  * @package WordPress
  * @subpackage Blocks
  *
- * @group blocks
  *
- * @covers ::_wp_apply_block_content_filters
  */
+#[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_apply_block_content_filters' )]
 class Tests_Blocks_WpApplyBlockContentFilters extends WP_UnitTestCase {
 	const TEST_BLOCK_NAME           = 'tests/apply-block-content-filters';
 	const TEST_EXCEPTION_BLOCK_NAME = 'tests/apply-block-content-filters-exception';
@@ -107,8 +107,8 @@ class Tests_Blocks_WpApplyBlockContentFilters extends WP_UnitTestCase {
 	/**
 	 * Tests that each expected content filter is applied.
 	 *
-	 * @ticket 65586
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65586' )]
 	public function test_applies_content_filters() {
 		add_filter( 'wp_content_img_tag', array( $this, 'filter_content_image_tag' ), 10, 2 );
 
@@ -187,8 +187,8 @@ class Tests_Blocks_WpApplyBlockContentFilters extends WP_UnitTestCase {
 	/**
 	 * Tests that seen IDs are set during block rendering and cleared afterward.
 	 *
-	 * @ticket 65586
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65586' )]
 	public function test_marks_and_clears_seen_id() {
 		$seen_ids               = array();
 		$seen_ids_during_render = null;
@@ -232,8 +232,8 @@ class Tests_Blocks_WpApplyBlockContentFilters extends WP_UnitTestCase {
 	/**
 	 * Tests that seen IDs are cleared when block rendering throws an exception.
 	 *
-	 * @ticket 65586
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '65586' )]
 	public function test_clears_seen_id_when_block_rendering_throws() {
 		$seen_ids = array();
 

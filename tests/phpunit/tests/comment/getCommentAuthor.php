@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @group comment
  *
- * @covers ::get_comment_author
  */
+#[\PHPUnit\Framework\Attributes\Group( 'comment' )]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'get_comment_author' )]
 class Tests_Comment_GetCommentAuthor extends WP_UnitTestCase {
 
 	private static $comment;
@@ -47,8 +47,8 @@ class Tests_Comment_GetCommentAuthor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 60475
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '60475' )]
 	public function test_comment_author_passes_correct_comment_id_for_non_existent_comment() {
 		add_filter( 'get_comment_author', array( $this, 'get_comment_author_filter_non_existent_id' ), 99, 3 );
 
@@ -58,14 +58,14 @@ class Tests_Comment_GetCommentAuthor extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @ticket 61681
 	 *
-	 * @dataProvider data_should_return_author_when_given_object_without_comment_id
 	 *
 	 * @param stdClass $comment_props Comment properties test data.
 	 * @param string   $expected      The expected result.
 	 * @param array    $user_data     Optional. User data for creating an author. Default empty array.
 	 */
+	#[\PHPUnit\Framework\Attributes\Ticket( '61681' )]
+	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_return_author_when_given_object_without_comment_id' )]
 	public function test_should_return_author_when_given_object_without_comment_id( $comment_props, $expected, $user_data = array() ) {
 		if ( ! empty( $comment_props->user_id ) ) {
 			$user                   = self::factory()->user->create_and_get( $user_data );
@@ -82,7 +82,7 @@ class Tests_Comment_GetCommentAuthor extends WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_should_return_author_when_given_object_without_comment_id() {
+	public static function data_should_return_author_when_given_object_without_comment_id() {
 		return array(
 			'with no author'             => array(
 				'comment_props' => new stdClass(),

@@ -5,9 +5,9 @@
  * @package WordPress
  * @subpackage Font Library
  *
- * @group fonts
- * @group font-library
  */
+#[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
+#[\PHPUnit\Framework\Attributes\Group( 'font-library' )]
 class Tests_Fonts_FontLibraryHooks extends WP_UnitTestCase {
 
 	public function test_deleting_font_family_deletes_child_font_faces() {
@@ -37,7 +37,7 @@ class Tests_Fonts_FontLibraryHooks extends WP_UnitTestCase {
 		wp_delete_post( $font_family_id, true );
 
 		$this->assertNull( get_post( $font_face_id ), 'Font face post should also have been deleted.' );
-		$this->assertNotNull( get_post( $other_font_face_id ), 'The other post should exist.' );
+		$this->assertInstanceOf( WP_Post::class, get_post( $other_font_face_id ), 'The other post should exist.' );
 	}
 
 	public function test_deleting_font_faces_deletes_associated_font_files() {
