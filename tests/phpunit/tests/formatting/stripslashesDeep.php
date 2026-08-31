@@ -1,14 +1,9 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\Group( 'slashes' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'stripslashes_deep' )]
 class Tests_Formatting_StripslashesDeep extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18026' )]
 	public function test_preserves_original_datatype() {
 

@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'utf8_uri_encode' )]
 class Tests_Formatting_Utf8UriEncode extends WP_UnitTestCase {
@@ -17,8 +14,6 @@ class Tests_Formatting_Utf8UriEncode extends WP_UnitTestCase {
 		$this->assertSame( $urlencoded, utf8_uri_encode( $utf8 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data' )]
 	public function test_output_is_not_longer_than_optional_length_argument( $utf8, $unused_for_this_test ) {
 		$max_length = 30;

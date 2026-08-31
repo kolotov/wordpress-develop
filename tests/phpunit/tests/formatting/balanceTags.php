@@ -1,14 +1,9 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'balanceTags' )]
 class Tests_Formatting_BalanceTags extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47014' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_supported_traditional_tag_names' )]
 	public function test_detects_traditional_tag_names( $tag ) {
@@ -29,8 +24,6 @@ class Tests_Formatting_BalanceTags extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47014' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_supported_custom_element_tag_names' )]
 	public function test_detects_supported_custom_element_tag_names( $tag ) {
@@ -49,8 +42,6 @@ class Tests_Formatting_BalanceTags extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47014' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_invalid_tag_names' )]
 	public function test_ignores_invalid_tag_names( $input, $output ) {
@@ -64,8 +55,6 @@ class Tests_Formatting_BalanceTags extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47014' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unsupported_valid_tag_names' )]
 	public function test_ignores_unsupported_custom_tag_names( $tag ) {
@@ -132,8 +121,6 @@ class Tests_Formatting_BalanceTags extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47014' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_supported_invalid_tag_names' )]
 	public function test_detects_supported_invalid_tag_names( $tag ) {
@@ -258,8 +245,6 @@ class Tests_Formatting_BalanceTags extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_nestable_tags' )]
 	public function test_balances_nestable_tags( $tag ) {
 		$inputs   = array(
@@ -307,8 +292,6 @@ class Tests_Formatting_BalanceTags extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20401' )]
 	public function test_allows_immediately_nested_object_tags() {
 		$object = '<object id="obj1"><param name="param1"/><object id="obj2"><param name="param2"/></object></object>';

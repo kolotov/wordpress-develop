@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_make_link_relative' )]
 class Tests_Formatting_wpMakeLinkRelative extends WP_UnitTestCase {
@@ -19,8 +16,6 @@ class Tests_Formatting_wpMakeLinkRelative extends WP_UnitTestCase {
 		$this->assertSame( '/this-is-a-test-https-url/', $relative_link );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30373' )]
 	public function test_wp_make_link_relative_with_no_scheme() {
 		$link          = '//example.com/this-is-a-test-schemeless-url/';
@@ -28,8 +23,6 @@ class Tests_Formatting_wpMakeLinkRelative extends WP_UnitTestCase {
 		$this->assertSame( '/this-is-a-test-schemeless-url/', $relative_link );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30373' )]
 	public function test_wp_make_link_relative_should_retain_URL_param_that_is_also_a_URL() {
 		$link          = 'https://example.com/this-is-a-test/?redirect=https://example.org/a-different-test-post/';
@@ -37,8 +30,6 @@ class Tests_Formatting_wpMakeLinkRelative extends WP_UnitTestCase {
 		$this->assertSame( '/this-is-a-test/?redirect=https://example.org/a-different-test-post/', $relative_link );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26819' )]
 	public function test_wp_make_link_relative_with_no_path() {
 		$link          = 'http://example.com';

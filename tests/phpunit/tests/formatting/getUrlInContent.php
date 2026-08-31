@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_url_in_content' )]
 class Tests_Formatting_GetUrlInContent extends WP_UnitTestCase {

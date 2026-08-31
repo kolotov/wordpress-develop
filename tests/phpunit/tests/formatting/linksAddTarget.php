@@ -8,9 +8,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'links_add_target' )]
 class Tests_Formatting_LinksAddTarget extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26164' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_links_add_target' )]
 	public function test_links_add_target( $content, $target, $tags, $expected ) {

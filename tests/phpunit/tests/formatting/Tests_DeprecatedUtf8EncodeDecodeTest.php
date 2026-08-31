@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 class Tests_DeprecatedUtf8EncodeDecodeTest extends WP_UnitTestCase {
 	/**

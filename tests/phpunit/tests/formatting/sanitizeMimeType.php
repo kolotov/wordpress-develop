@@ -1,14 +1,9 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_mime_type' )]
 class Tests_Formatting_SanitizeMimeType extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17855' )]
 	public function test_sanitize_valid_mime_type() {
 		$inputs = array(

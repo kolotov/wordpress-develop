@@ -1,15 +1,10 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_text_field' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_textarea_field' )]
 class Tests_Formatting_SanitizeTextField extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32257' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_text_field' )]
 	public function test_sanitize_text_field( $str, $expected ) {
@@ -144,8 +139,6 @@ class Tests_Formatting_SanitizeTextField extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60357' )]
 	public function test_sanitize_text_field_filter() {
 		$filter = new MockAction();
@@ -155,8 +148,6 @@ class Tests_Formatting_SanitizeTextField extends WP_UnitTestCase {
 		$this->assertSame( 1, $filter->get_call_count(), 'The sanitize_text_field filter was not called.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60357' )]
 	public function test_sanitize_textarea_field_filter() {
 		$filter = new MockAction();

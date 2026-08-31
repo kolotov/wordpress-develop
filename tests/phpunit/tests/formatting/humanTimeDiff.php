@@ -1,15 +1,10 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '38773' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'human_time_diff' )]
 class Tests_Formatting_HumanTimeDiff extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '38773' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_human_time_diff' )]

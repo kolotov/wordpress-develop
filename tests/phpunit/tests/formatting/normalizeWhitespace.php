@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'normalize_whitespace' )]
 class Tests_Formatting_NormalizeWhitespace extends WP_UnitTestCase {

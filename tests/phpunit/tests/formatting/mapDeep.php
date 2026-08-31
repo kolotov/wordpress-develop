@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '22300' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'map_deep' )]
@@ -132,8 +129,6 @@ class Tests_Formatting_MapDeep extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35058' )]
 	public function test_map_deep_should_map_object_properties_passed_by_reference() {
 		$object_a = (object) array( 'var0' => 'a' );
@@ -150,8 +145,6 @@ class Tests_Formatting_MapDeep extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35058' )]
 	public function test_map_deep_should_map_array_elements_passed_by_reference() {
 		$array_a = array( 'var0' => 'a' );

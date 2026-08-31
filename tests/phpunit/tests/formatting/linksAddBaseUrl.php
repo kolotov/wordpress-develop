@@ -9,9 +9,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'links_add_base_url' )]
 class Tests_Formatting_LinksAddBaseUrl extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60389' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_links_add_base_url' )]
 	public function test_links_add_base_url( $content, $base, $attrs, $expected ) {

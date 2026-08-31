@@ -1,14 +1,9 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_rel_nofollow' )]
 class Tests_Formatting_wpRelNofollow extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '9959' )]
 	public function test_add_no_follow() {
 		$content  = '<p>This is some cool <a href="/">Code</a></p>';
@@ -16,8 +11,6 @@ class Tests_Formatting_wpRelNofollow extends WP_UnitTestCase {
 		$this->assertEqualHTML( $expected, stripslashes( wp_rel_nofollow( $content ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '9959' )]
 	public function test_convert_no_follow() {
 		$content  = '<p>This is some cool <a href="/" rel="weird">Code</a></p>';
@@ -25,8 +18,6 @@ class Tests_Formatting_wpRelNofollow extends WP_UnitTestCase {
 		$this->assertEqualHTML( $expected, stripslashes( wp_rel_nofollow( $content ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '11360' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_rel_nofollow' )]
 	public function test_wp_rel_nofollow( $input, $output, $expect_deprecation = false ) {

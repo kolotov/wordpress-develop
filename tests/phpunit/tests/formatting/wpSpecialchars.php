@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_specialchars' )]
 class Tests_Formatting_wpSpecialchars extends WP_UnitTestCase {

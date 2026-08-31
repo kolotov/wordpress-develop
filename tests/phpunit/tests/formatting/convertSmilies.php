@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\Group( 'emoji' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'convert_smilies' )]

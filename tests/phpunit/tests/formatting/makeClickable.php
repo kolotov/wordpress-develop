@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'make_clickable' )]
 class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
@@ -437,8 +434,6 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16892' )]
 	public function test_no_segfault() {
 		$in  = str_repeat( 'http://example.com/2011/03/18/post-title/', 256 );
@@ -446,8 +441,6 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 		$this->assertSame( $in, $out );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19028' )]
 	public function test_line_break_in_existing_clickable_link() {
 		$html = "<a
@@ -455,8 +448,6 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 		$this->assertSame( $html, make_clickable( $html ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30162' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_script_and_style_tags' )]
 	public function test_dont_link_script_and_style_tags( $tag ) {
@@ -480,8 +471,6 @@ class Tests_Formatting_MakeClickable extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48022' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '56444' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_add_rel_ugc_in_comments' )]

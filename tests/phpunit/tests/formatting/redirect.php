@@ -1,13 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'pluggable' )]
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\Group( 'redirect' )]
-
-
-
 class Tests_Formatting_Redirect extends WP_UnitTestCase {
 	public function set_up() {
 		parent::set_up();
@@ -46,8 +41,6 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_redirect' )]
 	public function test_wp_sanitize_redirect() {
 		$this->assertSame( 'http://example.com/watchthelinefeedgo', wp_sanitize_redirect( 'http://example.com/watchthelinefeed%0Ago' ) );
@@ -65,9 +58,6 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 		$this->assertSame( 'http://example.com/@username', wp_sanitize_redirect( 'http://example.com/@username' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36998' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_redirect' )]
 	public function test_wp_sanitize_redirect_should_encode_spaces() {

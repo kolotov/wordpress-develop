@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_key' )]
 class Tests_Formatting_SanitizeKey extends WP_UnitTestCase {
@@ -99,12 +96,11 @@ class Tests_Formatting_SanitizeKey extends WP_UnitTestCase {
 
 	/**
 	 *
-	 * @param mixed  $key      A non-scalar data type given as a key.
-	 * @param string $expected The expected value.
+	 * @param mixed $key A non-scalar data type given as a key.
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54160' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_key_with_non_scalars' )]
-	public function test_sanitize_key_with_non_scalars( $key, $expected ) {
+	public function test_sanitize_key_with_non_scalars( $key ) {
 		$nonscalar_key = $key;
 
 		add_filter(
@@ -128,16 +124,13 @@ class Tests_Formatting_SanitizeKey extends WP_UnitTestCase {
 	public static function data_sanitize_key_with_non_scalars() {
 		return array(
 			'array type' => array(
-				'key'      => array( 'key' ),
-				'expected' => '',
+				'key' => array( 'key' ),
 			),
 			'null'       => array(
-				'key'      => null,
-				'expected' => '',
+				'key' => null,
 			),
 			'object'     => array(
-				'key'      => new stdClass(),
-				'expected' => '',
+				'key' => new stdClass(),
 			),
 		);
 	}

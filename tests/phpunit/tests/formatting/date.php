@@ -1,12 +1,7 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
-
-
-
 class Tests_Formatting_Date extends WP_UnitTestCase {
 
 	/**
@@ -48,9 +43,6 @@ class Tests_Formatting_Date extends WP_UnitTestCase {
 		$this->assertSame( $local, get_date_from_gmt( $gmt ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20328' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_gmt_from_date' )]
 	public function test_get_gmt_from_date_outside_of_dst() {
@@ -60,9 +52,6 @@ class Tests_Formatting_Date extends WP_UnitTestCase {
 		$this->assertSame( $gmt, get_gmt_from_date( $local ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20328' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_gmt_from_date' )]
 	public function test_get_gmt_from_date_during_dst() {
@@ -72,10 +61,6 @@ class Tests_Formatting_Date extends WP_UnitTestCase {
 		$this->assertSame( $gmt, get_gmt_from_date( $local ) );
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34279' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_date_from_gmt' )]
 	public function test_get_date_and_time_from_gmt_no_timezone() {
@@ -84,9 +69,6 @@ class Tests_Formatting_Date extends WP_UnitTestCase {
 		$this->assertSame( $gmt, get_date_from_gmt( $local ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34279' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_gmt_from_date' )]
 	public function test_get_gmt_from_date_no_timezone() {
@@ -95,9 +77,6 @@ class Tests_Formatting_Date extends WP_UnitTestCase {
 		$this->assertSame( $gmt, get_gmt_from_date( $date ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34279' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_gmt_from_date' )]
 	public function test_get_gmt_from_date_short_date() {
@@ -107,9 +86,6 @@ class Tests_Formatting_Date extends WP_UnitTestCase {
 		$this->assertSame( $gmt, get_gmt_from_date( $local ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34279' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_gmt_from_date' )]
 	public function test_get_gmt_from_date_string_date() {
@@ -119,9 +95,6 @@ class Tests_Formatting_Date extends WP_UnitTestCase {
 		$this->assertEqualsWithDelta( strtotime( $gmt ), strtotime( get_gmt_from_date( $local ) ), 2, 'The dates should be equal' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34279' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_gmt_from_date' )]
 	public function test_get_gmt_from_date_string_date_no_timezone() {
@@ -130,10 +103,6 @@ class Tests_Formatting_Date extends WP_UnitTestCase {
 		$this->assertEqualsWithDelta( strtotime( $gmt ), strtotime( get_gmt_from_date( $local ) ), 2, 'The dates should be equal' );
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31809' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_timezone_provider' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_gmt_from_date' )]
@@ -148,10 +117,6 @@ class Tests_Formatting_Date extends WP_UnitTestCase {
 		$this->assertSame( $utc->format( DATE_RFC3339 ), get_gmt_from_date( $mysql_local, DATE_RFC3339 ) );
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31809' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_timezone_provider' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_date_from_gmt' )]
@@ -166,10 +131,6 @@ class Tests_Formatting_Date extends WP_UnitTestCase {
 		$this->assertSame( $local->format( DATE_RFC3339 ), get_date_from_gmt( $mysql_utc, DATE_RFC3339 ) );
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31809' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '56468' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_timezone_provider' )]

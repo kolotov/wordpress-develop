@@ -1,9 +1,6 @@
 <?php
 // phpcs:disable WordPress.WP.CapitalPDangit.MisspelledInText -- 🙃
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'capital_P_dangit' )]
 class Tests_Formatting_CapitalPDangit extends WP_UnitTestCase {

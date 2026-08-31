@@ -1,13 +1,8 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_trim_excerpt' )]
 class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25349' )]
 	public function test_secondary_loop_respect_more() {
 		$post1 = self::factory()->post->create(
@@ -38,8 +33,6 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25349' )]
 	public function test_secondary_loop_respect_nextpage() {
 		$post1 = self::factory()->post->create(
@@ -70,8 +63,6 @@ class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51042' )]
 	public function test_should_generate_excerpt_for_empty_values() {
 		$post = self::factory()->post->create(

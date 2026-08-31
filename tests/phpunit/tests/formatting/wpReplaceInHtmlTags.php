@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_replace_in_html_tags' )]
 class Tests_Formatting_wpReplaceInHtmlTags extends WP_UnitTestCase {

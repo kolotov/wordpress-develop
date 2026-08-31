@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_html_excerpt' )]
 class Tests_Formatting_wpHtmlExcerpt extends WP_UnitTestCase {

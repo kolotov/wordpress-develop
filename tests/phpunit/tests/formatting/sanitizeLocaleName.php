@@ -1,13 +1,8 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_locale_name' )]
 class Tests_Formatting_SanitizeLocaleName extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_locale_name_returns_non_empty_string' )]
 	public function test_sanitize_locale_name_returns_non_empty_string( $expected, $input ) {
 		$this->assertSame( $expected, sanitize_locale_name( $input ) );
@@ -30,8 +25,6 @@ class Tests_Formatting_SanitizeLocaleName extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_locale_name_returns_empty_string' )]
 	public function test_sanitize_locale_name_returns_empty_string( $input ) {
 		$this->assertSame( '', sanitize_locale_name( $input ) );

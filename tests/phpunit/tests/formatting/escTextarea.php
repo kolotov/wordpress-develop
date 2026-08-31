@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'esc_textarea' )]
 class Tests_Formatting_EscTextarea extends WP_UnitTestCase {

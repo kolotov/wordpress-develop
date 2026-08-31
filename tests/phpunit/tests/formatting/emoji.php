@@ -1,14 +1,7 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\Group( 'emoji' )]
-
-
-
-
-
 class Tests_Formatting_Emoji extends WP_UnitTestCase {
 
 	private const PNG_CDN = 'https://s.w.org/images/core/emoji/17.0.2/72x72/';
@@ -177,9 +170,6 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63842' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_print_emoji_detection_script' )]
 	public function test_script_tag_printing() {
@@ -214,9 +204,6 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 		$this->assertFalse( $processor->next_tag() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36525' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_print_emoji_detection_script' )]
 	public function test_unfiltered_emoji_cdns() {
@@ -232,9 +219,6 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 		return 'https://s.wordpress.org/images/core/emoji/svg/';
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36525' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_print_emoji_detection_script' )]
 	public function test_filtered_emoji_svn_cdn() {
@@ -257,9 +241,6 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 		return 'https://s.wordpress.org/images/core/emoji/png_cdn/';
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36525' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_print_emoji_detection_script' )]
 	public function test_filtered_emoji_png_cdn() {
@@ -278,9 +259,6 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 		remove_filter( 'emoji_url', array( $this, '_filtered_emoji_png_cdn' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41501' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_wp_emoji_list' )]
 	public function test_wp_emoji_list_returns_data() {
@@ -333,9 +311,6 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35293' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_encode_emoji' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_encode_emoji' )]
@@ -375,9 +350,6 @@ class Tests_Formatting_Emoji extends WP_UnitTestCase {
 		return $data;
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35293' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_staticize_emoji' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_staticize_emoji' )]

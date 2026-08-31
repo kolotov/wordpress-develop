@@ -1,14 +1,8 @@
 <?php
-/**
- *
- */
 
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
-
 #[\PHPUnit\Framework\Attributes\Ticket( '58805' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'excerpt_remove_footnotes' )]
-
 class Tests_Formatting_ExcerptRemoveFootnotes extends WP_UnitTestCase {
 	/**
 	 *

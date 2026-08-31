@@ -1,11 +1,6 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'convert_invalid_entities' )]
 class Tests_Formatting_ConvertInvalidEntities extends WP_UnitTestCase {
 	public function test_replaces_windows1252_entities_with_unicode_ones() {
@@ -14,8 +9,6 @@ class Tests_Formatting_ConvertInvalidEntities extends WP_UnitTestCase {
 		$this->assertSame( $output, convert_invalid_entities( $input ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20503' )]
 	public function test_replaces_latin_letter_z_with_caron() {
 		$input  = '&#142;&#158;';

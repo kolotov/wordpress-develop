@@ -1,15 +1,10 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_post' )]
 #[\PHPUnit\Framework\Attributes\CoversMethod( WP_Post::class, '__construct' )]
 class Tests_Formatting_SanitizePost extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22324' )]
 	public function test_int_fields() {
 		$post       = self::factory()->post->create_and_get();

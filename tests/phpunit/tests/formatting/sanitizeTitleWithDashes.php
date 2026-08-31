@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_title_with_dashes' )]
 class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
@@ -65,8 +62,6 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 		$this->assertSame( 'dont-break-the-space', sanitize_title_with_dashes( "don't break the space", '', 'save' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31790' )]
 	public function test_replaces_nbsp_entities() {
 		$this->assertSame( 'dont-break-the-space', sanitize_title_with_dashes( "don't&nbsp;break&#160;the&nbsp;space", '', 'save' ) );
@@ -77,23 +72,17 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 		$this->assertSame( 'do-the-dash', sanitize_title_with_dashes( 'Do the — Dash', '', 'save' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31790' )]
 	public function test_replaces_ndash_mdash_entities() {
 		$this->assertSame( 'do-the-dash', sanitize_title_with_dashes( 'Do &ndash; the &#8211; Dash', '', 'save' ) );
 		$this->assertSame( 'do-the-dash', sanitize_title_with_dashes( 'Do &mdash; the &#8212; Dash', '', 'save' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64089' )]
 	public function test_replaces_non_breaking_hyphen() {
 		$this->assertSame( 'do-the-dash', sanitize_title_with_dashes( 'Do‑the Dash', '', 'save' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64089' )]
 	public function test_replaces_non_breaking_hyphen_entity() {
 		$this->assertSame( 'do-the-dash', sanitize_title_with_dashes( 'Do &#8209; the Dash', '', 'save' ) );
@@ -117,8 +106,6 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 		$this->assertSame( 'hey-its-curly-joe', sanitize_title_with_dashes( 'Hey its „Curly Joe‟', '', 'save' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49791' )]
 	public function test_replaces_bullet() {
 		$this->assertSame( 'fancy-title-amazing', sanitize_title_with_dashes( 'Fancy Title • Amazing', '', 'save' ) );
@@ -131,8 +118,6 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 		$this->assertSame( 'just-a-slug', sanitize_title_with_dashes( 'Just ™ a Slug', '', 'save' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '10792' )]
 	public function test_replaces_forward_slash() {
 		$this->assertSame( 'songs-by-lennon-mccartney', sanitize_title_with_dashes( 'songs by Lennon/McCartney', '', 'save' ) );
@@ -142,22 +127,16 @@ class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 		$this->assertSame( 'songs-by-lennon-mccartney', sanitize_title_with_dashes( '//songs by Lennon/McCartney', '', 'save' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19820' )]
 	public function test_replaces_multiply_sign() {
 		$this->assertSame( '6x7-is-42', sanitize_title_with_dashes( '6×7 is 42', '', 'save' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20772' )]
 	public function test_replaces_standalone_diacritic() {
 		$this->assertSame( 'aaaa', sanitize_title_with_dashes( 'āáǎà', '', 'save' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22395' )]
 	public function test_replaces_acute_accents() {
 		$this->assertSame( 'aaaa', sanitize_title_with_dashes( 'ááa´aˊ', '', 'save' ) );

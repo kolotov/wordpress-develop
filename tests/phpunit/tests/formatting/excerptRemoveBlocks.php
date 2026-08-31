@@ -1,13 +1,7 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '46133' )]
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'excerpt_remove_blocks' )]
 class Tests_Formatting_ExcerptRemoveBlocks extends WP_UnitTestCase {
 

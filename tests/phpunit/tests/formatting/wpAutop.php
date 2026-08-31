@@ -1,14 +1,9 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wpautop' )]
 class Tests_Formatting_wpAutop extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '11008' )]
 	public function test_first_post() {
 		$expected  = '<p>Welcome to WordPress!  This post contains important information.  After you read it, you can make it private to hide it from visitors but still have the information handy for future reference.</p>
@@ -586,8 +581,6 @@ line 2<br/>
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '4857' )]
 	public function test_that_text_before_blocks_is_wrapped_in_a_paragraph() {
 		$content  = 'a<div>b</div>';
@@ -617,8 +610,6 @@ line 2<br/>
 		$this->assertSameIgnoreEOL( $expected2, trim( wpautop( $content2 ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '14674' )]
 	public function test_the_hr_is_not_wrapped_in_a_paragraph() {
 		$content  = 'paragraph1<hr>paragraph2';

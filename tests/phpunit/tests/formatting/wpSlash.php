@@ -1,11 +1,6 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_slash' )]
 class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 
@@ -55,8 +50,6 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24106' )]
 	public function test_adds_slashes() {
 		$old = "I can't see, isn't that it?";
@@ -67,8 +60,6 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 		$this->assertSame( array( $new ), wp_slash( array( $old ) ) ); // Non-keyed.
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24106' )]
 	public function test_preserves_original_datatype() {
 
@@ -93,8 +84,6 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 		$this->assertSame( $obj, wp_slash( $obj ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24106' )]
 	public function test_add_even_more_slashes() {
 		$old = 'single\\slash double\\\\slash triple\\\\\\slash';

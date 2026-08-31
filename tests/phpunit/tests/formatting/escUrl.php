@@ -1,17 +1,9 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'esc_url' )]
 class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23605' )]
 	public function test_spaces() {
 		$this->assertSame( 'http://example.com/Mr%20WordPress', esc_url( 'http://example.com/Mr WordPress' ) );
@@ -45,8 +37,6 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 		$this->assertSame( '?foo=bar', esc_url( '?foo=bar' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_url' )]
 	public function test_all_url_parts() {
 		$url = 'https://user:pass@host.example.com:1234/path;p=1?query=2&r[]=3#fragment';
@@ -76,8 +66,6 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 		$this->assertSame( 'http://баба.org/баба', esc_url( 'баба.org/баба' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_url' )]
 	public function test_encoding() {
 		$this->assertSame( 'http://example.com?foo=1&bar=2', sanitize_url( 'http://example.com?foo=1&bar=2' ) );
@@ -92,9 +80,6 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 		$this->assertSame( "http://example.com?url={$param}", esc_url( "http://example.com?url={$param}" ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23605' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '52886' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_allowed_protocols' )]
@@ -192,8 +177,6 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23187' )]
 	public function test_protocol_case() {
 		$this->assertSame( 'http://example.com', esc_url( 'HTTP://example.com' ) );
@@ -219,8 +202,6 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 		$this->assertSame( 'feed:http://wordpress.org/feed/', esc_url( 'feed:http://wordpress.org/feed/' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16859' )]
 	public function test_square_brackets() {
 		$this->assertSame( '/example.php?one%5B%5D=two', esc_url( '/example.php?one[]=two' ) );
@@ -244,15 +225,11 @@ class Tests_Formatting_EscUrl extends WP_UnitTestCase {
 		$this->assertSame( $url, sanitize_url( $url ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21974' )]
 	public function test_protocol_relative_with_colon() {
 		$this->assertSame( '//example.com/foo?foo=abc:def', esc_url( '//example.com/foo?foo=abc:def' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31632' )]
 	public function test_mailto_with_newline() {
 		$body       = <<<EOT
@@ -266,8 +243,6 @@ EOT;
 		$this->assertSame( 'mailto:?body=Hi%20there%2C%0A%0AI%20thought%20you%20might%20want%20to%20sign%20up%20for%20this%20newsletter', $email_link );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31632' )]
 	public function test_mailto_in_http_url_with_newline() {
 		$body       = <<<EOT
@@ -281,8 +256,6 @@ EOT;
 		$this->assertSame( 'http://example.com/mailto:?body=Hi%20there%2CI%20thought%20you%20might%20want%20to%20sign%20up%20for%20this%20newsletter', $email_link );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23605' )]
 	public function test_mailto_with_spaces() {
 		$body = 'Hi there, I thought you might want to sign up for this newsletter';
@@ -292,17 +265,12 @@ EOT;
 		$this->assertSame( 'mailto:?body=Hi%20there,%20I%20thought%20you%20might%20want%20to%20sign%20up%20for%20this%20newsletter', $email_link );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28015' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_url' )]
 	public function test_invalid_characters() {
 		$this->assertEmpty( sanitize_url( '"^<>{}`' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34202' )]
 	public function test_ipv6_hosts() {
 		$this->assertSame( '//[::127.0.0.1]', esc_url( '//[::127.0.0.1]' ) );

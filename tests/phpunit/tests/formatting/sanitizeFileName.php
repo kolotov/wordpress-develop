@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_file_name' )]
 class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
@@ -22,8 +19,6 @@ class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
 		$this->assertSame( 'testtest', sanitize_file_name( $string ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22363' )]
 	public function test_removes_accents() {
 		$in  = 'àáâãäåæçèéêëìíîïñòóôõöøùúûüýÿ';
@@ -66,8 +61,6 @@ class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
 		$this->assertSame( 'a-t', sanitize_file_name( "a    \n\n\nt" ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16226' )]
 	public function test_replaces_percent_sign() {
 		$this->assertSame( 'a22b.jpg', sanitize_file_name( 'a%22b.jpg' ) );
@@ -84,8 +77,6 @@ class Tests_Formatting_SanitizeFileName extends WP_UnitTestCase {
 		$this->assertSame( 'no-extension', sanitize_file_name( '_.no-extension' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_filenames' )]
 	public function test_replaces_invalid_utf8_characters( $input, $expected ) {
 		$this->assertSame( $expected, sanitize_file_name( $input ) );

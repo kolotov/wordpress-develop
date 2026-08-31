@@ -1,14 +1,9 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'sanitize_sql_orderby' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'sanitize_sql_orderby' )]
 class Tests_Formatting_SanitizeOrderby extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_sql_orderby_valid' )]
 	public function test_sanitize_sql_orderby_valid( $orderby ) {
 		$this->assertSame( $orderby, sanitize_sql_orderby( $orderby ) );
@@ -33,8 +28,6 @@ class Tests_Formatting_SanitizeOrderby extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_sql_orderby_invalid' )]
 	public function test_sanitize_sql_orderby_invalid( $orderby ) {
 		$this->assertFalse( sanitize_sql_orderby( $orderby ) );

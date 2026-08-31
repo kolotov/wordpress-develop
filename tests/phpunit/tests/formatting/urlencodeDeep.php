@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '22300' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'urlencode_deep' )]

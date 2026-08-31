@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_basename' )]
 class Tests_Formatting_wpBasename extends WP_UnitTestCase {
@@ -21,8 +18,6 @@ class Tests_Formatting_wpBasename extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22138' )]
 	public function test_wp_basename_windows() {
 		$this->assertSame(
@@ -31,8 +26,6 @@ class Tests_Formatting_wpBasename extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22138' )]
 	public function test_wp_basename_windows_utf8_support() {
 		$this->assertSame(
