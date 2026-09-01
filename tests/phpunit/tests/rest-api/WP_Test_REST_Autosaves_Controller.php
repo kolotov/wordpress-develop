@@ -10,8 +10,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi-autosave' )]
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
-
 class WP_Test_REST_Autosaves_Controller extends WP_Test_REST_Post_Type_Controller_Testcase {
 	protected static int $post_id;
 	protected static int $page_id;
@@ -183,8 +181,6 @@ class WP_Test_REST_Autosaves_Controller extends WP_Test_REST_Post_Type_Controlle
 		$this->check_get_autosave_response( $data[0], $this->post_autosave );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_with_head_request_should_not_prepare_autosaves_data() {
 		$request = new WP_REST_Request( 'HEAD', '/wp/v2/posts/' . self::$post_id . '/autosaves' );
@@ -883,9 +879,6 @@ class WP_Test_REST_Autosaves_Controller extends WP_Test_REST_Post_Type_Controlle
 		wp_delete_post( $post_id );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49532' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Autosaves_Controller', 'create_post_autosave' )]
 	public function test_rest_autosave_do_not_create_autosave_when_post_is_unchanged() {

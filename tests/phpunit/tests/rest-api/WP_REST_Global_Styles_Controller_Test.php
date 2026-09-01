@@ -10,15 +10,6 @@
 
 #[\PHPUnit\Framework\Attributes\Group( 'restapi-global-styles' )]
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
-
-
-
-
-
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Global_Styles_Controller::class )]
 class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Testcase {
 	/**
@@ -136,8 +127,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		return 'https://example.org/wp-content/themes/example-theme/assets/' . $file_name;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54596' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'register_routes' )]
 	public function test_register_routes() {
@@ -169,8 +158,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_context_param() {
 		// Controller does not use get_context_param().
@@ -289,15 +276,11 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertSameSets( $expected, $data );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_items() {
 		// Controller does not implement get_items().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_theme_item' )]
 	public function test_get_theme_item_no_user() {
@@ -307,8 +290,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_cannot_read_global_styles', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '62042' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_theme_item' )]
@@ -319,8 +300,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_cannot_read_global_styles', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62042' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_theme_item' )]
 	public function test_get_theme_item_editor_permission_check() {
@@ -335,8 +314,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertArrayHasKey( 'self', $links, 'Links do not have a "self" key' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62042' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_theme_item' )]
 	public function test_get_theme_item_theme_options_manager_permission_check() {
@@ -352,8 +329,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertArrayHasKey( 'self', $links, 'Links do not have a "self" key' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_theme_item' )]
 	public function test_get_theme_item_invalid() {
@@ -482,8 +457,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54595' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_theme_item' )]
 	public function test_get_theme_item_fields() {
@@ -496,8 +469,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertArrayNotHasKey( 'styles', $data );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_item' )]
 	public function test_get_item_no_user() {
@@ -507,8 +478,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_cannot_view', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_item' )]
 	public function test_get_item_invalid_post() {
@@ -518,8 +487,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_global_styles_not_found', $response, 404 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_item' )]
 	public function test_get_item_permission_check() {
@@ -529,8 +496,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_cannot_view', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_item' )]
 	public function test_get_item_no_user_edit() {
@@ -541,8 +506,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_forbidden_context', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_item' )]
 	public function test_get_item_permission_check_edit() {
@@ -553,8 +516,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_forbidden_context', $response, 403 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_item' )]
 	public function test_get_item() {
 		wp_set_current_user( self::$admin_id );
@@ -580,15 +541,11 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertStringContainsString( '/wp/v2/global-styles/' . self::$global_styles_id, $links['self'][0]['href'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_create_item() {
 		// Controller does not implement create_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'update_item' )]
 	public function test_update_item() {
@@ -604,8 +561,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertSame( 'My new global styles title', $data['title']['raw'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'update_item' )]
 	public function test_update_item_no_user() {
@@ -615,8 +570,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_cannot_edit', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'update_item' )]
 	public function test_update_item_invalid_post() {
@@ -626,8 +579,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_global_styles_not_found', $response, 404 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'update_item' )]
 	public function test_update_item_permission_check() {
@@ -637,8 +588,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_cannot_edit', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57536' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'update_item' )]
 	public function test_update_item_valid_styles_css() {
@@ -657,8 +606,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertSame( 'body { color: red; }', $data['styles']['css'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57536' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '64418' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'update_item' )]
@@ -677,8 +624,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertErrorResponse( 'rest_custom_css_illegal_markup', $response, 400 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65640' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'update_item' )]
 	public function test_update_item_non_string_styles_css() {
@@ -758,22 +703,16 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertSame( $group_variations, $data['styles']['blocks']['core/group']['variations'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_delete_item() {
 		// Controller does not implement delete_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_prepare_item() {
 		// Controller does not implement prepare_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
@@ -788,8 +727,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertArrayHasKey( 'title', $properties, 'Schema properties array does not have "title" key' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_available_actions' )]
 	public function test_assign_edit_css_action_admin() {
 		wp_set_current_user( self::$admin_id );
@@ -857,8 +794,6 @@ class WP_REST_Global_Styles_Controller_Test extends WP_Test_REST_Controller_Test
 		$this->assertSame( 'integer', $route_data[0]['args']['id']['type'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64418' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'update_item' )]
 	public function test_update_allows_valid_css_with_more_syntax() {
@@ -891,9 +826,6 @@ CSS;
 		$this->assertSame( $css, $response->get_data()['styles']['css'] );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64418' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_custom_css_allowed' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'validate_custom_css' )]
@@ -928,9 +860,6 @@ CSS;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64418' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_custom_css_disallowed' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'validate_custom_css' )]

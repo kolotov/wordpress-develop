@@ -92,8 +92,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		$widget_object->_register_one( $number );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
@@ -105,8 +103,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		$this->assertCount( 1, $routes['/wp/v2/widget-types/(?P<id>[a-zA-Z0-9_-]+)/encode'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_context_param() {
 		// Collection.
@@ -123,8 +119,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		$this->assertSame( array( 'view', 'embed', 'edit' ), $data['endpoints'][0]['args']['context']['enum'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
@@ -139,8 +133,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_with_head_request_should_not_prepare_widget_types_data() {
 		wp_set_current_user( self::$admin_id );
@@ -150,8 +142,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		$this->assertSame( array(), $response->get_data(), 'The server should not generate a body in response to a HEAD request.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53303' )]
 	public function test_get_items_ordering() {
 		wp_set_current_user( self::$admin_id );
@@ -166,8 +156,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		$this->assertSame( $sorted, $ids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53305' )]
 	public function test_get_items_removes_duplicates() {
 		wp_set_current_user( self::$admin_id );
@@ -197,8 +185,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		$this->assertCount( 1, $text_widgets );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_item() {
 		$widget_name = 'calendar';
@@ -291,8 +277,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_widget_legacy() {
 		$widget_id = 'legacy';
@@ -325,8 +309,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_widget_type_invalid', $response, 404 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53407' )]
 	public function test_get_widgets_decodes_html_entities() {
 		wp_set_current_user( self::$admin_id );
@@ -346,8 +328,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		$this->assertSame( '“A great & interesting archive of your site’s posts!”', $data['description'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_item_schema() {
 		wp_set_current_user( self::$admin_id );
@@ -420,8 +400,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_cannot_manage_widgets', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_prepare_item() {
 		$endpoint    = new WP_REST_Widget_Types_Controller();
@@ -463,8 +441,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		$this->assertSame( rest_url( 'wp/v2/widget-types' ), $links['collection'][0]['href'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_encode_form_data_with_no_input() {
 		wp_set_current_user( self::$admin_id );
@@ -498,8 +474,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_encode_form_data_with_number() {
 		wp_set_current_user( self::$admin_id );
@@ -534,8 +508,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_encode_form_data_with_instance() {
 		wp_set_current_user( self::$admin_id );
@@ -576,8 +548,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_encode_form_data_with_form_data() {
 		wp_set_current_user( self::$admin_id );
@@ -612,8 +582,6 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_encode_form_data_no_raw() {
 		global $wp_widget_factory;

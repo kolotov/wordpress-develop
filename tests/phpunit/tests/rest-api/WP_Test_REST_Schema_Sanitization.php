@@ -75,8 +75,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertSame( '2001:DB8:0:0:8:800:200C:417A', rest_sanitize_value_from_schema( '2001:DB8:0:0:8:800:200C:417A', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49270' )]
 	public function test_format_hex_color() {
 		$schema = array(
@@ -88,8 +86,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertSame( '', rest_sanitize_value_from_schema( 'WordPress', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50053' )]
 	public function test_format_uuid() {
 		$schema = array(
@@ -398,8 +394,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertSame( array( 'a' => 1.0 ), rest_sanitize_value_from_schema( (object) array( 'a' => '1' ), $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42961' )]
 	public function test_type_object_accepts_empty_string() {
 		$this->assertSame( array(), rest_sanitize_value_from_schema( '', array( 'type' => 'object' ) ) );
@@ -438,8 +432,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertSame( 'lalala', rest_sanitize_value_from_schema( 'lalala', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50189' )]
 	public function test_format_validation_is_skipped_if_non_string_type() {
 		$schema = array(
@@ -450,8 +442,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertSame( array( '#qrst' ), rest_sanitize_value_from_schema( '#qrst', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50189' )]
 	public function test_format_validation_is_applied_if_missing_type() {
 		$this->setExpectedIncorrectUsage( 'rest_sanitize_value_from_schema' );
@@ -488,8 +478,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50189' )]
 	public function test_format_validation_is_applied_if_unknown_type() {
 		$this->setExpectedIncorrectUsage( 'rest_sanitize_value_from_schema' );
@@ -546,8 +534,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertSame( array( 'raw' => true ), rest_sanitize_value_from_schema( array( 'raw' => 'something non boolean' ), $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50300' )]
 	public function test_multi_type_with_no_known_types() {
 		$this->setExpectedIncorrectUsage( 'rest_handle_multi_type_schema' );
@@ -560,8 +546,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertSame( 'My Value', rest_sanitize_value_from_schema( 'My Value', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50300' )]
 	public function test_multi_type_with_some_unknown_types() {
 		$this->setExpectedIncorrectUsage( 'rest_handle_multi_type_schema' );
@@ -574,8 +558,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertSame( 'My Value', rest_sanitize_value_from_schema( 'My Value', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50300' )]
 	public function test_multi_type_returns_null_if_no_valid_type() {
 		$schema = array(
@@ -585,8 +567,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertNull( rest_sanitize_value_from_schema( array( 'Hello!' ), $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48821' )]
 	public function test_unique_items_after_sanitization() {
 		$schema = array(
@@ -607,8 +587,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertWPError( rest_sanitize_value_from_schema( $data, $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51025' )]
 	public function test_any_of() {
 		$schema = array(
@@ -630,8 +608,6 @@ class WP_Test_REST_Schema_Sanitization extends WP_UnitTestCase {
 		$this->assertWPError( rest_sanitize_value_from_schema( '11', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51025' )]
 	public function test_one_of() {
 		$schema = array(

@@ -11,9 +11,6 @@
 
 #[\PHPUnit\Framework\Attributes\Group( 'restapi-blocks' )]
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Block_Renderer_Controller::class )]
 class REST_Block_Renderer_Controller_Test extends WP_Test_REST_Controller_Testcase {
 
@@ -543,8 +540,6 @@ class REST_Block_Renderer_Controller_Test extends WP_Test_REST_Controller_Testca
 		$this->assertErrorResponse( 'block_cannot_read', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48079' )]
 	public function test_get_item_non_dynamic_block() {
 		wp_set_current_user( self::$user_id );
@@ -556,8 +551,6 @@ class REST_Block_Renderer_Controller_Test extends WP_Test_REST_Controller_Testca
 		$this->assertErrorResponse( 'block_invalid', $response, 404 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50620' )]
 	public function test_get_sanitized_attributes_for_dynamic_block_with_boolean_attributes() {
 		wp_set_current_user( self::$user_id );

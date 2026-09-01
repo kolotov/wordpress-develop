@@ -70,8 +70,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( 'email', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49270' )]
 	public function test_format_hex_color() {
 		$schema = array(
@@ -83,8 +81,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( 'WordPress', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50053' )]
 	public function test_format_uuid() {
 		$schema = array(
@@ -135,8 +131,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( 'FF01::101::2', $schema ) ); // Multicast, compressed.
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50189' )]
 	public function test_format_validation_is_skipped_if_non_string_type() {
 		$schema = array(
@@ -150,8 +144,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertTrue( rest_validate_value_from_schema( 'email', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50189' )]
 	public function test_format_validation_is_applied_if_missing_type() {
 		$this->setExpectedIncorrectUsage( 'rest_validate_value_from_schema' );
@@ -188,8 +180,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50189' )]
 	public function test_format_validation_is_applied_if_unknown_type() {
 		$this->setExpectedIncorrectUsage( 'rest_validate_value_from_schema' );
@@ -1003,8 +993,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertTrue( rest_validate_value_from_schema( (object) array( 'a' => 1 ), $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42961' )]
 	public function test_type_object_allows_empty_string() {
 		$this->assertTrue( rest_validate_value_from_schema( '', array( 'type' => 'object' ) ) );
@@ -1041,8 +1029,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertSame( 'Invalid date.', $error->get_error_message() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60184' )]
 	public function test_epoch() {
 		$schema = array(
@@ -1070,8 +1056,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertSame( '[raw] is not of type string.', $error->get_error_message() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50300' )]
 	public function test_null_or_integer() {
 		$schema = array(
@@ -1125,8 +1109,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50300' )]
 	public function test_multi_type_with_no_known_types() {
 		$this->setExpectedIncorrectUsage( 'rest_handle_multi_type_schema' );
@@ -1139,8 +1121,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertTrue( rest_validate_value_from_schema( 'My Value', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50300' )]
 	public function test_multi_type_with_some_unknown_types() {
 		$this->setExpectedIncorrectUsage( 'rest_handle_multi_type_schema' );
@@ -1153,8 +1133,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertTrue( rest_validate_value_from_schema( 'My Value', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48820' )]
 	public function test_string_min_length() {
 		$schema = array(
@@ -1177,8 +1155,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertTrue( rest_validate_value_from_schema( $mb_char . $mb_char, $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48820' )]
 	public function test_string_max_length() {
 		$schema = array(
@@ -1201,9 +1177,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( $mb_char . $mb_char . $mb_char, $schema ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48818' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_required_property' )]
 	public function test_property_is_required( $data, $expected ) {
@@ -1229,9 +1202,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48818' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_required_property' )]
 	public function test_property_is_required_v4( $data, $expected ) {
@@ -1271,9 +1241,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48818' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_required_nested_property' )]
 	public function test_nested_property_is_required( $data, $expected ) {
@@ -1304,9 +1271,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48818' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_required_nested_property' )]
 	public function test_nested_property_is_required_v4( $data, $expected ) {
@@ -1363,9 +1327,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48818' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_required_deeply_nested_property' )]
 	public function test_deeply_nested_v3_required_property( $value, $expected ) {
@@ -1403,9 +1364,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48818' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_required_deeply_nested_property' )]
 	public function test_deeply_nested_v4_required_property( $value, $expected ) {
@@ -1443,9 +1401,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48818' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_required_deeply_nested_property' )]
 	public function test_deeply_nested_mixed_version_required_property( $value, $expected ) {
@@ -1551,8 +1506,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertTrue( rest_validate_value_from_schema( array( 'listed' => 'x' ), $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51023' )]
 	public function test_object_min_properties() {
 		$schema = array(
@@ -1574,8 +1527,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( '', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51023' )]
 	public function test_object_max_properties() {
 		$schema = array(
@@ -1606,8 +1557,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( 'foobar', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44949' )]
 	public function test_string_pattern() {
 		$schema = array(
@@ -1619,8 +1568,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( 'b', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44949' )]
 	public function test_string_pattern_with_escaped_delimiter() {
 		$schema = array(
@@ -1632,8 +1579,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( '#abc', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44949' )]
 	public function test_string_pattern_with_utf8() {
 		$schema = array(
@@ -1645,8 +1590,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( 'ââ', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48821' )]
 	public function test_array_min_items() {
 		$schema = array(
@@ -1663,8 +1606,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( '', $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48821' )]
 	public function test_array_max_items() {
 		$schema = array(
@@ -1681,9 +1622,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertWPError( rest_validate_value_from_schema( 'foobar', $schema ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48821' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unique_items' )]
 	public function test_unique_items( $test, $suite ) {
@@ -1738,8 +1676,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		return $tests;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48821' )]
 	public function test_unique_items_deep_objects() {
 		$schema = array(
@@ -1784,8 +1720,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertTrue( rest_validate_value_from_schema( $data, $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48821' )]
 	public function test_unique_items_deep_arrays() {
 		$schema = array(
@@ -1816,8 +1750,6 @@ class WP_Test_REST_Schema_Validation extends WP_UnitTestCase {
 		$this->assertTrue( rest_validate_value_from_schema( $data, $schema ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50300' )]
 	public function test_string_or_integer() {
 		$schema = array(

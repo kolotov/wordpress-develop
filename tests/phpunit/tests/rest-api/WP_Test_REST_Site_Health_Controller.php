@@ -75,8 +75,6 @@ class WP_Test_REST_Site_Health_Controller extends WP_Test_REST_TestCase {
 		$this->assertErrorResponse( 'rest_forbidden', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_custom_capability() {
 		wp_set_current_user( self::$admin );
@@ -92,8 +90,6 @@ class WP_Test_REST_Site_Health_Controller extends WP_Test_REST_TestCase {
 		$this->assertErrorResponse( 'rest_forbidden', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test() {
 		wp_set_current_user( self::$admin );

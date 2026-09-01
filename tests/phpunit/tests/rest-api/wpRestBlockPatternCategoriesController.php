@@ -129,8 +129,6 @@ class Tests_REST_WpRestBlockPatternCategoriesController extends WP_Test_REST_Con
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_with_head_request_should_not_prepare_block_pattern_categories_data() {
 		wp_set_current_user( self::$admin_id );
@@ -140,8 +138,6 @@ class Tests_REST_WpRestBlockPatternCategoriesController extends WP_Test_REST_Con
 		$this->assertSame( array(), $response->get_data(), 'The server should not generate a body in response to a HEAD request.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_head_request_with_specified_fields_returns_success_response() {
 		wp_set_current_user( self::$admin_id );

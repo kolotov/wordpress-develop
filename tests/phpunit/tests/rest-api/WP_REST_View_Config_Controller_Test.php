@@ -9,11 +9,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
 #[\PHPUnit\Framework\Attributes\Group( 'view-config' )]
-
-
-
-
-
 class WP_REST_View_Config_Controller_Test extends WP_Test_REST_TestCase {
 
 	/**

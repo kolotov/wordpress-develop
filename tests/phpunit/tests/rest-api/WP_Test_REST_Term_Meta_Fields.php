@@ -228,8 +228,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'testvalue', $meta['test_single'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_get_multi_value() {
 		add_term_meta( self::$category_id, 'test_multi', 'value1' );
@@ -255,8 +253,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertContains( 'value2', $meta['test_multi'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_get_unregistered() {
 		add_term_meta( self::$category_id, 'test_unregistered', 'value1' );
@@ -270,8 +266,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'test_unregistered', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_get_registered_no_api_access() {
 		add_term_meta( self::$category_id, 'test_no_rest', 'for_the_wicked' );
@@ -285,8 +279,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'test_no_rest', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_get_registered_api_disabled() {
 		add_term_meta( self::$category_id, 'test_rest_disabled', 'sleepless_nights' );
@@ -374,8 +366,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'janet', $meta['new_name'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_set_value() {
 		// Ensure no data exists currently.
@@ -406,8 +396,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'test_value', $meta['test_single'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_set_duplicate_single_value() {
 		// Start with an existing metakey and value.
@@ -437,8 +425,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'test_value', $meta['test_single'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_set_value' )]
 	public function test_set_value_unauthenticated() {
 		$data = array(
@@ -459,8 +445,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertEmpty( get_term_meta( self::$category_id, 'test_single', false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_set_value' )]
 	public function test_set_value_blocked() {
 		$data = array(
@@ -479,8 +463,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertEmpty( get_term_meta( self::$category_id, 'test_bad_auth', false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_set_value' )]
 	public function test_set_value_db_error() {
 		$data = array(
@@ -596,8 +578,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertContains( 'n', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_set_value_multiple' )]
 	public function test_set_value_multiple_unauthenticated() {
 		// Ensure no data exists currently.
@@ -723,8 +703,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 1, 2, 3 ), $data['meta']['my_meta_key'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_set_value_multiple' )]
 	public function test_set_value_multiple_blocked() {
 		$data = array(
@@ -773,8 +751,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertErrorResponse( 'rest_meta_database_error', $response, 500 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_set_value_single_custom_schema() {
 		// Ensure no data exists currently.
@@ -846,8 +822,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertContains( '8', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value_custom_name' )]
 	public function test_set_value_custom_name() {
 		// Ensure no data exists currently.
@@ -919,8 +893,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertContains( 'graeme', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38989' )]
 	public function test_set_value_invalid_meta_string_request_type() {
 		update_term_meta( self::$category_id, 'test_single', 'So I tied an onion to my belt, which was the style at the time.' );
@@ -949,8 +921,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( $term_original->name, $term_updated->name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38989' )]
 	public function test_set_value_invalid_meta_float_request_type() {
 		update_term_meta( self::$category_id, 'test_single', 'Now, to take the ferry cost a nickel, and in those days, nickels had pictures of bumblebees on them.' );
@@ -1031,8 +1001,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertEmpty( $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_delete_value' )]
 	public function test_delete_value_blocked() {
 		add_term_meta( self::$category_id, 'test_bad_auth', 'val1' );
@@ -1056,8 +1024,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'val1', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_delete_value' )]
 	public function test_delete_value_db_error() {
 		add_term_meta( self::$category_id, 'test_single', 'val1' );
@@ -1137,8 +1103,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'test_no_type', $meta_schema );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_subtype_meta_value' )]
 	public function test_get_subtype_meta_value( $taxonomy, $meta_key, $single, $in_taxonomy ) {
@@ -1189,8 +1153,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_set_subtype_meta_value' )]
 	public function test_set_subtype_meta_value( $taxonomy, $meta_key, $single, $in_taxonomy, $can_write ) {
@@ -1259,8 +1221,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		return $data;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43941' )]
 	public function test_get_default_value() {
 		$meta_key = 'registered_key1';
@@ -1289,8 +1249,6 @@ class WP_Test_REST_Term_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'Goodbye', $meta[ $meta_key ] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53099' )]
 	public function test_get_term_metadata_returning_false_does_not_cause_php_warnings() {
 		add_filter( 'get_term_metadata', '__return_false', 11 );

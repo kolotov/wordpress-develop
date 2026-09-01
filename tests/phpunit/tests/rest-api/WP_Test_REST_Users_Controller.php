@@ -765,8 +765,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertCount( 0, $response->get_data() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62596' )]
 	public function test_get_items_search_columns() {
 		$request = new WP_REST_Request( 'GET', '/wp/v2/users' );
@@ -801,8 +799,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertCount( 1, $response->get_data() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62596' )]
 	public function test_get_items_search_columns_without_permission() {
 		self::factory()->user->create(
@@ -983,8 +979,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertEmpty( $data );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_items_capabilities() {
 		wp_set_current_user( self::$user );
@@ -1000,8 +994,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_items_capabilities_no_permission_no_user() {
 		wp_set_current_user( 0 );
@@ -1012,8 +1004,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_user_cannot_view', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_items_capabilities_no_permission_editor() {
 		wp_set_current_user( self::$editor );
@@ -1024,8 +1014,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_user_cannot_view', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16841' )]
 	public function test_get_items_invalid_capabilities() {
 		wp_set_current_user( self::$user );
@@ -1462,9 +1450,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertSame( 'Sorry, that username is not allowed.', $errors['username'] );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_create_new_network_user_on_site_does_not_add_user_to_sub_site() {
 		$this->allow_user_to_manage_multisite();
@@ -1491,9 +1476,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertFalse( $user_is_member );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41101' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_create_new_network_user_with_add_user_to_blog_failure() {
@@ -1516,9 +1498,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'user_cannot_be_added', $response );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_create_new_network_user_on_sub_site_adds_user_to_site() {
 		$this->allow_user_to_manage_multisite();
@@ -1549,9 +1528,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertTrue( $user_is_member );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_create_existing_network_user_on_sub_site_has_error() {
 		$this->allow_user_to_manage_multisite();
@@ -1787,8 +1763,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertSame( 'rest_user_invalid_email', $response->as_error()->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44672' )]
 	public function test_update_item_existing_email_case() {
 		wp_set_current_user( self::$editor );
@@ -1806,8 +1780,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertSame( $updated_email_with_case_change, $data['email'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44672' )]
 	public function test_update_item_existing_email_case_not_own() {
 		wp_set_current_user( self::$editor );
@@ -1866,8 +1838,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertSame( 'en_US', $user->locale );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38632' )]
 	public function test_update_item_empty_locale() {
 		$user_id = self::factory()->user->create(
@@ -2052,9 +2022,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertArrayNotHasKey( 'administrator', $user->caps );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_update_user_role_invalid_privilege_deescalation() {
 		$user_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
@@ -2082,9 +2049,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertArrayNotHasKey( 'editor', $user->caps );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_update_user_role_privilege_deescalation_multisite() {
 		$user_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
@@ -2187,8 +2151,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_user_invalid_id', $response, 404 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40263' )]
 	public function test_update_item_only_roles_as_editor() {
 		$user_id = self::factory()->user->create(
@@ -2205,8 +2167,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_cannot_edit_roles', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40263' )]
 	public function test_update_item_only_roles_as_site_administrator() {
 		$user_id = self::factory()->user->create(
@@ -2226,8 +2186,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertSame( 'editor', $new_data['roles'][0] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40263' )]
 	public function test_update_item_including_roles_and_other_params() {
 		$user_id = self::factory()->user->create(
@@ -2980,9 +2938,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		update_user_meta( $user->ID, $field_name, $value );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39701' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_get_item_from_different_site_as_site_administrator() {
@@ -3001,9 +2956,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_user_invalid_id', $response, 404 );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39701' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_get_item_from_different_site_as_network_administrator() {
@@ -3022,9 +2974,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_user_invalid_id', $response, 404 );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39701' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_update_item_from_different_site_as_site_administrator() {
@@ -3045,9 +2994,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_user_invalid_id', $response, 404 );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39701' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_update_item_from_different_site_as_network_administrator() {
@@ -3068,9 +3014,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_user_invalid_id', $response, 404 );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39701' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_delete_item_from_different_site_as_site_administrator() {
@@ -3091,9 +3034,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_user_invalid_id', $response, 404 );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39701' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_delete_item_from_different_site_as_network_administrator() {
@@ -3114,9 +3054,6 @@ class WP_Test_REST_Users_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_user_invalid_id', $response, 404 );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43941' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_default_data' )]
 	public function test_get_default_value( $args, $expected ) {

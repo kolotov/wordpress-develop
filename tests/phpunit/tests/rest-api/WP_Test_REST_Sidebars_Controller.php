@@ -13,8 +13,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
 #[\PHPUnit\Framework\Attributes\Group( 'widgets' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Sidebars_Controller::class )]
 class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase {
 
@@ -115,8 +113,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
@@ -124,8 +120,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertArrayHasKey( '/wp/v2/sidebars/(?P<id>[\w-]+)', $routes );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_context_param() {
 		// Collection.
@@ -142,8 +136,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( array( 'view', 'embed', 'edit' ), $data['endpoints'][0]['args']['context']['enum'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_items() {
 		wp_widgets_init();
@@ -155,8 +147,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( array(), $data );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_with_head_request_should_not_prepare_sidebar_data() {
 		wp_widgets_init();
@@ -192,8 +182,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertErrorResponse( 'rest_cannot_manage_widgets', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53915' )]
 	public function test_get_items_no_permission_show_in_rest() {
 		$this->setup_sidebar(
@@ -227,8 +215,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53915' )]
 	public function test_get_items_without_show_in_rest_are_removed_from_the_list() {
 		$this->setup_sidebar(
@@ -288,8 +274,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_items_wrong_permission_author() {
 		wp_set_current_user( self::$author_id );
@@ -298,8 +282,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertErrorResponse( 'rest_cannot_manage_widgets', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_items_basic_sidebar() {
 		$this->setup_sidebar(
@@ -344,8 +326,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_items_active_sidebar_with_widgets() {
 		wp_widgets_init();
@@ -398,8 +378,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53489' )]
 	public function test_get_items_when_registering_new_sidebars() {
 		register_sidebar(
@@ -448,8 +426,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53646' )]
 	public function test_get_items_when_descriptions_have_markup() {
 		register_sidebar(
@@ -499,8 +475,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_item() {
 		$this->setup_sidebar(
@@ -646,8 +620,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertErrorResponse( 'rest_cannot_manage_widgets', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_item_no_permission_public() {
 		wp_set_current_user( 0 );
@@ -709,8 +681,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		// Controller does not implement create_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_update_item() {
 		wp_widgets_init();
@@ -776,8 +746,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_update_item_removes_widget_from_existing_sidebar() {
 		wp_widgets_init();
@@ -819,8 +787,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertNotContains( 'text-1', rest_do_request( '/wp/v2/sidebars/sidebar-1' )->get_data()['widgets'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53612' )]
 	public function test_batch_remove_widgets_from_existing_sidebar() {
 		wp_widgets_init();
@@ -867,8 +833,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_update_item_moves_omitted_widget_to_inactive_sidebar() {
 		wp_widgets_init();
@@ -911,8 +875,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertContains( 'text-1', rest_do_request( '/wp/v2/sidebars/wp_inactive_widgets' )->get_data()['widgets'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_items_inactive_widgets() {
 		wp_widgets_init();
@@ -988,8 +950,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57531' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Sidebars_Controller', 'prepare_item_for_response' )]
 	public function test_prepare_item_for_response_to_set_inactive_on_theme_switch() {
@@ -1055,8 +1015,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_update_item_no_permission() {
 		wp_set_current_user( 0 );
@@ -1071,8 +1029,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertErrorResponse( 'rest_cannot_manage_widgets', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_update_item_wrong_permission_author() {
 		wp_set_current_user( self::$author_id );
@@ -1103,8 +1059,6 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 		// Controller does not implement prepare_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41683' )]
 	public function test_get_item_schema() {
 		wp_set_current_user( self::$admin_id );

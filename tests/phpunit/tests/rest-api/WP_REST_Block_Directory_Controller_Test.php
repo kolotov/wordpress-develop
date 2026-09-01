@@ -41,8 +41,6 @@ class WP_REST_Block_Directory_Controller_Test extends WP_Test_REST_Controller_Te
 		self::delete_user( self::$admin_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50321' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
@@ -50,8 +48,6 @@ class WP_REST_Block_Directory_Controller_Test extends WP_Test_REST_Controller_Te
 		$this->assertArrayHasKey( '/wp/v2/block-directory/search', $routes );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50321' )]
 	public function test_context_param() {
 		// Collection.
@@ -62,8 +58,6 @@ class WP_REST_Block_Directory_Controller_Test extends WP_Test_REST_Controller_Te
 		$this->assertSame( array( 'view' ), $data['endpoints'][0]['args']['context']['enum'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50321' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
@@ -81,8 +75,6 @@ class WP_REST_Block_Directory_Controller_Test extends WP_Test_REST_Controller_Te
 		$this->assertSame( 200, $result->status );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50321' )]
 	public function test_get_items_wdotorg_unavailable() {
 		wp_set_current_user( self::$admin_id );
@@ -127,8 +119,6 @@ class WP_REST_Block_Directory_Controller_Test extends WP_Test_REST_Controller_Te
 		) . ' ' . __( '(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50321' )]
 	public function test_get_items_logged_out() {
 		$request = new WP_REST_Request( 'GET', '/wp/v2/block-directory/search' );
@@ -137,8 +127,6 @@ class WP_REST_Block_Directory_Controller_Test extends WP_Test_REST_Controller_Te
 		$this->assertErrorResponse( 'rest_block_directory_cannot_view', $response );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50321' )]
 	public function test_get_items_no_results() {
 		wp_set_current_user( self::$admin_id );
@@ -158,36 +146,26 @@ class WP_REST_Block_Directory_Controller_Test extends WP_Test_REST_Controller_Te
 		$this->assertSame( array(), $data );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_item() {
 		// Controller does not implement get_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_create_item() {
 		// Controller does not implement create_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_update_item() {
 		// Controller does not implement update_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_delete_item() {
 		// Controller does not implement delete_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50321' )]
 	public function test_prepare_item() {
 		wp_set_current_user( self::$admin_id );
@@ -219,8 +197,6 @@ class WP_REST_Block_Directory_Controller_Test extends WP_Test_REST_Controller_Te
 		$this->assertSame( $expected, $response->get_data() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50321' )]
 	public function test_get_item_schema() {
 		wp_set_current_user( self::$admin_id );
@@ -252,8 +228,6 @@ class WP_REST_Block_Directory_Controller_Test extends WP_Test_REST_Controller_Te
 		$this->assertArrayHasKey( 'humanized_updated', $properties );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53621' )]
 	public function test_get_items_response_conforms_to_schema() {
 		wp_set_current_user( self::$admin_id );

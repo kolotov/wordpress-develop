@@ -10,15 +10,6 @@
 
 #[\PHPUnit\Framework\Attributes\Group( 'restapi-global-styles' )]
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
-
-
-
-
-
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Global_Styles_Revisions_Controller::class )]
 class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Controller_Testcase {
 	/**
@@ -253,9 +244,6 @@ class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Contr
 		parent::tear_down();
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58524' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '59810' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'register_routes' )]
@@ -304,6 +292,8 @@ class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Contr
 	/**
 	 * Utility function to check the items in WP_REST_Global_Styles_Controller::get_items
 	 * against the expected values.
+	 *
+	 * @ticket 58524
 	 */
 	protected function check_get_revision_response( $response_revision_item, $revision_expected_item ) {
 		$this->assertSame( (int) $revision_expected_item->post_author, $response_revision_item['author'], 'Check that the revision item `author` exists.' );
@@ -327,9 +317,6 @@ class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Contr
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58524' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_items' )]
 	public function test_get_items() {
@@ -353,9 +340,6 @@ class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Contr
 		$this->check_get_revision_response( $data[2], $this->revision_1 );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'prepare_item_for_response' )]
 	public function test_get_items_should_return_no_response_body_for_head_requests() {
@@ -397,9 +381,6 @@ class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Contr
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59810' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_item' )]
 	public function test_get_item() {
@@ -413,9 +394,6 @@ class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Contr
 		$this->check_get_revision_response( $data, $this->revision_1 );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_item' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'prepare_item_for_response' )]
@@ -447,9 +425,6 @@ class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Contr
 		$this->assertErrorResponse( $expected_error, $response, $expected_status );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58524' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_items' )]
 	public function test_get_items_eligible_roles() {
@@ -479,9 +454,6 @@ class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Contr
 		$this->assertSame( self::$second_admin_id, $data[0]['author'], 'Check that second author id returns expected value.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58524' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_items' )]
 	public function test_get_item_embed_context() {
@@ -500,9 +472,6 @@ class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Contr
 		$this->assertSameSets( $fields, array_keys( $data[0] ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58524' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Global_Styles_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
@@ -1422,36 +1391,26 @@ class WP_REST_Global_Styles_Revisions_Controller_Test extends WP_Test_REST_Contr
 		wp_delete_post( $global_styles_id, true );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_context_param() {
 		// Controller does not implement get_context_param().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_create_item() {
 		// Controller does not implement create_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_delete_item() {
 		// Controller does not implement delete_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_prepare_item() {
 		// Controller does not implement prepare_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_update_item() {
 		// Controller does not implement update_item().

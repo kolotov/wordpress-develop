@@ -7,7 +7,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
 class Tests_REST_Server extends WP_Test_REST_TestCase {
 	protected static $icon_id;
 	protected static $admin_id;
@@ -96,8 +95,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( $headers, $enveloped['headers'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54015' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_envelope_params' )]
 	public function test_envelope_param( $_embed ) {
@@ -477,8 +474,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( $sent_headers['Allow'], 'POST' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53063' )]
 	public function test_batched_options() {
 		register_rest_route(
@@ -595,8 +590,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 'status' => 403 ), $error->error_data[ $code2 ] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '46191' )]
 	public function test_error_to_response_with_additional_data() {
 		$error = new WP_Error( 'test', 'test', array( 'status' => 400 ) );
@@ -608,8 +601,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( array( array( 'status' => 400 ) ), $response->get_data()['additional_data'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64901' )]
 	public function test_error_to_response_with_stdclass_data() {
 		$error = new WP_Error( 'test', 'test', (object) array( 'status' => 400 ) );
@@ -621,8 +612,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 500, $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64901' )]
 	public function test_error_to_response_with_multi_status_non_numeric_status() {
 		$error = new WP_Error( 'test', 'test', array( 'status' => array( 'feeling' => 'happy' ) ) );
@@ -758,8 +747,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		return $curies;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47684' )]
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_link_embedding' )]
 	public function test_link_embedding_self() {
@@ -782,8 +769,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertArrayHasKey( '_embedded', $data );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47684' )]
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_link_embedding' )]
 	public function test_link_embedding_self_non_embeddable() {
@@ -806,8 +791,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( '_embedded', $data );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_link_embedding' )]
 	public function test_link_embedding_params() {
 		// Register our testing route.
@@ -834,8 +817,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 'yes', $data['parameters']['parsed_params'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_link_embedding_params' )]
 	public function test_link_embedding_error() {
 		// Register our testing route.
@@ -868,8 +849,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 403, $up_data['data']['status'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48838' )]
 	public function test_link_embedding_clears_cache() {
 		$post_id = self::factory()->post->create();
@@ -894,8 +873,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 'My Awesome Title', $data['_embedded']['post'][0]['title']['rendered'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48838' )]
 	public function test_link_embedding_cache() {
 		$response = new WP_REST_Response(
@@ -926,8 +903,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertCount( 1, $mock->get_events() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48838' )]
 	public function test_link_embedding_cache_collection() {
 		$response = new WP_REST_Response(
@@ -1093,8 +1068,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( $self_not_filtered, $data['_links']['self'][0] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_response_to_data_embedding' )]
 	public function test_response_to_data_embedding( $expected, $embed ) {
 		$response = new WP_REST_Response();
@@ -1208,9 +1181,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertArrayHasKey( 'site_icon_url', $data );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64804' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Server', 'get_index' )]
 	public function test_get_index_should_include_media_processing_settings(): void {
@@ -1233,9 +1203,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 16, $data['image_max_bit_depth'] );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64804' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Server', 'get_index' )]
 	public function test_get_index_should_not_include_media_processing_settings_without_caps(): void {
@@ -1253,9 +1220,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'image_max_bit_depth', $data );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64804' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Server', 'get_index' )]
 	public function test_get_index_should_honor_media_processing_filters(): void {
@@ -1278,9 +1242,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 8, $data['image_max_bit_depth'] );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57902' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Server', 'get_index' )]
 	public function test_get_index_fields_name() {
@@ -1331,8 +1292,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		return self::text_array_to_dataprovider( array( '_links', '_embedded' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50152' )]
 	public function test_index_includes_link_to_active_theme_if_authenticated() {
 		$server = new WP_REST_Server();
@@ -1344,9 +1303,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertArrayHasKey( 'https://api.w.org/active-theme', $index->get_links() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52321' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '59935' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Server', 'get_index' )]
@@ -1364,9 +1320,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( self::$icon_id, $data['site_icon'], 'The response "site_icon" ID does not match.' );
 		$this->assertStringContainsString( 'test-image-large', $data['site_icon_url'], 'The "site_icon_url" should contain the expected image.' );
 	}
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52321' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '59935' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Server', 'get_index' )]
@@ -1545,8 +1498,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertContains( 'test/another', $namespaces );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49147' )]
 	public function test_get_data_for_non_variable_route_includes_links() {
 		$expected = array(
@@ -1935,8 +1886,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		return true;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43691' )]
 	public function test_does_not_echo_body_for_null_responses() {
 		register_rest_route(
@@ -1957,8 +1906,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( '', rest_get_server()->sent_body );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43691' )]
 	public function test_does_not_echo_body_for_responses_with_204_status() {
 		register_rest_route(
@@ -1979,8 +1926,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( '', rest_get_server()->sent_body );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47077' )]
 	public function test_http_authorization_header_substitution() {
 		$headers        = array( 'HTTP_AUTHORIZATION' => 'foo' );
@@ -1992,8 +1937,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47077' )]
 	public function test_redirect_http_authorization_header_substitution() {
 		$headers        = array( 'REDIRECT_HTTP_AUTHORIZATION' => 'foo' );
@@ -2005,8 +1948,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47077' )]
 	public function test_redirect_http_authorization_with_http_authorization_header_substitution() {
 		$headers        = array(
@@ -2021,8 +1962,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47077' )]
 	public function test_redirect_http_authorization_with_empty_http_authorization_header_substitution() {
 		$headers        = array(
@@ -2037,8 +1976,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48530' )]
 	public function test_get_routes_respects_namespace_parameter() {
 		$routes = rest_get_server()->get_routes( 'oembed/1.0' );
@@ -2050,8 +1987,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48530' )]
 	public function test_get_routes_no_namespace_overriding() {
 		register_rest_route(
@@ -2083,8 +2018,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 204, $response->get_status(), '/test-ns/v1/test' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50244' )]
 	public function test_no_route() {
 		$mock_hook = new MockAction();
@@ -2097,8 +2030,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertCount( 0, $mock_hook->get_events() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50244' )]
 	public function test_invalid_handler() {
 		register_rest_route(
@@ -2123,8 +2054,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 'rest_invalid_handler', $events[0]['args'][0]->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50244' )]
 	public function test_callbacks_are_not_executed_if_request_validation_fails() {
 		$callback = $this->createPartialMock( 'Mock_Invokable', array( '__invoke' ) );
@@ -2153,8 +2082,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertErrorResponse( 'rest_invalid_param', $response, 400 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50244' )]
 	public function test_filters_are_executed_if_request_validation_fails() {
 		register_rest_route(
@@ -2187,8 +2114,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 'rest_invalid_param', $events[0]['args'][0]->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50244' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_batch_v1_opt_in' )]
 	public function test_batch_v1_opt_in( $allow_batch, $allowed ) {
@@ -2243,8 +2168,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50244' )]
 	public function test_batch_v1_pre_validation() {
 		register_rest_route(
@@ -2302,8 +2225,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertFalse( get_option( 'test_project' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50244' )]
 	public function test_batch_v1_pre_validation_all_successful() {
 		register_rest_route(
@@ -2356,8 +2277,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 'WordPress', $data['responses'][1]['body'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50244' )]
 	public function test_batch_v1() {
 		register_rest_route(
@@ -2404,8 +2323,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 'test', $response->get_data()['responses'][0]['body'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50244' )]
 	public function test_batch_v1_partial_error() {
 		register_rest_route(
@@ -2462,8 +2379,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50244' )]
 	public function test_batch_v1_max_requests() {
 		add_filter(
@@ -2501,8 +2416,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 400, $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63502' )]
 	public function test_batch_request_with_malformed_url() {
 		$request = new WP_REST_Request( 'POST', '/batch/v1' );
@@ -2525,8 +2438,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 'parse_path_failed', $data['code'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51020' )]
 	public function test_get_data_for_route_includes_permitted_schema_keywords() {
 		$keywords = array(
@@ -2590,8 +2501,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSameSetsWithIndex( $expected, $args['param'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64955' )]
 	public function test_get_data_for_route_includes_filtered_json_schema_keywords() {
 		$filter = static function ( $keywords, $schema_profile ) {
@@ -2631,8 +2540,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'invalid', $args['param'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53056' )]
 	public function test_json_encode_error_results_in_500_status_code() {
 		register_rest_route(
@@ -2653,8 +2560,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( 500, rest_get_server()->status );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57752' )]
 	public function test_rest_exposed_cors_headers_filter_receives_request_object() {
 		$mock_hook = new MockAction();
@@ -2668,8 +2573,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( '/test-exposed-cors-headers', $mock_hook->get_events()[0]['args'][1]->get_route() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57752' )]
 	public function test_rest_allowed_cors_headers_filter_receives_request_object() {
 		$mock_hook = new MockAction();
@@ -2683,8 +2586,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( '/test-allowed-cors-headers', $mock_hook->get_events()[0]['args'][1]->get_route() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61739' )]
 	public function test_validates_request_when_building_target_hints() {
 		register_rest_route(
@@ -2715,8 +2616,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'targetHints', $links['self'][0] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61739' )]
 	public function test_sanitizes_request_when_building_target_hints() {
 		$validated_param = null;
@@ -2753,8 +2652,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertIsInt( $validated_param );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61739' )]
 	public function test_populates_target_hints_for_administrator() {
 		wp_set_current_user( self::$admin_id );
@@ -2767,8 +2664,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 'GET', 'POST', 'PUT', 'PATCH', 'DELETE' ), $link['targetHints']['allow'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61739' )]
 	public function test_populates_target_hints_for_logged_out_user() {
 		$response = rest_do_request( '/wp/v2/posts' );
@@ -2780,8 +2675,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 'GET' ), $link['targetHints']['allow'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61739' )]
 	public function test_does_not_error_on_invalid_urls() {
 		$response = new WP_REST_Response();
@@ -2791,8 +2684,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'targetHints', $links['self'][0] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61739' )]
 	public function test_does_not_error_on_bad_rest_api_routes() {
 		$response = new WP_REST_Response();
@@ -2802,8 +2693,6 @@ class Tests_REST_Server extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'targetHints', $links['self'][0] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61739' )]
 	public function test_prefers_developer_defined_target_hints() {
 		$response = new WP_REST_Response();

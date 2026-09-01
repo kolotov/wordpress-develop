@@ -736,8 +736,6 @@ class WP_Test_REST_Categories_Controller extends WP_Test_REST_Controller_Testcas
 		$this->check_get_taxonomy_term_response( $response );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39122' )]
 	public function test_get_item_meta() {
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/categories/1' );
@@ -756,8 +754,6 @@ class WP_Test_REST_Categories_Controller extends WP_Test_REST_Controller_Testcas
 		$this->assertSame( $meta['test_cat_multi'], array() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39122' )]
 	public function test_get_item_meta_registered_for_different_taxonomy() {
 		$request  = new WP_REST_Request( 'GET', '/wp/v2/categories/1' );
@@ -835,8 +831,6 @@ class WP_Test_REST_Categories_Controller extends WP_Test_REST_Controller_Testcas
 		$this->assertSame( 'so-awesome', $data['slug'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41370' )]
 	public function test_create_item_term_already_exists() {
 		wp_set_current_user( self::$administrator );

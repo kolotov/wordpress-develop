@@ -8,14 +8,6 @@
 
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
-
-
-
-
-
-
-
 class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controller_Testcase {
 
 	/**
@@ -247,8 +239,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Template_Revisions_Controller', 'register_routes' )]
 	public function test_register_routes() {
@@ -275,8 +265,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_context_param() {
@@ -342,8 +330,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_get_items() {
@@ -435,8 +421,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 			'template parts' => array( 'template_part_post', 'template-parts', self::TEST_THEME . '//' . self::TEMPLATE_PART_NAME ),
 		);
 	}
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_should_return_no_response_body_for_head_requests() {
 		wp_set_current_user( self::$admin_id );
@@ -579,8 +563,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_get_item() {
@@ -626,8 +608,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_item_should_return_no_response_body_for_head_requests() {
 		wp_set_current_user( self::$admin_id );
@@ -814,8 +794,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_prepare_item() {
@@ -897,8 +875,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_get_item_schema() {
@@ -969,8 +945,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	public function test_create_item() {
 		wp_set_current_user( self::$admin_id );
@@ -982,8 +956,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 		$this->assertCount( $revision_count, wp_get_post_revisions( self::$template_post ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	public function test_update_item() {
 		wp_set_current_user( self::$admin_id );
@@ -998,8 +970,6 @@ class Tests_REST_wpRestTemplateRevisionsController extends WP_Test_REST_Controll
 		$this->assertSame( $original_title, get_post( $revision->ID )->post_title );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56922' )]
 	#[\PHPUnit\Framework\Attributes\CoversNothing]
 	public function test_delete_item() {

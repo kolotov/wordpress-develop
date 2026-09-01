@@ -364,8 +364,6 @@ class WP_Test_REST_Pages_Controller extends WP_Test_REST_Post_Type_Controller_Te
 		$this->assertSame( $post2, $data[0]['id'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50617' )]
 	public function test_get_items_invalid_modified_date() {
 		$request = new WP_REST_Request( 'GET', '/wp/v2/pages' );
@@ -375,8 +373,6 @@ class WP_Test_REST_Pages_Controller extends WP_Test_REST_Post_Type_Controller_Te
 		$this->assertErrorResponse( 'rest_invalid_param', $response, 400 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50617' )]
 	public function test_get_items_valid_modified_date() {
 		$post1 = self::factory()->post->create(
@@ -409,8 +405,6 @@ class WP_Test_REST_Pages_Controller extends WP_Test_REST_Post_Type_Controller_Te
 		$this->assertSame( $post2, $data[0]['id'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_item() {
 		// Controller does not implement get_item().
@@ -423,8 +417,6 @@ class WP_Test_REST_Pages_Controller extends WP_Test_REST_Post_Type_Controller_Te
 		$this->assertSame( 404, $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_create_item() {
 		// Controller does not implement create_item().
@@ -491,8 +483,6 @@ class WP_Test_REST_Pages_Controller extends WP_Test_REST_Post_Type_Controller_Te
 		$this->assertErrorResponse( 'rest_post_invalid_id', $response, 400 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_update_item() {
 		// Controller does not implement update_item().
@@ -517,8 +507,6 @@ class WP_Test_REST_Pages_Controller extends WP_Test_REST_Post_Type_Controller_Te
 		$this->assertSame( 'trash', $data['status'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_prepare_item() {
 		// Controller does not implement prepare_item().

@@ -12,8 +12,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversClass( WP_REST_Block_Patterns_Controller::class )]
 class Tests_REST_WpRestBlockPatternsController extends WP_Test_REST_Controller_Testcase {
 
@@ -130,9 +128,6 @@ class Tests_REST_WpRestBlockPatternsController extends WP_Test_REST_Controller_T
 		$this->assertArrayHasKey( static::REQUEST_ROUTE, $routes );
 	}
 
-	/**
-
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
@@ -241,50 +236,36 @@ class Tests_REST_WpRestBlockPatternsController extends WP_Test_REST_Controller_T
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_context_param() {
 		// Controller does not use get_context_param().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_item() {
 		// Controller does not implement get_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_create_item() {
 		// Controller does not implement create_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_update_item() {
 		// Controller does not implement update_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_delete_item() {
 		// Controller does not implement delete_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_prepare_item() {
 		// Controller does not implement prepare_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_item_schema() {
 		// Controller does not implement get_item_schema().

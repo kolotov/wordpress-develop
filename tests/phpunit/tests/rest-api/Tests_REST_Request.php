@@ -244,8 +244,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49404' )]
 	public function test_content_type_cache() {
 		$this->request_with_parameters();
@@ -470,8 +468,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertSame( 'rest_invalid_param', $valid->get_error_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '46191' )]
 	public function test_sanitize_params_error_multiple_messages() {
 		$this->request->set_url_params(
@@ -505,8 +501,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertSame( 'Invalid. Super Invalid. Broken.', $data['params']['failparam'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '46191' )]
 	public function test_sanitize_params_provides_detailed_errors() {
 		$this->request->set_url_params(
@@ -733,8 +727,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '46191' )]
 	public function test_invalid_params_error_multiple_messages() {
 		$this->request->set_url_params(
@@ -768,8 +760,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertSame( 'Invalid. Super Invalid. Broken.', $data['params']['failparam'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '46191' )]
 	public function test_invalid_params_provides_detailed_errors() {
 		$this->request->set_url_params(
@@ -822,8 +812,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_from_url' )]
 	public function test_from_url( $permalink_structure, $original_url ) {
 		update_option( 'permalink_structure', $permalink_structure );
@@ -840,8 +828,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_from_url' )]
 	public function test_from_url_invalid( $permalink_structure, $original_url ) {
 		update_option( 'permalink_structure', $permalink_structure );
@@ -885,8 +871,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40838' )]
 	public function test_set_param_updates_param_in_json_and_query() {
 		$request = new WP_REST_Request();
@@ -912,8 +896,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertSame( array( 'param' => 'new_value' ), $request->get_query_params() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40838' )]
 	public function test_set_param_updates_param_if_already_exists_in_query() {
 		$request = new WP_REST_Request();
@@ -946,8 +928,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertSame( $original_defaults, $request->get_default_params() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40838' )]
 	public function test_set_param_to_null_updates_param_in_json_and_query() {
 		$request = new WP_REST_Request();
@@ -973,8 +953,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertSame( array( 'param' => null ), $request->get_query_params() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40838' )]
 	public function test_set_param_from_null_updates_param_in_json_and_query_with_null() {
 		$request = new WP_REST_Request();
@@ -1000,8 +978,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertSame( array( 'param' => 'new_value' ), $request->get_query_params() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50786' )]
 	public function test_set_param_with_invalid_json() {
 		$request = new WP_REST_Request();
@@ -1014,8 +990,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertSame( 'value', $request->get_param( 'param' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51255' )]
 	public function test_route_level_validate_callback() {
 		$request = new WP_REST_Request();
@@ -1038,8 +1012,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertSame( $error, $request->has_valid_params() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51255' )]
 	public function test_route_level_validate_callback_no_parameter_callbacks() {
 		$request = new WP_REST_Request();
@@ -1057,8 +1029,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertSame( $error, $request->has_valid_params() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51255' )]
 	public function test_route_level_validate_callback_is_not_executed_if_parameter_validation_fails() {
 		$request = new WP_REST_Request();
@@ -1127,8 +1097,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62163' )]
 	public function test_get_params_without_pretty_permalink() {
 		update_option( 'permalink_structure', '' );
@@ -1143,8 +1111,6 @@ class Tests_REST_Request extends WP_UnitTestCase {
 		$this->assertArrayHasKey( 'some_param', $params );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62163' )]
 	public function test_get_params_with_pretty_permalinks() {
 		update_option( 'permalink_structure', '/%postname%/' );

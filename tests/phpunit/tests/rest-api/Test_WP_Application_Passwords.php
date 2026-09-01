@@ -8,9 +8,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
 #[\PHPUnit\Framework\Attributes\Group( 'app_password' )]
-
-
-
 class Test_WP_Application_Passwords extends WP_UnitTestCase {
 
 	/**
@@ -33,8 +30,6 @@ class Test_WP_Application_Passwords extends WP_UnitTestCase {
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51941' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_create_new_application_password_validation' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Application_Passwords', 'create_new_application_password' )]
@@ -83,8 +78,6 @@ class Test_WP_Application_Passwords extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51941' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_create_new_application_password' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Application_Passwords', 'create_new_application_password' )]
@@ -116,8 +109,6 @@ class Test_WP_Application_Passwords extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51941' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_application_name_exists_for_user' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Application_Passwords', 'application_name_exists_for_user' )]
@@ -140,8 +131,6 @@ class Test_WP_Application_Passwords extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51941' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_update_application_password' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Application_Passwords', 'update_application_password' )]
@@ -162,8 +151,6 @@ class Test_WP_Application_Passwords extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51941' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_update_application_password' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Application_Passwords', 'update_application_password' )]
@@ -192,8 +179,6 @@ class Test_WP_Application_Passwords extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51941' )]
 	public function test_can_create_duplicate_app_password_names() {
 		$created = WP_Application_Passwords::create_new_application_password( self::$user_id, array( 'name' => 'My App' ) );

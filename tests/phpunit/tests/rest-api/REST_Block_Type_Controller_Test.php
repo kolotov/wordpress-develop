@@ -66,8 +66,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		unregister_block_type( 'fake/false' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
@@ -79,8 +77,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->assertCount( 1, $routes['/wp/v2/block-types/(?P<namespace>[a-zA-Z0-9_-]+)/(?P<name>[a-zA-Z0-9_-]+)'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	public function test_context_param() {
 		// Collection.
@@ -97,8 +93,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->assertSame( array( 'view', 'embed', 'edit' ), $data['endpoints'][0]['args']['context']['enum'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	public function test_get_items() {
 		$block_name = 'fake/test';
@@ -111,8 +105,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->check_block_type_object( $block_type, $data[0], $data[0]['_links'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	public function test_get_item() {
 		$block_name = 'fake/test';
@@ -123,8 +115,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->check_block_type_object( $block_type, $response->get_data(), $response->get_links() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	public function test_get_item_with_styles() {
 		$block_name   = 'fake/styles';
@@ -142,8 +132,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->assertSameSets( array( $block_styles ), $data['styles'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	public function test_get_item_with_styles_merge() {
 		$block_name   = 'fake/styles2';
@@ -182,8 +170,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->assertSameSets( $expected, $data['styles'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	public function test_get_block_invalid_name() {
 		$block_type = 'fake/block';
@@ -194,8 +180,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_block_type_invalid', $response, 404 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '57585' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '59346' )]
@@ -273,8 +257,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->assertNull( $data['style'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '57585' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '59346' )]
@@ -352,8 +334,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->assertNull( $data['style'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56733' )]
 	public function test_get_item_deprecated() {
 		$block_type = 'fake/deprecated';
@@ -422,8 +402,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56733' )]
 	public function test_get_item_deprecated_with_arrays() {
 		$block_type = 'fake/deprecated-with-arrays';
@@ -552,8 +530,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '57585' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '59346' )]
@@ -651,8 +627,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_with_head_request_should_not_prepare_block_type_data() {
 		wp_set_current_user( self::$admin_id );
@@ -749,8 +723,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_block_type_cannot_view', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_prepare_item() {
@@ -768,8 +740,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		$this->check_block_type_object( $block_type, $response->get_data(), $response->get_links() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47620' )]
 	public function test_prepare_item_limit_fields() {
 		$registry = new WP_Block_Type_Registry();
@@ -855,8 +825,6 @@ class REST_Block_Type_Controller_Test extends WP_Test_REST_Controller_Testcase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59969' )]
 	public function test_variation_callback() {
 		$block_type = 'test/block';

@@ -10,13 +10,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
-
-
-
-
-
-
 class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_Testcase {
 
 	/**
@@ -60,8 +53,6 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'register_routes' )]
 	public function test_register_routes() {
@@ -72,8 +63,6 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 		$this->assertCount( 1, $routes['/wp/v2/menu-locations/(?P<location>[\w-]+)'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_context_param' )]
 	public function test_context_param() {
@@ -92,8 +81,6 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 		$this->assertSame( array( 'view', 'embed', 'edit' ), $data['endpoints'][0]['args']['context']['enum'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_items' )]
 	public function test_get_items() {
@@ -112,8 +99,6 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 		$this->assertSame( $menu_descriptions, $descriptions );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item' )]
 	public function test_get_item() {
@@ -127,8 +112,6 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 		$this->assertSame( $menu, $data['name'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54304' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_items' )]
 	public function test_get_items_filter() {
@@ -150,8 +133,6 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 		$this->assertSame( $menu_descriptions, $descriptions, 'Menu descriptions do not match' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54304' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item' )]
 	public function test_get_item_filter() {
@@ -166,8 +147,6 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 		$this->assertSame( $menu, $data['name'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item' )]
 	public function test_get_item_invalid() {
@@ -193,8 +172,6 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_prepare_item() {}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
@@ -210,8 +187,6 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_items' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_items_permissions_check' )]
@@ -223,8 +198,6 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 		$this->assertErrorResponse( 'rest_cannot_view', $response, rest_authorization_required_code() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menu_Locations_Controller', 'get_item_permissions_check' )]

@@ -7,8 +7,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
-
 class WP_Test_REST_Revisions_Controller extends WP_Test_REST_Controller_Testcase {
 	protected static int $post_id;
 	protected static int $post_id_2;
@@ -166,8 +164,6 @@ class WP_Test_REST_Revisions_Controller extends WP_Test_REST_Controller_Testcase
 		$this->check_get_revision_response( $data[2], $this->revision_1 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_with_head_request_should_not_prepare_revisions_data() {
 		wp_set_current_user( self::$editor_id );
@@ -660,8 +656,6 @@ class WP_Test_REST_Revisions_Controller extends WP_Test_REST_Controller_Testcase
 		$this->assertErrorResponse( 'rest_post_invalid_parent', $response, 404 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59875' )]
 	public function test_get_item_valid_parent_id() {
 		wp_set_current_user( self::$editor_id );
@@ -698,8 +692,6 @@ class WP_Test_REST_Revisions_Controller extends WP_Test_REST_Controller_Testcase
 		$this->assertNotNull( get_post( $this->revision_id1 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49645' )]
 	public function test_delete_item_parent_check() {
 		wp_set_current_user( self::$contributor_id );
@@ -710,8 +702,6 @@ class WP_Test_REST_Revisions_Controller extends WP_Test_REST_Controller_Testcase
 		$this->assertNotNull( get_post( $this->revision_id1 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43709' )]
 	public function test_delete_item_remove_do_not_allow() {
 		wp_set_current_user( self::$editor_id );
@@ -723,8 +713,6 @@ class WP_Test_REST_Revisions_Controller extends WP_Test_REST_Controller_Testcase
 		$this->assertNull( get_post( $this->revision_id1 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43709' )]
 	public function test_delete_item_cannot_delete_parent() {
 		wp_set_current_user( self::$editor_id );
@@ -735,8 +723,6 @@ class WP_Test_REST_Revisions_Controller extends WP_Test_REST_Controller_Testcase
 		$this->assertNotNull( get_post( $this->revision_id1 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38494' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '43709' )]
 	public function test_delete_item_no_trash() {

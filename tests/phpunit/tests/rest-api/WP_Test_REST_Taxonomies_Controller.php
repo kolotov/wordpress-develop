@@ -61,8 +61,6 @@ class WP_Test_REST_Taxonomies_Controller extends WP_Test_REST_Controller_Testcas
 		$this->assertSame( 'tags', $data['post_tag']['rest_base'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_with_head_request_should_not_prepare_taxonomy_data() {
 		$request   = new WP_REST_Request( 'HEAD', '/wp/v2/taxonomies' );
@@ -329,8 +327,6 @@ class WP_Test_REST_Taxonomies_Controller extends WP_Test_REST_Controller_Testcas
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42209' )]
 	public function test_object_types_is_an_array_if_object_type_is_unregistered() {
 		register_taxonomy_for_object_type( 'category', 'page' );
@@ -423,8 +419,6 @@ class WP_Test_REST_Taxonomies_Controller extends WP_Test_REST_Controller_Testcas
 		$this->assertCount( count( $taxonomies ), $data );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49116' )]
 	public function test_get_for_taxonomy_reuses_same_instance() {
 		$this->assertSame(
@@ -433,8 +427,6 @@ class WP_Test_REST_Taxonomies_Controller extends WP_Test_REST_Controller_Testcas
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49116' )]
 	public function test_get_for_taxonomy_returns_terms_controller_if_custom_class_not_specified() {
 		register_taxonomy(

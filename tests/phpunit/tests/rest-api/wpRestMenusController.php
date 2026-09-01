@@ -10,21 +10,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase {
 	/**
 	 * @var int
@@ -121,8 +106,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'register_routes' )]
 	public function test_register_routes() {
@@ -131,8 +114,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertArrayHasKey( '/wp/v2/menus/(?P<id>[\d]+)', $routes );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_context_param' )]
 	public function test_context_param() {
@@ -153,8 +134,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( array( 'v1' => true ), $data['endpoints'][0]['allow_batch'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_collection_params' )]
 	public function test_registered_query_params() {
@@ -182,8 +161,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_items' )]
 	public function test_get_items() {
@@ -201,8 +178,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->check_get_taxonomy_terms_response( $response );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_item' )]
 	public function test_get_item() {
@@ -224,8 +199,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54304' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_items' )]
 	public function test_get_items_filter() {
@@ -243,8 +216,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->check_get_taxonomy_terms_response( $response );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54304' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_item' )]
 	public function test_get_item_filter() {
@@ -265,8 +236,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->check_get_taxonomy_term_response( $response, $nav_menu_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'create_item' )]
 	public function test_create_item() {
@@ -285,8 +254,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( 'my-awesome-menus', $data['slug'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'create_item' )]
 	public function test_create_item_same_name() {
@@ -308,8 +275,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertErrorResponse( 'menu_exists', $response, 400 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'update_item' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'handle_auto_add' )]
@@ -337,8 +302,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertFalse( isset( $data['meta']['test_cat_meta'] ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'delete_item' )]
 	public function test_delete_item() {
@@ -363,8 +326,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( 'Deleted Menu', $data['previous']['name'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'prepare_item_for_response' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_item' )]
@@ -386,8 +347,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->check_taxonomy_term( $term, $data, $response->get_links() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
@@ -404,8 +363,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertArrayHasKey( 'locations', $properties );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'create_item' )]
 	public function test_create_item_with_location_permission_correct() {
@@ -423,8 +380,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( $locations['primary'], $term_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'create_item' )]
 	public function test_create_item_with_invalid_location() {
@@ -440,8 +395,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( 'rest_invalid_menu_location', $response->get_data()['data']['details']['locations']['code'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'update_item' )]
 	public function test_update_item_with_no_location() {
@@ -457,8 +410,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( 400, $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'update_item' )]
 	public function test_update_item_with_location_permission_correct() {
@@ -475,8 +426,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( $locations['primary'], $this->menu_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'update_item' )]
 	public function test_update_item_with_location_permission_incorrect() {
@@ -491,8 +440,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( rest_authorization_required_code(), $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'prepare_links' )]
 	public function test_get_item_links() {
@@ -520,8 +467,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( $location_url, $links['https://api.w.org/menu-location'][0]['href'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'update_item' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'handle_locations' )]
@@ -559,8 +504,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( $this->menu_id, $locations['secondary'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_items' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_items_permissions_check' )]
@@ -571,8 +514,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertErrorResponse( 'rest_cannot_view', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_items' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_items_permissions_check' )]
@@ -583,8 +524,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertErrorResponse( 'rest_cannot_view', $response, 401 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_items' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_items_permissions_check' )]
@@ -595,8 +534,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertErrorResponse( 'rest_cannot_view', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_item' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Menus_Controller', 'get_item_permissions_check' )]
@@ -607,8 +544,6 @@ class Tests_REST_WpRestMenusController extends WP_Test_REST_Controller_Testcase 
 		$this->assertErrorResponse( 'rest_cannot_view', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40878' )]
 	public function test_it_allows_batch_requests_when_updating_menus() {
 		$rest_server = rest_get_server();

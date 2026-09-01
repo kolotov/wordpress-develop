@@ -13,13 +13,8 @@
  *
  */
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
 #[\PHPUnit\Framework\Attributes\Group( 'navigation' )]
-
-
-
 class WP_REST_Navigation_Fallback_Controller_Test extends WP_Test_REST_Controller_Testcase {
 
 	protected static $admin_user;
@@ -192,43 +187,31 @@ class WP_REST_Navigation_Fallback_Controller_Test extends WP_Test_REST_Controlle
 		return $navs_in_db->posts ? $navs_in_db->posts : array();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_prepare_item() {
 		// Covered by the core test.
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_context_param() {
 		// Covered by the core test.
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_items() {
 		// Covered by the core test.
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_create_item() {
 		// Controller does not implement create_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_update_item() {
 		// Controller does not implement update_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_delete_item() {
 		// Controller does not implement delete_item().

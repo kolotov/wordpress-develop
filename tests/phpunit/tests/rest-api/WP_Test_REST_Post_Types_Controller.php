@@ -8,7 +8,6 @@
 
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
-
 class WP_Test_REST_Post_Types_Controller extends WP_Test_REST_Controller_Testcase {
 
 	public function test_register_routes() {
@@ -146,8 +145,6 @@ class WP_Test_REST_Post_Types_Controller extends WP_Test_REST_Controller_Testcas
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53656' )]
 	public function test_get_item_cpt() {
 		register_post_type(
@@ -163,8 +160,6 @@ class WP_Test_REST_Post_Types_Controller extends WP_Test_REST_Controller_Testcas
 		$this->check_post_type_object_response( 'view', $response, 'cpt' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61477' )]
 	public function test_get_item_template_cpt() {
 		register_post_type(
@@ -273,9 +268,6 @@ class WP_Test_REST_Post_Types_Controller extends WP_Test_REST_Controller_Testcas
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Post_Types_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
@@ -343,8 +335,6 @@ class WP_Test_REST_Post_Types_Controller extends WP_Test_REST_Controller_Testcas
 		return 123;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_with_head_request_should_not_prepare_post_types_data() {
 		$request   = new WP_REST_Request( 'HEAD', '/wp/v2/types' );

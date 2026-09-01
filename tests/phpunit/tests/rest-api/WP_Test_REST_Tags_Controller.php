@@ -483,8 +483,6 @@ class WP_Test_REST_Tags_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertSame( 'Cape', $data[0]['name'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62500' )]
 	public function test_get_items_custom_tax_without_post_arg_respects_tax_query_args() {
 		register_taxonomy(
@@ -726,8 +724,6 @@ class WP_Test_REST_Tags_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->check_get_taxonomy_term_response( $response, $id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39122' )]
 	public function test_get_item_meta() {
 		$id = self::factory()->tag->create();
@@ -748,8 +744,6 @@ class WP_Test_REST_Tags_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertSame( $meta['test_tag_multi'], array() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39122' )]
 	public function test_get_item_meta_registered_for_different_taxonomy() {
 		$id = self::factory()->tag->create();
@@ -976,8 +970,6 @@ class WP_Test_REST_Tags_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_cannot_update', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38505' )]
 	public function test_update_item_with_edit_term_cap_granted() {
 		wp_set_current_user( self::$subscriber );
@@ -1003,8 +995,6 @@ class WP_Test_REST_Tags_Controller extends WP_Test_REST_Controller_Testcase {
 		return $caps;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38505' )]
 	public function test_update_item_with_edit_term_cap_revoked() {
 		wp_set_current_user( self::$administrator );
@@ -1201,8 +1191,6 @@ class WP_Test_REST_Tags_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertErrorResponse( 'rest_cannot_delete', $response, 403 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38505' )]
 	public function test_delete_item_with_delete_term_cap_granted() {
 		wp_set_current_user( self::$subscriber );
@@ -1229,8 +1217,6 @@ class WP_Test_REST_Tags_Controller extends WP_Test_REST_Controller_Testcase {
 		return $caps;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38505' )]
 	public function test_delete_item_with_delete_term_cap_revoked() {
 		wp_set_current_user( self::$administrator );
@@ -1388,8 +1374,6 @@ class WP_Test_REST_Tags_Controller extends WP_Test_REST_Controller_Testcase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38504' )]
 	public function test_object_term_queries_are_cached() {
 		$tags = self::factory()->tag->create_many( 2 );
@@ -1414,8 +1398,6 @@ class WP_Test_REST_Tags_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41411' )]
 	public function test_editable_response_uses_edit_context() {
 		wp_set_current_user( self::$administrator );

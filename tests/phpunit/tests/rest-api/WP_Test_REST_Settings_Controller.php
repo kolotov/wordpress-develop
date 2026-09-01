@@ -687,8 +687,6 @@ class WP_Test_REST_Settings_Controller extends WP_Test_REST_Controller_Testcase 
 		// Controller does not implement get_item_schema().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42875' )]
 	public function test_register_setting_issues_doing_it_wrong_when_show_in_rest_is_true() {
 		$this->setExpectedIncorrectUsage( 'register_setting' );
@@ -703,8 +701,6 @@ class WP_Test_REST_Settings_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42875' )]
 	public function test_register_setting_issues_doing_it_wrong_when_show_in_rest_omits_schema() {
 		$this->setExpectedIncorrectUsage( 'register_setting' );
@@ -721,8 +717,6 @@ class WP_Test_REST_Settings_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42875' )]
 	public function test_register_setting_issues_doing_it_wrong_when_show_in_rest_omits_schema_items() {
 		$this->setExpectedIncorrectUsage( 'register_setting' );
@@ -741,8 +735,6 @@ class WP_Test_REST_Settings_Controller extends WP_Test_REST_Controller_Testcase 
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56493' )]
 	public function test_register_setting_with_custom_additional_properties_value() {
 		wp_set_current_user( self::$administrator );
@@ -787,8 +779,6 @@ class WP_Test_REST_Settings_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( 3, $response->data['mycustomsetting']['test3'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61023' )]
 	public function test_provides_setting_metadata_in_schema() {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/settings' );

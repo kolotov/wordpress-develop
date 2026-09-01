@@ -293,8 +293,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'testvalue', $meta['test_single'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_get_multi_value() {
 		add_post_meta( self::$post_id, 'test_multi', 'value1' );
@@ -320,8 +318,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertContains( 'value2', $meta['test_multi'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_get_unregistered() {
 		add_post_meta( self::$post_id, 'test_unregistered', 'value1' );
@@ -335,8 +331,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'test_unregistered', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_get_registered_no_api_access() {
 		add_post_meta( self::$post_id, 'test_no_rest', 'for_the_wicked' );
@@ -350,8 +344,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'test_no_rest', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_get_registered_api_disabled() {
 		add_post_meta( self::$post_id, 'test_rest_disabled', 'sleepless_nights' );
@@ -439,8 +431,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'janet', $meta['new_name'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_set_value() {
 		// Ensure no data exists currently.
@@ -471,8 +461,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'test_value', $meta['test_single'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_set_duplicate_single_value() {
 		// Start with an existing metakey and value.
@@ -502,8 +490,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'test_value', $meta['test_single'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_set_value' )]
 	public function test_set_value_unauthenticated() {
 		$data = array(
@@ -524,8 +510,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertEmpty( get_post_meta( self::$post_id, 'test_single', false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_set_value' )]
 	public function test_set_value_blocked() {
 		$data = array(
@@ -544,8 +528,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertEmpty( get_post_meta( self::$post_id, 'test_bad_auth', false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_set_value' )]
 	public function test_set_value_db_error() {
 		$data = array(
@@ -661,8 +643,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertContains( 'n', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_set_value_multiple' )]
 	public function test_set_value_multiple_unauthenticated() {
 		// Ensure no data exists currently.
@@ -788,8 +768,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 1, 2, 3 ), $data['meta']['my_meta_key'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_set_value_multiple' )]
 	public function test_set_value_multiple_blocked() {
 		$data = array(
@@ -838,8 +816,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertErrorResponse( 'rest_meta_database_error', $response, 500 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value' )]
 	public function test_set_value_single_custom_schema() {
 		// Ensure no data exists currently.
@@ -911,8 +887,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertContains( '8', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_get_value_custom_name' )]
 	public function test_set_value_custom_name() {
 		// Ensure no data exists currently.
@@ -984,8 +958,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertContains( 'graeme', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38989' )]
 	public function test_set_value_invalid_meta_string_request_type() {
 		update_post_meta( self::$post_id, 'test_single', 'So I tied an onion to my belt, which was the style at the time.' );
@@ -1014,8 +986,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( $post_original->post_title, $post_updated->post_title );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38989' )]
 	public function test_set_value_invalid_meta_float_request_type() {
 		update_post_meta( self::$post_id, 'test_single', 'Now, to take the ferry cost a nickel, and in those days, nickels had pictures of bumblebees on them.' );
@@ -1043,8 +1013,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( $post_original->post_content, $post_updated->post_content );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50790' )]
 	public function test_remove_multi_value_with_empty_array() {
 		add_post_meta( self::$post_id, 'test_multi', 'val1' );
@@ -1157,8 +1125,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertEmpty( $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_delete_value' )]
 	public function test_delete_value_blocked() {
 		add_post_meta( self::$post_id, 'test_bad_auth', 'val1' );
@@ -1182,8 +1148,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'val1', $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_delete_value' )]
 	public function test_delete_value_db_error() {
 		add_post_meta( self::$post_id, 'test_single', 'val1' );
@@ -1263,9 +1227,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'test_no_type', $meta_schema );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_subtype_meta_value' )]
 	public function test_get_subtype_meta_value( $post_type, $meta_key, $single, $in_post_type ) {
@@ -1316,9 +1277,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_set_subtype_meta_value' )]
 	public function test_set_subtype_meta_value( $post_type, $meta_key, $single, $in_post_type, $can_write ) {
@@ -1388,9 +1346,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		return $data;
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42069' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_update_value_return_success_with_same_value' )]
 	public function test_update_value_return_success_with_same_value( $meta_key, $meta_value ) {
@@ -1427,8 +1382,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42069' )]
 	public function test_slashed_meta_key() {
 
@@ -1443,8 +1396,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'Hello', $data['meta']['test\'slashed\'key'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_object_single() {
 		$this->grant_write_permission();
@@ -1491,8 +1442,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'WordPress', $meta['project'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_object_multiple() {
 		$this->grant_write_permission();
@@ -1555,8 +1504,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'bbPress', $meta[1]['project'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_array_single() {
 		$this->grant_write_permission();
@@ -1597,8 +1544,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 'WordPress', 'bbPress' ), $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_array_of_objects_multiple() {
 		$this->grant_write_permission();
@@ -1715,8 +1660,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_php_objects_returned_as_null() {
 		register_post_meta(
@@ -1750,8 +1693,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertNull( $data['meta']['object'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_php_objects_returned_as_null_multiple() {
 		register_post_meta(
@@ -1788,8 +1729,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertNull( $data['meta']['object'][1] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_php_jsonserializable_object_returns_value() {
 		require_once __DIR__ . '/../../includes/class-jsonserializable-object.php';
@@ -1823,8 +1762,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 'project' => 'WordPress' ), $data['meta']['object'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_updating_meta_to_null_for_key_with_existing_php_object_does_not_delete_meta_value() {
 		$this->grant_write_permission();
@@ -1865,8 +1802,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 500, $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_updating_non_single_meta_to_null_for_key_with_existing_php_object_does_not_set_meta_value_to_null() {
 		$this->grant_write_permission();
@@ -1911,8 +1846,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 500, $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_object_rejects_additional_properties_by_default() {
 		$this->grant_write_permission();
@@ -1952,8 +1885,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 400, $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_object_allows_additional_properties_if_explicitly_set() {
 		$this->grant_write_permission();
@@ -1999,8 +1930,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( $value, get_post_meta( self::$post_id, 'object', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_object_allows_additional_properties_and_uses_its_schema() {
 		$this->grant_write_permission();
@@ -2045,8 +1974,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 400, $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_invalid_meta_value_are_set_to_null_in_response() {
 		register_post_meta(
@@ -2072,8 +1999,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertNull( $response->get_data()['meta']['email'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '48363' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_meta_values_are_not_set_to_null_in_response_if_type_safely_serializable' )]
@@ -2116,8 +2041,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_update_multi_meta_value_object() {
 		register_post_meta(
@@ -2184,8 +2107,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 'project' => 'BuddyPress' ), $meta[1] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_update_multi_meta_value_array() {
 		register_post_meta(
@@ -2237,8 +2158,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 'BuddyPress' ), $meta[1] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47928' )]
 	public function test_update_meta_with_unchanged_array_values() {
 		register_post_meta(
@@ -2278,8 +2197,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 'WordCamp' ), $data['meta']['list'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47928' )]
 	public function test_update_meta_with_unchanged_object_values() {
 		register_post_meta(
@@ -2321,8 +2238,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 'project' => 'WordCamp' ), $data['meta']['object'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57745' )]
 	public function test_update_meta_with_unchanged_values_and_custom_authentication() {
 		register_post_meta(
@@ -2357,8 +2272,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertFalse( $data['meta']['authenticated'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_register_meta_issues_doing_it_wrong_when_show_in_rest_is_true() {
 		$this->setExpectedIncorrectUsage( 'register_meta' );
@@ -2375,8 +2288,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		self::assertFalse( $registered );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_register_meta_issues_doing_it_wrong_when_show_in_rest_omits_schema() {
 		$this->setExpectedIncorrectUsage( 'register_meta' );
@@ -2395,8 +2306,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		self::assertFalse( $registered );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43392' )]
 	public function test_register_meta_issues_doing_it_wrong_when_show_in_rest_omits_schema_items() {
 		$this->setExpectedIncorrectUsage( 'register_meta' );
@@ -2417,8 +2326,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		self::assertFalse( $registered );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48264' )]
 	public function test_update_array_of_ints_meta() {
 		$this->grant_write_permission();
@@ -2452,8 +2359,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 200, $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48264' )]
 	public function test_update_array_of_ints_meta_stored_strings_are_updated() {
 		$this->grant_write_permission();
@@ -2491,8 +2396,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 1, 2, 3 ), get_post_meta( self::$post_id, 'items', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48264' )]
 	public function test_update_array_of_ints_meta_string_request_data_is_set_as_ints() {
 		$this->grant_write_permission();
@@ -2528,8 +2431,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 1, 2, 3 ), get_post_meta( self::$post_id, 'items', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48264' )]
 	public function test_update_array_of_ints_meta_string_request_data_and_string_stored_data() {
 		$this->grant_write_permission();
@@ -2565,8 +2466,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( 1, 2, 3 ), get_post_meta( self::$post_id, 'items', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48264' )]
 	public function test_update_array_of_bools_meta() {
 		$this->grant_write_permission();
@@ -2600,8 +2499,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 200, $response->get_status() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48264' )]
 	public function test_update_array_of_bools_meta_stored_strings_are_updated() {
 		$this->grant_write_permission();
@@ -2640,8 +2537,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( true, false ), get_post_meta( self::$post_id, 'items', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48264' )]
 	public function test_update_array_of_bools_meta_string_request_data_is_set_as_bools() {
 		$this->grant_write_permission();
@@ -2677,8 +2572,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( true, false ), get_post_meta( self::$post_id, 'items', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48264' )]
 	public function test_update_array_of_bools_meta_string_request_data_and_string_stored_data() {
 		$this->grant_write_permission();
@@ -2714,8 +2607,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( true, false ), get_post_meta( self::$post_id, 'items', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48264' )]
 	public function test_update_array_of_bools_with_string_values_stored_and_opposite_request_data() {
 		$this->grant_write_permission();
@@ -2751,8 +2642,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( array( false, true ), get_post_meta( self::$post_id, 'items', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48363' )]
 	public function test_boolean_meta_update_to_false_stores_0() {
 		$this->grant_write_permission();
@@ -2786,8 +2675,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( '0', get_post_meta( self::$post_id, 'boolean', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49339' )]
 	public function test_update_multi_meta_value_handles_integer_types() {
 		$this->grant_write_permission();
@@ -2822,8 +2709,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertNotFalse( get_metadata_by_mid( 'post', $mid2 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49339' )]
 	public function test_update_multi_meta_value_handles_boolean_types() {
 		$this->grant_write_permission();
@@ -2859,8 +2744,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertNotFalse( get_metadata_by_mid( 'post', $mid2 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49339' )]
 	public function test_update_multi_meta_value_handles_object_types() {
 		$this->grant_write_permission();
@@ -2913,8 +2796,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertNotFalse( get_metadata_by_mid( 'post', $mid2 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43941' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_default_data' )]
 	public function test_get_default_value( $args, $expected ) {
@@ -3079,8 +2960,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43941' )]
 	public function test_set_default_in_schema() {
 		register_post_meta(
@@ -3101,8 +2980,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'Hello World', $response->get_data()['meta']['greeting'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43941' )]
 	public function test_default_is_added_to_schema() {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/posts' );
@@ -3113,8 +2990,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		$this->assertSame( 'Goodnight Moon', $schema['default'], 'Schema default is expected to be defined and contain the value of the meta default argument.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61998' )]
 	public function test_title_is_added_to_schema() {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/posts' );
@@ -3584,8 +3459,6 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48823' )]
 	public function test_multiple_errors_are_returned_at_once() {
 		$this->grant_write_permission();

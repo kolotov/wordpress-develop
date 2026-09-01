@@ -189,8 +189,6 @@ class WP_Test_REST_Controller extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49270' )]
 	public function test_validate_schema_format_hex_color() {
 
@@ -216,8 +214,6 @@ class WP_Test_REST_Controller extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50053' )]
 	public function test_validate_schema_format_uuid() {
 		$this->assertTrue(
@@ -230,8 +226,6 @@ class WP_Test_REST_Controller extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49960' )]
 	public function test_validate_schema_format_text_field() {
 		$this->assertTrue(
@@ -253,8 +247,6 @@ class WP_Test_REST_Controller extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49960' )]
 	public function test_validate_schema_format_textarea_field() {
 		$this->assertTrue(
@@ -276,8 +268,6 @@ class WP_Test_REST_Controller extends WP_Test_REST_TestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50876' )]
 	public function test_get_endpoint_args_for_item_schema() {
 		$controller = new WP_REST_Test_Controller();
@@ -325,8 +315,6 @@ class WP_Test_REST_Controller extends WP_Test_REST_TestCase {
 		$this->assertSame( 'a', $args['somedefault']['default'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50301' )]
 	public function test_get_endpoint_args_for_item_schema_arg_properties() {
 
@@ -364,8 +352,6 @@ class WP_Test_REST_Controller extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'ignored_prop', $args['someobject'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_fields_for_response' )]
 	public function test_get_fields_for_response( $param, $expected ) {
 		$controller = new WP_REST_Test_Controller();
@@ -529,8 +515,6 @@ class WP_Test_REST_Controller extends WP_Test_REST_TestCase {
 		$this->assertGreaterThan( 0, $listener->get_call_count( $method ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48785' )]
 	public function test_get_public_item_schema_with_properties() {
 		$schema = ( new WP_REST_Test_Controller() )->get_public_item_schema();
@@ -542,8 +526,6 @@ class WP_Test_REST_Controller extends WP_Test_REST_TestCase {
 		$this->assertArrayNotHasKey( 'arg_options', $schema['properties']['someargoptions'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48785' )]
 	public function test_get_public_item_schema_no_properties() {
 		$controller = new WP_REST_Test_Configurable_Controller(
@@ -603,8 +585,6 @@ class WP_Test_REST_Controller extends WP_Test_REST_TestCase {
 		$this->assertGreaterThan( $first_call_count, $listener->get_call_count( $method ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_filter_nested_registered_rest_fields' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '49648' )]
 	public function test_filter_nested_registered_rest_fields( $filter, $expected ) {

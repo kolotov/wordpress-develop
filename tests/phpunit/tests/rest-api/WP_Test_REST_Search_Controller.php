@@ -436,8 +436,6 @@ class WP_Test_REST_Search_Controller extends WP_Test_REST_Controller_Testcase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55674' )]
 	public function test_get_items_search_prime_ids() {
 		$action = new MockAction();
@@ -682,8 +680,6 @@ class WP_Test_REST_Search_Controller extends WP_Test_REST_Controller_Testcase {
 		$this->assertSameSets( array( 'test_first_type', 'test_second_type', WP_REST_Search_Controller::TYPE_ANY ), $params[ WP_REST_Search_Controller::PROP_SUBTYPE ]['items']['enum'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47684' )]
 	public function test_search_result_links_are_embedded() {
 		$response = $this->do_request_with_params( array( 'per_page' => 1 ) );
@@ -935,8 +931,6 @@ class WP_Test_REST_Search_Controller extends WP_Test_REST_Controller_Testcase {
 		return $request;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56546' )]
 	public function test_get_items_search_posts_include_ids() {
 		$response = $this->do_request_with_params(
@@ -952,8 +946,6 @@ class WP_Test_REST_Search_Controller extends WP_Test_REST_Controller_Testcase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56546' )]
 	public function test_get_items_search_posts_exclude_ids() {
 		$response = $this->do_request_with_params(
@@ -972,8 +964,6 @@ class WP_Test_REST_Search_Controller extends WP_Test_REST_Controller_Testcase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56546' )]
 	public function test_get_items_search_terms_include_ids() {
 		$response = $this->do_request_with_params(
@@ -990,8 +980,6 @@ class WP_Test_REST_Search_Controller extends WP_Test_REST_Controller_Testcase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56546' )]
 	public function test_get_items_search_terms_exclude_ids() {
 		$response = $this->do_request_with_params(

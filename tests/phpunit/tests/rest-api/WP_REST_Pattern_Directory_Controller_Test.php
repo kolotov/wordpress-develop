@@ -8,12 +8,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'restapi' )]
 #[\PHPUnit\Framework\Attributes\Group( 'pattern-directory' )]
-
-
-
-
-
-
 class WP_REST_Pattern_Directory_Controller_Test extends WP_Test_REST_Controller_Testcase {
 
 	/**
@@ -150,8 +144,6 @@ class WP_REST_Pattern_Directory_Controller_Test extends WP_Test_REST_Controller_
 		$this->assertSame( array( 'call to action', 'hero section' ), $patterns[2]['keywords'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_with_head_request_should_not_prepare_block_patterns_data() {
 		wp_set_current_user( self::$contributor_id );
@@ -176,8 +168,6 @@ class WP_REST_Pattern_Directory_Controller_Test extends WP_Test_REST_Controller_
 		$this->assertSame( array(), $response->get_data(), 'The server should not generate a body in response to a HEAD request.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56481' )]
 	public function test_get_items_head_request_with_specified_fields_returns_success_response() {
 		wp_set_current_user( self::$contributor_id );
@@ -584,29 +574,21 @@ class WP_REST_Pattern_Directory_Controller_Test extends WP_Test_REST_Controller_
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_get_item() {
 		// Controller does not implement get_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_create_item() {
 		// Controller does not implement create_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_update_item() {
 		// Controller does not implement update_item().
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
 	public function test_delete_item() {
 		// Controller does not implement delete_item().
@@ -735,6 +717,8 @@ class WP_REST_Pattern_Directory_Controller_Test extends WP_Test_REST_Controller_
 
 	/**
 	 * @since 6.0.0
+	 *
+	 * @ticket 55617
 	 */
 	public static function data_get_query_parameters() {
 		return array(
