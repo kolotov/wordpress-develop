@@ -11,7 +11,6 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  */
 
 #[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_send_attachment_to_editor' )]
 class Tests_Ajax_wpAjaxSendAttachmentToEditor extends WP_Ajax_UnitTestCase {
 
@@ -46,8 +45,6 @@ class Tests_Ajax_wpAjaxSendAttachmentToEditor extends WP_Ajax_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36578' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_image_send_to_editor' )]
 	public function test_wp_ajax_send_attachment_to_editor_should_return_an_image() {
@@ -89,8 +86,6 @@ class Tests_Ajax_wpAjaxSendAttachmentToEditor extends WP_Ajax_UnitTestCase {
 		$this->assertSame( $expected, $response['data'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36578' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_wp_ajax_send_attachment_to_editor_should_return_a_link() {

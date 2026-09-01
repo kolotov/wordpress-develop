@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 #[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 class Tests_XMLRPC_wp_getMediaItem extends WP_XMLRPC_UnitTestCase {

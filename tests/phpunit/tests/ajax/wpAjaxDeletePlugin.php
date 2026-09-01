@@ -11,7 +11,6 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  */
 
 #[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_delete_plugin' )]
 class Tests_Ajax_wpAjaxDeletePlugin extends WP_Ajax_UnitTestCase {
 
@@ -129,9 +128,6 @@ class Tests_Ajax_wpAjaxDeletePlugin extends WP_Ajax_UnitTestCase {
 		$this->assertSameSets( $expected, $response );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_plugins' )]
 	public function test_delete_plugin() {

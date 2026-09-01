@@ -80,8 +80,6 @@ class Tests_Ajax_wpAjaxEditComment extends WP_Ajax_UnitTestCase {
 		$this->assertEmpty( (string) $xml->response[0]->edit_comment[0]->supplemental );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33154' )]
 	public function test_editor_can_edit_orphan_comments() {
 		global $wpdb;
@@ -207,8 +205,6 @@ class Tests_Ajax_wpAjaxEditComment extends WP_Ajax_UnitTestCase {
 		$this->_handleAjax( 'edit-comment' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39732' )]
 	public function test_wp_update_comment_data_is_wp_error() {
 		// Become an administrator.

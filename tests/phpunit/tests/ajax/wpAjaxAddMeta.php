@@ -13,12 +13,9 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 
 
 #[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_add_meta' )]
 class Tests_Ajax_wpAjaxAddMeta extends WP_Ajax_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43559' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_post_meta' )]
 	public function test_wp_ajax_add_meta_allows_empty_values_on_adding() {
@@ -44,8 +41,6 @@ class Tests_Ajax_wpAjaxAddMeta extends WP_Ajax_UnitTestCase {
 		$this->assertSame( '', get_post_meta( $post, 'testkey', true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43559' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_metadata_by_mid' )]
 	public function test_wp_ajax_add_meta_allows_empty_values_on_updating() {

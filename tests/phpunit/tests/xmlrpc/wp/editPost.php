@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 
@@ -110,8 +108,6 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertEquals( $contributor_id, $out->post_author );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24916' )]
 	public function test_capable_reassign_author_to_self() {
 		$contributor_id = $this->make_user_by_role( 'contributor' );
@@ -132,8 +128,6 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertEquals( $editor_id, $out->post_author );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_post_thumbnail() {
 		add_theme_support( 'post-thumbnails' );
@@ -345,8 +339,6 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( 'draft', get_post( $post_id )->post_status );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22220' )]
 	public function test_loss_of_categories_on_edit() {
 		$editor_id = $this->make_user_by_role( 'editor' );
@@ -376,8 +368,6 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertContains( $term_id, $term_ids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26686' )]
 	public function test_clear_categories_on_edit() {
 		$editor_id = $this->make_user_by_role( 'editor' );
@@ -403,8 +393,6 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertNotContains( $term_id, $term_ids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23219' )]
 	public function test_add_enclosure_if_new() {
 		// Sample enclosure data.
@@ -464,8 +452,6 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertContains( $enclosure_string, get_post_meta( $post_id, 'enclosure' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35874' )]
 	public function test_draft_not_prematurely_published() {
 		$editor_id = $this->make_user_by_role( 'editor' );
@@ -500,8 +486,6 @@ class Tests_XMLRPC_wp_editPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( $future_date_string, $after->post_date );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45322' )]
 	public function test_draft_not_assigned_published_date() {
 		$editor_id = $this->make_user_by_role( 'editor' );

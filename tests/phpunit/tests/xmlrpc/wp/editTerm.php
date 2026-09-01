@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_editTerm extends WP_XMLRPC_UnitTestCase {
 	protected static $parent_term;
@@ -271,8 +269,6 @@ class Tests_XMLRPC_wp_editTerm extends WP_XMLRPC_UnitTestCase {
 		$this->assertIsBool( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35991' )]
 	public function test_update_term_meta() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -311,8 +307,6 @@ class Tests_XMLRPC_wp_editTerm extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( 'baz', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35991' )]
 	public function test_delete_term_meta() {
 		register_taxonomy( 'wptests_tax', 'post' );

@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_deleteTerm extends WP_XMLRPC_UnitTestCase {
 	protected static $term_id;

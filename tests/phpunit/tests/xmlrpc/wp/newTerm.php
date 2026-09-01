@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_newTerm extends WP_XMLRPC_UnitTestCase {
 
@@ -179,8 +177,6 @@ class Tests_XMLRPC_wp_newTerm extends WP_XMLRPC_UnitTestCase {
 		$this->assertStringMatchesFormat( '%d', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35991' )]
 	public function test_add_term_meta() {
 		$this->make_user_by_role( 'editor' );

@@ -4,8 +4,6 @@ require_once ABSPATH . 'wp-admin/includes/admin.php';
 require_once ABSPATH . WPINC . '/class-IXR.php';
 require_once ABSPATH . WPINC . '/class-wp-xmlrpc-server.php';
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_Basic extends WP_XMLRPC_UnitTestCase {
 	public function test_enabled() {
@@ -33,8 +31,6 @@ class Tests_XMLRPC_Basic extends WP_XMLRPC_UnitTestCase {
 		$this->assertFalse( $this->myxmlrpcserver->login_pass_ok( 'subscriber', 'subscriber' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34336' )]
 	public function test_multicall_invalidates_all_calls_after_invalid_call() {
 		$editor_id = $this->make_user_by_role( 'editor' );
@@ -95,8 +91,6 @@ class Tests_XMLRPC_Basic extends WP_XMLRPC_UnitTestCase {
 		$this->assertArrayHasKey( 'faultCode', $result[2] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36586' )]
 	public function test_isStruct_on_non_numerically_indexed_array() {
 		$value = new IXR_Value( array( '0.0' => 100 ) );

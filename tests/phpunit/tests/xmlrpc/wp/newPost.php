@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 
@@ -145,8 +143,6 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( 'Test', $out->post_title );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_post_thumbnail() {
 		add_theme_support( 'post-thumbnails' );
@@ -344,8 +340,6 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( 401, $result2->code );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_invalid_post_date_does_not_fatal() {
 		$this->make_user_by_role( 'author' );
@@ -361,8 +355,6 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( current_time( 'Y-m-d' ), substr( $fetched_post->post_date, 0, 10 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_invalid_post_date_gmt_does_not_fatal() {
 		$this->make_user_by_role( 'author' );
@@ -378,8 +370,6 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( '0000-00-00', substr( $fetched_post->post_date_gmt, 0, 10 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_valid_string_post_date() {
 		$this->make_user_by_role( 'author' );
@@ -395,8 +385,6 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( $date_string, $fetched_post->post_date );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_valid_string_post_date_gmt() {
 		$this->make_user_by_role( 'author' );
@@ -412,8 +400,6 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( $date_string, $fetched_post->post_date_gmt );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_valid_IXR_post_date() {
 		$this->make_user_by_role( 'author' );
@@ -429,8 +415,6 @@ class Tests_XMLRPC_wp_newPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( $date_string, $fetched_post->post_date );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28601' )]
 	public function test_valid_IXR_post_date_gmt() {
 		$this->make_user_by_role( 'author' );

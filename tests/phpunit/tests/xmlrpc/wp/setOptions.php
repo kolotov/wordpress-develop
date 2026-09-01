@@ -1,11 +1,7 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_setOptions extends WP_XMLRPC_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22936' )]
 	public function test_set_option_no_escape_strings() {
 		$this->make_user_by_role( 'administrator' );

@@ -18,7 +18,6 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 
 
 #[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
-
 #[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_image_editor' )]
 class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
@@ -32,11 +31,9 @@ class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26381' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_save_image' )]
 	public function testCropImageIntoLargerOne() {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
 
@@ -58,11 +55,10 @@ class Tests_Ajax_wpAjaxImageEditor extends WP_Ajax_UnitTestCase {
 		$this->assertSame( 'Images cannot be scaled to a size larger than the original.', $ret->error );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32171' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_attachment' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_save_image' )]
 	public function testImageEditOverwriteConstant() {
 		define( 'IMAGE_EDIT_OVERWRITE', true );
 

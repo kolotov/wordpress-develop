@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 
@@ -80,8 +78,6 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( 403, $result->code );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43177' )]
 	public function test_empty_content_multiple_spaces() {
 		$result = $this->myxmlrpcserver->wp_newComment(
@@ -100,8 +96,6 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( 403, $result->code );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43177' )]
 	public function test_valid_comment_0_content() {
 		$result = $this->myxmlrpcserver->wp_newComment(
@@ -119,8 +113,6 @@ class Tests_XMLRPC_wp_newComment extends WP_XMLRPC_UnitTestCase {
 		$this->assertNotIXRError( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43177' )]
 	public function test_valid_comment_allow_empty_content() {
 		add_filter( 'allow_empty_comment', '__return_true' );

@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getTaxonomy extends WP_XMLRPC_UnitTestCase {
 
@@ -61,8 +59,6 @@ class Tests_XMLRPC_wp_getTaxonomy extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( (array) $taxonomy->object_type, $result['object_type'], 'object_types' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51493' )]
 	public function test_taxonomy_with_menu_field_specified() {
 		$this->make_user_by_role( 'editor' );

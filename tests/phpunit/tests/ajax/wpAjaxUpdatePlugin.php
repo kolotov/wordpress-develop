@@ -131,8 +131,6 @@ class Tests_Ajax_wpAjaxUpdatePlugin extends WP_Ajax_UnitTestCase {
 		$this->assertSameSets( $expected, $response );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_update_plugin() {
 		$this->_setRole( 'administrator' );

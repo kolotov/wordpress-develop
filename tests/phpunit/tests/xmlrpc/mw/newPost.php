@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_mw_newPost extends WP_XMLRPC_UnitTestCase {
 
@@ -100,8 +98,6 @@ class Tests_XMLRPC_mw_newPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( 401, $result->code );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20356' )]
 	public function test_invalid_author() {
 		$this->make_user_by_role( 'editor' );
@@ -128,8 +124,6 @@ class Tests_XMLRPC_mw_newPost extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( 'Test', $out->post_title );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_post_thumbnail() {
 		add_theme_support( 'post-thumbnails' );
@@ -180,8 +174,6 @@ class Tests_XMLRPC_mw_newPost extends WP_XMLRPC_UnitTestCase {
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16985' )]
 	public function test_draft_post_date() {
 		$this->make_user_by_role( 'editor' );

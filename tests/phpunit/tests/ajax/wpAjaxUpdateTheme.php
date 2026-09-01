@@ -103,8 +103,6 @@ class Tests_Ajax_wpAjaxUpdateTheme extends WP_Ajax_UnitTestCase {
 		$this->assertSameSets( $expected, $response );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_update_theme() {
 		$this->_setRole( 'administrator' );
@@ -143,8 +141,6 @@ class Tests_Ajax_wpAjaxUpdateTheme extends WP_Ajax_UnitTestCase {
 		$this->assertSameSets( $expected, $response );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_uppercase_theme_slug() {
 		$this->_setRole( 'administrator' );

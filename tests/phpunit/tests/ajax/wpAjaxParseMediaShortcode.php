@@ -34,8 +34,6 @@ class Tests_Ajax_wpAjaxParseMediaShortcode extends WP_Ajax_UnitTestCase {
 			)
 		);
 	}
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'shortcode_provider' )]
 	public function test_parse_shortcode( array $payload, $expected ) {
 		add_shortcode( 'test', array( $this, 'shortcode_test' ) );

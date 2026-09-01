@@ -12,7 +12,6 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  */
 
 #[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_add_tag' )]
 class Tests_Ajax_wpAjaxAddTag extends WP_Ajax_UnitTestCase {
 
@@ -93,8 +92,6 @@ class Tests_Ajax_wpAjaxAddTag extends WP_Ajax_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42937' )]
 	public function test_adding_category_without_capability_should_error() {
 		$this->_setRole( 'subscriber' );
@@ -111,8 +108,6 @@ class Tests_Ajax_wpAjaxAddTag extends WP_Ajax_UnitTestCase {
 		$this->_handleAjax( 'add-tag' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42937' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_insert_term' )]
 	public function test_adding_existing_category_should_error() {

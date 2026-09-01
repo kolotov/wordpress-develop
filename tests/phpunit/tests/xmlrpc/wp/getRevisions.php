@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getRevisions extends WP_XMLRPC_UnitTestCase {
 
@@ -56,8 +54,6 @@ class Tests_XMLRPC_wp_getRevisions extends WP_XMLRPC_UnitTestCase {
 		$this->assertCount( 2, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22687' )]
 	public function test_revision_count_for_auto_draft_post_creation() {
 		$this->make_user_by_role( 'editor' );

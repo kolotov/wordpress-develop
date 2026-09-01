@@ -16,7 +16,6 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
  */
 
 #[\PHPUnit\Framework\Attributes\Group( 'ajax' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_delete_comment' )]
 class Tests_Ajax_wpAjaxDeleteComment extends WP_Ajax_UnitTestCase {
 
@@ -62,6 +61,7 @@ class Tests_Ajax_wpAjaxDeleteComment extends WP_Ajax_UnitTestCase {
 	 *
 	 * Expects test to pass.
 	 *
+	 * @covers ::_wp_ajax_delete_comment_response
 	 *
 	 * @param WP_Comment $comment Comment object.
 	 * @param string     $action  Action: 'trash', 'untrash', etc.

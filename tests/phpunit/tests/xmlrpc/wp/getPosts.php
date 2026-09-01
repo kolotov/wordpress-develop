@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getPosts extends WP_XMLRPC_UnitTestCase {
 
@@ -11,8 +9,6 @@ class Tests_XMLRPC_wp_getPosts extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( 403, $result->code );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20991' )]
 	public function test_incapable_user() {
 		$this->make_user_by_role( 'subscriber' );
@@ -148,8 +144,6 @@ class Tests_XMLRPC_wp_getPosts extends WP_XMLRPC_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21623' )]
 	public function test_search() {
 		$this->make_user_by_role( 'editor' );

@@ -2,13 +2,9 @@
 require_once ABSPATH . WPINC . '/class-IXR.php';
 require_once ABSPATH . WPINC . '/class-wp-http-ixr-client.php';
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_Client extends WP_XMLRPC_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26947' )]
 	public function test_ixr_client_allows_query_strings() {
 		$client = new IXR_Client( 'http://example.com/server.php?this-is-needed=true#not-this' );
@@ -17,16 +13,12 @@ class Tests_XMLRPC_Client extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( '/server.php?this-is-needed=true', $client->path );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64635' )]
 	public function test_ixr_client_can_handle_missing_host() {
 		$client = new IXR_Client( '/no-host-here' );
 		$this->assertSame( '', $client->server );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26947' )]
 	public function test_wp_ixr_client_allows_query_strings() {
 		$client = new WP_HTTP_IXR_Client( 'http://example.com/server.php?this-is-needed=true#not-this' );
@@ -35,8 +27,6 @@ class Tests_XMLRPC_Client extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( '/server.php?this-is-needed=true', $client->path );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40784' )]
 	public function test_wp_ixr_client_can_handle_protocolless_urls() {
 		$client = new WP_HTTP_IXR_Client( '//example.com/server.php' );
@@ -44,8 +34,6 @@ class Tests_XMLRPC_Client extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( 'example.com', $client->server );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40784' )]
 	public function test_wp_ixr_client_can_handle_relative_urls() {
 		$client = new WP_HTTP_IXR_Client( '/server.php' );
@@ -54,8 +42,6 @@ class Tests_XMLRPC_Client extends WP_XMLRPC_UnitTestCase {
 		$this->assertSame( '/server.php', $client->path );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40784' )]
 	public function test_wp_ixr_client_can_handle_invalid_urls() {
 		$client = new WP_HTTP_IXR_Client( '' );

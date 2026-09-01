@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_XMLRPC_blogger_getUsersBlogs extends WP_XMLRPC_UnitTestCase {

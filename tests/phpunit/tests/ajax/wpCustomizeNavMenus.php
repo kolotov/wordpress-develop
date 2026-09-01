@@ -396,6 +396,7 @@ class Tests_Ajax_wpCustomizeNavMenus extends WP_Ajax_UnitTestCase {
 	 * @param array $post_args POST args.
 	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_ajax_load_available_items_structure' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Customize_Nav_Menus', 'ajax_load_available_items' )]
 	public function test2_ajax_load_available_items_structure( $post_args ) {
 		do_action( 'customize_register', $this->wp_customize );
 

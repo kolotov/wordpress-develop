@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
 class Tests_XMLRPC_wp_getOptions extends WP_XMLRPC_UnitTestCase {
 
@@ -29,8 +27,6 @@ class Tests_XMLRPC_wp_getOptions extends WP_XMLRPC_UnitTestCase {
 		$this->assertFalse( $result['default_comment_status']['readonly'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20201' )]
 	public function test_option_values_subscriber() {
 		global $wp_version;

@@ -15,9 +15,6 @@ require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_ajax_inline_save' )]
 class Tests_Ajax_wpAjaxInlineSave extends WP_Ajax_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26948' )]
 	public function test_dont_process_terms_if_taxonomy_does_not_allow_show_on_quick_edit() {
 		register_taxonomy(

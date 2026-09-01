@@ -11,7 +11,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_XMLRPC_Message extends WP_UnitTestCase {
 
 	/**
@@ -24,6 +23,7 @@ class Tests_XMLRPC_Message extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56033' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'IXR_Message', 'tag_open' )]
 	public function test_tag_open_does_not_create_dynamic_property() {
 		$message = new IXR_Message( '<methodResponse><params><param><value>1</value></param></params></methodResponse>' );
 		$this->assertTrue( $message->parse() );
@@ -37,6 +37,7 @@ class Tests_XMLRPC_Message extends WP_UnitTestCase {
 	 * Safeguards handling of the PHP 8.4 deprecation of `xml_set_object()`.
 	 *
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'IXR_Message', 'parse' )]
 	public function test_parse_sets_handlers() {
 		$xml     = '<methodResponse><params><param><value>1</value></param></params></methodResponse>';
 		$message = new class( $xml ) extends IXR_Message {
