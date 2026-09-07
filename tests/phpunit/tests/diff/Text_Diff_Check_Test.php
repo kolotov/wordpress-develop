@@ -6,7 +6,7 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'diff' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
+#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'Text_Diff', '_check' )]
 final class Text_Diff_Check_Test extends WP_UnitTestCase {
 
 	const FILE_A = array(
