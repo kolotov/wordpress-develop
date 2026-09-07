@@ -46,7 +46,7 @@ class Tests_Diff_WpTextDiffRendererTable extends WP_UnitTestCase {
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Text_Diff_Renderer_Table', '__get' )]
 	public function test_should_throw_deprecation_when_getting_dynamic_property() {
 		$this->assertExpectedUserDeprecation(
-			'WP_Text_Diff_Renderer_Table::__get()',
+			'WP_Text_Diff_Renderer_Table::__get(): The property `undeclared_property` is not declared. Getting a dynamic property is deprecated since version 6.4.0! Instead, declare the property on the class.',
 			function () {
 				$this->assertNull( $this->diff_renderer_table->undeclared_property, 'Getting a dynamic property should return null from WP_Text_Diff_Renderer_Table::__get()' );
 			}
@@ -75,7 +75,7 @@ class Tests_Diff_WpTextDiffRendererTable extends WP_UnitTestCase {
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Text_Diff_Renderer_Table', '__set' )]
 	public function test_should_throw_deprecation_when_setting_dynamic_property() {
 		$this->assertExpectedUserDeprecation(
-			'WP_Text_Diff_Renderer_Table::__set()',
+			'WP_Text_Diff_Renderer_Table::__set(): The property `undeclared_property` is not declared. Setting a dynamic property is deprecated since version 6.4.0! Instead, declare the property on the class.',
 			function () {
 				$this->diff_renderer_table->undeclared_property = 'some value';
 			}
@@ -107,7 +107,7 @@ class Tests_Diff_WpTextDiffRendererTable extends WP_UnitTestCase {
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Text_Diff_Renderer_Table', '__isset' )]
 	public function test_should_throw_deprecation_when_isset_of_dynamic_property() {
 		$this->assertExpectedUserDeprecation(
-			'WP_Text_Diff_Renderer_Table::__isset()',
+			'WP_Text_Diff_Renderer_Table::__isset(): The property `undeclared_property` is not declared. Checking `isset()` on a dynamic property is deprecated since version 6.4.0! Instead, declare the property on the class.',
 			function () {
 				$this->assertFalse( isset( $this->diff_renderer_table->undeclared_property ), 'Checking a dynamic property should return false from WP_Text_Diff_Renderer_Table::__isset()' );
 			}
@@ -134,7 +134,7 @@ class Tests_Diff_WpTextDiffRendererTable extends WP_UnitTestCase {
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Text_Diff_Renderer_Table', '__unset' )]
 	public function test_should_throw_deprecation_when_unset_of_dynamic_property() {
 		$this->assertExpectedUserDeprecation(
-			'WP_Text_Diff_Renderer_Table::__unset()',
+			'WP_Text_Diff_Renderer_Table::__unset(): A property `undeclared_property` is not declared. Unsetting a dynamic property is deprecated since version 6.4.0! Instead, declare the property on the class.',
 			function () {
 				unset( $this->diff_renderer_table->undeclared_property );
 			}
