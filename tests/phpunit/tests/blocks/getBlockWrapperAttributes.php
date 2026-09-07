@@ -54,8 +54,6 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 		$this->assertSame( 'class="0 wp-block-example" aria-label="0"', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_preserves_string_zero_values_from_extra_attributes(): void {
 		WP_Block_Supports::init();
@@ -74,8 +72,6 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 		$this->assertSame( 'class="0 wp-block-example" id="0" aria-label="0" data-foo="0" data-var="0"', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_preserves_numeric_values(): void {
 		WP_Block_Supports::init();
@@ -100,8 +96,6 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 		$this->assertSame( 'class="5 wp-block-example" aria-label="42"', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_preserves_numeric_values_from_extra_attributes(): void {
 		WP_Block_Supports::init();
@@ -119,8 +113,6 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 		$this->assertSame( 'class="5 wp-block-example" id="7" aria-label="42" data-foo="1.5"', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_excludes_non_scalar_values(): void {
 		WP_Block_Supports::init();
@@ -145,8 +137,6 @@ class Tests_Blocks_GetBlockWrapperAttributes extends WP_UnitTestCase {
 		$this->assertSame( 'class="wp-block-example"', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64452' )]
 	public function test_excludes_non_scalar_values_from_extra_attributes(): void {
 		WP_Block_Supports::init();

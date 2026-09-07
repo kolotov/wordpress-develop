@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_date' )]
@@ -27,15 +24,11 @@ class Tests_Date_wpDate extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28636' )]
 	public function test_should_return_false_on_invalid_timestamp() {
 		$this->assertFalse( wp_date( DATE_RFC3339, 'invalid' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48319' )]
 	public function test_should_not_escape_localized_numbers() {
 		global $wp_locale;
@@ -48,8 +41,6 @@ class Tests_Date_wpDate extends WP_UnitTestCase {
 		$this->assertSame( '10月', wp_date( 'F', $datetime->getTimestamp(), $utc ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48319' )]
 	public function test_should_keep_localized_slashes() {
 		global $wp_locale;

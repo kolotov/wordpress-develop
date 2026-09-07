@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'link' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_adjacent_post_link' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_next_post_link' )]

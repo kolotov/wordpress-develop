@@ -8,8 +8,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 class Tests_Functions_wpPrivacyExportsDir extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59710' )]
 	public function test_wp_privacy_exports_dir() {
 		$upload_dir = wp_upload_dir();
@@ -17,8 +15,6 @@ class Tests_Functions_wpPrivacyExportsDir extends WP_UnitTestCase {
 		$this->assertSame( $expected, wp_privacy_exports_dir() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59710' )]
 	public function test_wp_privacy_exports_dir_filtered() {
 		add_filter( 'wp_privacy_exports_dir', array( $this, 'filter_wp_privacy_exports_dir' ) );

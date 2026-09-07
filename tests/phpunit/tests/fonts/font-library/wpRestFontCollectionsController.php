@@ -59,8 +59,6 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 		wp_unregister_font_collection( 'mock-col-slug' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Collections_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
@@ -71,8 +69,6 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 		$this->assertArrayHasKey( 'GET', $routes['/wp/v2/font-collections/(?P<slug>[\/\w-]+)'][0]['methods'], 'Rest server has not the GET method for collection initialized.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Collections_Controller', 'get_items' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
@@ -122,8 +118,6 @@ class Tests_REST_WpRestFontCollectionsController extends WP_Test_REST_Controller
 		$this->assertSame( 2, $headers['X-WP-Total'], 'The "X-WP-Total" header value should be equal to 1.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Collections_Controller', 'get_item' )]
 	public function test_get_item() {
 		wp_set_current_user( self::$admin_id );

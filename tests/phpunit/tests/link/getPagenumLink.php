@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'link' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_pagenum_link' )]
 class Tests_Link_GetPagenumLink extends WP_UnitTestCase {
@@ -37,8 +35,6 @@ class Tests_Link_GetPagenumLink extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '8847' )]
 	public function test_get_pagenum_link_case_insensitivity() {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );

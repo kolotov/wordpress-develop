@@ -1,10 +1,6 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 #[\PHPUnit\Framework\Attributes\Group( 'block-templates' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_block_templates' )]
 class Tests_Blocks_GetBlockTemplates extends WP_UnitTestCase {
 

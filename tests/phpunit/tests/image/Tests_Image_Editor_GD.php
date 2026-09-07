@@ -637,8 +637,6 @@ class Tests_Image_Editor_GD extends WP_Image_UnitTestCase {
 		unlink( $save_to_file );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30596' )]
 	public function test_image_preserves_alpha_on_rotate() {
 		if ( ! ( imagetypes() & IMG_PNG ) ) {

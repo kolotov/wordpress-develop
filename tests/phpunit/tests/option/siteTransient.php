@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 
 
 
@@ -17,8 +15,6 @@ class Tests_Option_SiteTransient extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_transient' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_site_transient' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_site_transient' )]
@@ -38,8 +34,6 @@ class Tests_Option_SiteTransient extends WP_UnitTestCase {
 		$this->assertFalse( delete_site_transient( $key ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_transient' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_site_transient' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_site_transient' )]
@@ -59,9 +53,6 @@ class Tests_Option_SiteTransient extends WP_UnitTestCase {
 		$this->assertTrue( delete_site_transient( $key ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22846' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_site_transient' )]

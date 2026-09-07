@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\Group( 'category' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_category_by_ID' )]
@@ -19,8 +16,6 @@ class Tests_Category_GetTheCategoryById extends WP_UnitTestCase {
 		$this->assertSame( 'Foo', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42771' )]
 	public function test_should_return_link_for_term_from_another_taxonomy_on_primed_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -39,8 +34,6 @@ class Tests_Category_GetTheCategoryById extends WP_UnitTestCase {
 		$this->assertSame( 'Foo', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42771' )]
 	public function test_should_return_link_for_term_from_another_taxonomy_on_empty_cache() {
 		register_taxonomy( 'wptests_tax', 'post' );

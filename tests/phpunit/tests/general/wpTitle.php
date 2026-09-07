@@ -1,15 +1,10 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'general' )]
 #[\PHPUnit\Framework\Attributes\Group( 'template' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_title' )]
 class Tests_General_WpTitle extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31521' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_title_archive' )]
 	public function test_wp_title_archive( $query, $expected ) {

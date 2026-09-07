@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\Group( 'meta' )]
 class Tests_Query_MetaQuery extends WP_UnitTestCase {
@@ -546,8 +544,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30681' )]
 	public function test_meta_query_compare_exists() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -569,8 +565,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[0], $posts[2] ), $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30681' )]
 	public function test_meta_query_compare_exists_with_value_should_convert_to_equals() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -593,8 +587,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[2] ), $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30681' )]
 	public function test_meta_query_compare_not_exists_should_ignore_value() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -617,8 +609,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[1] ), $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18158' )]
 	public function test_meta_query_compare_not_exists() {
 		$post_id = self::factory()->post->create();
@@ -699,8 +689,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertCount( 0, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29062' )]
 	public function test_meta_query_compare_not_exists_with_another_condition_relation_or() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -737,8 +725,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_or_compare_equals() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -772,8 +758,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_or_compare_equals_different_keys() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -807,8 +791,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_or_compare_equals_and_in() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -842,8 +824,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_or_compare_equals_and_like() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -877,8 +857,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_or_compare_equals_and_between() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -913,8 +891,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_and_compare_in_same_keys() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -950,8 +926,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_and_compare_in_different_keys() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -987,8 +961,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_and_compare_not_equals() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -1023,8 +995,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_and_compare_not_equals_different_keys() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -1066,8 +1036,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_and_compare_not_equals_not_in() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -1102,8 +1070,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24093' )]
 	public function test_meta_query_relation_and_compare_not_equals_and_not_like() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -1138,8 +1104,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23033' )]
 	public function test_meta_query_decimal_results() {
 		$post_1 = self::factory()->post->create();
@@ -1335,8 +1299,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSame( 'SIGNED', $q->meta_query->queries[0]['type'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29604' )]
 	public function test_meta_query_with_orderby_meta_value_relation_or() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -1376,8 +1338,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $posts[2], $posts[0], $posts[1] ), $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29604' )]
 	public function test_meta_query_with_orderby_meta_value_relation_and() {
 		$posts = self::factory()->post->create_many( 4 );
@@ -1421,8 +1381,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $posts[2], $posts[0], $posts[1] ), $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29642' )]
 	public function test_meta_query_nested() {
 		$p1 = self::factory()->post->create();
@@ -1464,8 +1422,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $query->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29642' )]
 	public function test_meta_query_nested_two_levels_deep() {
 		$p1 = self::factory()->post->create();
@@ -1559,8 +1515,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $post_id, $post_id4, $post_id5 ), $posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16829' )]
 	public function test_meta_default_compare() {
 		// Compare should default to IN when meta_value is an array.
@@ -1603,8 +1557,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $post_id, $post_id3 ), $posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17264' )]
 	public function test_duplicate_posts_when_no_key() {
 		$post_id = self::factory()->post->create();
@@ -1634,8 +1586,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $post_id, $post_id2 ), $posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '15292' )]
 	public function test_empty_meta_value() {
 		$post_id = self::factory()->post->create();
@@ -1713,8 +1663,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $post_id, $post_id3, $post_id4, $post_id5, $post_id6 ), $posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31045' )]
 	public function test_orderby_clause_key() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -1739,8 +1687,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $posts[1], $posts[2], $posts[0] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31045' )]
 	public function test_orderby_clause_key_as_secondary_sort() {
 		$p1 = self::factory()->post->create(
@@ -1782,8 +1728,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p3, $p1, $p2 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31045' )]
 	public function test_orderby_more_than_one_clause_key() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -1818,8 +1762,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $posts[2], $posts[0], $posts[1] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31045' )]
 	public function test_duplicate_clause_keys_should_be_made_unique() {
 		$q = new WP_Query(
@@ -1849,8 +1791,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( 'foo_key', 'foo_key-1', 'foo_key-2' ), array_keys( $q->meta_query->get_clauses() ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42409' )]
 	public function test_compare_key_like() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -1874,8 +1814,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[0], $posts[2] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42409' )]
 	public function test_meta_compare_key_like() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -1895,8 +1833,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[0], $posts[2] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42409' )]
 	public function test_compare_key_like_with_not_exists_compare() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -1922,8 +1858,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[0] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43446' )]
 	public function test_compare_key_not_equals() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -1949,8 +1883,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[0], $posts[1] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43446' )]
 	public function test_compare_key_not_like() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -1976,8 +1908,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[0], $posts[2] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43446' )]
 	public function test_compare_key_in() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -2001,8 +1931,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[1], $posts[2] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43446' )]
 	public function test_compare_key_not_in() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -2028,8 +1956,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[1] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43446' )]
 	public function test_compare_key_not_exists() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -2055,8 +1981,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[0], $posts[1] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43446' )]
 	public function test_compare_key_exists() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -2082,8 +2006,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[2] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43446' )]
 	public function test_compare_key_regexp_rlike() {
 		$posts = self::factory()->post->create_many( 3 );
@@ -2123,8 +2045,6 @@ class Tests_Query_MetaQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $posts[0] ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43446' )]
 	public function test_compare_key_not_regexp() {
 		$posts = self::factory()->post->create_many( 3 );

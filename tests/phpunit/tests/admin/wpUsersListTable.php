@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\CoversClass( WP_Users_List_Table::class )]
@@ -18,9 +15,6 @@ class Tests_Admin_wpUsersListTable extends WP_UnitTestCase {
 		$this->table = _get_list_table( 'WP_Users_List_Table', array( 'screen' => 'users' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42066' )]
 	public function test_get_views_should_return_views_by_default() {
 		$expected = array(

@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_block_style_variation_name_from_class' )]
 class Tests_Block_Supports_WpGetBlockStyleVariationNameFromClass extends WP_UnitTestCase {

@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_Option extends WP_UnitTestCase {
 
@@ -9,8 +7,6 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		return 'foo';
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
@@ -40,8 +36,6 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		$this->assertFalse( get_option( $key2 ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
@@ -70,9 +64,6 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		$this->assertFalse( get_option( 'doesnotexist' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31047' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
@@ -102,9 +93,6 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		$this->assertSame( 1, $filter->get_call_count() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58277' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_get_option_notoptions_cache() {
@@ -120,9 +108,6 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		$this->assertSame( 0, $after - $before );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58277' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_get_option_notoptions_set_cache() {
@@ -139,8 +124,6 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		$this->assertArrayHasKey( 'invalid', $notoptions, 'The "invalid" option should be in the notoptions cache.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
@@ -298,9 +281,6 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23289' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
 	public function test_special_option_name_alloption() {
@@ -308,9 +288,6 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		delete_option( 'alloptions' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23289' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_option' )]
 	public function test_special_option_name_notoptions() {
@@ -358,10 +335,6 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_option_autoloading_large_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
@@ -415,9 +388,6 @@ class Tests_Option_Option extends WP_UnitTestCase {
 		return 1000;
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	public function test_update_option_autoloading_small_option_auto() {

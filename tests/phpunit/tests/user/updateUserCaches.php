@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_UpdateUserCaches extends WP_UnitTestCase {
 	public function test_should_store_entire_database_row_in_users_bucket() {
@@ -51,8 +49,6 @@ class Tests_User_UpdateUserCaches extends WP_UnitTestCase {
 		$this->assertSame( 12345, wp_cache_get( 'bar', 'userslugs' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24635' )]
 	public function test_should_store_raw_data_in_users_bucket_when_passed_a_wp_user_object() {
 		global $wpdb;

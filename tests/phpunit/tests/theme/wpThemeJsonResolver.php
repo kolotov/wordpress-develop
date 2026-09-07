@@ -10,14 +10,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'themes' )]
-
-
-
-
-
-
-
-
 class Tests_Theme_wpThemeJsonResolver extends WP_UnitTestCase {
 
 	/**

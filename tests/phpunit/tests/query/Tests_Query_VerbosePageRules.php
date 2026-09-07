@@ -2,10 +2,6 @@
 
 require_once __DIR__ . '/conditionals.php';
 
-/**
-
-
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\Group( 'rewrite' )]
 class Tests_Query_VerbosePageRules extends Tests_Query_Conditionals {

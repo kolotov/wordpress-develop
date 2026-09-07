@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_page_reload_on_back_button_js' )]
 class Tests_Admin_Includes_Misc_WpPageReloadOnBackButtonJs_Test extends WP_UnitTestCase {

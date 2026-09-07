@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_apply_dimensions_support' )]
 class Tests_Block_Supports_WpApplyDimensionsSupport extends WP_UnitTestCase {

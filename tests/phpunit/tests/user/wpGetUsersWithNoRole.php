@@ -1,12 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_wpGetUsersWithNoRole extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22993' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_get_users_with_no_role_is_accurate() {
@@ -44,8 +40,6 @@ class Tests_User_wpGetUsersWithNoRole extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22993' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '36196' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
@@ -127,8 +121,6 @@ class Tests_User_wpGetUsersWithNoRole extends WP_UnitTestCase {
 		$this->assertEmpty( $users );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42015' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]

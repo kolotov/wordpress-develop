@@ -1,13 +1,9 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'link' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_adjacent_post' )]
 class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 	protected $exclude_term;
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17807' )]
 	public function test_get_adjacent_post() {
 		// Need some sample posts to test adjacency.
@@ -86,8 +82,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		$this->assertEquals( array( $post_four ), get_boundary_post( true, '', false, 'post_tag' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22112' )]
 	public function test_get_adjacent_post_exclude_self_term() {
 		// Bump term_taxonomy to mimic shared term offsets.
@@ -173,8 +167,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		$this->assertEmpty( get_adjacent_post( false, array(), false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32833' )]
 	public function test_get_adjacent_post_excluded_terms() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -207,8 +199,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		$this->assertSame( $p3, $found->ID );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32833' )]
 	public function test_get_adjacent_post_excluded_terms_should_not_require_posts_to_have_terms_in_any_taxonomy() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -244,8 +234,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		$this->assertSame( $p3, $found->ID );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35211' )]
 	public function test_get_adjacent_post_excluded_terms_filter() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -278,8 +266,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		$this->assertSame( $p3, $found->ID );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43521' )]
 	public function test_get_adjacent_post_excluded_terms_filter_should_apply_to_empty_excluded_terms_parameter() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -312,8 +298,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		$this->assertSame( $p3, $found->ID );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43521' )]
 	public function test_excluded_terms_filter_empty() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -351,8 +335,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		return $excluded_terms;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63920' )]
 	public function test_get_adjacent_post_returns_empty_string_when_wp_get_object_terms_returns_wp_error() {
 		register_taxonomy( 'wptests_error_tax', 'post' );
@@ -392,8 +374,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		$this->assertSame( '', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63920' )]
 	public function test_get_adjacent_post_empty_term_array_after_exclusions() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -426,8 +406,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		$this->assertSame( '', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63920' )]
 	public function test_get_adjacent_post_term_array_processing_order() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -487,8 +465,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		$this->assertSame( $post3_id, $result->ID );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63920' )]
 	public function test_get_adjacent_post_invalid_taxonomy() {
 		self::factory()->post->create(
@@ -510,8 +486,6 @@ class Tests_Link_GetAdjacentPost extends WP_UnitTestCase {
 		$this->assertNull( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41131' )]
 	public function test_get_adjacent_post_cache() {
 		// Need some sample posts to test adjacency.

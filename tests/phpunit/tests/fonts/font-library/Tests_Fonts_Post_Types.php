@@ -9,22 +9,16 @@
 #[\PHPUnit\Framework\Attributes\Group( 'fonts' )]
 #[\PHPUnit\Framework\Attributes\Group( 'font-library' )]
 class Tests_Fonts_Post_Types extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41172' )]
 	public function test_wp_font_family_does_not_support_autosaves() {
 		$this->assertFalse( post_type_supports( 'wp_font_family', 'autosave' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41172' )]
 	public function test_wp_font_face_does_not_support_autosaves() {
 		$this->assertFalse( post_type_supports( 'wp_font_face', 'autosave' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41172' )]
 	public function test_wp_font_family_does_not_have_an_autosave_controller() {
 		$post_type_object = get_post_type_object( 'wp_font_family' );
@@ -33,8 +27,6 @@ class Tests_Fonts_Post_Types extends WP_UnitTestCase {
 		$this->assertNull( $controller );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41172' )]
 	public function test_wp_font_face_does_not_have_an_autosave_controller() {
 		$post_type_object = get_post_type_object( 'wp_font_face' );

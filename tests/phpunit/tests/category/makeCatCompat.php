@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\Group( 'category' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_make_cat_compat' )]

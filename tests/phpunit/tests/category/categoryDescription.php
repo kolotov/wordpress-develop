@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\Group( 'category' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'category_description' )]
@@ -38,8 +35,6 @@ class Tests_Category_CategoryDescription extends WP_UnitTestCase {
 		$this->assertSame( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42605' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '42771' )]
 	public function test_should_return_description_for_term_from_another_taxonomy_on_primed_cache() {
@@ -62,8 +57,6 @@ class Tests_Category_CategoryDescription extends WP_UnitTestCase {
 		$this->assertSame( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42605' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '42771' )]
 	public function test_should_return_description_for_term_from_another_taxonomy_on_empty_cache() {

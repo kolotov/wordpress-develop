@@ -64,8 +64,6 @@ class Tests_General_wpGetDocumentTitle extends WP_UnitTestCase {
 		_wp_render_title_tag();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '6479' )]
 	public function test__wp_render_title_tag_with_blog_description() {
 		$this->go_to( '/' );

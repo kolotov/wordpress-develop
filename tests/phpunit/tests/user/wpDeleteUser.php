@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_wpDeleteUser extends WP_UnitTestCase {
 
@@ -108,8 +106,6 @@ class Tests_User_wpDeleteUser extends WP_UnitTestCase {
 		$this->assertNull( get_post( $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20447' )]
 	public function test_wp_delete_user_reassignment_clears_post_caches() {
 		$user_id  = self::factory()->user->create();
@@ -124,8 +120,6 @@ class Tests_User_wpDeleteUser extends WP_UnitTestCase {
 		$this->assertEquals( $reassign, $post->post_author );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_numeric_string_user_id() {
 		$u = self::factory()->user->create();
@@ -135,15 +129,11 @@ class Tests_User_wpDeleteUser extends WP_UnitTestCase {
 		$this->assertFalse( get_user_by( 'id', $u ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33800' )]
 	public function test_should_return_false_for_non_numeric_string_user_id() {
 		$this->assertFalse( wp_delete_user( 'abcde' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33800' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_should_return_false_for_object_user_id() {

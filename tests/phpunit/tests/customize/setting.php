@@ -607,8 +607,6 @@ class Tests_WP_Customize_Setting extends WP_UnitTestCase {
 		restore_current_blog();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33499' )]
 	public function test_option_autoloading() {
 		global $wpdb;

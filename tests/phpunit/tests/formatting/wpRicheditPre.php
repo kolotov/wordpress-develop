@@ -5,7 +5,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Formatting_wpRicheditPre extends WP_UnitTestCase {
 
 	public function charset_iso_8859_1() {
@@ -13,6 +12,7 @@ class Tests_Formatting_wpRicheditPre extends WP_UnitTestCase {
 	}
 
 	#[\PHPUnit\Framework\Attributes\Ticket( '23688' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_richedit_pre' )]
 	public function test_wp_richedit_pre_charset_iso_8859_1() {
 		add_filter( 'pre_option_blog_charset', array( $this, 'charset_iso_8859_1' ) );
 		$iso8859_1 = 'Fran' . chr( 135 ) . 'ais';
@@ -25,6 +25,7 @@ class Tests_Formatting_wpRicheditPre extends WP_UnitTestCase {
 	}
 
 	#[\PHPUnit\Framework\Attributes\Ticket( '23688' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_richedit_pre' )]
 	public function test_wp_richedit_pre_charset_utf_8() {
 		add_filter( 'pre_option_blog_charset', array( $this, 'charset_utf_8' ) );
 		$utf8 = 'Fran' . chr( 195 ) . chr( 167 ) . 'ais';

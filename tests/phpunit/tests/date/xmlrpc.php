@@ -1,15 +1,12 @@
 <?php
 
-/**
- *
- */
 
 
 
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\Group( 'xmlrpc' )]
-
+#[\PHPUnit\Framework\Attributes\CoversClass( IXR_Date::class )]
 class Tests_Date_XMLRPC extends WP_XMLRPC_UnitTestCase {
 
 	/**
@@ -22,8 +19,6 @@ class Tests_Date_XMLRPC extends WP_XMLRPC_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30429' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_newPost' )]
 	public function test_date_new_post() {
@@ -141,8 +136,6 @@ class Tests_Date_XMLRPC extends WP_XMLRPC_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30429' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'mw_editPost' )]
 	public function test_date_edit_post() {
@@ -209,8 +202,6 @@ class Tests_Date_XMLRPC extends WP_XMLRPC_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30429' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'wp_xmlrpc_server', 'wp_editComment' )]
 	public function test_date_edit_comment() {

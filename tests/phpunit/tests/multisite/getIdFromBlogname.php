@@ -86,8 +86,6 @@ class Tests_Multisite_GetIdFromBlogname extends WP_UnitTestCase {
 		wp_update_network_site_counts();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34450' )]
 	public function test_get_id_from_blogname_no_www() {
 		global $current_site;
@@ -107,8 +105,6 @@ class Tests_Multisite_GetIdFromBlogname extends WP_UnitTestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34450' )]
 	public function test_get_id_from_blogname_www() {
 		global $current_site;

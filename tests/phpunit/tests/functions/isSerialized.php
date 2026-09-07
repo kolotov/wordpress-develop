@@ -184,8 +184,6 @@ class Tests_Functions_IsSerialized extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '46570' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_serialized_should_return_true_for_large_floats' )]
 	public function test_is_serialized_should_return_true_for_large_floats( $value ) {
@@ -204,8 +202,6 @@ class Tests_Functions_IsSerialized extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17375' )]
 	public function test_no_new_serializable_types() {
 		$this->assertFalse( is_serialized( 'C:16:"Serialized_Class":6:{a:0:{}}' ) );

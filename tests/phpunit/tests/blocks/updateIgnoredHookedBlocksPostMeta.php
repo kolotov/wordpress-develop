@@ -44,8 +44,6 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60759' )]
 	public function test_update_ignored_hooked_blocks_postmeta_preserves_entities() {
 		register_block_type(
@@ -80,8 +78,6 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60759' )]
 	public function test_update_ignored_hooked_blocks_postmeta_dont_modify_no_post_id() {
 		register_block_type(
@@ -107,8 +103,6 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60759' )]
 	public function test_update_ignored_hooked_blocks_postmeta_retains_content_if_not_set() {
 		register_block_type(
@@ -139,8 +133,6 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60759' )]
 	public function test_update_ignored_hooked_blocks_postmeta_dont_modify_if_not_navigation() {
 		register_block_type(
@@ -167,8 +159,6 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60759' )]
 	public function test_update_ignored_hooked_blocks_postmeta_dont_modify_if_no_post_type() {
 		register_block_type(
@@ -194,8 +184,6 @@ class Tests_Blocks_UpdateIgnoredHookedBlocksPostMeta extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62639' )]
 	public function test_update_ignored_hooked_blocks_postmeta_sets_correct_context_type() {
 		$action = new MockAction();

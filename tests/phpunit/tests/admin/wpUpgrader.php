@@ -5,16 +5,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\Group( 'upgrade' )]
-
-
-
-
-
-
-
-
-
-
 class Tests_Admin_WpUpgrader extends WP_UnitTestCase {
 
 	/**

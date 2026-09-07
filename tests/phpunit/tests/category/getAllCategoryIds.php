@@ -1,10 +1,6 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\Group( 'category' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Category_GetAllCategoryIds extends WP_UnitTestCase {
 
 	/**
@@ -12,6 +8,7 @@ class Tests_Category_GetAllCategoryIds extends WP_UnitTestCase {
 	 *
 	 * @expectedDeprecated get_all_category_ids
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_all_category_ids' )]
 	public function test_get_all_category_ids() {
 		// Ccreate categories.
 		self::factory()->category->create_many( 2 );

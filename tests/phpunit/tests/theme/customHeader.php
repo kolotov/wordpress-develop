@@ -1,6 +1,5 @@
 <?php
 #[\PHPUnit\Framework\Attributes\Group( 'themes' )]
-
 class Tests_Theme_CustomHeader extends WP_UnitTestCase {
 
 	public static $post;

@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_position_support' )]
 class Tests_Block_Supports_WpRenderPositionSupport extends WP_UnitTestCase {

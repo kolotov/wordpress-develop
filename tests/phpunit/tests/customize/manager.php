@@ -10,34 +10,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'customize' )]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 
 	/**

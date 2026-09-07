@@ -1,10 +1,7 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'comments' )]
 #[\PHPUnit\Framework\Attributes\Group( 'meta' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Lazy_Load_Comment_Meta extends WP_UnitTestCase {
 
 	/**
@@ -29,6 +26,7 @@ class Tests_Lazy_Load_Comment_Meta extends WP_UnitTestCase {
 	 * @expectedDeprecated wp_queue_comments_for_comment_meta_lazyload
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57901' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_queue_comments_for_comment_meta_lazyload' )]
 	public function test_wp_queue_comments_for_comment_meta_lazyload() {
 		$filter = new MockAction();
 		add_filter( 'update_comment_metadata_cache', array( $filter, 'filter' ), 10, 2 );
@@ -49,6 +47,7 @@ class Tests_Lazy_Load_Comment_Meta extends WP_UnitTestCase {
 	 * @expectedDeprecated wp_queue_comments_for_comment_meta_lazyload
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57901' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_queue_comments_for_comment_meta_lazyload' )]
 	public function test_wp_queue_comments_for_comment_meta_lazyload_new_comment() {
 		$filter = new MockAction();
 		add_filter( 'update_comment_metadata_cache', array( $filter, 'filter' ), 10, 2 );

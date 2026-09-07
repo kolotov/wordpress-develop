@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/testcase-adjacent-image-link.php';
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_previous_image_link' )]
 class Tests_Media_GetPreviousImageLink extends WP_Test_Adjacent_Image_Link_TestCase {
@@ -12,9 +10,6 @@ class Tests_Media_GetPreviousImageLink extends WP_Test_Adjacent_Image_Link_TestC
 		'text' => false,
 	);
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45708' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_previous_image_link' )]
 	public function test_get_previous_image_link( $current_attachment_index, $expected_attachment_index, $expected, array $args = array() ) {

@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_apply_border_support' )]
 class Tests_Block_Supports_Border extends WP_UnitTestCase {
@@ -21,8 +18,6 @@ class Tests_Block_Supports_Border extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 	public function test_border_color_slug_with_numbers_is_kebab_cased_properly() {
 		$this->test_block_name = 'test/border-color-slug-with-numbers-is-kebab-cased-properly';
@@ -70,8 +65,6 @@ class Tests_Block_Supports_Border extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 	public function test_border_with_skipped_serialization_block_supports() {
 		$this->test_block_name = 'test/border-with-skipped-serialization-block-supports';
@@ -114,8 +107,6 @@ class Tests_Block_Supports_Border extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 	public function test_radius_with_individual_skipped_serialization_block_supports() {
 		$this->test_block_name = 'test/radius-with-individual-skipped-serialization-block-supports';

@@ -60,8 +60,6 @@ class Tests_User_RetrievePassword extends WP_UnitTestCase {
 		$this->assertWPError( retrieve_password( $this->user->user_login ), 'Sending password reset notification email succeeded.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53634' )]
 	public function test_retrieve_password_should_fetch_user_by_login_if_not_found_by_email() {
 		self::factory()->user->create(

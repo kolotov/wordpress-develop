@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'clamp' )]
 #[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 class Tests_Compat_clamp extends WP_UnitTestCase {

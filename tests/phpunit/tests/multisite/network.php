@@ -7,8 +7,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'ms-network' )]
 #[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
-
-
 class Tests_Multisite_Network extends WP_UnitTestCase {
 
 	protected $plugin_hook_count = 0;
@@ -212,8 +210,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertIsString( $property->getValue( $network ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22917' )]
 	public function test_get_blog_count_no_filter_applied() {
 		wp_update_network_counts();
@@ -230,8 +226,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( $site_count_start + 1, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22917' )]
 	public function test_get_blog_count_enable_live_network_counts_false() {
 		wp_update_network_counts();
@@ -250,8 +244,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( $site_count_start, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22917' )]
 	public function test_get_blog_count_enabled_live_network_counts_true() {
 		wp_update_network_counts();
@@ -270,8 +262,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( $site_count_start + 1, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37865' )]
 	public function test_get_blog_count_on_different_network() {
 		wp_update_network_site_counts( self::$different_network_id );
@@ -309,8 +299,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( 1, $this->plugin_hook_count ); // Testing actions and silent mode.
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28651' )]
 	public function test_duplicate_network_active_plugin() {
 		$path = 'hello.php';
@@ -373,8 +361,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( $blog_id, (int) $dashboard_blog->blog_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37528' )]
 	public function test_wp_update_network_site_counts() {
 		update_network_option( null, 'blog_count', 40 );
@@ -395,8 +381,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37528' )]
 	public function test_wp_update_network_site_counts_on_different_network() {
 		update_network_option( self::$different_network_id, 'blog_count', 40 );
@@ -407,8 +391,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( 3, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40349' )]
 	public function test_wp_update_network_user_counts() {
 		global $wpdb;
@@ -423,8 +405,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40349' )]
 	public function test_wp_update_network_user_counts_on_different_network() {
 		global $wpdb;
@@ -439,8 +419,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40386' )]
 	public function test_wp_update_network_counts() {
 		delete_network_option( null, 'blog_count' );
@@ -455,8 +433,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertGreaterThan( 0, $user_count );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40386' )]
 	public function test_wp_update_network_counts_on_different_network() {
 		delete_network_option( self::$different_network_id, 'blog_count' );
@@ -497,8 +473,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( 0, $return );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55926' )]
 	public static function data_upload_size_limit_filter_empty_fileupload_maxk() {
 		return array(
@@ -519,8 +493,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( 0, $return );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40489' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_is_large_network' )]
 	public function test_wp_is_large_network( $using, $count, $expected, $different_network ) {
@@ -550,8 +522,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40489' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_is_large_network_filtered_by_component' )]
 	public function test_wp_is_large_network_filtered_by_component( $using, $count, $expected, $different_network ) {
@@ -592,8 +562,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		return $is_large_network;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40489' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_is_large_network_filtered_by_network' )]
 	public function test_wp_is_large_network_filtered_by_network( $using, $count, $expected, $different_network ) {
@@ -634,8 +602,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		return $is_large_network;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38699' )]
 	public function test_wpmu_create_blog_updates_correct_network_site_count() {
 		global $wpdb;
@@ -653,8 +619,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( $original_count + 1, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_network_blog_id_set() {
 		$network = get_network( self::$different_network_id );
@@ -662,8 +626,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( (string) self::$different_site_ids[0], $network->blog_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42251' )]
 	public function test_get_network_not_found_cache() {
 		$new_network_id = $this->_get_next_network_id();
@@ -674,8 +636,6 @@ class Tests_Multisite_Network extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42251' )]
 	public function test_get_network_not_found_cache_clear() {
 		$new_network_id = $this->_get_next_network_id();

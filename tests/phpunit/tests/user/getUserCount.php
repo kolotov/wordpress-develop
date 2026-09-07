@@ -1,12 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_user_count' )]
 class Tests_User_GetUserCount extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40386' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
@@ -27,8 +23,6 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 		$this->assertGreaterThan( 0, $user_count );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37866' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
@@ -52,8 +46,6 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 		$this->assertSame( $current_network_user_count + 1, $user_count );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22917' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
@@ -83,8 +75,6 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 		$this->assertSame( $start_count + 1, $count );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38741' )]
 	public function test_get_user_count_update() {
 		wp_update_user_counts();
@@ -97,8 +87,6 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 		$this->assertSame( $current_network_user_count + 1, $user_count );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38741' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_get_user_count_update_on_delete() {
@@ -118,8 +106,6 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 		$this->assertSame( $user_count - 1, $user_count_after_delete );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38741' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_get_user_count_update_on_delete_multisite() {
@@ -139,8 +125,6 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 		$this->assertSame( $user_count - 1, $user_count_after_delete );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38741' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]

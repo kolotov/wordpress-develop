@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 
 
 
@@ -11,8 +9,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_Registration extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	public function test_register() {
 		register_setting( 'test_group', 'test_option' );
@@ -29,8 +25,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 		$this->assertSame( '', $args['description'] );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'apply_filters' )]
 	public function test_register_with_callback() {
@@ -40,8 +34,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 		$this->assertSame( 'S-M-R-T', $filtered );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_CLASS, 'WP_REST_Settings_Controller' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'apply_filters' )]
@@ -62,9 +54,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 		return 'S-M-R-T';
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38176' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	public function test_register_with_default() {
@@ -79,9 +68,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 		$this->assertSame( 'Got that Viper with them rally stripes', get_option( 'test_default' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38176' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	public function test_register_with_default_override() {
@@ -98,9 +84,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 		$this->assertSame( 'We the #1 Stunnas', get_option( 'test_default', 'We the #1 Stunnas' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38930' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
@@ -136,9 +119,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 		register_setting( 'privacy', 'test_option' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43207' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_setting' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unregister_setting' )]

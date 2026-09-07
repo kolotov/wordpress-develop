@@ -80,8 +80,6 @@ class Tests_Connectors_WpConnectorsSanitizeApplicationPasswordCredentials extend
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_sanitizes_submitted_credentials(): void {
 		update_option(
@@ -101,8 +99,6 @@ class Tests_Connectors_WpConnectorsSanitizeApplicationPasswordCredentials extend
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_empty_sanitized_username_discards_submitted_password(): void {
 		update_option(
@@ -122,8 +118,6 @@ class Tests_Connectors_WpConnectorsSanitizeApplicationPasswordCredentials extend
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_missing_fields_preserve_stored_credentials(): void {
 		update_option(
@@ -145,8 +139,6 @@ class Tests_Connectors_WpConnectorsSanitizeApplicationPasswordCredentials extend
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_masked_password_preserves_stored_password(): void {
 		update_option(
@@ -174,8 +166,6 @@ class Tests_Connectors_WpConnectorsSanitizeApplicationPasswordCredentials extend
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_non_array_value_preserves_stored_credentials(): void {
 		update_option(
@@ -197,8 +187,6 @@ class Tests_Connectors_WpConnectorsSanitizeApplicationPasswordCredentials extend
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_non_string_fields_preserve_stored_credentials(): void {
 		update_option(
@@ -226,8 +214,6 @@ class Tests_Connectors_WpConnectorsSanitizeApplicationPasswordCredentials extend
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_empty_strings_clear_stored_credentials(): void {
 		update_option(
@@ -255,8 +241,6 @@ class Tests_Connectors_WpConnectorsSanitizeApplicationPasswordCredentials extend
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_rest_round_trip_of_masked_response_preserves_stored_password(): void {
 		wp_set_current_user( self::$administrator_id );
@@ -294,8 +278,6 @@ class Tests_Connectors_WpConnectorsSanitizeApplicationPasswordCredentials extend
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_rest_partial_username_update_preserves_stored_password(): void {
 		wp_set_current_user( self::$administrator_id );
@@ -322,8 +304,6 @@ class Tests_Connectors_WpConnectorsSanitizeApplicationPasswordCredentials extend
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_rest_empty_strings_clear_stored_credentials(): void {
 		wp_set_current_user( self::$administrator_id );

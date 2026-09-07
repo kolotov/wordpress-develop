@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'image' )]
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
 #[\PHPUnit\Framework\Attributes\Group( 'upload' )]
@@ -93,8 +90,6 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 		$this->assertSame( '', $out['title'], 'Title value not the same' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '6571' )]
 	public function test_exif_error() {
 		// https://core.trac.wordpress.org/ticket/6571
@@ -129,8 +124,6 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 		$this->assertSame( '', $out['title'], 'Title value not the same' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63895' )]
 	public function test_iptc_alt() {
 		// Image tests alt text from the IPTC photo metadata standard 2025.1.
@@ -139,8 +132,6 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 		$this->assertSame( 'This is the Alt Text description to support accessibility in 2025.1', $out['alt'], 'Alt text does not match source.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '9417' )]
 	public function test_utf8_iptc_tags() {
 		// Trilingual UTF-8 text in the ITPC caption-abstract field.
@@ -158,8 +149,6 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33772' )]
 	public function test_exif_keywords() {
 		$out = wp_read_image_metadata( DIR_TESTDATA . '/images/33772.jpg' );
@@ -253,8 +242,6 @@ class Tests_Image_Meta extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54385' )]
 	public function test_exif_unexpected_data() {
 		// Unexpected Exif data: FNumber is "0/0", aperture should be 0.

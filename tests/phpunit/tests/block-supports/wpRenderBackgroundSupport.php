@@ -1,10 +1,5 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_background_support' )]
 class Tests_Block_Supports_WpRenderBackgroundSupport extends WP_UnitTestCase {
 	/**

@@ -17,9 +17,6 @@ class Test_WP_Customize_Media_Control extends WP_UnitTestCase {
 		require_once ABSPATH . WPINC . '/class-wp-customize-manager.php';
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64557' )]
 	public function test_to_json() {
 		$manager = new WP_Customize_Manager();

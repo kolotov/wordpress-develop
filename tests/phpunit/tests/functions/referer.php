@@ -62,8 +62,6 @@ class Tests_Functions_Referer extends WP_UnitTestCase {
 		$this->assertSame( 'http://' . WP_TESTS_DOMAIN . '/test.php?another=555', wp_get_referer() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19856' )]
 	public function test_from_request_subfolder_install() {
 		add_filter( 'site_url', array( $this, '_fake_subfolder_install' ) );
@@ -75,8 +73,6 @@ class Tests_Functions_Referer extends WP_UnitTestCase {
 		remove_filter( 'site_url', array( $this, '_fake_subfolder_install' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19856' )]
 	public function test_from_request_subfolder_install_different_resource() {
 		add_filter( 'site_url', array( $this, '_fake_subfolder_install' ) );
@@ -106,8 +102,6 @@ class Tests_Functions_Referer extends WP_UnitTestCase {
 		$this->assertSame( 'http://' . WP_TESTS_DOMAIN . '/another.php?id=123', wp_get_referer() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19856' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '27152' )]
 	public function test_different_server() {
@@ -116,8 +110,6 @@ class Tests_Functions_Referer extends WP_UnitTestCase {
 		$this->assertFalse( wp_get_referer() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19856' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '27152' )]
 	public function test_different_server_allowed_redirect_host() {
@@ -128,31 +120,23 @@ class Tests_Functions_Referer extends WP_UnitTestCase {
 		remove_filter( 'allowed_redirect_hosts', array( $this, 'filter_allowed_redirect_hosts' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27152' )]
 	public function test_raw_referer_empty() {
 		$this->assertFalse( wp_get_raw_referer() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27152' )]
 	public function test_raw_referer() {
 		$_SERVER['HTTP_REFERER'] = addslashes( 'http://example.com/foo?bar' );
 		$this->assertSame( 'http://example.com/foo?bar', wp_get_raw_referer() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27152' )]
 	public function test_raw_referer_from_request() {
 		$_REQUEST['_wp_http_referer'] = addslashes( 'http://foo.bar/baz' );
 		$this->assertSame( 'http://foo.bar/baz', wp_get_raw_referer() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27152' )]
 	public function test_raw_referer_both() {
 		$_SERVER['HTTP_REFERER']      = addslashes( 'http://example.com/foo?bar' );
@@ -160,8 +144,6 @@ class Tests_Functions_Referer extends WP_UnitTestCase {
 		$this->assertSame( 'http://foo.bar/baz', wp_get_raw_referer() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57670' )]
 	public function test_raw_referer_is_false_on_invalid_request_parameter() {
 		$_REQUEST['_wp_http_referer'] = array( 'demo' );

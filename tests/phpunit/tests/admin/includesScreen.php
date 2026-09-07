@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\Group( 'adminScreen' )]
 class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
@@ -328,8 +326,6 @@ class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
 		$this->assertSame( $screen->get_help_tabs(), array() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19828' )]
 	public function test_help_tabs_priority() {
 		$tab_1      = 'tab1';
@@ -424,8 +420,6 @@ class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
 		$this->assertSame( array(), $screen->get_help_tabs() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25799' )]
 	public function test_options() {
 		$option      = __FUNCTION__;
@@ -451,8 +445,6 @@ class Tests_Admin_IncludesScreen extends WP_UnitTestCase {
 		$this->assertSame( $screen->get_options(), array() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62562' )]
 	public function test_get_current_screen_type() {
 		global $current_screen;

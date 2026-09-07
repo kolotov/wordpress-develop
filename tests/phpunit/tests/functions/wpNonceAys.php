@@ -11,8 +11,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_nonce_ays' )]
 class Tests_Functions_wpNonceAys extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53882' )]
 	public function test_wp_nonce_ays() {
 		$this->expectException( 'WPDieException' );
@@ -22,8 +20,6 @@ class Tests_Functions_wpNonceAys extends WP_UnitTestCase {
 		wp_nonce_ays( 'random_string' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53882' )]
 	public function test_wp_nonce_ays_log_out() {
 		$this->expectException( 'WPDieException' );

@@ -1,7 +1,7 @@
 <?php
 
 /**
- *
+ * Tests run in a separate process to prevent "headers already sent" error.
  */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\Group( 'export' )]
@@ -289,8 +289,6 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 		$args['author'] = self::$post_ids[ $post_ids_key ]['post_author'];
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61244' )]
 	public function test_export_wp_should_not_include_empty_comments_when_filtered() {
 		$post_id = self::factory()->post->create( array( 'post_title' => 'Test Post' ) );
@@ -309,8 +307,6 @@ class Tests_Admin_ExportWp extends WP_UnitTestCase {
 		$this->assertCount( 0, $comment_tags, 'No <wp:comment> tags should be present when comments are filtered out.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61244' )]
 	public function test_export_wp_includes_comments_when_not_filtered() {
 		$post_id       = self::factory()->post->create( array( 'post_title' => 'Test Post' ) );

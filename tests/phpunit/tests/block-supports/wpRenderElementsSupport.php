@@ -1,12 +1,6 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
-
-
-
 class Tests_Block_Supports_WpRenderElementsSupport extends WP_UnitTestCase {
 	/**
 	 * @var string|null
@@ -26,7 +20,7 @@ class Tests_Block_Supports_WpRenderElementsSupport extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59578' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_elements_class_name' )]
 	public function test_leaves_block_content_alone_when_block_type_not_registered() {
 		$block = array(
 			'blockName' => 'test/element-block-supports',
@@ -63,7 +57,8 @@ class Tests_Block_Supports_WpRenderElementsSupport extends WP_UnitTestCase {
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59555' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_elements_block_support_class' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_elements_support_styles' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_render_elements_class_name' )]
 	public function test_elements_block_support_class( $color_settings, $elements_styles, $block_markup, $expected_markup ) {
 		$this->test_block_name = 'test/element-block-supports';
 

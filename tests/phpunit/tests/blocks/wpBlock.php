@@ -8,7 +8,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
 class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 
 	/**
@@ -48,8 +47,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		return 'Original: "' . $content . '", from block "' . $parsed_block['blockName'] . '"';
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_constructor_assigns_properties_from_parsed_block() {
 		$this->registry->register( 'core/example', array() );
@@ -66,8 +63,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		$this->assertSame( $parsed_block['innerHTML'], $block->inner_html );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '59797' )]
 	public function test_constructor_assigns_block_type_from_registry() {
@@ -99,8 +94,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_lazily_assigns_attributes_with_defaults() {
 		$this->registry->register(
@@ -133,8 +126,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_lazily_assigns_attributes_with_only_defaults() {
 		$this->registry->register(
@@ -161,8 +152,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		$this->assertSame( array( 'defaulted' => 10 ), $block->attributes );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_constructor_assigns_context_from_block_type() {
 		$this->registry->register(
@@ -182,8 +171,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		$this->assertSame( array( 'requested' => 'included' ), $block->context );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_constructor_maps_inner_blocks() {
 		$this->registry->register( 'core/example', array() );
@@ -198,8 +185,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		$this->assertSame( 'core/example', $block->inner_blocks[0]->name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_constructor_prepares_context_for_inner_blocks() {
 		$this->registry->register(
@@ -234,8 +219,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_constructor_assigns_merged_context() {
 		$this->registry->register(
@@ -278,8 +261,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_render_static_block_type_returns_own_content() {
 		$this->registry->register( 'core/static', array() );
@@ -300,8 +281,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		$this->assertSame( 'abc', $block->render() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_render_passes_block_for_render_callback() {
 		$this->registry->register(
@@ -321,8 +300,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		$this->assertSame( 'Hello from core/greeting', $block->render() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_render_applies_render_block_filter() {
 		$this->registry->register( 'core/example', array() );
@@ -341,8 +318,6 @@ class Tests_Blocks_wpBlock extends WP_UnitTestCase {
 		$this->assertSame( 'Original: "StaticOriginal: "Inner", from block "core/example"", from block "core/example"', $rendered_content );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '46187' )]
 	public function test_render_applies_dynamic_render_block_filter() {
 		$this->registry->register( 'core/example', array() );
@@ -725,8 +700,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_passes_attributes_to_render_callback() {
 		$this->registry->register(
@@ -759,8 +732,6 @@ HTML
 		$this->assertSame( 'Hello world!', $block->render() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_passes_content_to_render_callback() {
 		$this->registry->register(
@@ -788,8 +759,6 @@ HTML
 		$this->assertSame( 'abc', $block->render() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_build_query_vars_from_query_block() {
 		$this->registry->register(
@@ -836,8 +805,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65373' )]
 	public function test_build_query_vars_from_query_block_exclude_current(): void {
 		$this->registry->register(
@@ -866,8 +833,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64416' )]
 	public function test_build_query_vars_from_query_block_tax_query_old_format() {
 		$this->registry->register(
@@ -911,8 +876,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64416' )]
 	public function test_build_query_vars_from_query_block_tax_query_include_exclude() {
 		$this->registry->register(
@@ -962,8 +925,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62014' )]
 	public function test_build_query_vars_from_query_block_standard_post_formats() {
 		$this->registry->register(
@@ -1001,8 +962,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62014' )]
 	public function test_build_query_vars_from_query_block_post_format() {
 		$this->registry->register(
@@ -1040,8 +999,6 @@ HTML
 			$query
 		);
 	}
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62014' )]
 	public function test_build_query_vars_from_query_block_post_formats_with_category() {
 		$this->registry->register(
@@ -1090,8 +1047,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_build_query_vars_from_query_block_no_context() {
 		$this->registry->register( 'core/example', array() );
@@ -1113,8 +1068,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_build_query_vars_from_query_block_first_page() {
 		$this->registry->register(
@@ -1147,8 +1100,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_build_query_vars_from_query_block_page_no_offset() {
 		$this->registry->register(
@@ -1180,8 +1131,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_build_query_vars_from_query_block_page_with_offset() {
 		$this->registry->register(
@@ -1213,8 +1162,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62901' )]
 	public function test_build_query_vars_from_query_block_with_top_level_parent() {
 		$this->registry->register(
@@ -1388,8 +1335,6 @@ HTML
 		$this->assertSameSets( array_merge( $not_sticky_post_ids, array( $sticky_post_id ) ), wp_list_pluck( $query->posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56467' )]
 	public function test_query_loop_block_query_vars_filter() {
 		$this->registry->register(
@@ -1430,8 +1375,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_block_has_support() {
 		$this->registry->register(
@@ -1460,8 +1403,6 @@ HTML
 		$this->assertFalse( $font_nested );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_block_has_support_no_supports() {
 		$this->registry->register( 'core/example', array() );
@@ -1470,8 +1411,6 @@ HTML
 		$this->assertFalse( $has_support );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_block_has_support_provided_defaults() {
 		$this->registry->register(
@@ -1566,8 +1505,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51612' )]
 	public function test_block_filters_for_inner_blocks() {
 		$pre_render_callback           = new MockAction();

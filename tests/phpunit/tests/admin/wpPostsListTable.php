@@ -1,13 +1,6 @@
 <?php
 
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
-
-
-
-
-
-
-
 class Tests_Admin_wpPostsListTable extends WP_UnitTestCase {
 	protected static $top           = array();
 	protected static $children      = array();

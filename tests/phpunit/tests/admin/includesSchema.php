@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 
@@ -88,8 +86,6 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 		// phpcs:enable
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44893' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_populate_options' )]
 	public function test_populate_options( $options, $expected ) {
@@ -219,8 +215,6 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 		$this->assertSame( 'America/Buenos_Aires', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44896' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
@@ -264,8 +258,6 @@ class Tests_Admin_IncludesSchema extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44895' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_populate_network_meta' )]

@@ -20,7 +20,6 @@ class Tests_HtmlApi_WpHtmlProcessorBreadcrumbs extends WP_UnitTestCase {
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_single_tag_of_supported_elements' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step' )]
 	public function test_navigates_into_normative_html_for_supported_elements( $html, $tag_name ) {
 		$processor = WP_HTML_Processor::create_fragment( $html );
@@ -217,7 +216,6 @@ class Tests_HtmlApi_WpHtmlProcessorBreadcrumbs extends WP_UnitTestCase {
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_html_target_with_breadcrumbs' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'next_tag' )]
 	public function test_finds_correct_tag_given_breadcrumbs( $html, $breadcrumbs, $n ) {
 		$processor = WP_HTML_Processor::create_fragment( $html );
@@ -243,7 +241,6 @@ class Tests_HtmlApi_WpHtmlProcessorBreadcrumbs extends WP_UnitTestCase {
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_html_target_with_breadcrumbs' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'get_breadcrumbs' )]
 	public function test_reports_correct_breadcrumbs_for_html( $html, $breadcrumbs, $ignored_n ) {
 		$processor = WP_HTML_Processor::create_fragment( $html );
@@ -382,7 +379,6 @@ class Tests_HtmlApi_WpHtmlProcessorBreadcrumbs extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59607' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_updated_html' )]
 	public function test_remains_stable_when_editing_attributes() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><button>First<button><b here>Second' );
@@ -429,7 +425,6 @@ class Tests_HtmlApi_WpHtmlProcessorBreadcrumbs extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	public function test_can_modify_attributes_after_finding_tag() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><figure><img><figcaption>test</figcaption></figure>' );
@@ -448,7 +443,6 @@ class Tests_HtmlApi_WpHtmlProcessorBreadcrumbs extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'next_tag' )]
 	public function test_can_query_an_element_by_tag_name() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><DIV><strong><img></strong></DIV>' );
@@ -466,7 +460,6 @@ class Tests_HtmlApi_WpHtmlProcessorBreadcrumbs extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'seek' )]
 	public function test_can_seek_back_and_forth() {
 		$processor = WP_HTML_Processor::create_fragment(
@@ -531,7 +524,6 @@ HTML
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61348' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_virtual_nodes_breadcrumbs' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'get_breadcrumbs' )]
 	public function test_breadcrumbs_on_virtual_nodes( string $html, int $token_position, string $expected_tag_name, string $expect_open_close, array $expected_breadcrumbs ) {
 		$processor = WP_HTML_Processor::create_fragment( $html );
@@ -558,7 +550,6 @@ HTML
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61348' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_virtual_nodes_breadcrumbs' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'get_current_depth' )]
 	public function test_depth_on_virtual_nodes( string $html, int $token_position, string $expected_tag_name, string $expect_open_close, array $expected_breadcrumbs ) {
 		$processor = WP_HTML_Processor::create_fragment( $html );

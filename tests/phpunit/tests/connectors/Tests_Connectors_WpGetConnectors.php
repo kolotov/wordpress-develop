@@ -28,8 +28,6 @@ class Tests_Connectors_WpGetConnectors extends WP_UnitTestCase {
 		parent::tear_down_after_class();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64730' )]
 	public function test_returns_expected_connector_keys(): void {
 		$connectors = wp_get_connectors();
@@ -42,8 +40,6 @@ class Tests_Connectors_WpGetConnectors extends WP_UnitTestCase {
 		$this->assertCount( 5, $connectors );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64730' )]
 	public function test_each_connector_has_required_fields(): void {
 		$connectors = wp_get_connectors();
@@ -65,8 +61,6 @@ class Tests_Connectors_WpGetConnectors extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_application_password_connector_has_setting_name(): void {
 		$connector_id = 'remote-site';
@@ -95,8 +89,6 @@ class Tests_Connectors_WpGetConnectors extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64730' )]
 	public function test_api_key_connectors_have_setting_name_and_credentials_url(): void {
 		$connectors    = wp_get_connectors();
@@ -126,8 +118,6 @@ class Tests_Connectors_WpGetConnectors extends WP_UnitTestCase {
 		$this->assertGreaterThan( 0, $api_key_count, 'At least one connector should use api_key authentication.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64730' )]
 	public function test_featured_provider_names_match_expected(): void {
 		$connectors = wp_get_connectors();
@@ -137,8 +127,6 @@ class Tests_Connectors_WpGetConnectors extends WP_UnitTestCase {
 		$this->assertSame( 'Anthropic', $connectors['anthropic']['name'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64730' )]
 	public function test_includes_registered_provider_from_registry(): void {
 		$connectors = wp_get_connectors();

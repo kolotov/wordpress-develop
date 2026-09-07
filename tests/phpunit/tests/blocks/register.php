@@ -8,14 +8,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
-
-
-
-
-
-
-
 class Tests_Blocks_Register extends WP_UnitTestCase {
 
 	/**
@@ -116,8 +108,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		return 'pl_PL';
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_register_affects_main_registry() {
 		$name     = 'tests/static';
@@ -131,8 +121,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertTrue( $registry->is_registered( $name ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_unregister_affects_main_registry() {
 		$name     = 'tests/static';
@@ -147,8 +135,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( $registry->is_registered( $name ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_does_not_remove_block_asset_path_prefix() {
 		$result = remove_block_asset_path_prefix( 'script-handle' );
@@ -156,8 +142,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 'script-handle', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_removes_block_asset_path_prefix() {
 		$result = remove_block_asset_path_prefix( 'file:block.js' );
@@ -165,8 +149,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 'block.js', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54797' )]
 	public function test_removes_block_asset_path_prefix_and_current_directory() {
 		$result = remove_block_asset_path_prefix( 'file:./block.js' );
@@ -174,8 +156,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 'block.js', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_generate_block_asset_handle() {
@@ -221,8 +201,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50328' )]
 	public function test_generate_block_asset_handle_core_block() {
 		$block_name = 'core/paragraph';
@@ -249,8 +227,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_generate_block_asset_handle_core_block_module() {
 		$block_name = 'core/paragraph';
@@ -295,8 +271,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_field_not_found_register_block_script_handle() {
 		$result = register_block_script_handle( array(), 'script' );
@@ -304,8 +278,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_empty_string_value_do_not_register_block_script_handle() {
 		$metadata = array( 'script' => '' );
@@ -328,8 +300,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_field_not_found_register_block_script_module_id() {
 		$result = register_block_script_module_id( array(), 'viewScriptModule' );
@@ -337,8 +307,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_empty_string_value_do_not_register_block_script_module_id() {
 		$metadata = array( 'viewScriptModule' => '' );
@@ -347,8 +315,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_empty_array_value_do_not_register_block_script_module_id() {
 		$metadata = array( 'viewScriptModule' => array() );
@@ -357,8 +323,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_wrong_array_index_do_not_register_block_script_module_id() {
 		$metadata = array( 'viewScriptModule' => array( 'test-module_id' ) );
@@ -367,8 +331,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_missing_asset_file_register_block_script_module_id() {
 		$metadata = array(
@@ -381,8 +343,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 'tests-test-block-view-script-module', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_handle_passed_register_block_script_module_id() {
 		$metadata = array(
@@ -393,8 +353,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 'test-script-module-id', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_handles_passed_register_block_script_module_ids() {
 		$metadata = array(
@@ -408,8 +366,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 'test-id-other', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60233' )]
 	public function test_success_register_block_script_module_id() {
 		$metadata = array(
@@ -538,8 +494,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertNull( $p->get_attribute( 'data-wp-router-options' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_handle_passed_register_block_script_handle() {
 		$metadata = array(
@@ -562,8 +516,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 'test-script-handle-other', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60460' )]
 	public function test_missing_asset_file_register_block_script_handle_with_default_settings() {
@@ -577,8 +529,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 'tests-test-block-script', $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_success_register_block_script_handle() {
 		$metadata = array(
@@ -606,8 +556,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60485' )]
 	public function test_success_register_block_script_handle_with_custom_handle_name() {
 		$custom_script_handle = 'tests-my-shared-script';
@@ -625,8 +573,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60485' )]
 	public function test_reuse_registered_block_script_handle_with_custom_handle_name() {
 		$custom_script_handle = 'tests-my-shared-script';
@@ -651,8 +597,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55513' )]
 	public function test_success_register_block_script_handle_in_theme() {
 		switch_theme( 'block-theme' );
@@ -668,8 +612,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( $expected_script_handle, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_field_not_found_register_block_style_handle() {
 		$result = register_block_style_handle( array(), 'style' );
@@ -677,8 +619,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_empty_string_value_do_not_register_block_style_handle() {
 		$metadata = array( 'style' => '' );
@@ -771,8 +711,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	public function test_handle_passed_register_block_style_handle() {
 		$metadata = array(
@@ -797,8 +735,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 'test-style-handle-2', $result, 1 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50263' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '50328' )]
 	public function test_success_register_block_style_handle() {
@@ -898,8 +834,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56664' )]
 	public function test_register_nonexistent_stylesheet() {
 		$metadata = array(
@@ -913,8 +847,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( $wp_styles->registered['tests-test-block-nonexistent-stylesheet-style']->src );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55513' )]
 	public function test_success_register_block_style_handle_in_theme() {
 		switch_theme( 'block-theme' );
@@ -931,9 +863,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( wp_styles()->get_data( $expected_style_handle, 'rtl' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58528' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_style_handle' )]
 	public function test_success_register_block_style_handle_exists() {
@@ -1285,8 +1214,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertIsCallable( $result->render_callback );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53233' )]
 	public function test_block_register_block_type_proxy_for_metadata() {
 		$result = register_block_type(
@@ -1425,8 +1352,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52301' )]
 	public function test_block_registers_with_metadata_i18n_support() {
 		add_filter( 'locale', array( $this, 'filter_set_locale_to_polish' ) );
@@ -1471,8 +1396,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_get_dynamic_block_names() {
 		register_block_type( 'tests/static', array() );
@@ -1484,8 +1407,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertNotContains( 'tests/static', $dynamic_block_names );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	public function test_has_blocks() {
 		// Test with passing post ID.
@@ -1523,8 +1444,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertFalse( has_blocks( $a_post ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49615' )]
 	public function test_filter_block_registration() {
 		$filter_registration = static function ( $args, $name ) {
@@ -1541,8 +1460,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 'boolean', $block_type->attributes['core/test-filtered']['type'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52138' )]
 	public function test_filter_block_registration_metadata() {
 		$filter_metadata_registration = static function ( $metadata ) {
@@ -1559,8 +1476,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		$this->assertSame( 3, $result->api_version );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52138' )]
 	public function test_filter_block_registration_metadata_settings() {
 		$filter_metadata_registration = static function ( $settings, $metadata ) {
@@ -1652,9 +1567,6 @@ class Tests_Blocks_Register extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63027' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'register_block_type_from_metadata' )]
 	public function test_register_block_type_from_metadata_with_windows_path() {

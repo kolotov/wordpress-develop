@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 #[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_user_locale' )]
@@ -90,8 +87,6 @@ class Tests_L10n_GetUserLocale extends WP_UnitTestCase {
 		$this->assertSame( 'en_US', get_locale() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_user_locale_is_same_across_network() {
 		$user_locale = get_user_locale();

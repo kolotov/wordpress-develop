@@ -12,7 +12,6 @@ require_once __DIR__ . '/base.php';
 #[\PHPUnit\Framework\Attributes\Group( 'image' )]
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
 #[\PHPUnit\Framework\Attributes\Group( 'wp-image-editor-imagick' )]
-
 class Tests_Image_Editor_Imagick extends WP_Image_UnitTestCase {
 
 	public $editor_engine = 'WP_Image_Editor_Imagick';
@@ -527,8 +526,6 @@ class Tests_Image_Editor_Imagick extends WP_Image_UnitTestCase {
 		unlink( $save_to_file );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30596' )]
 	public function test_image_preserves_alpha_on_rotate() {
 		$file = DIR_TESTDATA . '/images/transparent.png';
@@ -627,8 +624,6 @@ class Tests_Image_Editor_Imagick extends WP_Image_UnitTestCase {
 		$this->assertSame( $temp_file, $saved['path'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51665' )]
 	public function test_directory_creation() {
 		$file      = realpath( DIR_TESTDATA ) . '/images/a2-small.jpg';

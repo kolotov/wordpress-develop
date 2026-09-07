@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 
 
 
@@ -14,15 +12,11 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		return 'foo';
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_get_site_option_returns_false_if_option_does_not_exist() {
 		$this->assertFalse( get_site_option( 'doesnotexist' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
@@ -34,8 +28,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertFalse( get_site_option( $key ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_get_site_option_returns_value() {
@@ -45,8 +37,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertSame( $value, get_site_option( $key ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
@@ -59,8 +49,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertSame( $new_value, get_site_option( $key ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_filter' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'remove_filter' )]
@@ -71,8 +59,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertSame( 'foo', $site_option );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_filter' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'remove_filter' )]
@@ -83,15 +69,11 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertSame( 'foo', $site_option );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_get_site_option_does_not_exist_returns_provided_default() {
 		$this->assertSame( 'bar', get_site_option( 'doesnotexist', 'bar' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_get_site_option_exists_does_not_return_provided_default() {
@@ -101,8 +83,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertSame( $value, get_site_option( $key, 'foo' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_filter' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
@@ -117,8 +97,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertSame( $value, $site_option );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	public function test_add_site_option_returns_true_for_new_option() {
 		$key   = __FUNCTION__;
@@ -126,8 +104,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertTrue( add_site_option( $key, $value ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	public function test_add_site_option_returns_false_for_existing_option() {
 		$key   = __FUNCTION__;
@@ -136,8 +112,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertFalse( add_site_option( $key, $value ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_site_option' )]
 	public function test_update_site_option_returns_false_for_same_value() {
@@ -147,8 +121,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertFalse( update_site_option( $key, $value ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_site_option' )]
 	public function test_update_site_option_returns_true_for_new_value() {
@@ -159,8 +131,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertTrue( update_site_option( $key, $new_value ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_site_option' )]
 	public function test_delete_site_option_returns_true_if_option_exists() {
@@ -170,8 +140,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertTrue( delete_site_option( $key ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_site_option' )]
 	public function test_delete_site_option_returns_false_if_option_does_not_exist() {
@@ -182,8 +150,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertFalse( delete_site_option( $key ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_site_option_add_and_get_serialized_array() {
@@ -196,8 +162,6 @@ class Tests_Option_SiteOption extends WP_UnitTestCase {
 		$this->assertSame( $value, get_site_option( $key ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_site_option_add_and_get_serialized_object() {

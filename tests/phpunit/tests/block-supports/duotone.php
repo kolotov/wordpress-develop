@@ -7,10 +7,6 @@
  */
 
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
-
-
-
-
 class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 	/**
 	 * Tests whether the duotone preset class is added to the block.
@@ -64,9 +60,6 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 		$this->assertMatchesRegularExpression( $expected, WP_Duotone::render_duotone_support( $block_content, $block, $wp_block ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65576' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Duotone', 'restore_image_outer_container' )]
 	public function test_restore_image_outer_container_moves_duotone_class_to_wrapper_in_classic_theme() {
@@ -148,8 +141,6 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 		$this->assertNotEmpty( $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_preset' )]
 	public function test_is_preset( $data_attr, $expected ) {
 		$reflection = new ReflectionMethod( 'WP_Duotone', 'is_preset' );
@@ -177,8 +168,6 @@ class Tests_Block_Supports_Duotone extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_colord_parse_hue' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '59496' )]
 	public function test_colord_parse_hue( $value, $unit, $expected ) {

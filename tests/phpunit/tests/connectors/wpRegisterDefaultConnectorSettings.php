@@ -44,8 +44,6 @@ class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCas
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65099' )]
 	public function test_non_ai_connector_skipped_when_is_active_returns_false(): void {
 		WP_Connector_Registry::get_instance()->register(
@@ -72,8 +70,6 @@ class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCas
 		$this->assertArrayNotHasKey( self::SETTING_NAME, get_registered_settings() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65099' )]
 	public function test_non_ai_connector_registers_setting_when_is_active_returns_true(): void {
 		WP_Connector_Registry::get_instance()->register(
@@ -100,8 +96,6 @@ class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCas
 		$this->assertArrayHasKey( self::SETTING_NAME, get_registered_settings() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_application_password_connector_registers_credentials_setting(): void {
 		WP_Connector_Registry::get_instance()->register(
@@ -135,8 +129,6 @@ class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCas
 		$this->assertArrayHasKey( 'password', $registered_settings[ self::CREDENTIALS_SETTING_NAME ]['show_in_rest']['schema']['properties'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_application_password_connector_skips_already_registered_setting(): void {
 		register_setting(
@@ -183,8 +175,6 @@ class Tests_Connectors_WpRegisterDefaultConnectorSettings extends WP_UnitTestCas
 			$this->assertFalse( $registered_settings[ self::CREDENTIALS_SETTING_NAME ]['show_in_rest'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_already_registered_setting_skips_before_is_active_callback(): void {
 		$is_active_called = false;

@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_archives' )]
 class Tests_Functions_wpGetArchives extends WP_UnitTestCase {
@@ -180,8 +177,6 @@ EOF;
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21596' )]
 	public function test_wp_get_archives_post_type() {
 		register_post_type( 'taco', array( 'public' => true ) );
@@ -205,8 +200,6 @@ EOF;
 		$this->assertSame( $expected, trim( $archives ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64304' )]
 	public function test_wp_get_archives_args_filter() {
 		// Test that the filter can modify the limit argument.

@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 class Tests_Admin_Theme_Body_Class extends WP_UnitTestCase {
 	protected static $admin_user;

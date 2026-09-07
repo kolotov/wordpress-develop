@@ -5,12 +5,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'customize' )]
-
-
-
-
-
-
 class Test_WP_Customize_Nav_Menus extends WP_UnitTestCase {
 
 	/**

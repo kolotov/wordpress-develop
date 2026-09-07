@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_privacy_settings_filter_draft_page_titles' )]

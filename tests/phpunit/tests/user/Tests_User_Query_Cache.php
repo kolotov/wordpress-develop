@@ -5,8 +5,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
-
-
 class Tests_User_Query_Cache extends WP_UnitTestCase {
 	/**
 	 * @var int[]
@@ -74,8 +72,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_query_cache_different_count() {
@@ -103,8 +99,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertSameSets( $users1, $users2, 'Results of the query are expected to match.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_query_cache_results() {
@@ -311,8 +305,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		return $data;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_query_cache_remove_user_role() {
@@ -341,8 +333,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertNotContains( $user_id, $found, 'Expected not to find author in returned values.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_query_cache_set_user_role() {
@@ -371,8 +361,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertNotContains( $user_id, $found, 'Expected not to find author in returned values.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_query_cache_delete_user() {
@@ -401,8 +389,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertNotContains( $user_id, $found, 'Expected not to find author in returned values.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_query_cache_do_not_cache() {
@@ -438,8 +424,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertSameSets( $found1, $found2, 'Expected results to match.', 'Ensure that to results match' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_query_cache_update_user() {
@@ -476,8 +460,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertNotContains( $user_id, $found, 'Expected not to find author in returned values.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_query_cache_create_user() {
@@ -499,8 +481,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertContains( $user_id_2, $found, 'Find author in returned values' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_has_published_posts_delete_post() {
@@ -537,8 +517,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertSameSets( array(), $found, 'Not to find author in returned values' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_has_published_posts_delete_post_order() {
@@ -576,8 +554,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertSameSets( $found1, $found2, 'Not same order' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
 	public function test_meta_query_cache_invalidation() {
@@ -619,8 +595,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $found, 'Asset that results do not contain author without meta' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
@@ -659,8 +633,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertNotContains( self::$author_ids[2], $found, 'Asset that results do not contain author 1 without capability on site on second run' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]
@@ -696,8 +668,6 @@ class Tests_User_Query_Cache extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $q->get_results(), 'Asset that expected users return from different blog' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40613' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_User_Query', 'query' )]

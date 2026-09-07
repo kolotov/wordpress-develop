@@ -9,8 +9,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_connectors' )]
 class Tests_Connectors_WpRegisterConnector extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_is_connector_registered_returns_true_for_default() {
 		// Default connectors are registered via wp_connectors_init.
@@ -19,15 +17,11 @@ class Tests_Connectors_WpRegisterConnector extends WP_UnitTestCase {
 		$this->assertTrue( wp_is_connector_registered( 'anthropic' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_is_connector_registered_returns_false_for_unregistered() {
 		$this->assertFalse( wp_is_connector_registered( 'nonexistent_provider' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_get_connector_returns_data_for_default() {
 		$connector = wp_get_connector( 'openai' );
@@ -39,8 +33,6 @@ class Tests_Connectors_WpRegisterConnector extends WP_UnitTestCase {
 		$this->assertSame( 'connectors_ai_openai_api_key', $connector['authentication']['setting_name'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_get_connector_returns_null_for_unregistered() {
 		$this->setExpectedIncorrectUsage( 'WP_Connector_Registry::get_registered' );
@@ -50,8 +42,6 @@ class Tests_Connectors_WpRegisterConnector extends WP_UnitTestCase {
 		$this->assertNull( $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_get_connectors_returns_all_defaults() {
 		$connectors = wp_get_connectors();

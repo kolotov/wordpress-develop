@@ -9,8 +9,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_mime_types' )]
 class Tests_Functions_wpGetMimeTypes extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47701' )]
 	public function test_all_mime_match() {
 		$mime_types_start = wp_get_mime_types();

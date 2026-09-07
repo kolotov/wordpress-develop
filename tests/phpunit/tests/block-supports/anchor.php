@@ -1,9 +1,5 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
-
-
 class Tests_Block_Supports_Anchor extends WP_UnitTestCase {
 	/**
 	 * @var string

@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
@@ -19,23 +16,17 @@ class Tests_Date_mysql2date extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_mysql2date_returns_false_with_no_date() {
 		$this->assertFalse( mysql2date( 'F j, Y H:i:s', '' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_mysql2date_returns_gmt_or_unix_timestamp() {
 		$this->assertSame( 441013392, mysql2date( 'G', '1983-12-23 07:43:12' ) );
 		$this->assertSame( 441013392, mysql2date( 'U', '1983-12-23 07:43:12' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28992' )]
 	public function test_mysql2date_should_format_time() {
 		$timezone = 'Europe/Helsinki';
@@ -48,8 +39,6 @@ class Tests_Date_mysql2date extends WP_UnitTestCase {
 		$this->assertSame( $rfc3339, mysql2date( DATE_RFC3339, $mysql, false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28992' )]
 	public function test_mysql2date_should_format_time_with_changed_time_zone() {
 		$timezone = 'Europe/Helsinki';
@@ -80,8 +69,6 @@ class Tests_Date_mysql2date extends WP_UnitTestCase {
 		$this->assertSame( $rfc3339, mysql2date( DATE_RFC3339, $mysql, false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28992' )]
 	public function test_mysql2date_should_return_wp_timestamp() {
 		$timezone = 'Europe/Helsinki';
@@ -94,8 +81,6 @@ class Tests_Date_mysql2date extends WP_UnitTestCase {
 		$this->assertSame( $wp_timestamp, mysql2date( 'G', $mysql, false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28992' )]
 	public function test_mysql2date_should_return_unix_timestamp_for_gmt_time() {
 		$timezone = 'Europe/Helsinki';

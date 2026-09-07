@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 #[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
@@ -251,8 +249,6 @@ class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 		$this->assertSame( 1, get_num_queries() - $num_queries );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58185' )]
 	public function test_lazy_load_site_meta() {
 		if ( ! is_site_meta_supported() ) {
@@ -286,8 +282,6 @@ class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 		$this->assertSameSets( $site_ids, array( self::$site_id, self::$site_id2 ), 'This should have two site\'s meta' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58185' )]
 	public function test_lazy_load_site_meta_fields_id() {
 		if ( ! is_site_meta_supported() ) {
@@ -342,8 +336,6 @@ class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 		$this->assertSame( 1, get_num_queries() - $num_queries );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40229' )]
 	public function test_add_site_meta_should_bust_get_sites_cache() {
 		if ( ! is_site_meta_supported() ) {
@@ -384,8 +376,6 @@ class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 		$this->assertSameSets( array( self::$site_id, self::$site_id2 ), $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40229' )]
 	public function test_update_site_meta_should_bust_get_sites_cache() {
 		if ( ! is_site_meta_supported() ) {
@@ -427,8 +417,6 @@ class Tests_Multisite_SiteMeta extends WP_UnitTestCase {
 		$this->assertSameSets( array( self::$site_id, self::$site_id2 ), $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40229' )]
 	public function test_delete_site_meta_should_bust_get_sites_cache() {
 		if ( ! is_site_meta_supported() ) {

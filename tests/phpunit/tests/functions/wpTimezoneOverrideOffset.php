@@ -9,9 +9,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_timezone_override_offset' )]
 class Tests_Functions_wpTimezoneOverrideOffset extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59980' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_timezone_override_offset' )]
 	public function test_wp_timezone_override_offset( $timezone_string, $expected ) {

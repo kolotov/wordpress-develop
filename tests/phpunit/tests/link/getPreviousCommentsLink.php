@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'link' )]
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_previous_comments_link' )]
@@ -36,8 +34,6 @@ class Tests_Link_GetPreviousCommentsLink extends WP_UnitTestCase {
 		$this->assertNull( $link );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60806' )]
 	public function test_page_should_respect_value_of_page_argument() {
 		$p = self::factory()->post->create();

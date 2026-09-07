@@ -5,8 +5,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_generate_attachment_metadata' )]
 class Tests_Media_wpGenerateAttachmentMetadata extends WP_UnitTestCase {
 

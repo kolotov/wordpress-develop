@@ -17,7 +17,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 #[\PHPUnit\Framework\Attributes\Group( 'cache' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_cache_switch_to_blog_fallback' )]
 class Tests_Multisite_WpCacheSwitchToBlogFallback extends WP_UnitTestCase {
 

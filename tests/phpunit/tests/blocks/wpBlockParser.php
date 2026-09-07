@@ -19,9 +19,6 @@ class Tests_Blocks_wpBlockParser extends WP_UnitTestCase {
 	 */
 	protected static $fixtures_dir;
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45109' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_parsing_test_filenames' )]
 	public function test_default_parser_output( $html_filename, $parsed_json_filename ) {
@@ -48,6 +45,7 @@ class Tests_Blocks_wpBlockParser extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @ticket 45109
 	 */
 	public static function data_parsing_test_filenames() {
 		self::$fixtures_dir = DIR_TESTDATA . '/blocks/fixtures';

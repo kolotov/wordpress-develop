@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_custom_css_support_styles' )]
 class Tests_Block_Supports_WpRenderCustomCssSupportStyles extends WP_UnitTestCase {

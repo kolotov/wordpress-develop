@@ -54,8 +54,6 @@ class Tests_Theme_WpThemeHasThemeJson extends WP_Theme_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52991' )]
 	public function test_switching_themes_recalculates_support() {
 		// The "default" theme doesn't have theme.json support.

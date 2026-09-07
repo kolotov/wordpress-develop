@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_apply_shadow_support' )]
 class Tests_Block_Supports_Shadow extends WP_UnitTestCase {

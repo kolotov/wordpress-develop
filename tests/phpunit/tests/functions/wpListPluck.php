@@ -75,8 +75,6 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28666' )]
 	public function test_wp_list_pluck_index_key() {
 		$list = wp_list_pluck( $this->array_list, 'name', 'id' );
@@ -90,8 +88,6 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28666' )]
 	public function test_wp_list_pluck_object_index_key() {
 		$list = wp_list_pluck( $this->object_list, 'name', 'id' );
@@ -105,8 +101,6 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28666' )]
 	public function test_wp_list_pluck_missing_index_key() {
 		$list = wp_list_pluck( $this->array_list, 'name', 'nonexistent' );
@@ -120,8 +114,6 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28666' )]
 	public function test_wp_list_pluck_partial_missing_index_key() {
 		$array_list = $this->array_list;
@@ -137,8 +129,6 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28666' )]
 	public function test_wp_list_pluck_mixed_index_key() {
 		$mixed_list        = $this->array_list;
@@ -154,8 +144,6 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16895' )]
 	public function test_wp_list_pluck_containing_references() {
 		$ref_list = array(
@@ -179,8 +167,6 @@ class Tests_Functions_wpListPluck extends WP_UnitTestCase {
 		$this->assertInstanceOf( 'stdClass', $ref_list[1] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16895' )]
 	public function test_wp_list_pluck_containing_references_keys() {
 		$ref_list = array(

@@ -35,8 +35,6 @@ class Tests_Functions_PluginBasename extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29154' )]
 	public function test_return_correct_basename_for_symlinked_plugins() {
 		global $wp_plugin_paths;
@@ -49,8 +47,6 @@ class Tests_Functions_PluginBasename extends WP_UnitTestCase {
 		$this->assertSame( 'a-symlinked-plugin/plugin.php', $basename );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28441' )]
 	public function test_return_correct_basename_for_symlinked_plugins_with_path_conflicts() {
 		global $wp_plugin_paths;

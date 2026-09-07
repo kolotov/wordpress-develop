@@ -1,16 +1,7 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 #[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
-
-
-
-
-
-
-
 class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 	protected $orig_theme_dir;
 	protected $theme_root;
@@ -73,9 +64,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		return 'de_DE';
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34114' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_textdomain_loaded' )]
 	public function test_plugin_translation_should_be_translated_without_calling_load_plugin_textdomain() {
@@ -94,9 +82,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertTrue( $is_textdomain_loaded_after );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59656' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_textdomain_loaded' )]
 	public function test_plugin_translation_should_be_translated_with_only_an_l10n_php_file() {
@@ -115,9 +100,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertTrue( $is_textdomain_loaded_after );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34114' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_textdomain_loaded' )]
 	public function test_theme_translation_should_be_translated_without_calling_load_theme_textdomain() {
@@ -138,9 +120,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertTrue( $is_textdomain_loaded_after );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34114' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_translations_for_domain' )]
 	public function test_get_translations_for_domain_does_not_return_null_if_override_load_textdomain_is_used() {
@@ -153,9 +132,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertInstanceOf( 'NOOP_Translations', $translations );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58321' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_translations_for_domain' )]
 	public function test_get_translations_for_domain_get_locale_is_called_only_once() {
@@ -174,9 +150,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertFalse( is_textdomain_loaded( 'internationalized-plugin' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37113' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_textdomain_loaded' )]
 	public function test_should_allow_unloading_of_text_domain() {
@@ -215,9 +188,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertTrue( $is_textdomain_loaded_final );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26511' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'switch_to_locale' )]
 	public function test_plugin_translation_after_switching_locale() {
@@ -230,9 +200,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertSame( 'Das ist ein Dummy Plugin', $actual );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37997' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '39210' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'switch_to_locale' )]
@@ -251,9 +218,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertSame( 'Este es un plugin dummy', $actual_es_es );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26511' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'switch_to_locale' )]
 	public function test_theme_translation_after_switching_locale() {
@@ -270,9 +234,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertSame( 'Das ist ein Dummy Theme', $actual );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38485' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_set_current_user' )]
 	public function test_plugin_translation_with_user_locale() {
@@ -286,9 +247,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertSame( 'Das ist ein Dummy Plugin', $actual );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38485' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_set_current_user' )]
 	public function test_theme_translation_with_user_locale() {
@@ -305,9 +263,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertSame( 'Das ist ein Dummy Theme', $actual );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37997' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_load_textdomain_just_in_time' )]
 	public function test_get_locale_is_called_only_once_per_textdomain() {
@@ -326,9 +281,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertSame( 1, $filter->get_call_count() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37997' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '39210' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, '_load_textdomain_just_in_time' )]
@@ -350,9 +302,6 @@ class Tests_L10n_LoadTextdomainJustInTime extends WP_UnitTestCase {
 		$this->assertSame( 1, $filter->get_call_count() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44937' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '62337' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_plugin_textdomain' )]

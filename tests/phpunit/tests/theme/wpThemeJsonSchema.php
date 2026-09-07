@@ -11,8 +11,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'themes' )]
 class Tests_Theme_wpThemeJsonSchema extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54336' )]
 	public function test_migrate_v1_to_latest() {
 		$theme_json_v1 = array(

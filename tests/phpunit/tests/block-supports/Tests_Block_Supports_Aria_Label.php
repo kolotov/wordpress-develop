@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_apply_aria_label_support' )]
 class Tests_Block_Supports_Aria_Label extends WP_UnitTestCase {

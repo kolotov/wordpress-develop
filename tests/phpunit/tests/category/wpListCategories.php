@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\Group( 'category' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_list_categories' )]
@@ -56,8 +53,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertDoesNotMatchRegularExpression( '/class="[^"]*cat-item-' . $c2 . '[^"]*current-cat-parent[^"]*"/', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33565' )]
 	public function test_current_category_should_accept_an_array_of_ids() {
 		$cats = self::factory()->category->create_many( 3 );
@@ -75,8 +70,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertMatchesRegularExpression( '/class="[^"]*cat-item-' . $cats[2] . '[^"]*current-cat[^"]*"/', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16792' )]
 	public function test_should_not_create_element_when_cat_name_is_filtered_to_empty_string() {
 		$c1 = self::factory()->category->create(
@@ -114,8 +107,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		return $cat;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '44872' )]
 	public function test_should_create_element_when_cat_name_is_zero() {
 		$c = self::factory()->category->create(
@@ -169,8 +160,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringContainsString( "<li class='cat-item-all'><a href='" . get_permalink( $p ) . "'>All</a></li>", $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21881' )]
 	public function test_show_option_all_link_should_link_to_post_type_archive_when_taxonomy_does_not_apply_to_posts() {
 		register_post_type( 'wptests_pt', array( 'has_archive' => true ) );
@@ -198,8 +187,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringContainsString( "<li class='cat-item-all'><a href='" . $pt_archive . "'>All</a></li>", $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21881' )]
 	public function test_show_option_all_link_should_not_link_to_post_type_archive_if_has_archive_is_false() {
 		register_post_type( 'wptests_pt', array( 'has_archive' => false ) );
@@ -279,8 +266,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringContainsString( "<li class='cat-item-all'><a href='" . $url . "'>All</a></li>", $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33460' )]
 	public function test_title_li_should_be_shown_by_default_for_empty_lists() {
 		$found = wp_list_categories(
@@ -292,8 +277,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringContainsString( '<li class="categories">Categories', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33460' )]
 	public function test_hide_title_if_empty_should_be_respected_for_empty_lists_when_true() {
 		$found = wp_list_categories(
@@ -306,8 +289,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( '<li class="categories">Categories', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33460' )]
 	public function test_hide_title_if_empty_should_be_respected_for_empty_lists_when_false() {
 		$found = wp_list_categories(
@@ -320,8 +301,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringContainsString( '<li class="categories">Categories', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33460' )]
 	public function test_hide_title_if_empty_should_be_ignored_when_category_list_is_not_empty() {
 		$cat = self::factory()->category->create();
@@ -337,8 +316,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringContainsString( '<li class="categories">Categories', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38839' )]
 	public function test_hide_title_if_empty_should_not_output_stray_closing_tags() {
 		$cat = self::factory()->category->create();
@@ -355,8 +332,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( '</ul></li>', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12981' )]
 	public function test_exclude_tree_should_be_respected() {
 		$c      = self::factory()->category->create();
@@ -387,8 +362,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( '<li class="cat-item cat-item-' . $child . '">', $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '12981' )]
 	public function test_exclude_tree_should_be_merged_with_exclude() {
 		$c       = self::factory()->category->create();
@@ -441,8 +414,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( '<li class="cat-item cat-item-' . $child2 . '">', $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35156' )]
 	public function test_comma_separated_exclude_tree_should_be_merged_with_exclude() {
 		$c       = self::factory()->category->create();
@@ -527,8 +498,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( '<li class="cat-item cat-item-' . $child4 . '">', $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35156' )]
 	public function test_array_exclude_tree_should_be_merged_with_exclude() {
 		$c       = self::factory()->category->create();
@@ -613,8 +582,6 @@ class Tests_Category_WpListCategories extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( '<li class="cat-item cat-item-' . $child4 . '">', $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '10676' )]
 	public function test_class_containing_current_cat_ancestor() {
 		$parent     = self::factory()->category->create(

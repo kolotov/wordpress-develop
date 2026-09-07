@@ -1,16 +1,11 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'general' )]
 #[\PHPUnit\Framework\Attributes\Group( 'template' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '42438' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_preload_resources' )]
 class Tests_General_wpPreloadResources extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_preload_resources' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '42438' )]
 	public function test_preload_resources( $expected, $urls ) {

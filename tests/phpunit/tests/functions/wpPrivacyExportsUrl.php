@@ -8,16 +8,12 @@
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 class Tests_Functions_wpPrivacyExportsUrl extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59709' )]
 	public function test_wp_privacy_exports_url() {
 		$upload_dir = wp_upload_dir();
 		$this->assertSame( trailingslashit( $upload_dir['baseurl'] ) . 'wp-personal-data-exports/', wp_privacy_exports_url() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59709' )]
 	public function test_wp_privacy_exports_url_filtered() {
 		add_filter( 'wp_privacy_exports_url', array( $this, 'filter_wp_privacy_exports_url' ) );

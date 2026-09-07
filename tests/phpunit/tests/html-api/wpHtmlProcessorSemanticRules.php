@@ -26,7 +26,6 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59914' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_article_container_group' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	public function test_in_body_article_group_closes_open_p_element( $tag_name ) {
 		$processor = WP_HTML_Processor::create_fragment( "<p><p><p><p><{$tag_name} target>" );
@@ -59,7 +58,6 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59914' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_article_container_group' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	public function test_in_body_article_group_can_nest_inside_itself( $tag_name ) {
 		$processor = WP_HTML_Processor::create_fragment( "<div><{$tag_name}><{$tag_name}></{$tag_name}><{$tag_name}><span><{$tag_name} target>" );
@@ -357,7 +355,6 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 * @since 6.4.0
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58907' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	public function test_in_body_any_other_end_tag_with_unclosed_special_element() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><span><p></span><div>' );
@@ -381,7 +378,6 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 * @since 6.4.0
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58907' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	public function test_in_body_any_other_end_tag_with_unclosed_non_special_element() {
 		$processor = WP_HTML_Processor::create_fragment( '<div><span><code></span><div>' );
@@ -419,7 +415,6 @@ class Tests_HtmlApi_WpHtmlProcessorSemanticRules extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60283' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	public function test_br_end_tag_unsupported() {
 		$processor = WP_HTML_Processor::create_fragment( '</br id="an-opener" html>' );

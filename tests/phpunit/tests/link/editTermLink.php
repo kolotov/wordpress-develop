@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'link' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'edit_term_link' )]
 class Tests_Link_EditTermLink extends WP_UnitTestCase {

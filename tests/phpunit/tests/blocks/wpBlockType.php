@@ -8,7 +8,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
 class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 
 	/**
@@ -62,8 +61,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	public function test_set_props() {
 		$name = 'core/fake';
@@ -122,8 +119,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	public function test_render() {
 		$attributes = array(
@@ -141,8 +136,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertSame( $attributes, json_decode( $output, true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	public function test_render_with_content() {
 		$attributes = array(
@@ -164,8 +157,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertSame( $expected, json_decode( $output, true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	public function test_render_for_static_block() {
 		$block_type = new WP_Block_Type( 'core/fake', array() );
@@ -174,8 +165,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertSame( '', $output );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	public function test_is_dynamic_for_static_block() {
 		$block_type = new WP_Block_Type( 'core/fake', array() );
@@ -183,8 +172,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertFalse( $block_type->is_dynamic() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	public function test_is_dynamic_for_dynamic_block() {
 		$block_type = new WP_Block_Type(
@@ -197,8 +184,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertTrue( $block_type->is_dynamic() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	public function test_prepare_attributes() {
 		$attributes = array(
@@ -251,8 +236,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45145' )]
 	public function test_prepare_attributes_none_defined() {
 		$attributes = array( 'exists' => 'keep' );
@@ -264,8 +247,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertSame( $attributes, $prepared_attributes );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	public function test_has_block_with_mixed_content() {
 		$mixed_post_content = 'before' .
@@ -299,8 +280,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertFalse( has_block( 'core', $mixed_post_content ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	public function test_has_block_with_invalid_content() {
 		// some content with invalid HTML comments and a single valid block.
@@ -322,8 +301,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertTrue( has_block( 'core/fake', $invalid_content ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	public function test_post_has_block() {
 		// should fail for a non-existent block `custom/fake`.
@@ -387,8 +364,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		return json_encode( $attributes );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48529' )]
 	public function test_register_block() {
 		$block_type = new WP_Block_Type(
@@ -458,8 +433,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59969' )]
 	public function test_variation_callback() {
 		$block_type = new WP_Block_Type(
@@ -473,8 +446,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertSameSets( $this->mock_variation_callback(), $block_type->variations );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59969' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type', 'get_variations' )]
 	public function test_get_variations() {
@@ -489,8 +460,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertSameSets( $this->mock_variation_callback(), $block_type->get_variations() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59969' )]
 	public function test_variations_precedence_over_callback() {
 		$test_variations = array( 'name' => 'test1' );
@@ -508,8 +477,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertSameSets( $test_variations, $block_type->variations );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59969' )]
 	public function test_variations_callback_are_lazy_loaded() {
 		$callback_called = false;
@@ -530,8 +497,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertTrue( $callback_called, 'The callback should be called when the variations are accessed.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59969' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type', 'get_variations' )]
 	public function test_variations_precedence_over_callback_post_registration() {
@@ -555,8 +520,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertFalse( $callback_called, 'The callback was never called.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59969' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type', 'get_variations' )]
 	public function test_variations_callback_happens_only_once() {
@@ -592,8 +555,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		return array( array( 'name' => 'test1' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59969' )]
 	public function test_get_block_type_variations_filter_with_variation_callback() {
 		// Filter will override the variations obtained from the callback.
@@ -618,8 +579,6 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 		$this->assertSameSets( $obtained_variations, $expected_variations, 'The variations obtained from the callback should be filtered.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59969' )]
 	public function test_get_block_type_variations_filter_variations() {
 		// Filter will override the variations set during registration.

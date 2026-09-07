@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_heartbeat_set_suspension' )]
 class Tests_Admin_Includes_Misc_WpHeartbeatSetSuspension_Test extends WP_UnitTestCase {

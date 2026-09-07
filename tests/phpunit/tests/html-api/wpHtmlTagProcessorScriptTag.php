@@ -144,9 +144,6 @@ class Tests_HtmlApi_WpHtmlTagProcessorScriptTag extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64419' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_script_content_type' )]
 	public function test_get_script_content_type_returns_null_before_finding_tags() {
@@ -159,9 +156,6 @@ class Tests_HtmlApi_WpHtmlTagProcessorScriptTag extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64419' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_script_content_type' )]
 	public function test_get_script_content_type_returns_null_for_non_html_namespace() {

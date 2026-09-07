@@ -107,8 +107,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		$this->assertSame( '', $result, 'Block content should be empty when blockVisibility is false, even without visibility support.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
 	public function test_block_visibility_support_no_visibility_attribute(): void {
 		$this->register_visibility_block_with_support(
@@ -127,8 +125,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		$this->assertSame( $block_content, $result, 'Block content should remain unchanged when no visibility attribute is present.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
 	public function test_block_visibility_support_generated_css_with_mobile_viewport_size(): void {
 		$this->register_visibility_block_with_support(
@@ -163,8 +159,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
 	public function test_block_visibility_support_generated_css_with_tablet_viewport_size(): void {
 		$this->register_visibility_block_with_support(
@@ -204,8 +198,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
 	public function test_block_visibility_support_generated_css_with_desktop_breakpoint(): void {
 		$this->register_visibility_block_with_support(
@@ -245,8 +237,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '64823' )]
 	public function test_block_visibility_support_generated_css_with_two_viewport_sizes(): void {
@@ -288,8 +278,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '64823' )]
 	public function test_block_visibility_support_generated_css_with_all_viewport_sizes_visible(): void {
@@ -319,8 +307,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		$this->assertSame( $block_content, $result, 'Block content should remain unchanged when all breakpoints are visible.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '64823' )]
 	public function test_block_visibility_support_generated_css_with_all_viewport_sizes_hidden(): void {
@@ -355,8 +341,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
 	public function test_block_visibility_support_generated_css_with_empty_object(): void {
 		$this->register_visibility_block_with_support(
@@ -379,8 +363,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		$this->assertSame( $block_content, $result, 'Block content should remain unchanged when blockVisibility is an empty array.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
 	public function test_block_visibility_support_generated_css_with_unknown_viewport_sizes_ignored(): void {
 		$this->register_visibility_block_with_support(
@@ -413,8 +395,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65596' )]
 	public function test_block_visibility_support_uses_custom_viewport_breakpoints(): void {
 		$this->register_visibility_block_with_support(
@@ -479,8 +459,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65596' )]
 	public function test_block_visibility_support_uses_single_max_width_tablet_query_for_single_breakpoint(): void {
 		$this->register_visibility_block_with_support(
@@ -543,8 +521,6 @@ class Tests_Block_Supports_BlockVisibility extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64414' )]
 	public function test_block_visibility_support_generated_css_with_empty_content(): void {
 		$this->register_visibility_block_with_support(

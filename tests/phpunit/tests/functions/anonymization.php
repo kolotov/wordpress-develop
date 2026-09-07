@@ -11,7 +11,6 @@
 
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 #[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_privacy_anonymize_data' )]
 class Tests_Functions_Anonymization extends WP_UnitTestCase {
 

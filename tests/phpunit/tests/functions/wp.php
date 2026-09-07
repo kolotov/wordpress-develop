@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp' )]

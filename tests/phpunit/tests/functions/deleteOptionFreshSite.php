@@ -9,8 +9,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_delete_option_fresh_site' )]
 class Tests_Functions_DeleteOptionFreshSite extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57191' )]
 	public function test_delete_option_fresh_site() {
 		$current_option = get_option( 'fresh_site' );

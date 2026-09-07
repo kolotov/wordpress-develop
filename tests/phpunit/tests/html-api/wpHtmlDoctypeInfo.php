@@ -6,9 +6,6 @@
  * @subpackage HTML-API
  */
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlDoctypeInfo extends WP_UnitTestCase {
 	/**
@@ -91,9 +88,6 @@ class Tests_HtmlApi_WpHtmlDoctypeInfo extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'invalid_inputs' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
 	public function test_invalid_inputs_return_null( string $html ) {

@@ -1,13 +1,11 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'array_first' )]
 class Tests_Compat_arrayFirst extends WP_UnitTestCase {
 
 	/**
+	 * Test that array_first() is always available (either from PHP or WP).
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63853' )]
 	public function test_array_first_availability(): void {

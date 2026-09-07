@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
@@ -80,8 +77,6 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 		return $the_date;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_the_modified_date_returns_false_with_null_or_non_existing_post() {
 		$this->assertFalse( get_the_modified_date() );
@@ -90,8 +85,6 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 		$this->assertFalse( get_the_modified_date( 'F j, Y h:i:s', 9 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_the_modified_date_returns_correct_time_with_empty_format() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2020-08-31 23:14:00' ) );
@@ -171,8 +164,6 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 		return $the_time;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_the_modified_time_returns_false_with_null_or_non_existing_post() {
 		$this->assertFalse( get_the_modified_time() );
@@ -181,8 +172,6 @@ class Tests_Date_GetTheModifiedDate extends WP_UnitTestCase {
 		$this->assertFalse( get_the_modified_time( 'h:i:s', 9 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51184' )]
 	public function test_get_the_modified_time_returns_correct_time_with_empty_format() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2020-08-31 23:14:00' ) );

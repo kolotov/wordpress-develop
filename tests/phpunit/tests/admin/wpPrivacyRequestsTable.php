@@ -9,9 +9,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\Group( 'privacy' )]
-
-
-
 class Tests_Admin_wpPrivacyRequestsTable extends WP_UnitTestCase {
 
 	/**

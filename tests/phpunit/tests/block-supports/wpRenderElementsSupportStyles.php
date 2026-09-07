@@ -1,11 +1,6 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_elements_support_styles' )]
 class Tests_Block_Supports_WpRenderElementsSupportStyles extends WP_UnitTestCase {
 	/**

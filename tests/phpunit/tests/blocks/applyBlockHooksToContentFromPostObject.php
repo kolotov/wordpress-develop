@@ -115,8 +115,6 @@ class Tests_Blocks_ApplyBlockHooksToContentFromPostObject extends WP_UnitTestCas
 		$registry->unregister( 'tests/dynamically-hooked-block-before-post-content' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62716' )]
 	public function test_apply_block_hooks_to_content_from_post_object_inserts_hooked_block() {
 		$expected = '<!-- wp:tests/hooked-block-first-child /-->' .
@@ -130,8 +128,6 @@ class Tests_Blocks_ApplyBlockHooksToContentFromPostObject extends WP_UnitTestCas
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65008' )]
 	public function test_apply_block_hooks_to_content_from_post_object_sets_ignored_hooked_blocks() {
 		$ignored_hooked_blocks_at_root = array();
@@ -155,8 +151,6 @@ class Tests_Blocks_ApplyBlockHooksToContentFromPostObject extends WP_UnitTestCas
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62716' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '65008' )]
 	public function test_apply_block_hooks_to_content_from_post_object_respects_ignored_hooked_blocks_post_meta() {
@@ -180,8 +174,6 @@ class Tests_Blocks_ApplyBlockHooksToContentFromPostObject extends WP_UnitTestCas
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63287' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '65008' )]
 	public function test_apply_block_hooks_to_content_from_post_object_does_not_insert_hooked_block_before_container_block() {
@@ -218,8 +210,6 @@ class Tests_Blocks_ApplyBlockHooksToContentFromPostObject extends WP_UnitTestCas
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62716' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '65008' )]
 	public function test_apply_block_hooks_to_content_from_post_object_inserts_hooked_block_if_content_contains_no_blocks() {

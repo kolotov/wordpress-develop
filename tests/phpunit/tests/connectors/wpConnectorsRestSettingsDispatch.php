@@ -40,8 +40,6 @@ class Tests_Connectors_WpConnectorsRestSettingsDispatch extends WP_UnitTestCase 
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_masks_application_password_but_not_username(): void {
 		$application_password = 'abcd efgh ijkl mnop 1234';

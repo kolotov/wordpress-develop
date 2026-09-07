@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'image' )]
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
 #[\PHPUnit\Framework\Attributes\Group( 'upload' )]
@@ -153,8 +151,6 @@ class Tests_Image_Dimensions extends WP_UnitTestCase {
 		remove_filter( 'wp_image_resize_identical_dimensions', '__return_true' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '19393' )]
 	public function test_crop_anchors() {
 		// Landscape: crop 640x480 to fit 400x500: 400x400 taken from a 480x480 crop.

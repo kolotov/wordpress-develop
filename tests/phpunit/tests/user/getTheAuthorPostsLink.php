@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'author' )]
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_author_posts_link' )]
@@ -38,8 +35,6 @@ class Tests_User_GetTheAuthorPostsLink extends WP_UnitTestCase {
 		setup_postdata( get_post( self::$post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30355' )]
 	public function test_get_the_author_posts_link_no_permalinks() {
 		$author = get_userdata( self::$author_id );
@@ -56,8 +51,6 @@ class Tests_User_GetTheAuthorPostsLink extends WP_UnitTestCase {
 		unset( $GLOBALS['authordata'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30355' )]
 	public function test_get_the_author_posts_link_with_permalinks() {
 		$this->set_permalink_structure( '/%postname%/' );
@@ -78,8 +71,6 @@ class Tests_User_GetTheAuthorPostsLink extends WP_UnitTestCase {
 		unset( $GLOBALS['authordata'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58157' )]
 	public function test_get_the_author_posts_link_should_return_empty_string_if_authordata_is_not_set() {
 		unset( $GLOBALS['authordata'] );

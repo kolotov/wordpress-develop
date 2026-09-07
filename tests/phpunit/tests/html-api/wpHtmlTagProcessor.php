@@ -6,18 +6,12 @@
  * @subpackage HTML-API
  */
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 	const HTML_SIMPLE       = '<div id="first"><span id="second">Text</span></div>';
 	const HTML_WITH_CLASSES = '<div class="main with-border" id="first"><span class="not-main bold with-border" id="second">Text</span></div>';
 	const HTML_MALFORMED    = '<div><span class="d-md-none" Notifications</span><span class="d-none d-md-inline">Back to notifications</span></div>';
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_tag' )]
 	public function test_get_tag_returns_null_before_finding_tags() {
@@ -26,9 +20,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertNull( $processor->get_tag(), 'Calling get_tag() without selecting a tag did not return null' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_tag' )]
 	public function test_get_tag_returns_null_when_not_in_open_tag() {
@@ -38,9 +29,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertNull( $processor->get_tag(), 'Accessing a non-existing tag did not return null' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_tag' )]
 	public function test_get_tag_returns_open_tag_name() {
@@ -121,9 +109,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_returns_null_before_finding_tags() {
@@ -132,9 +117,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertNull( $processor->get_attribute( 'class' ), 'Accessing an attribute without selecting a tag did not return null' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_returns_null_when_not_in_open_tag() {
@@ -144,9 +126,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertNull( $processor->get_attribute( 'class' ), 'Accessing an attribute of a non-existing tag did not return null' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_returns_null_when_in_closing_tag() {
@@ -157,9 +136,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertNull( $processor->get_attribute( 'class' ), 'Accessing an attribute of a closing tag did not return null' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_returns_null_when_attribute_missing() {
@@ -169,9 +145,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertNull( $processor->get_attribute( 'test-id' ), 'Accessing a non-existing attribute did not return null' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_returns_attribute_value() {
@@ -181,9 +154,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertSame( 'test', $processor->get_attribute( 'class' ), 'Accessing a class="test" attribute value did not return "test"' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_returns_true_for_boolean_attribute() {
@@ -193,9 +163,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertTrue( $processor->get_attribute( 'enabled' ), 'Accessing a boolean "enabled" attribute value did not return true' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_returns_string_for_truthy_attributes() {
@@ -207,9 +174,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertSame( 'true', $processor->get_attribute( 'hidden' ), 'Accessing a hidden="true" attribute value did not return "true"' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_decodes_html_character_references() {
@@ -219,9 +183,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertSame( 'the "grande" is < 32oz†', $processor->get_attribute( 'id' ), 'HTML Attribute value was returned without decoding character references' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_attributes_parser_treats_slash_as_attribute_separator() {
@@ -288,9 +249,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_attribute' )]
 	public function test_remove_attribute_is_case_insensitive() {
@@ -301,9 +259,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertSame( '<div >Test</div>', $processor->get_updated_html(), 'A case-insensitive remove_attribute call did not remove the attribute' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	public function test_set_attribute_is_case_insensitive() {
@@ -376,9 +331,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		return $invalid_names;
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute_names_with_prefix' )]
 	public function test_get_attribute_names_with_prefix_returns_null_before_finding_tags() {
@@ -389,9 +341,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute_names_with_prefix' )]
 	public function test_get_attribute_names_with_prefix_returns_null_when_not_in_open_tag() {
@@ -400,9 +349,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertNull( $processor->get_attribute_names_with_prefix( 'data-' ), 'Accessing attributes of a non-existing tag did not return null' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute_names_with_prefix' )]
 	public function test_get_attribute_names_with_prefix_returns_null_when_in_closing_tag() {
@@ -413,9 +359,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertNull( $processor->get_attribute_names_with_prefix( 'data-' ), 'Accessing attributes of a closing tag did not return null' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute_names_with_prefix' )]
 	public function test_get_attribute_names_with_prefix_returns_empty_array_when_no_attributes_present() {
@@ -425,9 +368,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertSame( array(), $processor->get_attribute_names_with_prefix( 'data-' ), 'Accessing the attributes on a tag without any did not return an empty array' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute_names_with_prefix' )]
 	public function test_get_attribute_names_with_prefix_returns_matching_attribute_names_in_lowercase() {
@@ -441,9 +381,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute_names_with_prefix' )]
 	public function test_get_attribute_names_with_prefix_returns_attribute_added_by_set_attribute() {
@@ -671,9 +608,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', '__toString' )]
 	public function test_to_string_returns_updated_html() {
@@ -692,9 +626,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_updated_html' )]
 	public function test_get_updated_html_applies_the_updates_so_far_and_keeps_the_processor_on_the_current_tag() {
@@ -731,9 +662,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_updated_html' )]
 	public function test_get_updated_html_without_updating_any_attributes_returns_the_original_html() {
@@ -870,9 +798,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	public function test_next_tag_with_no_arguments_should_find_the_next_existing_tag() {
@@ -881,9 +806,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertTrue( $processor->next_tag(), 'Querying an existing tag did not return true' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	public function test_next_tag_should_return_false_for_a_non_existing_tag() {
@@ -892,8 +814,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertFalse( $processor->next_tag( 'p' ), 'Querying a non-existing tag did not return false' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61545' )]
 	public function test_next_tag_should_not_match_on_substrings_of_a_requested_tag() {
 		$processor = new WP_HTML_Tag_Processor( '<p><pic><picture>' );
@@ -917,9 +837,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59209' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	public function test_next_tag_matches_decoded_class_names() {
@@ -928,9 +845,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertTrue( $processor->next_tag( array( 'class_name' => '<egg>' ) ), 'Failed to find tag with HTML-encoded class name.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '57852' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
@@ -966,9 +880,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertFalse( $processor->next_tag( array( 'tag_closers' => 'visit' ) ), "Found a closer where there wasn't one" );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57852' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'is_tag_closer' )]
@@ -1033,9 +944,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertFalse( $tags->is_tag_closer() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	public function test_set_attribute_on_a_non_existing_tag_does_not_change_the_markup() {
@@ -1053,9 +961,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_attribute' )]
@@ -1161,9 +1066,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	public function test_set_attribute_with_a_non_existing_attribute_adds_a_new_attribute_to_the_markup() {
@@ -1198,9 +1100,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertEqualHTML( '<span data-attr="HTML character references: &amp;lt; &amp;gt; &amp;amp;">', $processor->get_updated_html() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_returns_updated_values_before_they_are_applied() {
@@ -1220,9 +1119,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_returns_updated_values_before_they_are_applied_with_different_name_casing() {
@@ -1242,9 +1138,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_reflects_added_class_names_before_they_are_applied() {
@@ -1264,9 +1157,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_reflects_added_class_names_before_they_are_applied_and_retains_classes_from_previous_add_class_calls() {
@@ -1294,9 +1184,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_reflects_removed_attribute_before_it_is_applied() {
@@ -1315,9 +1202,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_reflects_adding_and_then_removing_an_attribute_before_those_updates_are_applied() {
@@ -1337,9 +1221,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_reflects_setting_and_then_removing_an_existing_attribute_before_those_updates_are_applied() {
@@ -1359,9 +1240,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_reflects_removed_class_names_before_they_are_applied() {
@@ -1381,9 +1259,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_reflects_setting_and_then_removing_a_class_name_before_those_updates_are_applied() {
@@ -1404,9 +1279,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_reflects_duplicating_and_then_removing_an_existing_class_name_before_those_updates_are_applied() {
@@ -1447,9 +1319,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	public function test_set_attribute_with_an_existing_attribute_name_updates_its_value_in_the_markup() {
@@ -1481,9 +1350,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		$this->assertSame( '<div data-enabled="canary">', strtolower( $processor->get_updated_html() ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
@@ -1522,9 +1388,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_attribute' )]
 	public function test_remove_attribute_with_an_existing_attribute_name_removes_it_from_the_markup() {
@@ -1594,9 +1457,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_attribute' )]
 	public function test_remove_attribute_with_a_non_existing_attribute_name_does_not_change_the_markup() {
@@ -1611,9 +1471,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'add_class' )]
 	public function test_add_class_creates_a_class_attribute_when_there_is_none() {
@@ -1633,9 +1490,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'add_class' )]
 	public function test_calling_add_class_twice_creates_a_class_attribute_with_both_class_names_when_there_is_no_class_attribute() {
@@ -1656,9 +1510,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_class' )]
 	public function test_remove_class_does_not_change_the_markup_when_there_is_no_class_attribute() {
@@ -1677,9 +1528,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'add_class' )]
 	public function test_add_class_appends_class_names_to_the_existing_class_attribute_when_one_already_exists() {
@@ -1700,9 +1548,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_class' )]
 	public function test_remove_class_removes_a_single_class_from_the_class_attribute_when_one_exists() {
@@ -1722,9 +1567,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_class' )]
 	public function test_calling_remove_class_with_all_listed_class_names_removes_the_existing_class_attribute_from_the_markup() {
@@ -1744,9 +1586,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'add_class' )]
 	public function test_add_class_does_not_add_duplicate_class_names() {
@@ -1766,9 +1605,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'add_class' )]
 	public function test_add_class_preserves_class_name_order_when_a_duplicate_class_name_is_added() {
@@ -1788,9 +1624,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'add_class' )]
 	public function test_add_class_when_there_is_a_class_attribute_with_excessive_whitespaces() {
@@ -1812,9 +1645,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_class' )]
 	public function test_remove_class_preserves_whitespaces_when_there_is_a_class_attribute_with_excessive_whitespaces() {
@@ -1836,9 +1666,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_class' )]
 	public function test_removing_all_classes_removes_the_existing_class_attribute_from_the_markup_even_when_excessive_whitespaces_are_present() {
@@ -1951,9 +1778,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'add_class' )]
 	public function test_add_class_overrides_boolean_class_attribute() {
@@ -1973,9 +1797,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'add_class' )]
 	public function test_add_class_overrides_boolean_class_attribute_even_before_updating() {
@@ -1995,9 +1816,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_attribute' )]
@@ -2095,9 +1913,6 @@ HTML;
 		$this->assertSame( $expected_output, $processor->get_updated_html(), 'Calling get_updated_html after updating the attributes did not return the expected HTML' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	public function test_correctly_parses_html_attributes_wrapped_in_single_quotation_marks() {
@@ -2125,9 +1940,6 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	public function test_set_attribute_with_value_equal_to_true_adds_a_boolean_html_attribute_with_implicit_value() {
@@ -2143,9 +1955,6 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	public function test_setting_a_boolean_attribute_to_false_removes_it_from_the_markup() {
@@ -2161,9 +1970,6 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	public function test_setting_a_missing_attribute_to_false_does_not_change_the_markup() {
@@ -2178,9 +1984,6 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	public function test_setting_a_boolean_attribute_to_a_string_value_adds_explicit_value_to_the_markup() {
@@ -2196,9 +1999,6 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'paused_at_incomplete_token' )]
@@ -2569,9 +2369,6 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59209' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'class_list' )]
 	public function test_class_list_empty_when_missing_class() {
@@ -2586,9 +2383,6 @@ HTML;
 		$this->assertFalse( $found_classes, 'Found classes when none exist.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59209' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'class_list' )]
 	public function test_class_list_empty_when_class_is_boolean() {
@@ -2603,9 +2397,6 @@ HTML;
 		$this->assertFalse( $found_classes, 'Found classes when none exist.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59209' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'class_list' )]
 	public function test_class_list_empty_when_class_is_empty() {
@@ -2620,9 +2411,6 @@ HTML;
 		$this->assertFalse( $found_classes, 'Found classes when none exist.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59209' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'class_list' )]
 	public function test_class_list_visits_each_class_in_order() {
@@ -2637,9 +2425,6 @@ HTML;
 		$this->assertSame( array( 'one', 'two', 'three' ), $found_classes, 'Failed to visit the class names in their original order.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59209' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'class_list' )]
 	public function test_class_list_decodes_class_names() {
@@ -2654,9 +2439,6 @@ HTML;
 		$this->assertSame( array( '∉-class', '<egg>', "\u{ff03}" ), $found_classes, 'Failed to report class names in their decoded form.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59209' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'class_list' )]
 	public function test_class_list_visits_unique_class_names_only_once() {
@@ -2880,9 +2662,6 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
@@ -2901,9 +2680,6 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'remove_attribute' )]
@@ -3028,9 +2804,6 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_attribute' )]
 	public function test_updating_specific_attributes_in_malformed_html() {
@@ -3291,8 +3064,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64340' )]
 	public function test_class_changes_produce_correct_html() {
 		$processor = new WP_HTML_Tag_Processor( '<div class="&amp;">' );
@@ -3335,8 +3106,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	public function test_handles_malformed_taglike_open_short_html() {
 		$processor = new WP_HTML_Tag_Processor( '<' );
@@ -3344,8 +3113,6 @@ HTML
 		$this->assertFalse( $result, 'Did not handle "<" html properly.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_tag' )]
 	public function test_handles_malformed_taglike_close_short_html() {
 		$processor = new WP_HTML_Tag_Processor( '</ ' );
@@ -3437,9 +3204,6 @@ HTML
 		$this->assertNull( $doctype->system_identifier );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62522' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_alphabet_by_characters_lowercase' )]
 	public function test_recognizes_lowercase_tag_name( string $char ) {
@@ -3456,9 +3220,6 @@ HTML
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62522' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_alphabet_by_characters_uppercase' )]
 	public function test_recognizes_uppercase_tag_name( string $char ) {

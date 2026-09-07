@@ -10,8 +10,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 #[\PHPUnit\Framework\Attributes\Group( 'themes' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversMethod( WP_Theme::class, 'get_block_patterns' )]
 class Tests_Theme_WPThemeGetBlockPatterns extends WP_UnitTestCase {
 	/**
@@ -104,9 +102,6 @@ class Tests_Theme_WPThemeGetBlockPatterns extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $patterns );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59490' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Theme', 'delete_pattern_cache' )]
 	public function test_delete_pattern_cache() {
@@ -135,8 +130,6 @@ class Tests_Theme_WPThemeGetBlockPatterns extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59490' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_should_clear_cache_after_switching_theme() {
@@ -248,9 +241,6 @@ class Tests_Theme_WPThemeGetBlockPatterns extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59600' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Theme', 'delete_pattern_cache' )]
 	public function test_delete_pattern_cache_non_obj_cache() {

@@ -30,7 +30,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * @expectedIncorrectUsage WP_HTML_Processor::__construct
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', '__construct' )]
 	public function test_warns_that_the_static_creator_methods_should_be_called_instead_of_the_public_constructor() {
 		new WP_HTML_Processor( '<p>Light roast.</p>' );
@@ -41,7 +40,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * @expectedIncorrectUsage WP_HTML_Processor::create_fragment
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63854' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'create_fragment' )]
 	public function test_create_fragment_validates_html_parameter() {
 		$processor = WP_HTML_Processor::create_fragment( null );
@@ -53,7 +51,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 * @expectedIncorrectUsage WP_HTML_Processor::create_full_parser
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63854' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'create_full_parser' )]
 	public function test_create_full_parser_validates_html_parameter() {
 		$processor = WP_HTML_Processor::create_full_parser( null );
@@ -68,7 +65,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59167' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'get_tag' )]
 	public function test_get_tag_is_null_once_document_is_finished() {
 		$processor = WP_HTML_Processor::create_fragment( '<div class="test">Test</div>' );
@@ -98,7 +94,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61576' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'get_tag' )]
 	public function test_get_tag_replaces_image_with_namespace_awareness() {
 		$processor = WP_HTML_Processor::create_fragment( '<image/><svg><image/></svg>' );
@@ -145,8 +140,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
-
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'next_tag' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'seek' )]
 	public function test_clear_to_navigate_after_seeking() {
@@ -197,7 +190,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58517' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'reconstruct_active_formatting_elements' )]
 	public function test_fails_to_reconstruct_formatting_elements() {
 		$processor = WP_HTML_Processor::create_fragment( '<p><em>One<p><em>Two<p><em>Three<p><em>Four' );
@@ -216,8 +208,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60283' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_void_tags_not_ignored_in_body' )]
-
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'step_in_body' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'is_void' )]
 	public function test_cannot_nest_void_tags( $tag_name ) {
@@ -702,7 +692,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'remove_class' )]
 	public function test_remove_class_no_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<!DOCTYPE html><span class="UPPER">' );
@@ -720,7 +709,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'add_class' )]
 	public function test_add_class_no_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<!DOCTYPE html><span class="UPPER">' );
@@ -738,7 +726,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'has_class' )]
 	public function test_has_class_no_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<!DOCTYPE html><span class="UPPER">' );
@@ -753,7 +740,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'class_list' )]
 	public function test_class_list_no_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser(
@@ -782,7 +768,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'remove_class' )]
 	public function test_remove_class_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<span class="uPPER">' );
@@ -797,7 +782,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'add_class' )]
 	public function test_add_class_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<span class="UPPER">' );
@@ -816,7 +800,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'has_class' )]
 	public function test_has_class_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser( '<span class="UPPER">' );
@@ -831,7 +814,6 @@ class Tests_HtmlApi_WpHtmlProcessor extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61531' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Processor', 'class_list' )]
 	public function test_class_list_quirks_mode() {
 		$processor = WP_HTML_Processor::create_full_parser(

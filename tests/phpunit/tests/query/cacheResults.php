@@ -1,11 +1,6 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversMethod( WP_Query::class, 'get_posts' )]
 class Test_Query_CacheResults extends WP_UnitTestCase {
 	/**
@@ -178,8 +173,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSame( $cache_key_1, $cache_key_2, 'Cache key differs when using wpdb placeholder.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59442' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_generate_cache_key_unregister_post_type() {
@@ -209,9 +202,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $cache_key_1, $cache_key_2, 'Cache key should differ after unregistering post type.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_post_in_order_by_clauses_are_not_normalized() {
@@ -260,9 +250,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSameSets( wp_list_pluck( $query1->posts, 'ID' ), wp_list_pluck( $query2->posts, 'ID' ), 'Query one posts should match the set of query two posts.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_post_parent_in_order_by_clauses_are_not_normalized() {
@@ -326,9 +313,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSameSets( wp_list_pluck( $query1->posts, 'ID' ), wp_list_pluck( $query2->posts, 'ID' ), 'Query one posts should match the set of query two posts.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59516' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Query', 'generate_cache_key' )]
 	public function test_post_name_in_order_by_clauses_are_not_normalized() {
@@ -387,10 +371,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSameSets( wp_list_pluck( $query1->posts, 'ID' ), wp_list_pluck( $query2->posts, 'ID' ), 'Query one posts should match the set of query two posts.' );
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59442' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '59516' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_cache_duplicate' )]
@@ -425,8 +405,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotEmpty( $cache_key_2, 'Cache key for query two should not be empty.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_cache' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache( $args ) {
@@ -940,8 +918,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_seeded_random_queries_only_cache_post_objects() {
 		$args   = array(
@@ -961,8 +937,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $queries_before, $queries_after );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_unseeded_random_queries_only_cache_post_objects() {
 		$args   = array(
@@ -982,8 +956,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $queries_before, $queries_after );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_filter_request() {
 		$args   = array(
@@ -1004,8 +976,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $queries_before, $queries_after );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_no_caching() {
 		$args   = array(
@@ -1029,8 +999,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		return $request . ' -- Add comment';
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_new_post() {
 		$args   = array(
@@ -1050,8 +1018,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_main_query_sticky_posts_change() {
 		add_action( 'parse_query', array( $this, 'set_cache_results' ) );
@@ -1081,8 +1047,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSame( $expected, $stuck_ids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_main_query_in_query_sticky_posts_change() {
 		add_action( 'parse_query', array( $this, 'set_cache_results' ) );
@@ -1111,8 +1075,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSame( $expected, $stuck_ids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_sticky_posts_change() {
 		add_action( 'parse_query', array( $this, 'set_cache_results' ) );
@@ -1156,8 +1118,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $unstuck, $stuck );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_in_query_sticky_posts_change() {
 		add_action( 'parse_query', array( $this, 'set_cache_results' ) );
@@ -1204,8 +1164,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$q->set( 'cache_results', true );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_different_args() {
 		$args   = array(
@@ -1233,8 +1191,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_different_fields() {
 		$args   = array(
@@ -1270,8 +1226,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_query_cache_unprimed_parents() {
 		$args   = array(
@@ -1302,8 +1256,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSame( $query1->found_posts, $query2->found_posts, 'Found posts should match on second query' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_query_cache_update_parent() {
 		$page_id = self::factory()->post->create(
@@ -1341,8 +1293,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSame( $query1->found_posts, $query2->found_posts, 'Found posts should match on second query' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59188' )]
 	public function test_query_cache_delete_parent() {
 		$parent_page_id = self::factory()->post->create(
@@ -1380,8 +1330,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSame( $query1->found_posts, $query2->found_posts, 'Found posts should match on second query' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_logged_in() {
 		$user_id = self::$author_id;
@@ -1409,8 +1357,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_logged_in_password() {
 		$user_id = self::$author_id;
@@ -1438,8 +1384,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_new_comment() {
 		$args   = array(
@@ -1461,8 +1405,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_main_comments_feed_includes_attachment_comments() {
 		$attachment_id = self::factory()->post->create( array( 'post_type' => 'attachment' ) );
@@ -1491,8 +1433,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertEquals( $comment_id, $feed_comment->comment_ID );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_delete_comment() {
 		$comment_id = self::factory()->comment->create( array( 'comment_post_ID' => self::$posts[0] ) );
@@ -1514,8 +1454,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_update_post() {
 		$p1 = self::$posts[0];
@@ -1543,8 +1481,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_new_meta() {
 		$p1 = self::$posts[1]; // Post 0 already has a color meta value.
@@ -1571,8 +1507,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_update_meta() {
 		// Posts[0] already has a color meta value set to #000000.
@@ -1603,8 +1537,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_delete_attachment() {
 		$p1 = self::factory()->post->create(
@@ -1634,8 +1566,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_delete_meta() {
 		// Post 0 already has a color meta value.
@@ -1665,8 +1595,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_new_term() {
 		// Post 0 already has the category foo.
@@ -1696,8 +1624,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_delete_term() {
 		// Post 0 already has the category foo.
@@ -1733,8 +1659,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $query1->found_posts, $query2->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58599' )]
 	public function test_query_posts_fields_request() {
 		global $wpdb;
@@ -1770,8 +1694,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		return "{$wpdb->posts}.ID";
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58599' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_filter_posts_results' )]
 	public function test_query_filter_posts_results( $filter ) {
@@ -1812,8 +1734,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_should_exclude_post_with_excluded_term() {
 		$term_id = self::$t1;
@@ -1841,8 +1761,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertSame( $num_queries, get_num_queries(), 'Second query is not cached.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_should_exclude_post_when_excluded_term_is_added_after_caching() {
 		$term_id = self::$t1;
@@ -1871,8 +1789,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $num_queries, get_num_queries(), 'Applying term does not invalidate previous cache.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	public function test_query_cache_should_not_exclude_post_when_excluded_term_is_removed_after_caching() {
 		$term_id = self::$t1;
@@ -1902,8 +1818,6 @@ class Test_Query_CacheResults extends WP_UnitTestCase {
 		$this->assertNotSame( $num_queries, get_num_queries(), 'Removing term does not invalidate previous cache.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22176' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_query_cache_with_empty_result_set' )]
 	public function test_query_cache_with_empty_result_set( $fields_q1, $fields_q2 ) {

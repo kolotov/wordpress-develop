@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
 class Tests_User_CountUserPosts extends WP_UnitTestCase {
@@ -62,29 +60,21 @@ class Tests_User_CountUserPosts extends WP_UnitTestCase {
 		$this->assertSame( '4', count_user_posts( self::$user_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21364' )]
 	public function test_count_user_posts_post_type_post() {
 		$this->assertSame( '4', count_user_posts( self::$user_id, 'post' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21364' )]
 	public function test_count_user_posts_post_type_cpt() {
 		$this->assertSame( '3', count_user_posts( self::$user_id, 'wptests_pt' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32243' )]
 	public function test_count_user_posts_with_multiple_post_types() {
 		$this->assertSame( '7', count_user_posts( self::$user_id, array( 'wptests_pt', 'post' ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32243' )]
 	public function test_count_user_posts_should_ignore_non_existent_post_types() {
 		$this->assertSame( '4', count_user_posts( self::$user_id, array( 'foo', 'post' ) ) );

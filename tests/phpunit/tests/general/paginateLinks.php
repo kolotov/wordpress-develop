@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'general' )]
 #[\PHPUnit\Framework\Attributes\Group( 'template' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'paginate_links' )]
@@ -154,8 +152,6 @@ EXPECTED;
 		$this->i18n_count += 1;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25735' )]
 	public function test_paginate_links_number_format() {
 		$this->i18n_count = 0;
@@ -176,8 +172,6 @@ EXPECTED;
 		remove_filter( 'number_format_i18n', array( $this, 'increment_i18n_count' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24606' )]
 	public function test_paginate_links_base_value() {
 
@@ -257,8 +251,6 @@ EXPECTED;
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29636' )]
 	public function test_paginate_links_query_args() {
 		add_filter( 'get_pagenum_link', array( $this, 'add_query_arg' ) );
@@ -295,8 +287,6 @@ EXPECTED;
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30831' )]
 	public function test_paginate_links_with_custom_query_args() {
 		add_filter( 'get_pagenum_link', array( $this, 'add_query_arg' ) );
@@ -335,8 +325,6 @@ EXPECTED;
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30831' )]
 	public function test_paginate_links_should_allow_non_default_format_without_add_args() {
 		// Fake the query params.
@@ -361,8 +349,6 @@ EXPECTED;
 		$_SERVER['REQUEST_URI'] = $request_uri;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30831' )]
 	public function test_paginate_links_should_allow_add_args_to_be_bool_false() {
 		// Fake the query params.
@@ -383,8 +369,6 @@ EXPECTED;
 		$this->assertContains( '<span aria-current="page" class="page-numbers current">3</span>', $links );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31939' )]
 	public function test_custom_base_query_arg_should_be_stripped_from_current_url_before_generating_pag_links() {
 		// Fake the current URL: example.com?foo.

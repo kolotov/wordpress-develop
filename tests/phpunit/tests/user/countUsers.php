@@ -1,13 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_CountUsers extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22993' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_count_users_strategies' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
@@ -66,9 +61,6 @@ class Tests_User_CountUsers extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22993' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '36196' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
@@ -175,9 +167,6 @@ class Tests_User_CountUsers extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42014' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
@@ -204,9 +193,6 @@ class Tests_User_CountUsers extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34495' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_count_users_strategies' )]
 	public function test_count_users_is_accurate_with_multiple_roles( $strategy ) {
@@ -248,9 +234,6 @@ class Tests_User_CountUsers extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29785' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_count_users_strategies' )]
 	public function test_count_users_should_not_count_users_who_are_not_in_posts_table( $strategy ) {

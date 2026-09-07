@@ -221,8 +221,6 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 		$this->assertSame( $expected, $query->queries );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23033' )]
 	public function test_get_cast_for_type() {
 		$query = new WP_Meta_Query();
@@ -500,8 +498,6 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 		$this->assertFalse( $query->get_sql( 'foo', 'foo', 'foo' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22096' )]
 	public function test_empty_value_sql() {
 		global $wpdb;
@@ -531,8 +527,6 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 		$this->assertSame( 3, substr_count( $sql['join'], 'JOIN' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22967' )]
 	public function test_null_value_sql() {
 		global $wpdb;
@@ -929,8 +923,6 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( "{$wpdb->postmeta}.post_id IS NULL", $sql['where'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32592' )]
 	public function test_has_or_relation_should_return_false() {
 		$q = new WP_Meta_Query(
@@ -957,8 +949,6 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 		$this->assertFalse( $q->has_or_relation() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32592' )]
 	public function test_has_or_relation_should_return_true_for_top_level_or() {
 		$q = new WP_Meta_Query(
@@ -985,8 +975,6 @@ class Tests_Meta_Query extends WP_UnitTestCase {
 		$this->assertTrue( $q->has_or_relation() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32592' )]
 	public function test_has_or_relation_should_return_true_for_nested_or() {
 		$q = new WP_Meta_Query(

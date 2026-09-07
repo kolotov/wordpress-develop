@@ -7,8 +7,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Query_Vars extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35115' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '51154' )]
 	public function testPublicQueryVarsAreAsExpected() {

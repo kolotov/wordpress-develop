@@ -1,6 +1,4 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'author' )]
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_list_authors' )]
@@ -285,8 +283,6 @@ class Tests_User_wpListAuthors extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26538' )]
 	public function test_wp_list_authors_feed_type() {
 		$url0 = get_author_feed_link( self::$user_ids[0], 'atom' );

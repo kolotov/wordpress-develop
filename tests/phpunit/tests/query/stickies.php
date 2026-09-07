@@ -106,8 +106,6 @@ class Tests_Query_Stickies extends WP_UnitTestCase {
 		$q->set( 'post__not_in', array( self::$posts[8] ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36907' )]
 	public function test_stickies_should_obey_parameters_from_the_main_query() {
 		$filter = new MockAction();
@@ -127,8 +125,6 @@ class Tests_Query_Stickies extends WP_UnitTestCase {
 		$this->assertTrue( $sticky_query_vars['no_found_rows'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36907' )]
 	public function test_stickies_should_limit_query() {
 		$sticky_count = 6;

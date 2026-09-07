@@ -1,14 +1,10 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 #[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_wpCountSites extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37392' )]
 	public function test_wp_count_sites() {
 		// Create a random number of sites with each status.

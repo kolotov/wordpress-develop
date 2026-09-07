@@ -5,8 +5,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'customize' )]
-
-
 class Tests_WP_Customize_Widgets extends WP_UnitTestCase {
 
 	/**

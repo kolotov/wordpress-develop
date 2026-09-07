@@ -9,9 +9,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_timezone_choice_usort_callback' )]
 class Tests_Functions_WpTimezoneChoiceUsortCallback extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59953' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_timezone_choice_usort_callback' )]
 	public function test_wp_timezone_choice_usort_callback( $unsorted, $sorted ) {

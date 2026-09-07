@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'array_all' )]
 class Test_Compat_arrayAll extends WP_UnitTestCase {

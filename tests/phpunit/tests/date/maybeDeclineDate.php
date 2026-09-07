@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
@@ -38,8 +35,6 @@ class Tests_Date_MaybeDeclineDate extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36790' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '37411' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '48606' )]

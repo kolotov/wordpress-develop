@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_wpSetCurrentUser extends WP_UnitTestCase {
 	protected static $user_id;

@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_galleries' )]
 class Tests_Media_GetPostGalleries extends WP_UnitTestCase {

@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 #[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
@@ -46,8 +43,6 @@ class Tests_Multisite_UpdateBlogStatus extends WP_UnitTestCase {
 		$this->assertSame( 1, $test_action_counter->get_call_count() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'external-http' )]
 	public function test_content_from_spam_blog_is_not_available() {
 		$spam_blog_id = self::factory()->blog->create();

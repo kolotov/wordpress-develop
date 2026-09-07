@@ -19,7 +19,6 @@ class Tests_HtmlApi_WpHtmlProcessor_Token_Scanning extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_completes_empty_document() {
 		$processor = new WP_HTML_Tag_Processor( '' );
@@ -38,7 +37,6 @@ class Tests_HtmlApi_WpHtmlProcessor_Token_Scanning extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_text_node() {
 		$processor = new WP_HTML_Tag_Processor( 'Hello, World!' );
@@ -142,7 +140,6 @@ class Tests_HtmlApi_WpHtmlProcessor_Token_Scanning extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_element() {
 		$processor = new WP_HTML_Tag_Processor( '<div id="test" inert>Hello, World!</div>' );
@@ -188,7 +185,6 @@ class Tests_HtmlApi_WpHtmlProcessor_Token_Scanning extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_script_element() {
 		$processor = new WP_HTML_Tag_Processor( '<script type="module">console.log( "Hello, World!" );</script>' );
@@ -229,7 +225,6 @@ class Tests_HtmlApi_WpHtmlProcessor_Token_Scanning extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_textarea_element() {
 		$processor = new WP_HTML_Tag_Processor(
@@ -283,7 +278,6 @@ HTML
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_title_element() {
 		$processor = new WP_HTML_Tag_Processor(
@@ -334,7 +328,6 @@ HTML
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_rawtext_elements' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_rawtext_elements( $tag_name ) {
 		$processor = new WP_HTML_Tag_Processor(
@@ -396,7 +389,6 @@ HTML
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_cdata_section() {
 		$processor = new WP_HTML_Tag_Processor( '<![CDATA[this is a comment]]>' );
@@ -439,7 +431,6 @@ HTML
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60406' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_cdata_comment_with_incorrect_closer() {
 		$processor = new WP_HTML_Tag_Processor( '<![CDATA[this is missing a closing square bracket]>' );
@@ -472,7 +463,6 @@ HTML
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_abruptly_closed_cdata_section() {
 		$processor = new WP_HTML_Tag_Processor( '<![CDATA[this is > a comment]]>' );
@@ -591,7 +581,6 @@ HTML
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_processing_instruction() {
 		$processor = new WP_HTML_Tag_Processor( '<?wp-bit {"just": "kidding"}?>' );
@@ -685,7 +674,6 @@ HTML
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_abruptly_closed_processing_instruction() {
 		$processor = new WP_HTML_Tag_Processor( '<?version=">=5.3.6"?>' );
@@ -741,7 +729,6 @@ HTML
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_common_comments' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_common_comments( $html, $text ) {
 		$processor = new WP_HTML_Tag_Processor( $html );
@@ -801,7 +788,6 @@ HTML
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_html_comment() {
 		$processor = new WP_HTML_Tag_Processor( '<!-- wp:paragraph -->' );
@@ -844,7 +830,6 @@ HTML
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_doctype() {
 		$processor = new WP_HTML_Tag_Processor( '<!DOCTYPE html>' );
@@ -887,7 +872,6 @@ HTML
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_presumptuous_tag() {
 		$processor = new WP_HTML_Tag_Processor( '</>' );
@@ -930,7 +914,6 @@ HTML
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_basic_assertion_funky_comment() {
 		$processor = new WP_HTML_Tag_Processor( '</%url>' );
@@ -978,7 +961,6 @@ HTML
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60170' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_various_funky_comments' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'next_token' )]
 	public function test_various_funky_comments( $funky_comment_html, $modifiable_text ) {
 		$processor = new WP_HTML_Tag_Processor( $funky_comment_html );

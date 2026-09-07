@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
@@ -86,8 +83,6 @@ class Tests_Date_TheDate extends WP_UnitTestCase {
 		return $input;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33750' )]
 	public function test_the_date() {
 		ob_start();
@@ -126,8 +121,6 @@ class Tests_Date_TheDate extends WP_UnitTestCase {
 		$this->assertSame( '', ob_get_clean() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47354' )]
 	public function test_the_weekday_date() {
 		ob_start();

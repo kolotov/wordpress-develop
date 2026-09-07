@@ -69,15 +69,11 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 		wp_update_network_site_counts();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_on_main_site_returns_self() {
 		$this->assertSame( get_current_blog_id(), get_main_site_id() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_returns_main_site_in_switched_context() {
 		$main_site_id  = get_current_blog_id();
@@ -90,8 +86,6 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 		$this->assertSame( $main_site_id, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55802' )]
 	public function test_get_main_site_id_with_different_network_cache_id() {
 		$this->assertSame( self::$site_ids['wordpress.org/'], get_main_site_id( self::$network_ids['wordpress.org/'] ), 'Main blog id needs to match blog id of wordpress.org/' );
@@ -101,29 +95,21 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 		$this->assertSame( 0, (int) get_network_option( self::$network_ids['wp.org/'], 'main_site' ), 'Network option should not be found' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_with_different_network_returns_correct_id() {
 		$this->assertSame( self::$site_ids['wordpress.org/'], get_main_site_id( self::$network_ids['wordpress.org/'] ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_on_network_without_site_returns_0() {
 		$this->assertSame( 0, get_main_site_id( self::$network_ids['wp.org/'] ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_on_invalid_network_returns_0() {
 		$this->assertSame( 0, get_main_site_id( 333 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_filtered() {
 		add_filter( 'pre_get_main_site_id', array( $this, 'filter_get_main_site_id' ) );
@@ -136,8 +122,6 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 		return 333;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29684' )]
 	public function test_get_main_site_id_filtered_depending_on_network() {
 		add_filter( 'pre_get_main_site_id', array( $this, 'filter_get_main_site_id_depending_on_network' ), 10, 2 );
@@ -155,8 +139,6 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 		return $main_site_id;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41936' )]
 	public function test_get_main_site_id_with_property_value() {
 		global $current_site;
@@ -171,8 +153,6 @@ class Tests_Multisite_GetMainSiteId extends WP_UnitTestCase {
 		$this->assertSame( 123, $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41936' )]
 	public function test_get_main_site_id_filtered_with_property_value() {
 		global $current_site;

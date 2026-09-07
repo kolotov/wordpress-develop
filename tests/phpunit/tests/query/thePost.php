@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\CoversMethod( WP_Query::class, 'the_post' )]
 class Tests_Query_ThePost extends WP_UnitTestCase {
@@ -110,7 +108,7 @@ class Tests_Query_ThePost extends WP_UnitTestCase {
 				'fields'    => 'custom',
 				'post_type' => 'page',
 				'post__in'  => self::$page_child_ids,
-				'orderby'   => 'ID',
+				'orderby'   => 'id',
 				'order'     => 'ASC',
 			)
 		);

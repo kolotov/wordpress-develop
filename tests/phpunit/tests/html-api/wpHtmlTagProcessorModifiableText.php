@@ -686,8 +686,6 @@ HTML
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64419' )]
 	public function test_complex_javascript_and_json_auto_escaping() {
 		$processor = new WP_HTML_Tag_Processor( "<script></script>\n<script></script>\n<hr>" );
@@ -742,8 +740,6 @@ HTML;
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64419' )]
 	public function test_json_auto_escaping() {
 		// This is not a typical JSON encoding or escaping, but it is valid.

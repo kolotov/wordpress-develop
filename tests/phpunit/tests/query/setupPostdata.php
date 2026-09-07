@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'setup_postdata' )]
 class Tests_Query_SetupPostdata extends WP_UnitTestCase {
@@ -19,8 +17,6 @@ class Tests_Query_SetupPostdata extends WP_UnitTestCase {
 		$this->assertSame( $p->ID, $GLOBALS['id'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30970' )]
 	public function test_setup_by_id() {
 		$p = self::factory()->post->create_and_get();
@@ -29,8 +25,6 @@ class Tests_Query_SetupPostdata extends WP_UnitTestCase {
 		$this->assertSame( $p->ID, $GLOBALS['id'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30970' )]
 	public function test_setup_by_fake_post() {
 		$fake     = new stdClass();
@@ -41,8 +35,6 @@ class Tests_Query_SetupPostdata extends WP_UnitTestCase {
 		$this->assertNotSame( $fake->ID, $GLOBALS['id'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30970' )]
 	public function test_setup_by_postish_object() {
 		$p = self::factory()->post->create();
@@ -170,8 +162,6 @@ class Tests_Query_SetupPostdata extends WP_UnitTestCase {
 		$this->assertSame( array( 'Page 0', 'Page 1', 'Page 2', 'Page 3' ), $GLOBALS['pages'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '16746' )]
 	public function test_nextpage_at_start_of_content() {
 		$post = self::factory()->post->create_and_get(
@@ -197,8 +187,6 @@ class Tests_Query_SetupPostdata extends WP_UnitTestCase {
 		$this->assertSame( array( 'Page 0', "Page 1\nhas a line break", 'Page 2', "\nPage 3" ), $GLOBALS['pages'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25349' )]
 	public function test_secondary_query_nextpage() {
 		$post1 = self::factory()->post->create(
@@ -268,8 +256,6 @@ class Tests_Query_SetupPostdata extends WP_UnitTestCase {
 		$this->assertSame( 1, $GLOBALS['page'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20904' )]
 	public function test_secondary_query_page() {
 		$post = self::factory()->post->create_and_get();
@@ -304,8 +290,6 @@ class Tests_Query_SetupPostdata extends WP_UnitTestCase {
 		$this->assertSame( 3, $GLOBALS['page'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20904' )]
 	public function test_more_when_on_setup_post() {
 		$post = self::factory()->post->create_and_get();
@@ -345,8 +329,6 @@ class Tests_Query_SetupPostdata extends WP_UnitTestCase {
 		$this->assertEmpty( $GLOBALS['more'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20904' )]
 	public function test_more_when_on_feed() {
 		$post = self::factory()->post->create_and_get();
@@ -356,8 +338,6 @@ class Tests_Query_SetupPostdata extends WP_UnitTestCase {
 		$this->assertSame( 1, $GLOBALS['more'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20904' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '25349' )]
 	public function test_secondary_query_more() {

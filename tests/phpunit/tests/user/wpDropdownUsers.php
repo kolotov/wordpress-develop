@@ -7,8 +7,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 class Tests_User_wpDropdownUsers extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31251' )]
 	public function test_default_value_of_show_should_be_display_name() {
 
@@ -31,8 +29,6 @@ class Tests_User_wpDropdownUsers extends WP_UnitTestCase {
 		$this->assertStringContainsString( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31251' )]
 	public function test_show_should_display_display_name_show_is_specified_as_empty() {
 
@@ -57,8 +53,6 @@ class Tests_User_wpDropdownUsers extends WP_UnitTestCase {
 		$this->assertStringContainsString( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31251' )]
 	public function test_show_should_display_user_property_when_the_value_of_show_is_a_valid_user_property() {
 
@@ -83,8 +77,6 @@ class Tests_User_wpDropdownUsers extends WP_UnitTestCase {
 		$this->assertStringContainsString( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31251' )]
 	public function test_show_display_name_with_login() {
 
@@ -109,8 +101,6 @@ class Tests_User_wpDropdownUsers extends WP_UnitTestCase {
 		$this->assertStringContainsString( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31251' )]
 	public function test_include_selected() {
 		$users = self::factory()->user->create_many( 2 );
@@ -129,8 +119,6 @@ class Tests_User_wpDropdownUsers extends WP_UnitTestCase {
 		$this->assertStringContainsString( $user1->user_login, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51370' )]
 	public function test_include_selected_with_non_existing_user_id() {
 		$found = wp_dropdown_users(
@@ -145,8 +133,6 @@ class Tests_User_wpDropdownUsers extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( (string) PHP_INT_MAX, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38135' )]
 	public function test_role() {
 		$u1 = self::factory()->user->create_and_get( array( 'role' => 'subscriber' ) );
@@ -164,8 +150,6 @@ class Tests_User_wpDropdownUsers extends WP_UnitTestCase {
 		$this->assertStringContainsString( $u2->user_login, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38135' )]
 	public function test_role__in() {
 		$u1 = self::factory()->user->create_and_get( array( 'role' => 'subscriber' ) );
@@ -183,8 +167,6 @@ class Tests_User_wpDropdownUsers extends WP_UnitTestCase {
 		$this->assertStringContainsString( $u2->user_login, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38135' )]
 	public function test_role__not_in() {
 		$u1 = self::factory()->user->create_and_get( array( 'role' => 'subscriber' ) );

@@ -8,9 +8,7 @@
  */
 
 #[\PHPUnit\Framework\Attributes\Group( 'themes' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_block_css_selector' )]
-
 class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 	private $test_block_name;
 
@@ -39,8 +37,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		);
 	}
 
-	/**
-	*/
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_get_root_selector_via_selectors_api() {
 		$block_type = self::register_test_block(
@@ -52,8 +48,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.wp-custom-block-class', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_get_root_selector_via_experimental_property() {
 		$block_type = self::register_test_block(
@@ -66,8 +60,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.experimental-selector', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_default_root_selector_generation_for_core_block() {
 		$block_type = self::register_test_block(
@@ -80,8 +72,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.wp-block-without-selectors-or-supports', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_default_root_selector_generation() {
 		$block_type = self::register_test_block(
@@ -94,8 +84,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.wp-block-test-without-selectors-or-supports', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_get_feature_selector_via_selectors_api() {
 		$block_type = self::register_test_block(
@@ -108,8 +96,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.typography', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_get_feature_selector_via_selectors_api_shorthand_property() {
 		$block_type = self::register_test_block(
@@ -122,8 +108,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.typography', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_no_feature_level_selector_via_selectors_api() {
 		$block_type = self::register_test_block(
@@ -136,8 +120,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertNull( $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_fallback_feature_level_selector_via_selectors_api_to_generated_class() {
 		$block_type = self::register_test_block(
@@ -150,8 +132,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.wp-block-test-fallback-feature-selector', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_fallback_feature_level_selector_via_selectors_api() {
 		$block_type = self::register_test_block(
@@ -164,8 +144,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.fallback-root-selector', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_get_feature_selector_via_experimental_property() {
 		$block_type = self::register_test_block(
@@ -182,8 +160,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.wp-block-test-experimental-feature-selector .experimental-typography', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_fallback_feature_selector_via_experimental_property() {
 		$block_type = self::register_test_block(
@@ -196,8 +172,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.wp-block-test-fallback-feature-selector', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_no_feature_selector_via_experimental_property() {
 		$block_type = self::register_test_block(
@@ -210,8 +184,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertNull( $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_get_subfeature_selector_via_selectors_api() {
 		$block_type = self::register_test_block(
@@ -232,8 +204,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.root .typography .text-decoration', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_fallback_subfeature_selector_via_selectors_api() {
 		$block_type = self::register_test_block(
@@ -253,8 +223,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.root .typography', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_no_subfeature_level_selector_via_selectors_api() {
 		$block_type = self::register_test_block(
@@ -267,8 +235,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertNull( $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_fallback_subfeature_selector_via_experimental_property() {
 		$block_type = self::register_test_block(
@@ -285,8 +251,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.wp-block-test-fallback-subfeature-selector', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_no_subfeature_selector_via_experimental_property() {
 		$block_type = self::register_test_block(
@@ -302,8 +266,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertNull( $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_empty_target_returns_null() {
 		$block_type = self::register_test_block(
@@ -319,8 +281,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertNull( $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_string_targets_for_features() {
 		$block_type = self::register_test_block(
@@ -336,8 +296,6 @@ class Tests_Theme_WpGetBlockCssSelector extends WP_Theme_UnitTestCase {
 		$this->assertSame( '.found', $selector );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58586' )]
 	public function test_string_targets_for_subfeatures() {
 		$block_type = self::register_test_block(

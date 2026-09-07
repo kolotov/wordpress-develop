@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'array_is_list' )]
 class Tests_Compat_arrayIsList extends WP_UnitTestCase {

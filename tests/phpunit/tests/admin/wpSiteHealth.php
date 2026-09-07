@@ -2,15 +2,6 @@
 
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\Group( 'site-health' )]
-
-
-
-
-
-
-
-
-
 class Tests_Admin_wpSiteHealth extends WP_UnitTestCase {
 
 	/**

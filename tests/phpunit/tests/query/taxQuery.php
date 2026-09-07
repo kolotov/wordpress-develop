@@ -1,10 +1,7 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
-
 class Tests_Query_TaxQuery extends WP_UnitTestCase {
 	public function test_tax_query_single_query_single_term_field_slug() {
 		$t  = self::factory()->term->create(
@@ -68,8 +65,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p1 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27810' )]
 	public function test_field_name_should_work_for_names_with_spaces() {
 		register_taxonomy( 'wptests_tax', 'post' );
@@ -342,8 +337,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p3 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18105' )]
 	public function test_tax_query_single_query_multiple_queries_operator_not_in() {
 		$t1 = self::factory()->term->create(
@@ -434,8 +427,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p2 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29181' )]
 	public function test_tax_query_operator_not_exists() {
 		register_taxonomy( 'wptests_tax1', 'post' );
@@ -468,8 +459,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p1, $p3 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36343' )]
 	public function test_tax_query_operator_not_exists_combined() {
 		register_post_type( 'wptests_cpt1' );
@@ -515,8 +504,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p1, $p3, $p4 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29181' )]
 	public function test_tax_query_operator_exists() {
 		register_taxonomy( 'wptests_tax1', 'post' );
@@ -549,8 +536,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p2 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29181' )]
 	public function test_tax_query_operator_exists_should_ignore_terms() {
 		register_taxonomy( 'wptests_tax1', 'post' );
@@ -584,8 +569,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p2 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29181' )]
 	public function test_tax_query_operator_exists_with_no_taxonomy() {
 		register_taxonomy( 'wptests_tax1', 'post' );
@@ -755,8 +738,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p1, $p2 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29738' )]
 	public function test_tax_query_two_nested_queries() {
 		register_taxonomy( 'foo', 'post' );
@@ -837,8 +818,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p1, $p2 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29738' )]
 	public function test_tax_query_one_nested_query_one_first_order_query() {
 		register_taxonomy( 'foo', 'post' );
@@ -911,8 +890,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p1, $p2 ), $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29738' )]
 	public function test_tax_query_one_double_nested_query_one_first_order_query() {
 		register_taxonomy( 'foo', 'post' );
@@ -1374,8 +1351,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $posts[0], $posts[3] ), $results2, 'Relation: AND; Operator: IN' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29738' )]
 	public function test_populate_taxonomy_query_var_from_tax_query() {
 		register_taxonomy( 'foo', 'post' );
@@ -1497,8 +1472,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		_unregister_taxonomy( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29738' )]
 	public function test_populate_cat_category_name_query_var_from_tax_query() {
 		register_taxonomy( 'foo', 'post' );
@@ -1544,8 +1517,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		_unregister_taxonomy( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29738' )]
 	public function test_populate_tag_id_query_var_from_tax_query() {
 		register_taxonomy( 'foo', 'post' );
@@ -1590,8 +1561,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		_unregister_taxonomy( 'foo' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39315' )]
 	public function test_tax_terms_should_not_be_double_escaped() {
 		$name = "Don't worry be happy";
@@ -1623,9 +1592,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p ), $q->posts );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55360' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Tax_Query', 'transform_query' )]
 	public function test_tax_terms_should_limit_query() {
@@ -1664,9 +1630,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'LIMIT 1', $query );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55360' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Tax_Query', 'transform_query' )]
 	public function test_tax_terms_should_limit_query_to_one() {
@@ -1705,9 +1668,6 @@ class Tests_Query_TaxQuery extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'LIMIT 1', $query );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55360' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Tax_Query', 'transform_query' )]
 	public function test_hierarchical_taxonomies_do_not_limit_query() {

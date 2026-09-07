@@ -24,8 +24,6 @@ class Tests_Blocks_InsertHookedBlocks extends WP_UnitTestCase {
 		),
 	);
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59572' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60126' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
@@ -42,8 +40,6 @@ class Tests_Blocks_InsertHookedBlocks extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59572' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60126' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
@@ -65,8 +61,6 @@ class Tests_Blocks_InsertHookedBlocks extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59572' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60126' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
@@ -88,8 +82,6 @@ class Tests_Blocks_InsertHookedBlocks extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59572' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60126' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
@@ -129,8 +121,6 @@ class Tests_Blocks_InsertHookedBlocks extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59572' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60126' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
@@ -173,9 +163,6 @@ class Tests_Blocks_InsertHookedBlocks extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60580' )]
 	public function test_insert_hooked_blocks_filter_can_suppress_hooked_block() {
 		$anchor_block = array(

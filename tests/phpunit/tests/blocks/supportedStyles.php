@@ -8,7 +8,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
 class Tests_Blocks_SupportedStyles extends WP_UnitTestCase {
 
 	/**

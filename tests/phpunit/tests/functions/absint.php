@@ -9,9 +9,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'absint' )]
 class Tests_Functions_Absint extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60101' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_absint' )]
 	public function test_absint( $test_value, $expected_value ) {

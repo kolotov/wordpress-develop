@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Ticket( '29845' )]
 #[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 #[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
@@ -144,8 +141,6 @@ class Tests_Multisite_GetBlogDetails extends WP_UnitTestCase {
 		$this->assertFalse( $site );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '50391' )]
 	public function test_get_blog_details_does_not_switch_to_current_blog() {
 		$count = did_action( 'switch_blog' );
@@ -154,9 +149,6 @@ class Tests_Multisite_GetBlogDetails extends WP_UnitTestCase {
 		$this->assertSame( $count, did_action( 'switch_blog' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40228' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_all' )]
 	public function test_get_blog_details_get_object_vars( $get_all ) {
@@ -173,9 +165,6 @@ class Tests_Multisite_GetBlogDetails extends WP_UnitTestCase {
 		$this->assertSameSets( $this->get_fields( $get_all ), $result );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40228' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_all' )]
 	public function test_get_blog_details_iterate_over_result( $get_all ) {

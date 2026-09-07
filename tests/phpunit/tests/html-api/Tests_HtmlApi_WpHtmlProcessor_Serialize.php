@@ -8,9 +8,6 @@
  * @since 6.7.0
  */
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlProcessor_Serialize extends WP_UnitTestCase {
 	/**
@@ -514,9 +511,6 @@ class Tests_HtmlApi_WpHtmlProcessor_Serialize extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62396' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_provider_serialize_doctype' )]
 	public function test_full_document_serialize_includes_doctype( string $doctype_input, string $doctype_output ) {

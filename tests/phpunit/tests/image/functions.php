@@ -3,19 +3,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'image' )]
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
 #[\PHPUnit\Framework\Attributes\Group( 'upload' )]
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Tests_Image_Functions extends WP_UnitTestCase {
 	private $initial_medium_crop;
 
@@ -596,7 +583,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 	 * @expectedDeprecated wp_load_image
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17814' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_image' )]
 	public function test_wp_load_image_should_fail_with_error_message_when_loading_a_directory() {
 		$editor = wp_load_image( DIR_TESTDATA );
 		$this->assertIsString( $editor );

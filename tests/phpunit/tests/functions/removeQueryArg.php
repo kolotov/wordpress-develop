@@ -1,14 +1,9 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'remove_query_arg' )]
 class Tests_Functions_RemoveQueryArg extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_remove_query_arg' )]
 	public function test_remove_query_arg( $keys_to_remove, $url, $expected ) {
 		$actual = remove_query_arg( $keys_to_remove, $url );

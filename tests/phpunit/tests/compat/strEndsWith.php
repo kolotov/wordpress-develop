@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'str_ends_with' )]
 class Tests_Compat_StrEndsWith extends WP_UnitTestCase {

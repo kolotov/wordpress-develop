@@ -1,16 +1,7 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 #[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
-
-
-
-
-
-
-
 class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 	protected static $user_id;
 
@@ -42,22 +33,16 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_textdomain_loaded' )]
 	public function test_is_textdomain_loaded() {
 		$this->assertFalse( is_textdomain_loaded( 'wp-tests-domain' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unload_textdomain' )]
 	public function test_unload_textdomain() {
 		$this->assertFalse( unload_textdomain( 'wp-tests-domain' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unload_textdomain' )]
 	public function test_load_textdomain() {
 		$loaded = load_textdomain( 'wp-tests-domain', DIR_TESTDATA . '/pomo/simple.mo' );
@@ -67,8 +52,6 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertTrue( $loaded );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unload_textdomain' )]
 	public function test_is_textdomain_loaded_after_loading() {
 		load_textdomain( 'wp-tests-domain', DIR_TESTDATA . '/pomo/simple.mo' );
@@ -80,8 +63,6 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertTrue( $loaded );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unload_textdomain' )]
 	public function test_unload_textdomain_after_loading() {
 		load_textdomain( 'wp-tests-domain', DIR_TESTDATA . '/pomo/simple.mo' );
@@ -89,8 +70,6 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertTrue( unload_textdomain( 'wp-tests-domain' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_textdomain_loaded' )]
 	public function test_is_textdomain_loaded_after_unloading() {
 		load_textdomain( 'wp-tests-domain', DIR_TESTDATA . '/pomo/simple.mo' );
@@ -100,18 +79,12 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertFalse( is_textdomain_loaded( 'wp-tests-domain' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21319' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_textdomain' )]
 	public function test_load_textdomain_non_existent_file() {
 		$this->assertFalse( load_textdomain( 'wp-tests-domain', DIR_TESTDATA . '/non-existent-file' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21319' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_textdomain_loaded' )]
 	public function test_is_textdomain_loaded_non_existent_file() {
@@ -120,9 +93,6 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertFalse( is_textdomain_loaded( 'wp-tests-domain' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21319' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_translations_for_domain' )]
 	public function test_get_translations_for_domain_non_existent_file() {
@@ -131,9 +101,6 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertInstanceOf( 'NOOP_Translations', get_translations_for_domain( 'wp-tests-domain' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21319' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'unload_textdomain' )]
 	public function test_unload_textdomain_non_existent_file() {
@@ -142,9 +109,6 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertFalse( unload_textdomain( 'wp-tests-domain' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21319' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'is_textdomain_loaded' )]
 	public function test_is_textdomain_is_not_loaded_after_gettext_call_with_no_translations() {
@@ -153,8 +117,6 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertFalse( is_textdomain_loaded( 'wp-tests-domain' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_textdomain' )]
 	public function test_override_load_textdomain_noop() {
 		add_filter( 'override_load_textdomain', '__return_true' );
@@ -165,8 +127,6 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertFalse( is_textdomain_loaded( 'wp-tests-domain' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_textdomain' )]
 	public function test_override_load_textdomain_non_existent_mofile() {
 		add_filter( 'override_load_textdomain', array( $this, 'override_load_textdomain_filter' ), 10, 3 );
@@ -182,8 +142,6 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertFalse( $is_textdomain_loaded_after );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_textdomain' )]
 	public function test_override_load_textdomain_custom_mofile() {
 		add_filter( 'override_load_textdomain', array( $this, 'override_load_textdomain_filter' ), 10, 3 );
@@ -227,9 +185,6 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		return true;
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58035' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_theme_textdomain' )]
 	public function test_pre_load_textdomain_filter() {
@@ -243,32 +198,24 @@ class Tests_L10n_LoadTextdomain extends WP_UnitTestCase {
 		$this->assertSame( 0, $override_load_textdomain_callback->get_call_count(), 'Expected override_load_textdomain not to be called.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60888' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_plugin_textdomain' )]
 	public function test_load_plugin_textdomain_invalid_domain() {
 		$this->assertFalse( load_plugin_textdomain( null ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60888' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_muplugin_textdomain' )]
 	public function test_load_muplugin_textdomain_invalid_domain() {
 		$this->assertFalse( load_muplugin_textdomain( null ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60888' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_theme_textdomain' )]
 	public function test_load_theme_textdomain_invalid_domain() {
 		$this->assertFalse( load_theme_textdomain( null ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60888' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'load_textdomain' )]
 	public function test_load_textdomain_invalid_domain() {

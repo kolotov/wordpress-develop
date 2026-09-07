@@ -126,8 +126,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		return $post_id;
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
@@ -206,8 +204,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_items' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
@@ -223,8 +219,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->check_font_face_data( $data[1], self::$font_face_id1, $data[1]['_links'] );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_items' )]
 	public function test_get_items_no_permission() {
 		wp_set_current_user( 0 );
@@ -237,8 +231,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_cannot_read', $response, 403, 'The response should return an error with a "rest_cannot_read" code and 403 status.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_items' )]
 	public function test_get_items_missing_parent() {
 		wp_set_current_user( self::$admin_id );
@@ -247,8 +239,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_post_invalid_parent', $response, 404 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_item' )]
 	public function test_get_item() {
 		wp_set_current_user( self::$admin_id );
@@ -260,8 +250,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->check_font_face_data( $data, self::$font_face_id1, $response->get_links() );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'prepare_item_for_response' )]
 	public function test_get_item_removes_extra_settings() {
 		$font_face_id = self::create_font_face_post( self::$font_family_id, array( 'extra' => array() ) );
@@ -276,8 +264,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertArrayNotHasKey( 'extra', $data['font_face_settings'], 'The extra property should exist in the font_face_settings data.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'prepare_item_for_response' )]
 	public function test_get_item_malformed_post_content_returns_empty_settings() {
 		$font_face_id = wp_insert_post(
@@ -306,8 +292,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertSame( $empty_settings, $data['font_face_settings'], 'The empty settings should exist in the font_face_settings data.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_item' )]
 	public function test_get_item_invalid_font_face_id() {
 		wp_set_current_user( self::$admin_id );
@@ -316,8 +300,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_post_invalid_id', $response, 404 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_item' )]
 	public function test_get_item_no_permission() {
 		wp_set_current_user( 0 );
@@ -331,8 +313,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_cannot_read', $response, 403, 'The response should return an error with a "rest_cannot_read" code and 403 status.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_item' )]
 	public function test_get_item_missing_parent() {
 		wp_set_current_user( self::$admin_id );
@@ -342,8 +322,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_post_invalid_parent', $response, 404 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_item' )]
 	public function test_get_item_valid_parent_id() {
 		wp_set_current_user( self::$admin_id );
@@ -355,8 +333,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertSame( self::$font_family_id, $data['parent'], 'The returned parent id should match the font family id.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_item' )]
 	public function test_get_item_invalid_parent_id() {
 		wp_set_current_user( self::$admin_id );
@@ -368,8 +344,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertSame( $expected_message, $response->as_error()->get_error_messages()[0], 'The message must contain the correct parent ID.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'create_item' )]
 	public function test_create_item() {
 		wp_set_current_user( self::$admin_id );
@@ -479,8 +453,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertFileDoesNotExist( $expected_file_path, 'The font file should have been deleted when the post was deleted.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'create_item' )]
 	public function test_create_item_with_multiple_font_files() {
 		wp_set_current_user( self::$admin_id );
@@ -512,8 +484,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertCount( 4, $settings['src'], 'There should be 4 items in the font_face_settings::src data.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'create_item' )]
 	public function test_create_item_invalid_file_type() {
 		$image_file = DIR_TESTDATA . '/images/canola.jpg';
@@ -553,8 +523,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_font_upload_invalid_file_type', $response, 400 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'create_item' )]
 	public function test_create_item_with_url_src() {
 		wp_set_current_user( self::$admin_id );
@@ -579,8 +547,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->check_font_face_data( $data, $data['id'], $response->get_links() );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'create_item' )]
 	public function test_create_item_with_all_properties() {
 		wp_set_current_user( self::$admin_id );
@@ -616,8 +582,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertSame( $properties, $data['font_face_settings'], 'The font_face_settings should match the expected properties.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'create_item' )]
 	public function test_create_item_missing_parent() {
 		wp_set_current_user( self::$admin_id );
@@ -631,8 +595,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_post_invalid_parent', $response, 404 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'create_item' )]
 	public function test_create_item_with_duplicate_properties() {
 		$settings = array(
@@ -655,8 +617,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertSame( $expected_message, $message, 'The response error message should match.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'create_item' )]
 	public function test_create_item_default_theme_json_version() {
 		wp_set_current_user( self::$admin_id );
@@ -770,8 +730,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'validate_create_font_face_settings' )]
 	public function test_create_item_invalid_settings_json() {
 		wp_set_current_user( self::$admin_id );
@@ -787,8 +745,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertSame( $expected_message, $message, 'The response error message should match.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'validate_create_font_face_settings' )]
 	public function test_create_item_non_string_settings() {
 		wp_set_current_user( self::$admin_id );
@@ -804,8 +760,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertSame( $expected_message, $message, 'The response error message should match.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'validate_create_font_face_settings' )]
 	public function test_create_item_invalid_file_src() {
 		$files = $this->setup_font_file_upload( array( 'woff2' ) );
@@ -830,8 +784,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertSame( $expected_message, $message, 'The response error message should match.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'validate_create_font_face_settings' )]
 	public function test_create_item_missing_file_src() {
 		$files = $this->setup_font_file_upload( array( 'woff2', 'woff' ) );
@@ -947,12 +899,8 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		);
 	}
 
-	/**
-	 */
 	// public function test_create_item_no_permission() {}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'update_item' )]
 	public function test_update_item() {
 		$request  = new WP_REST_Request( 'POST', '/wp/v2/font-families/' . self::$font_family_id . '/font-faces/' . self::$font_face_id1 );
@@ -960,8 +908,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_no_route', $response, 404 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'delete_item' )]
 	public function test_delete_item() {
 		wp_set_current_user( self::$admin_id );
@@ -974,8 +920,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertNull( get_post( $font_face_id ), 'The deleted post should not exist.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'delete_item' )]
 	public function test_delete_item_no_trash() {
 		wp_set_current_user( self::$admin_id );
@@ -995,8 +939,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertNotEmpty( $post, 'The post should still exists.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'delete_item' )]
 	public function test_delete_item_invalid_font_face_id() {
 		wp_set_current_user( self::$admin_id );
@@ -1006,8 +948,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_post_invalid_id', $response, 404 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'delete_item' )]
 	public function test_delete_item_missing_parent() {
 		wp_set_current_user( self::$admin_id );
@@ -1018,8 +958,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_post_invalid_parent', $response, 404 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_item' )]
 	public function test_delete_item_invalid_parent_id() {
 		wp_set_current_user( self::$admin_id );
@@ -1032,8 +970,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertSame( $expected_message, $response->as_error()->get_error_messages()[0], 'The message must contain the correct parent ID.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'delete_item' )]
 	public function test_delete_item_no_permissions() {
 		$font_face_id = $this->create_font_face_post( self::$font_family_id );
@@ -1049,8 +985,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertErrorResponse( 'rest_cannot_delete', $response, 403, 'The response should return an error for "rest_cannot_delete" with 403 status for a user without permission.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'prepare_item_for_response' )]
 	public function test_prepare_item() {
 		wp_set_current_user( self::$admin_id );
@@ -1062,8 +996,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->check_font_face_data( $data, self::$font_face_id2, $response->get_links() );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/font-families/' . self::$font_family_id . '/font-faces' );
@@ -1079,8 +1011,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		$this->assertArrayHasKey( 'font_face_settings', $properties, 'The font_face_settings property should exist in the schema::properties data.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_item_schema' )]
 	public function test_get_item_schema_font_face_settings_should_all_have_sanitize_callbacks() {
 		$schema                    = ( new WP_REST_Font_Faces_Controller( 'wp_font_face' ) )->get_item_schema();
@@ -1097,8 +1027,6 @@ class Tests_REST_WpRestFontFacesController extends WP_Test_REST_Controller_Testc
 		}
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Faces_Controller', 'get_public_item_schema' )]
 	public function test_get_public_item_schema_should_not_have_arg_options() {
 		$schema                    = ( new WP_REST_Font_Faces_Controller( 'wp_font_face' ) )->get_public_item_schema();

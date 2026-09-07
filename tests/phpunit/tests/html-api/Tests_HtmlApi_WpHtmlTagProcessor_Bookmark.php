@@ -6,17 +6,10 @@
  * @subpackage HTML-API
  */
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlTagProcessor_Bookmark extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_bookmark' )]
 	public function test_set_bookmark() {
 		$processor = new WP_HTML_Tag_Processor( '<ul><li>One</li><li>Two</li><li>Three</li></ul>' );
@@ -27,11 +20,7 @@ class Tests_HtmlApi_WpHtmlTagProcessor_Bookmark extends WP_UnitTestCase {
 		$this->assertTrue( $processor->set_bookmark( 'first li' ), 'Could not move the "first li" bookmark' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'release_bookmark' )]
 	public function test_release_bookmark() {
 		$processor = new WP_HTML_Tag_Processor( '<ul><li>One</li><li>Two</li><li>Three</li></ul>' );
@@ -41,22 +30,14 @@ class Tests_HtmlApi_WpHtmlTagProcessor_Bookmark extends WP_UnitTestCase {
 		$this->assertTrue( $processor->release_bookmark( 'first li' ), 'Could not release a bookmark' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57788' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'has_bookmark' )]
 	public function test_has_bookmark_returns_false_if_bookmark_does_not_exist() {
 		$processor = new WP_HTML_Tag_Processor( '<div>Test</div>' );
 		$this->assertFalse( $processor->has_bookmark( 'my-bookmark' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57788' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'has_bookmark' )]
 	public function test_has_bookmark_returns_true_if_bookmark_exists() {
 		$processor = new WP_HTML_Tag_Processor( '<div>Test</div>' );
@@ -65,11 +46,7 @@ class Tests_HtmlApi_WpHtmlTagProcessor_Bookmark extends WP_UnitTestCase {
 		$this->assertTrue( $processor->has_bookmark( 'my-bookmark' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57788' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'has_bookmark' )]
 	public function test_has_bookmark_returns_false_if_bookmark_has_been_released() {
 		$processor = new WP_HTML_Tag_Processor( '<div>Test</div>' );
@@ -79,11 +56,7 @@ class Tests_HtmlApi_WpHtmlTagProcessor_Bookmark extends WP_UnitTestCase {
 		$this->assertFalse( $processor->has_bookmark( 'my-bookmark' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'seek' )]
 	public function test_seek() {
 		$processor = new WP_HTML_Tag_Processor( '<ul><li>One</li><li>Two</li><li>Three</li></ul>' );
@@ -103,11 +76,7 @@ class Tests_HtmlApi_WpHtmlTagProcessor_Bookmark extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57787' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'seek' )]
 	public function test_seeks_to_tag_closer_bookmark() {
 		$processor = new WP_HTML_Tag_Processor( '<div>First</div><span>Second</span>' );
@@ -162,8 +131,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor_Bookmark extends WP_UnitTestCase {
 	 *
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
-
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'seek' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_bookmark' )]
 	public function test_removing_long_attributes_doesnt_break_seek() {
@@ -189,12 +156,7 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
-
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'seek' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_bookmark' )]
 	public function test_bookmarks_complex_use_case() {
@@ -301,12 +263,8 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60697' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'seek' )]
 	public function test_updates_bookmark_for_additions_after_both_sides() {
 		$processor = new WP_HTML_Tag_Processor( '<div>First</div><div>Second</div>' );
@@ -333,11 +291,7 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'seek' )]
 	public function test_updates_bookmark_for_additions_before_both_sides() {
 		$processor = new WP_HTML_Tag_Processor( '<div>First</div><div>Second</div>' );
@@ -359,11 +313,7 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'seek' )]
 	public function test_updates_bookmark_for_deletions_after_both_sides() {
 		$processor = new WP_HTML_Tag_Processor( '<div>First</div><div disabled>Second</div>' );
@@ -390,11 +340,7 @@ HTML;
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'seek' )]
 	public function test_updates_bookmark_for_deletions_before_both_sides() {
 		$processor = new WP_HTML_Tag_Processor( '<div disabled>First</div><div>Second</div>' );
@@ -429,7 +375,6 @@ HTML;
 	 * @expectedIncorrectUsage WP_HTML_Tag_Processor::set_bookmark
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'set_bookmark' )]
 	public function test_limits_the_number_of_bookmarks() {
 		$processor = new WP_HTML_Tag_Processor( '<ul><li>One</li><li>Two</li><li>Three</li></ul>' );
@@ -442,11 +387,7 @@ HTML;
 		$this->assertFalse( $processor->set_bookmark( 'final bookmark' ), "Allocated $i bookmarks, which is one above the limit" );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56299' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'seek' )]
 	public function test_limits_the_number_of_seek_calls() {
 		$processor = new WP_HTML_Tag_Processor( '<ul><li>One</li><li>Two</li><li>Three</li></ul>' );
@@ -471,11 +412,7 @@ HTML;
 		$this->assertFalse( $processor->seek( 'bookmark' ), "$i-th seek() to the bookmark succeeded, even though it should exceed the allowed limit" );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '62085' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'seek' )]
 	public function test_skips_counting_noop_seek_calls() {
 		$processor = new WP_HTML_Tag_Processor( '<ul><li>One</li><li>Two</li><li>Three</li></ul>' );

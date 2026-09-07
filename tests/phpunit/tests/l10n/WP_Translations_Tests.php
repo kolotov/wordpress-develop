@@ -1,15 +1,7 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 #[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
-
-
-
-
-
-
 class WP_Translations_Tests extends WP_UnitTestCase {
 	public function tear_down() {
 		unload_textdomain( 'wp-tests-domain' );
@@ -17,8 +9,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', '__construct' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', '__get' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', 'make_entry' )]
@@ -55,8 +45,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', '__get' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', 'make_entry' )]
 	public function test_get_entries_plural() {
@@ -94,8 +82,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 	}
 
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', '__get' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', 'make_entry' )]
 	public function test_get_entries_context() {
@@ -138,8 +124,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', '__get' )]
 	public function test_get_headers() {
 		global $l10n;
@@ -165,8 +149,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', '__get' )]
 	public function test_getter_unsupported_property() {
 		global $l10n;
@@ -180,8 +162,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		$this->assertNull( $compat_instance->foo );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', 'translate' )]
 	public function test_translate() {
 		global $l10n;
@@ -201,8 +181,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		$this->assertTrue( $unload_successful, 'Text domain not successfully unloaded' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', 'translate_plural' )]
 	public function test_translate_plural() {
 		global $l10n;
@@ -224,8 +202,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		$this->assertTrue( $unload_successful, 'Text domain not successfully unloaded' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', 'translate_plural' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_File', 'get_plural_form' )]
 	public function test_translate_plural_complex() {
@@ -243,8 +219,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		$this->assertSame( 'Plural', _n( 'Singular', 'Plural', 2, 'wp-tests-domain' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', 'translate_plural' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_File', 'get_plural_form' )]
 	public function test_translate_plural_complex_php() {
@@ -262,8 +236,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		$this->assertSame( 'Plural', _n( 'Singular', 'Plural', 2, 'wp-tests-domain' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_File', 'get_plural_form' )]
 	public function test_get_plural_form() {
 		$moe = WP_Translation_File::create( DIR_TESTDATA . '/l10n/plural-complex.mo' );
@@ -282,8 +254,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		$this->assertSame( 3, $moe->get_plural_form( 6 ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', 'translate_plural' )]
 	public function test_translate_plural_missing() {
 		global $l10n;
@@ -303,9 +273,6 @@ class WP_Translations_Tests extends WP_UnitTestCase {
 		$this->assertTrue( $unload_successful, 'Text domain not successfully unloaded' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41257' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', 'translate' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translations', 'translate_plural' )]

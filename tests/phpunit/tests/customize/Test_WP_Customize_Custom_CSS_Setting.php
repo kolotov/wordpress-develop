@@ -6,14 +6,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'customize' )]
-
-
-
-
-
-
-
-
 class Test_WP_Customize_Custom_CSS_Setting extends WP_UnitTestCase {
 
 	/**

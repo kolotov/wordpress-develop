@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'themes' )]
 class Tests_Theme_Support extends WP_UnitTestCase {
 
@@ -53,8 +51,6 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 		$this->assertFalse( current_theme_supports( 'post-thumbnails' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22080' )]
 	public function test_post_thumbnails_mixed_args() {
 		add_theme_support( 'post-thumbnails', array( 'post', 'page' ) );
@@ -158,8 +154,6 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 		return false;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '11611' )]
 	public function test_plugin_hook() {
 		$this->assertFalse( current_theme_supports( 'foobar' ) );
@@ -176,8 +170,6 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 		$this->assertFalse( current_theme_supports( 'foobar', 'bar' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55219' )]
 	public function test_plugin_hook_with_no_args() {
 		add_theme_support( 'foobar' );
@@ -187,8 +179,6 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 		$this->assertFalse( current_theme_supports( 'foobar' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26900' )]
 	public function test_supports_menus() {
 		// Start fresh.
@@ -217,8 +207,6 @@ class Tests_Theme_Support extends WP_UnitTestCase {
 		$this->assertFalse( current_theme_supports( 'menus' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45125' )]
 	public function test_responsive_embeds() {
 		add_theme_support( 'responsive-embeds' );

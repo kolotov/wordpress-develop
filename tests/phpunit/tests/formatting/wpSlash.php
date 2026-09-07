@@ -99,7 +99,7 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 	 * @expectedDeprecated addslashes_gpc
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64539' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'addslashes_gpc' )]
 	public function test_addslashes_gpc_matches_wp_slash_for_strings() {
 		$input = "String with 'quotes' and \"double quotes\"";
 		$this->assertSame( wp_slash( $input ), addslashes_gpc( $input ) );
@@ -111,7 +111,7 @@ class Tests_Formatting_wpSlash extends WP_UnitTestCase {
 	 * @expectedDeprecated addslashes_gpc
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64539' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'addslashes_gpc' )]
 	public function test_addslashes_gpc_matches_wp_slash_for_arrays() {
 		$input = array(
 			'field1' => "Value with 'apostrophe'",

@@ -1,17 +1,10 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wpmu_validate_user_signup' )]
 class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_user_name' )]
 	public function test_user_name( $user_name, $error_message ) {
 		$v = wpmu_validate_user_signup( $user_name, 'foo@example.com' );
@@ -134,8 +127,6 @@ class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 		$this->assertNotContains( 'user_email', $v['errors']->get_error_codes() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43232' )]
 	public function test_should_not_fail_for_data_used_by_a_deleted_user() {
 		global $wpdb;
@@ -195,8 +186,6 @@ class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 		$this->assertNotContains( 'user_email', $valid['errors']->get_error_codes() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43667' )]
 	public function test_signup_nonce_check() {
 		$original_php_self       = $_SERVER['PHP_SELF'];
@@ -210,8 +199,6 @@ class Tests_Multisite_wpmuValidateUserSignup extends WP_UnitTestCase {
 		$this->assertNotContains( 'invalid_nonce', $valid['errors']->get_error_codes() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43667' )]
 	public function test_signup_nonce_check_invalid() {
 		$original_php_self       = $_SERVER['PHP_SELF'];

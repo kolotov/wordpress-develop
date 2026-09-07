@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'author' )]
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_author_posts' )]
@@ -45,8 +42,6 @@ class Tests_User_GetTheAuthorPosts extends WP_UnitTestCase {
 		$this->assertSame( 1, get_the_author_posts() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30904' )]
 	public function test_get_the_author_posts_with_custom_post_type() {
 		register_post_type( 'wptests_pt' );

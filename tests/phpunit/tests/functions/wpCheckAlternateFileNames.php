@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_wp_check_alternate_file_names' )]
 class Tests_Functions_WpCheckAlternateFileNames extends WP_UnitTestCase {

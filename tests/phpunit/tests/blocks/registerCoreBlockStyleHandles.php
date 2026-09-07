@@ -11,8 +11,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'register_core_block_style_handles' )]
 class Tests_Blocks_registerCoreBlockStyleHandles extends WP_UnitTestCase {
 

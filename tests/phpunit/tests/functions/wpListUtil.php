@@ -13,8 +13,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'get_input' )]
 	public function test_wp_list_util_get_input() {
 		$input = array( 'foo', 'bar' );
@@ -23,8 +21,6 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 		$this->assertSameSets( $input, $util->get_input() );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'get_output' )]
 	public function test_wp_list_util_get_output_immediately() {
 		$input = array( 'foo', 'bar' );
@@ -33,8 +29,6 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 		$this->assertSameSets( $input, $util->get_output() );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'get_output' )]
 	public function test_wp_list_util_get_output() {
 		$expected = array(
@@ -173,9 +167,6 @@ class Tests_Functions_wpListUtil extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55300' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_List_Util', 'sort' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_list_sort' )]

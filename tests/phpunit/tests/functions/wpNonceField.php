@@ -11,8 +11,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_nonce_field' )]
 class Tests_Functions_wpNonceField extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55578' )]
 	public function test_wp_nonce_field() {
 		wp_nonce_field();

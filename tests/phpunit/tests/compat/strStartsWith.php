@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'str_starts_with' )]
 class Tests_Compat_StrStartsWith extends WP_UnitTestCase {

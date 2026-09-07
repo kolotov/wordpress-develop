@@ -1,6 +1,4 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'link' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_post_permalink' )]
 class Tests_Link_GetPostPermalink extends WP_UnitTestCase {

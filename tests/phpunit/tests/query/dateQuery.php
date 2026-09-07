@@ -181,8 +181,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p2, $p3 ), wp_list_pluck( $posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26653' )]
 	public function test_date_query_inclusive_between_dates() {
 		$p1 = self::factory()->post->create( array( 'post_date' => '2006-12-18 09:42:29' ) );
@@ -210,8 +208,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p2, $p3, $p4 ), wp_list_pluck( $posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Y() {
 		$p1 = self::factory()->post->create(
@@ -251,8 +247,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p1 ), $after_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Y_inclusive() {
 		$p1 = self::factory()->post->create(
@@ -294,8 +288,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p1, $p2 ), $after_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Ym() {
 		$p1 = self::factory()->post->create(
@@ -335,8 +327,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p1 ), $after_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Ym_inclusive() {
 		$p1 = self::factory()->post->create(
@@ -378,8 +368,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p1, $p2 ), $after_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Ymd() {
 		$p1 = self::factory()->post->create(
@@ -419,8 +407,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p1 ), $after_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_Ymd_inclusive() {
 		$p1 = self::factory()->post->create(
@@ -462,8 +448,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p1, $p2 ), $after_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_YmdHi() {
 		$p1 = self::factory()->post->create(
@@ -503,8 +487,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p1 ), $after_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_YmdHi_inclusive() {
 		$p1 = self::factory()->post->create(
@@ -546,8 +528,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p1, $p2 ), $after_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_YmdHis() {
 		$p1 = self::factory()->post->create(
@@ -587,8 +567,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p1 ), $after_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_YmdHis_inclusive() {
 		$p1 = self::factory()->post->create(
@@ -630,8 +608,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $p1, $p2 ), $after_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29908' )]
 	public function test_beforeafter_with_date_string_non_parseable() {
 		$p1 = self::factory()->post->create(
@@ -752,8 +728,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p1 ), wp_list_pluck( $posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28063' )]
 	public function test_date_query_dayofweek_iso() {
 		$p1 = self::factory()->post->create( array( 'post_date' => '2014-10-31 10:42:29' ) );
@@ -789,8 +763,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p1 ), wp_list_pluck( $posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34228' )]
 	public function test_date_query_hour_should_not_ignore_0() {
 		$p1 = self::factory()->post->create( array( 'post_date' => '2014-10-21 00:42:29' ) );
@@ -957,8 +929,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( "WEEK( $wpdb->posts.post_date, 1 ) = 42", $this->q->request );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25775' )]
 	public function test_date_query_with_taxonomy_join() {
 		$p1 = self::factory()->post->create(
@@ -995,8 +965,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p1 ), wp_list_pluck( $posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29822' )]
 	public function test_date_query_one_nested_query() {
 		$p1    = self::factory()->post->create( array( 'post_date' => '2004-10-01 13:42:29' ) );
@@ -1026,8 +994,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSame( array( $p2, $p3 ), wp_list_pluck( $posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29822' )]
 	public function test_date_query_one_nested_query_multiple_columns_relation_and() {
 		$p1 = self::factory()->post->create(
@@ -1087,8 +1053,6 @@ class Tests_Query_DateQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29822' )]
 	public function test_date_query_nested_query_multiple_columns_mixed_relations() {
 		$p1 = self::factory()->post->create(

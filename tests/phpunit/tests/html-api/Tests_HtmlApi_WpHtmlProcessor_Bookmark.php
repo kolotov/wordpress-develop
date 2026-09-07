@@ -6,14 +6,8 @@
  * @subpackage HTML-API
  */
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlProcessor_Bookmark extends WP_UnitTestCase {
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_processor_constructors' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '62290' )]
 	public function test_processor_seek_same_location( callable $factory ) {
@@ -31,9 +25,6 @@ class Tests_HtmlApi_WpHtmlProcessor_Bookmark extends WP_UnitTestCase {
 		$this->assertSame( array( 'HTML', 'BODY', 'DIV', 'SPAN' ), $processor->get_breadcrumbs() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_processor_constructors' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '62290' )]
 	public function test_processor_seek_backward( callable $factory ) {
@@ -50,9 +41,6 @@ class Tests_HtmlApi_WpHtmlProcessor_Bookmark extends WP_UnitTestCase {
 		$this->assertSame( 'DIV', $processor->get_tag() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_processor_constructors' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '62290' )]
 	public function test_processor_seek_forward( callable $factory ) {

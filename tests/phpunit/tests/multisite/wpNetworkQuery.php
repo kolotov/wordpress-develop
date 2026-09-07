@@ -423,8 +423,6 @@ class Tests_Multisite_wpNetworkQuery extends WP_UnitTestCase {
 		$this->assertSame( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41347' )]
 	public function test_wp_network_query_cache_with_different_fields_no_count() {
 		$q                 = new WP_Network_Query();
@@ -448,8 +446,6 @@ class Tests_Multisite_wpNetworkQuery extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41347' )]
 	public function test_wp_network_query_cache_with_different_fields_active_count() {
 		$q = new WP_Network_Query();
@@ -475,8 +471,6 @@ class Tests_Multisite_wpNetworkQuery extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41347' )]
 	public function test_wp_network_query_cache_with_same_fields_different_count() {
 		$q = new WP_Network_Query();
@@ -502,8 +496,6 @@ class Tests_Multisite_wpNetworkQuery extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries + 1, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55461' )]
 	public function test_wp_network_query_cache_with_same_fields_same_cache_field() {
 		$q                 = new WP_Network_Query();
@@ -529,8 +521,6 @@ class Tests_Multisite_wpNetworkQuery extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55461' )]
 	public function test_wp_network_query_cache_with_same_fields_different_cache_field() {
 		$q                 = new WP_Network_Query();
@@ -556,8 +546,6 @@ class Tests_Multisite_wpNetworkQuery extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45749' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '47599' )]
 	public function test_networks_pre_query_filter_should_bypass_database_query() {
@@ -586,8 +574,6 @@ class Tests_Multisite_wpNetworkQuery extends WP_UnitTestCase {
 		return array( 555 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51333' )]
 	public function test_networks_pre_query_filter_should_set_networks_property() {
 		add_filter( 'networks_pre_query', array( __CLASS__, 'filter_networks_pre_query_and_set_networks' ), 10, 2 );
@@ -608,8 +594,6 @@ class Tests_Multisite_wpNetworkQuery extends WP_UnitTestCase {
 		return array( get_network( self::$network_ids['wordpress.org/'] ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56841' )]
 	public function test_wp_network_query_does_not_have_leading_whitespace() {
 		$q = new WP_Network_Query();

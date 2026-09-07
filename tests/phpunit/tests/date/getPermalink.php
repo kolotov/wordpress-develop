@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
@@ -18,8 +15,6 @@ class Tests_Date_GetPermalink extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48623' )]
 	public function test_should_return_correct_date_permalink_with_changed_time_zone() {
 		$timezone = 'America/Chicago';

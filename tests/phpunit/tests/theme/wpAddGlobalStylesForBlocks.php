@@ -8,7 +8,6 @@ require_once __DIR__ . '/base.php';
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'themes' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_add_global_styles_for_blocks' )]
 class Tests_Theme_WpAddGlobalStylesForBlocks extends WP_Theme_UnitTestCase {
 
@@ -53,8 +52,6 @@ class Tests_Theme_WpAddGlobalStylesForBlocks extends WP_Theme_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56915' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '61165' )]
 	public function test_third_party_blocks_inline_styles_not_register_to_global_styles() {
@@ -69,8 +66,6 @@ class Tests_Theme_WpAddGlobalStylesForBlocks extends WP_Theme_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56915' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '61165' )]
 	public function test_third_party_blocks_inline_styles_get_registered_to_global_styles() {
@@ -234,8 +229,6 @@ class Tests_Theme_WpAddGlobalStylesForBlocks extends WP_Theme_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56915' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '61165' )]
 	public function test_third_party_blocks_inline_styles_get_registered_to_global_styles_when_per_block() {
@@ -259,8 +252,6 @@ class Tests_Theme_WpAddGlobalStylesForBlocks extends WP_Theme_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56915' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '61165' )]
 	public function test_third_party_blocks_inline_styles_get_rendered_when_per_block() {
@@ -285,9 +276,6 @@ class Tests_Theme_WpAddGlobalStylesForBlocks extends WP_Theme_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56915' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '61165' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_add_global_styles_for_blocks' )]
@@ -314,9 +302,6 @@ class Tests_Theme_WpAddGlobalStylesForBlocks extends WP_Theme_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57868' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '61165' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_add_global_styles_for_blocks' )]
@@ -337,8 +322,6 @@ class Tests_Theme_WpAddGlobalStylesForBlocks extends WP_Theme_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57868' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '61165' )]
 	public function test_third_party_blocks_inline_styles_for_elements_get_rendered() {

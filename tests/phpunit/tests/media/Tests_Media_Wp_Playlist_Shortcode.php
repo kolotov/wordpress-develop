@@ -1,12 +1,8 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_playlist_shortcode' )]
 class Tests_Media_Wp_Playlist_Shortcode extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63583' )]
 	public function test_should_load_scripts_exactly_once_when_first_playlist_is_invalid() {
 		global $wp_scripts;

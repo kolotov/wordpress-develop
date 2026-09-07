@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_is_numeric_array' )]
 class Tests_Functions_wpIsNumericArray extends WP_UnitTestCase {

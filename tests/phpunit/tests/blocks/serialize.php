@@ -9,7 +9,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
 class Tests_Blocks_Serialize extends WP_UnitTestCase {
 	/**
 	 * Ensure there are no issues with special character encoding.
@@ -127,9 +126,6 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 		$this->assertSame( 'plugin/example', strip_core_block_namespace( 'plugin/example' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59327' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '59412' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
@@ -145,9 +141,6 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59669' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_post_callback_modifies_current_block() {
@@ -168,9 +161,6 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_pre_callback_prepends_to_inner_block() {
@@ -185,9 +175,6 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_post_callback_appends_to_inner_block() {
@@ -210,9 +197,6 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 		return get_comment_delimited_block_content( 'tests/inserted-block', array(), '' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_pre_callback_prepends_to_child_blocks() {
@@ -227,9 +211,6 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_post_callback_appends_to_child_blocks() {
@@ -258,9 +239,6 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_pre_callback_prepends_if_prev_block() {
@@ -275,9 +253,6 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_post_callback_appends_if_prev_block() {
@@ -324,9 +299,6 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 		$this->assertSame( $original, $actual );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_do_not_insert_in_void_block() {
@@ -342,9 +314,6 @@ class Tests_Blocks_Serialize extends WP_UnitTestCase {
 		$this->assertSame( $markup, $actual );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'traverse_and_serialize_blocks' )]
 	public function test_traverse_and_serialize_blocks_do_not_insert_in_empty_parent_block() {

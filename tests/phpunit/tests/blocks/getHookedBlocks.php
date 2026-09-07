@@ -11,9 +11,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
 #[\PHPUnit\Framework\Attributes\Group( 'block-hooks' )]
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_hooked_blocks' )]
 class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 
@@ -61,8 +58,6 @@ class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 		register_block_type( $theme_blocks_dir . '/hooked-last-child' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59383' )]
 	public function test_get_hooked_blocks_no_match_found() {
 		$result = get_hooked_blocks();
@@ -70,8 +65,6 @@ class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 		$this->assertSame( array(), $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59383' )]
 	public function test_get_hooked_blocks_matches_found() {
 		register_block_type(
@@ -134,9 +127,6 @@ class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60008' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
@@ -165,9 +155,6 @@ class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60008' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]
@@ -196,9 +183,6 @@ class Tests_Blocks_GetHookedBlocks extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59313' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60008' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '60506' )]

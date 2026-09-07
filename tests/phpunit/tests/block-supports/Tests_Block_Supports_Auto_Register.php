@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_mark_auto_generate_control_attributes' )]
 class Tests_Block_Supports_Auto_Register extends WP_UnitTestCase {

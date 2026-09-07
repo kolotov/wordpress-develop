@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_space_used' )]

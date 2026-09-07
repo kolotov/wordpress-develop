@@ -1,9 +1,6 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
-
 class Tests_Query_InvalidQueries extends WP_UnitTestCase {
 
 	/**

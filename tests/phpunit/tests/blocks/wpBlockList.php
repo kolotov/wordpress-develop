@@ -36,8 +36,6 @@ class Tests_Blocks_wpBlockList extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_array_access() {
 		$parsed_blocks = parse_blocks( '<!-- wp:example /-->' );
@@ -60,8 +58,6 @@ class Tests_Blocks_wpBlockList extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 0, $blocks );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_iterable() {
 		$parsed_blocks = parse_blocks( '<!-- wp:example --><!-- wp:example /--><!-- /wp:example -->' );
@@ -92,8 +88,6 @@ class Tests_Blocks_wpBlockList extends WP_UnitTestCase {
 		$this->assertSame( 4, $assertions );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49927' )]
 	public function test_countable() {
 		$parsed_blocks = parse_blocks( '<!-- wp:example /-->' );

@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\Group( 'meta' )]
@@ -41,8 +39,6 @@ class Test_Lazy_Load_Term_Meta extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57150' )]
 	public function test_wp_queue_posts_for_term_meta_lazyload() {
 		$this->reset_lazyload_queue();
@@ -63,8 +59,6 @@ class Test_Lazy_Load_Term_Meta extends WP_UnitTestCase {
 		$this->assertSameSets( $term_ids, self::$term_ids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57150' )]
 	public function test_wp_queue_posts_for_term_meta_lazyload_update_post_term_cache() {
 		$filter = new MockAction();
@@ -85,8 +79,6 @@ class Test_Lazy_Load_Term_Meta extends WP_UnitTestCase {
 		$this->assertSameSets( $term_ids, self::$term_ids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57150' )]
 	public function test_wp_queue_posts_for_term_meta_lazyload_false() {
 		$filter = new MockAction();
@@ -108,9 +100,6 @@ class Test_Lazy_Load_Term_Meta extends WP_UnitTestCase {
 	}
 
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57901' )]
 	public function test_wp_queue_posts_for_term_meta_lazyload_insert_term() {
 		$filter = new MockAction();
@@ -136,8 +125,6 @@ class Test_Lazy_Load_Term_Meta extends WP_UnitTestCase {
 		$this->assertContains( $term_id, $term_ids );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57150' )]
 	public function test_wp_queue_posts_for_term_meta_lazyload_delete_term() {
 		$filter = new MockAction();

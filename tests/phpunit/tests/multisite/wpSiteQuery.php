@@ -774,8 +774,6 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 		$this->assertSameSets( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41197' )]
 	public function test_wp_site_query_cache_with_different_fields_no_count() {
 		$q                 = new WP_Site_Query();
@@ -801,8 +799,6 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41197' )]
 	public function test_wp_site_query_cache_with_different_fields_active_count() {
 		$q = new WP_Site_Query();
@@ -830,8 +826,6 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '41197' )]
 	public function test_wp_site_query_cache_with_same_fields_different_count() {
 		$q = new WP_Site_Query();
@@ -859,8 +853,6 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries + 1, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55462' )]
 	public function test_wp_site_query_cache_with_same_fields_same_cache_fields() {
 		$q = new WP_Site_Query();
@@ -891,8 +883,6 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55462' )]
 	public function test_wp_site_query_cache_with_same_fields_different_cache_fields() {
 		$q = new WP_Site_Query();
@@ -923,8 +913,6 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 		$this->assertSame( $number_of_queries, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40229' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_site_query_meta_query' )]
 	public function test_wp_site_query_meta_query( $query, $expected, $strict ) {
@@ -1110,8 +1098,6 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45749' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '47599' )]
 	public function test_sites_pre_query_filter_should_bypass_database_query() {
@@ -1140,8 +1126,6 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 		return array( 555 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51333' )]
 	public function test_sites_pre_query_filter_should_set_sites_property() {
 		add_filter( 'sites_pre_query', array( __CLASS__, 'filter_sites_pre_query_and_set_sites' ), 10, 2 );
@@ -1162,8 +1146,6 @@ class Tests_Multisite_wpSiteQuery extends WP_UnitTestCase {
 		return array( get_site( self::$site_ids['wordpress.org/'] ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56841' )]
 	public function test_wp_site_query_does_not_have_leading_whitespace() {
 		$q = new WP_Site_Query();

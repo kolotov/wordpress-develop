@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\Group( 'comments' )]
 #[\PHPUnit\Framework\Attributes\Group( 'feeds' )]
@@ -28,8 +26,6 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 		update_option( 'posts_per_rss', 100 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36904' )]
 	public function test_archive_comment_feed() {
 		add_filter( 'split_the_query', '__return_false' );
@@ -53,8 +49,6 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 		$this->assertSame( $num_queries + 1, get_num_queries() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36904' )]
 	public function test_archive_comment_feed_invalid_cache() {
 		$q1   = new WP_Query();
@@ -86,8 +80,6 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 		$this->assertSame( 20, $comment_count );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65613' )]
 	public function test_main_comment_feed_should_exclude_notes(): void {
 		$note_id = self::factory()->comment->create(
@@ -114,8 +106,6 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 		$this->assertSame( 15, $q->comment_count, 'Comments feed should include all regular comments.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65613' )]
 	public function test_archive_comment_feed_should_exclude_notes(): void {
 		$note_id = self::factory()->comment->create(
@@ -143,8 +133,6 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 		$this->assertSame( 15, $q->comment_count, 'Archive comments feed should include all regular comments.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65613' )]
 	public function test_single_comment_feed_should_exclude_notes(): void {
 		$post = get_post( self::$post_ids[0] );
@@ -176,8 +164,6 @@ class Tests_Query_CommentFeed extends WP_UnitTestCase {
 		$this->assertSame( 5, $q->comment_count, 'Singular comments feed should include all regular comments.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36904' )]
 	public function test_single_comment_feed() {
 		$post = get_post( self::$post_ids[0] );

@@ -1,15 +1,10 @@
 <?php
 
-/**
- */
 
 
 #[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_SanitizeOption extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_option' )]
 	public function test_sanitize_option( $option_name, $sanitized, $original ) {
@@ -98,9 +93,6 @@ class Tests_Option_SanitizeOption extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_option_upload_path' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_option' )]
 	public function test_sanitize_option_upload_path( $provided, $expected ) {
@@ -116,9 +108,6 @@ class Tests_Option_SanitizeOption extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36122' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_option' )]
 	public function test_emoji_in_blogname_and_description() {
@@ -136,9 +125,6 @@ class Tests_Option_SanitizeOption extends WP_UnitTestCase {
 		$this->assertSame( $expected, sanitize_option( 'blogdescription', $value ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_sanitize_option_permalink_structure' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'sanitize_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_settings_errors' )]

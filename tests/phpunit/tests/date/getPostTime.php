@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\Group( 'post' )]
@@ -20,8 +17,6 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_post_time_returns_correct_time_with_post_id() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2014-03-01 16:35:00' ) );
@@ -29,8 +24,6 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 		$this->assertSame( '16:35:00', get_post_time( 'H:i:s', false, $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_post_time_returns_false_with_null_or_non_existing_post() {
 		$this->assertFalse( get_post_time() );
@@ -39,8 +32,6 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 		$this->assertFalse( get_post_time( 'h:i:s', false, 9 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_post_modified_time_returns_correct_time_with_post_id() {
 		$post_id = self::factory()->post->create( array( 'post_date' => '2014-03-01 16:35:00' ) );
@@ -48,8 +39,6 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 		$this->assertSame( '16:35:00', get_post_modified_time( 'H:i:s', false, $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28310' )]
 	public function test_get_post_modified_time_returns_false_with_null_or_non_existing_post() {
 		$this->assertFalse( get_post_modified_time() );
@@ -58,8 +47,6 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 		$this->assertFalse( get_post_modified_time( 'h:i:s', false, 9 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25002' )]
 	public function test_should_return_wp_timestamp() {
 		$timezone = 'Europe/Helsinki';
@@ -87,8 +74,6 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 		$this->assertSame( $timestamp, get_post_modified_time( 'G', true, $post_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25002' )]
 	public function test_should_return_time() {
 		$timezone = 'Europe/Helsinki';
@@ -115,8 +100,6 @@ class Tests_Date_GetPostTime extends WP_UnitTestCase {
 		$this->assertSame( $rfc3339_utc, get_post_modified_time( DATE_RFC3339, true, $post_id, true ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48384' )]
 	public function test_should_keep_utc_time_on_timezone_change() {
 		$timezone = 'UTC';

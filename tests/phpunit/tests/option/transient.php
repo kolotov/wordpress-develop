@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 
 
 
@@ -18,8 +16,6 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_transient' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_transient' )]
@@ -39,8 +35,6 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 		$this->assertFalse( delete_transient( $key ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_transient' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_transient' )]
@@ -60,9 +54,6 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 		$this->assertTrue( delete_transient( $key ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22807' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
@@ -166,9 +157,6 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 		$this->assertNotContains( $unexpected_query_timeout, $queries, 'Unexpected query of transient timeout option individually.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22807' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_transient' )]
@@ -225,9 +213,6 @@ class Tests_Option_Transient extends WP_UnitTestCase {
 		$this->assertSame( 0, $a->get_call_count() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30380' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_transient' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_transient' )]

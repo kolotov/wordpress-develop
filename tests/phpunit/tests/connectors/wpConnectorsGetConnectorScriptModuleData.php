@@ -63,8 +63,6 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_exposes_application_password_metadata_without_credentials(): void {
 		update_option(
@@ -88,8 +86,6 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 		$this->assertArrayNotHasKey( 'password', $auth );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_is_not_connected_when_one_credential_is_missing(): void {
 		update_option(
@@ -105,8 +101,6 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 		$this->assertFalse( $data['connectors'][ self::CONNECTOR_ID ]['authentication']['isConnected'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_environment_variable_credentials_mark_connector_connected(): void {
 		$this->register_connector( array( 'env_var_name' => self::CREDENTIALS_ENV_VAR_NAME ) );
@@ -121,8 +115,6 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 		$this->assertArrayNotHasKey( 'password', $auth );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_constant_credentials_mark_connector_connected(): void {
 		if ( ! defined( 'WP_TESTS_CONNECTOR_REMOTE_CREDENTIALS_CONSTANT' ) ) {
@@ -137,8 +129,6 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 		$this->assertTrue( $auth['isConnected'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_environment_variable_takes_precedence_over_database(): void {
 		$this->register_connector( array( 'env_var_name' => self::CREDENTIALS_ENV_VAR_NAME ) );
@@ -156,8 +146,6 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 		$this->assertSame( 'env', $data['connectors'][ self::CONNECTOR_ID ]['authentication']['keySource'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_malformed_environment_variable_credentials_fall_back_to_database(): void {
 		$this->setExpectedIncorrectUsage( 'wp_connectors_get_application_password_credentials' );
@@ -179,8 +167,6 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 		$this->assertTrue( $auth['isConnected'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_malformed_environment_variable_credentials_without_fallback_are_not_connected(): void {
 		$this->setExpectedIncorrectUsage( 'wp_connectors_get_application_password_credentials' );
@@ -195,8 +181,6 @@ class Tests_Connectors_WpConnectorsGetConnectorScriptModuleData extends WP_UnitT
 		$this->assertFalse( $auth['isConnected'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64850' )]
 	public function test_environment_variable_password_may_contain_colons(): void {
 		$this->register_connector( array( 'env_var_name' => self::CREDENTIALS_ENV_VAR_NAME ) );

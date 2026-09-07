@@ -222,8 +222,6 @@ class Tests_Theme_WpGetGlobalStylesheet extends WP_Theme_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '56970' )]
 	public function test_switching_themes_should_recalculate_stylesheet() {
 		$expected = '--wp--preset--font-size--custom: 100px;';

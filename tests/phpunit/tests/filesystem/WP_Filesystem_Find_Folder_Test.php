@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/base.php';
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'file' )]
 #[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
 class WP_Filesystem_Find_Folder_Test extends WP_Filesystem_UnitTestCase {

@@ -11,8 +11,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_referer_field' )]
 class Tests_Functions_wpRefererField extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55578' )]
 	public function test_wp_referer_field() {
 		$_SERVER['REQUEST_URI'] = '/test/';
@@ -21,8 +19,6 @@ class Tests_Functions_wpRefererField extends WP_UnitTestCase {
 		$this->expectOutputString( '<input type="hidden" name="_wp_http_referer" value="/test/" />' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55578' )]
 	public function test_wp_referer_field_return() {
 		$_SERVER['REQUEST_URI'] = '/test/';
@@ -62,8 +58,6 @@ class Tests_Functions_wpRefererField extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54106' )]
 	public function test_wp_referer_field_with_referer() {
 		$old_request_uri        = $_SERVER['REQUEST_URI'];

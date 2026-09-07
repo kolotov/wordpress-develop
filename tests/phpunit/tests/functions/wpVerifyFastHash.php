@@ -9,8 +9,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_verify_fast_hash' )]
 class Tests_Functions_wpVerifyFastHash extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_verify_fast_hash_verifies_hash() {
 		$password = 'password';
@@ -20,8 +18,6 @@ class Tests_Functions_wpVerifyFastHash extends WP_UnitTestCase {
 		$this->assertTrue( wp_verify_fast_hash( $password, $hash ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_verify_fast_hash_fails_unprefixed_hash() {
 		$password = 'password';
@@ -31,8 +27,6 @@ class Tests_Functions_wpVerifyFastHash extends WP_UnitTestCase {
 		$this->assertFalse( wp_verify_fast_hash( $password, substr( $hash, 9 ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_verify_fast_hash_fails_partial_hash() {
 		$password = 'password';
@@ -42,8 +36,6 @@ class Tests_Functions_wpVerifyFastHash extends WP_UnitTestCase {
 		$this->assertFalse( wp_verify_fast_hash( $password, substr( $hash, 0, -3 ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21022' )]
 	public function test_wp_verify_fast_hash_verifies_phpass_hash() {
 		require_once ABSPATH . WPINC . '/class-phpass.php';

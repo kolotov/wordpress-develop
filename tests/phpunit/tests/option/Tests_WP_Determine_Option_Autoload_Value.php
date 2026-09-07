@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'option' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_determine_option_autoload_value' )]
 class Tests_WP_Determine_Option_Autoload_Value extends WP_UnitTestCase {
@@ -73,16 +70,12 @@ class Tests_WP_Determine_Option_Autoload_Value extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
 	public function test_small_option() {
 		$test = wp_determine_option_autoload_value( 'foo', 'bar', 'bar', null );
 		$this->assertSame( 'auto', $test );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
 	public function test_large_option() {
 		$value            = file( DIR_TESTDATA . '/formatting/entities.txt' );
@@ -91,8 +84,6 @@ class Tests_WP_Determine_Option_Autoload_Value extends WP_UnitTestCase {
 		$this->assertSame( 'auto-off', $test );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
 	public function test_large_option_json() {
 		$value            = file( DIR_TESTDATA . '/themedir1/block-theme/theme.json' );

@@ -8,8 +8,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
-
 class Tests_Blocks_RenderBlock extends WP_UnitTestCase {
 
 	/**

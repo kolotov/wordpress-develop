@@ -1,16 +1,7 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 #[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
-
-
-
-
-
-
 class Tests_L10n_wpTextdomainRegistry extends WP_UnitTestCase {
 	/**
 	 * @var WP_Textdomain_Registry
@@ -32,8 +23,6 @@ class Tests_L10n_wpTextdomainRegistry extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Textdomain_Registry', 'has' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Textdomain_Registry', 'get' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Textdomain_Registry', 'set_custom_path' )]
@@ -60,8 +49,6 @@ class Tests_L10n_wpTextdomainRegistry extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_domains_locales' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Textdomain_Registry', 'get' )]
 	public function test_get( $domain, $locale, $expected ) {
@@ -73,8 +60,6 @@ class Tests_L10n_wpTextdomainRegistry extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Textdomain_Registry', 'set' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Textdomain_Registry', 'get' )]
 	public function test_set_populates_cache() {
@@ -86,8 +71,6 @@ class Tests_L10n_wpTextdomainRegistry extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Textdomain_Registry', 'get_language_files_from_path' )]
 	public function test_get_language_files_from_path_caches_results() {
 		$this->instance->get_language_files_from_path( WP_LANG_DIR . '/foobar/' );
@@ -101,8 +84,6 @@ class Tests_L10n_wpTextdomainRegistry extends WP_UnitTestCase {
 		$this->assertNotFalse( wp_cache_get( md5( WP_LANG_DIR . '/' ), 'translation_files' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Textdomain_Registry', 'get_language_files_from_path' )]
 	public function test_get_language_files_from_path_short_circuit() {
 		add_filter( 'pre_get_language_files_from_path', '__return_empty_array' );
@@ -115,8 +96,6 @@ class Tests_L10n_wpTextdomainRegistry extends WP_UnitTestCase {
 		$this->assertFalse( $cache );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Textdomain_Registry', 'invalidate_mo_files_cache' )]
 	public function test_invalidate_mo_files_cache() {
 		$this->instance->get_language_files_from_path( WP_LANG_DIR . '/plugins/' );

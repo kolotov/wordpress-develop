@@ -8,9 +8,9 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'formatting' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Formatting_CleanPre extends WP_UnitTestCase {
 
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'clean_pre' )]
 	public function test_removes_self_closing_br_with_space() {
 		$source = 'a b c\n<br />sldfj<br />';
 		$res    = 'a b c\nsldfj';
@@ -18,6 +18,7 @@ class Tests_Formatting_CleanPre extends WP_UnitTestCase {
 		$this->assertSame( $res, clean_pre( $source ) );
 	}
 
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'clean_pre' )]
 	public function test_removes_self_closing_br_without_space() {
 		$source = 'a b c\n<br/>sldfj<br/>';
 		$res    = 'a b c\nsldfj';
@@ -31,12 +32,14 @@ class Tests_Formatting_CleanPre extends WP_UnitTestCase {
 	 * that replacement shouldn't happen (what if you want
 	 * HTML 4 output?).
 	 */
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'clean_pre' )]
 	public function test_removes_html_br() {
 		$source = 'a b c\n<br>sldfj<br>';
 		$res    = 'a b c\nsldfj';
 		$this->assertSame( $res, clean_pre( $source ) );
 	}
 
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'clean_pre' )]
 	public function test_removes_p() {
 		$source = "<p>isn't this exciting!</p><p>oh indeed!</p>";
 		$res    = "\nisn't this exciting!\noh indeed!";

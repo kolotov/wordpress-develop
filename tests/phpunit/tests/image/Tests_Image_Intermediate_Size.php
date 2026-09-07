@@ -1,6 +1,4 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'image' )]
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
 #[\PHPUnit\Framework\Attributes\Group( 'upload' )]
@@ -28,8 +26,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertFalse( $image );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_make_intermediate_size_width() {
 		$image = image_make_intermediate_size( DIR_TESTDATA . '/images/a2-small.jpg', 100, 0, false );
@@ -37,8 +33,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertIsArray( $image );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_make_intermediate_size_height() {
 		$image = image_make_intermediate_size( DIR_TESTDATA . '/images/a2-small.jpg', 0, 75, false );
@@ -46,8 +40,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertIsArray( $image );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_make_intermediate_size_successful() {
 		$image = image_make_intermediate_size( DIR_TESTDATA . '/images/a2-small.jpg', 100, 75, true );
@@ -62,8 +54,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 'path', $image );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '52867' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_image_editor_output_format_filter() {
@@ -88,8 +78,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17626' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_get_intermediate_sizes_by_name() {
@@ -109,8 +97,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertStringContainsString( '330x220', $image['file'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17626' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_get_intermediate_sizes_by_array_exact() {
@@ -131,8 +117,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertStringContainsString( '330x220', $image['file'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17626' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_get_intermediate_sizes_by_array_nearest() {
@@ -154,8 +138,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertStringContainsString( '450x300', $image['file'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17626' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_get_intermediate_sizes_by_array_nearest_false() {
@@ -176,8 +158,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertFalse( $image );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17626' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_get_intermediate_sizes_by_array_zero_height() {
@@ -204,8 +184,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertStringContainsString( $image_w . 'x' . $image_h, $image['file'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17626' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '34087' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
@@ -233,8 +211,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertStringContainsString( $image_w . 'x' . $image_h, $image['file'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '17626' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '34087' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
@@ -258,8 +234,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertStringContainsString( $width . 'x' . $height, $image['file'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34384' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_get_intermediate_size_with_small_size_array() {
@@ -276,8 +250,6 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertStringContainsString( '200x100', $image['file'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34384' )]
 	#[\PHPUnit\Framework\Attributes\RequiresFunction( 'imagejpeg' )]
 	public function test_get_intermediate_size_with_small_size_array_fallback() {

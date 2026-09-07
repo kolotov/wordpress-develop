@@ -10,8 +10,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'maybe_unserialize' )]
 class Tests_Functions_MaybeSerialize extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_not_serialized' )]
 	public function test_maybe_serialize( $data, $expected ) {
 		$value = $data;
@@ -24,8 +22,6 @@ class Tests_Functions_MaybeSerialize extends WP_UnitTestCase {
 		$this->assertSame( $expected, maybe_serialize( $value ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_serialized' )]
 	public function test_maybe_serialize_with_double_serialization( $data, $expected ) {
 		$value    = $data;
@@ -34,8 +30,6 @@ class Tests_Functions_MaybeSerialize extends WP_UnitTestCase {
 		$this->assertSame( $expected, maybe_serialize( $value ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_serialized' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_not_serialized' )]
 	public function test_maybe_unserialize( $data, $expected ) {
@@ -212,8 +206,6 @@ class Tests_Functions_MaybeSerialize extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_serialize_deserialize_objects' )]
 	public function test_deserialize_request_utility_filtered_iterator_objects( $value ) {
 		$serialized = maybe_serialize( $value );

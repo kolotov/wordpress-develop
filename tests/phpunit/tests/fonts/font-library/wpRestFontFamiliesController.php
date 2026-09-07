@@ -142,8 +142,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		return $post_id;
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'register_routes' )]
 	public function test_register_routes() {
 		$routes = rest_get_server()->get_routes();
@@ -222,8 +220,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'get_items' )]
 	public function test_get_items() {
 		wp_set_current_user( self::$admin_id );
@@ -239,8 +235,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->check_font_family_data( $data[1], self::$font_family_id1, $data[1]['_links'] );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'get_items' )]
 	public function test_get_items_by_slug() {
 		$font_family = get_post( self::$font_family_id2 );
@@ -257,8 +251,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertSame( $font_family->ID, $data[0]['id'], 'The id should match the expected ID in the response data.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'get_items' )]
 	public function test_get_items_no_permission() {
 		wp_set_current_user( 0 );
@@ -272,8 +264,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertErrorResponse( 'rest_cannot_read', $response, 403, 'The response should return an error with a "rest_cannot_read" code and 403 status.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'get_item' )]
 	public function test_get_item() {
 		wp_set_current_user( self::$admin_id );
@@ -285,8 +275,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->check_font_family_data( $data, self::$font_family_id1, $response->get_links() );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'prepare_item_for_response' )]
 	public function test_get_item_embedded_font_faces() {
 		wp_set_current_user( self::$admin_id );
@@ -311,8 +299,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		}
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'get_item' )]
 	public function test_get_item_removes_extra_settings() {
 		$font_family_id = self::create_font_family_post( array( 'fontFace' => array() ) );
@@ -326,8 +312,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertArrayNotHasKey( 'fontFace', $data['font_family_settings'], 'The fontFace property should not exist in the font_family_settings data.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'prepare_item_for_response' )]
 	public function test_get_item_malformed_post_content_returns_empty_settings() {
 		$font_family_id = wp_insert_post(
@@ -357,8 +341,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertSame( $empty_settings, $data['font_family_settings'], 'The empty settings should exist in the font_family_settings data.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'get_item' )]
 	public function test_get_item_invalid_font_family_id() {
 		wp_set_current_user( self::$admin_id );
@@ -367,8 +349,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertErrorResponse( 'rest_post_invalid_id', $response, 404 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'get_item' )]
 	public function test_get_item_no_permission() {
 		wp_set_current_user( 0 );
@@ -382,8 +362,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertErrorResponse( 'rest_cannot_read', $response, 403, 'The response should return an error with a "rest_cannot_read" code and 403 status.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'create_item' )]
 	public function test_create_item() {
 		$settings = array_merge( self::$default_settings, array( 'slug' => 'open-sans-2' ) );
@@ -403,8 +381,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertEmpty( $data['font_faces'], 'The font_faces should be empty or not exist in the response data.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'create_item' )]
 	public function test_create_item_default_theme_json_version() {
 		$settings = array_merge( self::$default_settings, array( 'slug' => 'open-sans-2' ) );
@@ -631,8 +607,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'validate_font_family_settings' )]
 	public function test_create_item_invalid_settings_json() {
 		wp_set_current_user( self::$admin_id );
@@ -648,8 +622,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertSame( $expected_message, $message, 'The response error message should match.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'validate_font_family_settings' )]
 	public function test_create_item_non_string_settings() {
 		wp_set_current_user( self::$admin_id );
@@ -665,8 +637,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertSame( $expected_message, $message, 'The response error message should match.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'create_item' )]
 	public function test_create_item_with_duplicate_slug() {
 		wp_set_current_user( self::$admin_id );
@@ -682,8 +652,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertSame( $expected_message, $message, 'The response error message should match.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'create_item' )]
 	public function test_create_item_no_permission() {
 		$settings = array_merge( self::$default_settings, array( 'slug' => 'open-sans-2' ) );
@@ -710,8 +678,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertErrorResponse( 'rest_cannot_create', $response, 403, 'The response should return an error for "rest_cannot_create" with 403 status.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'update_item' )]
 	public function test_update_item() {
 		wp_set_current_user( self::$admin_id );
@@ -851,8 +817,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'update_item' )]
 	public function test_update_item_update_slug_not_allowed() {
 		wp_set_current_user( self::$admin_id );
@@ -869,8 +833,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertSame( $expected_message, $message, 'The response error message should match.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'validate_font_family_settings' )]
 	public function test_update_item_non_string_settings() {
 		wp_set_current_user( self::$admin_id );
@@ -885,8 +847,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertSame( $expected_message, $message, 'The response error message should match.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'update_item' )]
 	public function test_update_item_invalid_font_family_id() {
 		$settings = array_diff_key( self::$default_settings, array( 'slug' => '' ) );
@@ -898,8 +858,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertErrorResponse( 'rest_post_invalid_id', $response, 404, 'The response should return an error for "rest_post_invalid_id" with 404 status.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'update_item' )]
 	public function test_update_item_no_permission() {
 		$settings = array_diff_key( self::$default_settings, array( 'slug' => '' ) );
@@ -918,8 +876,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 	}
 
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'delete_item' )]
 	public function test_delete_item() {
 		wp_set_current_user( self::$admin_id );
@@ -932,8 +888,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertNull( get_post( $font_family_id ), 'The post should not exist after deleting.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'delete_item' )]
 	public function test_delete_item_no_trash() {
 		wp_set_current_user( self::$admin_id );
@@ -953,8 +907,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertNotEmpty( $post, 'The post should still exist.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'delete_item' )]
 	public function test_delete_item_invalid_font_family_id() {
 		wp_set_current_user( self::$admin_id );
@@ -963,8 +915,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertErrorResponse( 'rest_post_invalid_id', $response, 404 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'delete_item' )]
 	public function test_delete_item_no_permissions() {
 		$font_family_id = self::create_font_family_post();
@@ -980,8 +930,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertErrorResponse( 'rest_cannot_delete', $response, 403, 'The response should return an error for "rest_cannot_delete" with 403 status for a user without permission.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'prepare_item_for_response' )]
 	public function test_prepare_item() {
 		wp_set_current_user( self::$admin_id );
@@ -993,8 +941,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->check_font_family_data( $data, self::$font_family_id2, $response->get_links() );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'get_item_schema' )]
 	public function test_get_item_schema() {
 		$request  = new WP_REST_Request( 'OPTIONS', '/wp/v2/font-families' );
@@ -1010,8 +956,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		$this->assertArrayHasKey( 'font_family_settings', $properties, 'The font_family_settings property should exist in the schema::properties data.' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'get_item_schema' )]
 	public function test_get_item_schema_font_family_settings_should_all_have_sanitize_callbacks() {
 		$schema                      = ( new WP_REST_Font_Families_Controller( 'wp_font_family' ) )->get_item_schema();
@@ -1028,8 +972,6 @@ class Tests_REST_WpRestFontFamiliesController extends WP_Test_REST_Controller_Te
 		}
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_REST_Font_Families_Controller', 'get_public_item_schema' )]
 	public function test_get_public_item_schema_should_not_have_arg_options() {
 		$schema                      = ( new WP_REST_Font_Families_Controller( 'wp_font_family' ) )->get_public_item_schema();

@@ -20,9 +20,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Option_NetworkOption extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_site_option' )]
 	public function test_add_network_option_not_available_on_other_network() {
@@ -34,9 +31,6 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 		$this->assertFalse( get_network_option( $id, $option, false ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_network_option' )]
 	public function test_add_network_option_available_on_same_network() {
@@ -48,9 +42,6 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 		$this->assertSame( $value, get_network_option( $id, $option, false ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'delete_site_option' )]
 	public function test_delete_network_option_on_only_one_network() {
@@ -94,9 +85,6 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 		$this->assertSame( 0, $queries, 'get_network_option should not make any database queries.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22846' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_network_option' )]
@@ -110,9 +98,6 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( $key, $options );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '22846' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_network_option' )]
@@ -174,9 +159,6 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43506' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_network_option' )]
@@ -202,9 +184,6 @@ class Tests_Option_NetworkOption extends WP_UnitTestCase {
 		$this->assertSame( array(), $cache );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43506' )]
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_network_option' )]

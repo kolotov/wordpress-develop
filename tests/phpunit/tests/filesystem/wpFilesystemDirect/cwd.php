@@ -5,9 +5,6 @@
  * @package WordPress
  */
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\Group( 'filesystem' )]
 #[\PHPUnit\Framework\Attributes\Group( 'filesystem-direct' )]

@@ -1,29 +1,21 @@
 <?php
 
-/**
- */
 
 
 
 #[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_ThemeMods extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_mod' )]
 	public function test_theme_mod_default() {
 		$this->assertFalse( get_theme_mod( 'non_existent' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_mod' )]
 	public function test_theme_mod_defined_default() {
 		$this->assertSame( 'default', get_theme_mod( 'non_existent', 'default' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_mod' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_theme_mod' )]
 	public function test_theme_mod_set() {
@@ -32,9 +24,6 @@ class Tests_Option_ThemeMods extends WP_UnitTestCase {
 		$this->assertSame( $expected, get_theme_mod( 'test_name' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51423' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_theme_mod' )]
 	public function test_theme_mod_set_with_invalid_theme_mods_option() {
@@ -43,8 +32,6 @@ class Tests_Option_ThemeMods extends WP_UnitTestCase {
 		self::test_theme_mod_set();
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_mod' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_theme_mod' )]
 	public function test_theme_mod_update() {
@@ -54,8 +41,6 @@ class Tests_Option_ThemeMods extends WP_UnitTestCase {
 		$this->assertSame( $expected, get_theme_mod( 'test_update' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'set_theme_mod' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'remove_theme_mod' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_mod' )]
@@ -65,10 +50,6 @@ class Tests_Option_ThemeMods extends WP_UnitTestCase {
 		$this->assertFalse( get_theme_mod( 'test_remove' ) );
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34290' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_mod_default_value_with_percent_symbols' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_mod' )]

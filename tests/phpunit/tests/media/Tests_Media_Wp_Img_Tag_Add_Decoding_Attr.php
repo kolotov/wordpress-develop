@@ -5,7 +5,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Media_Wp_Img_Tag_Add_Decoding_Attr extends WP_UnitTestCase {
 	/**
 	 * Tests that the `wp_img_tag_add_decoding_attr()` function should add
@@ -22,6 +21,7 @@ class Tests_Media_Wp_Img_Tag_Add_Decoding_Attr extends WP_UnitTestCase {
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53232' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_add_decoding_attr' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_decoding_attr' )]
 	public function test_should_add_decoding_attr( $image, $context, $decoding, $expected ) {
 		// Falsey values are allowed in the filter, cannot use `null` or `false` here.
 		if ( 'no value' !== $decoding ) {
@@ -85,6 +85,7 @@ class Tests_Media_Wp_Img_Tag_Add_Decoding_Attr extends WP_UnitTestCase {
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '53232' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_should_not_add_decoding_attr' )]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_img_tag_add_decoding_attr' )]
 	public function test_should_not_add_decoding_attr( $image, $context, $decoding, $expected ) {
 		// Falsey values are allowed in the filter, cannot use `null` or `false` here.
 		if ( 'no value' !== $decoding ) {

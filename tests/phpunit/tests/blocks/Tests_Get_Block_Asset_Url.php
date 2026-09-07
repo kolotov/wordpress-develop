@@ -42,8 +42,6 @@ class Tests_Get_Block_Asset_Url extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58525' )]
 	public function test_core_block() {
 		$path = ABSPATH . WPINC . '/blocks/file/view.min.js';
@@ -53,8 +51,6 @@ class Tests_Get_Block_Asset_Url extends WP_UnitTestCase {
 		$this->assertSame( includes_url( '/blocks/file/view.min.js' ), $url, 'The return block asset url should match includes url.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58525' )]
 	public function test_parent_theme() {
 		switch_theme( 'block-theme' );
@@ -65,8 +61,6 @@ class Tests_Get_Block_Asset_Url extends WP_UnitTestCase {
 		$this->assertSame( get_template_directory_uri() . '/blocks/example-block/view.js', $url );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58525' )]
 	public function test_child_theme() {
 		switch_theme( 'block-theme-child' );
@@ -77,8 +71,6 @@ class Tests_Get_Block_Asset_Url extends WP_UnitTestCase {
 		$this->assertSame( get_stylesheet_directory_uri() . '/blocks/example-block/view.js', $url );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58525' )]
 	public function test_plugin() {
 		$path = WP_PLUGIN_DIR . '/test-plugin/blocks/example-block/view.js';
@@ -89,8 +81,6 @@ class Tests_Get_Block_Asset_Url extends WP_UnitTestCase {
 		$this->assertStringStartsWith( WP_PLUGIN_URL, $url, 'The return block asset url should contain the url that support with the mu plugin url.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58525' )]
 	public function test_muplugin() {
 		$path = WPMU_PLUGIN_DIR . '/test-plugin/example-block/view.js';
@@ -101,8 +91,6 @@ class Tests_Get_Block_Asset_Url extends WP_UnitTestCase {
 		$this->assertStringStartsWith( WPMU_PLUGIN_URL, $url, 'The return block asset url should contain the url that support with the mu plugin url.' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58525' )]
 	public function test_empty() {
 		$url = get_block_asset_url( '' );

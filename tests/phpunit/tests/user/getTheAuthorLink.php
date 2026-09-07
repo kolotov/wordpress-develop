@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'author' )]
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_author_link' )]
@@ -38,9 +35,6 @@ class Tests_User_GetTheAuthorLink extends WP_UnitTestCase {
 		setup_postdata( get_post( self::$post_id ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51859' )]
 	public function test_get_the_author_link() {
 		$author_url          = get_the_author_meta( 'url' );
@@ -52,9 +46,6 @@ class Tests_User_GetTheAuthorLink extends WP_UnitTestCase {
 		$this->assertStringContainsString( $author_display_name, $link, 'The link does not contain the author display name' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '51859' )]
 	public function test_filtered_get_the_author_link() {
 		$filter = new MockAction();

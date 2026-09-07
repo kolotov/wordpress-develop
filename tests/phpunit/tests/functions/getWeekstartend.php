@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_weekstartend' )]
 class Tests_Functions_GetWeekstartend extends WP_UnitTestCase {

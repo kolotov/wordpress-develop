@@ -276,8 +276,6 @@ class Tests_Theme_ThemeDir extends WP_UnitTestCase {
 		$this->assertSame( 'Mr. WordPress', $theme_data['AuthorName'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28662' )]
 	public function test_theme_dir_slashes() {
 		$size = count( $GLOBALS['wp_theme_directories'] );

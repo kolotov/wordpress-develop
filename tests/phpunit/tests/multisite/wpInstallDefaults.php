@@ -9,8 +9,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'ms-site' )]
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Multisite_wpInstallDefaults extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40036' )]
 	public function test_option_should_not_be_empty_by_default() {
 		$blog_id = self::factory()->blog->create();
@@ -28,8 +26,6 @@ class Tests_Multisite_wpInstallDefaults extends WP_UnitTestCase {
 		$this->assertNotEmpty( $first_comment[0]->comment_content );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40036' )]
 	public function test_empty_option_should_fall_back_to_default() {
 		/*
@@ -54,8 +50,6 @@ class Tests_Multisite_wpInstallDefaults extends WP_UnitTestCase {
 		$this->assertNotEmpty( $first_comment[0]->comment_content );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '40036' )]
 	public function test_non_default_option_values() {
 		/*

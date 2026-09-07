@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 #[\PHPUnit\Framework\Attributes\Group( 'security-153' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'mb_substr' )]
@@ -20,8 +17,6 @@ class Tests_Compat_mbSubstr extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_utf8_substrings' )]
 	public function test_mb_substr( $input_string, $start, $length ) {
 		$this->assertSame(
@@ -30,8 +25,6 @@ class Tests_Compat_mbSubstr extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_utf8_substrings' )]
 	public function test_8bit_mb_substr( $input_string, $start, $length ) {
 		$this->assertSame(

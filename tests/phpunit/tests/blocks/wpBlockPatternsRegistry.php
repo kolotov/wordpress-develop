@@ -8,12 +8,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
-
-
-
-
-
 class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 
 	/**
@@ -702,8 +696,6 @@ class Tests_Blocks_wpBlockPatternsRegistry extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63957' )]
 	public function test_is_registered_with_null_pattern_name() {
 		$this->assertFalse( $this->registry->is_registered( null ) );

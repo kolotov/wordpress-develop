@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'is_email_address_unsafe' )]
@@ -14,8 +11,6 @@ class Tests_Multisite_IsEmailAddressUnsafe extends WP_UnitTestCase {
 		$this->assertFalse( is_email_address_unsafe( 'foo@example.org' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25046' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '21570' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_unsafe' )]
@@ -24,8 +19,6 @@ class Tests_Multisite_IsEmailAddressUnsafe extends WP_UnitTestCase {
 		$this->assertTrue( is_email_address_unsafe( $email ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25046' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '21570' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_safe' )]

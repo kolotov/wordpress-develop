@@ -1,31 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 #[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'get_instance' )]
 	public function test_get_instance() {
 		$instance  = WP_Translation_Controller::get_instance();
@@ -40,8 +17,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $instance->translate_plural( array( 'plural0', 'plural1' ), 1 ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'unload_textdomain' )]
 	public function test_unload_not_loaded() {
 		$instance = new WP_Translation_Controller();
@@ -49,8 +24,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $instance->unload_textdomain( 'unittest' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'load_file' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'unload_textdomain' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'is_textdomain_loaded' )]
@@ -70,8 +43,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $instance->translate( 'original', '', 'unittest' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'unload_file' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_File', 'get_file' )]
 	public function test_unload_file_is_not_actually_loaded() {
@@ -83,8 +54,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertSame( 'translation', $controller->translate( 'original', '', 'unittest' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'unload_textdomain' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'is_textdomain_loaded' )]
 	public function test_unload_specific_locale() {
@@ -156,8 +125,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'load_file' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'is_textdomain_loaded' )]
 	public function test_load_non_existent_file() {
@@ -167,15 +134,11 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $instance->is_textdomain_loaded( 'unittest' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_File', 'create' )]
 	public function test_create_non_existent_file() {
 		$this->assertFalse( WP_Translation_File::create( 'this-file-does-not-exist' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_File', 'create' )]
 	public function test_create_invalid_filetype() {
 		$file = $this->temp_filename();
@@ -233,8 +196,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'load_file' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'unload_file' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'is_textdomain_loaded' )]
@@ -283,8 +244,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $controller->translate( 'baba', '', 'unittest' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'set_locale' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'get_locale' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'load_file' )]
@@ -328,8 +287,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $controller->translate_plural( array( 'one dragon', '%d dragons' ), 1, '', 'unittest', 'en_US' ), 'String should not be translated in en_US' );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'unload_textdomain' )]
 	public function test_unload_with_multiple_locales() {
 		$ginger_mo = new WP_Translation_Controller();
@@ -362,8 +319,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $ginger_mo->is_textdomain_loaded( 'unittest', 'de_DE' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'load_file' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'locate_translation' )]
 	public function test_load_with_default_textdomain() {
@@ -374,8 +329,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertSame( 'translation', $controller->translate( 'original' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'load_file' )]
 	public function test_load_same_file_twice() {
 		$controller = new WP_Translation_Controller();
@@ -385,8 +338,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertTrue( $controller->is_textdomain_loaded( 'unittest' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'load_file' )]
 	public function test_load_file_is_already_loaded_for_different_textdomain() {
 		$controller = new WP_Translation_Controller();
@@ -397,8 +348,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertTrue( $controller->is_textdomain_loaded( 'bar' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'load_file' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'is_textdomain_loaded' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'translate' )]
@@ -423,8 +372,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertSame( '%s دیدگاه', $controller->translate_plural( array( '%s comment', '%s comments' ), 2, '', 'unittest' ) );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'get_headers' )]
 	public function test_get_headers_no_loaded_translations() {
 		$controller = new WP_Translation_Controller();
@@ -432,8 +379,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertEmpty( $headers );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'get_headers' )]
 	public function test_get_headers_with_default_textdomain() {
 		$controller = new WP_Translation_Controller();
@@ -447,8 +392,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'get_headers' )]
 	public function test_get_headers_no_loaded_translations_for_domain() {
 		$controller = new WP_Translation_Controller();
@@ -458,8 +401,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 	}
 
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'get_entries' )]
 	public function test_get_entries_no_loaded_translations() {
 		$controller = new WP_Translation_Controller();
@@ -467,8 +408,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		$this->assertEmpty( $headers );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'get_entries' )]
 	public function test_get_entries_with_default_textdomain() {
 		$controller = new WP_Translation_Controller();
@@ -483,8 +422,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_Controller', 'get_entries' )]
 	public function test_get_entries_no_loaded_translations_for_domain() {
 		$controller = new WP_Translation_Controller();
@@ -555,8 +492,6 @@ class WP_Translation_Controller_Convert_Tests extends WP_UnitTestCase {
 		return $matrix;
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Translation_File', 'transform' )]
 	public function test_convert_format_invalid_source() {
 		$this->assertFalse( WP_Translation_File::transform( 'this-file-does-not-exist', 'invalid' ) );

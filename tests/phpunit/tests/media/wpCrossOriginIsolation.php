@@ -5,11 +5,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
-
-
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_set_up_cross_origin_isolation' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_start_cross_origin_isolation_output_buffer' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_is_client_side_media_processing_enabled' )]

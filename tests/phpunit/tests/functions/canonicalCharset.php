@@ -9,7 +9,6 @@
  */
 
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_canonical_charset' )]
 class Tests_Functions_CanonicalCharset extends WP_UnitTestCase {
 	/**
@@ -62,9 +61,6 @@ class Tests_Functions_CanonicalCharset extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '23688' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	public function test_update_option_blog_charset() {

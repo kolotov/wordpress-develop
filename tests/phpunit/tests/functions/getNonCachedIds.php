@@ -12,8 +12,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_validate_cache_id' )]
 class Tests_Functions_GetNonCachedIds extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57593' )]
 	public function test_uncached_valid_ids_should_be_unique() {
 		$object_id = 1;
@@ -52,8 +50,6 @@ class Tests_Functions_GetNonCachedIds extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '57593' )]
 	public function test_mix_of_valid_and_invalid_ids_should_return_the_valid_ids_and_throw_a_notice() {
 		$object_id = 1;

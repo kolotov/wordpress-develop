@@ -15,6 +15,9 @@
 class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 	/**
 	 * Set up.
+	 *
+	 * @ticket 61902
+	 * @ticket 63287
 	 */
 	public static function wpSetUpBeforeClass() {
 		register_block_type(
@@ -50,6 +53,8 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 
 	/**
 	 * Tear down.
+	 *
+	 * @ticket 61902
 	 */
 	public static function wpTearDownAfterClass() {
 		$registry = WP_Block_Type_Registry::get_instance();
@@ -59,8 +64,6 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 		$registry->unregister( 'tests/dynamically-hooked-block-with-multiple-false' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '63287' )]
 	public function test_apply_block_hooks_to_content_sets_theme_attribute_on_template_part_block() {
@@ -74,8 +77,6 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '63287' )]
 	public function test_apply_block_hooks_to_content_inserts_hooked_block() {
@@ -89,8 +90,6 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61074' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '63287' )]
 	public function test_apply_block_hooks_to_content_with_context_set_to_null() {
@@ -110,8 +109,6 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
 	public function test_apply_block_hooks_to_content_respect_multiple_false() {
 		$context          = new WP_Block_Template();
@@ -124,8 +121,6 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
 	public function test_apply_block_hooks_to_content_respect_multiple_false_after_inserting_once() {
 		$context          = new WP_Block_Template();
@@ -138,8 +133,6 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
 	public function test_apply_block_hooks_to_content_respect_multiple_false_with_filter() {
 		$filter = function ( $hooked_block_types, $relative_position, $anchor_block_type ) {
@@ -163,8 +156,6 @@ class Tests_Blocks_ApplyBlockHooksToContent extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61902' )]
 	public function test_apply_block_hooks_to_content_respect_multiple_false_after_inserting_once_with_filter() {
 		$filter = function ( $hooked_block_types, $relative_position, $anchor_block_type ) {

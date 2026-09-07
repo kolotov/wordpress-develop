@@ -293,8 +293,6 @@ class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27884' )]
 	public function test_multisite_bootstrap_additional_path_segments() {
 		global $current_blog;
@@ -318,8 +316,6 @@ class Tests_Multisite_Bootstrap extends WP_UnitTestCase {
 		$this->assertEqualSetsWithIndex( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37053' )]
 	public function test_get_site_by_path_returns_wp_site() {
 		add_filter( 'pre_get_site_by_path', array( $this, 'filter_pre_get_site_by_path' ), 10, 3 );

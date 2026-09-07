@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wpmu_validate_blog_signup' )]
@@ -52,8 +49,6 @@ class Tests_Multisite_wpmuValidateBlogSignup extends WP_UnitTestCase {
 		wp_delete_site( self::$existing_blog_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_validate_blogname' )]
 	public function test_validate_blogname( $blog_name, $error_message ) {
 		$result = wpmu_validate_blog_signup( $blog_name, 'Foo Site Title', get_userdata( self::$super_admin_id ) );
@@ -93,9 +88,6 @@ class Tests_Multisite_wpmuValidateBlogSignup extends WP_UnitTestCase {
 		$this->assertEmpty( $result['errors']->get_error_codes() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '39676' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_filter_minimum_site_name_length' )]
 	public function test_filter_minimum_site_name_length( $site_name, $minimum_length, $expect_error ) {
@@ -129,8 +121,6 @@ class Tests_Multisite_wpmuValidateBlogSignup extends WP_UnitTestCase {
 		return $this->minimum_site_name_length;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43667' )]
 	public function test_signup_nonce_check() {
 		$original_php_self       = $_SERVER['PHP_SELF'];
@@ -144,8 +134,6 @@ class Tests_Multisite_wpmuValidateBlogSignup extends WP_UnitTestCase {
 		$this->assertNotContains( 'invalid_nonce', $valid['errors']->get_error_codes() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43667' )]
 	public function test_signup_nonce_check_invalid() {
 		$original_php_self       = $_SERVER['PHP_SELF'];

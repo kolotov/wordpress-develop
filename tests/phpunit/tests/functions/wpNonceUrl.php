@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_nonce_url' )]
 class Tests_Functions_WpNonceUrl extends WP_UnitTestCase {

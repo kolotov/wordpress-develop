@@ -8,8 +8,6 @@
 #[\PHPUnit\Framework\Attributes\CoversMethod( WP_Hook::class, 'has_filter' )]
 class Tests_Hooks_HasFilter extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64186' )]
 	public function test_has_filter_with_function() {
 		$callback      = '__return_null';

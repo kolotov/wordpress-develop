@@ -6,9 +6,6 @@
  * @subpackage HTML-API
  */
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'html-api' )]
 class Tests_HtmlApi_WpHtmlDecoder extends WP_UnitTestCase {
 	/**

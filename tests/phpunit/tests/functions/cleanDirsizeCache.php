@@ -7,7 +7,6 @@
  */
 
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'clean_dirsize_cache' )]
 class Tests_Functions_CleanDirsizeCache extends WP_UnitTestCase {
 

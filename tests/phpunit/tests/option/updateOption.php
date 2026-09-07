@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 
 
 
@@ -11,9 +9,6 @@
 
 #[\PHPUnit\Framework\Attributes\Group( 'option' )]
 class Tests_Option_UpdateOption extends WP_UnitTestCase {
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '31047' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_filter' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
@@ -27,9 +22,6 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 		$this->assertSame( 'bar', get_option( 'doesnotexist' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
@@ -50,9 +42,6 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 		$this->assertSame( $value, 'value' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
@@ -73,9 +62,6 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 		$this->assertSame( $value, 'value' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
@@ -97,9 +83,6 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 		$this->assertSame( $value, 'value' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
@@ -121,9 +104,6 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 		$this->assertSame( $value, 'value' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
@@ -145,9 +125,6 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 		$this->assertSame( $value, 'bar2' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
@@ -170,9 +147,6 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 		$this->assertSame( $value, 'bar' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '26394' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
@@ -197,9 +171,6 @@ class Tests_Option_UpdateOption extends WP_UnitTestCase {
 		$this->assertSame( $value, 'bar2' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38903' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_num_queries' )]

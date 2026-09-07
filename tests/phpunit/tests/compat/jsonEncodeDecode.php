@@ -1,12 +1,9 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'compat' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Compat_jsonEncodeDecode extends WP_UnitTestCase {
 
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_CLASS, 'Services_JSON' )]
 	public function test_json_encode_decode() {
 		$this->setExpectedDeprecated( 'class-json.php' );
 		$this->setExpectedDeprecated( 'Services_JSON::__construct' );

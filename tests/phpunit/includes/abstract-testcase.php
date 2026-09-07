@@ -775,8 +775,8 @@ abstract class WP_UnitTestCase_Base extends PHPUnit_Adapter_TestCase {
 			restore_error_handler();
 		}
 
-		$this->assertNotEmpty( $deprecations, 'Failed to capture an expected user deprecation.' );
-		$this->assertStringContainsString( $expected, implode( "\n", $deprecations ) );
+		$this->assertCount( 1, $deprecations, 'Expected exactly one user deprecation.' );
+		$this->assertStringContainsString( $expected, $deprecations[0] );
 	}
 
 	/**

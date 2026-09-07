@@ -33,7 +33,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor_InputPreprocessing extends WP_UnitTestCas
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_attribute_values_with_preprocessing' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_applies_input_preprocessing( string $html, string $expected ): void {
 		$processor = new WP_HTML_Tag_Processor( $html );
@@ -78,7 +77,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor_InputPreprocessing extends WP_UnitTestCas
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_enqueued_attribute_values' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'get_attribute' )]
 	public function test_get_attribute_returns_enqueued_values_verbatim( string $value ): void {
 		$processor = new WP_HTML_Tag_Processor( '<div a="original">' );
@@ -113,7 +111,6 @@ class Tests_HtmlApi_WpHtmlTagProcessor_InputPreprocessing extends WP_UnitTestCas
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65372' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_class_updates_with_preprocessing' )]
-
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_HTML_Tag_Processor', 'add_class' )]
 	public function test_class_updates_apply_input_preprocessing_to_existing_value( string $html, string $expected_html ): void {
 		$processor = new WP_HTML_Tag_Processor( $html );

@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\CoversMethod( WP_Query::class, 'get_posts' )]
 class Tests_Query_FieldsClause extends WP_UnitTestCase {

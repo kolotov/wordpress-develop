@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\Group( 'capabilities' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'map_meta_cap' )]
@@ -45,8 +43,6 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 		unset( $GLOBALS['wp_post_types'][ self::$post_type ] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '13905' )]
 	public function test_capability_type_post_with_invalid_id() {
 		$this->assertSame(
@@ -311,8 +307,6 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '30991' )]
 	public function test_delete_posts_cap_without_map_meta_cap() {
 		register_post_type(
@@ -342,8 +336,6 @@ class Tests_User_MapMetaCap extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20488' )]
 	public function test_file_edit_caps_not_reliant_on_unfiltered_html_constant() {
 		$this->assertFalse( defined( 'DISALLOW_FILE_MODS' ) );

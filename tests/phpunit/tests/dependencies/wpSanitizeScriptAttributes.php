@@ -6,9 +6,9 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'dependencies' )]
 #[\PHPUnit\Framework\Attributes\Group( 'scripts' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
 class Tests_Dependencies_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_script_attributes' )]
 	public function test_sanitize_script_attributes_type_set() {
 		$this->setExpectedDeprecated( 'wp_sanitize_script_attributes' );
 		$this->assertSame(
@@ -24,6 +24,7 @@ class Tests_Dependencies_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 		);
 	}
 
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_script_attributes' )]
 	public function test_sanitize_script_attributes_type_not_set() {
 		$this->setExpectedDeprecated( 'wp_sanitize_script_attributes' );
 		$this->assertSame(
@@ -39,6 +40,7 @@ class Tests_Dependencies_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 	}
 
 
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_script_attributes' )]
 	public function test_sanitize_script_attributes_no_attributes() {
 		$this->setExpectedDeprecated( 'wp_sanitize_script_attributes' );
 		$this->assertSame(
@@ -47,6 +49,7 @@ class Tests_Dependencies_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 		);
 	}
 
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_script_attributes' )]
 	public function test_sanitize_script_attributes_relative_src() {
 		$this->setExpectedDeprecated( 'wp_sanitize_script_attributes' );
 		$this->assertSame(
@@ -62,6 +65,7 @@ class Tests_Dependencies_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 	}
 
 
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_script_attributes' )]
 	public function test_sanitize_script_attributes_only_false_boolean_attributes() {
 		$this->setExpectedDeprecated( 'wp_sanitize_script_attributes' );
 		$this->assertSame(
@@ -75,6 +79,7 @@ class Tests_Dependencies_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 		);
 	}
 
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_sanitize_script_attributes' )]
 	public function test_sanitize_script_attributes_only_true_boolean_attributes() {
 		$this->setExpectedDeprecated( 'wp_sanitize_script_attributes' );
 		$this->assertSame(

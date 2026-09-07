@@ -9,11 +9,6 @@
  */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\Group( 'sitemaps' )]
-
-
-
-
-
 class Tests_Query_IsSitemap extends WP_UnitTestCase {
 
 	/**

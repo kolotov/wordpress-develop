@@ -1,6 +1,4 @@
 <?php
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'meta' )]
 class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 
@@ -259,8 +257,6 @@ class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 		$this->assertEmpty( $meta_keys );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '61998' )]
 	public function test_get_registered_meta_keys_label_arg() {
 		register_meta( 'post', 'registered_key1', array( 'label' => 'Field label' ) );
@@ -342,8 +338,6 @@ class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 		$this->assertEmpty( $meta );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_types_and_subtypes' )]
 	public function test_register_meta_with_subtype_populates_wp_meta_keys( $type, $subtype ) {
@@ -376,8 +370,6 @@ class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_types_and_subtypes' )]
 	public function test_unregister_meta_with_subtype_unpopulates_wp_meta_keys( $type, $subtype ) {
@@ -394,8 +386,6 @@ class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 		$this->assertEmpty( $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_types_and_subtypes' )]
 	public function test_unregister_meta_without_subtype_keeps_subtype_meta_key( $type, $subtype ) {
@@ -431,8 +421,6 @@ class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_types_and_subtypes' )]
 	public function test_get_registered_meta_keys_with_subtype( $type, $subtype ) {
@@ -446,8 +434,6 @@ class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 		$this->assertEmpty( get_registered_meta_keys( $type ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_types_and_subtypes' )]
 	public function test_get_registered_metadata_with_subtype( $type, $subtype ) {
@@ -503,8 +489,6 @@ class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 		$this->assertFalse( $key3 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_types_and_subtypes' )]
 	public function test_get_object_subtype( $type, $expected_subtype ) {
@@ -514,8 +498,6 @@ class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 		$this->assertSame( $expected_subtype, get_object_subtype( $type, $object_id ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38323' )]
 	public function test_get_object_subtype_custom() {
 		add_filter( 'get_object_subtype_customtype', array( $this, 'filter_get_object_subtype_for_customtype' ), 10, 2 );
@@ -527,8 +509,6 @@ class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 		$this->assertSame( 'even', $subtype_for_4 );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43941' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_default_data' )]
 	public function test_get_default_value( $args, $single, $expected ) {
@@ -571,8 +551,6 @@ class Tests_Meta_Register_Meta extends WP_UnitTestCase {
 		$this->assertSame( $value, $meta_value );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43941' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_get_invalid_default_data' )]
 	public function test_get_invalid_default_value( $args, $single, $expected ) {

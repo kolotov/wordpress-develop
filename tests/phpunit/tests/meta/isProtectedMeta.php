@@ -1,13 +1,9 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'meta' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'is_protected_meta' )]
 class Tests_Meta_isProtectedMeta extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_protected_meta_true' )]
 	public function test_is_protected_meta_true( $key ) {
 		$this->assertTrue( is_protected_meta( $key ) );
@@ -28,8 +24,6 @@ class Tests_Meta_isProtectedMeta extends WP_UnitTestCase {
 		return $protected_keys;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_is_protected_meta_false' )]
 	public function test_is_protected_meta_false( $key ) {
 		$this->assertFalse( is_protected_meta( $key ) );

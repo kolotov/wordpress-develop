@@ -1,13 +1,9 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'generate_postdata' )]
 class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_setup_by_id() {
 		$p    = self::factory()->post->create_and_get();
@@ -15,8 +11,6 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 		$this->assertSame( $p->ID, $data['id'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_setup_by_fake_post() {
 		$fake     = new stdClass();
@@ -27,8 +21,6 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 		$this->assertFalse( $data );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_setup_by_postish_object() {
 		$p = self::factory()->post->create();
@@ -40,8 +32,6 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 		$this->assertSame( $p, $data['id'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_authordata() {
 		$u    = self::factory()->user->create_and_get();
@@ -56,8 +46,6 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 		$this->assertEquals( $u, $data['authordata'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_currentday() {
 		$p    = self::factory()->post->create_and_get(
@@ -81,8 +69,6 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 		$this->assertSame( '09', $data['currentmonth'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_single_page() {
 		$post = self::factory()->post->create_and_get(
@@ -97,8 +83,6 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 		$this->assertSame( array( 'Page 0' ), $data['pages'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_multi_page() {
 		$post = self::factory()->post->create_and_get(
@@ -113,8 +97,6 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 		$this->assertSame( array( 'Page 0', 'Page 1', 'Page 2', 'Page 3' ), $data['pages'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_nextpage_at_start_of_content() {
 		$post = self::factory()->post->create_and_get(
@@ -129,8 +111,6 @@ class Tests_Query_GeneratePostdata extends WP_UnitTestCase {
 		$this->assertSame( array( 'Page 1', 'Page 2', 'Page 3' ), $data['pages'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42814' )]
 	public function test_trim_nextpage_linebreaks() {
 		$post = self::factory()->post->create_and_get(

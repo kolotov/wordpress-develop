@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Query_NoFoundRows extends WP_UnitTestCase {
 	public function test_no_found_rows_default() {
@@ -69,8 +67,6 @@ class Tests_Query_NoFoundRows extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'SQL_CALC_FOUND_ROWS', $q->request );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29552' )]
 	public function test_no_found_rows_default_with_nopaging_true() {
 		$p = self::factory()->post->create();
@@ -86,8 +82,6 @@ class Tests_Query_NoFoundRows extends WP_UnitTestCase {
 		$this->assertSame( 1, $q->found_posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29552' )]
 	public function test_no_found_rows_default_with_postsperpage_minus1() {
 		$p = self::factory()->post->create();

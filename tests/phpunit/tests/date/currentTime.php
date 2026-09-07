@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'current_time' )]
@@ -19,8 +16,6 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34378' )]
 	public function test_current_time_with_date_format_string() {
 		update_option( 'gmt_offset', 6 );
@@ -33,8 +28,6 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 		$this->assertEqualsWithDelta( strtotime( gmdate( $format, $wp_timestamp ) ), strtotime( current_time( $format ) ), 2, 'The dates should be equal' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34378' )]
 	public function test_current_time_with_mysql_format() {
 		update_option( 'gmt_offset', 6 );
@@ -47,8 +40,6 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 		$this->assertEqualsWithDelta( strtotime( gmdate( $format, $wp_timestamp ) ), strtotime( current_time( 'mysql' ) ), 2, 'The dates should be equal' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34378' )]
 	public function test_current_time_with_timestamp() {
 		update_option( 'gmt_offset', 6 );
@@ -62,8 +53,6 @@ class Tests_Date_CurrentTime extends WP_UnitTestCase {
 		$this->assertEqualsWithDelta( $wp_timestamp, current_time( 'timestamp' ), 2, 'The dates should be equal' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37440' )]
 	public function test_should_work_with_changed_timezone() {
 		$format          = 'Y-m-d H:i:s';

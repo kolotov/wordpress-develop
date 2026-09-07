@@ -123,8 +123,6 @@ class Tests_WP_Site_Icon extends WP_UnitTestCase {
 		$this->assertFalse( get_option( 'site_icon', false ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34368' )]
 	public function test_get_post_metadata() {
 		$attachment_id = $this->insert_attachment();

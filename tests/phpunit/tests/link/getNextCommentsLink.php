@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'link' )]
 #[\PHPUnit\Framework\Attributes\Group( 'comment' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_next_comments_link' )]
@@ -21,8 +19,6 @@ class Tests_Link_GetNextCommentsLink extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'cpage=4', $link );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20319' )]
 	public function test_page_should_default_to_1_when_no_cpage_query_var_is_found() {
 		$p = self::factory()->post->create();
@@ -38,8 +34,6 @@ class Tests_Link_GetNextCommentsLink extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'cpage=2', $link );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60806' )]
 	public function test_page_should_respect_value_of_page_argument() {
 		$p = self::factory()->post->create();

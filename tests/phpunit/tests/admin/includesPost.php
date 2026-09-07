@@ -1119,7 +1119,12 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 				'post_type'  => $post_type,
 			)
 		);
-		$this->assertSame( $post_id, post_exists( $title, '', '', $post_type ) );
+		$this->assertExpectedPhpDeprecations(
+			'~Passing null to parameter \#[0-9]+ \(\$[^)]+\) of type [^ ]+ is deprecated~',
+			function () use ( $post_id, $title, $post_type ) {
+				$this->assertSame( $post_id, post_exists( $title, null, null, $post_type ) );
+			}
+		);
 	}
 
 	/**
@@ -1136,7 +1141,12 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 				'post_type'  => $post_type,
 			)
 		);
-		$this->assertSame( 0, post_exists( $title, '', '', 'post' ) );
+		$this->assertExpectedPhpDeprecations(
+			'~Passing null to parameter \#[0-9]+ \(\$[^)]+\) of type [^ ]+ is deprecated~',
+			function () use ( $title ) {
+				$this->assertSame( 0, post_exists( $title, null, null, 'post' ) );
+			}
+		);
 	}
 
 	/**
@@ -1155,7 +1165,12 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 				'post_status' => $post_status,
 			)
 		);
-		$this->assertSame( $post_id, post_exists( $title, '', '', '', $post_status ) );
+		$this->assertExpectedPhpDeprecations(
+			'~Passing null to parameter \#[0-9]+ \(\$[^)]+\) of type [^ ]+ is deprecated~',
+			function () use ( $post_id, $title, $post_status ) {
+				$this->assertSame( $post_id, post_exists( $title, null, null, null, $post_status ) );
+			}
+		);
 	}
 
 
@@ -1175,7 +1190,12 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 				'post_status' => $post_status,
 			)
 		);
-		$this->assertSame( $post_id, post_exists( $title, '', '', $post_type, $post_status ) );
+		$this->assertExpectedPhpDeprecations(
+			'~Passing null to parameter \#[0-9]+ \(\$[^)]+\) of type [^ ]+ is deprecated~',
+			function () use ( $post_id, $title, $post_type, $post_status ) {
+				$this->assertSame( $post_id, post_exists( $title, null, null, $post_type, $post_status ) );
+			}
+		);
 	}
 
 	/**
@@ -1194,7 +1214,12 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 				'post_status' => $post_status,
 			)
 		);
-		$this->assertSame( 0, post_exists( $title, '', '', '', 'publish' ) );
+		$this->assertExpectedPhpDeprecations(
+			'~Passing null to parameter \#[0-9]+ \(\$[^)]+\) of type [^ ]+ is deprecated~',
+			function () use ( $title ) {
+				$this->assertSame( 0, post_exists( $title, null, null, null, 'publish' ) );
+			}
+		);
 	}
 
 	/**
@@ -1214,8 +1239,13 @@ class Tests_Admin_IncludesPost extends WP_UnitTestCase {
 			)
 		);
 
-		$this->assertSame( 0, post_exists( $title, '', '', $post_type, 'draft' ) );
-		$this->assertSame( 0, post_exists( $title, '', '', 'wp_tests', $post_status ) );
+		$this->assertExpectedPhpDeprecations(
+			'~Passing null to parameter \#[0-9]+ \(\$[^)]+\) of type [^ ]+ is deprecated~',
+			function () use ( $title, $post_type, $post_status ) {
+				$this->assertSame( 0, post_exists( $title, null, null, $post_type, 'draft' ) );
+				$this->assertSame( 0, post_exists( $title, null, null, 'wp_tests', $post_status ) );
+			}
+		);
 	}
 
 	/**

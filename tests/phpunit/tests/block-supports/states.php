@@ -9,13 +9,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
-
-
-
-
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_render_block_states_support' )]
 class Tests_Block_Supports_States extends WP_UnitTestCase {
 

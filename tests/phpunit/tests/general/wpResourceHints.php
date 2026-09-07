@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'general' )]
 #[\PHPUnit\Framework\Attributes\Group( 'template' )]
 #[\PHPUnit\Framework\Attributes\Ticket( '34292' )]
@@ -57,8 +55,6 @@ class Tests_General_wpResourceHints extends WP_UnitTestCase {
 		return $hints;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37652' )]
 	public function test_preconnect() {
 		$expected = "<link rel='preconnect' href='//wordpress.org' />\n" .
@@ -166,8 +162,6 @@ class Tests_General_wpResourceHints extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37385' )]
 	public function test_dns_prefetch_scripts_does_not_include_registered_only() {
 		$expected   = '';
@@ -183,8 +177,6 @@ class Tests_General_wpResourceHints extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( $unexpected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37502' )]
 	public function test_deregistered_scripts_are_ignored() {
 		$expected = '';
@@ -196,8 +188,6 @@ class Tests_General_wpResourceHints extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37652' )]
 	public function test_malformed_urls() {
 		$expected = '';
@@ -231,8 +221,6 @@ class Tests_General_wpResourceHints extends WP_UnitTestCase {
 		return $hints;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '38121' )]
 	public function test_custom_attributes() {
 		$expected = "<link rel='preconnect' href='https://make.wordpress.org' />\n" .

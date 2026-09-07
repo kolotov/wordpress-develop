@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'author' )]
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_the_modified_author' )]
@@ -48,8 +45,6 @@ class Tests_User_GetTheModifiedAuthor extends WP_UnitTestCase {
 		$this->assertSame( 'Test Author', $author_name );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58157' )]
 	public function test_get_the_modified_author_should_return_empty_string_if_user_id_does_not_exist() {
 		update_post_meta( self::$post_id, '_edit_last', -1 );
@@ -57,23 +52,17 @@ class Tests_User_GetTheModifiedAuthor extends WP_UnitTestCase {
 		$this->assertSame( '', get_the_modified_author() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64104' )]
 	public function test_get_the_modified_author_when_post_global_does_not_exist() {
 		$GLOBALS['post'] = null;
 		$this->assertNull( get_the_modified_author() );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64104' )]
 	public function test_get_the_modified_author_when_invalid_post() {
 		$this->assertNull( get_the_modified_author( -1 ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64104' )]
 	public function test_get_the_modified_author_for_another_post() {
 		$expected_display_name = 'Test Editor';

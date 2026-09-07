@@ -18,8 +18,6 @@
 #[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 class Tests_Option_Multisite extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_blog_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_blog_option' )]
@@ -62,8 +60,6 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 		$this->assertFalse( get_option( $key2 ) );                    // Check get_option().
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_blog_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_blog_option' )]
@@ -105,8 +101,6 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 		$this->assertFalse( get_option( $key2 ) );                       // Check get_option().
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_blog_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'add_blog_option' )]
@@ -159,9 +153,6 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 		// $this->assertFalse( get_option( $key2 ) );                        // Check get_option().
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'multisite' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_site_notoptions() {
@@ -181,8 +172,6 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 		$this->assertNotEmpty( $notoptions1 );
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'users_can_register_signup_filter' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]
 	public function test_users_can_register_signup_filter() {
@@ -200,9 +189,6 @@ class Tests_Option_Multisite extends WP_UnitTestCase {
 		$this->assertFalse( users_can_register_signup_filter() );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_illegal_names' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'update_site_option' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_site_option' )]

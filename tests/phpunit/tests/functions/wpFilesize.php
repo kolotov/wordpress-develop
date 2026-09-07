@@ -11,15 +11,11 @@ class Tests_Functions_wpFilesize extends WP_UnitTestCase {
 
 	const TEST_FILE = DIR_TESTDATA . '/images/test-image-upside-down.jpg';
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49412' )]
 	public function test_wp_filesize(): void {
 		$this->assertSame( filesize( self::TEST_FILE ), wp_filesize( self::TEST_FILE ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49412' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '65670' )]
 	public function test_wp_filesize_filters(): void {
@@ -39,15 +35,11 @@ class Tests_Functions_wpFilesize extends WP_UnitTestCase {
 		$this->assertSame( 9991, wp_filesize( self::TEST_FILE ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '49412' )]
 	public function test_wp_filesize_with_nonexistent_file(): void {
 		$this->assertSame( 0, wp_filesize( 'nonexistent/file.jpg' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '65670' )]
 	public function test_wp_filesize_pre_wp_filesize_filter_null(): void {
 		add_filter( 'pre_wp_filesize', '__return_null' );

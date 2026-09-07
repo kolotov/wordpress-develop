@@ -37,8 +37,6 @@ class Tests_Fonts_WPFontFaceResolver_GetFontsFromThemeJson extends WP_Font_Face_
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60605' )]
 	public function test_should_return_all_fonts_from_all_theme_origins() {
 		switch_theme( static::FONTS_THEME );

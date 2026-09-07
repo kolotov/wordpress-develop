@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 #[\PHPUnit\Framework\Attributes\Group( 'category' )]
 #[\PHPUnit\Framework\Attributes\Group( 'walker' )]
@@ -24,9 +21,6 @@ class Tests_Category_Walker_Category extends WP_UnitTestCase {
 		$this->walker = new Walker_Category();
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '47720' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_start_el_with_empty_attributes' )]
 	public function test_start_el_with_empty_attributes( $value, $expected ) {

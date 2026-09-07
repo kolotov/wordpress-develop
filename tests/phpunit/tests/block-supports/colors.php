@@ -1,9 +1,5 @@
 <?php
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
-
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_apply_colors_support' )]
 class Tests_Block_Supports_Colors extends WP_UnitTestCase {
 	/**
@@ -22,8 +18,6 @@ class Tests_Block_Supports_Colors extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54337' )]
 	public function test_color_slugs_with_numbers_are_kebab_cased_properly() {
 		$this->test_block_name = 'test/color-slug-with-numbers';
@@ -66,8 +60,6 @@ class Tests_Block_Supports_Colors extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 	public function test_color_with_skipped_serialization_block_supports() {
 		$this->test_block_name = 'test/color-with-skipped-serialization-block-supports';
@@ -107,8 +99,6 @@ class Tests_Block_Supports_Colors extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 	public function test_gradient_with_individual_skipped_serialization_block_supports() {
 		$this->test_block_name = 'test/gradient-with-individual-skipped-serialization-block-support';

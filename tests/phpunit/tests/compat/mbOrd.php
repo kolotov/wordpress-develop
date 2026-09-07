@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'mb_ord' )]
 #[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 class Tests_Compat_mbOrd extends WP_UnitTestCase {

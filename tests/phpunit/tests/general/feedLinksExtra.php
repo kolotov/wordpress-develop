@@ -426,8 +426,6 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 		return get_the_permalink( self::${$type . '_id'} );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
 	public function test_feed_links_extra_should_respect_comments_open() {
 		add_filter( 'comments_open', '__return_true' );
@@ -441,8 +439,6 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 		$this->assertSame( $expected, get_echo( 'feed_links_extra' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
 	public function test_feed_links_extra_should_respect_pings_open() {
 		add_filter( 'pings_open', '__return_true' );
@@ -456,8 +452,6 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 		$this->assertSame( $expected, get_echo( 'feed_links_extra' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
 	public function test_feed_links_extra_should_respect_post_comment_count() {
 		add_filter( 'pings_open', '__return_false' );
@@ -471,8 +465,6 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 		$this->assertSame( $expected, get_echo( 'feed_links_extra' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
 	public function test_feed_links_extra_should_return_empty_when_comments_and_pings_are_closed_and_post_has_no_comments() {
 		add_filter( 'comments_open', '__return_false' );
@@ -482,8 +474,6 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 		$this->assertEmpty( get_echo( 'feed_links_extra' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54713' )]
 	public function test_feed_links_extra_should_respect_feed_type() {
 		add_filter(
@@ -508,8 +498,6 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 		$this->assertSame( $expected, get_echo( 'feed_links_extra' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54703' )]
 	public function test_feed_links_extra_should_output_nothing_when_show_comments_feed_filter_returns_false() {
 		add_filter( 'feed_links_show_comments_feed', '__return_false' );
@@ -573,8 +561,6 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 		return '0';
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '54703' )]
 	public function test_feed_links_extra_should_output_the_comments_feed_link_when_show_comments_feed_filter_returns_true() {
 		add_filter( 'feed_links_show_comments_feed', '__return_true' );
@@ -638,8 +624,6 @@ class Tests_General_FeedLinksExtra extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63263' )]
 	public function test_feed_links_extra_should_work_fail_if_global_post_empty() {
 		$post_id = self::factory()->post->create();

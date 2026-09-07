@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'link' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_edit_term_link' )]
 class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
@@ -67,8 +65,6 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32786' )]
 	public function test_get_edit_term_link_invalid_id() {
 		$term1 = self::factory()->term->create(
@@ -82,24 +78,18 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 		$this->assertNull( $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32786' )]
 	public function test_get_edit_term_link_empty_id() {
 		$actual = get_edit_term_link( '', 'wptests_tax' );
 		$this->assertNull( $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '32786' )]
 	public function test_get_edit_term_link_bad_tax() {
 		$actual = get_edit_term_link( '', 'bad_tax' );
 		$this->assertNull( $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35922' )]
 	public function test_taxonomy_should_not_be_required() {
 		$t = self::factory()->term->create(
@@ -113,8 +103,6 @@ class Tests_Link_GetEditTermLink extends WP_UnitTestCase {
 		$this->assertIsString( $actual );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '35922' )]
 	public function test_cap_check_should_use_correct_taxonomy_when_taxonomy_is_not_specified() {
 		register_taxonomy(

@@ -8,9 +8,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
-
-
 class Tests_Blocks_RenderReusableCommentTemplate extends WP_UnitTestCase {
 
 	private static $custom_post;
@@ -80,9 +77,6 @@ class Tests_Blocks_RenderReusableCommentTemplate extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'build_comment_query_vars_from_block' )]
 	public function test_build_comment_query_vars_from_block_with_context() {
@@ -112,9 +106,6 @@ class Tests_Blocks_RenderReusableCommentTemplate extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55567' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'build_comment_query_vars_from_block' )]
 	public function test_build_comment_query_vars_from_block_with_context_no_pagination() {
@@ -143,9 +134,6 @@ class Tests_Blocks_RenderReusableCommentTemplate extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '55505' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'build_comment_query_vars_from_block' )]
 	public function test_build_comment_query_vars_from_block_no_context() {

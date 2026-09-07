@@ -1,8 +1,6 @@
 <?php
 require_once ABSPATH . 'wp-admin/includes/class-custom-image-header.php';
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'image' )]
 #[\PHPUnit\Framework\Attributes\Group( 'header' )]
 class Tests_Image_Header extends WP_UnitTestCase {
@@ -131,8 +129,6 @@ class Tests_Image_Header extends WP_UnitTestCase {
 		$this->assertGreaterThan( 0, $cropped_id );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '21819' )]
 	public function test_check_get_previous_crop() {
 		$id = wp_insert_attachment(

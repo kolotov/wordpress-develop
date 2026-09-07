@@ -7,9 +7,6 @@
 
 require_once __DIR__ . '/base.php';
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\Group( 'plugins' )]
 #[\PHPUnit\Framework\Attributes\CoversMethod( WP_Plugin_Dependencies::class, 'has_dependencies' )]

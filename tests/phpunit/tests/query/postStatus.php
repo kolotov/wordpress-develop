@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Query_PostStatus extends WP_UnitTestCase {
 	public static $editor_user_id;
@@ -457,8 +455,6 @@ class Tests_Query_PostStatus extends WP_UnitTestCase {
 		$this->assertSame( array( $p ), wp_list_pluck( $q->posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48653' )]
 	public function test_single_post_with_nonexisting_status_should_not_be_shown_for_user_who_cannot_edit_others_posts() {
 		register_post_type( 'foo_pt' );
@@ -482,8 +478,6 @@ class Tests_Query_PostStatus extends WP_UnitTestCase {
 		$this->assertEmpty( $q->posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48653' )]
 	public function test_single_post_with_nonexisting_status_should_be_shown_for_user_who_can_edit_others_posts() {
 		register_post_type( 'foo_pt' );
@@ -507,8 +501,6 @@ class Tests_Query_PostStatus extends WP_UnitTestCase {
 		$this->assertSame( array( $p ), wp_list_pluck( $q->posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '29167' )]
 	public function test_specific_post_should_be_returned_if_trash_is_one_of_the_requested_post_statuses() {
 		$p1 = self::factory()->post->create( array( 'post_status' => 'trash' ) );
@@ -524,8 +516,6 @@ class Tests_Query_PostStatus extends WP_UnitTestCase {
 		$this->assertContains( $p1, wp_list_pluck( $q->posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48556' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '13509' )]
 	public function test_non_singular_queries_using_post_type_any_should_respect_post_type_read_private_posts_cap() {
@@ -553,8 +543,6 @@ class Tests_Query_PostStatus extends WP_UnitTestCase {
 		$this->assertSameSets( array( $post_ids['wptests_pt1_p1'], $post_ids['wptests_pt1_p2'], $post_ids['wptests_pt2_p2'] ), wp_list_pluck( $q->posts, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '48556' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '13509' )]
 	public function test_non_singular_queries_using_multiple_post_type_should_respect_post_type_read_private_posts_cap() {

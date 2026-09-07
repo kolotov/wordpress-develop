@@ -9,8 +9,6 @@
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_mce_set_direction' )]
 class Tests_Functions_MceSetDirection extends WP_UnitTestCase {
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '60219' )]
 	public function test__mce_set_direction() {
 		global $wp_locale;

@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'media' )]
 #[\PHPUnit\Framework\Attributes\Group( 'taxonomy' )]
 class Tests_Media_GetAttachmentTaxonomies extends WP_UnitTestCase {
@@ -100,8 +98,6 @@ class Tests_Media_GetAttachmentTaxonomies extends WP_UnitTestCase {
 		$this->assertSame( $expected, $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37368' )]
 	public function test_should_respect_output_objects() {
 		register_taxonomy( 'wptests_tax2', 'attachment:image' );
@@ -124,8 +120,6 @@ class Tests_Media_GetAttachmentTaxonomies extends WP_UnitTestCase {
 	}
 
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '37368' )]
 	public function test_should_return_unique_taxonomies_for_output_objects() {
 		register_taxonomy( 'wptests_tax2', array( 'attachment:image', 'attachment:image/jpeg' ) );

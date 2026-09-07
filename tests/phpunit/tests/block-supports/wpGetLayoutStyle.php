@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'block-supports' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_get_layout_style' )]
 class Tests_Block_Supports_WpGetLayoutStyle extends WP_UnitTestCase {

@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 #[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_dropdown_languages' )]

@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'date_i18n' )]
@@ -19,8 +16,6 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28636' )]
 	public function test_should_return_current_time_on_invalid_timestamp() {
 		$timezone = 'Europe/Helsinki';
@@ -32,8 +27,6 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 		$this->assertEqualsWithDelta( $wp_timestamp, date_i18n( 'U', 'invalid' ), 5, 'The dates should be equal' );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '28636' )]
 	public function test_should_handle_zero_timestamp() {
 		$timezone = 'Europe/Helsinki';
@@ -122,8 +115,6 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 		$this->assertSame( $expected, date_i18n( 'Y-m-d H:i:s T P e', strtotime( '2022-08-01 00:00:00' ) ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '34835' )]
 	public function test_gmt_offset_should_output_correct_timezone() {
 		$timezone_formats = 'P I O T Z e';
@@ -139,9 +130,6 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 		$this->assertSame( $datetime->format( $timezone_formats ), date_i18n( $timezone_formats ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '20973' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_formats' )]
 	public function test_date_i18n_handles_shorthand_formats( $short, $full ) {
@@ -164,8 +152,6 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25768' )]
 	public function test_should_return_wp_timestamp() {
 		update_option( 'timezone_string', 'Europe/Helsinki' );
@@ -179,8 +165,6 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 		$this->assertSame( $wp_timestamp, date_i18n( 'U', $wp_timestamp ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '43530' )]
 	public function test_swatch_internet_time_with_wp_timestamp() {
 		update_option( 'timezone_string', 'America/Regina' );
@@ -188,8 +172,6 @@ class Tests_Date_DateI18n extends WP_UnitTestCase {
 		$this->assertSame( gmdate( 'B' ), date_i18n( 'B' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '25768' )]
 	public function test_should_handle_escaped_formats() {
 		$format = 'D | \D | \\D | \\\D | \\\\D | \\\\\D | \\\\\\D';

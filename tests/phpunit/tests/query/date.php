@@ -192,8 +192,6 @@ class Tests_Query_Date extends WP_UnitTestCase {
 		$this->assertCount( 0, $posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24884' )]
 	public function test_simple_m_with_yearmonthdayhourminute_expecting_results() {
 		$posts = $this->_get_query_result(
@@ -210,8 +208,6 @@ class Tests_Query_Date extends WP_UnitTestCase {
 		$this->assertSame( $expected_dates, wp_list_pluck( $posts, 'post_date' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24884' )]
 	public function test_simple_m_with_yearmonthdayhourminute_expecting_noresults() {
 		$posts = $this->_get_query_result(
@@ -223,8 +219,6 @@ class Tests_Query_Date extends WP_UnitTestCase {
 		$this->assertCount( 0, $posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24884' )]
 	public function test_simple_m_with_yearmonthdayhourminutesecond_expecting_results() {
 		$posts = $this->_get_query_result(
@@ -240,8 +234,6 @@ class Tests_Query_Date extends WP_UnitTestCase {
 		$this->assertSame( $expected_dates, wp_list_pluck( $posts, 'post_date' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24884' )]
 	public function test_simple_m_with_yearmonthdayhourminutesecond_expecting_noresults() {
 		$posts = $this->_get_query_result(
@@ -253,8 +245,6 @@ class Tests_Query_Date extends WP_UnitTestCase {
 		$this->assertCount( 0, $posts );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24884' )]
 	public function test_simple_m_with_yearmonthdayhourminutesecond_and_dashes_expecting_results() {
 		$posts = $this->_get_query_result(
@@ -270,8 +260,6 @@ class Tests_Query_Date extends WP_UnitTestCase {
 		$this->assertSame( $expected_dates, wp_list_pluck( $posts, 'post_date' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24884' )]
 	public function test_simple_m_with_yearmonthdayhourminutesecond_and_dashesletters_expecting_results() {
 		$posts = $this->_get_query_result(
@@ -287,8 +275,6 @@ class Tests_Query_Date extends WP_UnitTestCase {
 		$this->assertSame( $expected_dates, wp_list_pluck( $posts, 'post_date' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '36718' )]
 	public function test_non_scalar_m_should_be_discarded() {
 		$expected = $this->_get_query_result();

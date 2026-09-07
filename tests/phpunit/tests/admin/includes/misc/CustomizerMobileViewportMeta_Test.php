@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( '_customizer_mobile_viewport_meta' )]
 class Tests_Admin_Includes_Misc_CustomizerMobileViewportMeta_Test extends WP_UnitTestCase {

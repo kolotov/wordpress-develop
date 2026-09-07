@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 #[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'get_locale' )]
@@ -19,8 +16,6 @@ class Tests_L10n_GetLocale extends WP_UnitTestCase {
 		$this->assertSame( 'foo', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_local_option_should_take_precedence_on_multisite() {
 		global $locale;
@@ -36,8 +31,6 @@ class Tests_L10n_GetLocale extends WP_UnitTestCase {
 		$this->assertSame( 'en_GB', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-required' )]
 	public function test_network_option_should_be_fallback_on_multisite() {
 		global $locale;
@@ -52,8 +45,6 @@ class Tests_L10n_GetLocale extends WP_UnitTestCase {
 		$this->assertSame( 'es_ES', $found );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Group( 'ms-excluded' )]
 	public function test_option_should_be_respected_on_nonmultisite() {
 		global $locale;

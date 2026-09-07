@@ -9,11 +9,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
-
-
-
-
 class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 
 	/**
@@ -166,9 +161,6 @@ class Tests_Blocks_wpBlockTypeRegistry extends WP_UnitTestCase {
 		$this->assertFalse( $this->registry->is_registered( $name ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45097' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_METHOD, 'WP_Block_Type_Registry', 'get_all_registered' )]
 	public function test_get_all_registered() {

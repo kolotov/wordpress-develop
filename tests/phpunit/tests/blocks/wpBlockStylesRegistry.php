@@ -8,9 +8,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'blocks' )]
-
-
-
 class Tests_Blocks_wpBlockStylesRegistry extends WP_UnitTestCase {
 
 	/**
@@ -127,8 +124,6 @@ class Tests_Blocks_wpBlockStylesRegistry extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63957' )]
 	public function test_is_registered_returns_false_for_null_block_name() {
 		$style_name = 'fancy-style';
@@ -138,8 +133,6 @@ class Tests_Blocks_wpBlockStylesRegistry extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63957' )]
 	public function test_is_registered_returns_false_for_null_style_name() {
 		$block_name = 'core/paragraph';
@@ -149,8 +142,6 @@ class Tests_Blocks_wpBlockStylesRegistry extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '63957' )]
 	public function test_is_registered_returns_false_for_both_null_params() {
 		$this->assertFalse(

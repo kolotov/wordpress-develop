@@ -8,14 +8,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'themes' )]
-
-
-
-
-
-
-
-
 class Tests_Theme_wpTheme extends WP_UnitTestCase {
 
 	/**

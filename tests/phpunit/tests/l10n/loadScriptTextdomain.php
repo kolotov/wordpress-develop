@@ -1,16 +1,10 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'l10n' )]
 #[\PHPUnit\Framework\Attributes\Group( 'i18n' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'load_script_textdomain' )]
 class Tests_L10n_LoadScriptTextdomain extends WP_UnitTestCase {
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '45528' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '46336' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '46387' )]

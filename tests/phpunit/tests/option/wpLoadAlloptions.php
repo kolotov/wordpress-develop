@@ -15,16 +15,11 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 */
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_get' )]
 	public function test_if_alloptions_is_cached() {
 		$this->assertNotEmpty( wp_cache_get( 'alloptions', 'options' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_default_and_yes() {
@@ -35,9 +30,6 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 		$this->assertArrayHasKey( 'bar', $alloptions );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '42441' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_default_and_no() {
@@ -48,18 +40,12 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 'bar', $alloptions );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_if_alloptions_is_cached' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_cache_delete' )]
 	public function test_if_cached_alloptions_is_deleted() {
 		$this->assertTrue( wp_cache_delete( 'alloptions', 'options' ) );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_if_alloptions_is_cached' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_if_alloptions_are_retrieved_from_cache() {
@@ -71,9 +57,6 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 		$this->assertSame( $before, $after );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_if_cached_alloptions_is_deleted' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_if_alloptions_are_retrieved_from_database() {
@@ -88,9 +71,6 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 		$this->assertSame( $before + 1, $after );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_if_cached_alloptions_is_deleted' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_filter_pre_cache_alloptions_is_called() {
@@ -116,9 +96,6 @@ class Tests_Option_wpLoadAlloptions extends WP_UnitTestCase {
 		$this->assertSame( $this->alloptions, $all_options );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Depends( 'test_if_alloptions_is_cached' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_load_alloptions' )]
 	public function test_filter_pre_cache_alloptions_is_not_called() {

@@ -1,12 +1,8 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datequery' )]
 class Tests_User_DateQuery extends WP_UnitTestCase {
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27283' )]
 	public function test_user_registered() {
 		$u1 = self::factory()->user->create(
@@ -33,8 +29,6 @@ class Tests_User_DateQuery extends WP_UnitTestCase {
 		$this->assertSameSets( array( $u1 ), wp_list_pluck( $uq->results, 'ID' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '27283' )]
 	public function test_user_registered_relation_or() {
 		$u1 = self::factory()->user->create(

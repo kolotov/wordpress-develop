@@ -11,16 +11,6 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'themes' )]
-
-
-
-
-
-
-
-
-
-
 #[\PHPUnit\Framework\Attributes\CoversClass( WP_Theme_JSON::class )]
 class Tests_Theme_wpThemeJson extends WP_UnitTestCase {
 

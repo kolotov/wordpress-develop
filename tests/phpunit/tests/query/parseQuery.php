@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\Group( 'query' )]
 class Tests_Query_ParseQuery extends WP_UnitTestCase {
 	/**
@@ -40,8 +38,6 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 		$this->assertSame( $expected, $q->query_vars['s'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33372' )]
 	public function test_parse_query_p_negative_int() {
 		$q = new WP_Query();
@@ -54,8 +50,6 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 		$this->assertSame( '404', $q->query_vars['error'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33372' )]
 	public function test_parse_query_p_array() {
 		$q = new WP_Query();
@@ -68,8 +62,6 @@ class Tests_Query_ParseQuery extends WP_UnitTestCase {
 		$this->assertSame( '404', $q->query_vars['error'] );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '33372' )]
 	public function test_parse_query_p_object() {
 		$q = new WP_Query();

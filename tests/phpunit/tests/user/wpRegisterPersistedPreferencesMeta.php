@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'user' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_register_persisted_preferences_meta' )]
 class Tests_User_WpRegisterPersistedPreferencesMeta extends WP_UnitTestCase {

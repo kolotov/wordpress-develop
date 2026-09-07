@@ -1,7 +1,5 @@
 <?php
 
-/**
- */
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'mb_chr' )]
 #[\PHPUnit\Framework\Attributes\Group( 'compat' )]
 class Tests_Compat_mbChr extends WP_UnitTestCase {

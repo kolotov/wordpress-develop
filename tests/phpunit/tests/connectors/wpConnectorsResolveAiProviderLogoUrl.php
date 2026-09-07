@@ -53,15 +53,11 @@ class Tests_Connectors_WpConnectorsResolveAiProviderLogoUrl extends WP_UnitTestC
 		$this->created_files[] = $path;
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_returns_null_when_path_is_empty() {
 		$this->assertNull( _wp_connectors_resolve_ai_provider_logo_url( '' ) );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_resolves_plugin_dir_path_to_url() {
 		$logo_path = WP_PLUGIN_DIR . '/my-plugin/logo.svg';
@@ -72,8 +68,6 @@ class Tests_Connectors_WpConnectorsResolveAiProviderLogoUrl extends WP_UnitTestC
 		$this->assertSame( site_url( '/wp-content/plugins/my-plugin/logo.svg' ), $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_resolves_mu_plugin_dir_path_to_url() {
 		$logo_path = WPMU_PLUGIN_DIR . '/my-mu-plugin/logo.svg';
@@ -84,8 +78,6 @@ class Tests_Connectors_WpConnectorsResolveAiProviderLogoUrl extends WP_UnitTestC
 		$this->assertSame( site_url( '/wp-content/mu-plugins/my-mu-plugin/logo.svg' ), $result );
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '64791' )]
 	public function test_returns_null_when_file_does_not_exist() {
 		$this->assertNull(

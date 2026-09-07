@@ -1,6 +1,4 @@
 <?php
-/**
- */
 
 
 
@@ -45,10 +43,6 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_file_uri' )]
@@ -61,10 +55,6 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 		$this->assertSame( content_url( "themes/theme-file-parent/{$file}" ), get_parent_theme_file_uri( $file ) );
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_file_uri' )]
@@ -79,10 +69,6 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 		$this->assertSame( content_url( "themes/theme-file-parent/{$file}" ), get_parent_theme_file_uri( $file ) );
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_file_path' )]
@@ -95,10 +81,6 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 		$this->assertSame( WP_CONTENT_DIR . "/themes/theme-file-parent/{$file}", get_parent_theme_file_path( $file ) );
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_file_path' )]
@@ -135,10 +117,6 @@ class Tests_Link_ThemeFile extends WP_UnitTestCase {
 		}
 	}
 
-	/**
-	 *
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '18302' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_theme_files' )]
 	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'get_theme_file_uri' )]

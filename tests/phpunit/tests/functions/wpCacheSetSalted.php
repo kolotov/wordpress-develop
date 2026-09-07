@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'functions' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_cache_set_salted' )]
 class Tests_Functions_wpCacheSetSalted extends WP_UnitTestCase {

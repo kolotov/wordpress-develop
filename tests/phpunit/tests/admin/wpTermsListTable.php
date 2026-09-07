@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'admin' )]
 #[\PHPUnit\Framework\Attributes\CoversClass( WP_Terms_List_Table::class )]
 #[\PHPUnit\Framework\Attributes\CoversMethod( WP_Terms_List_Table::class, 'handle_row_actions' )]
@@ -56,9 +53,6 @@ class Tests_Admin_WpTermsListTable extends WP_UnitTestCase {
 		return $method->invokeArgs( $instance, $args );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59336' )]
 	public function test_handle_row_actions_as_author() {
 		wp_set_current_user( self::$author_id );
@@ -71,9 +65,6 @@ class Tests_Admin_WpTermsListTable extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'Delete', $actions, 'Delete action should not be displayed to the author.' );
 	}
 
-	/**
-	 *
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '59336' )]
 	public function test_handle_row_actions_as_admin() {
 		wp_set_current_user( self::$admin_id );

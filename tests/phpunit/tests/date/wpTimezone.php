@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 #[\PHPUnit\Framework\Attributes\Group( 'date' )]
 #[\PHPUnit\Framework\Attributes\Group( 'datetime' )]
 #[\PHPUnit\Framework\Attributes\CoversFunction( 'wp_timezone_string' )]
@@ -107,8 +104,6 @@ class Tests_Date_wpTimezone extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '24730' )]
 	public function test_should_return_timezone_string() {
 		update_option( 'timezone_string', 'Europe/Helsinki' );
