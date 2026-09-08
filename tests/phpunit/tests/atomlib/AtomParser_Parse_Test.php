@@ -12,7 +12,7 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\RequiresPhpExtension( 'xml' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
+#[\PHPUnit\Framework\Attributes\CoversMethod( AtomParser::class, 'parse' )]
 final class AtomParser_Parse_Test extends WP_UnitTestCase {
 
 	/**
