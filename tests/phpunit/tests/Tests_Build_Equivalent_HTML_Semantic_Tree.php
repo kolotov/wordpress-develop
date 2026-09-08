@@ -7,7 +7,7 @@
  *
  */
 #[\PHPUnit\Framework\Attributes\Group( 'testsuite' )]
-#[\PHPUnit\Framework\Attributes\CoversNothing]
+#[\PHPUnit\Framework\Attributes\CoversFunction( 'build_visual_html_tree' )]
 class Tests_Build_Equivalent_HTML_Semantic_Tree extends WP_UnitTestCase {
 	public static function data_build_equivalent_html_semantic_tree() {
 		$block_markup = <<<'HTML'
