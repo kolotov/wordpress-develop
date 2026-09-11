@@ -4356,7 +4356,7 @@ EOF;
 	#[\PHPUnit\Framework\Attributes\Ticket( '53675' )]
 	#[\PHPUnit\Framework\Attributes\Ticket( '56930' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_attr_default' )]
 	public function test_wp_get_loading_attr_default( $context ) {
 		// Return 'lazy' by default.
 		$this->assertSame( 'lazy', wp_get_loading_attr_default( 'test' ) );
@@ -4533,7 +4533,7 @@ EOF;
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_attr_default' )]
 	public function test_wp_get_loading_attr_default_before_loop_if_not_main_query( $context ) {
 		global $wp_query;
 
@@ -4557,7 +4557,7 @@ EOF;
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_attr_default' )]
 	public function test_wp_get_loading_attr_default_before_loop_in_main_query_but_header_not_called( $context ) {
 		global $wp_query;
 
@@ -4580,7 +4580,7 @@ EOF;
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_attr_default' )]
 	public function test_wp_get_loading_attr_default_before_loop_if_main_query( $context ) {
 		global $wp_query;
 
@@ -4603,7 +4603,7 @@ EOF;
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_attr_default' )]
 	public function test_wp_get_loading_attr_default_after_loop( $context ) {
 		global $wp_query;
 
@@ -4630,7 +4630,7 @@ EOF;
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58211' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_wp_get_loading_attr_default_before_and_no_loop' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_attr_default' )]
 	public function test_wp_get_loading_attr_default_no_loop( $context ) {
 		global $wp_query;
 
@@ -4910,7 +4910,7 @@ EOF;
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58089' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_special_contexts_for_the_content_wp_get_loading_attr_default' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_attr_default' )]
 	public function test_wp_get_loading_attr_default_should_return_lazy_for_special_contexts_outside_of_the_content( $context ) {
 		$this->assertSame( 'lazy', wp_get_loading_attr_default( $context ) );
 	}
@@ -4927,7 +4927,7 @@ EOF;
 	 */
 	#[\PHPUnit\Framework\Attributes\Ticket( '58089' )]
 	#[\PHPUnit\Framework\Attributes\DataProvider( 'data_special_contexts_for_the_content_wp_get_loading_attr_default' )]
-	#[\PHPUnit\Framework\Attributes\CoversNothing]
+	#[WP_PHPUnit_Covers( WP_PHPUnit_Covers::TARGET_FUNCTION, 'wp_get_loading_attr_default' )]
 	public function test_wp_get_loading_attr_default_should_return_false_for_special_contexts_within_the_content( $context ) {
 		remove_all_filters( 'the_content' );
 
